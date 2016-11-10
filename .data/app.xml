@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.06.00" ExportDate="2016-11-10T16:55:19.8363442+01:00">
+  <Header>
+    <App Guid="74c59dba-8e66-463a-b6fc-752b98c71a57" />
+    <Language Default="en-US" />
+    <Dimensions>
+      <Dimension DimensionID="32" Name="English (United States)" SystemKey="" ExternalKey="en-US" Active="true" />
+      <Dimension DimensionID="33" Name="Deutsch (Deutschland)" SystemKey="" ExternalKey="de-DE" Active="true" />
+    </Dimensions>
+  </Header>
+  <AttributeSets>
+    <AttributeSet StaticName="App-Resources" Name="App-Resources" Description="Stores resources like translations for an app" Scope="2SexyContent-App" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="LabelSubject" Type="String" IsTitle="true">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="0c98bcf0-4047-4744-a95d-d7fd93fda5e9" KeyNumber="963">
+            <Value Key="Name" Value="Label Subject" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="004ee113-2fd5-42fe-b10c-1b042652e84c" KeyNumber="963" />
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="dae9fe73-2866-4b2c-8795-cac71df1d73c" KeyNumber="963">
+            <Value Key="RowCount" Value="" Type="Number">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="LabelMessage" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="544ae295-dc1b-43d8-ac69-08e1c070f484" KeyNumber="964">
+            <Value Key="Name" Value="Label Message" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="435440d3-8250-4dcd-a974-53727099c753" KeyNumber="964" />
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="3f9b983c-bf9b-4ff8-9096-241214483d4d" KeyNumber="964">
+            <Value Key="RowCount" Value="" Type="Number">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+      </Attributes>
+    </AttributeSet>
+    <AttributeSet StaticName="App-Settings" Name="App-Settings" Description="Stores settings for an app" Scope="2SexyContent-App" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="Title" Type="String" IsTitle="true">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="cfbb986a-b60a-4f34-908c-1aa54dc57556" KeyNumber="897">
+            <Value Key="Name" Value="Title" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="OwnerName" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e29e7516-a5c4-43c0-ac80-53bd6fecb007" KeyNumber="898">
+            <Value Key="Name" Value="OwnerName" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="OwnerMail" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d4034cb7-ad94-4487-afc4-5c41707b1a26" KeyNumber="899">
+            <Value Key="Name" Value="OwnerMail" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="OwnerSubject" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="4af7701c-f0ce-468d-8cc0-95c747351690" KeyNumber="900">
+            <Value Key="Name" Value="OwnerSubject" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="OwnerMessage" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="02380712-2a94-4919-99a1-69471b90e5cd" KeyNumber="902">
+            <Value Key="Name" Value="OwnerMessage" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="69f38b32-fc70-4dd0-b20c-a07850cab577" KeyNumber="902" />
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="b6af1a3f-9057-405f-ac60-3d16f8ed3da2" KeyNumber="902">
+            <Value Key="RowCount" Value="8" Type="Number">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SenderSubject" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="76816a36-b13c-4bfd-ac9f-69c76d588ba8" KeyNumber="901">
+            <Value Key="Name" Value="SenderSubject" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SenderMessage" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="a9dcd8e0-de7d-430a-ae8a-8c603583a366" KeyNumber="903">
+            <Value Key="Name" Value="SenderMessage" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="58cc8777-f328-4328-8950-aeab702223af" KeyNumber="903" />
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="2b998028-8c65-4258-ae2e-30c0d83abef0" KeyNumber="903">
+            <Value Key="RowCount" Value="8" Type="Number">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+      </Attributes>
+    </AttributeSet>
+    <AttributeSet StaticName="7a1a6841-f37a-4bad-953a-f204612693b9" Name="ContactSimple" Description="Simple contact form requests" Scope="2SexyContent" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="Subject" Type="String" IsTitle="true">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e09be595-05ba-4197-84d7-436a2be5f7d3" KeyNumber="890">
+            <Value Key="Name" Value="Subject" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Message" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d93645ca-7941-40ca-8338-742192478952" KeyNumber="891">
+            <Value Key="Name" Value="Message" Type="String" />
+            <Value Key="Notes" Value="" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="Required" Value="False" Type="Boolean" />
+            <Value Key="DefaultValue" Value="" Type="String" />
+            <Value Key="Disabled" Value="False" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String" />
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="6c0e69ce-b30a-43e1-b5f9-11d3b7fb1365" KeyNumber="891" />
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="7b927a75-170b-451b-8632-f7bd1ca656bc" KeyNumber="891">
+            <Value Key="RowCount" Value="8" Type="Number" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SenderMail" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="64b65c9a-e9f9-4978-8a51-21c3f4af00b7" KeyNumber="892">
+            <Value Key="Name" Value="SenderMail" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SenderName" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="b513c2b7-c875-4734-87ba-c9bbd4a08cd8" KeyNumber="893">
+            <Value Key="Name" Value="SenderName" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Technical Details" Type="Empty" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="7025107f-33c8-40ec-87ce-63207d3250d0" KeyNumber="896">
+            <Value Key="Name" Value="Technical Details" Type="String" />
+            <Value Key="Notes" Value="" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="Required" Value="False" Type="Boolean" />
+            <Value Key="DefaultValue" Value="" Type="String" />
+            <Value Key="Disabled" Value="False" Type="Boolean" />
+            <Value Key="InputType" Value="empty-default" Type="String" />
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String" />
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="8999a835-8faa-4ab8-a5e7-2e850a2e2487" KeyNumber="896">
+            <Value Key="DefaultCollapsed" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Date" Type="DateTime" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="92515a2d-bc21-48b0-8e43-1d39e0bb1a11" KeyNumber="894">
+            <Value Key="Name" Value="Date" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="datetime-default" Type="String" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SenderIp" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="63c7a4db-8435-497a-9f8e-4dd8d092adf3" KeyNumber="895">
+            <Value Key="Name" Value="SenderIp" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+            <Value Key="InputType" Value="string-default" Type="String" />
+          </Entity>
+        </Attribute>
+      </Attributes>
+    </AttributeSet>
+  </AttributeSets>
+  <Entities>
+    <Entity AssignmentObjectType="App" AttributeSetStaticName="2SexyContent-App" AttributeSetName="2SexyContent-App" EntityGUID="96e04ae1-f719-453f-8421-d949d327d772" KeyNumber="40">
+      <Value Key="DisplayName" Value="Form jQuery Simple" Type="String" />
+      <Value Key="Version" Value="00.00.01" Type="String" />
+      <Value Key="Folder" Value="Form jQuery Simple" Type="String" />
+      <Value Key="AllowTokenTemplates" Value="False" Type="Boolean" />
+      <Value Key="AllowRazorTemplates" Value="False" Type="Boolean" />
+      <Value Key="OriginalId" Value="" Type="String" />
+    </Entity>
+    <Entity AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="f6bea776-f082-4717-b63a-4861ffa22183" KeyNumber="40">
+      <Value Key="Title" Value="Simple contact form" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerName" Value="Daniel Mettler" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="daniel.mettler@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSubject" Value="E-Mail from online form" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderSubject" Value="Thank you for your contact request on 2sxc.org" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMessage" Value="We received the following request:" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMessage" Value="Thank you for your request." Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="App" AttributeSetStaticName="App-Resources" AttributeSetName="App-Resources" EntityGUID="2231fdc4-3838-4f38-90b2-b29f2054b892" KeyNumber="40">
+      <Value Key="LabelSubject" Value="Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelSubject" Value="Betreff" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelMessage" Value="Message" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelMessage" Value="Mitteilung" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="7d3a9033-983e-4825-8091-1599cf6e36d0">
+      <Value Key="Name" Value="Contact Form" Type="String" />
+      <Value Key="Path" Value="_Contact Form.cshtml" Type="String" />
+      <Value Key="ContentTypeStaticName" Value="" Type="String" />
+      <Value Key="ContentDemoEntity" Value="" Type="Entity" />
+      <Value Key="PresentationTypeStaticName" Value="" Type="String" />
+      <Value Key="PresentationDemoEntity" Value="" Type="Entity" />
+      <Value Key="ListContentTypeStaticName" Value="" Type="String" />
+      <Value Key="ListContentDemoEntity" Value="" Type="Entity" />
+      <Value Key="ListPresentationTypeStaticName" Value="" Type="String" />
+      <Value Key="ListPresentationDemoEntity" Value="" Type="Entity" />
+      <Value Key="Type" Value="C# Razor" Type="String" />
+      <Value Key="IsHidden" Value="False" Type="Boolean" />
+      <Value Key="Location" Value="Portal File System" Type="String" />
+      <Value Key="UseForList" Value="False" Type="Boolean" />
+      <Value Key="PublishData" Value="False" Type="Boolean" />
+      <Value Key="StreamsToPublish" Value="" Type="String" />
+      <Value Key="Pipeline" Value="" Type="Entity" />
+      <Value Key="ViewNameInUrl" Value="" Type="String" />
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="8cfa9a57-734d-418e-a00a-92f717932b2a">
+      <Value Key="Name" Value="Contact Form Mail Template for Owner" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Path" Value="_Contact-Form - Mail Template Owner.cshtml" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ContentTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ContentDemoEntity" Value="" Type="Entity" />
+      <Value Key="PresentationTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="PresentationDemoEntity" Value="" Type="Entity" />
+      <Value Key="ListContentTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ListContentDemoEntity" Value="" Type="Entity" />
+      <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ListPresentationDemoEntity" Value="" Type="Entity" />
+      <Value Key="Type" Value="C# Razor" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="IsHidden" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Location" Value="Portal File System" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="PublishData" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="StreamsToPublish" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Pipeline" Value="" Type="Entity" />
+      <Value Key="ViewNameInUrl" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Entity" AttributeSetStaticName="PermissionConfiguration" AttributeSetName="PermissionConfiguration" EntityGUID="bb8d198c-0b34-4524-860f-2ceabdb4a4f8" KeyGuid="7a1a6841-f37a-4bad-953a-f204612693b9">
+      <Value Key="Title" Value="Security Rule" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Condition" Value="SecurityAccessLevel.Anonymous" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Grant" Value="c" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+  </Entities>
+  <PortalFiles />
+  <PortalFolders>
+    <Folder Id="630" RelativePath="adam/Form jQuery Simple/" />
+  </PortalFolders>
+</SexyContent>
