@@ -1,0 +1,23 @@
+@helper Message(dynamic request, ToSic.SexyContent.IAppAndDataHelpers helpers)
+{
+    <!doctype html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { font-family: Helvetica, sans-serif; }
+        </style>
+    </head>
+    <body>
+        <h1>Customer Mail - Thank you</h1>
+        <p>We got your message!</p>
+    </body>
+</html>
+}
+
+@functions {
+	public string Subject(dynamic request, dynamic helpers) {
+		return helpers.Content.CustomerMailSubject;
+	}
+}

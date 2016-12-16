@@ -1,0 +1,31 @@
+@helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers helpers)
+{
+    <!doctype html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { font-family: Helvetica, sans-serif; }
+        </style>
+    </head>
+    <body>
+        <h1>Website contact form request</h1>
+        <table>
+            @foreach (var item in request)
+            {
+                <tr>
+                    <th>@item.Key</th>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </table>
+    </body>
+</html>
+}
+
+@functions {
+	public string Subject(dynamic request, dynamic helpers) {
+		return helpers.Content.OwnerMailSubject;
+	}
+}

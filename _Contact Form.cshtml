@@ -1,71 +1,56 @@
-<style>
-    .cform-wrapper { width: 100%; max-width: 600px; margin: 0 auto; }
-    .cform-field-required:after { content:"*"; color:red; font-size: 20px; }
-    .cform-wrapper textarea { resize: vertical; }
-    .cform-wrapper .form-control { background: #e2e2e2; border-radius: 0; box-shadow: none; max-width: 80%; float: right;  }
-    .cform-wrapper label { float: left; }
-    
-    .cform-wrapper label,
-    .cform-wrapper .form-control { display: inline-block; vertical-align: top; }
-</style>
+<link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="100"/>
+<script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
-<script>
-    $(function(){
-        // Remove all Help blocks at every refresh
-        $(".help-block").css("display", "none");
+@{
+  var recaptcha = true;
+  var mid = Dnn.Module.ModuleID;
+  var sitekey = App.Settings.RecaptchaSiteKey;
+}
 
-            
-        // Event listener for Post btn
-        $("#post").click(function() {
-            // Remove all Help blocks at every re post
-            $(".help-block").fadeOut();
-        
-            // Validate Required fields
-            $(".cform-field-required").each(function(){
-                $(this).parent().removeClass("has-error");
-                
-                if ($(this).next().val().length > 0) {
-                    $(this).parent().addClass("has-success");
-                    
-                } else {
-                    $(this).parent().addClass("has-error");
-                    $(this).next().next().fadeIn();
-                }
-            });
-        });
-       
-    });
-</script>
 
-<div class="cform-wrapper">
+<div class="cform-wrapper @("cform-id" + Dnn.Module.ModuleID) sc-element">
+    @Edit.Toolbar(Content)
     <section>
         <div class="form-group">
           <label for="subject" class="cform-field-required">@App.Resources.LabelSubject:</label>
-          <input type="text" class="form-control" id="subject" aria-describedby="help-block-subject">
-          <span id="help-block-subject" class="help-block">This is a required field.</span>
+          <input type="text" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj">
+          <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
         </div>
         <div class="form-group">
-          <label for="message" class="cform-field-required">Message:</label>
-          <textarea class="form-control" rows="5" id="message" aria-describedby="help-block-message"></textarea>
-          <span id="help-block-message" class="help-block">This is a required field.</span>
+          <label for="message" class="cform-field-required">@App.Resources.LabelMessage</label>
+          <textarea class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
+          <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
         </div>
         <div class="form-group">
           <label for="sendername">Sender Name:</label>
-          <input type="text" class="form-control" id="sendername">
+          <input type="text" class="form-control" id="sendername" value="test joe">
         </div>
         <div class="form-group">
           <label for="sendermail" class="cform-field-required">Sender E-Mail:</label>
-          <input type="text" class="form-control" id="sendermail" aria-describedby="help-block-sendermail">
-          <span id="help-block-sendermail" class="help-block">This is a required field.</span>
+          <input type="text" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
+          <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
         </div>
-        <button id="post" type="button" class="btn btn-default">Send</button>
+
+      @if(recaptcha) {
+        <div class="form-group">
+          <script type="text/javascript">
+            // this mini-function caries the moduleID and ensures that each module has an own recaptcha
+            var recaptcha_onloadCallback_@mid = function() { appJqFormReCaptcha(@mid, "@sitekey"); };
+          </script>
+          <script src="https://www.google.com/recaptcha/api.js?xonload=recaptcha_onloadCallback_@mid&xrender=explicit" async defer></script>
+          <div id='grecaptcha_@Dnn.Module.ModuleID' class="g-recaptcha" data-sitekey="@sitekey"></div>
+        </div>
+      }
+
+        <button id="submit" type="button" class="btn btn-default">@App.Resources.ButtonSend</button>
     </section>
     
     <br />
     <br />
-    
+    <br/>
     <section>
-        <div class="alert alert-success" role="alert">Your request was successfully submitted to us.</div>
-        <div class="alert alert-danger" role="alert">Remove your errors and try submitting again.</div>
+        <div class="alert alert-success" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
+        <div class="alert alert-danger" role="alert">@Html.Raw( @App.Resources.MessageFormIncomplete )</div>
+        <div class="alert alert-danger" role="alert">@Html.Raw( @App.Resources.MessageSendError )</div>
     </section>
 </div>
