@@ -5,10 +5,11 @@
   var recaptcha = true; // todo: get this from module settings
   var mid = Dnn.Module.ModuleID;
   var sitekey = App.Settings.RecaptchaSiteKey;
+  var wrapperClass = "app-jqfs-id" + mid;
 }
 
 
-<div class="app-jqfs-wrapper @("app-jqfs-id" + mid) sc-element">
+<div class="app-jqfs-wrapper @wrapperClass sc-element">
     @Edit.Toolbar(Content)
     <div>
         <div class="form-group">
@@ -27,7 +28,7 @@
         </div>
         <div class="form-group">
           <label for="sendermail" class="app-jqfs-field-required">Sender E-Mail: (todo)</label>
-          <input type="text" item-property="SenderName" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
+          <input type="text" item-property="SenderMail" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
           <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
         </div>
 
@@ -36,11 +37,17 @@
           <div class="form-group">
           <label for="" class="app-jqfs-field-required">Are you human? (todo)</label>
             <script type="text/javascript">
-              // this mini-function caries the moduleID and ensures that each module has an own recaptcha
-              var recaptcha_onloadCallback_@mid = function() { appJqFormReCaptcha("@recaptchaId", "@sitekey"); };
+              // this mini-function carries the moduleID and ensures that each module has an own recaptcha
+              var recaptcha_onloadCallback_@mid = function() { 
+                window.appJqFormSimple.recap.register("@recaptchaId", $("." + "@wrapperClass"), "@sitekey"); 
+              };
+              var recapcallback = function(o){
+                console.log(o);
+              }
             </script>
             <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback_@mid&render=explicit" async defer></script>
-            <div id='@recaptchaId' data-sitekey="@sitekey"></div>
+            <div id='@recaptchaId' class="app-recaptcha" data-sitekey="@sitekey" data-callback="recapcallback"></div>
+            <input type="hidden" id="useRecaptcha" value="true">
           </div>
         }
 
@@ -49,18 +56,14 @@
         </div>
     </div>
     
-    <br />
-    <br />
     <br/>
     <div>
-        <div class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
-        <div class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
-        <div class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
+        <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
+        <div id="msgIncomplete" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
+        <div id="msgRecap" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageRecaptchaMissing )</div>
+        <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
     </div>
 </div>
 <script>
-  // init the form - must happen here in case the form was added w/ajax
-  $(function(){
-    window.appJqFormSimple.init();
-  })
+  $(function(){ window.appJqFormSimple.init(); }); // init the form - must trigger here in case the form was added w/ajax
 </script>
