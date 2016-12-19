@@ -59,9 +59,6 @@ $(function(){
             // data = manuallyBuildData(wrapper); // example with manual build, but we preferr automatic
             data = jqfs.autoCollectData(wrapper);
 
-
-            console.log('test auto', jqfs.autoCollectData(wrapper));
-
             console.log("will send", data);
             sxc.webApi.post("Form/ProcessForm", {}, data)
                 .success(function() {
@@ -80,7 +77,7 @@ $(function(){
         // automatically build the send-object with all properties, 
         // based on all form-fields which have a item-property=""
         autoCollectData: function(wrapper) {
-            var data = [], fields = $(wrapper).find("[" + c.iProp + "]");
+            var data = {}, fields = $(wrapper).find("[" + c.iProp + "]");
             function add(i, e) {
                 e = $(e);
                 data[e.attr(c.iProp)] = e.val();

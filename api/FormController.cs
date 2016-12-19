@@ -22,6 +22,7 @@ public class FormController : SxcApiController
         // in the request with the correct name, they will be added automatically
         contactFormRequest.Add("Date", DateTime.Now);
         contactFormRequest.Add("SenderIp", System.Web.HttpContext.Current.Request.UserHostAddress);
+        contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
         App.Data.Create("ContactSimple", contactFormRequest);
 
 

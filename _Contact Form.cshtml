@@ -2,7 +2,7 @@
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
 @{
-  var recaptcha = true; // todo: get this from module settings
+  var recaptcha = false;//true; // todo: get this from module settings
   var mid = Dnn.Module.ModuleID;
   var sitekey = App.Settings.RecaptchaSiteKey;
   var wrapperClass = "app-jqfs-id" + mid;
@@ -11,7 +11,16 @@
 
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
     @Edit.Toolbar(Content)
-    <div>
+      @* toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
+      @Edit.Toolbar(toolbar: new object[] { 
+          new { showCondition = true,
+              command = new { action = "contentitems", 
+                contentType= "ContactSimple", 
+                filters = new { ModuleId = mid } 
+            }
+        }
+      }, settings: new { hover="left", show = "hover" })
+      <div>
         <div class="form-group">
           <label for="subject" class="app-jqfs-field-required">@App.Resources.LabelSubject:</label>
           <input type="text" item-property="Subject" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj">
