@@ -1,8 +1,7 @@
 // define the method which binds the recaptcha to the DOM
-function appJqFormReCaptcha(mid, sitekey) {
-    console.log("grecaptcha is ready!");
-    grecaptcha.render('grecaptcha_' + mid, {
-    'sitekey' : sitekey
+function appJqFormReCaptcha(recaptchaId, sitekey) {
+    grecaptcha.render(recaptchaId, {
+        'sitekey' : sitekey
     });
 };
 
@@ -17,7 +16,7 @@ $(function(){
         $(".help-block").fadeOut();
     
         // Validate Required fields
-        $(".cform-field-required").each(function(){
+        $(".app-jqfs-field-required").each(function(){
             $(this).parent().removeClass("has-error");
             
             if ($(this).next().val().length > 0) {
@@ -30,14 +29,43 @@ $(function(){
         });
     });
 
-    var submitBtns = $(".cform-wrapper #submit");
-    submitBtns.click(sendContactSimple);    
+
+    // we need a global object, so that the init can be called again when the
+    // app is added to the page by ajax
+    var jqfs = window.appJqFormSimple = {
+        
+        // the main send method
+        send: function() {
+            var sxc = $2sxc(this);
+
+            var container = $(".app-jqfs-id" + sxc.id), 
+                data = manuallyBuildData(container);
+
+
+            console.log("will send", data);
+            // sxc.webApi.post("Form/ProcessForm", {}, data);
+
+            console.log("sent");
+        },
+
+        // automatically build the send-object with all properties, 
+        // based on all form-fields which have a item-property=""
+        autoCollectData: function(wrapper) {
+
+        },
+
+        // init all jqfs on the page
+        init: function() {
+            $(".app-jqfs-wrapper #submit").click(jqfs.send);    
+        }   
+    }
+
 
     function sendContactSimple(){
-        var sxc = $2sxc(this);
+    }
 
-        var container = $(".cform-id" + sxc.id),
-            data = {
+    function manuallyBuildData(container){
+        var data = {
                 Subject: container.find("#subject"),
                 Message: container.find("#message"),
                 SenderName: container.find("#sendername"),
@@ -48,11 +76,7 @@ $(function(){
             if (data.hasOwnProperty(prop)) 
                 data[prop] = data[prop].val();
 
-
-        console.log("will send", data);
-        sxc.webApi.post("Form/ProcessForm", {}, data);
-
-        console.log("sent");
+        return data;
     }
 
 });

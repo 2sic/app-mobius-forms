@@ -1,8 +1,10 @@
-    .cform-wrapper { width: 100%; max-width: 600px; margin: 0 auto; }
-    .cform-field-required:after { content:"*"; color:red; font-size: 20px; }
-    .cform-wrapper textarea { resize: vertical; }
-    .cform-wrapper .form-control { background: #ffffff; border-radius: 0; box-shadow: none; max-width: 80%; float: right;  }
-    .cform-wrapper label { float: left; }
+    .app-jqfs-wrapper { width: 100%; max-width: 600px; margin: 0 auto; }
+    .app-jqfs-field-required:after { content:"*"; color:red; font-size: 20px; }
+    .app-jqfs-wrapper textarea { resize: vertical; }
+    .app-jqfs-wrapper .form-control { background: #ffffff; border-radius: 0; box-shadow: none; max-width: 80%; float: right;  }
+    .app-jqfs-wrapper label { float: left; }
     
-    .cform-wrapper label,
-    .cform-wrapper .form-control { display: inline-block; vertical-align: top; }
+    .app-jqfs-wrapper label,
+    .app-jqfs-wrapper .form-control { display: inline-block; vertical-align: top; }
+
+    .app-app-jqfs-message { display: none }

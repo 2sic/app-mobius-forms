@@ -2,55 +2,65 @@
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
 @{
-  var recaptcha = true;
+  var recaptcha = true; // todo: get this from module settings
   var mid = Dnn.Module.ModuleID;
   var sitekey = App.Settings.RecaptchaSiteKey;
 }
 
 
-<div class="cform-wrapper @("cform-id" + Dnn.Module.ModuleID) sc-element">
+<div class="app-jqfs-wrapper @("app-jqfs-id" + mid) sc-element">
     @Edit.Toolbar(Content)
-    <section>
+    <div>
         <div class="form-group">
-          <label for="subject" class="cform-field-required">@App.Resources.LabelSubject:</label>
-          <input type="text" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj">
+          <label for="subject" class="app-jqfs-field-required">@App.Resources.LabelSubject:</label>
+          <input type="text" item-property="Subject" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj">
           <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
         </div>
         <div class="form-group">
-          <label for="message" class="cform-field-required">@App.Resources.LabelMessage</label>
-          <textarea class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
+          <label for="message" class="app-jqfs-field-required">@App.Resources.LabelMessage</label>
+          <textarea item-property="Message" class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
           <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
         </div>
         <div class="form-group">
           <label for="sendername">Sender Name:</label>
-          <input type="text" class="form-control" id="sendername" value="test joe">
+          <input type="text" item-property="SenderName" class="form-control" id="sendername" value="test joe">
         </div>
         <div class="form-group">
-          <label for="sendermail" class="cform-field-required">Sender E-Mail:</label>
-          <input type="text" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
+          <label for="sendermail" class="app-jqfs-field-required">Sender E-Mail: (todo)</label>
+          <input type="text" item-property="SenderName" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
           <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
         </div>
 
-      @if(recaptcha) {
-        <div class="form-group">
-          <script type="text/javascript">
-            // this mini-function caries the moduleID and ensures that each module has an own recaptcha
-            var recaptcha_onloadCallback_@mid = function() { appJqFormReCaptcha(@mid, "@sitekey"); };
-          </script>
-          <script src="https://www.google.com/recaptcha/api.js?xonload=recaptcha_onloadCallback_@mid&xrender=explicit" async defer></script>
-          <div id='grecaptcha_@Dnn.Module.ModuleID' class="g-recaptcha" data-sitekey="@sitekey"></div>
-        </div>
-      }
+        @if(recaptcha) {
+          var recaptchaId = "grecaptcha_" + mid;
+          <div class="form-group">
+          <label for="" class="app-jqfs-field-required">Are you human? (todo)</label>
+            <script type="text/javascript">
+              // this mini-function caries the moduleID and ensures that each module has an own recaptcha
+              var recaptcha_onloadCallback_@mid = function() { appJqFormReCaptcha("@recaptchaId", "@sitekey"); };
+            </script>
+            <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback_@mid&render=explicit" async defer></script>
+            <div id='@recaptchaId' data-sitekey="@sitekey"></div>
+          </div>
+        }
 
-        <button id="submit" type="button" class="btn btn-default">@App.Resources.ButtonSend</button>
-    </section>
+        <div class="form-group">
+          <button id="submit" type="button" class="btn btn-default">@App.Resources.ButtonSend</button>
+        </div>
+    </div>
     
     <br />
     <br />
     <br/>
-    <section>
-        <div class="alert alert-success" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
-        <div class="alert alert-danger" role="alert">@Html.Raw( @App.Resources.MessageFormIncomplete )</div>
-        <div class="alert alert-danger" role="alert">@Html.Raw( @App.Resources.MessageSendError )</div>
-    </section>
+    <div>
+        <div class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
+        <div class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
+        <div class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
+    </div>
 </div>
+<script>
+  // init the form - must happen here in case the form was added w/ajax
+  $(function(){
+    window.appJqFormSimple.init();
+  })
+</script>
