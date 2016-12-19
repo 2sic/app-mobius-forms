@@ -24,16 +24,12 @@ public class FormController : SxcApiController
             var recap = contactFormRequest["Recaptcha"];
             if(!(recap is string) || String.IsNullOrEmpty(recap as string)) 
                 throw new Exception("recaptcha is empty");
-            
-            var recapStr = recap as string;
-            var pKey = App.Settings.RecaptchaSecretKey;
-            //var verifyer = new ReCaptchaClass();
-            var ok = ReCaptchaClass.Validate(recapStr, pKey);
-            if(!ok)// != "true")
+        
+            // do server-validation
+            // based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
+            var ok = ReCaptchaClass.Validate(recap as string, App.Settings.RecaptchaSecretKey);
+            if(!ok)
                 throw new Exception("bad recaptcha '" + ok + "'" );
-            // todo: do server-processing
-            // probably like http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
-
         }
 
         // 1. add IP / host, and save all fields
