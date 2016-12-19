@@ -56,8 +56,9 @@ $(function(){
                 return jqfs.alerts(wrapper, "msgRecap");            
 
             // get data 
-            // data = manuallyBuildData(wrapper); // example with manual build, but we preferr automatic
+            // data = manuallyBuildData(wrapper); // example with manual build, but we prefer automatic
             data = jqfs.autoCollectData(wrapper);
+            data.Recaptcha = recap;
 
             console.log("will send", data);
             sxc.webApi.post("Form/ProcessForm", {}, data)

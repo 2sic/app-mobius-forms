@@ -9,6 +9,8 @@ using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 
+using Newtonsoft.Json;
+
 public class FormController : SxcApiController
 {
     
@@ -17,6 +19,23 @@ public class FormController : SxcApiController
     [ValidateAntiForgeryToken]
     public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
     {
+        // 0. Pre-Check - validate recaptcha if used
+        if(Content.Recaptcha ?? false) {
+            var recap = contactFormRequest["Recaptcha"];
+            if(!(recap is string) || String.IsNullOrEmpty(recap as string)) 
+                throw new Exception("recaptcha is empty");
+            
+            var recapStr = recap as string;
+            var pKey = App.Settings.RecaptchaSecretKey;
+            //var verifyer = new ReCaptchaClass();
+            var ok = ReCaptchaClass.Validate(recapStr, pKey);
+            if(!ok)// != "true")
+                throw new Exception("bad recaptcha '" + ok + "'" );
+            // todo: do server-processing
+            // probably like http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
+
+        }
+
         // 1. add IP / host, and save all fields
         // if you add fields to your content-type, just make sure they are 
         // in the request with the correct name, they will be added automatically
@@ -67,4 +86,39 @@ public class FormController : SxcApiController
         throw new Exception("Error while creating mail template instance.");
     }
 
+
+
+
 }
+
+
+
+    public class ReCaptchaClass
+    {
+        public static bool Validate(string EncodedResponse, string PrivateKey)
+        {
+            var client = new System.Net.WebClient();
+            var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
+            var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ReCaptchaClass>(GoogleReply);
+
+            return captchaResponse.Success;// == "True";
+        }
+
+        [JsonProperty("success")]
+        public bool Success
+        {
+            get { return m_Success; }
+            set { m_Success = value; }
+        }
+
+        private bool m_Success;
+        [JsonProperty("error-codes")]
+        public List<string> ErrorCodes
+        {
+            get { return m_ErrorCodes; }
+            set { m_ErrorCodes = value; }
+        }
+
+
+        private List<string> m_ErrorCodes;
+    }

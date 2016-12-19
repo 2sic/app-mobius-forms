@@ -2,7 +2,7 @@
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
 @{
-  var recaptcha = false;//true; // todo: get this from module settings
+  var recaptcha = Content.Recaptcha ?? false;
   var mid = Dnn.Module.ModuleID;
   var sitekey = App.Settings.RecaptchaSiteKey;
   var wrapperClass = "app-jqfs-id" + mid;
@@ -50,12 +50,9 @@
               var recaptcha_onloadCallback_@mid = function() { 
                 window.appJqFormSimple.recap.register("@recaptchaId", $("." + "@wrapperClass"), "@sitekey"); 
               };
-              var recapcallback = function(o){
-                console.log(o);
-              }
             </script>
             <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback_@mid&render=explicit" async defer></script>
-            <div id='@recaptchaId' class="app-recaptcha" data-sitekey="@sitekey" data-callback="recapcallback"></div>
+            <div id='@recaptchaId' class="app-recaptcha" data-sitekey="@sitekey"></div>
             <input type="hidden" id="useRecaptcha" value="true">
           </div>
         }
@@ -76,3 +73,14 @@
 <script>
   $(function(){ window.appJqFormSimple.init(); }); // init the form - must trigger here in case the form was added w/ajax
 </script>
+
+<div>
+  todo
+  <ul>
+    <li>on send - validate fields</li>
+    <li>when sending, disable form till promise returns</li>
+    <li>when promise returns ok, hide form, show message</li>
+    <li>when promise returns error, show msg</li>
+    <li>process recaptcha in web-api </li>
+    </ul>
+  </div>
