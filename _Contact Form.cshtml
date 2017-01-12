@@ -8,7 +8,7 @@
   var wrapperClass = "app-jqfs-id" + mid;
 }
 
-
+<form class="form-horizontal">
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
     @Edit.Toolbar(Content)
       @* toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
@@ -22,29 +22,39 @@
       }, settings: new { hover="left", show = "hover" })
       <div>
         <div class="form-group">
-          <label for="subject" class="app-jqfs-field-required">@App.Resources.LabelSubject:</label>
+          <label for="subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
+            <div class="col col-xs-12 col-sm-8">
           <input type="text" item-property="Subject" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj">
           <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
+          </div>
         </div>
         <div class="form-group">
-          <label for="message" class="app-jqfs-field-required">@App.Resources.LabelMessage</label>
-          <textarea item-property="Message" class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
-          <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
+          <label for="message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
+          <div class="col col-xs-12 col-sm-8">
+              <textarea item-property="Message" class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
+              <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
+          </div>
         </div>
         <div class="form-group">
-          <label for="sendername">Sender Name:</label>
-          <input type="text" item-property="SenderName" class="form-control" id="sendername" value="test joe">
+          <label for="sendername" class="control-label col col-xs-12 col-sm-4">Sender Name:</label>
+          <div class="col col-xs-12 col-sm-8">
+              <input type="text" item-property="SenderName" class="form-control" id="sendername" value="test joe">
+          </div>
         </div>
         <div class="form-group">
-          <label for="sendermail" class="app-jqfs-field-required">Sender E-Mail: (todo)</label>
-          <input type="text" item-property="SenderMail" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
-          <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
+          <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">Sender E-Mail: (todo)</label>
+          <div class="col col-xs-12 col-sm-8">
+            <input type="text" item-property="SenderMail" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
+            <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
+          </div>
         </div>
 
         @if(recaptcha) {
           var recaptchaId = "grecaptcha_" + mid;
           <div class="form-group">
-          <label for="" class="app-jqfs-field-required">Are you human? (todo)</label>
+           
+          <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">Are you human? (todo)</label>
+          <div class="col col-xs-12 col-sm-8">
             <script type="text/javascript">
               // this mini-function carries the moduleID and ensures that each module has an own recaptcha
               var recaptcha_onloadCallback_@mid = function() { 
@@ -52,13 +62,18 @@
               };
             </script>
             <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback_@mid&render=explicit" async defer></script>
+             
             <div id='@recaptchaId' class="app-recaptcha" data-sitekey="@sitekey"></div>
+             
             <input type="hidden" id="useRecaptcha" value="true">
+           </div>
           </div>
         }
 
         <div class="form-group">
-          <button id="submit" type="button" class="btn btn-default">@App.Resources.ButtonSend</button>
+           <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12">
+          <button id="submit" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+          </div>
         </div>
     </div>
     
@@ -70,6 +85,7 @@
         <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
     </div>
 </div>
+</form>
 <script>
   $(function(){ window.appJqFormSimple.init(); }); // init the form - must trigger here in case the form was added w/ajax
 </script>

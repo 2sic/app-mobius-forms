@@ -92,7 +92,8 @@ $(function(){
             // define the method which binds the recaptcha to the DOM
             register: function (recaptchaId, wrapper, sitekey) {
                 var id = grecaptcha.render(recaptchaId, {
-                    'sitekey' : sitekey
+                    'sitekey' : sitekey,
+                    'size' : 'normal'
                 });
                 wrapper.data(c.recapId, id); // remember for later use
             }, 
