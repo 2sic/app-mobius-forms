@@ -1,37 +1,16 @@
 
 
 $(function(){
-    // Remove all Help blocks at every refresh
-    // $(".help-block").css("display", "none");
-
-        
-    // Event listener for Post btn
-    $("#post").click(function() {
-        // Remove all Help blocks at every re post
-        $(".help-block").fadeOut();
-    
-        // Validate Required fields
-        $(".app-jqfs-field-required").each(function(){
-            $(this).parent().removeClass("has-error");
-            
-            if ($(this).next().val().length > 0) {
-                $(this).parent().addClass("has-success");
-                
-            } else {
-                $(this).parent().addClass("has-error");
-                $(this).next().next().fadeIn();
-            }
-        });
-    });
-
 
     // constants
     var c  = {
         clsWrp: "app-jqfs-wrapper",
         useRecapId: "useRecaptcha",
         recapId: "recId",
-        iProp: "item-property"
+        iProp: "item-property",
+        clsForm: "app-jqfs-form"
     };
+
 
     // we need a global object, so that the init can be called again when the
     // app is added to the page by ajax
@@ -61,13 +40,20 @@ $(function(){
             data.Recaptcha = recap;
 
             console.log("will send", data);
-            sxc.webApi.post("Form/ProcessForm", {}, data)
+            jqfs.disable(wrapper, true);
+            sxc.webApi.post("Form/ProcessForm", {}, data, true)
                 .success(function() {
+                    jqfs.alerts(wrapper, "msgOk")
+                    wrapper.find("." + c.clsForm).hide();
                 })
                 .error(function() {
+                    jqfs.alerts(wrapper, "msgError")
+                    jqfs.disable(wrapper, false);
                 });
+        },
 
-            console.log("sent");
+        disable: function(wrapper, state) {
+            wrapper.find(":input").attr("disabled", state);
         },
 
         alerts: function(wrapper, showId){

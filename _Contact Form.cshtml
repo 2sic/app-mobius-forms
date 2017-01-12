@@ -2,15 +2,17 @@
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
 @{
-  var recaptcha = Content.Recaptcha ?? false;
-  var mid = Dnn.Module.ModuleID;
-  var sitekey = App.Settings.RecaptchaSiteKey;
-  var wrapperClass = "app-jqfs-id" + mid;
+  // these variables are used by the razor
+  var recaptcha = Content.Recaptcha ?? false;   // off by default, turn of if configured
+  var mid = Dnn.Module.ModuleID;            
+  var sitekey = App.Settings.RecaptchaSiteKey;  // recaptcha-key from settings
+  var wrapperClass = "app-jqfs-id" + mid;       // wrapper-id for jQuery, uses module-id in the name
 }
 
-<form class="form-horizontal">
+<!--<form class="form-horizontal">-->
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
-    @Edit.Toolbar(Content)
+      @Edit.Toolbar(Content)
+
       @* toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
       @Edit.Toolbar(toolbar: new object[] { 
           new { showCondition = true,
@@ -20,29 +22,33 @@
             }
         }
       }, settings: new { hover="left", show = "hover" })
-      <div>
+      <div class="app-jqfs-form">
+
         <div class="form-group">
           <label for="subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
-            <div class="col col-xs-12 col-sm-8">
-          <input type="text" item-property="Subject" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj">
-          <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
+          <div class="col col-xs-12 col-sm-8">
+            <input type="text" item-property="Subject" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj" required aria-required>
+            <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
           </div>
         </div>
+
         <div class="form-group">
           <label for="message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
           <div class="col col-xs-12 col-sm-8">
-              <textarea item-property="Message" class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
-              <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
+            <textarea item-property="Message" class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
+            <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
           </div>
         </div>
+
         <div class="form-group">
-          <label for="sendername" class="control-label col col-xs-12 col-sm-4">Sender Name:</label>
+          <label for="sendername" class="control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderName</label>
           <div class="col col-xs-12 col-sm-8">
-              <input type="text" item-property="SenderName" class="form-control" id="sendername" value="test joe">
+            <input type="text" item-property="SenderName" class="form-control" id="sendername" value="test joe">
           </div>
         </div>
+
         <div class="form-group">
-          <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">Sender E-Mail: (todo)</label>
+          <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
           <div class="col col-xs-12 col-sm-8">
             <input type="text" item-property="SenderMail" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
             <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
@@ -53,7 +59,7 @@
           var recaptchaId = "grecaptcha_" + mid;
           <div class="form-group">
            
-          <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">Are you human? (todo)</label>
+          <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
           <div class="col col-xs-12 col-sm-8">
             <script type="text/javascript">
               // this mini-function carries the moduleID and ensures that each module has an own recaptcha
@@ -71,21 +77,24 @@
         }
 
         <div class="form-group">
-           <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12">
-          <button id="submit" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+          <!-- error messages, not visible at first --> 
+          <div id="msgIncomplete" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
+          <div id="msgRecap" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageRecaptchaMissing )</div>
+          <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
+
+          <!-- send button -->
+          <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12">
+            <button id="submit" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
           </div>
         </div>
     </div>
     
-    <br/>
+    <!-- success messages --> 
     <div>
-        <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
-        <div id="msgIncomplete" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
-        <div id="msgRecap" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageRecaptchaMissing )</div>
-        <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
+          <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
     </div>
 </div>
-</form>
+<!--</form>-->
 <script>
   $(function(){ window.appJqFormSimple.init(); }); // init the form - must trigger here in case the form was added w/ajax
 </script>
@@ -94,8 +103,6 @@
   todo
   <ul>
     <li>on send - validate fields</li>
-    <li>when sending, disable form till promise returns</li>
-    <li>when promise returns ok, hide form, show message</li>
-    <li>when promise returns error, show msg</li>
+    <li>fix minor styling of alerts</li>
   </ul>
 </div>
