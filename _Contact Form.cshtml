@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="100"/>
+<!-- todo: luca - add 2sxc-js here-->
+<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
 @{
@@ -9,7 +11,6 @@
   var wrapperClass = "app-jqfs-id" + mid;       // wrapper-id for jQuery, uses module-id in the name
 }
 
-<!--<form class="form-horizontal">-->
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
       @Edit.Toolbar(Content)
 
@@ -27,7 +28,10 @@
         <div class="form-group">
           <label for="subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
           <div class="col col-xs-12 col-sm-8">
-            <input type="text" item-property="Subject" class="form-control" id="subject" aria-describedby="help-block-subject" value="test subj" required aria-required>
+            <input type="text" item-property="Subject" class="form-control" id="subject" 
+              aria-describedby="help-block-subject" value="" 
+              required aria-required
+              data-msg-required="test text: @App.Resources.LabelRequired">
             <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
           </div>
         </div>
@@ -94,7 +98,9 @@
           <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
     </div>
 </div>
-<!--</form>-->
+
+
+
 <script>
   $(function(){ window.appJqFormSimple.init(); }); // init the form - must trigger here in case the form was added w/ajax
 </script>

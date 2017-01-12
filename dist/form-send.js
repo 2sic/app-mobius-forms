@@ -26,8 +26,12 @@ $(function(){
             jqfs.alerts(wrapper);
 
             // todo: validate form
-            
+            var val = wrapper[0].validator; // pre-initialized validator... wrapper.validate();
+            console.log(val);
+            console.log("valid: " + val.valid());
+            return;
 
+            // Do Recaptcha test
             var recap = jqfs.recap.check(wrapper);
 
             // show alert if recap required and not complete
@@ -39,7 +43,6 @@ $(function(){
             data = jqfs.autoCollectData(wrapper);
             data.Recaptcha = recap;
 
-            console.log("will send", data);
             jqfs.disable(wrapper, true);
             sxc.webApi.post("Form/ProcessForm", {}, data, true)
                 .success(function() {
@@ -100,8 +103,20 @@ $(function(){
 
         // init all jqfs on the page
         init: function() {
-            $("." + c.clsWrp + " #submit").click(jqfs.send);    
-        }   
+            var wrappers = $("." + c.clsWrp);
+            wrappers.each(function(){
+                // prevent dupl execution
+                if(this.alreadyInit) 
+                    return;
+
+                var wrap = $(this);
+                wrap.find("#submit").click(jqfs.send);  // handle click event
+                this.validator = wrap.validate();
+                this.alreadyInit = true;
+            });
+            //  wrappers
+            // var val = wrappers.validate();
+        }
     }
 
 

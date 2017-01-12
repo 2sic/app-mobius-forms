@@ -19,8 +19,10 @@ public class FormController : SxcApiController
     [ValidateAntiForgeryToken]
     public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
     {
-        // test exception
+        // test exception to see how the js-side behaves on errors
         // throw new Exception();
+
+
         // 0. Pre-Check - validate recaptcha if used
         if(Content.Recaptcha ?? false) {
             var recap = contactFormRequest["Recaptcha"];
@@ -55,6 +57,11 @@ public class FormController : SxcApiController
 			CustomerMailCC = Content.CustomerMailCC,
 			CustomerMailTemplateFile = !String.IsNullOrEmpty(Content.CustomerMailTemplateFile) ? Content.CustomerMailTemplateFile : App.Settings.CustomerMailTemplateFile
 		};
+
+        // todo: ensure sender-mail / reply-to are defaulted back to original if missing
+        // todo: maybe give content-type in request?
+        // todo: finish de translations
+        // todo: subject-fields...
 		
 
         // 3. Send Mail to owner
