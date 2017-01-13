@@ -57,11 +57,6 @@ public class FormController : SxcApiController
 			CustomerMailCC = Content.CustomerMailCC,
 			CustomerMailTemplateFile = !String.IsNullOrEmpty(Content.CustomerMailTemplateFile) ? Content.CustomerMailTemplateFile : App.Settings.CustomerMailTemplateFile
 		};
-
-        // todo: ensure sender-mail / reply-to are defaulted back to original if missing
-        // todo: maybe give content-type in request?
-        // todo: finish de translations
-        // todo: subject-fields...
 		
 
         // 3. Send Mail to owner

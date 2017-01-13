@@ -21,6 +21,8 @@
         // create custom code to generate the subject here...
 
         // or just return the setting configured in the form
-		return helpers.Content.CustomerMailSubject;
+		return !String.IsNullOrWhiteSpace(helpers.Content.CustomerMailSubject)
+            ? helpers.Content.CustomerMailSubject
+            : helpers.App.Settings.CustomerMailSubject;
 	}
 }

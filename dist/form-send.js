@@ -29,7 +29,7 @@ $(function(){
             var val = wrapper[0].validator; // pre-initialized validator... wrapper.validate();
             console.log(val);
             console.log("valid: " + val.valid());
-            return;
+            // return;
 
             // Do Recaptcha test
             var recap = jqfs.recap.check(wrapper);

@@ -15,7 +15,7 @@
             @foreach (var item in request)
             {
                 <tr>
-                    <th>@item.Key</th>
+                    <td><b>@item.Key</b></td>
                     <td>@item.Value</td>
                 </tr>
             }
@@ -29,6 +29,8 @@
         // create custom code to generate the subject here...
 
         // or just return the setting configured in the form
-		return helpers.Content.OwnerMailSubject;
+        return !String.IsNullOrWhiteSpace(helpers.Content.OwnerMailSubject)
+            ? helpers.Content.OwnerMailSubject.ToString()
+            : helpers.App.Settings.OwnerMailSubject.ToString();
 	}
 }
