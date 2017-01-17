@@ -39,10 +39,11 @@ public class FormController : SxcApiController
         // 1. add IP / host, and save all fields
         // if you add fields to your content-type, just make sure they are 
         // in the request with the correct name, they will be added automatically
-        contactFormRequest.Add("Date", DateTime.Now);
-        contactFormRequest.Add("SenderIp", System.Web.HttpContext.Current.Request.UserHostAddress);
+        var typeName = String.IsNullOrEmpty(Content.ContentType) ? App.Settings.DefaultContentType : Content.ContentType;
+        contactFormRequest.Add("Timestamp", DateTime.Now);
+        contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
         contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
-        App.Data.Create("ContactSimple", contactFormRequest);
+        App.Data.Create(typeName, contactFormRequest);
 
 
         // 2. assemble all settings to send the mail

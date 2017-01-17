@@ -11,6 +11,9 @@
   var wrapperClass = "app-jqfs-id" + mid;       // wrapper-id for jQuery, uses module-id in the name
 }
 
+<input type="text" />
+<input type="submit">test</input>
+
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
       @Edit.Toolbar(Content)
 
@@ -18,7 +21,7 @@
       @Edit.Toolbar(toolbar: new object[] { 
           new { showCondition = true,
               command = new { action = "contentitems", 
-                contentType= "ContactSimple", 
+                contentType = String.IsNullOrEmpty(Content.ContentType) ? App.Settings.DefaultContentType : Content.ContentType, 
                 filters = new { ModuleId = mid } 
             }
         }
@@ -31,6 +34,7 @@
             <input type="text" item-property="Subject" class="form-control" id="subject" 
               aria-describedby="help-block-subject" value="" 
               required aria-required
+              minlength="2"
               data-msg-required="test text: @App.Resources.LabelRequired">
             <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
           </div>
@@ -102,7 +106,7 @@
 
 
 <script>
-  $(function(){ window.appJqFormSimple.init(); }); // init the form - must trigger here in case the form was added w/ajax
+  $(function(){ window.appJqFormSimple.init("@wrapperClass", "@(String.IsNullOrEmpty(Content.Webservice) ? App.Settings.DefaultWebservice : Content.Webservice )"); }); // init the form - must trigger here in case the form was added w/ajax
 </script>
 
 <div>
@@ -116,3 +120,4 @@
         // todo: ensure sender-mail / reply-to are defaulted back to original if missing
         // todo: maybe give content-type in request?
         // todo: finish de translations
+        // todo: mail-cc functionality, check also separation char

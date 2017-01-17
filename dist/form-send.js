@@ -15,7 +15,14 @@ $(function(){
     // we need a global object, so that the init can be called again when the
     // app is added to the page by ajax
     var jqfs = window.appJqFormSimple = {
-        
+        val: function() {
+            var inputsInForm = $("." + c.clsForm + " :input");
+
+            inputsInForm.each(function() {
+                console.log("elem : " + $(this).attr("item-property") + " -  valid : " + $(this).valid());
+            });
+        },
+
         // the main send method
         send: function() {
 
@@ -27,8 +34,11 @@ $(function(){
 
             // todo: validate form
             var val = wrapper[0].validator; // pre-initialized validator... wrapper.validate();
-            console.log(val);
-            console.log("valid: " + val.valid());
+            
+            // ToDo: Change to the custom validation function
+            // console.log("valid: " + val.valid());
+            jqfs.val();
+            
             // return;
 
             // Do Recaptcha test
@@ -43,7 +53,8 @@ $(function(){
             data = jqfs.autoCollectData(wrapper);
             data.Recaptcha = recap;
 
-            jqfs.disable(wrapper, true);
+            // dddddddddddddd
+            /*jqfs.disable(wrapper, true);
             sxc.webApi.post("Form/ProcessForm", {}, data, true)
                 .success(function() {
                     jqfs.alerts(wrapper, "msgOk")
@@ -52,7 +63,7 @@ $(function(){
                 .error(function() {
                     jqfs.alerts(wrapper, "msgError")
                     jqfs.disable(wrapper, false);
-                });
+                });*/
         },
 
         disable: function(wrapper, state) {
@@ -67,10 +78,13 @@ $(function(){
         // automatically build the send-object with all properties, 
         // based on all form-fields which have a item-property=""
         autoCollectData: function(wrapper) {
-            var data = {}, fields = $(wrapper).find("[" + c.iProp + "]");
+            var data = {}, fields = $(wrapper).find(":input");//.find("[" + c.iProp + "]");
             function add(i, e) {
                 e = $(e);
-                data[e.attr(c.iProp)] = e.val();
+                // get the property name from special-attribut, name OR id
+                var propName = e.attr(c.iProp) || e.attr("name") || e.attr("id");
+                if(propName)
+                    data[propName] = e.val();
             }
             fields.each(add);
             return data;
@@ -85,7 +99,7 @@ $(function(){
                     'size' : 'normal'
                 });
                 wrapper.data(c.recapId, id); // remember for later use
-            }, 
+            },
 
             // JS-check recaptcha, if enabled
             check: function(wrapper) {
@@ -109,13 +123,24 @@ $(function(){
                 if(this.alreadyInit) 
                     return;
 
+                jqfs.val();
+
                 var wrap = $(this);
                 wrap.find("#submit").click(jqfs.send);  // handle click event
-                this.validator = wrap.validate();
+                
+                // ToDo: Change the selector
+                this.validator = $("form").validate({
+                    invalidHandler: function(form) {
+                        form.submit();
+                    },
+                    submitHandler: function(form) {
+                        // do other things for a valid form
+                        form.submit();
+                    }
+                });
+                
                 this.alreadyInit = true;
             });
-            //  wrappers
-            // var val = wrappers.validate();
         }
     }
 
