@@ -1,3 +1,4 @@
+@using System.Linq
 <script type="text/javascript" src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js" data-enableoptimizations="100"></script>
 <link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="100"/>
 <script src="@App.Path/dist/smoke.min.js"></script>
@@ -9,7 +10,15 @@
   var mid = Dnn.Module.ModuleID;            
   var sitekey = App.Settings.RecaptchaSiteKey;  // recaptcha-key from settings
   var wrapperClass = "app-jqfs-id" + mid;       // wrapper-id for jQuery, uses module-id in the name
+
+   var config = (Content.FormType as IEnumerable<dynamic>).FirstOrDefault()
+            ?? (App.Settings.DefaultFormType as IEnumerable<dynamic>).First();
+
+   // todo: get nice-name
+   var type = Data.Cache.GetContentType(config.ContentType);
+
 }
+
 
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
       @Edit.Toolbar(Content)
@@ -18,7 +27,7 @@
       @Edit.Toolbar(toolbar: new object[] { 
           new { showCondition = true,
               command = new { action = "contentitems", 
-                contentType = String.IsNullOrEmpty(Content.ContentType) ? App.Settings.DefaultContentType : Content.ContentType, 
+                contentType = config.ContentType, 
                 filters = new { ModuleId = mid } 
             }
         }
@@ -85,11 +94,10 @@
             <!--<input id="submit" type="submit" class="btn btn-primary" value="@App.Resources.ButtonSend" />-->
         </div>
     </div>
-    
-    <!-- success messages --> 
-    <div>
-          <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
-    </div>
+  </div>
+  <!-- success messages - must come after the main form, so it's still visible when the form goes invisible--> 
+  <div>
+    <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
   </div>
 </div>
 
@@ -102,12 +110,14 @@
 <div>
   todo
   <ul>
-    <li>on send - validate fields</li>
     <li>fix minor styling of alerts</li>
+    <li>
+       todo: ensure sender-mail / reply-to are defaulted back to original if missing
+    </li>
+    <li>
+        // todo: mail-cc functionality, check also separation char
+    </li>
+    <li>at end: clean out demo-text</li>
   </ul>
 </div>
 
-        // todo: ensure sender-mail / reply-to are defaulted back to original if missing
-        // todo: maybe give content-type in request?
-        // todo: finish de translations
-        // todo: mail-cc functionality, check also separation char

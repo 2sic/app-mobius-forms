@@ -84,7 +84,7 @@ $(function(){
         // automatically build the send-object with all properties, 
         // based on all form-fields which have a item-property=""
         autoCollectData: function(wrapper) {
-            var data = {}, fields = $(wrapper).find(":input");//.find("[" + c.iProp + "]");
+            var data = {}, fields = $(wrapper).find(":input");
             function add(i, e) {
                 e = $(e);
                 // get the property name from special-attribut, name OR id

@@ -38,8 +38,10 @@ public class FormController : SxcApiController
 
         // get configuration for this Form
         // it is either customized at Content-level, or we should use the default in the App.Settings
-        var config = Content.FormType.First() 
-            ?? App.Settings.DefaultFormType.First();
+        // the content-type is stored as the StaticName - but for the simple API we need the "nice name"
+        var config = (Content.FormType as IEnumerable<dynamic>).FirstOrDefault()
+            ?? (App.Settings.DefaultFormType as IEnumerable<dynamic>).First();
+        var type = Data.Cache.GetContentType(config.ContentType);
 
         // 1. add IP / host, and save all fields
         // if you add fields to your content-type, just make sure they are 
@@ -47,7 +49,7 @@ public class FormController : SxcApiController
         contactFormRequest.Add("Timestamp", DateTime.Now);
         contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
         contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
-        App.Data.Create(config.ContentType, contactFormRequest);
+        App.Data.Create(type.Name, contactFormRequest);
 
 
         // 2. assemble all settings to send the mail
