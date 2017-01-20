@@ -18,7 +18,12 @@ $(function(){
     var jqfs = window.appJqFormSimple = {
         validateOnBlur: function() {
             $("." + c.clsWrp).on("blur", ":input", function() {
+                if ($(this).data("validation") == "true") {
+                    return;
+                }
+                
                 $(this).smkValidate();
+                $(this).data("validation", "true");
             });
         },
 
