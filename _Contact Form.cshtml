@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js" data-enableoptimizations="100"></script>
 <link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="100"/>
-<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+<script src="@App.Path/dist/smoke.min.js"></script>
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100"></script>
 
 @{
@@ -10,9 +10,6 @@
   var sitekey = App.Settings.RecaptchaSiteKey;  // recaptcha-key from settings
   var wrapperClass = "app-jqfs-id" + mid;       // wrapper-id for jQuery, uses module-id in the name
 }
-
-<input type="text" />
-<input type="submit">test</input>
 
 <div class="app-jqfs-wrapper @wrapperClass sc-element">
       @Edit.Toolbar(Content)
@@ -31,20 +28,14 @@
         <div class="form-group">
           <label for="subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
           <div class="col col-xs-12 col-sm-8">
-            <input type="text" item-property="Subject" class="form-control" id="subject" 
-              aria-describedby="help-block-subject" value="" 
-              required aria-required
-              minlength="2"
-              data-msg-required="test text: @App.Resources.LabelRequired">
-            <span id="help-block-subject" class="help-block">@App.Resources.LabelRequired</span>
+            <input type="text" item-property="Subject" class="form-control" id="subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
           </div>
         </div>
 
         <div class="form-group">
           <label for="message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
           <div class="col col-xs-12 col-sm-8">
-            <textarea item-property="Message" class="form-control" rows="5" id="message" aria-describedby="help-block-message">test msg</textarea>
-            <span id="help-block-message" class="help-block">@App.Resources.LabelRequired</span>
+            <textarea item-property="Message" class="form-control" rows="5" id="message" required data-smk-msg="@App.Resources.LabelRequired">test msg</textarea>
           </div>
         </div>
 
@@ -58,29 +49,27 @@
         <div class="form-group">
           <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
           <div class="col col-xs-12 col-sm-8">
-            <input type="text" item-property="SenderMail" class="form-control" id="sendermail" aria-describedby="help-block-sendermail" value="test@test.com">
-            <span id="help-block-sendermail" class="help-block">@App.Resources.LabelRequired</span>
+            <input type="email" item-property="SenderMail" class="form-control" id="sendermail" value="test@test.com" required data-smk-msg="@App.Resources.LabelValidEmail">
           </div>
         </div>
 
         @if(recaptcha) {
           var recaptchaId = "grecaptcha_" + mid;
           <div class="form-group">
-           
-          <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
-          <div class="col col-xs-12 col-sm-8">
-            <script type="text/javascript">
-              // this mini-function carries the moduleID and ensures that each module has an own recaptcha
-              var recaptcha_onloadCallback_@mid = function() { 
-                window.appJqFormSimple.recap.register("@recaptchaId", $("." + "@wrapperClass"), "@sitekey"); 
-              };
-            </script>
-            <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback_@mid&render=explicit" async defer></script>
-             
-            <div id='@recaptchaId' class="app-recaptcha" data-sitekey="@sitekey"></div>
-             
-            <input type="hidden" id="useRecaptcha" value="true">
-           </div>
+            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
+            <div class="col col-xs-12 col-sm-8">
+              <script type="text/javascript">
+                // this mini-function carries the moduleID and ensures that each module has an own recaptcha
+                var recaptcha_onloadCallback_@mid = function() { 
+                  window.appJqFormSimple.recap.register("@recaptchaId", $("." + "@wrapperClass"), "@sitekey"); 
+                };
+              </script>
+              <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback_@mid&render=explicit" async defer></script>
+                
+              <div id='@recaptchaId' class="app-recaptcha" data-sitekey="@sitekey"></div>
+                
+              <input type="hidden" id="useRecaptcha" value="true">
+            </div>
           </div>
         }
 
@@ -93,7 +82,7 @@
           <!-- send button -->
           <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12">
             <button id="submit" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
-          </div>
+            <!--<input id="submit" type="submit" class="btn btn-primary" value="@App.Resources.ButtonSend" />-->
         </div>
     </div>
     
@@ -101,6 +90,7 @@
     <div>
           <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
     </div>
+  </div>
 </div>
 
 

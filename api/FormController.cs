@@ -36,14 +36,18 @@ public class FormController : SxcApiController
                 throw new Exception("bad recaptcha '" + ok + "'" );
         }
 
+        // get configuration for this Form
+        // it is either customized at Content-level, or we should use the default in the App.Settings
+        var config = Content.FormType.First() 
+            ?? App.Settings.DefaultFormType.First();
+
         // 1. add IP / host, and save all fields
         // if you add fields to your content-type, just make sure they are 
         // in the request with the correct name, they will be added automatically
-        var typeName = String.IsNullOrEmpty(Content.ContentType) ? App.Settings.DefaultContentType : Content.ContentType;
         contactFormRequest.Add("Timestamp", DateTime.Now);
         contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
         contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
-        App.Data.Create(typeName, contactFormRequest);
+        App.Data.Create(config.ContentType, contactFormRequest);
 
 
         // 2. assemble all settings to send the mail
@@ -54,9 +58,9 @@ public class FormController : SxcApiController
 			MailFrom = Content.MailFrom,
 			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail,
 			OwnerMailCC = Content.OwnerMailCC,
-			OwnerMailTemplateFile = !String.IsNullOrEmpty(Content.OwnerMailTemplateFile) ? Content.OwnerMailTemplateFile : App.Settings.OwnerMailTemplateFile,
+			OwnerMailTemplateFile = config.OwnerMailTemplate,
 			CustomerMailCC = Content.CustomerMailCC,
-			CustomerMailTemplateFile = !String.IsNullOrEmpty(Content.CustomerMailTemplateFile) ? Content.CustomerMailTemplateFile : App.Settings.CustomerMailTemplateFile
+			CustomerMailTemplateFile = config.CustomerMailTemplate
 		};
 		
 

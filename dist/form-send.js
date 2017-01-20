@@ -1,6 +1,7 @@
 
 
 $(function(){
+    $("form").attr("novalidate", "");
 
     // constants
     var c  = {
@@ -15,12 +16,17 @@ $(function(){
     // we need a global object, so that the init can be called again when the
     // app is added to the page by ajax
     var jqfs = window.appJqFormSimple = {
-        val: function() {
-            var inputsInForm = $("." + c.clsForm + " :input");
-
-            inputsInForm.each(function() {
-                console.log("elem : " + $(this).attr("item-property") + " -  valid : " + $(this).valid());
+        validateOnBlur: function() {
+            $("." + c.clsWrp).on("blur", ":input", function() {
+                $(this).smkValidate();
             });
+        },
+
+        validate: function(wrapper) {
+            // Validation is here
+            if (wrapper.smkValidate()) {
+                return true;
+            }
         },
 
         // the main send method
@@ -31,15 +37,10 @@ $(function(){
             
             // clear all alerts
             jqfs.alerts(wrapper);
-
-            // todo: validate form
-            var val = wrapper[0].validator; // pre-initialized validator... wrapper.validate();
             
-            // ToDo: Change to the custom validation function
-            // console.log("valid: " + val.valid());
-            jqfs.val();
-            
-            // return;
+            // Validate form
+            if (!jqfs.validate(wrapper))
+                return;
 
             // Do Recaptcha test
             var recap = jqfs.recap.check(wrapper);
@@ -53,8 +54,8 @@ $(function(){
             data = jqfs.autoCollectData(wrapper);
             data.Recaptcha = recap;
 
-            // dddddddddddddd
-            /*jqfs.disable(wrapper, true);
+            // submission
+            jqfs.disable(wrapper, true);
             sxc.webApi.post("Form/ProcessForm", {}, data, true)
                 .success(function() {
                     jqfs.alerts(wrapper, "msgOk")
@@ -63,7 +64,7 @@ $(function(){
                 .error(function() {
                     jqfs.alerts(wrapper, "msgError")
                     jqfs.disable(wrapper, false);
-                });*/
+                });
         },
 
         disable: function(wrapper, state) {
@@ -118,26 +119,16 @@ $(function(){
         // init all jqfs on the page
         init: function() {
             var wrappers = $("." + c.clsWrp);
+
+            jqfs.validateOnBlur();
+
             wrappers.each(function(){
                 // prevent dupl execution
                 if(this.alreadyInit) 
                     return;
 
-                jqfs.val();
-
                 var wrap = $(this);
                 wrap.find("#submit").click(jqfs.send);  // handle click event
-                
-                // ToDo: Change the selector
-                this.validator = $("form").validate({
-                    invalidHandler: function(form) {
-                        form.submit();
-                    },
-                    submitHandler: function(form) {
-                        // do other things for a valid form
-                        form.submit();
-                    }
-                });
                 
                 this.alreadyInit = true;
             });
