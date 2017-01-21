@@ -5,53 +5,47 @@
 
 @using System.Linq
 @{
-  // these variables are used by the razor
-  // var recaptcha = Content.Recaptcha ?? false;   // off by default, turn of if configured
-  var mid = Dnn.Module.ModuleID;            
-  var wrapperClass = "app-jqfs-id" + mid;       // wrapper-id for jQuery, uses module-id in the name
-
-  // get form config (data-type, web-api, etc.) - either custom for this form or default from App
-  var config = (Content.FormType as IEnumerable<dynamic>).FirstOrDefault()
-      ?? (App.Settings.DefaultFormType as IEnumerable<dynamic>).First();
-
+  // get form config (data-type, web-api, etc.)
+  var config = (Content.FormType as IEnumerable<dynamic>).FirstOrDefault()  // custom for this form only...
+      ?? (App.Settings.DefaultFormType as IEnumerable<dynamic>).First();    // ...or app-default configuration
 }
 
-<div class="app-jqfs-wrapper @wrapperClass sc-element" data-ws="@config.Webservice" >
+<div class="app-jqfs-wrapper app-recaptcha-wrapper sc-element" data-webservice="@config.Webservice" >
+      @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
       @Edit.Toolbar(Content)
-
-      @* toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
       @Edit.Toolbar(toolbar: new object[] { 
           new { showCondition = true,
               command = new { action = "contentitems", 
                 contentType = config.ContentType, 
-                filters = new { ModuleId = mid } 
+                filters = new { ModuleId = Dnn.Module.ModuleID } 
             }
         }
       }, settings: new { hover="left", show = "hover" })
+
       <div class="app-jqfs-form">
 
-        <div class="form-group">
+        <div class="form-group app-jqfs-support-disable">
           <label for="subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
           <div class="col col-xs-12 col-sm-8">
             <input type="text" item-property="Subject" class="form-control" id="subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group app-jqfs-support-disable">
           <label for="message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
           <div class="col col-xs-12 col-sm-8">
             <textarea item-property="Message" class="form-control" rows="5" id="message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group app-jqfs-support-disable">
           <label for="sendername" class="control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderName</label>
           <div class="col col-xs-12 col-sm-8">
             <input type="text" item-property="SenderName" class="form-control" id="sendername" value="">
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group app-jqfs-support-disable">
           <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
           <div class="col col-xs-12 col-sm-8">
             <input type="email" item-property="SenderMail" class="form-control" id="sendermail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
@@ -59,59 +53,37 @@
         </div>
 
         @if(Content.Recaptcha ?? false) {
-          var recaptchaId = "grecaptcha_" + mid;
-          var sitekey = App.Settings.RecaptchaSiteKey;  // recaptcha-key from settings
-          <div class="form-group">
+          <div class="form-group app-jqfs-support-disable">
             <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
             <div class="col col-xs-12 col-sm-8">
-              <script type="text/javascript">
-                // this mini-function carries the moduleID and ensures that each module has an own recaptcha
-                function recaptcha_onloadCallback() { 
-                  window.appJqF.recap.register();//"@sitekey"); 
-                };
-              </script>
-              <script src="https://www.google.com/recaptcha/api.js?onload=recaptcha_onloadCallback&render=explicit" async defer data-enableoptimizations="bottom">
-                // test
-              </script>
-                
-              <div id='@recaptchaId' class="app-jqfs-recaptcha" data-sitekey="@sitekey"></div>
-                
-              <input type="hidden" id="useRecaptcha" value="true">
+              <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
             </div>
           </div>
+          @* load scripts - at page bottom - must be optimized bottom, otherwise it might load before the html is ready *@
+          <script src="@App.Path/dist/recaptcha.js" type="text/javascript" data-enableoptimizations="999:bottom"></script>
+          <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
         }
 
         <div class="form-group">
-          <!-- error messages, not visible at first --> 
+          <!-- error messages, invisible at first --> 
           <div class="col col-sm-12 col-xs-12">
             <div id="msgIncomplete" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
             <div id="msgRecap" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageRecaptchaMissing )</div>
             <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
             <div id="msgSending" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSending )</div>
+            <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
           </div>
           <!-- send button -->
-          <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12">
+          <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12 app-jqfs-support-disable">
             <button id="submit" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
-            <!--<input id="submit" type="submit" class="btn btn-primary" value="@App.Resources.ButtonSend" />-->
         </div>
     </div>
-  </div>
-  <!-- success messages - must come after the main form, so it's still visible when the form goes invisible--> 
-  <div class="col col-sm-12 col-xs-12">
-    <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendOk )</div>
-  </div>
-
-  <div>
-  todo
-  <ul>
-    <li>at end: clean out demo-text</li>
-  </ul>
   </div>
 
 </div>
 
 <script>
-  $(function(){ window.appJqF.init(); }); // init the form - must trigger here in case the form was added w/ajax
+  $(function(){ window.appJqF.init(); }); // init the form - must trigger in-line, in case the form was added w/ajax
 </script>
 
 

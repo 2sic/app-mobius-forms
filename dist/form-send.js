@@ -7,11 +7,8 @@ $(function(){
     // constants
     var c  = {
         clsWrp: "app-jqfs-wrapper",
-        useRecapId: "useRecaptcha",
-        recapId: "recId",
         iProp: "item-property",
-        clsForm: "app-jqfs-form",
-        clsRecap: "app-jqfs-recaptcha"
+        clsForm: "app-jqfs-form"
     };
 
 
@@ -21,23 +18,26 @@ $(function(){
         findWrapper: function(e){
             return $(e).closest("." + c.clsWrp);
         },
+
         // the main send method
         send: function() {
 
-            var data, sxc = $2sxc(this),
-                wrapper = jqfs.findWrapper(this);//  $(this).closest("." + c.clsWrp);
+            var data, 
+                btn = this,
+                sxc = $2sxc(btn),
+                wrapper = jqfs.findWrapper(btn);
             
             // clear all alerts
-            jqfs.alerts(wrapper);
+            showOneAlert(wrapper);
             
             // Validate form
             if (!wrapper.smkValidate())
-                return jqfs.alerts(wrapper, "msgIncomplete");
+                return showOneAlert(wrapper, "msgIncomplete");
 
             // Do Recaptcha test, show alert & fail if required and not complete
-            var recap = jqfs.recap.check(wrapper);
+            var recap = window.appJqRecap && window.appJqRecap.check(wrapper);
             if(!recap) 
-                return jqfs.alerts(wrapper, "msgRecap");            
+                return showOneAlert(wrapper, "msgRecap");            
 
             // get data 
             // data = manuallyBuildData(wrapper); // alternative example with manual build, but we prefer automatic
@@ -45,62 +45,20 @@ $(function(){
             data.Recaptcha = recap;
 
             // submission
-            jqfs.disable(wrapper, true);
-            jqfs.alerts(wrapper, "msgSending"); // show "sending..."
-            var ws = wrapper.attr("data-ws");   // should be "Form/ProcessForm" or a custom override
+            disableInputs(wrapper, true);
+            showOneAlert(wrapper, "msgSending"); // show "sending..."
+            var ws = wrapper.data("webservice");   // should be "Form/ProcessForm" or a custom override
             sxc.webApi.post(ws, {}, data, true)
                 .success(function() {
-                    jqfs.alerts(wrapper, "msgOk")
-                    wrapper.find("." + c.clsForm).hide();
+                    showOneAlert(wrapper, "msgOk")
+                    $(btn).hide();
+                    // wrapper.find("." + c.clsForm).hide();
                 })
                 .error(function() {
-                    jqfs.alerts(wrapper, "msgError")
-                    jqfs.disable(wrapper, false);
+                    showOneAlert(wrapper, "msgError")
+                    disableInputs(wrapper, false);
                 });
         },
-
-        disable: function(wrapper, state) {
-            wrapper.find(":input").attr("disabled", state);
-        },
-
-        alerts: function(wrapper, showId){
-            wrapper.find(".alert").hide();
-            wrapper.find("#" + showId).show();
-        },
-
-        // recaptcha handling
-        recap: {
-            // define the method which binds the recaptcha to the DOM
-            register: function () { // sitekey) { // recaptchaId, wrapper, sitekey) {
-                // find all
-                $("." + c.clsRecap).each(function(i, e){
-                    var wrapper = jqfs.findWrapper(e);
-                    var sitekey = $(e).data("sitekey");
-                    if(isNaN(wrapper.data(c.recapId))) {  // only do if not init yet...
-                        var id = grecaptcha.render(e, {
-                            'sitekey' : sitekey,
-                            'size' : 'normal'
-                        });
-                        wrapper.data(c.recapId, id); // remember for later use
-                    }
-                    else
-                        grecaptcha.reset(wrapper.data(c.recapId)); // this is necessary, in case the google-script loads again
-                })
-            },
-
-            // JS-check recaptcha, if enabled
-            check: function(wrapper) {
-                var useField = $(wrapper).find("#" + c.useRecapId);
-                if(useField.length === 0 || !$(useField).val())
-                    return true;
-                var recap = $(wrapper).find("." + c.clsRecap);
-                if(recap.length !== 1)
-                    throw "recaptcha not found";
-                var res = grecaptcha.getResponse($(wrapper).data(c.recapId)); // null if failed, something cryptic if ok
-                return res || false; 
-            },
-        },
-
 
         // init all jqfs on the page
         init: function() {
@@ -121,6 +79,18 @@ $(function(){
             });
         }
     }
+
+
+    function showOneAlert(wrapper, showId) {
+        wrapper.find(".alert").hide();
+        wrapper.find("#" + showId).show();
+    }
+
+    function disableInputs(wrapper, state) {
+        wrapper.toggleClass("disable", state)
+        wrapper.find(":input").attr("disabled", state);
+    }
+
 
     // automatically build the send-object with all properties, 
     // based on all form-fields which have a item-property=""
