@@ -8,7 +8,6 @@ using System.Linq;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
-
 using Newtonsoft.Json;
 
 public class FormController : SxcApiController
@@ -57,28 +56,27 @@ public class FormController : SxcApiController
         // but if they are missing we use fallback settings 
         // which are taken from the App.Settings
 		var settings = new {
-			MailFrom = Content.MailFrom,
-			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail,
-			OwnerMailCC = Content.OwnerMailCC,
-			OwnerMailTemplateFile = config.OwnerMailTemplate,
-			CustomerMailCC = Content.CustomerMailCC,
-			CustomerMailTemplateFile = config.CustomerMailTemplate
+            MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.OwnerMail,
+			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
 		};
 		
 
         // 3. Send Mail to owner
-        var ownerMailFile = TemplateInstance(settings.OwnerMailTemplateFile);
-        var ownerMail = ownerMailFile.Message(contactFormRequest, this).ToString();
+        // uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
+        var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
+        var ownerBody = ownerMailEngine.Message(contactFormRequest, this).ToString();
+        var ownerSubj = ownerMailEngine.Subject(contactFormRequest, this);
 
-        Mail.SendMail(settings.MailFrom, settings.OwnerMail, settings.OwnerMailCC, "", MailPriority.Normal,
-            ownerMailFile.Subject(contactFormRequest, this), MailFormat.Html, System.Text.Encoding.UTF8, ownerMail, "", "", "", "", "");
+        Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", MailPriority.Normal,
+            ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, "", "", "", "", "");
 
         // 4. Send Mail to customer
-        var customerMailFile = TemplateInstance(settings.CustomerMailTemplateFile);
-        var customerMail = customerMailFile.Message(contactFormRequest, this).ToString();
+        var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
+        var customerBody = customerMailEngine.Message(contactFormRequest, this).ToString();
+        var customerSubj = customerMailEngine.Subject(contactFormRequest, this);
 
-        Mail.SendMail(settings.MailFrom, contactFormRequest["SenderMail"].ToString(), settings.CustomerMailCC, "", MailPriority.Normal,
-            customerMailFile.Subject(contactFormRequest, this), MailFormat.Html, System.Text.Encoding.UTF8, customerMail, "", "", "", "", "");
+        Mail.SendMail(settings.MailFrom, contactFormRequest["SenderMail"].ToString(), Content.CustomerMailCC, "", MailPriority.Normal,
+            customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, "", "", "", "", "");
     }
 
     private dynamic TemplateInstance(string fileName)
