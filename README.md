@@ -39,6 +39,8 @@ This app is only useful is you use DNN. So assuming you have a DNN installation,
 Now you can use this app as-is, or customize it to be whatever you need it to be. 
 
 
+## Credits
+The icon was built using the CC icon [_optical illusion by pedro baños cancer_ from the Noun Project](https://thenounproject.com/term/mobius-strip/182380/)
 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
