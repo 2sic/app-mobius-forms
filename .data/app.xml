@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.09.00" ExportDate="2017-01-21T16:47:43.1138609+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.09.00" ExportDate="2017-01-22T15:27:25.4135236+01:00">
   <Header>
     <App Guid="74c59dba-8e66-463a-b6fc-752b98c71a57" />
     <Language Default="en-US" />
@@ -1175,7 +1175,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="fa801736-f678-432d-b389-8272cca1cd92" Name="FormConfiguration" Description="Configuration for the contact form" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="fa801736-f678-432d-b389-8272cca1cd92" Name="FormInstanceConfiguration" Description="Configuration for the contact form" Scope="2SexyContent" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="BasicSettingsGroup" Type="Empty" IsTitle="false">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="4c2554c2-89c3-46a9-b8fe-00e57054aded" KeyNumber="986">
@@ -1671,13 +1671,13 @@
       <Value Key="DisplayName" Value="Formulare" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="Description" Value="" Type="String">
+      <Value Key="Description" Value="Mobius Forms is a online form, which can be customized to be everything." Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Version" Value="01.00.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Folder" Value="Forms jQuery" Type="String">
+      <Value Key="Folder" Value="Mobius Forms" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="AllowTokenTemplates" Value="False" Type="Boolean">
@@ -1709,7 +1709,7 @@
       <Value Key="OwnerName" Value="Online Formular" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="OwnerMail" Value="info@2sic.com" Type="String">
+      <Value Key="OwnerMail" Value="info@2sxc.org" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="RecaptchaSiteKey" Value="6LexDw8UAAAAAEa9CXQhRlhSxlqJde9cuShQMOrX" Type="String">
@@ -1915,7 +1915,7 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormConfiguration" EntityGUID="5e814df8-8669-46ca-8ad1-3d96c4d93f08">
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="5e814df8-8669-46ca-8ad1-3d96c4d93f08">
       <Value Key="OwnerName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -1945,7 +1945,7 @@
       </Value>
       <Value Key="FormType" Value="" Type="Entity" />
     </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormConfiguration" EntityGUID="b7bd773f-7eae-4fe9-bf34-0e64e36b3302">
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="b7bd773f-7eae-4fe9-bf34-0e64e36b3302">
       <Value Key="OwnerName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -1965,29 +1965,6 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="FormType" Value="" Type="Entity" />
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="e36a2f58-87ee-4a35-8044-929d0c92ed93">
-      <Value Key="Subject" Value="test subj" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-12T16:22:15" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
     </Entity>
     <Entity AssignmentObjectType="ContentType" AttributeSetStaticName="ContentType" AttributeSetName="ContentType" EntityGUID="24d75cc0-300a-43c1-8523-3eb1fb24a9d5" KeyString="7a1a6841-f37a-4bad-953a-f204612693b9">
       <Value Key="Label" Value="Contact Simple" Type="String">
@@ -2049,237 +2026,7 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="5237be26-dea5-432c-96d6-eb2accba70c8">
-      <Value Key="Subject" Value="f2" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T15:37:55" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="6d241188-4f8d-416a-a7e3-404560ffdd91">
-      <Value Key="Subject" Value="22" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T15:49:59" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="2385ec93-f122-456c-98a9-686634792821">
-      <Value Key="Subject" Value="3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T15:51:47" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="e5605b51-c06f-4518-bda6-fbeede04a9ea">
-      <Value Key="Subject" Value="eu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T15:56:09" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="e7fa5973-88fd-474e-83d4-860378d78c91">
-      <Value Key="Subject" Value="euou" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T15:56:21" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="7a3c3433-e783-4f96-8e41-f179b3231d2c">
-      <Value Key="Subject" Value="oeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T16:53:54" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="51eae7a8-9a71-48f0-a802-89e3117b562a">
-      <Value Key="Subject" Value="eu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T16:54:17" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="7a13a538-7298-4b1a-8549-49c01f92ac6b">
-      <Value Key="Subject" Value="oeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T17:13:19" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="0f8e0c25-fb4e-4209-ae98-5cd2e369214f">
-      <Value Key="Subject" Value="1714" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T17:14:38" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="45103916-2fca-4368-8907-30205982fd9f">
-      <Value Key="Subject" Value="1715" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-20T17:15:34" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormConfiguration" EntityGUID="902a8660-cced-4b36-8073-a069d1f7e259">
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="902a8660-cced-4b36-8073-a069d1f7e259">
       <Value Key="OwnerName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -2306,262 +2053,29 @@
       </Value>
       <Value Key="FormType" Value="" Type="Entity" />
     </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="108670e3-8e44-4815-a918-db91d97a0d44">
-      <Value Key="Subject" Value="4234" Type="String">
+    <Entity AssignmentObjectType="ContentType" AttributeSetStaticName="ContentType" AttributeSetName="ContentType" EntityGUID="b5f7f293-bce3-440b-9530-58278c7da58d" KeyString="15ad4672-7b74-4586-888f-4884abad523a">
+      <Value Key="Label" Value="FormType" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Message" Value="test msg" Type="String">
+      <Value Key="Description" Value="Config for each type of form" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
+      <Value Key="Notes" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
+      <Value Key="Icon" Value="" Type="Hyperlink">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Timestamp" Value="2017-01-21T15:06:31" Type="DateTime">
+      <Value Key="Link" Value="" Type="Hyperlink">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="0fda9b9c-c0ec-4c68-9d7d-ff0e7ff08290">
-      <Value Key="Subject" Value="2" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T15:38:48" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1921" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="637a849c-8790-4e06-91ab-b9aea8d7ec09">
-      <Value Key="Subject" Value="1538" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="test msg" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="test@test.com" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="test joe" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T15:38:58" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="a34f8ae8-e5e8-4dc9-bfa9-388d1d5df560">
-      <Value Key="Subject" Value="1543" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="ok" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="daniel" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T15:43:24" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="0aad4a9c-129f-4d4e-bd4a-5bbd9c71eea6">
-      <Value Key="Subject" Value="Elektronische Unterlagene" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="e" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:01:01" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="9062be9f-81bd-4548-bc28-37efd997f6ec">
-      <Value Key="Subject" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="a" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="aoue" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:07:20" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="b14d1e78-0129-4b33-aaf4-271f4eea0472">
-      <Value Key="Subject" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:16:53" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="169f5ae9-3414-446b-981d-51fdd62a78f3">
-      <Value Key="Subject" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="aou" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:37:48" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="a9400b34-43be-47fd-8557-a5f63770ec5a">
-      <Value Key="Subject" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:40:16" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="7e0d8610-ecaf-423b-8b35-996cf171b911">
-      <Value Key="Subject" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="aoeu" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:45:57" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="0cd4b222-6b2c-4376-aba6-1a7db419b693">
-      <Value Key="Subject" Value="e" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Message" Value="e" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderMail" Value="daniel@mettlers.info" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2017-01-21T16:47:04" Type="DateTime">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="1749" Type="Number">
+      <Value Key="EditInstructions" Value="&lt;p&gt;This configures a form - basically what type should be used when an item is created, what web-api call to use and which e-mail templates. It's meant for technical people.&amp;nbsp;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
   </Entities>
   <PortalFiles />
   <PortalFolders>
-    <Folder Id="656" RelativePath="adam/Forms jQuery/" />
+    <Folder Id="657" RelativePath="adam/Mobius Forms/" />
   </PortalFolders>
 </SexyContent>
