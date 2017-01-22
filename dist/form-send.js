@@ -36,7 +36,7 @@ $(function(){
 
             // Do Recaptcha test, show alert & fail if required and not complete
             var recap = window.appJqRecap && window.appJqRecap.check(wrapper);
-            if(!recap) 
+            if(window.appJqRecap && !recap) 
                 return showOneAlert(wrapper, "msgRecap");            
 
             // get data 

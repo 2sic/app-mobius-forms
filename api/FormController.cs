@@ -50,6 +50,12 @@ public class FormController : SxcApiController
         contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
         App.Data.Create(type.Name, contactFormRequest);
 
+        // after saving, remove recaptcha fields from the data-package,
+        // because we don't want them in the e-mails
+        var badKeys = new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit"}; 
+        foreach (var key in badKeys)
+            if(contactFormRequest.ContainsKey(key)) 
+                contactFormRequest.Remove(key);
 
         // 2. assemble all settings to send the mail
         // background: some settings are made in this module,
@@ -66,17 +72,20 @@ public class FormController : SxcApiController
         var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
         var ownerBody = ownerMailEngine.Message(contactFormRequest, this).ToString();
         var ownerSubj = ownerMailEngine.Subject(contactFormRequest, this);
+        var custMail = contactFormRequest["SenderMail"].ToString();
 
-        Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", MailPriority.Normal,
-            ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, "", "", "", "", "");
+        // todo: check reply-to e-mail!
+        Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
+            ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, new string[0], "", "", "", "", false);
 
         // 4. Send Mail to customer
         var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
         var customerBody = customerMailEngine.Message(contactFormRequest, this).ToString();
         var customerSubj = customerMailEngine.Subject(contactFormRequest, this);
 
-        Mail.SendMail(settings.MailFrom, contactFormRequest["SenderMail"].ToString(), Content.CustomerMailCC, "", MailPriority.Normal,
-            customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, "", "", "", "", "");
+        // todo: check reply-to e-mail!
+        Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
+            customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
     }
 
     private dynamic TemplateInstance(string fileName)
