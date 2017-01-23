@@ -74,7 +74,6 @@ public class FormController : SxcApiController
         var ownerSubj = ownerMailEngine.Subject(contactFormRequest, this);
         var custMail = contactFormRequest["SenderMail"].ToString();
 
-        // todo: check reply-to e-mail!
         Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
             ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, new string[0], "", "", "", "", false);
 
@@ -83,7 +82,6 @@ public class FormController : SxcApiController
         var customerBody = customerMailEngine.Message(contactFormRequest, this).ToString();
         var customerSubj = customerMailEngine.Subject(contactFormRequest, this);
 
-        // todo: check reply-to e-mail!
         Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
             customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
     }
