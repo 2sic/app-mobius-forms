@@ -38,8 +38,8 @@ public class FormController : SxcApiController
         // get configuration for this Form
         // it is either customized at Content-level, or we should use the default in the App.Settings
         // the content-type is stored as the StaticName - but for the simple API we need the "nice name"
-        var config = (Content.FormType as IEnumerable<dynamic>).FirstOrDefault()
-            ?? (App.Settings.DefaultFormType as IEnumerable<dynamic>).First();
+        var config = (Content.Presentation.SubmitType as IEnumerable<dynamic>).FirstOrDefault()
+            ?? (App.Settings.SubmitType as IEnumerable<dynamic>).First();
         var type = Data.Cache.GetContentType(config.ContentType);
 
         // 1. add IP / host, and save all fields
@@ -48,6 +48,11 @@ public class FormController : SxcApiController
         contactFormRequest.Add("Timestamp", DateTime.Now);
         contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
         contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
+        // add raw-data, in case the content-type has a "RawData" field
+        contactFormRequest.Add("RawData", JsonConvert.SerializeObject(contactFormRequest));
+        // add Title (if non given), in case the Content-Type would benefit of an automatic title
+        if(!contactFormRequest.ContainsKey("Title"))
+            contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
         App.Data.Create(type.Name, contactFormRequest);
 
         // after saving, remove recaptcha fields from the data-package,
