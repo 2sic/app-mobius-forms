@@ -51,13 +51,14 @@ public class FormController : SxcApiController
         // add raw-data, in case the content-type has a "RawData" field
         contactFormRequest.Add("RawData", JsonConvert.SerializeObject(contactFormRequest));
         // add Title (if non given), in case the Content-Type would benefit of an automatic title
-        if(!contactFormRequest.ContainsKey("Title"))
-            contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
+        var addTitle = !contactFormRequest.ContainsKey("Title");
+        if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
         App.Data.Create(type.Name, contactFormRequest);
 
         // after saving, remove recaptcha fields from the data-package,
+        // also the raw-data and the generated title
         // because we don't want them in the e-mails
-        var badKeys = new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit"}; 
+        var badKeys = new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit", "RawData", addTitle ? "Title" : "some-fake-key" }; 
         foreach (var key in badKeys)
             if(contactFormRequest.ContainsKey(key)) 
                 contactFormRequest.Remove(key);
