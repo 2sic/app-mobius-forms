@@ -20,6 +20,7 @@ A [DNN App][2sxc] is like a DNN module, just way better :). Since this is an ope
 1. Pre-Built Forms for use or learning
     1. Basic contact form with _Subject, Message, Name, E-Mail_
     1. A support-request form with a dropdown-example
+    1. An example with JS show/hide logic and saving raw JSON-data
 1. **AJAX**, so no page reloads for validation, sending or messages
 1. **Recaptcha** (optional) validation on client and server
 2. data is saved, together with the _Timestamp_, _SenderIP_, optionaly generated _Title_ or even raw JSON-data
