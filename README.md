@@ -4,6 +4,7 @@
 [//]: # "So always update it first in the wiki, then copy-paste everything into readme.md"
 [//]: # "*******************************************************"
 
+<img src="https://github.com/2sic/app-mobius-forms/wiki/assets/app-icon.png" width="250" align="right">
 ## The Mobius Forms App
 This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form extension_ in the DNN ecosystem. This means that it
 
@@ -14,12 +15,14 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 The app is built with the [pattern **Don't be DAFT**][daft] (DAFT = Densely Abstract Features for Techies), aka the **Anti-Abstraction** pattern. So customizing it is mostly done using common technologies like HTML and if necessary, jQuery and C#. 
 
 ## Quick Intro To The Mobius Forms App for DNN
-A [DNN App][2sxc] is like a DNN module, just way better :). Since this is a 2sxc-app, you can customize it to be anything you want! This list just shows what it already does, so you know what you get out-of-the-first-box.
+A [DNN App][2sxc] is like a DNN module, just way better :). Since this is an open-code/open-source 2sxc-app, you can customize it to be anything you want! This list just shows what it already does, so you know what you get out-of-the-first-box.
 
-1. Basic contact form with _Subject, Message, Name, E-Mail_
+1. Pre-Built Forms for use or learning
+    1. Basic contact form with _Subject, Message, Name, E-Mail_
+    1. A support-request form with a dropdown-example
 1. **AJAX**, so no page reloads for validation, sending or messages
 1. **Recaptcha** (optional) validation on client and server
-2. data is saved, together with the _Timestamp_ and _SenderIP_
+2. data is saved, together with the _Timestamp_, _SenderIP_, optionaly generated _Title_ or even raw JSON-data
 3. sends [various e-mails][cust-mail], which are **razor-templateable** and has **Reply-To** and **CC** options
 4. **multi-language** labels and messages, already translated into English and German/Deutsch
 6. field validation uses [html5 and jQueryValidation][jqval] and works with multiple forms on the same page
@@ -39,7 +42,11 @@ This app is only useful is you use DNN. So assuming you have a DNN installation,
 
 * Here's how to [install 2sxc and an App of your Choice](http://2sxc.org/en/blog/post/install-2sxc-and-an-app-of-your-choice)
 
-Now you can use this app as-is, or customize it to be whatever you need it to be. 
+* Now you can use this app as-is, or customize it to be whatever you need it to be. 
+
+* It probably helps to review the [Overview][overview] about how the parts play together by default, so you can then change as little as necessary to get it to do what you want
+
+
 
 ## Credits
 The icon was built using the CC icon [_optical illusion by pedro baños cancer_ from the Noun Project](https://thenounproject.com/term/mobius-strip/182380/)
@@ -56,3 +63,4 @@ The icon was built using the CC icon [_optical illusion by pedro baños cancer_ 
 [translate]: https://github.com/2sic/app-form-jquery-simple/wiki/Translate
 [cust-webapi]: https://github.com/2sic/app-form-jquery-simple/wiki/Customize-WebApi
 [daft]: http://2sxc.org/en/blog/post/the-dont-be-daft-pattern-densely-abstract-features-for-techies
+[overview]: https://github.com/2sic/app-form-jquery-simple/wiki/Overview
