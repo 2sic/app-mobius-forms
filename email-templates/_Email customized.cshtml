@@ -1,0 +1,51 @@
+@helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers helpers)
+{
+    <!doctype html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { font-family: Helvetica, sans-serif; }
+        </style>
+    </head>
+    <body>
+        <h1>Website contact form request</h1>
+        <table width="100%">
+            <tr>
+                <td width="10%">Subject</td>
+                <td>@request["Subject"]</td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>@request["Message"]</td>
+            </tr>
+            <tr>
+                <td>Customer</td>
+                <td>@request["Name"] (@request["E-Mail"])</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>Log</td>
+                <td>@request["Timestamp"] (@request["SenderIP"])</td>
+            </tr>
+
+        </table>
+    </body>
+</html>
+}
+
+@functions {
+	public string Subject(dynamic request, dynamic helpers) {
+        // create custom code to generate the subject here...
+
+        // or just return the setting configured in the form
+        return !String.IsNullOrWhiteSpace(helpers.Content.OwnerMailSubject)
+            ? helpers.Content.OwnerMailSubject.ToString()
+            : helpers.App.Settings.OwnerMailSubject.ToString();
+	}
+}
