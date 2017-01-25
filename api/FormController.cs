@@ -18,6 +18,10 @@ public class FormController : SxcApiController
     [ValidateAntiForgeryToken]
     public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
     {
+
+        // Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
+        contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
+
         // test exception to see how the js-side behaves on errors
         // throw new Exception();
 
@@ -59,9 +63,7 @@ public class FormController : SxcApiController
         if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
         App.Data.Create(type.Name, contactFormRequest);
 
-        // after saving, remove raw-data and the generated title
-        // because we don't want them in the e-mails
-        removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
+
 
         // 2. assemble all settings to send the mail
         // background: some settings are made in this module,
@@ -73,11 +75,22 @@ public class FormController : SxcApiController
 		};
 		
 
+        // Pre 3: Improve keys / values for nicer presentation in the mail
+        // after saving, remove raw-data and the generated title
+        // because we don't want them in the e-mails
+        removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
+
+        // rewrite the keys to be a nicer format, based on the configuration
+        string mailLabelRewrites = (!String.IsNullOrEmpty(config.MailLabels) 
+            ? config.MailLabels
+            : App.Settings.SubmitType[0].MailLabels) ?? "";
+        var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
+
         // 3. Send Mail to owner
         // uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
         var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
-        var ownerBody = ownerMailEngine.Message(contactFormRequest, this).ToString();
-        var ownerSubj = ownerMailEngine.Subject(contactFormRequest, this);
+        var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
+        var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
         var custMail = contactFormRequest["SenderMail"].ToString();
 
         Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
@@ -85,8 +98,8 @@ public class FormController : SxcApiController
 
         // 4. Send Mail to customer
         var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
-        var customerBody = customerMailEngine.Message(contactFormRequest, this).ToString();
-        var customerSubj = customerMailEngine.Subject(contactFormRequest, this);
+        var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
+        var customerSubj = customerMailEngine.Subject(valuesWithMailLabels, this);
 
         Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
             customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
@@ -112,6 +125,15 @@ public class FormController : SxcApiController
                 contactFormRequest.Remove(key);
     }
 
+    private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
+    {
+        // create keys-map
+        Dictionary<string, string> newKeys = map
+            .Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
+            .ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
+
+        return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
+    }
 
 }
 
