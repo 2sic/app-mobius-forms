@@ -59,13 +59,15 @@
 
         <!-- I'm a Customer -->
         @{
+          // will show/hide the additional field, and set it's "Required" state
+          // create a unique name, to ensure it works if multiple forms are on the page
           var custFieldId = "app-form-cid-" + Dnn.Module.ModuleID;
         }
         <div class="form-group app-jqfs-support-disable">
           <label for="IsCustomer" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">I'm a Customer</label>
           <div class="col col-xs-12 col-sm-8">
             <input type="checkbox" class="form-control" id="IsCustomer" value="yes" 
-              onclick="$('#@custFieldId').toggle(this.checked)">
+              onclick="$('#@custFieldId').toggle(this.checked).find('input').prop('required', this.checked)">
           </div>
         </div>
 

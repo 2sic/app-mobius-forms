@@ -35,6 +35,10 @@ public class FormController : SxcApiController
                 throw new Exception("bad recaptcha '" + ok + "'" );
         }
 
+        // after saving, remove recaptcha fields from the data-package,
+        // because we don't want them in the e-mails
+        removeKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" }); 
+
         // get configuration for this Form
         // it is either customized at Content-level, or we should use the default in the App.Settings
         // the content-type is stored as the StaticName - but for the simple API we need the "nice name"
@@ -55,13 +59,9 @@ public class FormController : SxcApiController
         if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
         App.Data.Create(type.Name, contactFormRequest);
 
-        // after saving, remove recaptcha fields from the data-package,
-        // also the raw-data and the generated title
+        // after saving, remove raw-data and the generated title
         // because we don't want them in the e-mails
-        var badKeys = new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit", "RawData", addTitle ? "Title" : "some-fake-key" }; 
-        foreach (var key in badKeys)
-            if(contactFormRequest.ContainsKey(key)) 
-                contactFormRequest.Remove(key);
+        removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
 
         // 2. assemble all settings to send the mail
         // background: some settings are made in this module,
@@ -105,6 +105,12 @@ public class FormController : SxcApiController
     }
 
 
+    private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
+    {
+        foreach (var key in badKeys)
+            if(contactFormRequest.ContainsKey(key)) 
+                contactFormRequest.Remove(key);
+    }
 
 
 }
