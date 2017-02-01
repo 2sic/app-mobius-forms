@@ -88,21 +88,25 @@ public class FormController : SxcApiController
 
         // 3. Send Mail to owner
         // uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-        var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
-        var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
-        var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
         var custMail = contactFormRequest["SenderMail"].ToString();
+        if(Content.OwnerSend != null && Content.OwnerSend){
+            var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
+            var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
+            var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
 
-        Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
-            ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, new string[0], "", "", "", "", false);
+            Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
+                ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, new string[0], "", "", "", "", false);
+        }
 
         // 4. Send Mail to customer
-        var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
-        var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
-        var customerSubj = customerMailEngine.Subject(valuesWithMailLabels, this);
+        if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
+            var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
+            var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
+            var customerSubj = customerMailEngine.Subject(valuesWithMailLabels, this);
 
-        Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
-            customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
+            Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
+                customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
+        }
     }
 
     private dynamic TemplateInstance(string fileName)
