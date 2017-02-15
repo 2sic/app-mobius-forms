@@ -40,51 +40,6 @@
           </div>
         </div>
 
-        <!-- Sender Name -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="sendername" class="control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderName</label>
-          <div class="col col-xs-12 col-sm-8">
-            <input type="text" item-property="SenderName" class="form-control" id="sendername" value="">
-          </div>
-        </div>
-
-        <!-- Sender Mail -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
-          <div class="col col-xs-12 col-sm-8">
-            <input type="email" item-property="SenderMail" class="form-control" id="sendermail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
-          </div>
-        </div>
-
-        <!-- ChargeMe Dropdown -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="ChargeMe" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.ChargeMe</label>
-          <div class="col col-xs-12 col-sm-8">
-              <select class="form-control" id="ChargeMe" required data-smk-msg="@App.Resources.LabelRequired">
-                  <option value="">--Please Select--</option>
-                  <option>This is just feedback, don't charge me</option>
-                  <option>It's ok to charge me 1h = 160.-</option>
-                  <option>It's ok to charge me 4h = 640.-</option>
-                  <option>It's ok to charge me 1d = 1'280.-</option>
-                  <option>It's ok to charge me 10h = 1'600.-</option>
-                  <option>This could be more than 10h, please contact me</option>
-              </select>
-          </div>
-        </div>
-
-        <!-- Recaptcha -->
-        @if(Content.Recaptcha ?? false) {
-          <div class="form-group app-jqfs-support-disable">
-            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
-            <div class="col col-xs-12 col-sm-8">
-              <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
-            </div>
-          </div>
-          @* load scripts - at page bottom - must be optimized bottom, otherwise it might load before the html is ready *@
-          <script src="@App.Path/dist/recaptcha.js" type="text/javascript" data-enableoptimizations="999:bottom"></script>
-          <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
-        }
-
         <!-- Messages / Send -->
         <div class="form-group">
           @RenderPage("_Shared - Messages.cshtml")

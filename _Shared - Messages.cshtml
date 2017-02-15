@@ -1,0 +1,11 @@
+<!-- error messages, invisible at first --> 
+<div class="col col-sm-12 col-xs-12">
+<div id="msgIncomplete" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
+<div id="msgRecap" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageRecaptchaMissing )</div>
+<div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
+<div id="msgSending" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSending )</div>
+<div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">
+    @Html.Raw( App.Resources.MessageSendOk )
+    @Html.Raw( Content.CustomerSend != null && Content.CustomerSend ? App.Resources.MessageCustomerMailSend : "")
+</div>
+</div>

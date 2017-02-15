@@ -71,19 +71,10 @@
 
         <!-- Messages / Send -->
         <div class="form-group">
-          <!-- error messages, invisible at first --> 
-          <div class="col col-sm-12 col-xs-12">
-            <div id="msgIncomplete" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageFormIncomplete )</div>
-            <div id="msgRecap" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageRecaptchaMissing )</div>
-            <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSendError )</div>
-            <div id="msgSending" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw( App.Resources.MessageSending )</div>
-            <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">
-              @Html.Raw( App.Resources.MessageSendOk )
-              @Html.Raw( Content.CustomerSend ? App.Resources.MessageCustomerMailSend : "")
-            </div>
-          </div>
-          <!-- send button -->
-          <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12 app-jqfs-support-disable">
+          @RenderPage("_Shared - Messages.cshtml")
+
+        <!-- send button -->
+        <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12 app-jqfs-support-disable">
             <button id="submit" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
         </div>
     </div>

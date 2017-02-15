@@ -88,7 +88,8 @@ public class FormController : SxcApiController
 
         // 3. Send Mail to owner
         // uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-        var custMail = contactFormRequest["SenderMail"].ToString();
+        var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
+        
         if(Content.OwnerSend != null && Content.OwnerSend){
             var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
             var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
