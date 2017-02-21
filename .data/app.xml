@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.09.01" ExportDate="2017-02-15T10:19:21.1562724+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="08.10.01" ExportDate="2017-02-21T09:14:59.8908364+01:00">
   <Header>
     <App Guid="74c59dba-8e66-463a-b6fc-752b98c71a57" />
     <Language Default="en-US" />
@@ -2526,7 +2526,7 @@
       <Value Key="Description" Value="Mobius Forms is a online form, which can be customized to be everything." Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="01.04.00" Type="String">
+      <Value Key="Version" Value="01.04.01" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Folder" Value="Mobius Forms" Type="String">
@@ -2621,46 +2621,16 @@
       <Value Key="MessageSendOk" Value="&lt;p&gt;Danke f&amp;uuml;r Ihre Anfrage - wir werden sie innert eines Arbeitstages bearbeiten.&amp;nbsp;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="MessageSendError" Value="&lt;p&gt;An unexpected error occured while sending. Please try again. If it fails again, please send it by E-Mail.&lt;/p&gt;" Type="String">
+      <Value Key="LabelSenderPhone" Value="Your phone" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="MessageSendError" Value="&lt;p&gt;Beim Senden ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es nochmals. Wenn der Versand weiterhin fehlschl&amp;auml;gt, bitten wir Sie die Mitteilung per E-Mail zu senden.&amp;nbsp;&lt;/p&gt;" Type="String">
+      <Value Key="LabelSenderPhone" Value="Ihre Telefonnummer" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="LabelRequired" Value="Required" Type="String">
+      <Value Key="MessageCustomerMailSend" Value="&lt;p&gt;You will also receive a confirmation to the e-mail address you provided.&amp;nbsp;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="LabelRequired" Value="Pflichtfeld" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageFormIncomplete" Value="&lt;p&gt;Please fill in all required fields before sending.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageFormIncomplete" Value="&lt;p&gt;Bitte das Formular vollst&amp;auml;ndig ausf&amp;uuml;llen.&amp;nbsp;&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageRecaptchaMissing" Value="&lt;p&gt;Please fill in all required fields before sending.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageRecaptchaMissing" Value="&lt;p&gt;Bitte das Formular vollst&amp;auml;ndig ausf&amp;uuml;llen.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelRecaptcha" Value="Are you human?" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelRecaptcha" Value="Spam-Schutz" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelValidEmail" Value="Requires valid e-mail address" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelValidEmail" Value="Benötigt gültige E-Mail Adresse" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageSending" Value="&lt;p&gt;Sending your message, please wait...&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageSending" Value="&lt;p&gt;Mitteilung wird versandt, bitte warten...&lt;/p&gt;" Type="String">
+      <Value Key="MessageCustomerMailSend" Value="&lt;p&gt;Wir senden Ihnen auch auch ein Best&amp;auml;tigungsmail&amp;nbsp;an die angegebene Adresse.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
       <Value Key="ChargeMe" Value="It's ok to charge me" Type="String">
@@ -2693,16 +2663,46 @@
       <Value Key="LabelSenderCity" Value="Ort" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="LabelSenderPhone" Value="Your phone" Type="String">
+      <Value Key="LabelValidEmail" Value="Requires valid e-mail address" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="LabelSenderPhone" Value="Ihre Telefonnummer" Type="String">
+      <Value Key="LabelValidEmail" Value="Benötigt gültige E-Mail Adresse" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="MessageCustomerMailSend" Value="&lt;p&gt;You will also receive a confirmation to the e-mail address you provided.&amp;nbsp;&lt;/p&gt;" Type="String">
+      <Value Key="MessageSending" Value="&lt;p&gt;Sending your message, please wait...&lt;/p&gt;" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="MessageCustomerMailSend" Value="&lt;p&gt;Wir senden Ihnen auch auch ein Best&amp;auml;tigungsmail&amp;nbsp;an die angegebene Adresse.&lt;/p&gt;" Type="String">
+      <Value Key="MessageSending" Value="&lt;p&gt;Mitteilung wird versandt, bitte warten...&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageSendError" Value="&lt;p&gt;An unexpected error occured while sending. Please try again. If it fails again, please send it by E-Mail.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageSendError" Value="&lt;p&gt;Beim Senden ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es nochmals. Wenn der Versand weiterhin fehlschl&amp;auml;gt, bitten wir Sie die Mitteilung per E-Mail zu senden.&amp;nbsp;&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRequired" Value="Required" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRequired" Value="Pflichtfeld" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageFormIncomplete" Value="&lt;p&gt;Please fill in all required fields before sending.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageFormIncomplete" Value="&lt;p&gt;Bitte das Formular vollst&amp;auml;ndig ausf&amp;uuml;llen.&amp;nbsp;&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageRecaptchaMissing" Value="&lt;p&gt;Please fill in all required fields before sending.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageRecaptchaMissing" Value="&lt;p&gt;Bitte das Formular vollst&amp;auml;ndig ausf&amp;uuml;llen.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRecaptcha" Value="Are you human?" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRecaptcha" Value="Spam-Schutz" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
     </Entity>
@@ -2782,6 +2782,12 @@
       <Value Key="MailFrom" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="OwnerSend" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="Recaptcha" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -2792,12 +2798,6 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Default (fallback) config" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerSend" Value="False" Type="Boolean">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="CustomerSend" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -3012,6 +3012,12 @@
       <Value Key="MailFrom" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="OwnerSend" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="Recaptcha" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -3022,12 +3028,6 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Support request fallback / default" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerSend" Value="False" Type="Boolean">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="CustomerSend" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -4166,6 +4166,12 @@
       <Value Key="MailFrom" Value="luca.tescari@2sic.com" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="Recaptcha" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -4176,12 +4182,6 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Test Config" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerSend" Value="True" Type="Boolean">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="CustomerSend" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -4236,6 +4236,87 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="MailLabels" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="98826614-c4ab-4a06-bb80-d99b94ecaf26">
+      <Value Key="OwnerName" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Subject Customer" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Subject Owner" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Kontaktformular" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="45bc157f-c6d8-4a64-83a5-ac3f175fb820">
+      <Value Key="Subject" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Message" Value="tset" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2017-02-21T08:38:25" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="1983" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="56e984e4-3e44-4548-8c4f-4dd5e53555c2">
+      <Value Key="Subject" Value="Hans" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Message" Value="wie Heiri" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2017-02-21T08:54:33" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="192.168.251.3" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="1983" Type="Number">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
