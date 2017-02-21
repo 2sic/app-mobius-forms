@@ -73,7 +73,7 @@ $(function(){
                     return;
 
                 var wrap = $(this);
-                wrap.find("#submit").click(jqfs.send);  // handle click event
+                wrap.find("#sendFormWithApi").click(jqfs.send);  // handle click event
                 
                 this.alreadyInit = true;
             });
