@@ -41,8 +41,14 @@ $(function() {
         if (allInputsFilled(inputArray) == true) {
             $("#FormReminder").fadeIn();
         } else {
+            var u = {
+                mail: $(".app-jqfs-mailchimp-" + mid + " #SenderMail").val(),
+                name: $(".app-jqfs-mailchimp-" + mid + " #SenderName").val(),
+                surname: $(".app-jqfs-mailchimp-" + mid + " #SenderSurname").val()
+            }
+
             $("#FormReminder").fadeOut();
-            mc.subscribeUser($(".app-jqfs-mailchimp-" + mid + " #SenderMail").val(), $(".app-jqfs-mailchimp-" + mid + " #SenderName").val(), $(".app-jqfs-mailchimp-" + mid + " #SenderSurname").val());
+            mc.subscribeUser(u.mail, u.name, u.surname);
         }
         
     })
