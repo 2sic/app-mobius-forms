@@ -9,6 +9,7 @@ using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 using Newtonsoft.Json;
+using System.IO;
 
 public class FormController : SxcApiController
 {
@@ -61,10 +62,22 @@ public class FormController : SxcApiController
         // add Title (if non given), in case the Content-Type would benefit of an automatic title
         var addTitle = !contactFormRequest.ContainsKey("Title");
         if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
+        // Add guid to identify entity after saving
+        var guid = Guid.NewGuid();
+        contactFormRequest.Add("EntityGuid", guid);
         App.Data.Create(type.Name, contactFormRequest);
 
+        // Save files to Adam
+        var files = new List<ToSic.Sxc.Adam.IFile>();
+        foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
+        {
+            var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
+            files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: type.Name, guid: guid, field: file["Field"]));
+        }
 
-
+        // Don't keep Files array in ContactFormRequest
+        removeKeys(contactFormRequest, new string[] { "Files" });
+        
         // 2. assemble all settings to send the mail
         // background: some settings are made in this module,
         // but if they are missing we use fallback settings 
@@ -95,8 +108,12 @@ public class FormController : SxcApiController
             var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
             var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
 
+            var attachments = files.Select(f =>
+                new System.Net.Mail.Attachment(
+                    new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
+
             Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
-                ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, new string[0], "", "", "", "", false);
+                ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, attachments, "", "", "", "", false);
         }
 
         // 4. Send Mail to customer

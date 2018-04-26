@@ -41,23 +41,25 @@ $(function(){
 
             // get data 
             // data = manuallyBuildData(wrapper); // alternative example with manual build, but we prefer automatic
-            data = autoCollectData(wrapper);
-            data.Recaptcha = recap;
+            autoCollectData(wrapper).then(function (data) {
+                data.Recaptcha = recap;
 
-            // submission
-            disableInputs(wrapper, true);
-            showOneAlert(wrapper, "msgSending"); // show "sending..."
-            var ws = wrapper.data("webservice");   // should be "Form/ProcessForm" or a custom override
-            sxc.webApi.post(ws, {}, data, true)
-                .success(function() {
-                    showOneAlert(wrapper, "msgOk")
-                    $(btn).hide();
-                    // wrapper.find("." + c.clsForm).hide();
-                })
-                .error(function() {
-                    showOneAlert(wrapper, "msgError")
-                    disableInputs(wrapper, false);
-                });
+                // submission
+                disableInputs(wrapper, true);
+                showOneAlert(wrapper, "msgSending"); // show "sending..."
+                var ws = wrapper.data("webservice");   // should be "Form/ProcessForm" or a custom override
+                sxc.webApi.post(ws, {}, data, true)
+                    .success(function () {
+                        showOneAlert(wrapper, "msgOk")
+                        $(btn).hide();
+                        // wrapper.find("." + c.clsForm).hide();
+                    })
+                    .error(function () {
+                        showOneAlert(wrapper, "msgError")
+                        disableInputs(wrapper, false);
+                    });
+            });
+            
         },
 
         // init all jqfs on the page
@@ -95,16 +97,48 @@ $(function(){
     // automatically build the send-object with all properties, 
     // based on all form-fields which have a item-property=""
     function autoCollectData(wrapper) {
-        var data = {}, fields = $(wrapper).find(":input");
+        
+        var data = {
+            Files: []
+        };
+        var fields = $(wrapper).find(":input");
+
         function add(i, e) {
             e = $(e);
             // get the property name from special-attribut, name OR id
             var propName = e.attr(c.iProp) || e.attr("name") || e.attr("id");
-            if(propName)
+            
+            if (!propName)
+                return;
+            
+            // extract data from file fields
+            if (e.attr('type') && e.attr('type').toLowerCase() == 'file') {
+                var deferred = $.Deferred();
+                var file = e.get(0).files[0];
+                if (!file)
+                    return;
+                var reader = new FileReader();
+
+                reader.addEventListener("load", function () {
+                    data.Files.push({
+                        Encoded: reader.result,
+                        Name: file.name,
+                        Field: propName
+                    });
+                    deferred.resolve();
+                }, false);
+                reader.readAsDataURL(file);
+                return deferred.promise();
+            }
+            else { // For all standard fields, set value directly
                 data[propName] = e.val();
+            }
         }
-        fields.each(add);
-        return data;
+        var promises = fields.map(add);
+
+        return $.when.apply($, promises).then(function () {
+            return data;
+        });
     };
 
     // example using code to manually build a custom data-object
