@@ -4,6 +4,8 @@
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100" ></script>
 
 @using System.Linq
+@using Connect.Koi
+
 @{
   // get form config (data-type, web-api, etc.)
   var config = (Content.Presentation.SubmitType as IEnumerable<dynamic>).FirstOrDefault()  // custom for this form only...
@@ -27,7 +29,7 @@
         <!-- Subject -->
         <div class="form-group app-jqfs-support-disable">
           <label for="Subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
-          <div class="col col-xs-12 col-sm-8">
+          <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="Subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
           </div>
         </div>
@@ -35,15 +37,15 @@
         <!-- Message -->
         <div class="form-group app-jqfs-support-disable">
           <label for="Message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
-          <div class="col col-xs-12 col-sm-8">
+          <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <textarea class="form-control" rows="5" id="Message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
           </div>
         </div>
 
         <!-- Sender Name -->
         <div class="form-group app-jqfs-support-disable">
-          <label for="SenderName" class="control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderName</label>
-          <div class="col col-xs-12 col-sm-8">
+          <label for="SenderName" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
+          <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderName" value="">
           </div>
         </div>
@@ -51,7 +53,7 @@
         <!-- Sender Mail -->
         <div class="form-group app-jqfs-support-disable">
           <label for="SenderMail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
-          <div class="col col-xs-12 col-sm-8">
+          <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="email" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
           </div>
         </div>
@@ -60,7 +62,7 @@
         @if(Content.Recaptcha ?? false) {
           <div class="form-group app-jqfs-support-disable">
             <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
-            <div class="col col-xs-12 col-sm-8">
+            <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
               <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
             </div>
           </div>
