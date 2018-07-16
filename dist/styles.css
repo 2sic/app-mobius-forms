@@ -4,25 +4,19 @@
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px; }
-  .app-jqfs-wrapper .form-group {
-    overflow: hidden; }
-  .app-jqfs-wrapper textarea {
-    resize: vertical; }
-  .app-jqfs-wrapper .form-control {
-    background: #ffffff;
-    box-shadow: none;
-    float: right; }
-  .app-jqfs-wrapper .form-control.select-control {
-    padding: 6px 7px; }
-  .app-jqfs-wrapper label {
-    float: left;
-    padding-top: 7px; }
   .app-jqfs-wrapper label, .app-jqfs-wrapper .form-control {
     display: inline-block;
     vertical-align: top;
     font-size: 16px;
     height: 32px;
     font-weight: normal; }
+  .app-jqfs-wrapper .form-control {
+    background: #ffffff;
+    box-shadow: none;
+    float: right; }
+  .app-jqfs-wrapper label {
+    float: left;
+    padding-top: 7px; }
   .app-jqfs-wrapper .app-jqfs-recaptcha {
     overflow: hidden;
     clear: both; }
@@ -31,7 +25,7 @@
     margin-right: -15px; }
   .app-jqfs-wrapper .help-block {
     float: right;
-    margin-right: 15PX;
+    margin-right: 15px;
     font-size: 16px; }
   .app-jqfs-wrapper .app-jqfs-recaptcha {
     overflow: hidden;
@@ -41,13 +35,19 @@
     margin-right: -15px; }
   .app-jqfs-wrapper .help-block {
     float: right;
-    margin-right: 15PX;
+    margin-right: 15px;
     font-size: 16px; }
+  .app-jqfs-wrapper .form-group {
+    overflow: hidden; }
+  .app-jqfs-wrapper textarea {
+    resize: vertical; }
+  .app-jqfs-wrapper .form-control.select-control {
+    padding: 6px 7px; }
 
 .app-jqfs-field-required:after {
   content: "   *";
   font-size: 12px;
-  /*color: #c0392b;*/
+  color: #c0392b;
   display: inline-block;
   padding: 0 0 0 5px;
   vertical-align: top; }
