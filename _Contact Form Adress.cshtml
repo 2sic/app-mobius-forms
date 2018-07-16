@@ -26,7 +26,7 @@
 
       <div class="app-jqfs-form">
         <!-- Vorname -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderName" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderName" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -34,7 +34,7 @@
         </div>
         
         <!-- Nachname -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderSurname" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderSurname</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderSurname" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -42,15 +42,15 @@
         </div>
         
         <!-- Strasse -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="SenderStreet" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")></label>@App.Resources.LabelSenderStreet</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="SenderStreet" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderStreet</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderStreet" value="">
           </div>
         </div>
 
         <!-- PLZ -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderPLZ" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderZip</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderPLZ" value="">
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Ort -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderCity" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderCity</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderCity" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -66,7 +66,7 @@
         </div>
 
         <!-- Telefon -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderPhone" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderPhone</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderPhone" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -74,7 +74,7 @@
         </div>
 
         <!-- Subject -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="Subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="Subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -82,7 +82,7 @@
         </div>
 
         <!-- Message -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="Message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <textarea class="form-control" rows="5" id="Message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
@@ -90,7 +90,7 @@
         </div>
 
         <!-- Sender Mail -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderMail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="email" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
@@ -99,7 +99,7 @@
 
         <!-- Recaptcha -->
         @if(Content.Recaptcha ?? false) {
-          <div class="form-group app-jqfs-support-disable">
+          <div class="form-group app-jqfs-support-disable row">
             <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
               <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
