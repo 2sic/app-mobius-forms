@@ -1,0 +1,15 @@
+{
+    "name": "app-mobius-forms",
+    "version": "02.00.00",
+    "description": "A forms app for 2sxc",
+    "main": "gulpfile.js",
+    "scripts": {
+      "start": "npm run start-all",
+      "start-bs3": "gulp watch-sass-bs3",
+      "start-bs4": "gulp watch-sass-bs4",
+      "start-all": "gulp"
+    },
+    "author": "2sic internet solutions",
+    "license": "MIT"
+  }
+  
