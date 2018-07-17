@@ -50,9 +50,8 @@
 #NewsletterSuccessMsg,
 #NewsletterFailedMsg,
 #FormReminder {
-  display: none; }
-
-#FormReminder {
+  margin-top: 10px;
+  display: none;
   color: #a94442; }
 
 /*# sourceMappingURL=styles.css.map */

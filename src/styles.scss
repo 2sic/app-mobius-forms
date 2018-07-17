@@ -57,6 +57,8 @@
 /* Newsletter styles */ 
 #NewsletterSuccessMsg,
 #NewsletterFailedMsg,
-#FormReminder { display: none; }
-
-#FormReminder { color: #a94442; }
+#FormReminder {
+    margin-top: 10px;
+    display: none; 
+    color: #a94442;
+}
