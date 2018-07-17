@@ -21,6 +21,8 @@
     resize: vertical; }
   .app-jqfs-wrapper .form-control.select-control {
     padding: 6px 7px; }
+  .app-jqfs-wrapper .alert {
+    width: 100%; }
 
 .app-jqfs-field-required:after {
   content: "   *";
