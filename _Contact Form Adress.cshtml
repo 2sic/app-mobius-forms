@@ -111,10 +111,10 @@
         }
 
         
-        <div>
+        <div class="form-group row">
           @RenderPage("_Shared - Messages.cshtml")
           
-          <div class="app-jqfs-support-disable">
+          <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
             <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
           </div>
         </div>

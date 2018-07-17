@@ -28,6 +28,7 @@
     textarea { resize: vertical; }
     .form-control.select-control { padding: 6px 7px; }
     .alert { width: 100%; }
+    #sendFormWithApi { float: right; }
 }
 
 .app-jqfs-field-required:after {
@@ -48,11 +49,6 @@
     opacity: 0.4;
 }
 
-/* Bootstrap */ 
-button.btn { 
-    font-size: 14px;
-    border-radius: 0;
-}
 .alert > p { font-size: 16px; }
 
 /* Newsletter styles */ 

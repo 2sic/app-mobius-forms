@@ -1,7 +1,7 @@
 @using Connect.Koi
 
 <!-- form error messages, invisible at first --> 
-<div @Koi.Class("all='row' bs3='col col-xs-12' bs4,oth='col-12'")>
+<div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
     <div id="msgIncomplete" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
     <div id="msgRecap" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
     <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
