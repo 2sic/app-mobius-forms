@@ -27,23 +27,23 @@
       <div class="app-jqfs-form">
 
         <!-- Subject -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="subject" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSubject:</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" item-property="Subject" class="form-control" id="subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
           </div>
         </div>
 
         <!-- Message -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="message" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelMessage</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <textarea item-property="Message" class="form-control" rows="5" id="message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
           </div>
         </div>
 
         <!-- Sender Name -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="sendername" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" item-property="SenderName" class="form-control" id="sendername" value="">
@@ -51,16 +51,16 @@
         </div>
 
         <!-- Sender Mail -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="sendermail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="sendermail" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderMail</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="email" item-property="SenderMail" class="form-control" id="sendermail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
           </div>
         </div>
 
         <!-- ChargeMe Dropdown -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="ChargeMe" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.ChargeMe</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="ChargeMe"@Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.ChargeMe</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
               <select class="form-control" id="ChargeMe" required data-smk-msg="@App.Resources.LabelRequired">
                   <option value="">--Please Select--</option>
@@ -76,8 +76,8 @@
 
         <!-- Recaptcha -->
         @if(Content.Recaptcha ?? false) {
-          <div class="form-group app-jqfs-support-disable">
-            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
+          <div class="form-group app-jqfs-support-disable row">
+            <label for=""@Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
               <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
             </div>
