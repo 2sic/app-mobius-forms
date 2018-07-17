@@ -28,7 +28,7 @@
       <div class="app-jqfs-form app-jqfs-form-mailchimp">
 
         <!-- EMail -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderMail" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderMail</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Vorname -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderName" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderName" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -44,7 +44,7 @@
         </div>
 
         <!-- Nachname -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderSurname" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderSurname</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderSurname" value="" required data-smk-msg="@App.Resources.LabelRequired">
@@ -54,8 +54,8 @@
         <!-- Recaptcha -->
         @*
         @if(Content.Recaptcha ?? false) {
-          <div class="form-group app-jqfs-support-disable">
-            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
+          <div class="form-group app-jqfs-support-disable row">
+            <label for=""@Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
               <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
             </div>
@@ -72,8 +72,10 @@
 
             <!-- mc button -->
             <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
+                <div id="FormReminder">
+                  <div id="msgIncomplete" class="alert alert-danger app-app-jqfs-message" role="alert" style="display:block;" >@Html.Raw(App.Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
+                </div>
                 <button id="subToMc" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
-                <span id="FormReminder">@Html.Raw(App.Resources.MessageFormIncomplete)</span>
             </div>
         </div>
   </div>
