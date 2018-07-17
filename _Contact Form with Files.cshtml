@@ -27,23 +27,23 @@
     <div class="app-jqfs-form">
 
         <!-- Subject -->
-        <div class="form-group app-jqfs-support-disable">
-            <label for="Subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
+        <div class="form-group app-jqfs-support-disable row">
+            <label for="Subject" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSubject:</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <input type="text" class="form-control" id="Subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
             </div>
         </div>
 
         <!-- Message -->
-        <div class="form-group app-jqfs-support-disable">
-            <label for="Message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
+        <div class="form-group app-jqfs-support-disable row">
+            <label for="Message" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelMessage</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <textarea class="form-control" rows="5" id="Message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
             </div>
         </div>
 
         <!-- Sender Name -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
             <label for="SenderName" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <input type="text" class="form-control" id="SenderName" value="">
@@ -51,30 +51,32 @@
         </div>
 
         <!-- Sender Mail -->
-        <div class="form-group app-jqfs-support-disable">
-            <label for="SenderMail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
+        <div class="form-group app-jqfs-support-disable row">
+            <label for="SenderMail" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderMail</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <input type="email" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
             </div>
         </div>
 
         <!-- File -->
-        <div class="form-group app-jqfs-support-disable">
-            <label for="File" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">File (jpeg only)</label>
+        <div class="form-group app-jqfs-support-disable row">
+            <label for="File" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>File (jpeg only)</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <input type="file" class="form-control-file" id="SingleFile" accept=".jpg, .jpeg" value="" required data-smk-msg="File invalid">
             </div>
         </div>
+
         <!-- File2 -->
-        <div class="form-group app-jqfs-support-disable">
-            <label for="File" class="control-label col col-xs-12 col-sm-4">Any file</label>
+        <div class="form-group app-jqfs-support-disable row">
+            <label for="File" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Any file</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <input type="file" class="form-control-file" name="Attachments" id="File2_1" value="" data-smk-msg="File invalid">
             </div>
         </div>
+
         <!-- File3 -->
-        <div class="form-group app-jqfs-support-disable">
-            <label for="File" class="control-label col col-xs-12 col-sm-4">Another file</label>
+        <div class="form-group app-jqfs-support-disable row">
+            <label for="File" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Another file</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
                 <input type="file" class="form-control-file" name="Attachments" id="File2_2" value="" data-smk-msg="File invalid">
             </div>
@@ -82,26 +84,26 @@
 
         <!-- Recaptcha -->
         @if (Content.Recaptcha ?? false)
-    {
-        <div class="form-group app-jqfs-support-disable">
-            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
-            <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-                <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
+        {
+            <div class="form-group app-jqfs-support-disable row">
+                <label for="" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
+                <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
+                    <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
+                </div>
             </div>
-        </div>
-        @* load scripts - at page bottom - must be optimized bottom, otherwise it might load before the html is ready *@
-        <script src="@App.Path/dist/recaptcha.js" type="text/javascript" data-enableoptimizations="999:bottom"></script>
-        <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
-}
+            @* load scripts - at page bottom - must be optimized bottom, otherwise it might load before the html is ready *@
+            <script src="@App.Path/dist/recaptcha.js" type="text/javascript" data-enableoptimizations="999:bottom"></script>
+            <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
+        }
 
         <!-- Messages / Send -->
-        <div class="form-group">
-            @RenderPage("_Shared - Messages.cshtml")
-
-            <!-- send button -->
-            <div class="col-sm-offset-4 col-sm-8 col col-xs-offset-0 col col-xs-12 app-jqfs-support-disable">
-                <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
-            </div>
+        <div class="form-group row">
+          @RenderPage("_Shared - Messages.cshtml")
+          
+          <!-- send button -->
+          <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
+            <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+          </div>
         </div>
     </div>
 
