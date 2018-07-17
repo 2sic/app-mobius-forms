@@ -17,7 +17,8 @@
   .app-jqfs-wrapper .app-jqfs-recaptcha {
     overflow: hidden;
     clear: both; }
-  .app-jqfs-wrapper #sendFormWithApi {
+  .app-jqfs-wrapper #sendFormWithApi,
+  .app-jqfs-wrapper #subToMc {
     float: right;
     padding: 10px 20px; }
   .app-jqfs-wrapper textarea {
