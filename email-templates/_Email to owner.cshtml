@@ -14,10 +14,13 @@
         <table width="100%">
             @foreach (var item in request)
             {
-                <tr>
-                    <td width="10%"><b>@item.Key</b></td>
-                    <td>@item.Value</td>
-                </tr>
+                if(item.Key != "EntityGuid" && item.Key != "ModuleId" && item.Key != "SenderIP" && item.Key != "Timestamp" && item.Key != "sendFormWithApi")
+                {
+                    <tr>
+                        <td width="10%"><b>@item.Key</b></td>
+                        <td>@item.Value</td>
+                    </tr>
+                }
             }
         </table>
     </body>
