@@ -27,23 +27,23 @@
       <div class="app-jqfs-form">
 
         <!-- Subject -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="Subject" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSubject:</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="Subject" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSubject:</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="Subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
           </div>
         </div>
 
         <!-- Message -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="Message" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelMessage</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="Message" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelMessage</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <textarea class="form-control" rows="5" id="Message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
           </div>
         </div>
 
         <!-- Sender Name -->
-        <div class="form-group app-jqfs-support-disable">
+        <div class="form-group app-jqfs-support-disable row">
           <label for="SenderName" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="SenderName" value="">
@@ -51,8 +51,8 @@
         </div>
 
         <!-- Sender Mail -->
-        <div class="form-group app-jqfs-support-disable">
-          <label for="SenderMail" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelSenderMail</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="SenderMail" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderMail</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="email" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
           </div>
@@ -65,17 +65,17 @@
           // create a unique name, to ensure it works if multiple forms are on the page
           var custFieldId = "app-form-cid-" + Dnn.Module.ModuleID;
         }
-        <div class="form-group app-jqfs-support-disable">
-          <label for="IsCustomer" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">I'm a Customer</label>
+        <div class="form-group app-jqfs-support-disable row">
+          <label for="IsCustomer" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-            <input type="checkbox" class="form-control" id="IsCustomer" value="yes" 
-              onclick="$('#@custFieldId').toggle(this.checked).find('input').prop('required', this.checked)">
+            <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
+            <input type="checkbox" class="form-control" name="IsCustomer" onclick="$('#@custFieldId').toggle(this.checked).find('input').prop('required', this.checked)" required>
           </div>
         </div>
 
         <!-- Customer ID (if is customer) -->
-        <div id="@custFieldId" class="form-group app-jqfs-support-disable" style="display:none">
-          <label for="CustomerId" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">Customer ID</label>
+        <div id="@custFieldId" class="form-group app-jqfs-support-disable row" style="display:none">
+          <label for="CustomerId" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
           <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
             <input type="text" class="form-control" id="CustomerId" value="">
           </div>
@@ -83,8 +83,8 @@
 
         <!-- Recaptcha -->
         @if(Content.Recaptcha ?? false) {
-          <div class="form-group app-jqfs-support-disable">
-            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
+          <div class="form-group app-jqfs-support-disable row">
+            <label for="" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
             <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
               <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
             </div>
