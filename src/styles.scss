@@ -23,12 +23,15 @@
         clear: both;
     }
 
+    #sendFormWithApi {
+        float: right;
+        padding: 10px 20px;
+    }
 
     //.form-group { overflow:hidden; }
     textarea { resize: vertical; }
     .form-control.select-control { padding: 6px 7px; }
     .alert { width: 100%; }
-    #sendFormWithApi { float: right; }
 }
 
 .app-jqfs-field-required:after {

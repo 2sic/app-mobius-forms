@@ -110,10 +110,11 @@
           <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
         }
 
-        
+        <!-- Messages / Send -->
         <div class="form-group row">
           @RenderPage("_Shared - Messages.cshtml")
           
+          <!-- send button -->
           <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
             <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
           </div>

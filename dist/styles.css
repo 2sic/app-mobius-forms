@@ -17,14 +17,15 @@
   .app-jqfs-wrapper .app-jqfs-recaptcha {
     overflow: hidden;
     clear: both; }
+  .app-jqfs-wrapper #sendFormWithApi {
+    float: right;
+    padding: 10px 20px; }
   .app-jqfs-wrapper textarea {
     resize: vertical; }
   .app-jqfs-wrapper .form-control.select-control {
     padding: 6px 7px; }
   .app-jqfs-wrapper .alert {
     width: 100%; }
-  .app-jqfs-wrapper #sendFormWithApi {
-    float: right; }
 
 .app-jqfs-field-required:after {
   content: "   *";

@@ -67,15 +67,15 @@
         *@
         
         <!-- Messages / Send -->
-        <div class="form-group">
-          @RenderPage("_Shared - Messages.cshtml")
-        
-        <!-- mc button -->
-        <div class="col-xs-12 app-jqfs-support-disable">
-            <a id="subToMc" data-mid="@Dnn.Module.ModuleID" type="button btn-primary" class="btn btn-primary">@App.Resources.ButtonSendNewsletter</a><br />
-            <span id="FormReminder">@Html.Raw(App.Resources.MessageFormIncomplete)</span>
+        <div class="form-group row">
+            @RenderPage("_Shared - Messages.cshtml")
+
+            <!-- mc button -->
+            <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
+                <button id="subToMc" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+                <span id="FormReminder">@Html.Raw(App.Resources.MessageFormIncomplete)</span>
+            </div>
         </div>
-    </div>
   </div>
 
     <span id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</span>
