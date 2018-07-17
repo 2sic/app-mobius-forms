@@ -1,7 +1,7 @@
 {
     "name": "app-mobius-forms",
-    "version": "02.00.00",
-    "description": "A forms app for 2sxc",
+    "version": "02.00.01",
+    "description": "Mobius Forms is a online form, which can be customized to be everything.",
     "main": "gulpfile.js",
     "scripts": {
       "start": "npm run start-all",
