@@ -67,6 +67,9 @@ public class FormController : SxcApiController
         contactFormRequest.Add("EntityGuid", guid);
         App.Data.Create(type.Name, contactFormRequest);
 
+        // 2018-09-18 added feature to create a full-save of each request into a system-protocol content-type
+        App.Data.Create("SystemProtocol", contactFormRequest);
+
         // Save files to Adam
         var files = new List<ToSic.Sxc.Adam.IFile>();
         foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())

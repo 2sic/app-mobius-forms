@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="09.32.01" ExportDate="2018-07-17T10:26:24.4831754+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="09.32.01" ExportDate="2018-09-18T18:13:34.1005722+02:00">
   <Header>
     <App Guid="74c59dba-8e66-463a-b6fc-752b98c71a57" />
     <Language Default="en-US" />
@@ -2931,6 +2931,139 @@
             <Value Key="InputType" Value="number-default" Type="String" />
             <Value Key="Name" Value="ModuleId" Type="String" />
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+      </Attributes>
+    </AttributeSet>
+    <AttributeSet StaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" Name="SystemProtocol" Description="Protocol of all forms sent - as safety net" Scope="2SexyContent" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="Title" Type="String" IsTitle="true">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d3d692e0-2c63-4a1a-88b4-35b17ac13a5a" KeyNumber="2099">
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Title" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="RawData" Type="Custom" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="49da1c11-ada6-41ad-b907-c847d1b0c259" KeyNumber="2100">
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="custom-json-editor" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Raw Data" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="&lt;p&gt;This is&amp;nbsp;all the data stored in a raw JSON-Format - ideal for catch-everything and debug-scenarios.&lt;/p&gt;" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="False" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Technical" Type="Empty" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="601b0db0-a8cd-4db2-81b6-ce726e25ddf3" KeyNumber="2101">
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="empty-default" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Technical" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="711b3ad2-3a16-463b-a973-e028ae4f8884" KeyNumber="2101">
+            <Value Key="DefaultCollapsed" Value="True" Type="Boolean">
+              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Timestamp" Type="DateTime" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="323fed21-c6c6-4f28-beec-336eb192d34b" KeyNumber="2102">
+            <Value Key="InputType" Value="datetime-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Timestamp" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SenderIP" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="68f3db34-244b-4ed5-a5c9-92aa747d8401" KeyNumber="2103">
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="SenderIP" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="ModuleId" Type="Number" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="a5abf8bf-c77e-46c2-994d-b9b477d2abc1" KeyNumber="2104">
+            <Value Key="InputType" Value="number-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="ModuleId" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
           </Entity>
         </Attribute>
       </Attributes>
