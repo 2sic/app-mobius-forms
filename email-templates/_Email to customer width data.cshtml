@@ -1,0 +1,39 @@
+@helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers context)
+{
+    <!doctype html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { font-family: Helvetica, sans-serif; }
+        </style>
+    </head>
+    <body>
+        <h1>Website contact form request</h1>
+        <table width="100%">
+            @foreach (var item in request)
+            {
+                if(item.Key != "EntityGuid" && item.Key != "ModuleId" && item.Key != "SenderIP" && item.Key != "Timestamp" && item.Key != "sendFormWithApi")
+                {
+                    <tr>
+                        <td width="10%"><b>@item.Key</b></td>
+                        <td>@item.Value</td>
+                    </tr>
+                }
+            }
+        </table>
+    </body>
+</html>
+}
+
+@functions {
+	public string Subject(dynamic request, dynamic context) {
+        // create custom code to generate the subject here...
+
+        // or just return the setting configured in the form
+		return !String.IsNullOrWhiteSpace(context.Content.CustomerMailSubject)
+            ? context.Content.CustomerMailSubject
+            : context.App.Settings.CustomerMailSubject;
+	}
+}
