@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js" data-enableoptimizations="100" ></script>
 <link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="100" />
-<script src="@App.Path/dist/smoke.min.js" ></script>
+<script src="@App.Path/dist/lib/smoke.min.js" ></script>
 <script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100" ></script>
 <script src="@App.Path/dist/mailchimp.js" type="text/javascript" data-enableoptimizations="100" ></script>
 
@@ -58,7 +58,6 @@
           </div>
 
           <!-- Recaptcha -->
-          @*
           @if(Content.Recaptcha ?? false) {
             <div class="form-group app-jqfs-support-disable row">
               <label for=""@Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
@@ -66,11 +65,11 @@
                 <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
               </div>
             </div>
-            @* load scripts - at page bottom - must be optimized bottom, otherwise it might load before the html is ready 
+
             <script src="@App.Path/dist/recaptcha.js" type="text/javascript" data-enableoptimizations="999:bottom"></script>
             <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
           }
-          *@
+          
           
           <!-- Messages / Send -->
           <div class="form-group row">
