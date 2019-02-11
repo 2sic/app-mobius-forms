@@ -1,5 +1,9 @@
 @helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers context)
 {
+    // Here the "non-sexy" fields get filtered out so the mail owner (and customer) won't see IP, EntityGuid etc.
+    // If you do want to send these informations, just remove the statement out of the Where function
+    var registrationData = request.Where(d => d.Key != "EntityGuid" || d.Key != "ModuleId" || d.Key != "SenderIP" || d.Key != "Timestamp" || d.Key != "sendFormWithApi");
+    
     <!doctype html>
     <html>
     <head>
@@ -15,19 +19,16 @@
             @context.App.Resources.MailOwnerContent
         </div>
         <table width="100%">
-            @foreach (var item in request)
+            @foreach (var item in registrationData)
             {
-                if(item.Key != "EntityGuid" && item.Key != "ModuleId" && item.Key != "SenderIP" && item.Key != "Timestamp" && item.Key != "sendFormWithApi")
-                {
-                    <tr>
-                        <td width="10%"><b>@item.Key</b></td>
-                        <td>@item.Value</td>
-                    </tr>
-                }
+                <tr>
+                    <td width="10%"><b>@item.Key</b></td>
+                    <td>@item.Value</td>
+                </tr>
             }
         </table>
     </body>
-</html>
+    </html>
 }
 
 @functions {
@@ -40,3 +41,4 @@
             : context.App.Settings.OwnerMailSubject.ToString();
 	}
 }
+
