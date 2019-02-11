@@ -26,13 +26,6 @@ public class MailchimpController : SxcApiController
             return msg;
         }
 
-        [HttpPost]
-        [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
-        public string Test()
-        {
-            return "Doenar";
-        }
-
         private static string SubscribeToMailChimp(string srv, string listId, string apiKey, string substatus, string email, string fname, string lname)
         {
             var wr = WebRequest.Create("https://" + srv + ".api.mailchimp.com/3.0/lists/" + listId + "/members");
