@@ -10,8 +10,10 @@
         </style>
     </head>
     <body>
-        <h1>Customer Mail - Thank you</h1>
-        <p>We got your message!</p>
+        <h1>@context.App.Resources.MailCustomerTitle</h1>
+        <div>
+            @Html.Raw(context.App.Resources.MailCustomerContent)
+        </div>
     </body>
 </html>
 }

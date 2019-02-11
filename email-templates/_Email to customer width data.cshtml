@@ -1,4 +1,4 @@
-@helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers context)
+@helper Message(dynamic request, ToSic.SexyContent.IAppAndDataHelpers context)
 {
     <!doctype html>
     <html>
@@ -10,7 +10,14 @@
         </style>
     </head>
     <body>
-        <h1>Website contact form request</h1>
+        <h1>@context.App.Resources.MailCustomerTitle</h1>
+        <div>
+            @context.App.Resources.MailCustomerContent
+        </div>
+        <br />
+        <div>
+            @context.App.Resources.MailCustomerContentWithData
+        </div>
         <table width="100%">
             @foreach (var item in request)
             {
