@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="09.32.01" ExportDate="2018-09-18T18:13:34.1005722+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="09.32.01" ExportDate="2019-02-11T13:04:09.3828695+01:00">
   <Header>
     <App Guid="74c59dba-8e66-463a-b6fc-752b98c71a57" />
     <Language Default="en-US" />
@@ -1034,6 +1034,218 @@
             <Value Key="RowCount" Value="" Type="Number">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="GroupMail" Type="Empty" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="f339577d-bb03-48d4-9262-bba577b9783d" KeyNumber="2808">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="empty-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Mail strings" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Mail Beschriftungen" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="ba874c87-0cfd-422a-8d09-6888d5f233b3" KeyNumber="2808">
+            <Value Key="DefaultCollapsed" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MailOwnerTitle" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="11b9b833-72b2-4097-b9ec-7691d9dfccd0" KeyNumber="2809">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Owner-Mail Title" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Titel des Besitzer-Mails" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="41fb4f4e-e12c-408e-8e62-a2382b20295e" KeyNumber="2809">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="20ddca29-25a1-4be7-8a17-bb2ad5cb530a" KeyNumber="2809" />
+        </Attribute>
+        <Attribute StaticName="MailOwnerContent" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e8cfcb51-4df5-4745-ae47-4bd672ad697b" KeyNumber="2810">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="Owner-Mail Content" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Inhalt des Besitzer-Mails" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="699a4d00-9251-460e-8f36-05527d0b69db" KeyNumber="2810">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MailCustomerTitle" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e7e9bc0b-bf06-4d04-abf3-c6c5b8aabfc0" KeyNumber="2811">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Customer-Mail Title" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Titel des Kunden-Mails" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="5646d901-6975-4a60-9f0d-954b95b51fa9" KeyNumber="2811">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="b4b0f772-df3c-4e53-88c8-7954f9d45d76" KeyNumber="2811" />
+        </Attribute>
+        <Attribute StaticName="MailCustomerContent" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="fadb5f6a-e6be-4a0e-bcf4-f6184173db4e" KeyNumber="2812">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="Customer-Mail Content" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Inhalt des Kunden-Mails" Type="String">
+              <Dimension DimensionID="33" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="80ce85af-4a96-4b31-a913-60572afe2b3b" KeyNumber="2812">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MailCustomerContentWithData" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="130d53bd-5e01-4fa2-ba45-9fcf424ebf2c" KeyNumber="2813">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="MailCustomerContentWithData" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
       </Attributes>
@@ -2952,6 +3164,9 @@
         </Attribute>
         <Attribute StaticName="RawData" Type="Custom" IsTitle="false">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="49da1c11-ada6-41ad-b907-c847d1b0c259" KeyNumber="2100">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
             <Value Key="DefaultValue" Value="" Type="String">
               <Dimension DimensionID="33" ReadOnly="false" />
               <Dimension DimensionID="32" ReadOnly="false" />
@@ -2981,6 +3196,11 @@
             </Value>
             <Value Key="VisibleInEditUI" Value="False" Type="Boolean">
               <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@custom-json-editor" AttributeSetName="@custom-json-editor" EntityGUID="3382d955-bf50-4776-8b30-f04b3d15c844" KeyNumber="2100">
+            <Value Key="Rows" Value="10.0" Type="Number">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
           </Entity>
@@ -3104,7 +3324,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="02.00.01" Type="String">
+      <Value Key="Version" Value="02.00.02" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -3237,6 +3457,21 @@
       </Value>
       <Value Key="LabelValidEmail" Value="Benötigt gültige E-Mail Adresse" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="MailCustomerContent" Value="We will process your request in the next 24 hours." Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailCustomerContentWithData" Value="Your request was sent with the following data:" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailCustomerTitle" Value="Thank you for your message" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailOwnerContent" Value="You recieved a new request with the following data." Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailOwnerTitle" Value="New Request" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="MessageCustomerMailSend" Value="&lt;p&gt;You will also receive a confirmation to the e-mail address you provided.&amp;nbsp;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
@@ -3688,17 +3923,20 @@
       <Value Key="ContentType" Value="080f40f9-bea4-427c-b951-253bb146346d" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="CustomerMailTemplate" Value="_Email to customer.cshtml" Type="String">
+      <Value Key="CustomerMailTemplate" Value="_Email to customer width data.cshtml" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailLabels" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="OwnerMailTemplate" Value="_Email to owner.cshtml" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Title" Value="Generic Save Example" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
       <Value Key="Title" Value="Generische Datenspeicherung" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Generic Save Example" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Webservice" Value="Form/ProcessForm" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
@@ -3934,47 +4172,6 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="7b12c89b-f0fa-4b37-9fd1-bde1b6529d68">
-      <Value Key="ContentTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="IsHidden" Value="True" Type="Boolean">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ListContentTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Name" Value="test" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Path" Value="_email test.cshtml" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="PresentationTypeStaticName" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="PublishData" Value="False" Type="Boolean">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="StreamsToPublish" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="Type" Value="C# Razor" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="UseForList" Value="False" Type="Boolean">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="ViewNameInUrl" Value="" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="167043bf-a599-46de-896a-9da9550625c7">
       <Value Key="CustomerMailCC" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
@@ -4171,6 +4368,1214 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="13393a88-2bc4-466a-846c-5e4ad22af951">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;test 2dm&quot;,&quot;Message&quot;:&quot;test 2dm&quot;,&quot;SenderName&quot;:&quot;Daniel Mettler&quot;,&quot;SenderMail&quot;:&quot;daniel.mettler@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2018-09-18T18:15:15.1179006+02:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2018-09-18T18:15:15" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2018-09-18T18:15:15" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="fd8afab4-f34f-4324-9480-319c4e8c6578">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="subject of customer mail" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Test Config" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="luca.tescari@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Subject of owner mail" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerName" Value="owner name" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="53650a87-b8c4-4d40-ab20-7d1bf94aa21f">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:02:55.3187962+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:02:55" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:02:55" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="53650a87-b8c4-4d40-ab20-7d1bf94aa21f">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:02:55.3187962+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:02:55" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:02:55" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="b57450d2-21d8-471d-9c1d-34421b55d593">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:03:16.3187962+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:03:16" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:03:16" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="b57450d2-21d8-471d-9c1d-34421b55d593">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:03:16.3187962+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:03:16" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:03:16" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="a8c68237-827a-4101-aaca-0086d20b7645">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:17:29.5941135+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:17:29" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:17:29" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="a8c68237-827a-4101-aaca-0086d20b7645">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:17:29.5941135+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:17:29" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:17:29" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="6fae36f2-d829-4241-8529-89abf3d6e456">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:18:22.2499156+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:18:22" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:18:22" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="6fae36f2-d829-4241-8529-89abf3d6e456">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:18:22.2499156+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:18:22" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:18:22" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="55c97a39-e86e-47bf-bd55-6447c786babf">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:34:03.0275107+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:34:03" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:34:03" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="55c97a39-e86e-47bf-bd55-6447c786babf">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;2sic Test message&quot;,&quot;SenderName&quot;:&quot;2sic&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123456&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:34:03.0275107+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:34:03" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:34:03" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="dfacb78a-d0d8-4ec6-915c-3561797e9209">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;Luca Tescari&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:35:45.0118857+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:35:45" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:35:45" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="dfacb78a-d0d8-4ec6-915c-3561797e9209">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;Luca Tescari&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;123&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:35:45.0118857+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:35:45" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:35:45" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="4efe6aa8-cc8b-4d39-96e2-b640bc041ad5">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;dgsdgsdf&quot;,&quot;SenderName&quot;:&quot;sdgfsdfgf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;1234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:38:27.7310447+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:38:27" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:38:27" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="4efe6aa8-cc8b-4d39-96e2-b640bc041ad5">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;dgsdgsdf&quot;,&quot;SenderName&quot;:&quot;sdgfsdfgf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;1234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:38:27.7310447+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:38:27" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:38:27" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="70420134-13d7-4fc1-aa1c-568e874985c3">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;dgsdgsdf&quot;,&quot;SenderName&quot;:&quot;sdgfsdfgf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;1234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:38:45.2156429+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:38:45" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:38:45" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="70420134-13d7-4fc1-aa1c-568e874985c3">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;dgsdgsdf&quot;,&quot;SenderName&quot;:&quot;sdgfsdfgf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;1234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:38:45.2156429+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:38:45" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:38:45" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="a8fdc774-db58-49f3-ad9a-c571cdb0a42e">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;dgsdgsdf&quot;,&quot;SenderName&quot;:&quot;sdgfsdfgf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;1234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:43:55.8449775+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:43:55" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:43:55" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="a8fdc774-db58-49f3-ad9a-c571cdb0a42e">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;dgsdgsdf&quot;,&quot;SenderName&quot;:&quot;sdgfsdfgf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;1234&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:43:55.8449775+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:43:55" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:43:55" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="cf36c10f-d521-4db6-928c-562c2a904d3c">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:44:18.0172782+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:44:18" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:44:18" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="cf36c10f-d521-4db6-928c-562c2a904d3c">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:44:18.0172782+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:44:18" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:44:18" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="897b6aa4-b735-47cf-88a2-bc5e18c83110">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:44:24.9392861+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:44:24" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:44:24" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="897b6aa4-b735-47cf-88a2-bc5e18c83110">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:44:24.9392861+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:44:24" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:44:24" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="49a77d09-e7bb-4463-bd5f-ae2cd6b4b73f">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:45:57.0657397+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:45:57" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:45:57" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="49a77d09-e7bb-4463-bd5f-ae2cd6b4b73f">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:45:57.0657397+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:45:57" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:45:57" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="6e5ff187-f28f-4be1-b1ba-d13610cf0a68">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:46:33.9410701+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:46:33" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:46:33" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="6e5ff187-f28f-4be1-b1ba-d13610cf0a68">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:46:33.9410701+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:46:33" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:46:33" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="e25d9ce9-736e-48fe-b7df-1f04244fb8df">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:53:00.0543588+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:53:00" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:53:00" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="e25d9ce9-736e-48fe-b7df-1f04244fb8df">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:53:00.0543588+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:53:00" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:53:00" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="2a102621-ff42-495e-9a67-93f043ae7dfe">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:54:12.3524077+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:54:12" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:54:12" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="2a102621-ff42-495e-9a67-93f043ae7dfe">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;2sic Test&quot;,&quot;Message&quot;:&quot;sdfgsdf&quot;,&quot;SenderName&quot;:&quot;gdfgsdfg&quot;,&quot;SenderMail&quot;:&quot;luca@ltescari.ch&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;q234t&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T09:54:12.3524077+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T09:54:12" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T09:54:12" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="f5eea558-7c9a-4b3f-abf6-53504041d867">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;fasdf&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;dfq3&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:09:14.9805187+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:09:14" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:09:14" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="f5eea558-7c9a-4b3f-abf6-53504041d867">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;fasdf&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;dfq3&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:09:14.9805187+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:09:14" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:09:14" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="87941c1e-f1bf-4bb9-8a3b-4a628df47c18">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:40:00.3538564+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:40:00" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:40:00" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="87941c1e-f1bf-4bb9-8a3b-4a628df47c18">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:40:00.3538564+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:40:00" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:40:00" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="0db1aeea-56fe-4ccc-b261-6779756ed5e0">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:41:22.448078+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:41:22" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:41:22" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="0db1aeea-56fe-4ccc-b261-6779756ed5e0">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:41:22.448078+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:41:22" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:41:22" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="b2e18c07-d998-4a0a-bb8b-97d86109b089">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:41:25.8231212+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:41:25" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:41:25" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="b2e18c07-d998-4a0a-bb8b-97d86109b089">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:41:25.8231212+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:41:25" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:41:25" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="a041f270-f942-4dee-9bbb-f56f25cc1528">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:42:00.4010895+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:42:00" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:42:00" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="a041f270-f942-4dee-9bbb-f56f25cc1528">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:42:00.4010895+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:42:00" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:42:00" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="74e5c0c5-cb9a-46fa-a854-0ba81d3e066f">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:42:11.2291452+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:42:11" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:42:11" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="74e5c0c5-cb9a-46fa-a854-0ba81d3e066f">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:42:11.2291452+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:42:11" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:42:11" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="176196ab-893a-47cc-b15d-6b9eb642b9c2">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:42:41.3541412+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:42:41" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:42:41" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="176196ab-893a-47cc-b15d-6b9eb642b9c2">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:42:41.3541412+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:42:41" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:42:41" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="13675b96-c42d-4cbb-a2a5-dfc579a92377">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:46:37.3217642+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:46:37" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:46:37" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="13675b96-c42d-4cbb-a2a5-dfc579a92377">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:46:37.3217642+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:46:37" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:46:37" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="44960c68-d49f-47ad-a07f-8334a7ddb516">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:47:03.0873892+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:47:03" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:47:03" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="44960c68-d49f-47ad-a07f-8334a7ddb516">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;sergsdfg&quot;,&quot;Message&quot;:&quot;sdfgsdfg&quot;,&quot;SenderName&quot;:&quot;sfdgfsdf&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;terter&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:47:03.0873892+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:47:03" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:47:03" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="f5f72025-65bb-4699-aa9c-426fe9499e29">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:47:33.3691415+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:47:33" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:47:33" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="f5f72025-65bb-4699-aa9c-426fe9499e29">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:47:33.3691415+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:47:33" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:47:33" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="f28d10fc-a95d-45cd-bf78-30d23734a263">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:15.2909238+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:15" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:15" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="f28d10fc-a95d-45cd-bf78-30d23734a263">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:15.2909238+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:15" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:15" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="1c94db5c-bcf7-4549-a5c3-0a8e987c7008">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:17.3065488+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:17" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:17" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="1c94db5c-bcf7-4549-a5c3-0a8e987c7008">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:17.3065488+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:17" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:17" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="91efc0e8-84b2-4259-86fb-a944c560b240">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:31.1346738+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:31" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:31" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="91efc0e8-84b2-4259-86fb-a944c560b240">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:31.1346738+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:31" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:31" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="d6e7e5b1-32bf-4950-bfe5-8068652230fe">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:44.5096738+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:44" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:44" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="d6e7e5b1-32bf-4950-bfe5-8068652230fe">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:48:44.5096738+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:48:44" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:48:44" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="a4fceb06-5890-4ee0-ba1c-18cd7fa02b87">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:49:04.6815488+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:49:04" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:49:04" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="a4fceb06-5890-4ee0-ba1c-18cd7fa02b87">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:49:04.6815488+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:49:04" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:49:04" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="65b1206d-b45e-4512-9149-70635a64e143">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:49:37.3847604+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:49:37" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:49:37" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="65b1206d-b45e-4512-9149-70635a64e143">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:49:37.3847604+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:49:37" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:49:37" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="a3255ca8-d218-49d8-a2e4-b33ce1b7558e">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:50:19.5413866+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:50:19" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:50:19" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="a3255ca8-d218-49d8-a2e4-b33ce1b7558e">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfas&quot;,&quot;Message&quot;:&quot;asdfasdf&quot;,&quot;SenderName&quot;:&quot;asdfasd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdfasdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:50:19.5413866+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:50:19" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:50:19" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="d5567ff5-5ac0-46dd-8223-6b5b4c86fd21">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfa&quot;,&quot;Message&quot;:&quot;sdfasdfasdf&quot;,&quot;SenderName&quot;:&quot;safd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:50:58.759988+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:50:58" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:50:58" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="d5567ff5-5ac0-46dd-8223-6b5b4c86fd21">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;asdfa&quot;,&quot;Message&quot;:&quot;sdfasdfasdf&quot;,&quot;SenderName&quot;:&quot;safd&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;asdf&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:50:58.759988+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:50:58" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:50:58" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="080f40f9-bea4-427c-b951-253bb146346d" AttributeSetName="GenericForm" EntityGUID="e1aba620-b37e-44a4-8174-694714188a78">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;dsfgsdf&quot;,&quot;Message&quot;:&quot;gsdfg&quot;,&quot;SenderName&quot;:&quot;registrationData&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;awef&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:51:31.556856+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:51:31" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:51:31" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="e1aba620-b37e-44a4-8174-694714188a78">
+      <Value Key="ModuleId" Value="3416" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Files&quot;:[],&quot;Subject&quot;:&quot;dsfgsdf&quot;,&quot;Message&quot;:&quot;gsdfg&quot;,&quot;SenderName&quot;:&quot;registrationData&quot;,&quot;SenderMail&quot;:&quot;luca.tescari@2sic.com&quot;,&quot;IsCustomer&quot;:&quot;on&quot;,&quot;CustomerId&quot;:&quot;awef&quot;,&quot;sendFormWithApi&quot;:&quot;&quot;,&quot;Timestamp&quot;:&quot;2019-02-11T10:51:31.556856+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:3416}" Type="Custom">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2019-02-11T10:51:31" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2019-02-11T10:51:31" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
