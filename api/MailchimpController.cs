@@ -37,7 +37,8 @@ public class MailchimpController : SxcApiController
             String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(user + ":" + apiKey));
             wr.Headers.Add("Authorization", "Basic " + encoded);
 
-            var body = "{\"email_address\":\"" + email + "\", \"status\":\"" + substatus + "\", \"merge_fields\": { \"FNAME\":\"" + fname + "\", \"LNAME\": \"" + lname + "\" } }";
+            // You will have to change these names "EMAIL", "FNAME", "LNAME" to the field names you have in your Mailchimp list
+            var body = "{\"EMAIL\":\"" + email + "\", \"status\":\"" + substatus + "\", \"merge_fields\": { \"FNAME\":\"" + fname + "\", \"LNAME\": \"" + lname + "\" } }";
             var reqStream = wr.GetRequestStream();
 
             using (var sw = new StreamWriter(reqStream))

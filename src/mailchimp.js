@@ -1,6 +1,7 @@
 $(function() {
     var sxc = $2sxc($("#subToMc"));
     var mid = $("#subToMc").data("mid");
+    var wrapper = $(".app-jqfs-mailchimp-wrapper");
 
     var inputArray = [];
     $(".app-jqfs-mailchimp-" + mid + " :input").each(function() {
@@ -38,6 +39,7 @@ $(function() {
     }
 
     $("#subToMc").click(function () {
+        /*
         if (allInputsFilled(inputArray) == true) {
             $("#FormReminder").fadeIn();
         } else {
@@ -49,7 +51,19 @@ $(function() {
 
             $("#FormReminder").fadeOut();
             mc.subscribeUser(u.mail, u.name, u.surname);
+        }*/
+
+        // Validate form
+        if (!wrapper.smkValidate()) 
+            return showOneAlert(wrapper, "msgIncomplete");
+
+        var u = {
+            mail: $(".app-jqfs-mailchimp-" + mid + " #SenderMail").val(),
+            name: $(".app-jqfs-mailchimp-" + mid + " #SenderName").val(),
+            surname: $(".app-jqfs-mailchimp-" + mid + " #SenderSurname").val()
         }
+
+        mc.subscribeUser(u.mail, u.name, u.surname);
         
     })
 })

@@ -1,7 +1,7 @@
 <script type="text/javascript" src="/desktopmodules/tosic_sexycontent/js/2sxc.api.min.js" data-enableoptimizations="100" ></script>
 <link rel="stylesheet" href="@App.Path/dist/styles.css" data-enableoptimizations="100" />
 <script src="@App.Path/dist/lib/smoke.min.js" ></script>
-<script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100" ></script>
+@*<script src="@App.Path/dist/form-send.js" type="text/javascript" data-enableoptimizations="100" ></script>*@
 <script src="@App.Path/dist/mailchimp.js" type="text/javascript" data-enableoptimizations="100" ></script>
 
 @using System.Linq
@@ -80,18 +80,18 @@
                   <div id="FormReminder">
                     <div id="msgIncomplete" class="alert alert-danger app-app-jqfs-message" role="alert" style="display:block;" >@Html.Raw(App.Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
                   </div>
-                  <button id="subToMc" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+                  <button id="subToMc" type="button" class="btn btn-primary" data-mid="@Dnn.Module.ModuleID" >@App.Resources.ButtonSend</button>
               </div>
           </div>
     </div>
 
-      <span id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</span>
-      <span id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</span>
+    <span id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</span>
+    <span id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</span>
 
   </div>
 
   <script>
-    $(function(){ window.appJqF.init(); }); // init the form - must trigger in-line, in case the form was added w/ajax
+    //$(function(){ window.appJqF.init(); }); // init the form - must trigger in-line, in case the form was added w/ajax
   </script>
 }
 
