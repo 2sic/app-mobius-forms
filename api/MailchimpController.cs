@@ -25,7 +25,7 @@ public class MailchimpController : SxcApiController
         var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, email, fname, lname);
         if(msg != "OK")
         {
-            throw new Exception("Mailchimp registration failed - check EventLog");
+            throw new Exception("Mailchimp registration failed - check EventLog - msg was " + msg);
         }
         return msg;
     }
