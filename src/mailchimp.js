@@ -27,7 +27,8 @@ $(function() {
     var mc = {
         subscribeUser: function (email, fname, lname) {
             sxc.webApi.post("Mailchimp/Subscribe", { email: email, fname: fname, lname: lname }, null, true)
-                .success(function (data) {
+                .success(function (response) {
+                    console.log(response);
                     $(".app-jqfs-form-mailchimp").fadeOut();
                     $("#NewsletterSuccessMsg").fadeIn();
                 })
@@ -39,31 +40,16 @@ $(function() {
     }
 
     $("#subToMc").click(function () {
-        /*
-        if (allInputsFilled(inputArray) == true) {
-            $("#FormReminder").fadeIn();
-        } else {
-            var u = {
-                mail: $(".app-jqfs-mailchimp-" + mid + " #SenderMail").val(),
-                name: $(".app-jqfs-mailchimp-" + mid + " #SenderName").val(),
-                surname: $(".app-jqfs-mailchimp-" + mid + " #SenderSurname").val()
-            }
-
-            $("#FormReminder").fadeOut();
-            mc.subscribeUser(u.mail, u.name, u.surname);
-        }*/
-
         // Validate form
         if (!wrapper.smkValidate()) 
-            return showOneAlert(wrapper, "msgIncomplete");
+            return;
 
         var u = {
             mail: $(".app-jqfs-mailchimp-" + mid + " #SenderMail").val(),
             name: $(".app-jqfs-mailchimp-" + mid + " #SenderName").val(),
             surname: $(".app-jqfs-mailchimp-" + mid + " #SenderSurname").val()
         }
-
-        mc.subscribeUser(u.mail, u.name, u.surname);
         
+        mc.subscribeUser(u.mail, u.name, u.surname);
     })
 })
