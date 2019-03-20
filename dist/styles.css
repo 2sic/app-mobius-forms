@@ -4,6 +4,8 @@
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px; }
+  .app-jqfs-wrapper label {
+    font-weight: normal; }
   .app-jqfs-wrapper .help-block {
     float: right;
     margin-right: 15px;
@@ -48,11 +50,13 @@
   font-size: 16px; }
 
 /* Newsletter styles */
-#NewsletterSuccessMsg,
-#NewsletterFailedMsg,
 #FormReminder {
   margin-top: 10px;
   display: none;
   color: #a94442; }
+
+#NewsletterSuccessMsg,
+#NewsletterFailedMsg {
+  display: none; }
 
 /*# sourceMappingURL=styles.css.map */
