@@ -78,12 +78,22 @@
           @RenderPage("_Shared - Messages.cshtml")
         
           <!-- mc button -->
-          <div class="col-xs-12 app-jqfs-support-disable">
-              <a id="subToMc" type="button btn-primary" class="btn btn-primary" data-mid="@Dnn.Module.ModuleID">@App.Resources.ButtonSendNewsletter</a><br />
+          <div @Koi.Class("all='app-jqfs-support-disable' bs3='' bs4,oth=''")>
+              <button id="subToMc" type="button" @Koi.Class("bs3='btn btn-primary' bs4,oth='btn btn-primary'") data-mid="@Dnn.Module.ModuleID">@App.Resources.ButtonSendNewsletter</button><br />
               <span id="EmailReminder">@App.Resources.LabelGeneralReminder</span>
           </div>
+          
+         
     </div>
   </div>
-    <span class="alert alert-success" id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</span>
-    <span class="alert alert-danger" id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</span>
+  
+  <span  @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-success'") id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</span>
+  <span @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-danger'") id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</span>
+
+  @if(String.IsNullOrEmpty(App.Settings.MailchimpListId) || String.IsNullOrEmpty(App.Settings.MailchimpAPIKey) || String.IsNullOrEmpty(App.Settings.MailchimpServer) || String.IsNullOrEmpty(App.Settings.MailchimpSubscriptionStatus)) {
+      <br>
+      <div @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-danger'") role="alert">
+          Please fill out the App Settings regarding your Mailchimp data.
+      </div>
+  }
 </div>
