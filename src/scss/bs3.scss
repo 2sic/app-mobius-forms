@@ -1,0 +1,27 @@
+//
+// This SCSS generates the css file for bootstrap 3 themes
+// To regenerate the SCSS using your variables (custom colors, etc.)
+// update the reference to your _variables.scss of your skin
+// and re-run the following npm task:
+// npm run start-bs3
+// 
+
+// Add header-comments to the final file
+@import "sass-comments.scss";
+
+
+// Include needed variables from Bootstrap 3
+// You must adapt the path to match your Bootstrap 3 skin
+@import "../../../_default/skins/2sxcBootstrap-B3/src/_variables.scss";
+
+// Map all relevant variables to bs4 convention 
+// so we can use bs4 standard variable names in the other SCSS files
+@import "bs4-polyfills/_map-bs3-vars-to-bs4.scss";
+
+// Include mixins which are defined in Boostrap 4 but not in Bootstrap 3
+// this is important because the other SCSS use bootstrap 4 conventions
+// and they wouldn't work otherwise
+@import "bs4-polyfills/_breakpoints.scss";
+
+
+@import "_styles.scss"; // General CSS stuff for everything

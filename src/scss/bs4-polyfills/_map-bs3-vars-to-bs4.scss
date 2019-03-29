@@ -1,0 +1,81 @@
+//
+// Including this file will ensure that the SCSS which uses Bootstrap 4 features also works in Bootstrap 3 skins
+// by mapping all variables from the bootstrap 3 convention to the bootstrap 4 convention
+//
+//
+
+// The dummy value is used below to check whether a variable has been set or not
+$dummy: "this is just a test value, use it to see if a real value was found";
+
+
+// generate the variable primary, IF it doesn't exist yet
+// Translate primary color
+@if variable-exists(primary) and variable-exists(brand-primary) {
+	@warn "both bs3 and bs4 variable exists - will use bs3"
+}
+
+$primary: $dummy !default; // try to use default, otherwise just use red
+
+@if variable-exists(brand-primary) {
+	$primary: $brand-primary;
+}
+
+// If the primary variable contains the dummy value, then both bs3 and bs4 variables were missing - not able to compile
+@if $primary==$dummy {
+	@error "trying to set primary based on colors, but something failed - your variables seem to be missing BOTH $primary and $brand-primary";
+}
+
+
+
+// Translate gray light
+@if variable-exists(gray-200) and variable-exists(gray-light) {
+	@warn "both bs3 and bs4 variable exists - will use bs3";
+}
+
+$gray-200: $dummy !default; // try to use default, otherwise just use red
+
+@if variable-exists(gray-light) {
+	$gray-200: $gray-light;
+}
+
+@if $gray-200==$dummy {
+	@error "trying to set gray-200 based on colors, but something failed - your variables seem to be missing BOTH $gray-200 and $gray-light";
+}
+
+
+
+// Translate body color vs text-color
+@if variable-exists(body-color) and variable-exists(text-color) {
+	@warn "both bs3 and bs4 variable exists - will use bs3";
+}
+
+$body-color: $dummy !default; // try to use default, otherwise just use red
+
+@if variable-exists(text-color) {
+	$body-color: $text-color;
+}
+
+@if $body-color==$dummy {
+	@error "trying to set body-color based on colors, but something failed - your variables seem to be missing BOTH $body-color and $text-color";
+}
+
+
+
+// Translate grid-breakpoints
+@if variable-exists(grid-breakpoints) and variable-exists(screen-sm-min) {
+	@warn "both bs3 and bs4 variable exists - will use bs3";
+}
+
+$grid-breakpoints: $dummy !default; // try to use default, otherwise just use red
+
+@if variable-exists(screen-sm-min) {
+	$grid-breakpoints: (xs: 0,
+		sm: 576px,
+		md: $screen-sm-min,
+		lg: $screen-md-min,
+		xl: $screen-lg-min);
+}
+
+@if $grid-breakpoints==$dummy {
+	@error "trying to set grid-breakpoints, but something failed - your variables seem to be missing BOTH $grid-breakpoints and $screen-sm-min";
+}

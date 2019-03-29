@@ -1,15 +1,24 @@
 {
-    "name": "app-mobius-forms",
-    "version": "02.00.02",
-    "description": "Mobius Forms is a online form, which can be customized to be everything.",
-    "main": "gulpfile.js",
-    "scripts": {
-      "start": "npm run start-all",
-      "start-bs3": "gulp watch-sass-bs3",
-      "start-bs4": "gulp watch-sass-bs4",
-      "start-all": "gulp"
-    },
-    "author": "2sic internet solutions",
-    "license": "MIT"
+  "name": "2sic-typescript-template",
+  "version": "01.00.00",
+  "description": "The standard template to build sexy apps.",
+  "main": "",
+  "scripts": {
+    "watch-live": "webpack",
+    "watch-dev": "webpack --env.staging"
+  },
+  "author": "2sic internet solutions",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^2.1.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.29"
   }
-  
+}

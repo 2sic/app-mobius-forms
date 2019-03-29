@@ -1,0 +1,14 @@
+@using Connect.Koi;
+
+<div class="co-container-outer">
+    <div class="co-container-inner">
+        <!-- Your template goes here -->
+    </div>
+</div>
+
+<script src="@App.Path/live/dist/app-bundle.min.js" data-enableoptimizations="true" ></script>
+<link rel="stylesheet" type="text/css" href="@App.Path/live/dist/style.min.css" data-enableoptimizations="true" >
+<script>
+    // Replace 'appname' with the name you gave your app in the webpack.config 
+    new mobiusforms.App(@Dnn.Module.ModuleID);
+</script>
