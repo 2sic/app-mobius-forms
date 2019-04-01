@@ -28,7 +28,7 @@ export class Recaptcha {
     wrapper.data(this.c.recapId, id); // remember for later use       
   }
 
-  check(wrapper: any) {
+  check(wrapper: JQuery) {
     const recap = wrapper.find("." + this.c.clsRecap);
     // if no recaptcha found, probably ok
     if(recap.length === 0) {

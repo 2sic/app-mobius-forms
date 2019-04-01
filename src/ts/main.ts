@@ -1,9 +1,12 @@
+declare let $2sxc: any;
+
 import { Helpers } from './components/helpers';
 import { Recaptcha } from  './components/recaptcha';
+import { MailChimp } from './components/mailchimp';
 export class App {
     helper = new Helpers();
     recaptcha = new Recaptcha();
-
+    mailChimp = new MailChimp();
     moduleWrapper: JQuery;
     alreadyInit = false;
 
@@ -35,12 +38,14 @@ export class App {
             
             this.alreadyInit = true;
         });
+
+        this.mailChimp.init(wrapper);
     }
 
     public send(event: any) {
         const data = []; 
         const btn = event.currentTarget;
-        const sxc = (window as any).$2sxc(btn);
+        const sxc = $2sxc(btn);
         const wrapper = this.moduleWrapper;
         
         // clear all alerts
@@ -73,7 +78,7 @@ export class App {
                 .error(() => {
                     this.helper.showOneAlert(wrapper, 'msgError')
                     this.helper.disableInputs(wrapper, false);
-                });
+            });
         });
     }
 

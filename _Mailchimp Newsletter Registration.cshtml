@@ -26,21 +26,21 @@
           <!-- Sender Mail -->
           <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
               <div>
-                  <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
+                  <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control sender-mail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
               </div>
           </div>
 
         <!-- Sender Name -->
         <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
           <div>
-            <input placeholder="@App.Resources.LabelSenderName" type="text" class="form-control" id="SenderName" value="" required data-smk-msg="@App.Resources.LabelRequired">
+            <input placeholder="@App.Resources.LabelSenderName" type="text" class="form-control sender-name" value="" required data-smk-msg="@App.Resources.LabelRequired">
           </div>
         </div>
 
         <!-- Sender LastName -->
         <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
             <div>
-                <input placeholder="@App.Resources.LabelSenderSurname" type="text" class="form-control" id="SenderSurname" value="" required data-smk-msg="@App.Resources.LabelRequired">
+                <input placeholder="@App.Resources.LabelSenderSurname" type="text" class="form-control sender-surname" value="" required data-smk-msg="@App.Resources.LabelRequired">
             </div>
         </div>
         
@@ -74,7 +74,7 @@
         
           <!-- mc button -->
           <div @Koi.Class("all='app-jqfs-support-disable' bs3='' bs4,oth=''")>
-              <button id="subToMc" type="button" @Koi.Class("bs3='btn btn-primary' bs4,oth='btn btn-primary'") data-mid="@Dnn.Module.ModuleID">@App.Resources.ButtonSendNewsletter</button><br />
+              <button id="subToMc" type="button" @Koi.Class("bs3='btn btn-primary' bs4,oth='btn btn-primary'")>@App.Resources.ButtonSendNewsletter</button><br />
               <span id="EmailReminder">@App.Resources.LabelGeneralReminder</span>
           </div>
           
