@@ -19,6 +19,7 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@types/jquery": "^3.3.29"
+    "@types/jquery": "^3.3.29",
+    "smokejs": "^3.1.0"
   }
 }

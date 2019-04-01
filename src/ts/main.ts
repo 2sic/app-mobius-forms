@@ -7,7 +7,6 @@ export class App {
 
     alreadyInit = false;
 
-
     constructor(moduleId: number) {
         // disable validate on the global asp.net form, to not interfere with the contact-form
         $('form').attr('novalidate', '');
@@ -36,14 +35,13 @@ export class App {
         const btn = event.currentTarget;
         const sxc = (window as any).$2sxc(btn);
         const wrapper = this.findWrapper(btn);
-
         
         // clear all alerts
         this.showOneAlert(wrapper, '');
         
-        // // Validate form
-        // if (!wrapper.smkValidate())
-        //     return this.showOneAlert(wrapper, 'msgIncomplete');
+        // Validate form
+        if (!(wrapper as any).smkValidate())
+            return this.showOneAlert(wrapper, 'msgIncomplete');
 
         // // Do Recaptcha test, show alert & fail if required and not complete
         // const recap = window.appJqRecap && window.appJqRecap.check(wrapper);
@@ -156,7 +154,7 @@ export class App {
             return;
 
         // not yet enabled, let's enable and remember...
-        // $(this).smkValidate();
+        ($(this) as any).smkValidate();
         $(this).data('alreadyRun', true);
     }
 }
