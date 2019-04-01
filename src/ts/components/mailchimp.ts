@@ -34,7 +34,7 @@ export class MailChimp {
     }
     
     sxc.webApi.post("Mailchimp/Subscribe", { email: u.mail, fname: u.name, lname: u.surname }, null, true)
-      .success((response: any) => {
+      .success(() => {
           $(".app-jqfs-form-mailchimp").fadeOut();
           $("#NewsletterSuccessMsg").fadeIn();
       })

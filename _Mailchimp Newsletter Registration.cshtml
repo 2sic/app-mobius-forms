@@ -23,39 +23,31 @@
       }, settings: new { hover="left", show = "hover" })
 
       <div class="app-jqfs-form app-jqfs-form-mailchimp">
-          <!-- Sender Mail -->
-          <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
-              <div>
-                  <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control sender-mail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
-              </div>
-          </div>
+        <!-- Sender Mail -->
+        <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
+                <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control sender-mail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
+        </div>
 
         <!-- Sender Name -->
-        <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
-          <div>
+        <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
             <input placeholder="@App.Resources.LabelSenderName" type="text" class="form-control sender-name" value="" required data-smk-msg="@App.Resources.LabelRequired">
-          </div>
         </div>
 
         <!-- Sender LastName -->
-        <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
-            <div>
+        <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
                 <input placeholder="@App.Resources.LabelSenderSurname" type="text" class="form-control sender-surname" value="" required data-smk-msg="@App.Resources.LabelRequired">
-            </div>
         </div>
         
         <!-- Sender AcceptDSGVO -->
-        <div @Koi.Class("all='app-jqfs-support-disable' bs3='form-group' bs4,oth='form-group'")>
-            <div>
-                <div @Koi.Class("bs3='row' bs4,oth='row'")>
-                  <div @Koi.Class("bs3='col col-xs-1' bs4,oth='col-1'")>
-                    <input  type="checkbox" id="DSGVO" name="DSGVO" required data-smk-msg="@App.Resources.LabelRequired" >
-                  </div>
-                  <div @Koi.Class("bs3='col col-xs-11' bs4,oth='col-11'")>
-                    <label for="DSGVO" class="control-label">@Html.Raw(App.Resources.LabelDSGVO)</label>
-                  </div>
-                </div>
+        <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
+          <div @Koi.Class("bs3='row' bs4,oth='row'")>
+            <div @Koi.Class("bs3='col col-xs-1' bs4,oth='col-1'")>
+              <input  type="checkbox" id="DSGVO" name="DSGVO" required data-smk-msg="@App.Resources.LabelRequired" >
             </div>
+            <div @Koi.Class("bs3='col col-xs-11' bs4,oth='col-11'")>
+              <label for="DSGVO" class="control-label">@Html.Raw(App.Resources.LabelDSGVO)</label>
+            </div>
+          </div>
         </div>
 
         <!-- Recaptcha -->
