@@ -86,12 +86,9 @@
             <div class="form-group app-jqfs-support-disable row">
                 <label for="" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
                 <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-                    <div class="app-jqfs-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey"></div>
+                    <div class="app-jqfs-recaptcha g-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey" data-size="normal"></div>
                 </div>
             </div>
-            @* load scripts - at page bottom - must be optimized bottom, otherwise it might load before the html is ready *@
-            <script src="@App.Path/dist/recaptcha.js" type="text/javascript" data-enableoptimizations="999:bottom"></script>
-            <script src="https://www.google.com/recaptcha/api.js?onload=appJqRecap&render=explicit" async defer data-enableoptimizations="1000:bottom"></script>
         }
 
         <!-- Messages / Send -->
@@ -110,14 +107,14 @@
 
 </div>
 
-<script>
-  $(function(){ window.appJqF.init(); }); // init the form - must trigger in-line, in case the form was added w/ajax
-</script>
-
-<script src="@App.Path/live/dist/app-bundle.min.js" data-enableoptimizations="true" ></script>
-<link rel="stylesheet" type="text/css" href="@App.Path/live/dist/style.min.css" data-enableoptimizations="true" >
+<script src="@App.Path/live/dist/app-bundle.min.js" data-enableoptimizations="true"></script>
+<link rel="stylesheet" type="text/css" href="@App.Path/live/dist/style.min.css" data-enableoptimizations="true">
 <script>
     // Replace 'appname' with the name you gave your app in the webpack.config 
-    new mobiusforms.App(@Dnn.Module.ModuleID);
+    mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
+    mobius.initialize();
 </script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer data-enableoptimizations="true"></script>
+
 

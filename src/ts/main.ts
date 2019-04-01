@@ -1,29 +1,31 @@
 import { Helpers } from './components/helpers';
+import { Recaptcha } from  './components/recaptcha';
 export class App {
     helper = new Helpers();
+    recaptcha = new Recaptcha();
+
+    moduleWrapper: JQuery;
+    alreadyInit = false;
 
     c = {
         clsWrp: 'app-jqfs-wrapper',
         clsForm: 'app-jqfs-form',
-        iProp: 'item-property',
     };
-
-    alreadyInit = false;
 
     constructor(
         moduleId: number,
     ) {
         // disable validate on the global asp.net form, to not interfere with the contact-form
         $('form').attr('novalidate', '');
+        this.moduleWrapper = $(`.DnnModule-${moduleId}`);
     }
 
     public initialize() {
-        const wrappers = $('.' + this.c.clsWrp);
+        const wrapper = this.moduleWrapper;
+        // attach validation to enable as soon as we blur        
+        wrapper.on('blur', ':input', this.attachFieldValidateOnBlur );
 
-        // attach validation to enable as soon as we blur
-        wrappers.on('blur', ':input', this.attachFieldValidateOnce );
-
-        wrappers.each((i, item) => {
+        wrapper.each((i, item) => {
             // prevent dupl execution
             if(this.alreadyInit) 
                 return;
@@ -39,7 +41,7 @@ export class App {
         const data = []; 
         const btn = event.currentTarget;
         const sxc = (window as any).$2sxc(btn);
-        const wrapper = this.helper.findWrapper(btn);
+        const wrapper = this.moduleWrapper;
         
         // clear all alerts
         this.helper.showOneAlert(wrapper, '');
@@ -48,17 +50,16 @@ export class App {
         if (!(wrapper as any).smkValidate())
             return this.helper.showOneAlert(wrapper, 'msgIncomplete');
 
-        // // Do Recaptcha test, show alert & fail if required and not complete
-        // const recap = window.appJqRecap && window.appJqRecap.check(wrapper);
-        // if(window.appJqRecap && !recap) 
-        //     return this.showOneAlert(wrapper, 'msgRecap');            
+        // Do Recaptcha test, show alert & fail if required and not complete
+        const recap = this.recaptcha.check(wrapper);
+        if(!recap) 
+            return this.helper.showOneAlert(wrapper, 'msgRecap');  
 
         // get data 
         // data = this.manuallyBuildData(wrapper); // alternative example with manual build, but we prefer automatic
-        this.autoCollectData(wrapper).then((data: any) => {
-            const helper = this.helper;
-            const ws = wrapper.data('webservice');   // should be "Form/ProcessForm" or a custom override
-            // data.Recaptcha = recap;
+        this.autoCollectData().then((data: any) => {
+            const ws = wrapper.find('.app-jqfs-wrapper').data('webservice');   // should be "Form/ProcessForm" or a custom override
+            data.Recaptcha = recap;
 
             // submission
             this.helper.disableInputs(wrapper, true);
@@ -68,7 +69,6 @@ export class App {
                 .success(() => {
                     this.helper.showOneAlert(wrapper, 'msgOk')
                     $(btn).hide();
-                    // wrapper.find('.' + c.clsForm).hide();
                 })
                 .error(() => {
                     this.helper.showOneAlert(wrapper, 'msgError')
@@ -79,12 +79,11 @@ export class App {
 
     // automatically build the send-object with all properties, 
     // based on all form-fields which have a item-property=""
-    private autoCollectData(wrapper: JQuery) {
-        
+    private autoCollectData() {
         const data = {
             Files: []
         };
-        const fields = $(wrapper).find(':input');
+        const fields = this.moduleWrapper.find(':input');
 
         function add(i: number, e: any) {
             e = $(e);
@@ -139,10 +138,11 @@ export class App {
         return data;
     }
 
-    private attachFieldValidateOnce() {
+    private attachFieldValidateOnBlur() {
         // skif if validation is already enabled
-        if ($(this).data('alreadyRun'))
+        if ($(this).data('alreadyRun')) {
             return;
+        }
 
         // not yet enabled, let's enable and remember...
         ($(this) as any).smkValidate();

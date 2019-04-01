@@ -10,8 +10,4 @@ export class Helpers {
     wrapper.toggleClass('disable', state)
     wrapper.find(':input').prop('disabled', state);
   }
-
-  findWrapper(e: any) {
-    return $(e).closest('.' + this.c.clsWrp);
-  } 
 }
