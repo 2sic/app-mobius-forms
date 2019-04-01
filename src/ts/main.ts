@@ -1,4 +1,7 @@
+import { Helpers } from './components/helpers';
 export class App {
+    helper = new Helpers();
+
     c = {
         clsWrp: 'app-jqfs-wrapper',
         clsForm: 'app-jqfs-form',
@@ -7,7 +10,9 @@ export class App {
 
     alreadyInit = false;
 
-    constructor(moduleId: number) {
+    constructor(
+        moduleId: number,
+    ) {
         // disable validate on the global asp.net form, to not interfere with the contact-form
         $('form').attr('novalidate', '');
     }
@@ -34,56 +39,42 @@ export class App {
         const data = []; 
         const btn = event.currentTarget;
         const sxc = (window as any).$2sxc(btn);
-        const wrapper = this.findWrapper(btn);
+        const wrapper = this.helper.findWrapper(btn);
         
         // clear all alerts
-        this.showOneAlert(wrapper, '');
+        this.helper.showOneAlert(wrapper, '');
         
         // Validate form
         if (!(wrapper as any).smkValidate())
-            return this.showOneAlert(wrapper, 'msgIncomplete');
+            return this.helper.showOneAlert(wrapper, 'msgIncomplete');
 
         // // Do Recaptcha test, show alert & fail if required and not complete
         // const recap = window.appJqRecap && window.appJqRecap.check(wrapper);
         // if(window.appJqRecap && !recap) 
         //     return this.showOneAlert(wrapper, 'msgRecap');            
 
-        // // get data 
-        // // data = manuallyBuildData(wrapper); // alternative example with manual build, but we prefer automatic
+        // get data 
+        // data = this.manuallyBuildData(wrapper); // alternative example with manual build, but we prefer automatic
         this.autoCollectData(wrapper).then((data: any) => {
+            const helper = this.helper;
+            const ws = wrapper.data('webservice');   // should be "Form/ProcessForm" or a custom override
             // data.Recaptcha = recap;
 
             // submission
-            this.disableInputs(wrapper, true);
-            this.showOneAlert(wrapper, 'msgSending'); // show "sending..."
-            const ws = wrapper.data('webservice');   // should be "Form/ProcessForm" or a custom override
+            this.helper.disableInputs(wrapper, true);
+            this.helper.showOneAlert(wrapper, 'msgSending'); // show "sending..."
+
             sxc.webApi.post(ws, {}, data, true)
                 .success(() => {
-                    this.showOneAlert(wrapper, 'msgOk')
+                    this.helper.showOneAlert(wrapper, 'msgOk')
                     $(btn).hide();
                     // wrapper.find('.' + c.clsForm).hide();
                 })
                 .error(() => {
-                    this.showOneAlert(wrapper, 'msgError')
-                    this.disableInputs(wrapper, false);
+                    this.helper.showOneAlert(wrapper, 'msgError')
+                    this.helper.disableInputs(wrapper, false);
                 });
         });
-    }
-
-    public findWrapper(e: any) {
-        return $(e).closest('.' + this.c.clsWrp);
-    }
-
-    private showOneAlert(wrapper: JQuery, showId: string) {
-        wrapper.find('.alert').hide();
-        if (showId !== '') {
-            wrapper.find('#' + showId).show();
-        }
-    }
-
-    private disableInputs(wrapper: JQuery, state: boolean) {
-        wrapper.toggleClass('disable', state)
-        wrapper.find(':input').prop('disabled', state);
     }
 
     // automatically build the send-object with all properties, 
