@@ -25,17 +25,17 @@
       <div class="app-jqfs-form app-jqfs-form-mailchimp">
         <!-- Sender Mail -->
         <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-                <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control sender-mail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
+            <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control sender-mail" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
         </div>
 
         <!-- Sender Name -->
         <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-            <input placeholder="@App.Resources.LabelSenderName" type="text" class="form-control sender-name" value="" required data-smk-msg="@App.Resources.LabelRequired">
+            <input placeholder="@App.Resources.LabelSenderName" type="text" class="form-control sender-name"  id="SenderName" value="" required data-smk-msg="@App.Resources.LabelRequired">
         </div>
 
         <!-- Sender LastName -->
         <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-                <input placeholder="@App.Resources.LabelSenderSurname" type="text" class="form-control sender-surname" value="" required data-smk-msg="@App.Resources.LabelRequired">
+            <input placeholder="@App.Resources.LabelSenderSurname" type="text" class="form-control sender-surname" id="SenderSurname" value="" required data-smk-msg="@App.Resources.LabelRequired">
         </div>
         
         <!-- Sender AcceptDSGVO -->
