@@ -130,10 +130,10 @@ export class App {
 
     private manuallyBuildData(wrapper: JQuery){
         const data: any = {
-            Subject: wrapper.find('#subject'),
-            Message: wrapper.find('#message'),
-            SenderName: wrapper.find('#sendername'),
-            SenderMail: wrapper.find('#sendermail')
+            Subject: wrapper.find('#Subject'),
+            Message: wrapper.find('#Message'),
+            SenderName: wrapper.find('#Sendername'),
+            SenderMail: wrapper.find('#Sendermail')
         };
 
 

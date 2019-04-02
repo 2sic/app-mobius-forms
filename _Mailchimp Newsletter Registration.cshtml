@@ -52,12 +52,7 @@
 
         <!-- Recaptcha -->
         @if(Content.Recaptcha ?? false) {
-          <div class="form-group app-jqfs-support-disable">
-            <label for="" class="app-jqfs-field-required control-label col col-xs-12 col-sm-4">@App.Resources.LabelRecaptcha</label>
-            <div class="col col-xs-12 col-sm-8">
-              <div class="app-jqfs-recaptcha g-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey" data-size="normal"></div>
-            </div>
-          </div>
+          @RenderPage("_Shared Recaptcha.cshtml")
         }
 
         <!-- Messages / Send -->
