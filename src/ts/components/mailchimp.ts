@@ -33,14 +33,14 @@ export class MailChimp {
       surname: wrapper.find('.sender-surname').val()
     }
     
-    sxc.webApi.post("Mailchimp/Subscribe", { email: u.mail, fname: u.name, lname: u.surname }, null, true)
+    sxc.webApi.post('Mailchimp/Subscribe', { email: u.mail, fname: u.name, lname: u.surname }, null, true)
       .success(() => {
-          $(".app-jqfs-form-mailchimp").fadeOut();
-          $("#NewsletterSuccessMsg").fadeIn();
+        this.moduleWrapper.find('.app-jqfs-form-mailchimp').fadeOut();
+        this.moduleWrapper.find('#NewsletterSuccessMsg').fadeIn();
       })
       .error(() => {
-          $(".app-jqfs-form-mailchimp").fadeOut();
-          $("#NewsletterFailedMsg").fadeIn();
+        this.moduleWrapper.find('.app-jqfs-form-mailchimp').fadeOut();
+        this.moduleWrapper.find('#NewsletterFailedMsg').fadeIn();
       })
   }
 }
