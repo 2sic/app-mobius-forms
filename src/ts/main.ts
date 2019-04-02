@@ -43,7 +43,7 @@ export class App {
     }
 
     public send(event: any) {
-        const data = []; 
+        let data = []; 
         const btn = event.currentTarget;
         const sxc = $2sxc(btn);
         const wrapper = this.moduleWrapper;
@@ -85,7 +85,7 @@ export class App {
     // automatically build the send-object with all properties, 
     // based on all form-fields which have a item-property=""
     private autoCollectData() {
-        const data = {
+        const data: any = {
             Files: []
         };
         const fields = this.moduleWrapper.find(':input');
@@ -129,16 +129,19 @@ export class App {
     }
 
     private manuallyBuildData(wrapper: JQuery){
-        const data = {
-                Subject: wrapper.find('#subject'),
-                Message: wrapper.find('#message'),
-                SenderName: wrapper.find('#sendername'),
-                SenderMail: wrapper.find('#sendermail')
+        const data: any = {
+            Subject: wrapper.find('#subject'),
+            Message: wrapper.find('#message'),
+            SenderName: wrapper.find('#sendername'),
+            SenderMail: wrapper.find('#sendermail')
         };
 
-        for (let prop in data) 
-            if (data.hasOwnProperty(prop)) 
+
+        for (let prop in data) {
+            if (data.hasOwnProperty(prop)) {
                 data[prop] = data[prop].val();
+            }
+        }
 
         return data;
     }
