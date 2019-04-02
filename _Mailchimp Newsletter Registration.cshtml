@@ -74,8 +74,8 @@
     </div>
   </div>
   
-  <span  @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-success'") id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</span>
-  <span @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-danger'") id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</span>
+  <div @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-success'") id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</div>
+  <div @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-danger'") id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</div>
 
   @if(String.IsNullOrEmpty(App.Settings.MailchimpListId) || String.IsNullOrEmpty(App.Settings.MailchimpAPIKey) || String.IsNullOrEmpty(App.Settings.MailchimpServer) || String.IsNullOrEmpty(App.Settings.MailchimpSubscriptionStatus)) {
       <br>
