@@ -1,4 +1,4 @@
-@helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers context)
+@helper Message(Dictionary<string,object> data, ToSic.SexyContent.IAppAndDataHelpers context)
 {
     <!doctype html>
     <html>
@@ -14,15 +14,15 @@
         <table width="100%">
             <tr>
                 <td width="10%">Subject</td>
-                <td>@request["Subject"]</td>
+                <td>@data["Subject"]</td>
             </tr>
             <tr>
                 <td>Message</td>
-                <td>@request["Message"]</td>
+                <td>@data["Message"]</td>
             </tr>
             <tr>
                 <td>Customer</td>
-                <td>@request["Name"] (@request["E-Mail"])</td>
+                <td>@data["Name"] (@data["E-Mail"])</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -31,7 +31,7 @@
 
             <tr>
                 <td>Log</td>
-                <td>@request["Timestamp"] (@request["SenderIP"])</td>
+                <td>@data["Timestamp"] (@data["SenderIP"])</td>
             </tr>
 
         </table>
@@ -40,7 +40,7 @@
 }
 
 @functions {
-	public string Subject(dynamic request, dynamic context) {
+	public string Subject(dynamic data, dynamic context) {
         // create custom code to generate the subject here...
 
         // or just return the setting configured in the form

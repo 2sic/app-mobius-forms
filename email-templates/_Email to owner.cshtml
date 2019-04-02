@@ -1,8 +1,8 @@
-@helper Message(Dictionary<string,object> request, ToSic.SexyContent.IAppAndDataHelpers context)
+@helper Message(Dictionary<string,object> data, ToSic.SexyContent.IAppAndDataHelpers context)
 {
     // Here the "non-sexy" fields get filtered out so the mail owner (and customer) won't see IP, EntityGuid etc.
     // If you do want to send these informations, just remove the statement out of the Where function
-    var registrationData = request.Where(d => d.Key != "EntityGuid" || d.Key != "ModuleId" || d.Key != "SenderIP" || d.Key != "Timestamp" || d.Key != "sendFormWithApi");
+    var registrationData = data.Where(d => d.Key != "EntityGuid" || d.Key != "ModuleId" || d.Key != "SenderIP" || d.Key != "Timestamp" || d.Key != "sendFormWithApi");
     
     <!doctype html>
     <html>
@@ -32,7 +32,7 @@
 }
 
 @functions {
-	public string Subject(dynamic request, dynamic context) {
+	public string Subject(dynamic data, dynamic context) {
         // create custom code to generate the subject here...
 
         // or just return the setting configured in the form

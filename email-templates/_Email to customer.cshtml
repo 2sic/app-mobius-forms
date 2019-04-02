@@ -1,4 +1,4 @@
-@helper Message(dynamic request, ToSic.SexyContent.IAppAndDataHelpers context)
+@helper Message(dynamic data, ToSic.SexyContent.IAppAndDataHelpers context)
 {
     <!doctype html>
     <html>
@@ -19,7 +19,7 @@
 }
 
 @functions {
-	public string Subject(dynamic request, dynamic context) {
+	public string Subject(dynamic data, dynamic context) {
         // create custom code to generate the subject here...
 
         // or just return the setting configured in the form
