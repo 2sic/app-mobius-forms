@@ -116,6 +116,10 @@ export class App {
                 }, false);
                 reader.readAsDataURL(file);
                 return deferred.promise();
+            } else if (e.attr('type') && e.attr('type').toLowerCase() == 'radio') {
+                if (e.is(':checked')){
+                    data[propName] = e.val();    
+                }
             }
             else { // For all standard fields, set value directly
                 data[propName] = e.val();
