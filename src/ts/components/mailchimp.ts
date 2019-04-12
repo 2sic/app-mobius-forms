@@ -20,6 +20,7 @@ export class MailChimp {
 
   send(event: any) {
     const wrapper = this.moduleWrapper;
+    const ws = wrapper.find('.app-jqfs-wrapper').data('webservice');
     const btn = event.currentTarget;
     const sxc = $2sxc(btn);
   
@@ -27,13 +28,14 @@ export class MailChimp {
     if (!(wrapper as any).smkValidate())
       return this.helper.showOneAlert(wrapper, 'msgIncomplete');
     
-    var u = {
-      mail: wrapper.find('.sender-mail').val(),
-      name: wrapper.find('.sender-name').val(),
-      surname: wrapper.find('.sender-surname').val()
+    const data = {
+      SenderMail: wrapper.find('.sender-mail').val(),
+      SenderName: wrapper.find('.sender-name').val(),
+      SenderLastName: wrapper.find('.sender-surname').val(),
+      MailChimp: true
     }
     
-    sxc.webApi.post('Mailchimp/Subscribe', { email: u.mail, fname: u.name, lname: u.surname }, null, true)
+    sxc.webApi.post(ws, {}, data, true)
       .success(() => {
         this.moduleWrapper.find('.app-jqfs-form-mailchimp').fadeOut();
         this.moduleWrapper.find('#NewsletterSuccessMsg').fadeIn();

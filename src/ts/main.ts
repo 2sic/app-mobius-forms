@@ -34,7 +34,7 @@ export class App {
                 return;
 
             const wrap = $(item);
-            wrap.find('#sendFormWithApi').on('click', (evt) => this.send(evt) );  // handle click event
+            wrap.find('#sendFormWithApi').on('click', (evt: JQueryEventObject) => this.send(evt) );  // handle click event
             
             this.alreadyInit = true;
         });
@@ -42,7 +42,7 @@ export class App {
         this.mailChimp.init(wrapper);
     }
 
-    public send(event: any) {
+    public send(event: JQueryEventObject) {
         let data = []; 
         const btn = event.currentTarget;
         const sxc = $2sxc(btn);
@@ -85,9 +85,14 @@ export class App {
     // automatically build the send-object with all properties, 
     // based on all form-fields which have a item-property=""
     private autoCollectData() {
-        const data: any = {
-            Files: []
-        };
+        const files = this.moduleWrapper.find(':file');
+        let data: any = {};
+        if(files.length > 0){
+            data = {
+                Files: []
+            };
+        }
+        
         const fields = this.moduleWrapper.find(':input');
 
         function add(i: number, e: any) {

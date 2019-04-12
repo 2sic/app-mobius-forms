@@ -4,9 +4,13 @@ using System.Web.Http;
 using ToSic.SexyContent.WebApi;
 using System.Collections.Generic;
 using System;
+using System.Text;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
+using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
 using Newtonsoft.Json;
 using System.IO;
@@ -25,7 +29,6 @@ public class FormController : SxcApiController
 
         // test exception to see how the js-side behaves on errors
         // throw new Exception();
-
 
         // 0. Pre-Check - validate recaptcha if used
         if(Content.Recaptcha ?? false) {
@@ -70,16 +73,25 @@ public class FormController : SxcApiController
         // 2018-09-18 added feature to create a full-save of each request into a system-protocol content-type
         App.Data.Create("SystemProtocol", contactFormRequest);
 
-        // Save files to Adam
         var files = new List<ToSic.Sxc.Adam.IFile>();
-        foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
-        {
-            var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
-            files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: type.Name, guid: guid, field: file["Field"]));
-        }
+        
+        // Save files to Adam
+        if(contactFormRequest.ContainsKey("Files")){
+            foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
+            {
+                var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
+                files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: type.Name, guid: guid, field: file["Field"]));
+            }
 
-        // Don't keep Files array in ContactFormRequest
-        removeKeys(contactFormRequest, new string[] { "Files" });
+            // Don't keep Files array in ContactFormRequest
+            removeKeys(contactFormRequest, new string[] { "Files" });
+        }   
+
+        // if(contactFormRequest.ContainsKey("MailChimp")){
+        //     if(contactFormRequest['MailChimp']) {
+        //         Subscribe(contactFormRequest['SenderMail'], contactFormRequest['SenderName'], contactFormRequest['SenderLastName']);
+        //     }
+        // }
         
         // 2. assemble all settings to send the mail
         // background: some settings are made in this module,
@@ -160,6 +172,108 @@ public class FormController : SxcApiController
         return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
     }
 
+    private string Subscribe(string email, string fname, string lname)
+    {
+        var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, email, fname, lname);
+        if(msg != "OK")
+        {
+            throw new Exception("Mailchimp registration failed - check EventLog - msg was " + msg);
+        }
+        return "test";
+    }
+
+    private string SubscribeToMailChimp(string srv, string listId, string apiKey, string email, string fname, string lname)
+    {
+        var baseUrl = "https://" + srv + ".api.mailchimp.com/3.0/lists/" + listId + "/members";
+
+        var subscriberUrl = baseUrl + "/" + CreateMD5(email.ToLower());
+        return "test2";
+
+        var body = new
+        {
+            email_address = email,
+            status = "pending",
+            merge_fields = new { FNAME = fname, LNAME = lname }
+        };
+
+        // First check if user is already in list
+        var response = MailchimpRequest(subscriberUrl, "GET", "", apiKey);
+        if(response.StatusCode == HttpStatusCode.OK)
+        {
+            var currentStatus = JsonConvert.DeserializeObject<dynamic>(response.Response).status;
+
+            // Do nothing if user is already subscribed
+            if (currentStatus == "subscribed") return "OK";
+            
+            // Update existing subscriber
+            return MailchimpRequest(subscriberUrl, "PUT", JsonConvert.SerializeObject(body), apiKey).StatusCode.ToString();
+        }
+        else
+        {
+            return MailchimpRequest(baseUrl, "POST", JsonConvert.SerializeObject(body), apiKey).StatusCode.ToString();
+        }
+    }
+    
+    private class MailchimpResponse
+    {
+        public string Response;
+        public HttpStatusCode StatusCode;
+    }
+
+    private static readonly HttpClient client = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) };
+	
+    private MailchimpResponse MailchimpRequest(string url, string method, string body, string apiKey) {
+        var logTimeStamp = DateTime.Now;
+        EventLog("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
+        
+		String encodedApiKey = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes("anystring" + ":" + apiKey));
+		
+		var httpMethod = new HttpMethod(method.ToUpper());
+		var requestMessage = new HttpRequestMessage(httpMethod, url);
+		requestMessage.Headers.Add("Authorization", "Basic " + encodedApiKey);
+
+        if (method != "GET")
+        {
+            requestMessage.Content = new StringContent(body);
+            requestMessage.Content.Headers.Remove("Content-Type");
+            requestMessage.Content.Headers.Add("Content-Type", "application/json; charset=utf-8");
+        }
+
+        var responseMessage = client.SendAsync(requestMessage).Result;
+        var response = responseMessage.Content.ReadAsStringAsync().Result;
+
+        var r = new MailchimpResponse()
+        {
+            StatusCode = responseMessage.StatusCode,
+            Response = response
+        };
+        EventLog("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
+        return r;
+    }
+
+    private void EventLog(string title, string message)
+    {
+        var objEventLog = new EventLogController();
+        objEventLog.AddLog(title, message, PortalSettings, this.UserInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
+    }
+    
+    private static string CreateMD5(string input)
+    {
+        // Use input string to calculate MD5 hash
+        using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+        {
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+            // Convert the byte array to hexadecimal string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                sb.Append(hashBytes[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+    }
 }
 
 
