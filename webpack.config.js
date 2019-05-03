@@ -4,6 +4,7 @@ const cssFramework = 'bs4';
 const appname = 'mobiusforms';
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const path = require('path');
 
 module.exports = env => {
@@ -12,6 +13,11 @@ module.exports = env => {
     entry: ['./src/scss/' + cssFramework + '.scss', './src/ts/main.ts'],
     watch: true,
     mode: 'none',
+    devtool: 'source-map',
+    stats: {
+      all: false,
+      assets: true
+    },
     output: {
       path: path.resolve(__dirname, ((env && env.staging) ? 'staging/dist' : 'live/dist')),
       filename: 'app-bundle.min.js',
@@ -40,7 +46,8 @@ module.exports = env => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: 'style.min.css'
-      })
+      }),
+      new FriendlyErrorsWebpackPlugin(),
     ]
   };
 };
