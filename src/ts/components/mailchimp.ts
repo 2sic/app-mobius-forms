@@ -15,7 +15,7 @@ export class MailChimp {
 
   init(wrapper: JQuery) {
     this.moduleWrapper = wrapper;
-    wrapper.find('#subToMc').on('click', (evt) => this.send(evt) );  // handle click event
+    wrapper.find('#subToMc').on('click', (evt) => this.send(evt) );
   }
 
   send(event: any) {
