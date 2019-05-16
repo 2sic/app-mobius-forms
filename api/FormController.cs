@@ -119,6 +119,8 @@ public class FormController : SxcApiController
         var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
         
         if(Content.OwnerSend != null && Content.OwnerSend){
+            removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp", "sendFormWithApi" }); 
+            
             var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
             var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
             var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
@@ -133,6 +135,8 @@ public class FormController : SxcApiController
 
         // 4. Send Mail to customer
         if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
+            removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp", "sendFormWithApi" }); 
+
             var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
             var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
             var customerSubj = customerMailEngine.Subject(valuesWithMailLabels, this);
