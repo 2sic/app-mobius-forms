@@ -1,6 +1,6 @@
 declare let grecaptcha: any;
 
-import { Helpers } from './helpers';
+import { Helpers } from '../helpers/helpers';
 
 export class Recaptcha {
   helper = new Helpers();

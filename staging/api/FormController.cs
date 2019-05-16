@@ -148,7 +148,7 @@ public class FormController : SxcApiController
 
     private dynamic TemplateInstance(string fileName)
     {
-        var compiledType = BuildManager.GetCompiledType(System.IO.Path.Combine("~", App.Path, "email-templates", fileName));
+        var compiledType = BuildManager.GetCompiledType(System.IO.Path.Combine("~", App.Path, "staging/email-templates", fileName));
         object objectValue = null;
         if (compiledType != null)
         {

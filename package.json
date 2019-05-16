@@ -4,8 +4,8 @@
   "description": "The standard template to build sexy apps.",
   "main": "",
   "scripts": {
-    "watch-live": "webpack",
-    "watch-dev": "webpack --env.staging"
+    "develop": "webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "2sic internet solutions",
   "license": "MIT",
@@ -14,12 +14,14 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.1"
+    "webpack-cli": "^3.3.1",
+    "webpackbar": "^3.2.0"
   },
   "dependencies": {
     "@types/jquery": "^3.3.29",

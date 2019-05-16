@@ -3,23 +3,23 @@ const cssFramework = 'bs4';
 // Enter the name of your app here. Use all lowercase lettering.
 const appname = 'mobiusforms';
 
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const path = require('path');
+const WebpackBar = require('webpackbar');
 
 module.exports = env => {
   
   return {
     entry: ['./src/scss/' + cssFramework + '.scss', './src/ts/main.ts'],
+    mode: 'development',
     watch: true,
-    mode: 'none',
-    devtool: 'source-map',
     stats: {
       all: false,
       assets: true
     },
     output: {
-      path: path.resolve(__dirname, ((env && env.staging) ? 'staging/dist' : 'live/dist')),
+      path: path.resolve(__dirname, 'staging/dist'),
       filename: 'app-bundle.min.js',
       library: appname,
     },
@@ -29,16 +29,19 @@ module.exports = env => {
     module: {
       rules: [{
           test: /\.scss$/i,
+          exclude: /node_modules/,
           use: [
             MiniCssExtractPlugin.loader,
-            'css-loader',
             {
+              loader: 'css-loader'
+            }, {
               loader: 'sass-loader',
             }
           ]
         },
         {
           test: /\.ts?$/,
+          exclude: /node_modules/,
           use: 'ts-loader',
         },
       ],
@@ -47,6 +50,7 @@ module.exports = env => {
       new MiniCssExtractPlugin({
         filename: 'style.min.css'
       }),
+      new WebpackBar(),
       new FriendlyErrorsWebpackPlugin(),
     ]
   };

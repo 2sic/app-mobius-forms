@@ -1,6 +1,6 @@
 declare let $2sxc: any;
 
-import { Helpers } from './helpers';
+import { Helpers } from '../helpers/helpers';
 
 export class MailChimp {
   helper = new Helpers();
