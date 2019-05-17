@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
@@ -22,6 +23,9 @@ public class FormController : SxcApiController
 	[ValidateAntiForgeryToken]
 	public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
 	{
+		// var currentDirectory = System.IO.Path.Combine("~", App.Path, getEdition() , "email-tamplates");
+		// throw new Exception(currentDirectory);
+
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
@@ -36,7 +40,7 @@ public class FormController : SxcApiController
 		
 			// do server-validation
 			// based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
-			var gRecap = instantiateClass("RecaptchaHelper");
+			var gRecap = InstantiateClass("RecaptchaHelper");
 			var ok = gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
 			if(!ok)
 				throw new Exception("bad recaptcha '" + ok + "'" );
@@ -89,7 +93,7 @@ public class FormController : SxcApiController
 
 		
 		if(contactFormRequest.ContainsKey("MailChimp")){
-			var mChimp = instantiateClass("MailChimpHelper");
+			var mChimp = InstantiateClass("MailChimpHelper");
 			mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
 		}
 		
@@ -173,11 +177,18 @@ public class FormController : SxcApiController
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
 	}
 
+	private string getEdition(){
+		var path = HttpContext.Current.Request.Url.AbsolutePath;
+		return path.IndexOf("staging") > 0 ? "staging" : "live";
+	}
+
 	/* GET EMAIL TEMPLATE */
 	private dynamic TemplateInstance(string fileName)
 	{
-		var compiledType = BuildManager.GetCompiledType(System.IO.Path.Combine("~", App.Path, "staging/email-templates", fileName));
-		object objectValue = null;
+		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "email-tamplates", fileName);
+		var compiledType = BuildManager.GetCompiledType(path);
+		
+		object objectValue = null;	
 		if (compiledType != null)
 		{
 			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
@@ -187,9 +198,9 @@ public class FormController : SxcApiController
 	}
 
 	/* INSTANTIATE CLASS */
-	private dynamic instantiateClass(string name){
-		var path = System.IO.Path.Combine("~", App.Path, "staging/api", name + ".cs");
-
+	private dynamic InstantiateClass(string name){
+		var fileName = name + ".cs";
+		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "api/Helpers", fileName);
 		var assembly = BuildManager.GetCompiledAssembly(path);
     var compiledType = assembly.GetType(name, true, true);
 
