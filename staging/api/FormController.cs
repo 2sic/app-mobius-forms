@@ -36,7 +36,7 @@ public class FormController : SxcApiController
 		
 			// do server-validation
 			// based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
-			var gRecap = ReCaptchaInstance();
+			var gRecap = instantiateClass("RecaptchaHelper");
 			var ok = gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
 			if(!ok)
 				throw new Exception("bad recaptcha '" + ok + "'" );
@@ -89,7 +89,7 @@ public class FormController : SxcApiController
 
 		
 		if(contactFormRequest.ContainsKey("MailChimp")){
-			var mChimp = MailChimpInstance();
+			var mChimp = instantiateClass("MailChimpHelper");
 			mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
 		}
 		
@@ -186,14 +186,12 @@ public class FormController : SxcApiController
 		throw new Exception("Error while creating mail template instance.");
 	}
 
-	/* INSTANTIATE RECAPTCHA CLASS */
-	private dynamic ReCaptchaInstance()
-	{
-		var path = System.IO.Path.Combine("~", App.Path, "staging/api", "RecaptchaHelper.cs");
-		//var compiledType = BuildManager.GetCompiledType(path);
+	/* INSTANTIATE CLASS */
+	private dynamic instantiateClass(string name){
+		var path = System.IO.Path.Combine("~", App.Path, "staging/api", name + ".cs");
 
 		var assembly = BuildManager.GetCompiledAssembly(path);
-    var compiledType = assembly.GetType("RecaptchaHelper", true, true);
+    var compiledType = assembly.GetType(name, true, true);
 
 		object objectValue = null;
 		if (compiledType != null)
@@ -201,24 +199,6 @@ public class FormController : SxcApiController
 			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
 			return ((dynamic)objectValue);
 		}
-		return objectValue;
-	}
-
-	/* INSTANTIATE MAILCHIMP CLASS */
-	private dynamic MailChimpInstance()
-	{
-		var path = System.IO.Path.Combine("~", App.Path, "staging/api", "MailChimpHelper.cs");
-		//var compiledType = BuildManager.GetCompiledType(path);
-
-		var assembly = BuildManager.GetCompiledAssembly(path);
-    var compiledType = assembly.GetType("MailChimpHelper", true, true);
-
-		object objectValue = null;
-		if (compiledType != null)
-		{
-			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-			return ((dynamic)objectValue);
-		}
-		return objectValue;
+		throw new Exception("Error while creating class instance.");
 	}
 }
