@@ -9,10 +9,8 @@ public class MailChimpHelper
   public string portalSetting = "";
 
   /* MAILCHIMP SUBSCRIBE */
-  public string Subscribe(string ps, string MailchimpServer, string MailchimpListId, string MailchimpAPIKey, string email, string fname, string lname)
+  public string Subscribe(string MailchimpServer, string MailchimpListId, string MailchimpAPIKey, string email, string fname, string lname)
   {
-    portalSetting = ps;
-
     var msg = SubscribeToMailChimp(MailchimpServer, MailchimpListId, MailchimpAPIKey, email, fname, lname);
     if(msg != "OK")
     {

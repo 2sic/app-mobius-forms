@@ -6,6 +6,8 @@
     <div id="msgRecap" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
     <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
     <div id="msgSending" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageSending.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgNewsletterSuccess" class="alert alert-success app-app-jqfs-message">@App.Resources.MessageNewsletterSuccess</div>
+    <div id="msgNewsletterFailed" class="alert alert-danger app-app-jqfs-message">@App.Resources.MessageNewsletterUnexpectedError</div>
     <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">
         @Html.Raw( App.Resources.MessageSendOk )
         @Html.Raw( Content.CustomerSend != null && Content.CustomerSend ? App.Resources.MessageCustomerMailSend : "")

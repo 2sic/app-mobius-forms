@@ -50,23 +50,21 @@
 
     <!-- Recaptcha -->
     @if(Content.Recaptcha ?? false) {
-      @RenderPage("_Shared Recaptcha.cshtml")
+      @RenderPage("staging/_Shared Recaptcha.cshtml")
     }
 
     <!-- Messages / Send -->
-    <div class="form-group">
-      @RenderPage("_Shared Messages.cshtml")
+    <div class="form-group row">
+      @RenderPage("staging/_Shared Messages.cshtml")
     
       <!-- mc button -->
-      <div @Koi.Class("all='app-jqfs-support-disable' bs3='' bs4,oth=''")>
+      <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
         <button id="subToMc" type="button" @Koi.Class("bs3='btn btn-primary' bs4,oth='btn btn-primary'")>@App.Resources.ButtonSendNewsletter</button><br />
         <span id="EmailReminder">@App.Resources.LabelGeneralReminder</span>
       </div>
     </div>
   </div>
   
-  <div @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-success'") id="NewsletterSuccessMsg">@App.Resources.MessageNewsletterSuccess</div>
-  <div @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-danger'") id="NewsletterFailedMsg">@App.Resources.MessageNewsletterUnexpectedError</div>
 
   @if(String.IsNullOrEmpty(App.Settings.MailchimpListId) || String.IsNullOrEmpty(App.Settings.MailchimpAPIKey) || String.IsNullOrEmpty(App.Settings.MailchimpServer) || String.IsNullOrEmpty(App.Settings.MailchimpSubscriptionStatus)) {
       <br>
@@ -76,4 +74,4 @@
   }
 </div>
 
-@RenderPage("_Shared Assets.cshtml")
+@RenderPage("staging/_Shared Assets.cshtml")

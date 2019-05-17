@@ -90,7 +90,7 @@ public class FormController : SxcApiController
 		
 		if(contactFormRequest.ContainsKey("MailChimp")){
 			var mChimp = MailChimpInstance();
-			mChimp.Subscribe(PortalSettings, App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+			mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
 		}
 		
 		// 2. assemble all settings to send the mail

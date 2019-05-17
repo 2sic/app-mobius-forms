@@ -81,12 +81,12 @@
     <!-- Recaptcha -->
     @if (Content.Recaptcha ?? false)
     {
-        @RenderPage("_Shared Recaptcha.cshtml")
+        @RenderPage("staging/_Shared Recaptcha.cshtml")
     }
 
     <!-- Messages / Send -->
     <div class="form-group row">
-      @RenderPage("_Shared Messages.cshtml")
+      @RenderPage("staging/_Shared Messages.cshtml")
       
       <!-- send button -->
       <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
@@ -96,8 +96,8 @@
   </div>
 
   @* show message if the upload feature isn't ready *@
-  @RenderPage("_Shared Feature UploadInAdam.cshtml")
+  @RenderPage("staging/_Shared Feature UploadInAdam.cshtml")
 
 </div>
 
-@RenderPage("_Shared Assets.cshtml")
+@RenderPage("staging/_Shared Assets.cshtml")

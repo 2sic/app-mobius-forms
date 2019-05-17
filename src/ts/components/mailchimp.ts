@@ -34,15 +34,18 @@ export class MailChimp {
       SenderLastName: wrapper.find('.sender-surname').val(),
       MailChimp: true
     }
+
+    this.helper.disableInputs(wrapper, true);
+    this.helper.showOneAlert(wrapper, 'msgSending'); // show "sending..."
     
     sxc.webApi.post(ws, {}, data, true)
       .success(() => {
-        this.moduleWrapper.find('.app-jqfs-form-mailchimp').fadeOut();
-        this.moduleWrapper.find('#NewsletterSuccessMsg').fadeIn();
+        this.helper.showOneAlert(wrapper, 'msgNewsletterSuccess');
+        $(btn).hide();
       })
       .error(() => {
-        this.moduleWrapper.find('.app-jqfs-form-mailchimp').fadeOut();
-        this.moduleWrapper.find('#NewsletterFailedMsg').fadeIn();
+        this.helper.showOneAlert(wrapper, 'msgNewsletterFailed');
+        this.helper.disableInputs(wrapper, false);
       })
   }
 }
