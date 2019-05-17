@@ -1,0 +1,14 @@
+@using ToSic.Eav.Configuration
+@{
+    // show warning if the save-attachments in web api isn't activated
+    var reqFeatures = new[]{new Guid("ecdab0f6-4692-4544-b1e7-72581f489f6a")};
+    FeaturesDisabledException missingException;
+
+    if(!Features.EnabledOrException(reqFeatures, 
+        "Warning: file upload won't work yet, as it hasn't been enabled.",
+        out missingException)) {
+        <div class="alert alert-warning">
+            @missingException.Message
+        </div>
+    }
+}

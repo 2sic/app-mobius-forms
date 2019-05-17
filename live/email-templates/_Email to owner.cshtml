@@ -1,0 +1,40 @@
+@helper Message(Dictionary<string,object> data, ToSic.SexyContent.IAppAndDataHelpers context)
+{
+    <!doctype html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { font-family: Helvetica, sans-serif; }
+        </style>
+    </head>
+    <body>
+        <h1>@context.App.Resources.MailOwnerTitle</h1>
+        <div>
+            @context.App.Resources.MailOwnerContent
+        </div>
+        <table width="100%">
+            @foreach (var item in registrationData)
+            {
+                <tr>
+                    <td width="10%"><b>@item.Key</b></td>
+                    <td>@item.Value</td>
+                </tr>
+            }
+        </table>
+    </body>
+    </html>
+}
+
+@functions {
+	public string Subject(dynamic data, dynamic context) {
+        // create custom code to generate the subject here...
+
+        // or just return the setting configured in the form
+        return !String.IsNullOrWhiteSpace(context.Content.OwnerMailSubject)
+            ? context.Content.OwnerMailSubject.ToString()
+            : context.App.Settings.OwnerMailSubject.ToString();
+	}
+}
+

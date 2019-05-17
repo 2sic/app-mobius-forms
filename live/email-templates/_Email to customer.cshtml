@@ -1,0 +1,30 @@
+@helper Message(dynamic data, ToSic.SexyContent.IAppAndDataHelpers context)
+{
+    <!doctype html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+            body { font-family: Helvetica, sans-serif; }
+        </style>
+    </head>
+    <body>
+        <h1>@context.App.Resources.MailCustomerTitle</h1>
+        <div>
+            @context.App.Resources.MailCustomerContent
+        </div>
+    </body>
+</html>
+}
+
+@functions {
+	public string Subject(dynamic data, dynamic context) {
+        // create custom code to generate the subject here...
+
+        // or just return the setting configured in the form
+		return !String.IsNullOrWhiteSpace(context.Content.CustomerMailSubject)
+            ? context.Content.CustomerMailSubject
+            : context.App.Settings.CustomerMailSubject;
+	}
+}
