@@ -51,12 +51,12 @@
 
     <!-- Recaptcha -->
     @if(Content.Recaptcha ?? false) {
-      @RenderPage("_Shared Recaptcha.cshtml")
+      @RenderPage("shared/_Shared Recaptcha.cshtml")
     }
 
     <!-- Messages / Send -->
     <div class="form-group row">
-      @RenderPage("_Shared Messages.cshtml")
+      @RenderPage("shared/_Shared Messages.cshtml")
     
       <!-- mc button -->
       <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
@@ -75,4 +75,4 @@
   }
 </div>
 
-@RenderPage("_Shared Assets.cshtml")
+@RenderPage("shared/_Shared Assets.cshtml", new { Edition = Edition})
