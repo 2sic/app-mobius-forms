@@ -1,19 +1,18 @@
-using DotNetNuke.Security;
-using DotNetNuke.Web.Api;
-using System.Web.Http;
-using ToSic.SexyContent.WebApi;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Http;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
-using Newtonsoft.Json;
-using System.IO;
+using DotNetNuke.Security;
+using DotNetNuke.Web.Api;
+using ToSic.SexyContent.WebApi;
 
 public class FormController : SxcApiController
 {
@@ -37,7 +36,8 @@ public class FormController : SxcApiController
 		
 			// do server-validation
 			// based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
-			var ok = ReCaptchaClass.Validate(recap as string, App.Settings.RecaptchaSecretKey);
+			var gRecap = ReCaptchaInstance();
+			var ok = gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
 			if(!ok)
 				throw new Exception("bad recaptcha '" + ok + "'" );
 		}
@@ -89,7 +89,8 @@ public class FormController : SxcApiController
 
 		
 		if(contactFormRequest.ContainsKey("MailChimp")){
-			Subscribe(contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+			var mChimp = MailChimpInstance();
+			mChimp.Subscribe(PortalSettings, App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
 		}
 		
 		// 2. assemble all settings to send the mail
@@ -145,6 +146,34 @@ public class FormController : SxcApiController
 		}
 	}
 
+	/* HELPERS */
+	/* EVENTLOGGER */
+	private void EventLog(string title, string message)
+	{
+		var objEventLog = new EventLogController();
+		objEventLog.AddLog(title, message, PortalSettings, this.UserInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
+	}
+
+	/* REMOVE KEY FROM HEADER */
+	private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
+	{
+		foreach (var key in badKeys)
+			if(contactFormRequest.ContainsKey(key)) 
+				contactFormRequest.Remove(key);
+	}
+
+	/* CREATES A DICTIONARY */
+	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
+	{
+		// create keys-map
+		Dictionary<string, string> newKeys = map
+			.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
+			.ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
+
+		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
+	}
+
+	/* GET EMAIL TEMPLATE */
 	private dynamic TemplateInstance(string fileName)
 	{
 		var compiledType = BuildManager.GetCompiledType(System.IO.Path.Combine("~", App.Path, "staging/email-templates", fileName));
@@ -157,156 +186,39 @@ public class FormController : SxcApiController
 		throw new Exception("Error while creating mail template instance.");
 	}
 
-
-	private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
+	/* INSTANTIATE RECAPTCHA CLASS */
+	private dynamic ReCaptchaInstance()
 	{
-		foreach (var key in badKeys)
-			if(contactFormRequest.ContainsKey(key)) 
-				contactFormRequest.Remove(key);
-	}
+		var path = System.IO.Path.Combine("~", App.Path, "staging/api", "RecaptchaHelper.cs");
+		//var compiledType = BuildManager.GetCompiledType(path);
 
-	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
-	{
-		// create keys-map
-		Dictionary<string, string> newKeys = map
-			.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
-			.ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
+		var assembly = BuildManager.GetCompiledAssembly(path);
+    var compiledType = assembly.GetType("RecaptchaHelper", true, true);
 
-		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
-	}
-
-	private string Subscribe(string email, string fname, string lname)
-	{
-		var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, email, fname, lname);
-		if(msg != "OK")
+		object objectValue = null;
+		if (compiledType != null)
 		{
-			throw new Exception("Mailchimp registration failed - check EventLog - msg was " + msg);
+			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
+			return ((dynamic)objectValue);
 		}
-		return "true";
+		return objectValue;
 	}
 
-	private string SubscribeToMailChimp(string srv, string listId, string apiKey, string email, string fname, string lname)
+	/* INSTANTIATE MAILCHIMP CLASS */
+	private dynamic MailChimpInstance()
 	{
-		var baseUrl = "https://" + srv + ".api.mailchimp.com/3.0/lists/" + listId + "/members";
+		var path = System.IO.Path.Combine("~", App.Path, "staging/api", "MailChimpHelper.cs");
+		//var compiledType = BuildManager.GetCompiledType(path);
 
-		var subscriberUrl = baseUrl + "/" + CreateMD5(email.ToLower());
+		var assembly = BuildManager.GetCompiledAssembly(path);
+    var compiledType = assembly.GetType("MailChimpHelper", true, true);
 
-		var body = new
+		object objectValue = null;
+		if (compiledType != null)
 		{
-			email_address = email,
-			status = "pending",
-			merge_fields = new { FNAME = fname, LNAME = lname }
-		};
-
-		// First check if user is already in list
-		var response = MailchimpRequest(subscriberUrl, "GET", "", apiKey);
-		if(response.StatusCode == HttpStatusCode.OK)
-		{
-			var currentStatus = JsonConvert.DeserializeObject<dynamic>(response.Response).status;
-
-			// Do nothing if user is already subscribed
-			if (currentStatus == "subscribed") return "OK";
-			
-			// Update existing subscriber
-			return MailchimpRequest(subscriberUrl, "PUT", JsonConvert.SerializeObject(body), apiKey).StatusCode.ToString();
+			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
+			return ((dynamic)objectValue);
 		}
-		else
-		{
-			return MailchimpRequest(baseUrl, "POST", JsonConvert.SerializeObject(body), apiKey).StatusCode.ToString();
-		}
+		return objectValue;
 	}
-	
-	private class MailchimpResponse
-	{
-		public string Response;
-		public HttpStatusCode StatusCode;
-	}
-
-	private static readonly HttpClient client = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) };
-	
-	private MailchimpResponse MailchimpRequest(string url, string method, string body, string apiKey) {
-		var logTimeStamp = DateTime.Now;
-		EventLog("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
-		
-		String encodedApiKey = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes("anystring" + ":" + apiKey));
-		
-		var httpMethod = new HttpMethod(method.ToUpper());
-		var requestMessage = new HttpRequestMessage(httpMethod, url);
-		requestMessage.Headers.Add("Authorization", "Basic " + encodedApiKey);
-
-		if (method != "GET")
-		{
-			requestMessage.Content = new StringContent(body);
-			requestMessage.Content.Headers.Remove("Content-Type");
-			requestMessage.Content.Headers.Add("Content-Type", "application/json; charset=utf-8");
-		}
-
-		var responseMessage = client.SendAsync(requestMessage).Result;
-		var response = responseMessage.Content.ReadAsStringAsync().Result;
-
-		var r = new MailchimpResponse()
-		{
-			StatusCode = responseMessage.StatusCode,
-			Response = response
-		};
-		EventLog("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
-		return r;
-	}
-
-	private void EventLog(string title, string message)
-	{
-		var objEventLog = new EventLogController();
-		objEventLog.AddLog(title, message, PortalSettings, this.UserInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
-	}
-	
-	private static string CreateMD5(string input)
-	{
-		// Use input string to calculate MD5 hash
-		using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-		{
-			byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-			byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-			// Convert the byte array to hexadecimal string
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < hashBytes.Length; i++)
-			{
-				sb.Append(hashBytes[i].ToString("X2"));
-			}
-			return sb.ToString();
-		}
-	}
-}
-
-
-// Helper to to Recaptcha checks
-// shouldn't really need any modifications, just leave this as is
-public class ReCaptchaClass
-{
-	public static bool Validate(string EncodedResponse, string PrivateKey)
-	{
-		var client = new System.Net.WebClient();
-		var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
-		var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ReCaptchaClass>(GoogleReply);
-
-		return captchaResponse.Success;// == "True";
-	}
-
-	[JsonProperty("success")]
-	public bool Success
-	{
-		get { return m_Success; }
-		set { m_Success = value; }
-	}
-
-	private bool m_Success;
-	[JsonProperty("error-codes")]
-	public List<string> ErrorCodes
-	{
-		get { return m_ErrorCodes; }
-		set { m_ErrorCodes = value; }
-	}
-
-
-	private List<string> m_ErrorCodes;
 }
