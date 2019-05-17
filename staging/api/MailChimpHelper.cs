@@ -3,11 +3,6 @@ using System.Text;
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
-using DotNetNuke.Services.Log.EventLog;
-using DotNetNuke.Services.Mail;
-using DotNetNuke.Security;
-using DotNetNuke.Web.Api;
-using ToSic.SexyContent.WebApi;
 
 public class MailChimpHelper
 {

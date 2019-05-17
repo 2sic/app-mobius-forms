@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,6 +12,7 @@ using DotNetNuke.Services.Mail;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
 using ToSic.SexyContent.WebApi;
+using Newtonsoft.Json;
 
 public class FormController : SxcApiController
 {
