@@ -23,9 +23,6 @@ public class FormController : SxcApiController
 	[ValidateAntiForgeryToken]
 	public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
 	{
-		// var currentDirectory = System.IO.Path.Combine("~", App.Path, getEdition() , "email-tamplates");
-		// throw new Exception(currentDirectory);
-
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
@@ -93,8 +90,11 @@ public class FormController : SxcApiController
 
 		
 		if(contactFormRequest.ContainsKey("MailChimp")){
-			var mChimp = InstantiateClass("MailChimpHelper");
-			mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+			if(contactFormRequest["MailChimp"].ToString() == "True"){
+				var mChimp = InstantiateClass("MailChimpHelper");
+				mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+			}
+			removeKeys(contactFormRequest, new string[] { "MailChimp" }); 
 		}
 		
 		// 2. assemble all settings to send the mail

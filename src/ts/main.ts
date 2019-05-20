@@ -3,12 +3,10 @@ declare let $2sxc: any;
 import { Helpers } from './helpers/helpers';
 import { DataCollect } from './helpers/datacollect';
 import { Recaptcha } from './components/recaptcha';
-import { MailChimp } from './components/mailchimp';
 export class App {
   helper = new Helpers();
   datacollect = new DataCollect();
   recaptcha = new Recaptcha();
-  mailChimp = new MailChimp();
   moduleWrapper: JQuery;
   alreadyInit = false;
 
@@ -40,8 +38,6 @@ export class App {
 
       this.alreadyInit = true;
     });
-
-    this.mailChimp.init(wrapper);
   }
 
   public send(event: JQueryEventObject) {
@@ -61,12 +57,15 @@ export class App {
     if (!recap)
       return this.helper.showOneAlert(wrapper, 'msgRecap');
 
+    const mailchimp = wrapper.find('.app-jqfs-wrapper').hasClass('app-jqfs-mailchimp-wrapper');
+
     // get data 
     // let data;
     // data = this.datacollect.manual(wrapper); // alternative example with manual build, but we prefer automatic
     this.datacollect.auto(wrapper).then((data: any) => {
       const ws = wrapper.find('.app-jqfs-wrapper').data('webservice'); // should be "Form/ProcessForm" or a custom override
       data.Recaptcha = recap;
+      data.MailChimp = mailchimp;
 
       // submission
       this.helper.disableInputs(wrapper, true);
@@ -74,11 +73,13 @@ export class App {
 
       sxc.webApi.post(ws, {}, data, true)
         .success(() => {
-          this.helper.showOneAlert(wrapper, 'msgOk')
+          const msg = mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
+          this.helper.showOneAlert(wrapper, msg);
           $(btn).hide();
         })
         .error(() => {
-          this.helper.showOneAlert(wrapper, 'msgError')
+          const msg = mailchimp ? 'msgNewsletterFailed' : 'msgError';
+          this.helper.showOneAlert(wrapper, msg);
           this.helper.disableInputs(wrapper, false);
         });
     });

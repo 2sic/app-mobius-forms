@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 
 public class MailChimpHelper
 {
-  public string portalSetting = "";
-
   /* MAILCHIMP SUBSCRIBE */
   public string Subscribe(string MailchimpServer, string MailchimpListId, string MailchimpAPIKey, string email, string fname, string lname)
   {
