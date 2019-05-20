@@ -2,17 +2,12 @@ export class DataCollect {
   // automatically build the send-object with all properties, 
   // based on all form-fields which have a item-property=""
   auto(wrapper: JQuery) {
-    let data: any = {};
-    const fields = wrapper.find(':input');
+    let data: any = {
+      Files: []
+    };
+    const fields = wrapper.find(':input').not('button');
     const promises = fields.map((i, field) => add(i, field));
-    const files = wrapper.find(':file');
-
-    if (files.length > 0) {
-      data = {
-        Files: []
-      };
-    }
-
+    
     function add(i: number, e: any) {
       e = $(e);
       // get the property name from special-attribut, name OR id

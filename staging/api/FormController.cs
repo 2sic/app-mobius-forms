@@ -123,7 +123,7 @@ public class FormController : SxcApiController
 		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 		
 		if(Content.OwnerSend != null && Content.OwnerSend){
-			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp", "sendFormWithApi" }); 
+			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
 			
 			var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
 			var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
@@ -139,7 +139,7 @@ public class FormController : SxcApiController
 
 		// 4. Send Mail to customer
 		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
-			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp", "sendFormWithApi" }); 
+			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
 
 			var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
 			var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
@@ -185,7 +185,7 @@ public class FormController : SxcApiController
 	/* GET EMAIL TEMPLATE */
 	private dynamic TemplateInstance(string fileName)
 	{
-		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "email-tamplates", fileName);
+		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "email-templates", fileName);
 		var compiledType = BuildManager.GetCompiledType(path);
 		
 		object objectValue = null;	
