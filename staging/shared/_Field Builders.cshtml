@@ -1,0 +1,52 @@
+@using Connect.Koi
+
+@helper Text(string idString, bool required) {
+  var content = "<input type='text' class='form-control' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelRequired + "'>";
+  @Field(idString, required, content);
+}
+
+
+@helper EMail(string idString, bool required) {
+  var content = "<input type='email' class='form-control' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelValidEmail + "'>";
+  @Field(idString, required, content);
+}
+
+
+@helper Multiline(string idString, bool required) {
+  var content = "<textarea class='form-control' rows='5' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelRequired + "'></textarea>";
+  @Field(idString, required, content);
+}
+
+@helper DropDown(string idString, bool required, string[] values) {
+  var content = "<select class='form-control' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelRequired + "'>";
+  content += "<option value=''>--Please Select--</option>";
+
+  foreach(var value in values){
+    content += "<option>" + value + "</option>";
+  }
+  
+  content += "</select>";
+
+  @Field(idString, required, content);
+}
+
+@helper File(string idString, bool required, string acceptType, string name = "") {
+  var inputNameAttr = (name != "" ? "name='" + name + "'" : "");
+  var content = "<input type='file' class='form-control-file' " + inputNameAttr + " id='" + idString + "' accept='" + acceptType + "' required data-smk-msg='" + App.Resources.LabelValidFile + "'>";
+
+  @Field(idString, required, content);
+}
+
+
+@helper Field(string idString, bool required, string contents) {
+  var requiredClass = (required ? "app-jqfs-field-required" : "");
+  var appRec = App.Resources.Entity.GetBestValue<string>("Label" + idString);
+  var label = Connect.Razor.Blade.Text.First(appRec, idString);
+
+  <div class="form-group row">
+    <label for="@idString" @Koi.Class("all='control-label " + requiredClass + "' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@label</label>
+    <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
+      @Html.Raw(contents)
+    </div>
+  </div>
+}

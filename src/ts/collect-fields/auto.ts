@@ -1,7 +1,7 @@
-export class DataCollect {
+export class CollectFieldsAutomatic {
   // automatically build the send-object with all properties, 
   // based on all form-fields which have a item-property=""
-  auto(wrapper: JQuery) {
+  collect(wrapper: JQuery) {
     let data: any = {
       Files: []
     };
@@ -18,6 +18,7 @@ export class DataCollect {
 
       // extract data from file fields
       if (e.attr('type') && e.attr('type').toLowerCase() == 'file') {
+        // todo 2ro: put this block into a function below
         const deferred = $.Deferred();
         const file = e.get(0).files[0];
         if (!file)
@@ -49,22 +50,5 @@ export class DataCollect {
     return $.when.apply($, promises).then(() => {
       return data;
     });
-  }
-
-  manual(wrapper: JQuery) {
-    const data: any = {
-      Subject: wrapper.find('#Subject'),
-      Message: wrapper.find('#Message'),
-      SenderName: wrapper.find('#Sendername'),
-      SenderMail: wrapper.find('#Sendermail')
-    };
-
-    for (let prop in data) {
-      if (data.hasOwnProperty(prop)) {
-        data[prop] = data[prop].val();
-      }
-    }
-
-    return data;
   }
 }

@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-public class MailChimpHelper
+public class MailChimp
 {
   /* MAILCHIMP SUBSCRIBE */
   public string Subscribe(string MailchimpServer, string MailchimpListId, string MailchimpAPIKey, string email, string fname, string lname)

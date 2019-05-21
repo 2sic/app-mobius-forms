@@ -1,3 +1,9 @@
+@* 
+  This file is used as Template-View.
+  As superuser the staging version is loaded. This version is for development.
+  As a normal user the live version is loaded. 
+*@
+
 @{
   string edition = (Dnn.User.IsSuperUser ? "staging" : "live");
 }

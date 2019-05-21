@@ -1,59 +1,32 @@
 @using System.Linq
 @using Connect.Koi
-
+@using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
-  var Edition = PageData["Edition"];
+  string Edition = PageData["Edition"];
   // get form config (data-type, web-api, etc.)
-  var config = (Content.Presentation.SubmitType as IEnumerable<dynamic>).FirstOrDefault()  // custom for this form only...
-      ?? (App.Settings.SubmitType as IEnumerable<dynamic>).First();    // ...or app-default configuration
+  var config = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault()  // custom for this form only...
+      ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
 }
 
 <div class="app-jqfs-wrapper app-recaptcha-wrapper sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
-  @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
-  @Edit.Toolbar(Content)
-  @Edit.Toolbar(toolbar: new object[] { 
-    new { 
-      showCondition = true,
-      command = new { 
-        action = "contentitems", 
-        contentType = config.ContentType, 
-        filters = new { ModuleId = Dnn.Module.ModuleID } 
-      }
-    }
-  }, settings: new { hover="left", show = "hover" })
+  @RenderPage("shared/_Shared Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="app-jqfs-form">
     <!-- Subject -->
-    <div class="form-group app-jqfs-support-disable row">
-      <label for="Subject" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSubject:</label>
-      <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-        <input type="text" class="form-control" id="Subject" value="" required data-smk-msg="@App.Resources.LabelRequired">
-      </div>
-    </div>
+    @FieldBuilder.Text("Subject", true)
+
 
     <!-- Message -->
-    <div class="form-group app-jqfs-support-disable row">
-      <label for="Message" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelMessage</label>
-      <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-        <textarea class="form-control" rows="5" id="Message" required data-smk-msg="@App.Resources.LabelRequired"></textarea>
-      </div>
-    </div>
+    @FieldBuilder.Multiline("Message", true)
+
 
     <!-- Sender Name -->
-    <div class="form-group app-jqfs-support-disable row">
-      <label for="SenderName" @Koi.Class("all='control-label' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderName</label>
-      <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-        <input type="text" class="form-control" id="SenderName" value="">
-      </div>
-    </div>
+    @FieldBuilder.Text("SenderName", false)
+
 
     <!-- Sender Mail -->
-    <div class="form-group app-jqfs-support-disable row">
-      <label for="SenderMail" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelSenderMail</label>
-      <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-        <input type="email" class="form-control" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
-      </div>
-    </div>
+    @FieldBuilder.EMail("SenderMail", true)
+
 
     <!-- I'm a Customer -->
     @{
@@ -84,12 +57,7 @@
 
     <!-- Messages / Send -->
     <div class="form-group row">
-        @RenderPage("shared/_Shared Messages.cshtml")
-
-        <!-- send button -->
-        <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
-            <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
-        </div>
+        @RenderPage("shared/_Shared Submit with Messages.cshtml")
     </div>
   </div>
 </div>

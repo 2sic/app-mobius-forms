@@ -1,18 +1,21 @@
 declare let grecaptcha: any;
 
-import { Helpers } from '../helpers/helpers';
+import { UiActions } from './uiActions';
 
 export class Recaptcha {
-  helper = new Helpers();
+  helperFunc = new UiActions();
 
   c  = {
     recapId: "recapId",
     clsRecap: "app-jqfs-recaptcha",
     clsRecapWrap: "app-recaptcha-wrapper"
-};
+  };
 
   constructor() { }
 
+  /*
+    Initialize Recaptcha and create a Recapcha Checkbox below the Formfields 
+  */
   init(wrapper: JQuery) {
     const recap = wrapper.find(this.c.clsRecap);
 
@@ -28,6 +31,11 @@ export class Recaptcha {
     wrapper.data(this.c.recapId, id); // remember for later use       
   }
 
+
+  
+  /* 
+    Checks if a recaptcha is implemented in the current Form
+  */
   check(wrapper: JQuery) {
     const recap = wrapper.find("." + this.c.clsRecap);
     // if no recaptcha found, probably ok

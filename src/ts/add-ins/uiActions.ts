@@ -1,4 +1,5 @@
-export class Helpers {
+// rename to UiActions
+export class UiActions {
   showOneAlert(wrapper: JQuery, showId: string) {
     wrapper.find('.alert').hide();
     if (showId !== '') {
