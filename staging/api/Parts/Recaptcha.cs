@@ -9,6 +9,9 @@ public class Recaptcha
 {
   public bool Validate(string EncodedResponse, string PrivateKey)
   {
+    if(!(EncodedResponse is string) || String.IsNullOrEmpty(EncodedResponse as string)) 
+      throw new Exception("recaptcha is empty");
+
     var client = new System.Net.WebClient();
     var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
     var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Recaptcha>(GoogleReply);

@@ -31,11 +31,6 @@ public class FormController : SxcApiController
 
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
-			// todo:  move out
-			var recap = contactFormRequest["Recaptcha"];
-			if(!(recap is string) || String.IsNullOrEmpty(recap as string)) 
-				throw new Exception("recaptcha is empty");
-
 			InstantiateClass("Recaptcha")
 				.Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
 		}
@@ -106,21 +101,6 @@ public class FormController : SxcApiController
 		// remove App informations from data-package
 		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
 
-		// Send Mail to owner
-		if(Content.OwnerSend != null && Content.OwnerSend) {
-			sendMail(config, contactFormRequest, "owner", files);
-		}
-
-		// Send Mail to customer
-		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
-			sendMail(config, contactFormRequest, "customer", files);
-		}
-	}
-
-	// todo: change again. differences sohuld not be in this method
-	// todo: put in external file
-	private void sendMail(dynamic config, Dictionary<string,object> contactFormRequest, string receiver, List<ToSic.Sxc.Adam.IFile> files = null)
-	{
 		// assemble all settings to send the mail
 		// background: some settings are made in this module,
 		// but if they are missing we use fallback settings 
@@ -130,40 +110,25 @@ public class FormController : SxcApiController
 			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
 		};
 
-		// Check for attachments and add them to the mail
-		var attachments = files.Select(f =>
-				new System.Net.Mail.Attachment(
-					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
-
 		// rewrite the keys to be a nicer format, based on the configuration
 		string mailLabelRewrites = (!String.IsNullOrEmpty(config.MailLabels) 
 			? config.MailLabels
 			: App.Settings.SubmitType[0].MailLabels) ?? "";
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
-		
-		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 
-		var fileName = (receiver == "owner" ? config.OwnerMailTemplate : config.CustomerMailTemplate);
+		// Send Mail to owner
+		if(Content.OwnerSend != null && Content.OwnerSend) {
+			InstantiateClass("SendMail").send(
+				config, config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files, App.Path,	this
+			);
+		}
 
-		var mailEngine = TemplateInstance(fileName);
-		var mailBody = mailEngine.Message(valuesWithMailLabels, this).ToString();
-		var mailSubj = mailEngine.Subject(valuesWithMailLabels, this);
-
-		// Send Mail
-		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-		Mail.SendMail(
-			settings.MailFrom,
-			(receiver == "owner" ? settings.OwnerMail : custMail), 
-			(receiver == "owner" ? Content.OwnerMailCC : Content.CustomerMailCC), 
-			"",
-			(receiver == "owner" ? settings.OwnerMail : custMail), 
-			MailPriority.Normal,
-			mailSubj, 
-			MailFormat.Html, 
-			System.Text.Encoding.UTF8, 
-			mailBody, 
-			attachments,
-			"", "", "", "", false);
+		// Send Mail to customer
+		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
+			InstantiateClass("SendMail").send(
+				config, config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, App.Path, this
+			);
+		}
 	}
 
 	// helpers
@@ -175,7 +140,13 @@ public class FormController : SxcApiController
 				contactFormRequest.Remove(key);
 	}
 
-	// rewrite the keys to be a nicer format, based on the configuration
+	// Get current edition (live/staging)
+	private string getEdition(){
+		var path = HttpContext.Current.Request.Url.AbsolutePath;
+		return path.IndexOf("staging") > 0 ? "staging" : "live";
+	}
+
+  // rewrite the keys to be a nicer format, based on the configuration
 	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
 	{
 		// create keys-map
@@ -184,27 +155,6 @@ public class FormController : SxcApiController
 			.ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
 
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
-	}
-
-	// Get current edition (live/staging)
-	private string getEdition(){
-		var path = HttpContext.Current.Request.Url.AbsolutePath;
-		return path.IndexOf("staging") > 0 ? "staging" : "live";
-	}
-
-	// get email template
-	private dynamic TemplateInstance(string fileName)
-	{
-		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "email-templates", fileName);
-		var compiledType = BuildManager.GetCompiledType(path);
-		
-		object objectValue = null;	
-		if (compiledType != null)
-		{
-			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-			return ((dynamic)objectValue);
-		}
-		throw new Exception("Error while creating mail template instance.");
 	}
 
 	// instantiate class

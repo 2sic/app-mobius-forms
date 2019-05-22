@@ -8,19 +8,19 @@ export class CollectFieldsAutomatic {
     const fields = wrapper.find(':input').not('button');
     const promises = fields.map((i, field) => add(i, field));
     
-    function add(i: number, e: any) {
-      e = $(e);
+    function add(i: number, element: any) {
+      element = $(element);
       // get the property name from special-attribut, name OR id
-      const propName = e.attr('name') || e.attr('id');
+      const propName = element.attr('name') || element.attr('id');
 
       if (!propName)
         return;
 
       // extract data from file fields
-      if (e.attr('type') && e.attr('type').toLowerCase() == 'file') {
+      if (element.attr('type') && element.attr('type').toLowerCase() == 'file') {
         // todo 2ro: put this block into a function below
         const deferred = $.Deferred();
-        const file = e.get(0).files[0];
+        const file = element.get(0).files[0];
         if (!file)
           return;
 
@@ -38,12 +38,12 @@ export class CollectFieldsAutomatic {
 
         return deferred.promise();
 
-      } else if (e.attr('type') && e.attr('type').toLowerCase() == 'radio') {
-        if (e.is(':checked')) {
-          data[propName] = e.val();
+      } else if (element.attr('type') && element.attr('type').toLowerCase() == 'radio') { // For radio fields get checked values
+        if (element.is(':checked')) {
+          data[propName] = element.val();
         }
       } else { // For all standard fields, set value directly
-        data[propName] = e.val();
+        data[propName] = element.val();
       }
     }
 
