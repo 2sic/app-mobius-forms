@@ -78,7 +78,7 @@ export class App {
         .success(() => {
           const msg = mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
           this.helperFunc.showOneAlert(wrapper, msg);
-          $(btn).hide();
+          // $(btn).hide();
         })
         .error(() => {
           const msg = mailchimp ? 'msgNewsletterFailed' : 'msgError';

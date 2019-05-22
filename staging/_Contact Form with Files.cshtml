@@ -10,47 +10,31 @@
   var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
 }
 
-<div class="app-jqfs-wrapper app-recaptcha-wrapper sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
-  @RenderPage("shared/_Shared Toolbar.cshtml", new { Content = Content, Config = config })
+<div class="app-jqfs-wrapper @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="app-jqfs-form">
-    <!-- Subject -->
     @FieldBuilder.Text("Subject", true)
-
-    <!-- Message -->
     @FieldBuilder.Multiline("Message", true)
-
-    <!-- Sender Name -->
     @FieldBuilder.Text("SenderName", false)
-
-    <!-- Sender Mail -->
     @FieldBuilder.Text("SenderMail", true)
 
-    <!-- File -->
-    @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg")
-
-    <!-- File2 -->
-    @FieldBuilder.File("File2_1", false, "", "Attachments")
-
-    <!-- File3 -->
-    @FieldBuilder.File("File2_2", false, "", "Attachments")
+    @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg", "SingleFile")
+    @* since multiple files are sent to Attachments, in needs a unique form id *@
+    @FieldBuilder.File("Attachments", false, "", "File2_1")
+    @* since multiple files are sent to Attachments, in needs a unique form id *@
+    @FieldBuilder.File("Attachments", false, "", "File2_2")
 
     <!-- Recaptcha -->
     @if (Content.Recaptcha ?? false)
     {
-        @RenderPage("shared/_Shared Recaptcha.cshtml")
+        @RenderPage("shared/_Recaptcha.cshtml")
     }
 
-    <!-- Messages / Send -->
-    <div class="form-group row">
-      @RenderPage("shared/_Shared Submit with Messages.cshtml")
-    </div>
+    <!-- Messages / Send Button -->
+    @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
-
-  @* show message if the upload feature isn't ready *@
-  @* this is only needed in forms which use file upload *@
-  @RenderPage("shared/_Shared Feature UploadInAdam.cshtml")
 
 </div>
 
-@RenderPage("shared/_Shared Assets.cshtml", new { Edition = Edition})
+@RenderPage("shared/_Assets.cshtml", new { Edition = Edition})

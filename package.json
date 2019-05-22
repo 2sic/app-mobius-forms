@@ -6,7 +6,7 @@
   "scripts": {
     "develop": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "staging2live": "npm run build & (ROBOCOPY staging live /MIR /XD dist) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
+    "deploy-staging2live": "npm run build & (ROBOCOPY staging live /MIR /XD dist) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
   },
   "author": "2sic internet solutions",
   "license": "MIT",

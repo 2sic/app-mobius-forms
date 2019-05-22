@@ -1,0 +1,22 @@
+@using Connect.Koi
+<div class="form-group row">
+  <!-- form error messages, invisible at first --> 
+  <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+    <div id="msgIncomplete" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgRecap" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgError" class="alert alert-danger app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgSending" class="alert alert-warning app-app-jqfs-message" role="alert">@Html.Raw(App.Resources.MessageSending.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgNewsletterSuccess" class="alert alert-success app-app-jqfs-message">@App.Resources.MessageNewsletterSuccess</div>
+    <div id="msgNewsletterFailed" class="alert alert-danger app-app-jqfs-message">@App.Resources.MessageNewsletterUnexpectedError</div>
+    <div id="msgOk" class="alert alert-success app-app-jqfs-message" role="alert">
+      @Html.Raw( App.Resources.MessageSendOk )
+      @Html.Raw( Content.CustomerSend != null && Content.CustomerSend ? App.Resources.MessageCustomerMailSend : "")
+    </div>
+  </div>
+
+  <!-- send button -->
+  <div @Koi.Class("all='' bs3='col col-xs-12' bs4,oth='col-12'")>
+    <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+  </div>
+</div>
+

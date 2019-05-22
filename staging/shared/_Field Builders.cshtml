@@ -1,24 +1,87 @@
-@using Connect.Koi
+@using Connect.Koi;
+@using ToSic.Eav.Configuration
+@functions {
+  /* 
+    this file is for creating different fields e.g. input, textarea, file, dropdown and showing them in the template
 
+    Example: 
+    Shows a required input of type text with a label infront of it
+    
+    var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
+    @FieldBuilder.Text("Subject", true)
+
+    Shows a required input of type text with a label infront of it
+    
+    var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
+    FieldBuilder.LabelInPlaceholder = true
+    @FieldBuilder.EMail("Email", true)
+
+    Shows a required input of type text with a placeholder
+  */
+
+  // handels the visibility of a label or a placeholder
+  public bool LabelInPlaceholder = false;
+
+  // add common attributes like class, id, required and required message to the fields
+  public string CommonAttributes(string id, bool required, string additionalValidationText = "", string className = "") {
+    return "id='" + id + "' class='" + (String.IsNullOrEmpty(className) ? "form-control" : className) + "' " + (required ? "required data-smk-msg='" + additionalValidationText + "'" : "");
+  }
+
+  // Choose CSS classes based on the framework
+  // uses Connect.Koi for framework detection
+  // if you customize this, you probably know what css framework you want,
+  // in which case you can skip framework detection and just write the classes
+  internal string FormClasses() {
+    return "form-group " 
+      + (LabelInPlaceholder ? "" : "row");
+  }
+
+  // Choose CSS classes for the labels
+  internal string LabelClasses(bool required) {
+    return "control-label "
+      + (required ? "app-jqfs-field-required " : "")
+      + (Koi.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4");
+  } 
+
+  // Choose CSS classes for the wrapping div of an input
+  internal string InputWrapperClasses = (Koi.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8");
+
+  // Add a placeholder text to the inputs
+  internal string Placeholder(string key) {
+    var labelTranslated = App.Resources.Entity.GetBestValue<string>("Label" + key);
+    return LabelInPlaceholder ? " placeholder='" + labelTranslated + "'" : "";
+  }
+}
+
+@*
+returns an input with common attributes and a possible placeholder
+*@
 @helper Text(string idString, bool required) {
-  var content = "<input type='text' class='form-control' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelRequired + "'>";
+  var content = "<input type='text' " + Placeholder(idString) + " " + CommonAttributes(idString, required, App.Resources.LabelRequired) + ">";
   @Field(idString, required, content);
 }
 
-
+@*
+returns an input of type email with common attributes and a possible placeholder
+*@
 @helper EMail(string idString, bool required) {
-  var content = "<input type='email' class='form-control' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelValidEmail + "'>";
+  var content = "<input type='email' " + Placeholder(idString) + " " + CommonAttributes(idString, required, App.Resources.LabelValidEmail) + ">";
   @Field(idString, required, content);
 }
 
-
+@*
+returns a textarea with common attributes and a possible placeholder
+*@
 @helper Multiline(string idString, bool required) {
-  var content = "<textarea class='form-control' rows='5' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelRequired + "'></textarea>";
+  var content = "<textarea rows='5' " + Placeholder(idString) + " " + CommonAttributes(idString, required, App.Resources.LabelValidEmail) + "></textarea>";
   @Field(idString, required, content);
 }
 
+@*
+returns a select and options with common attributes
+*@
 @helper DropDown(string idString, bool required, string[] values) {
-  var content = "<select class='form-control' id='" + idString + "' " + (required ? "required" : "") + " data-smk-msg='" + App.Resources.LabelRequired + "'>";
+  var content = "<select " + CommonAttributes(idString, required, App.Resources.LabelRequired) + ">";
   content += "<option value=''>--Please Select--</option>";
 
   foreach(var value in values){
@@ -30,22 +93,36 @@
   @Field(idString, required, content);
 }
 
-@helper File(string idString, bool required, string acceptType, string name = "") {
-  var inputNameAttr = (name != "" ? "name='" + name + "'" : "");
-  var content = "<input type='file' class='form-control-file' " + inputNameAttr + " id='" + idString + "' accept='" + acceptType + "' required data-smk-msg='" + App.Resources.LabelValidFile + "'>";
-
+@*
+returns a input of type file with common attributes
+*@
+@helper File(string name, bool required, string acceptType, string idString = "") {
+  var content = "<input type='file' name='" + name + "' accept='" + acceptType + "' " + CommonAttributes(idString, required, App.Resources.LabelValidFile, "form-control-file") + ">";
   @Field(idString, required, content);
+  
+  @*
+    show warning if the save-attachments in web api isn't activated
+    this is a security feature to protect your installation from unwanted uploads
+  *@
+  if(!Features.Enabled(FeatureIds.UseAdamInWebApi)) {
+    <div class="alert alert-warning">
+      Warning: file upload won't work yet, as it hasn't been enabled.
+    </div>
+  }
 }
 
-
+@*
+shows a wrapping div with choosen content
+*@
 @helper Field(string idString, bool required, string contents) {
-  var requiredClass = (required ? "app-jqfs-field-required" : "");
-  var appRec = App.Resources.Entity.GetBestValue<string>("Label" + idString);
-  var label = Connect.Razor.Blade.Text.First(appRec, idString);
+  var labelTranslated = App.Resources.Entity.GetBestValue<string>("Label" + idString);
 
-  <div class="form-group row">
-    <label for="@idString" @Koi.Class("all='control-label " + requiredClass + "' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@label</label>
-    <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
+  <!-- Field @idString -->
+  <div class="@FormClasses()">
+    @if(!LabelInPlaceholder) {
+      <label for="@idString" class="@LabelClasses(required)">@Connect.Razor.Blade.Text.First(labelTranslated, idString)</label>
+    }
+    <div class="@(!LabelInPlaceholder ? InputWrapperClasses : "")">
       @Html.Raw(contents)
     </div>
   </div>

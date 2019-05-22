@@ -29,14 +29,15 @@ public class FormController : SxcApiController
 		// test exception for development to see how the js-side behaves on errors
 		// throw new Exception();
 
-		// 0. Pre-Check - validate recaptcha if used
+		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
+			// todo:  move out
 			var recap = contactFormRequest["Recaptcha"];
 			if(!(recap is string) || String.IsNullOrEmpty(recap as string)) 
 				throw new Exception("recaptcha is empty");
 
-			var gRecap = InstantiateClass("Recaptcha");
-			gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
+			InstantiateClass("Recaptcha")
+				.Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
 		}
 
 		// after saving, remove recaptcha fields from the data-package,
@@ -65,7 +66,8 @@ public class FormController : SxcApiController
 		contactFormRequest.Add("EntityGuid", guid);
 		App.Data.Create(type.Name, contactFormRequest);
 
-		// 2018-09-18 added feature to create a full-save of each request into a system-protocol content-type
+		// Automatically full-save each request into a system-protocol content-type
+		// This helps to debug or find submissions in case something wasn't configured right
 		App.Data.Create("SystemProtocol", contactFormRequest);
 
 		var files = new List<ToSic.Sxc.Adam.IFile>();
@@ -85,12 +87,11 @@ public class FormController : SxcApiController
 		// Checks for MailChimp Integration
 		// if true instantiate mailchimp
 		// subscribe for mailchimp
-		if(contactFormRequest.ContainsKey("MailChimp")){
-			if(contactFormRequest["MailChimp"].ToString() == "True"){
-				var mChimp = InstantiateClass("MailChimp");
-				mChimp.Subscribe(App, contactFormRequest);
+		if(contactFormRequest.ContainsKey("MailChimp")) {
+			if(contactFormRequest["MailChimp"].ToString() == "True") {
+				InstantiateClass("MailChimp").Subscribe(App, contactFormRequest);
 			}
-			// after subscribe, remove mailchimo field from the data-package,
+			// after subscribe, remove mailchimp field from the data-package,
 			// because we don't want them in the e-mails
 			removeKeys(contactFormRequest, new string[] { "MailChimp" }); 
 		}
@@ -106,16 +107,18 @@ public class FormController : SxcApiController
 		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
 
 		// Send Mail to owner
-		if(Content.OwnerSend != null && Content.OwnerSend){
+		if(Content.OwnerSend != null && Content.OwnerSend) {
 			sendMail(config, contactFormRequest, "owner", files);
 		}
 
 		// Send Mail to customer
-		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
+		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
 			sendMail(config, contactFormRequest, "customer", files);
 		}
 	}
 
+	// todo: change again. differences sohuld not be in this method
+	// todo: put in external file
 	private void sendMail(dynamic config, Dictionary<string,object> contactFormRequest, string receiver, List<ToSic.Sxc.Adam.IFile> files = null)
 	{
 		// assemble all settings to send the mail
@@ -163,8 +166,8 @@ public class FormController : SxcApiController
 			"", "", "", "", false);
 	}
 
-	/* HELPERS */	
-	/* REMOVE KEY FROM HEADER */
+	// helpers
+	// remove key from header
 	private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
 	{
 		foreach (var key in badKeys)
@@ -172,7 +175,6 @@ public class FormController : SxcApiController
 				contactFormRequest.Remove(key);
 	}
 
-	/* CREATES A DICTIONARY */
 	// rewrite the keys to be a nicer format, based on the configuration
 	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
 	{
@@ -190,7 +192,7 @@ public class FormController : SxcApiController
 		return path.IndexOf("staging") > 0 ? "staging" : "live";
 	}
 
-	/* GET EMAIL TEMPLATE */
+	// get email template
 	private dynamic TemplateInstance(string fileName)
 	{
 		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "email-templates", fileName);
@@ -205,7 +207,7 @@ public class FormController : SxcApiController
 		throw new Exception("Error while creating mail template instance.");
 	}
 
-	/* INSTANTIATE CLASS */
+	// instantiate class
 	private dynamic InstantiateClass(string name){
 		var fileName = name + ".cs";
 		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "api/Parts", fileName);

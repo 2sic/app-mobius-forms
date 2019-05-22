@@ -8,9 +8,7 @@
 <script src="@App.Path/@Edition/dist/app-bundle.min.js" data-enableoptimizations="true"></script>
 <link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/style.min.css" data-enableoptimizations="true">
 <script>
-  // Replace 'appname' with the name you gave your app in the webpack.config 
+  // initialize the javascripts which will collect the data and send it to the server on send
   mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
   mobius.initialize();
 </script>
-
-<script src="https://www.google.com/recaptcha/api.js" async defer data-enableoptimizations="true"></script>

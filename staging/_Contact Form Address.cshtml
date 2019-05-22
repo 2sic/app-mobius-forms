@@ -10,48 +10,29 @@
   var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
 }
 
-<div class="app-jqfs-wrapper app-recaptcha-wrapper sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
-  @RenderPage("shared/_Shared Toolbar.cshtml", new { Content = Content, Config = config })
+<div class="app-jqfs-wrapper @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="app-jqfs-form">
-    <!-- Firstname -->
     @FieldBuilder.Text("SenderName", true)
-    
-    <!-- Lastname -->
     @FieldBuilder.Text("SenderSurname", true)
-    
-    <!-- Street -->
     @FieldBuilder.Text("SenderStreet", false)
-
-    <!-- ZIP -->
     @FieldBuilder.Text("SenderZIP", false)
-
-    <!-- City -->
     @FieldBuilder.Text("SenderCity", true)
-
-    <!-- Phone -->
     @FieldBuilder.Text("SenderPhone", true)
-
-    <!-- Subject -->
     @FieldBuilder.Text("Subject", true)
-
-    <!-- Message -->
     @FieldBuilder.Multiline("Message", true)
-
-    <!-- Sender Mail -->
     @FieldBuilder.EMail("SenderMail", true)
 
     <!-- Recaptcha -->
     @if(Content.Recaptcha ?? false) {
-      @RenderPage("shared/_Shared Recaptcha.cshtml")
+      @RenderPage("shared/_Recaptcha.cshtml")
     }
 
-    <!-- Messages / Send -->
-    <div class="form-group row">
-      @RenderPage("shared/_Shared Submit with Messages.cshtml")
-    </div>
+    <!-- Messages / Send Button -->
+    @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
 
 </div>
 
-@RenderPage("shared/_Shared Assets.cshtml", new { Edition = Edition})
+@RenderPage("shared/_Assets.cshtml", new { Edition = Edition})

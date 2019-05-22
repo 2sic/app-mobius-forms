@@ -8,25 +8,14 @@
       ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
 }
 
-<div class="app-jqfs-wrapper app-recaptcha-wrapper sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
-  @RenderPage("shared/_Shared Toolbar.cshtml", new { Content = Content, Config = config })
+<div class="app-jqfs-wrapper @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="app-jqfs-form">
-    <!-- Subject -->
     @FieldBuilder.Text("Subject", true)
-
-
-    <!-- Message -->
     @FieldBuilder.Multiline("Message", true)
-
-
-    <!-- Sender Name -->
     @FieldBuilder.Text("SenderName", false)
-
-
-    <!-- Sender Mail -->
     @FieldBuilder.EMail("SenderMail", true)
-
 
     <!-- I'm a Customer -->
     @{
@@ -34,7 +23,7 @@
       // create a unique name, to ensure it works if multiple forms are on the page
       var custFieldId = "app-form-cid-" + Dnn.Module.ModuleID;
     }
-    <div class="form-group app-jqfs-support-disable row">
+    <div class="form-group row">
       <label for="IsCustomer" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
       <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
@@ -43,7 +32,7 @@
     </div>
 
     <!-- Customer ID (if is customer) -->
-    <div id="@custFieldId" class="form-group app-jqfs-support-disable row" style="display:none">
+    <div id="@custFieldId" class="form-group row" style="display:none">
       <label for="CustomerId" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
       <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
         <input type="text" class="form-control" id="CustomerId" value="">
@@ -52,14 +41,12 @@
 
     <!-- Recaptcha -->
     @if(Content.Recaptcha ?? false) {
-      @RenderPage("shared/_Shared Recaptcha.cshtml")
+      @RenderPage("shared/_Recaptcha.cshtml")
     }
 
-    <!-- Messages / Send -->
-    <div class="form-group row">
-        @RenderPage("shared/_Shared Submit with Messages.cshtml")
-    </div>
+    <!-- Messages / Send Button -->
+    @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
 </div>
 
-@RenderPage("shared/_Shared Assets.cshtml", new { Edition = Edition})
+@RenderPage("shared/_Assets.cshtml", new { Edition = Edition})

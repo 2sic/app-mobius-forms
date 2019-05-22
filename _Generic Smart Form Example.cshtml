@@ -1,10 +1,11 @@
 @* 
   This file is used as Template-View.
-  As superuser the staging version is loaded. This version is for development.
+  As superuser the staging version is loaded for development.
   As a normal user the live version is loaded. 
+  To publish completed development, copy everything using: npm run deploy-staging2live
 *@
-
 @{
+  // detect edition based on the current user
   string edition = (Dnn.User.IsSuperUser ? "staging" : "live");
 }
 @RenderPage(edition + "/_Generic Smart Form Example.cshtml", new { Edition = edition })

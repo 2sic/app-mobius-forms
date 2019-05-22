@@ -1,4 +1,5 @@
 @using Connect.Koi
+<!-- todo: split out koi classes -->
 
 <div class="form-group app-jqfs-support-disable row">
   <label for="" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
@@ -6,3 +7,5 @@
     <div class="app-jqfs-recaptcha g-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey" data-size="normal"></div>
   </div>
 </div>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer data-enableoptimizations="true"></script>
