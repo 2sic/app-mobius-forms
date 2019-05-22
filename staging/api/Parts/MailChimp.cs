@@ -1,15 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
+using DotNetNuke.Common;
+using DotNetNuke.Services.Log.EventLog;
+using DotNetNuke.Entities.Users;
+using DotNetNuke.Entities.Portals;
 
 public class MailChimp
 {
   /* MAILCHIMP SUBSCRIBE */
-  public string Subscribe(string MailchimpServer, string MailchimpListId, string MailchimpAPIKey, string email, string fname, string lname)
+  public string Subscribe(dynamic App, Dictionary<string,object> contactFormRequest)
   {
-    var msg = SubscribeToMailChimp(MailchimpServer, MailchimpListId, MailchimpAPIKey, email, fname, lname);
+    var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
     if(msg != "OK")
     {
       throw new Exception("Mailchimp registration failed - check EventLog - msg was " + msg);
@@ -58,7 +63,7 @@ public class MailChimp
 
   private MailchimpResponse MailchimpRequest(string url, string method, string body, string apiKey) {
     var logTimeStamp = DateTime.Now;
-    // EventLog("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
+    EventLog("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
     
     String encodedApiKey = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes("anystring" + ":" + apiKey));
     
@@ -81,7 +86,7 @@ public class MailChimp
       StatusCode = responseMessage.StatusCode,
       Response = response
     };
-    // EventLog("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
+    EventLog("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
     return r;
   }
 
@@ -103,5 +108,15 @@ public class MailChimp
 			}
 			return sb.ToString();
 		}
+	}
+
+	/* EVENTLOGGER */
+  // // todo: move to mailchimp, pass in object Dnn (has .PortalSettings and .User)
+	private void EventLog(string title, string message)
+	{
+    PortalSettings portalSettings = Globals.GetPortalSettings();
+    var userInfo = UserController.Instance.GetCurrentUserInfo();
+		var objEventLog = new EventLogController();
+		objEventLog.AddLog(title, message, portalSettings, userInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
 	}
 }

@@ -18,7 +18,6 @@ using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class FormController : SxcApiController
 {
-	
 	[HttpPost]
 	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
 	[ValidateAntiForgeryToken]
@@ -37,9 +36,7 @@ public class FormController : SxcApiController
 				throw new Exception("recaptcha is empty");
 
 			var gRecap = InstantiateClass("Recaptcha");
-			var ok = gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
-			if(!ok)
-				throw new Exception("bad recaptcha '" + ok + "'" );
+			gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
 		}
 
 		// after saving, remove recaptcha fields from the data-package,
@@ -72,7 +69,7 @@ public class FormController : SxcApiController
 		App.Data.Create("SystemProtocol", contactFormRequest);
 
 		var files = new List<ToSic.Sxc.Adam.IFile>();
-		
+
 		// Save files to Adam
 		if(contactFormRequest.ContainsKey("Files")){
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
@@ -84,18 +81,44 @@ public class FormController : SxcApiController
 			// Don't keep Files array in ContactFormRequest
 			removeKeys(contactFormRequest, new string[] { "Files" });
 		}   
-		
 
-		// todo 2ro comment
+		// Checks for MailChimp Integration
+		// if true instantiate mailchimp
+		// subscribe for mailchimp
 		if(contactFormRequest.ContainsKey("MailChimp")){
 			if(contactFormRequest["MailChimp"].ToString() == "True"){
 				var mChimp = InstantiateClass("MailChimp");
-				mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+				mChimp.Subscribe(App, contactFormRequest);
 			}
+			// after subscribe, remove mailchimo field from the data-package,
+			// because we don't want them in the e-mails
 			removeKeys(contactFormRequest, new string[] { "MailChimp" }); 
 		}
+
+		// Improve keys / values for nicer presentation in the mail
+		// after saving, remove raw-data and the generated title
+		// because we don't want them in the e-mails
+		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
+
+		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 		
-		// 2. assemble all settings to send the mail
+		// remove App informations from data-package
+		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
+
+		// Send Mail to owner
+		if(Content.OwnerSend != null && Content.OwnerSend){
+			sendMail(config, config.OwnerMailTemplate, contactFormRequest, "owner", files);
+		}
+
+		// Send Mail to customer
+		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
+			sendMail(config, config.CustomerMailTemplate, contactFormRequest, "customer", files);
+		}
+	}
+
+	private void sendMail(dynamic config, string fileName, Dictionary<string,object> contactFormRequest, string receiver, List<ToSic.Sxc.Adam.IFile> files)
+	{
+		// assemble all settings to send the mail
 		// background: some settings are made in this module,
 		// but if they are missing we use fallback settings 
 		// which are taken from the App.Settings
@@ -103,62 +126,42 @@ public class FormController : SxcApiController
 			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.OwnerMail,
 			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
 		};
-		
 
-		// Pre 3: Improve keys / values for nicer presentation in the mail
-		// after saving, remove raw-data and the generated title
-		// because we don't want them in the e-mails
-		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
+		// Check for attachments and add them to the mail
+		var attachments = files.Select(f =>
+				new System.Net.Mail.Attachment(
+					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
 		// rewrite the keys to be a nicer format, based on the configuration
 		string mailLabelRewrites = (!String.IsNullOrEmpty(config.MailLabels) 
 			? config.MailLabels
 			: App.Settings.SubmitType[0].MailLabels) ?? "";
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
-
-		// 3. Send Mail to owner
-		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 		
+		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 
-		// todo: move shared bits up (remove) and put rest into a function to call 2x
-		if(Content.OwnerSend != null && Content.OwnerSend){
-			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
-			
-			var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
-			var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
-			var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
+		var mailEngine = TemplateInstance(fileName);
+		var mailBody = mailEngine.Message(valuesWithMailLabels, this).ToString();
+		var mailSubj = mailEngine.Subject(valuesWithMailLabels, this);
 
-			var attachments = files.Select(f =>
-				new System.Net.Mail.Attachment(
-					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
-
-			Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
-				ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, attachments, "", "", "", "", false);
-		}
-
-		// 4. Send Mail to customer
-		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
-			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
-
-			var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
-			var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
-			var customerSubj = customerMailEngine.Subject(valuesWithMailLabels, this);
-
-			Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
-				customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
-		}
+		// Send Mail
+		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
+		Mail.SendMail(
+			settings.MailFrom,
+			(receiver == "owner" ? settings.OwnerMail : custMail), 
+			(receiver == "owner" ? Content.OwnerMailCC : Content.CustomerMailCC), 
+			"",
+			(receiver == "owner" ? settings.OwnerMail : custMail), 
+			MailPriority.Normal,
+			mailSubj, 
+			MailFormat.Html, 
+			System.Text.Encoding.UTF8, 
+			mailBody, 
+			attachments,
+			"", "", "", "", false);
 	}
 
-	/* HELPERS */
-	/* EVENTLOGGER */
-	// todo: move to mailchimp, pass in object Dnn (has .PortalSettings and .User)
-	private void EventLog(string title, string message)
-	{
-		var objEventLog = new EventLogController();
-		objEventLog.AddLog(title, message, PortalSettings, this.UserInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
-	}
-
+	/* HELPERS */	
 	/* REMOVE KEY FROM HEADER */
 	private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
 	{
@@ -167,8 +170,8 @@ public class FormController : SxcApiController
 				contactFormRequest.Remove(key);
 	}
 
-	// todo: better comment
 	/* CREATES A DICTIONARY */
+	// rewrite the keys to be a nicer format, based on the configuration
 	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
 	{
 		// create keys-map
@@ -179,6 +182,7 @@ public class FormController : SxcApiController
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
 	}
 
+	// Get current edition (live/staging)
 	private string getEdition(){
 		var path = HttpContext.Current.Request.Url.AbsolutePath;
 		return path.IndexOf("staging") > 0 ? "staging" : "live";

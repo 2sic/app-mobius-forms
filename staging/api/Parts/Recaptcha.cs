@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -12,7 +13,12 @@ public class Recaptcha
     var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
     var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Recaptcha>(GoogleReply);
 
-    return captchaResponse.Success;
+    var status = captchaResponse.Success;
+
+    if(!status)
+      throw new Exception("bad recaptcha '" + status + "'" );
+
+    return status;
   }
 
   [JsonProperty("success")]
