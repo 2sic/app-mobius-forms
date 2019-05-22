@@ -107,16 +107,16 @@ public class FormController : SxcApiController
 
 		// Send Mail to owner
 		if(Content.OwnerSend != null && Content.OwnerSend){
-			sendMail(config, config.OwnerMailTemplate, contactFormRequest, "owner", files);
+			sendMail(config, contactFormRequest, "owner", files);
 		}
 
 		// Send Mail to customer
 		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
-			sendMail(config, config.CustomerMailTemplate, contactFormRequest, "customer", files);
+			sendMail(config, contactFormRequest, "customer", files);
 		}
 	}
 
-	private void sendMail(dynamic config, string fileName, Dictionary<string,object> contactFormRequest, string receiver, List<ToSic.Sxc.Adam.IFile> files)
+	private void sendMail(dynamic config, Dictionary<string,object> contactFormRequest, string receiver, List<ToSic.Sxc.Adam.IFile> files = null)
 	{
 		// assemble all settings to send the mail
 		// background: some settings are made in this module,
@@ -139,6 +139,8 @@ public class FormController : SxcApiController
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
 		
 		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
+
+		var fileName = (receiver == "owner" ? config.OwnerMailTemplate : config.CustomerMailTemplate);
 
 		var mailEngine = TemplateInstance(fileName);
 		var mailBody = mailEngine.Message(valuesWithMailLabels, this).ToString();
