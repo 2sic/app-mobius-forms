@@ -14,10 +14,10 @@ using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
 using ToSic.SexyContent.WebApi;
 using Newtonsoft.Json;
+using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class FormController : SxcApiController
 {
-	
 	[HttpPost]
 	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
 	[ValidateAntiForgeryToken]
@@ -26,21 +26,10 @@ public class FormController : SxcApiController
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
-		// test exception to see how the js-side behaves on errors
-		// throw new Exception();
-
-		// 0. Pre-Check - validate recaptcha if used
+		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
-			var recap = contactFormRequest["Recaptcha"];
-			if(!(recap is string) || String.IsNullOrEmpty(recap as string)) 
-				throw new Exception("recaptcha is empty");
-		
-			// do server-validation
-			// based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
-			var gRecap = InstantiateClass("RecaptchaHelper");
-			var ok = gRecap.Validate(recap as string, App.Settings.RecaptchaSecretKey);
-			if(!ok)
-				throw new Exception("bad recaptcha '" + ok + "'" );
+			InstantiateClass("Recaptcha")
+				.Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
 		}
 
 		// after saving, remove recaptcha fields from the data-package,
@@ -50,8 +39,7 @@ public class FormController : SxcApiController
 		// get configuration for this Form
 		// it is either customized at Content-level, or we should use the default in the App.Settings
 		// the content-type is stored as the StaticName - but for the simple API we need the "nice name"
-		var config = (Content.Presentation.SubmitType as IEnumerable<dynamic>).FirstOrDefault()
-			?? (App.Settings.SubmitType as IEnumerable<dynamic>).First();
+		var config = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
 		var type = Data.Cache.GetContentType(config.ContentType);
 
 		// 1. add IP / host, and save all fields
@@ -65,16 +53,20 @@ public class FormController : SxcApiController
 		// add Title (if non given), in case the Content-Type would benefit of an automatic title
 		var addTitle = !contactFormRequest.ContainsKey("Title");
 		if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
-		// Add guid to identify entity after saving
+
+		// Automatically full-save each request into a system-protocol content-type
+		// This helps to debug or find submissions in case something wasn't configured right
+		App.Data.Create("SystemProtocol", contactFormRequest);
+
+		// Add guid to identify entity after saving (because we need to find it afterwards)
 		var guid = Guid.NewGuid();
 		contactFormRequest.Add("EntityGuid", guid);
 		App.Data.Create(type.Name, contactFormRequest);
 
-		// 2018-09-18 added feature to create a full-save of each request into a system-protocol content-type
-		App.Data.Create("SystemProtocol", contactFormRequest);
+
 
 		var files = new List<ToSic.Sxc.Adam.IFile>();
-		
+
 		// Save files to Adam
 		if(contactFormRequest.ContainsKey("Files")){
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
@@ -86,18 +78,30 @@ public class FormController : SxcApiController
 			// Don't keep Files array in ContactFormRequest
 			removeKeys(contactFormRequest, new string[] { "Files" });
 		}   
-		
 
-		
-		if(contactFormRequest.ContainsKey("MailChimp")){
-			if(contactFormRequest["MailChimp"].ToString() == "True"){
-				var mChimp = InstantiateClass("MailChimpHelper");
-				mChimp.Subscribe(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+		// Checks for MailChimp Integration
+		// if true instantiate mailchimp
+		// subscribe for mailchimp
+		if(contactFormRequest.ContainsKey("MailChimp")) {
+			if(contactFormRequest["MailChimp"].ToString() == "True") {
+				InstantiateClass("MailChimp").Subscribe(App, contactFormRequest);
 			}
+			// after subscribe, remove mailchimp field from the data-package,
+			// because we don't want them in the e-mails
 			removeKeys(contactFormRequest, new string[] { "MailChimp" }); 
 		}
+
+		// Improve keys / values for nicer presentation in the mail
+		// after saving, remove raw-data and the generated title
+		// because we don't want them in the e-mails
+		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
+
+		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 		
-		// 2. assemble all settings to send the mail
+		// remove App informations from data-package
+		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
+
+		// assemble all settings to send the mail
 		// background: some settings are made in this module,
 		// but if they are missing we use fallback settings 
 		// which are taken from the App.Settings
@@ -105,12 +109,6 @@ public class FormController : SxcApiController
 			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.OwnerMail,
 			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
 		};
-		
-
-		// Pre 3: Improve keys / values for nicer presentation in the mail
-		// after saving, remove raw-data and the generated title
-		// because we don't want them in the e-mails
-		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
 
 		// rewrite the keys to be a nicer format, based on the configuration
 		string mailLabelRewrites = (!String.IsNullOrEmpty(config.MailLabels) 
@@ -118,47 +116,25 @@ public class FormController : SxcApiController
 			: App.Settings.SubmitType[0].MailLabels) ?? "";
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
 
-		// 3. Send Mail to owner
-		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
-		
-		if(Content.OwnerSend != null && Content.OwnerSend){
-			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
-			
-			var ownerMailEngine = TemplateInstance(config.OwnerMailTemplate);
-			var ownerBody = ownerMailEngine.Message(valuesWithMailLabels, this).ToString();
-			var ownerSubj = ownerMailEngine.Subject(valuesWithMailLabels, this);
 
-			var attachments = files.Select(f =>
-				new System.Net.Mail.Attachment(
-					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
-
-			Mail.SendMail(settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, "", custMail, MailPriority.Normal,
-				ownerSubj, MailFormat.Html, System.Text.Encoding.UTF8, ownerBody, attachments, "", "", "", "", false);
+		var sendMail = InstantiateClass("SendMail");
+		// Send Mail to owner
+		if(Content.OwnerSend != null && Content.OwnerSend) {
+			sendMail.send(
+				config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
+			);
 		}
 
-		// 4. Send Mail to customer
-		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)){
-			removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
-
-			var customerMailEngine = TemplateInstance(config.CustomerMailTemplate);
-			var customerBody = customerMailEngine.Message(valuesWithMailLabels, this).ToString();
-			var customerSubj = customerMailEngine.Subject(valuesWithMailLabels, this);
-
-			Mail.SendMail(settings.MailFrom, custMail, Content.CustomerMailCC, "", settings.OwnerMail, MailPriority.Normal,
-				customerSubj, MailFormat.Html, System.Text.Encoding.UTF8, customerBody, new string[0], "", "", "", "", false);
+		// Send Mail to customer
+		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
+			sendMail.send(
+				config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
+			);
 		}
 	}
 
-	/* HELPERS */
-	/* EVENTLOGGER */
-	private void EventLog(string title, string message)
-	{
-		var objEventLog = new EventLogController();
-		objEventLog.AddLog(title, message, PortalSettings, this.UserInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
-	}
-
-	/* REMOVE KEY FROM HEADER */
+	// helpers
+	// remove key from header
 	private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
 	{
 		foreach (var key in badKeys)
@@ -166,7 +142,13 @@ public class FormController : SxcApiController
 				contactFormRequest.Remove(key);
 	}
 
-	/* CREATES A DICTIONARY */
+	// Get current edition (live/staging)
+	private string getEdition(){
+		var path = HttpContext.Current.Request.Url.AbsolutePath;
+		return path.IndexOf("staging") > 0 ? "staging" : "live";
+	}
+
+  // rewrite the keys to be a nicer format, based on the configuration
 	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
 	{
 		// create keys-map
@@ -177,30 +159,10 @@ public class FormController : SxcApiController
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
 	}
 
-	private string getEdition(){
-		var path = HttpContext.Current.Request.Url.AbsolutePath;
-		return path.IndexOf("staging") > 0 ? "staging" : "live";
-	}
-
-	/* GET EMAIL TEMPLATE */
-	private dynamic TemplateInstance(string fileName)
-	{
-		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "email-templates", fileName);
-		var compiledType = BuildManager.GetCompiledType(path);
-		
-		object objectValue = null;	
-		if (compiledType != null)
-		{
-			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-			return ((dynamic)objectValue);
-		}
-		throw new Exception("Error while creating mail template instance.");
-	}
-
-	/* INSTANTIATE CLASS */
+	// instantiate class
 	private dynamic InstantiateClass(string name){
 		var fileName = name + ".cs";
-		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "api/Helpers", fileName);
+		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "api/Parts", fileName);
 		var assembly = BuildManager.GetCompiledAssembly(path);
     var compiledType = assembly.GetType(name, true, true);
 

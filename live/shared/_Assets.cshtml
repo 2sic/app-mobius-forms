@@ -1,0 +1,14 @@
+@{
+  string Edition = PageData["Edition"];
+}
+
+@Edit.Enable(api: true, forms: true, context: true, autoToolbar: false)
+<script src="@App.Path/node_modules/smokejs/dist/js/smoke.min.js" data-enableoptimizations="100"></script>
+
+<script src="@App.Path/@Edition/dist/app-bundle.min.js" data-enableoptimizations="true"></script>
+<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/style.min.css" data-enableoptimizations="true">
+<script>
+  // initialize the javascripts which will collect the data and send it to the server on send
+  mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
+  mobius.initialize();
+</script>

@@ -1,47 +1,29 @@
 @using Connect.Koi
 @using System.Linq
-
+@using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
-  var Edition = PageData["Edition"];
+  string Edition = PageData["Edition"];
   // get form config (data-type, web-api, etc.)
-  var config = (Content.Presentation.SubmitType as IEnumerable<dynamic>).FirstOrDefault()  // custom for this form only...
-      ?? (App.Settings.SubmitType as IEnumerable<dynamic>).First();    // ...or app-default configuration
+  var config = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault()  // custom for this form only...
+      ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
+
+  var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
+  FieldBuilder.LabelInPlaceholder = true;
 }
 
-<div class="app-jqfs-wrapper app-jqfs-mailchimp-wrapper app-recaptcha-wrapper sc-element app-jqfs-mailchimp-@Dnn.Module.ModuleID" data-webservice="app/auto/@Edition/api/@config.Webservice">
-  @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
-  @Edit.Toolbar(Content)
-  @Edit.Toolbar(toolbar: new object[] {
-    new { 
-      showCondition = true,
-      command = new { action = "contentitems", 
-        contentType = config.ContentType, 
-        filters = new { ModuleId = Dnn.Module.ModuleID } 
-      }
-    }
-  }, settings: new { hover="left", show = "hover" })
+<div class="app-jqfs-wrapper app-jqfs-mailchimp-wrapper @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
-  <div class="app-jqfs-form app-jqfs-form-mailchimp">
-    <!-- Sender Mail -->
-    <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-      <input placeholder="@App.Resources.LabelSenderMail" type="email" class="form-control sender-mail" id="SenderMail" value="" required data-smk-msg="@App.Resources.LabelValidEmail">
-    </div>
-
-    <!-- Sender Name -->
-    <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-      <input placeholder="@App.Resources.LabelSenderName" type="text" class="form-control sender-name"  id="SenderName" value="" required data-smk-msg="@App.Resources.LabelRequired">
-    </div>
-
-    <!-- Sender LastName -->
-    <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-      <input placeholder="@App.Resources.LabelSenderSurname" type="text" class="form-control sender-lastname" id="SenderLastName" value="" required data-smk-msg="@App.Resources.LabelRequired">
-    </div>
+  <div class="app-jqfs-form">
+    @FieldBuilder.Text("SenderMail", true)
+    @FieldBuilder.Text("SenderName", true)
+    @FieldBuilder.Text("SenderLastName", true)
     
     <!-- Sender AcceptDSGVO -->
-    <div @Koi.Class("all='app-jqfs-support-disable clearfix' bs3='form-group' bs4,oth='form-group'")>
-      <div @Koi.Class("bs3='row' bs4,oth='row'")>
+    <div class="form-group">
+      <div class="row">
         <div @Koi.Class("bs3='col col-xs-1' bs4,oth='col-1'")>
-          <input  type="checkbox" id="DSGVO" name="DSGVO" required data-smk-msg="@App.Resources.LabelRequired" >
+          <input type="checkbox" id="DSGVO" name="DSGVO" required data-smk-msg="@App.Resources.LabelRequired" >
         </div>
         <div @Koi.Class("bs3='col col-xs-11' bs4,oth='col-11'")>
           <label for="DSGVO" class="control-label">@Html.Raw(App.Resources.LabelDSGVO)</label>
@@ -51,19 +33,11 @@
 
     <!-- Recaptcha -->
     @if(Content.Recaptcha ?? false) {
-      @RenderPage("shared/_Shared Recaptcha.cshtml")
+      @RenderPage("shared/_Recaptcha.cshtml")
     }
 
-    <!-- Messages / Send -->
-    <div class="form-group row">
-      @RenderPage("shared/_Shared Messages.cshtml")
-    
-      <!-- mc button -->
-      <div @Koi.Class("all='app-jqfs-support-disable' bs3='col col-xs-12' bs4,oth='col-12'")>
-        <button id="sendFormWithApi" type="button" @Koi.Class("bs3='btn btn-primary' bs4,oth='btn btn-primary'")>@App.Resources.ButtonSendNewsletter</button><br />
-        <span id="EmailReminder">@App.Resources.LabelGeneralReminder</span>
-      </div>
-    </div>
+    <!-- Messages / Send Button -->
+    @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
   
 
@@ -75,4 +49,4 @@
   }
 </div>
 
-@RenderPage("shared/_Shared Assets.cshtml", new { Edition = Edition})
+@RenderPage("shared/_Assets.cshtml", new { Edition = Edition})
