@@ -26,9 +26,6 @@ public class FormController : SxcApiController
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
-		// test exception for development to see how the js-side behaves on errors
-		// throw new Exception();
-
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
 			InstantiateClass("Recaptcha")
@@ -56,14 +53,17 @@ public class FormController : SxcApiController
 		// add Title (if non given), in case the Content-Type would benefit of an automatic title
 		var addTitle = !contactFormRequest.ContainsKey("Title");
 		if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
+
+		// Automatically full-save each request into a system-protocol content-type
+		// This helps to debug or find submissions in case something wasn't configured right
+		App.Data.Create("SystemProtocol", contactFormRequest);
+
 		// Add guid to identify entity after saving (because we need to find it afterwards)
 		var guid = Guid.NewGuid();
 		contactFormRequest.Add("EntityGuid", guid);
 		App.Data.Create(type.Name, contactFormRequest);
 
-		// Automatically full-save each request into a system-protocol content-type
-		// This helps to debug or find submissions in case something wasn't configured right
-		App.Data.Create("SystemProtocol", contactFormRequest);
+
 
 		var files = new List<ToSic.Sxc.Adam.IFile>();
 
@@ -116,17 +116,19 @@ public class FormController : SxcApiController
 			: App.Settings.SubmitType[0].MailLabels) ?? "";
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
 
+
+		var sendMail = InstantiateClass("SendMail");
 		// Send Mail to owner
 		if(Content.OwnerSend != null && Content.OwnerSend) {
-			InstantiateClass("SendMail").send(
-				config, config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files, App.Path,	this
+			sendMail.send(
+				config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
 			);
 		}
 
 		// Send Mail to customer
 		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
-			InstantiateClass("SendMail").send(
-				config, config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, App.Path, this
+			sendMail.send(
+				config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
 			);
 		}
 	}

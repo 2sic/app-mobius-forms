@@ -17,7 +17,7 @@
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)
-    @FieldBuilder.Text("SenderMail", true)
+    @FieldBuilder.EMail("SenderMail", true)
 
     @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg", "SingleFile")
     @* since multiple files are sent to Attachments, in needs a unique form id *@

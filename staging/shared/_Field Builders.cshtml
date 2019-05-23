@@ -19,12 +19,13 @@
     Shows a required input of type text with a placeholder
   */
 
-  // handels the visibility of a label or a placeholder
+  // handles the visibility of a label or a placeholder
   public bool LabelInPlaceholder = false;
 
   // add common attributes like class, id, required and required message to the fields
   public string CommonAttributes(string id, bool required, string additionalValidationText = "", string className = "") {
-    return "id='" + id + "' class='" + (String.IsNullOrEmpty(className) ? "form-control" : className) + "' " + (required ? "required data-smk-msg='" + additionalValidationText + "'" : "");
+    var validationText = (String.IsNullOrEmpty(additionalValidationText) ? App.Resources.LabelRequired : additionalValidationText);
+    return "id='" + id + "' class='" + (String.IsNullOrEmpty(className) ? "form-control" : className) + "' " + (required ? "required data-smk-msg='" + validationText + "'" : "");
   }
 
   // Choose CSS classes based on the framework
@@ -57,7 +58,7 @@
 returns an input with common attributes and a possible placeholder
 *@
 @helper Text(string idString, bool required) {
-  var content = "<input type='text' " + Placeholder(idString) + " " + CommonAttributes(idString, required, App.Resources.LabelRequired) + ">";
+  var content = "<input type='text' " + Placeholder(idString) + " " + CommonAttributes(idString, required) + ">";
   @Field(idString, required, content);
 }
 
@@ -73,7 +74,7 @@ returns an input of type email with common attributes and a possible placeholder
 returns a textarea with common attributes and a possible placeholder
 *@
 @helper Multiline(string idString, bool required) {
-  var content = "<textarea rows='5' " + Placeholder(idString) + " " + CommonAttributes(idString, required, App.Resources.LabelValidEmail) + "></textarea>";
+  var content = "<textarea rows='5' " + Placeholder(idString) + " " + CommonAttributes(idString, required) + "></textarea>";
   @Field(idString, required, content);
 }
 
@@ -81,7 +82,7 @@ returns a textarea with common attributes and a possible placeholder
 returns a select and options with common attributes
 *@
 @helper DropDown(string idString, bool required, string[] values) {
-  var content = "<select " + CommonAttributes(idString, required, App.Resources.LabelRequired) + ">";
+  var content = "<select " + CommonAttributes(idString, required) + ">";
   content += "<option value=''>--Please Select--</option>";
 
   foreach(var value in values){

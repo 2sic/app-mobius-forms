@@ -18,7 +18,6 @@ export class CollectFieldsAutomatic {
 
       // extract data from file fields
       if (element.attr('type') && element.attr('type').toLowerCase() == 'file') {
-        // todo 2ro: put this block into a function below
         const deferred = $.Deferred();
         const file = element.get(0).files[0];
         if (!file)

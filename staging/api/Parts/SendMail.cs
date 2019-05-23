@@ -10,7 +10,6 @@ using DotNetNuke.Services.Mail;
 public class SendMail
 {
   public bool send(
-    dynamic config,
     string emailTemplateFilename,
     Dictionary<string,object> valuesWithMailLabels,
     string MailFrom,
@@ -18,7 +17,6 @@ public class SendMail
     string MailCC,
     string MailReply,
     List<ToSic.Sxc.Adam.IFile> files,
-    string AppPath,
     ToSic.SexyContent.IAppAndDataHelpers context)
   {
 		// Check for attachments and add them to the mail
@@ -26,7 +24,7 @@ public class SendMail
 				new System.Net.Mail.Attachment(
 					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
-		var mailEngine = TemplateInstance(emailTemplateFilename, AppPath);
+		var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
 		var mailBody = mailEngine.Message(valuesWithMailLabels, context).ToString();
 		var mailSubj = mailEngine.Subject(valuesWithMailLabels, context);
 
