@@ -4,8 +4,10 @@
 [//]: # "So always update it first in the wiki, then copy-paste everything into readme.md"
 [//]: # "*******************************************************"
 
-<img src="https://github.com/2sic/app-mobius-forms/wiki/assets/app-icon.png" width="250" align="right">
+<img src="app-icon.png" width="250" align="right">
+
 ## The Mobius Forms App
+
 This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form extension_ in the DNN ecosystem. This means that it
 
 1. can be used to create a simple contact form in one minute
