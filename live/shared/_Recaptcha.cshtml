@@ -7,4 +7,10 @@
   </div>
 </div>
 
+@if(App.Settings.RecaptchaSiteKey == "00000" || App.Settings.RecaptchaSecretKey == "00000") {
+  <div class="alert alert-warning">
+    @App.Resources.MessageDefaultRecaptchaKey
+  </div>
+}
+
 <script src="https://www.google.com/recaptcha/api.js" async defer data-enableoptimizations="true"></script>

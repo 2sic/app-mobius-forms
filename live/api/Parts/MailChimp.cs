@@ -14,7 +14,9 @@ public class MailChimp
   /* MAILCHIMP SUBSCRIBE */
   public string Subscribe(dynamic App, Dictionary<string,object> contactFormRequest)
   {
-    var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), contactFormRequest["SenderName"].ToString(), contactFormRequest["SenderLastName"].ToString());
+    var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
+    var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");
+    var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
     if(msg != "OK")
     {
       throw new Exception("Mailchimp registration failed - check EventLog - msg was " + msg);

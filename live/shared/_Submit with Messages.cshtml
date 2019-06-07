@@ -14,6 +14,14 @@
     </div>
   </div>
 
+  @if((Content.Mailchimp ?? false) && (App.Settings.MailchimpListId == "00000" || App.Settings.MailchimpAPIKey == "00000")) {
+    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+      <div class="alert alert-warning">
+        @App.Resources.MessageDefaultMailChimpKey
+      </div>
+    </div>
+  }
+
   <!-- send button -->
   <div @Koi.Class("all='' bs3='col col-xs-12' bs4,oth='col-12'")>
     <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
