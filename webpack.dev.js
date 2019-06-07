@@ -13,6 +13,7 @@ module.exports = env => {
   return {
     entry: ['./src/scss/' + cssFramework + '.scss', './src/ts/main.ts'],
     mode: 'development',
+    devtool: 'source-map',
     watch: true,
     stats: {
       all: false,

@@ -11,7 +11,7 @@
       ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
 }
 
-<div class="app-jqfs-wrapper @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+<div class="app-jqfs-wrapper @(Content.Mailchimp ?? false ? "app-jqfs-mailchimp-wrapper" : "") @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
   @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="app-jqfs-form">
