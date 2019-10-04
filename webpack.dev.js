@@ -7,6 +7,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = env => {
   
@@ -46,6 +48,27 @@ module.exports = env => {
           use: 'ts-loader',
         },
       ],
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            output: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+        new OptimizeCSSAssetsPlugin({ 
+          cssProcessorOptions: { 
+            map: { 
+              inline: false, 
+              annotation: true, 
+            } 
+          } 
+        })
+      ]
     },
     plugins: [
       new MiniCssExtractPlugin({
