@@ -49,7 +49,7 @@
 
   // Add a placeholder text to the inputs
   internal string Placeholder(string key) {
-    var labelTranslated = App.Resources.Entity.GetBestValue<string>("Label" + key);
+    var labelTranslated = App.Resources.Get("Label" + key);
     return LabelInPlaceholder ? " placeholder='" + labelTranslated + "'" : "";
   }
 }
@@ -116,7 +116,7 @@ returns a input of type file with common attributes
 shows a wrapping div with choosen content
 *@
 @helper Field(string idString, bool required, string contents) {
-  var labelTranslated = App.Resources.Entity.GetBestValue<string>("Label" + idString);
+  var labelTranslated = App.Resources.Get("Label" + idString);
 
   <!-- Field @idString -->
   <div class="@FormClasses()">
