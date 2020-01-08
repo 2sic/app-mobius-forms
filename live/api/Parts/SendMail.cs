@@ -30,9 +30,22 @@ public class SendMail
 
 		// Send Mail
 		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-		Mail.SendMail(MailFrom, MailTo,	MailCC,	"", MailReply, MailPriority.Normal,	mailSubj, MailFormat.Html, System.Text.Encoding.UTF8, mailBody, attachments, "", "", "", "", false);
+		var sendMailResult = Mail.SendMail(MailFrom, MailTo,	MailCC,	"", MailReply, MailPriority.Normal,	mailSubj, MailFormat.Html, System.Text.Encoding.UTF8, mailBody, attachments, "", "", "", "", DotNetNuke.Entities.Host.Host.EnableSMTPSSL);
 
-    return true;
+    var logInfo = new DotNetNuke.Services.Log.EventLog.LogInfo
+    {
+        LogTypeKey = DotNetNuke.Services.Log.EventLog.EventLogController.EventLogType.ADMIN_ALERT.ToString()
+    };
+    logInfo.AddProperty("MailFrom", MailFrom);
+    logInfo.AddProperty("MailTo", MailTo);
+    logInfo.AddProperty("MailCC", MailCC);
+    logInfo.AddProperty("MailReply", MailReply);
+    logInfo.AddProperty("MailSubject", mailSubj);
+    logInfo.AddProperty("SSL", DotNetNuke.Entities.Host.Host.EnableSMTPSSL.ToString());
+    logInfo.AddProperty("Result", sendMailResult);
+    DotNetNuke.Services.Log.EventLog.EventLogController.Instance.AddLog(logInfo);
+
+    return sendMailResult == "";
   }
 
   // get email template

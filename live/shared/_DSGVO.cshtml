@@ -1,0 +1,13 @@
+@using Connect.Koi
+
+<!-- Sender AcceptDSGVO -->
+<div class="form-group">
+  <div class="row">
+    <div @Koi.Class("bs3='col col-xs-1' bs4,oth='col-1'")>
+      <input type="checkbox" id="DSGVO" name="DSGVO" required data-smk-msg="@App.Resources.LabelRequired" >
+    </div>
+    <div @Koi.Class("bs3='col col-xs-11' bs4,oth='col-11'")>
+      <label for="DSGVO" class="control-label">@Html.Raw(App.Resources.LabelDSGVO)</label>
+    </div>
+  </div>
+</div>

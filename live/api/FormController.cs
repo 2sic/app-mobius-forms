@@ -120,16 +120,24 @@ public class FormController : SxcApiController
 		var sendMail = InstantiateClass("SendMail");
 		// Send Mail to owner
 		if(Content.OwnerSend != null && Content.OwnerSend) {
-			sendMail.send(
-				config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
-			);
+			try {
+				sendMail.send(
+					config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
+				);
+			} catch(Exception ex) {
+				throw new Exception("OwnwerSend mail failed: " + ex.Message);
+			}
 		}
 
 		// Send Mail to customer
 		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
-			sendMail.send(
-				config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
-			);
+			try {
+				sendMail.send(
+					config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
+				);
+			} catch(Exception ex) {
+				throw new Exception("Customer Send mail failed: " + ex.Message);
+			}
 		}
 	}
 
