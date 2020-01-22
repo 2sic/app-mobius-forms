@@ -16,7 +16,7 @@ using ToSic.SexyContent.WebApi;
 using Newtonsoft.Json;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
-public class FormController : ToSic.Sxc.Dnn.ApiController // SxcApiController
+public class FormController : ToSic.Sxc.Dnn.ApiController
 {
 	[HttpPost]
 	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
@@ -30,7 +30,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController // SxcApiController
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
 			Log.Add("checking Recaptcha");
-			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
+			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey, this);
 		}
 
 		// after saving, remove recaptcha fields from the data-package,
@@ -134,7 +134,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController // SxcApiController
 		if(Content.OwnerSend != null && Content.OwnerSend) {
 			Log.Add("Send Mail to Owner");
 			try {
-				sendMail.send(
+				sendMail.Send(
 					config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
 				);
 			} catch(Exception ex) {
@@ -146,7 +146,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController // SxcApiController
 		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
 			Log.Add("Send Mail to Customer");
 			try {
-				sendMail.send(
+				sendMail.Send(
 					config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
 				);
 			} catch(Exception ex) {

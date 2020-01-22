@@ -9,18 +9,27 @@ using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Portals;
 
-public class MailChimp
+// TODO: 2ro - check if we can just log to EAV and not to DNN
+public class MailChimp : ToSic.Sxc.Dnn.DynamicCode
 {
   /* MAILCHIMP SUBSCRIBE */
-  public string Subscribe(dynamic App, Dictionary<string,object> contactFormRequest)
+  public string Subscribe(ToSic.Sxc.Dnn.ApiController context, 
+    Dictionary<string,object> contactFormRequest)
   {
+      // Log what's happening in case we run into problems
+    var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
+    var wrapLog = Log.Call();
+
     var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
     var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");
-    var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
+    Log.Add("Name:" + SenderName + ", LastName:" + SenderLastName);
+    var msg = SubscribeToMailChimp(context.App.Settings.MailchimpServer, context.App.Settings.MailchimpListId, context.App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
     if(msg != "OK")
     {
+      wrapLog("error");
       throw new Exception("Mailchimp registration failed - check EventLog - msg was " + msg);
     }
+    wrapLog("ok");
     return "true";
   }
 
