@@ -16,7 +16,7 @@ using ToSic.SexyContent.WebApi;
 using Newtonsoft.Json;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
-public class FormController : SxcApiController
+public class FormController : ToSic.Sxc.Dnn.ApiController // SxcApiController
 {
 	[HttpPost]
 	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
@@ -28,8 +28,7 @@ public class FormController : SxcApiController
 
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
-			InstantiateClass("Recaptcha")
-				.Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
+			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
 		}
 
 		// after saving, remove recaptcha fields from the data-package,
@@ -84,7 +83,7 @@ public class FormController : SxcApiController
 		// subscribe for mailchimp
 		if(contactFormRequest.ContainsKey("MailChimp")) {
 			if(contactFormRequest["MailChimp"].ToString() == "True") {
-				InstantiateClass("MailChimp").Subscribe(App, contactFormRequest);
+				CreateInstance("Parts/MailChimp.cs").Subscribe(App, contactFormRequest);
 			}
 			// after subscribe, remove mailchimp field from the data-package,
 			// because we don't want them in the e-mails
@@ -117,7 +116,7 @@ public class FormController : SxcApiController
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
 
 
-		var sendMail = InstantiateClass("SendMail");
+		var sendMail = CreateInstance("Parts/SendMail.cs");
 		// Send Mail to owner
 		if(Content.OwnerSend != null && Content.OwnerSend) {
 			try {
@@ -150,12 +149,6 @@ public class FormController : SxcApiController
 				contactFormRequest.Remove(key);
 	}
 
-	// Get current edition (live/staging)
-	private string getEdition(){
-		var path = HttpContext.Current.Request.Url.AbsolutePath;
-		return path.IndexOf("staging") > 0 ? "staging" : "live";
-	}
-
   // rewrite the keys to be a nicer format, based on the configuration
 	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
 	{
@@ -167,19 +160,4 @@ public class FormController : SxcApiController
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
 	}
 
-	// instantiate class
-	private dynamic InstantiateClass(string name){
-		var fileName = name + ".cs";
-		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "api/Parts", fileName);
-		var assembly = BuildManager.GetCompiledAssembly(path);
-    var compiledType = assembly.GetType(name, true, true);
-
-		object objectValue = null;
-		if (compiledType != null)
-		{
-			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-			return ((dynamic)objectValue);
-		}
-		throw new Exception("Error while creating class instance.");
-	}
 }

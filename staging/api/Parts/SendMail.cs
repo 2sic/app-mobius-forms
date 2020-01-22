@@ -7,7 +7,7 @@ using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 
-public class SendMail
+public class SendMail : ToSic.Sxc.Code.DynamicCode
 {
   public bool send(
     string emailTemplateFilename,
@@ -17,14 +17,14 @@ public class SendMail
     string MailCC,
     string MailReply,
     List<ToSic.Sxc.Adam.IFile> files,
-    ToSic.SexyContent.IAppAndDataHelpers context)
+    ToSic.Sxc.Code.IDynamicCode context)
   {
 		// Check for attachments and add them to the mail
 		var attachments = files.Select(f =>
 				new System.Net.Mail.Attachment(
 					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
-		var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
+		var mailEngine = /* CreateInstance("../../email-templates/" + emailTemplateFilename);*/ TemplateInstance(emailTemplateFilename, context.App.Path);
 		var mailBody = mailEngine.Message(valuesWithMailLabels, context).ToString();
 		var mailSubj = mailEngine.Subject(valuesWithMailLabels, context);
 
