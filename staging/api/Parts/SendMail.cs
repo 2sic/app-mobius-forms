@@ -38,7 +38,7 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     Log.Add("sending...");
 		var sendMailResult = Mail.SendMail(MailFrom, MailTo,	MailCC,	"", MailReply, MailPriority.Normal,	mailSubj, MailFormat.Html, System.Text.Encoding.UTF8, mailBody, attachments, "", "", "", "", DotNetNuke.Entities.Host.Host.EnableSMTPSSL);
 
-// TODO: 2ro - discuss, maybe not needed any more, as we can just add it to the EAV log?
+    // Log to DNN - just as a last resort in case something is lost, to track down why
     var logInfo = new DotNetNuke.Services.Log.EventLog.LogInfo
     {
         LogTypeKey = DotNetNuke.Services.Log.EventLog.EventLogController.EventLogType.ADMIN_ALERT.ToString()

@@ -21,8 +21,7 @@
     @FieldBuilder.EMail("SenderMail", true)
 
     <!-- Recaptcha -->
-    @if (Content.Recaptcha ?? false)
-    {
+    @if (Content.Recaptcha ?? false) {
       @RenderPage("shared/_Recaptcha.cshtml")
     }
 
