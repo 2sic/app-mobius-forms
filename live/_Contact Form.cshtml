@@ -1,3 +1,4 @@
+@inherits ToSic.Sxc.Dnn.RazorComponent
 @using System.Linq
 @using Connect.Koi
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
@@ -20,8 +21,7 @@
     @FieldBuilder.EMail("SenderMail", true)
 
     <!-- Recaptcha -->
-    @if (Content.Recaptcha ?? false)
-    {
+    @if (Content.Recaptcha ?? false) {
       @RenderPage("shared/_Recaptcha.cshtml")
     }
 

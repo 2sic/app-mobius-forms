@@ -1,3 +1,4 @@
+@inherits ToSic.Sxc.Dnn.RazorComponent
 @using System.Linq
 @using Connect.Koi
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
@@ -26,8 +27,7 @@
     @FieldBuilder.File("Attachments", false, "", "File2_2")
 
     <!-- Recaptcha -->
-    @if (Content.Recaptcha ?? false)
-    {
+    @if (Content.Recaptcha ?? false) {
         @RenderPage("shared/_Recaptcha.cshtml")
     }
 

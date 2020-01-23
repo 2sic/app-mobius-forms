@@ -7,9 +7,9 @@
   </div>
 </div>
 
-@if(App.Settings.RecaptchaSiteKey == "00000" || App.Settings.RecaptchaSecretKey == "00000") {
+@if(App.Settings.RecaptchaShowWaring == null || App.Settings.RecaptchaShowWaring) {
   <div class="alert alert-warning">
-    @App.Resources.MessageDefaultRecaptchaKey
+    @Html.Raw(App.Resources.MessageRecaptchaWarning)
   </div>
 }
 

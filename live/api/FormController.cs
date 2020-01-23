@@ -16,20 +16,21 @@ using ToSic.SexyContent.WebApi;
 using Newtonsoft.Json;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
-public class FormController : SxcApiController
+public class FormController : ToSic.Sxc.Dnn.ApiController
 {
 	[HttpPost]
 	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
 	[ValidateAntiForgeryToken]
 	public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
 	{
+		var wrapLog = Log.Call(useTimer: true);
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
-			InstantiateClass("Recaptcha")
-				.Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
+			Log.Add("checking Recaptcha");
+			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey, this);
 		}
 
 		// after saving, remove recaptcha fields from the data-package,
@@ -56,11 +57,13 @@ public class FormController : SxcApiController
 
 		// Automatically full-save each request into a system-protocol content-type
 		// This helps to debug or find submissions in case something wasn't configured right
+		Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
 		App.Data.Create("SystemProtocol", contactFormRequest);
 
 		// Add guid to identify entity after saving (because we need to find it afterwards)
 		var guid = Guid.NewGuid();
 		contactFormRequest.Add("EntityGuid", guid);
+		Log.Add("Save data to content type");
 		App.Data.Create(type.Name, contactFormRequest);
 
 
@@ -68,7 +71,8 @@ public class FormController : SxcApiController
 		var files = new List<ToSic.Sxc.Adam.IFile>();
 
 		// Save files to Adam
-		if(contactFormRequest.ContainsKey("Files")){
+		if(contactFormRequest.ContainsKey("Files")) {
+			Log.Add("Found files, will save");
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
 			{
 				var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
@@ -77,18 +81,26 @@ public class FormController : SxcApiController
 
 			// Don't keep Files array in ContactFormRequest
 			removeKeys(contactFormRequest, new string[] { "Files" });
-		}   
+		} else {
+			Log.Add("No files found to save");
+		}
 
 		// Checks for MailChimp Integration
 		// if true instantiate mailchimp
 		// subscribe for mailchimp
 		if(contactFormRequest.ContainsKey("MailChimp")) {
+			Log.Add("MailChimp - see if we can add it...");
 			if(contactFormRequest["MailChimp"].ToString() == "True") {
-				InstantiateClass("MailChimp").Subscribe(App, contactFormRequest);
+				Log.Add("...MailChimp - try to add");
+				CreateInstance("Parts/MailChimp.cs").Subscribe(this, contactFormRequest);
+			} else {
+				Log.Add("...MailChimp - not wanted by user, won't add");
 			}
 			// after subscribe, remove mailchimp field from the data-package,
 			// because we don't want them in the e-mails
 			removeKeys(contactFormRequest, new string[] { "MailChimp" }); 
+		} else {
+			Log.Add("Won't add to MailChimp");
 		}
 
 		// Improve keys / values for nicer presentation in the mail
@@ -117,11 +129,12 @@ public class FormController : SxcApiController
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
 
 
-		var sendMail = InstantiateClass("SendMail");
+		var sendMail = CreateInstance("Parts/SendMail.cs");
 		// Send Mail to owner
 		if(Content.OwnerSend != null && Content.OwnerSend) {
+			Log.Add("Send Mail to Owner");
 			try {
-				sendMail.send(
+				sendMail.Send(
 					config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
 				);
 			} catch(Exception ex) {
@@ -131,14 +144,16 @@ public class FormController : SxcApiController
 
 		// Send Mail to customer
 		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
+			Log.Add("Send Mail to Customer");
 			try {
-				sendMail.send(
+				sendMail.Send(
 					config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
 				);
 			} catch(Exception ex) {
 				throw new Exception("Customer Send mail failed: " + ex.Message);
 			}
 		}
+		wrapLog("ok");
 	}
 
 	// helpers
@@ -148,12 +163,6 @@ public class FormController : SxcApiController
 		foreach (var key in badKeys)
 			if(contactFormRequest.ContainsKey(key)) 
 				contactFormRequest.Remove(key);
-	}
-
-	// Get current edition (live/staging)
-	private string getEdition(){
-		var path = HttpContext.Current.Request.Url.AbsolutePath;
-		return path.IndexOf("staging") > 0 ? "staging" : "live";
 	}
 
   // rewrite the keys to be a nicer format, based on the configuration
@@ -167,19 +176,4 @@ public class FormController : SxcApiController
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
 	}
 
-	// instantiate class
-	private dynamic InstantiateClass(string name){
-		var fileName = name + ".cs";
-		var path = System.IO.Path.Combine("~", App.Path, getEdition() , "api/Parts", fileName);
-		var assembly = BuildManager.GetCompiledAssembly(path);
-    var compiledType = assembly.GetType(name, true, true);
-
-		object objectValue = null;
-		if (compiledType != null)
-		{
-			objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-			return ((dynamic)objectValue);
-		}
-		throw new Exception("Error while creating class instance.");
-	}
 }
