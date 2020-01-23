@@ -92,7 +92,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			Log.Add("MailChimp - see if we can add it...");
 			if(contactFormRequest["MailChimp"].ToString() == "True") {
 				Log.Add("...MailChimp - try to add");
-				CreateInstance("Parts/MailChimp.cs").Subscribe(App, contactFormRequest);
+				CreateInstance("Parts/MailChimp.cs").Subscribe(this, contactFormRequest);
 			} else {
 				Log.Add("...MailChimp - not wanted by user, won't add");
 			}

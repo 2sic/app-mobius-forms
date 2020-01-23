@@ -27,17 +27,20 @@
       @RenderPage("shared/_Recaptcha.cshtml")
     }
 
+    @if(!Content.Mailchimp) {
+      <div class="form-group row">
+        <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+          <div class="alert alert-warning">
+            @App.Resources.MessageEnableMailchimp
+          </div>
+        </div>
+      </div>
+    }
+
     <!-- Messages / Send Button -->
     @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
   
-
-  @if(String.IsNullOrEmpty(App.Settings.MailchimpListId) || String.IsNullOrEmpty(App.Settings.MailchimpAPIKey) || String.IsNullOrEmpty(App.Settings.MailchimpServer) || String.IsNullOrEmpty(App.Settings.MailchimpSubscriptionStatus)) {
-      <br>
-      <div @Koi.Class("bs3='alert alert-danger' bs4,oth='alert alert-danger'") role="alert">
-          Please fill out the App Settings regarding your Mailchimp data.
-      </div>
-  }
 </div>
 
 @RenderPage("shared/_Assets.cshtml", new { Edition = Edition})
