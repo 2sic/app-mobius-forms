@@ -33,29 +33,10 @@ public class Recaptcha : ToSic.Sxc.Dnn.DynamicCode
     return status;
   }
 
-// // TODO: 2ro - what is this for, is it even used?
-//   [JsonProperty("success")]
-//   public bool Success
-//   {
-//     get { return m_Success; }
-//     set { m_Success = value; }
-//   }
-
-// // TODO: 2ro - what is this for, is it even used?
-//   private bool m_Success;
-//   [JsonProperty("error-codes")]
-//   public List<string> ErrorCodes
-//   {
-//     get { return m_ErrorCodes; }
-//     set { m_ErrorCodes = value; }
-//   }
-
-// // TODO: 2ro - what is this for, is it even used?
-//   private List<string> m_ErrorCodes;
 }
 
-// 2dm > 2ro - this is probably how we should do it
 
+// The response from the Recaptcha Endpoint
 public class RecaptchaResponse {
   [JsonProperty("success")]
   public bool Success
