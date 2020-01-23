@@ -10,9 +10,10 @@
 
   var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
   FieldBuilder.LabelInPlaceholder = true;
+  var helpers = CreateInstance("shared/_Helpers.cshtml");
 }
 
-<div class="mobius-wrapper @(Content.Mailchimp ?? false ? "mobius-mailchimp" : "") @(Content.Recaptcha ?? false ? "mobius-recaptcha" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/@config.Webservice">
   @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="mobius-form">
