@@ -46,9 +46,13 @@ export class App {
     const btn = event.currentTarget;
     const sxc = $2sxc(btn);
     const wrapper = this.moduleWrapper;
+    const label = wrapper.find('#sendFormWithApi').text();
 
     // clear all alerts
     this.helperFunc.showOneAlert(wrapper, '');
+
+    const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'submit', label: label } });
+    document.dispatchEvent(trackingEvent);
 
     // Validate form
     if (!(wrapper as any).smkValidate())
@@ -78,12 +82,17 @@ export class App {
         .success(() => {
           const msg = mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
           this.helperFunc.showOneAlert(wrapper, msg);
-          // $(btn).hide();
+
+          const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'success', label: label } });
+          document.dispatchEvent(trackingEvent);
         })
         .error(() => {
           const msg = mailchimp ? 'msgNewsletterFailed' : 'msgError';
           this.helperFunc.showOneAlert(wrapper, msg);
           this.helperFunc.disableInputs(wrapper, false);
+
+          const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'error', label: label } });
+          document.dispatchEvent(trackingEvent);
         });
     });
   }
