@@ -1,0 +1,6 @@
+@inherits ToSic.Sxc.Dnn.RazorComponent
+@using ToSic.Razor.Blade;
+
+@helper WrapperClasses(dynamic data) {
+<text>mobius-wrapper sc-element @(data.Mailchimp ?? false ? "mobius-mailchimp" : "") @(data.Recaptcha ?? false ? "mobius-recaptcha" : "")</text>
+}
