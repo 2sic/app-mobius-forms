@@ -1,6 +1,8 @@
 @inherits ToSic.Sxc.Dnn.RazorComponent
 @*
   Experimental stuff, don't use yet :)
+  this is just some testing stuff
+  not for production!!!
 *@
 @using System.Linq
 @using Connect.Koi
@@ -12,10 +14,10 @@
       ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
 }
 
-<div class="app-jqfs-wrapper @(Content.Mailchimp ?? false ? "app-jqfs-mailchimp-wrapper" : "") @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+<div class="mobius-wrapper @(Content.Mailchimp ?? false ? "mobius-mailchimp" : "") @(Content.Recaptcha ?? false ? "mobius-recaptcha" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
   @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
-  <div class="app-jqfs-form">
+  <div class="mobius-form">
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)
@@ -28,7 +30,7 @@
       var custFieldId = "app-form-cid-" + Dnn.Module.ModuleID;
     }
     <div class="form-group row">
-      <label for="IsCustomer" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
+      <label for="IsCustomer" @Koi.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
       <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
         <input type="checkbox" class="form-control" name="IsCustomer" onclick="$('#@custFieldId').toggle(this.checked).find('input').prop('required', this.checked)" required>
@@ -37,7 +39,7 @@
 
     <!-- Customer ID (if is customer) -->
     <div id="@custFieldId" class="form-group row" style="display:none">
-      <label for="CustomerId" @Koi.Class("all='control-label app-jqfs-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
+      <label for="CustomerId" @Koi.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
       <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
         <input type="text" class="form-control" id="CustomerId" value="">
       </div>
