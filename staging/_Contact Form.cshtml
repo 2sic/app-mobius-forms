@@ -11,10 +11,10 @@
   var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
 }
 
-<div class="app-jqfs-wrapper @(Content.Mailchimp ?? false ? "app-jqfs-mailchimp-wrapper" : "") @(Content.Recaptcha ?? false ? "app-recaptcha-wrapper" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
+<div class="mobius-wrapper @(Content.Mailchimp ?? false ? "mobius-mailchimp" : "") @(Content.Recaptcha ?? false ? "mobius-recaptcha" : "") sc-element" data-webservice="app/auto/@Edition/api/@config.Webservice">
   @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
-  <div class="app-jqfs-form">
+  <div class="mobius-form">
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)

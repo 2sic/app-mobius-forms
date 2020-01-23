@@ -7,8 +7,7 @@ export class Recaptcha {
 
   c  = {
     recapId: "recapId",
-    clsRecap: "app-jqfs-recaptcha",
-    clsRecapWrap: "app-recaptcha-wrapper"
+    clsRecap: "g-recaptcha"
   };
 
   constructor() { }

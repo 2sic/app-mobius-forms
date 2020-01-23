@@ -13,8 +13,8 @@ export class App {
   alreadyInit = false;
 
   c = {
-    clsWrp: 'app-jqfs-wrapper',
-    clsForm: 'app-jqfs-form',
+    clsWrp: 'mobius-wrapper',
+    clsForm: 'mobius-form',
   };
 
   constructor(
@@ -63,14 +63,14 @@ export class App {
     if (!recap)
       return this.helperFunc.showOneAlert(wrapper, 'msgRecap');
 
-    const mailchimp = wrapper.find('.app-jqfs-wrapper').hasClass('app-jqfs-mailchimp-wrapper');
+    const mailchimp = wrapper.find('.mobius-wrapper').hasClass('mobius-mailchimp');
 
     // get data 
     // alternative example with manual build, but we prefer automatic
     // let data;
     // data = this.collectFieldsManual.collect(wrapper);
     this.collectFieldsAutomatic.collect(wrapper).then((data: any) => {
-      const ws = wrapper.find('.app-jqfs-wrapper').data('webservice'); // should be "Form/ProcessForm" or a custom override
+      const ws = wrapper.find('.mobius-wrapper').data('webservice'); // should be "Form/ProcessForm" or a custom override
       data.Recaptcha = recap;
       data.MailChimp = mailchimp;
 
