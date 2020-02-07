@@ -1,22 +1,22 @@
 {
-  "name": "2sic-typescript-template",
-  "version": "03.00.00",
-  "description": "The standard template to build sexy apps.",
+  "name": "2sxc-mobius-forms",
+  "version": "10.00.00",
+  "description": "2sxc Forms",
   "main": "",
   "scripts": {
-    "develop": "webpack --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
-    "deploy-staging2live": "npm run build & (ROBOCOPY staging live /MIR /XD dist) ^& IF %ERRORLEVEL% LEQ 1 exit 0",
-    "copy-staging2live": "(ROBOCOPY staging live /MIR /XD dist) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
+    "build-prod": "webpack",
+    "copy-staging2live": "(ROBOCOPY staging live /MIR /XD) ^& IF %ERRORLEVEL% LEQ 1 exit 0"
   },
   "author": "2sic internet solutions",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^9.7.4",
     "css-loader": "^2.1.1",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^2.1.2",
