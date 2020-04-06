@@ -5,12 +5,7 @@
   var Config = PageData["Config"];
 }
 @Edit.Toolbar(Content)
-@Edit.Toolbar(toolbar: new object[] { 
-  new { 
-    showCondition = true,
-    command = new { action = "contentitems", 
-      contentType = Config.ContentType, 
-      filters = new { ModuleId = Dnn.Module.ModuleID } 
-    }
-  }
-}, settings: new { hover="left", show = "hover" })
+@Edit.Toolbar(toolbar: new [] { 
+  "toolbar=empty&hover=left",
+  "contentitems?contentType=" + Config.ContentType + "&filter:ModuleId=" + Dnn.Module.ModuleID
+})

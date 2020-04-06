@@ -58,6 +58,7 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
   }
   
   // // get email template - before 10.28 update
+  // keep for a while, in case somebody needs this code to downgrade to a prev. version of 2sxc
 	// private dynamic TemplateInstance(string fileName, string AppPath)
   // {
   //   var path = System.IO.Path.Combine("~", CreateInstancePath, "../../email-templates", fileName);
