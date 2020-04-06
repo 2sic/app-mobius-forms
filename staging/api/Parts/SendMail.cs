@@ -29,7 +29,8 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
     Log.Add("Get MailEngine");
-		var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
+		// old 2sxc var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
+    var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
 		var mailBody = mailEngine.Message(valuesWithMailLabels, context).ToString();
 		var mailSubj = mailEngine.Subject(valuesWithMailLabels, context);
 
@@ -55,17 +56,17 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     wrapLog("ok");
     return sendMailResult == "";
   }
-
-  // get email template
-	private dynamic TemplateInstance(string fileName, string AppPath)
-  {
-    var path = System.IO.Path.Combine("~", CreateInstancePath, "../../email-templates", fileName);
-    var compiledType = BuildManager.GetCompiledType(path);
-
-    if (compiledType == null)
-      throw new Exception("Error while creating mail template instance.");
   
-    var objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-    return ((dynamic)objectValue);
-  }
+  // // get email template - before 10.28 update
+	// private dynamic TemplateInstance(string fileName, string AppPath)
+  // {
+  //   var path = System.IO.Path.Combine("~", CreateInstancePath, "../../email-templates", fileName);
+  //   var compiledType = BuildManager.GetCompiledType(path);
+
+  //   if (compiledType == null)
+  //     throw new Exception("Error while creating mail template instance.");
+  
+  //   var objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
+  //   return ((dynamic)objectValue);
+  // }
 }

@@ -50,7 +50,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
 		contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
 		// add raw-data, in case the content-type has a "RawData" field
-		contactFormRequest.Add("RawData", JsonConvert.SerializeObject(contactFormRequest));
+		contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
 		// add Title (if non given), in case the Content-Type would benefit of an automatic title
 		var addTitle = !contactFormRequest.ContainsKey("Title");
 		if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
@@ -154,6 +154,13 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			}
 		}
 		wrapLog("ok");
+	}
+
+	private dynamic createRawDataEntry(Dictionary<string,object> formRequest)
+	{
+		var data = new Dictionary<string, object>(formRequest, StringComparer.OrdinalIgnoreCase);
+		data.Remove("Files");
+		return JsonConvert.SerializeObject(data);
 	}
 
 	// helpers
