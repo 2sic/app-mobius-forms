@@ -6,9 +6,54 @@ using System.Web;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
+using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 {
+  public void sendMails(Dictionary<string,object> contactFormRequest, dynamic files) {
+    var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
+		var saveSendConfig = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
+
+		// rewrite the keys to be a nicer format, based on the configuration
+    string mailLabelRewrites = (!String.IsNullOrEmpty(saveSendConfig.MailLabels) 
+			? saveSendConfig.MailLabels
+			: App.Settings.SubmitType[0].MailLabels) ?? "";
+		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
+
+    // assemble all settings to send the mail
+		// background: some settings are made in this module,
+		// but if they are missing we use fallback settings 
+		// which are taken from the App.Settings
+    var settings = new {
+			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.OwnerMail,
+			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
+		};
+
+		// Send Mail to owner
+		if(Content.OwnerSend != null && Content.OwnerSend) {
+			Log.Add("Send Mail to Owner");
+			try {
+				Send(
+					saveSendConfig.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
+				);
+			} catch(Exception ex) {
+				throw new Exception("OwnwerSend mail failed: " + ex.Message);
+			}
+		}
+
+		// Send Mail to customer
+		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
+			Log.Add("Send Mail to Customer");
+			try {
+				Send(
+					saveSendConfig.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files
+				);
+			} catch(Exception ex) {
+				throw new Exception("Customer Send mail failed: " + ex.Message);
+			}
+		}
+  }
+
   public bool Send(
     string emailTemplateFilename,
     Dictionary<string,object> valuesWithMailLabels,
@@ -54,6 +99,17 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     wrapLog("ok");
     return sendMailResult == "";
   }
+
+  // rewrite the keys to be a nicer format, based on the configuration
+	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
+	{
+		// create keys-map
+		Dictionary<string, string> newKeys = map
+			.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
+			.ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
+
+		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
+	}
   
   // // get email template - before 10.28 update
   // keep for a while, in case somebody needs this code to downgrade to a prev. version of 2sxc

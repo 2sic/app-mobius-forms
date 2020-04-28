@@ -139,7 +139,6 @@ public class MailChimp : ToSic.Sxc.Dnn.DynamicCode
 	}
 
 	/* EVENTLOGGER */
-  // // todo: move to mailchimp, pass in object Dnn (has .PortalSettings and .User)
 	private void EventLog(string title, string message)
 	{
     PortalSettings portalSettings = Globals.GetPortalSettings();

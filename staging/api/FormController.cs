@@ -66,8 +66,6 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		Log.Add("Save data to content type");
 		App.Data.Create(saveSendConfig.ContentType, contactFormRequest);
 
-
-
 		var files = new List<ToSic.Sxc.Adam.IFile>();
 
 		// Save files to Adam
@@ -94,54 +92,14 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// after saving, remove raw-data and the generated title
 		// because we don't want them in the e-mails
 		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
-
-		var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
 		
 		// remove App informations from data-package
 		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
 
-		// assemble all settings to send the mail
-		// background: some settings are made in this module,
-		// but if they are missing we use fallback settings 
-		// which are taken from the App.Settings
-		var settings = new {
-			MailFrom = !String.IsNullOrEmpty(config.MailFrom) ? config.MailFrom : App.Settings.OwnerMail,
-			OwnerMail = !String.IsNullOrEmpty(config.OwnerMail) ? config.OwnerMail : App.Settings.OwnerMail
-		};
-
-		// TODO: 2ro - probably move into sendmail and call from there, not really needed here
-		// rewrite the keys to be a nicer format, based on the configuration
-		string mailLabelRewrites = (!String.IsNullOrEmpty(saveSendConfig.MailLabels) 
-			? saveSendConfig.MailLabels
-			: App.Settings.SubmitType[0].MailLabels) ?? "";
-		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
-
-
+		// sending Mails
 		var sendMail = CreateInstance("Parts/SendMail.cs");
-		// TODO: 2ro - probably move all mail sending into a simple sendMail.SendMails(...) - goal is to shorten the code in this file
-		// Send Mail to owner
-		if(config.OwnerSend != null && config.OwnerSend) {
-			Log.Add("Send Mail to Owner");
-			try {
-				sendMail.Send(
-					saveSendConfig.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, config.OwnerMailCC, custMail, files
-				);
-			} catch(Exception ex) {
-				throw new Exception("OwnwerSend mail failed: " + ex.Message);
-			}
-		}
-
-		// Send Mail to customer
-		if(config.CustomerSend != null && config.CustomerSend && !String.IsNullOrEmpty(custMail)) {
-			Log.Add("Send Mail to Customer");
-			try {
-				sendMail.Send(
-					saveSendConfig.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, config.CustomerMailCC, settings.OwnerMail, files
-				);
-			} catch(Exception ex) {
-				throw new Exception("Customer Send mail failed: " + ex.Message);
-			}
-		}
+		sendMail.sendMails(contactFormRequest, files);
+		
 		wrapLog("ok");
 	}
 
@@ -160,17 +118,4 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			if(contactFormRequest.ContainsKey(key)) 
 				contactFormRequest.Remove(key);
 	}
-
-// TODO: 2ro - probably move into sendmail and call from there, not really needed here
-  // rewrite the keys to be a nicer format, based on the configuration
-	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
-	{
-		// create keys-map
-		Dictionary<string, string> newKeys = map
-			.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
-			.ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
-
-		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
-	}
-
 }
