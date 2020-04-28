@@ -26,22 +26,24 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		var wrapLog = Log.Call(useTimer: true);
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
+    var config = Content; // the Content-Object is auto-prefilled with the configuration of the form
+
 
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
-		if(Content.Recaptcha ?? false) {
+		if(config.Recaptcha ?? false) {
 			Log.Add("checking Recaptcha");
 			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey, this);
 		}
 
-		// after saving, remove recaptcha fields from the data-package,
-		// because we don't want them in the e-mails
+		// 0.1. after saving, remove recaptcha fields from the data-package, because we don't want them in the e-mails
 		removeKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" }); 
 
 		// get configuration for this Form
 		// it is either customized at Content-level, or we should use the default in the App.Settings
 		// the content-type is stored as the StaticName - but for the simple API we need the "nice name"
-		var config = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
-		var type = Data.Cache.GetContentType(config.ContentType);
+		var saveSendConfig = (config.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
+    // TODO: 2dm @ 2ro - not sure if we need to do this, probably old code?
+		var type = Data.Cache.GetContentType(saveSendConfig.ContentType);
 
 		// 1. add IP / host, and save all fields
 		// if you add fields to your content-type, just make sure they are 
@@ -61,6 +63,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		App.Data.Create("SystemProtocol", contactFormRequest);
 
 		// Add guid to identify entity after saving (because we need to find it afterwards)
+    // FYI: 2ro - App.Data.Create now returns an entity, so we could save 2 lines of code
 		var guid = Guid.NewGuid();
 		contactFormRequest.Add("EntityGuid", guid);
 		Log.Add("Save data to content type");
@@ -85,6 +88,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			Log.Add("No files found to save");
 		}
 
+// TODO: 2ro - probably best to move this whole code block into Mailchimp, to keep this code here simpler
 		// Checks for MailChimp Integration
 		// if true instantiate mailchimp
 		// subscribe for mailchimp
@@ -118,24 +122,26 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// but if they are missing we use fallback settings 
 		// which are taken from the App.Settings
 		var settings = new {
-			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.OwnerMail,
-			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
+			MailFrom = !String.IsNullOrEmpty(config.MailFrom) ? config.MailFrom : App.Settings.OwnerMail,
+			OwnerMail = !String.IsNullOrEmpty(config.OwnerMail) ? config.OwnerMail : App.Settings.OwnerMail
 		};
 
+// TODO: 2ro - probably move into sendmail and call from there, not really needed here
 		// rewrite the keys to be a nicer format, based on the configuration
-		string mailLabelRewrites = (!String.IsNullOrEmpty(config.MailLabels) 
-			? config.MailLabels
+		string mailLabelRewrites = (!String.IsNullOrEmpty(saveSendConfig.MailLabels) 
+			? saveSendConfig.MailLabels
 			: App.Settings.SubmitType[0].MailLabels) ?? "";
 		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
 
 
 		var sendMail = CreateInstance("Parts/SendMail.cs");
+// TODO: 2ro - probably move all mail sending into a simple sendMail.SendMails(...) - goal is to shorten the code in this file
 		// Send Mail to owner
-		if(Content.OwnerSend != null && Content.OwnerSend) {
+		if(config.OwnerSend != null && config.OwnerSend) {
 			Log.Add("Send Mail to Owner");
 			try {
 				sendMail.Send(
-					config.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files,	this
+					saveSendConfig.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, config.OwnerMailCC, custMail, files,	this
 				);
 			} catch(Exception ex) {
 				throw new Exception("OwnwerSend mail failed: " + ex.Message);
@@ -143,11 +149,11 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		}
 
 		// Send Mail to customer
-		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
+		if(config.CustomerSend != null && config.CustomerSend && !String.IsNullOrEmpty(custMail)) {
 			Log.Add("Send Mail to Customer");
 			try {
 				sendMail.Send(
-					config.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files, this
+					saveSendConfig.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, config.CustomerMailCC, settings.OwnerMail, files, this
 				);
 			} catch(Exception ex) {
 				throw new Exception("Customer Send mail failed: " + ex.Message);
@@ -172,6 +178,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 				contactFormRequest.Remove(key);
 	}
 
+// TODO: 2ro - probably move into sendmail and call from there, not really needed here
   // rewrite the keys to be a nicer format, based on the configuration
 	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
 	{

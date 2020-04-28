@@ -3,7 +3,7 @@
 @using Connect.Koi
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
-  string Edition = PageData["Edition"];
+  string Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
   // get form config (data-type, web-api, etc.)
   var config = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault()  // custom for this form only...
       ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
@@ -12,7 +12,7 @@
   var helpers = CreateInstance("shared/_Helpers.cshtml");
 }
 
-<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/@config.Webservice">
+<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm">
   @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 
   <div class="mobius-form">
@@ -37,4 +37,4 @@
 
 </div>
 
-@RenderPage("shared/_Assets.cshtml", new { Edition = Edition})
+@RenderPage("shared/_Assets.cshtml")

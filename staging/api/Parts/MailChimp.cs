@@ -16,8 +16,8 @@ public class MailChimp : ToSic.Sxc.Dnn.DynamicCode
   public string Subscribe(ToSic.Sxc.Dnn.ApiController context, 
     Dictionary<string,object> contactFormRequest)
   {
-      // Log what's happening in case we run into problems
-    var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
+    // Log what's happening in case we run into problems
+    // var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
     var wrapLog = Log.Call();
 
     var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
