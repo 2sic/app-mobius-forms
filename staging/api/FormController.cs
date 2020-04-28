@@ -42,8 +42,6 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// it is either customized at Content-level, or we should use the default in the App.Settings
 		// the content-type is stored as the StaticName - but for the simple API we need the "nice name"
 		var saveSendConfig = (config.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
-    // TODO: 2dm @ 2ro - not sure if we need to do this, probably old code?
-		var type = Data.Cache.GetContentType(saveSendConfig.ContentType);
 
 		// 1. add IP / host, and save all fields
 		// if you add fields to your content-type, just make sure they are 
@@ -63,11 +61,10 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		App.Data.Create("SystemProtocol", contactFormRequest);
 
 		// Add guid to identify entity after saving (because we need to find it afterwards)
-    // FYI: 2ro - App.Data.Create now returns an entity, so we could save 2 lines of code
 		var guid = Guid.NewGuid();
 		contactFormRequest.Add("EntityGuid", guid);
 		Log.Add("Save data to content type");
-		App.Data.Create(type.Name, contactFormRequest);
+		App.Data.Create(saveSendConfig.ContentType, contactFormRequest);
 
 
 
@@ -79,7 +76,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
 			{
 				var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
-				files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: type.Name, guid: guid, field: file["Field"]));
+				files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: saveSendConfig.ContentType, guid: guid, field: file["Field"]));
 			}
 
 			// Don't keep Files array in ContactFormRequest
@@ -88,24 +85,10 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			Log.Add("No files found to save");
 		}
 
-// TODO: 2ro - probably best to move this whole code block into Mailchimp, to keep this code here simpler
-		// Checks for MailChimp Integration
-		// if true instantiate mailchimp
-		// subscribe for mailchimp
-		if(contactFormRequest.ContainsKey("MailChimp")) {
-			Log.Add("MailChimp - see if we can add it...");
-			if(contactFormRequest["MailChimp"].ToString() == "True") {
-				Log.Add("...MailChimp - try to add");
-				CreateInstance("Parts/MailChimp.cs").Subscribe(this, contactFormRequest);
-			} else {
-				Log.Add("...MailChimp - not wanted by user, won't add");
-			}
-			// after subscribe, remove mailchimp field from the data-package,
-			// because we don't want them in the e-mails
-			removeKeys(contactFormRequest, new string[] { "MailChimp" }); 
-		} else {
-			Log.Add("Won't add to MailChimp");
-		}
+		CreateInstance("Parts/MailChimp.cs").Validate(contactFormRequest);
+		// after subscribe, remove mailchimp field from the data-package,
+		// because we don't want them in the e-mails
+		removeKeys(contactFormRequest, new string[] { "MailChimp" });
 
 		// Improve keys / values for nicer presentation in the mail
 		// after saving, remove raw-data and the generated title
@@ -126,7 +109,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			OwnerMail = !String.IsNullOrEmpty(config.OwnerMail) ? config.OwnerMail : App.Settings.OwnerMail
 		};
 
-// TODO: 2ro - probably move into sendmail and call from there, not really needed here
+		// TODO: 2ro - probably move into sendmail and call from there, not really needed here
 		// rewrite the keys to be a nicer format, based on the configuration
 		string mailLabelRewrites = (!String.IsNullOrEmpty(saveSendConfig.MailLabels) 
 			? saveSendConfig.MailLabels
@@ -135,13 +118,13 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 
 
 		var sendMail = CreateInstance("Parts/SendMail.cs");
-// TODO: 2ro - probably move all mail sending into a simple sendMail.SendMails(...) - goal is to shorten the code in this file
+		// TODO: 2ro - probably move all mail sending into a simple sendMail.SendMails(...) - goal is to shorten the code in this file
 		// Send Mail to owner
 		if(config.OwnerSend != null && config.OwnerSend) {
 			Log.Add("Send Mail to Owner");
 			try {
 				sendMail.Send(
-					saveSendConfig.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, config.OwnerMailCC, custMail, files,	this
+					saveSendConfig.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, config.OwnerMailCC, custMail, files
 				);
 			} catch(Exception ex) {
 				throw new Exception("OwnwerSend mail failed: " + ex.Message);
@@ -153,7 +136,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			Log.Add("Send Mail to Customer");
 			try {
 				sendMail.Send(
-					saveSendConfig.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, config.CustomerMailCC, settings.OwnerMail, files, this
+					saveSendConfig.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, config.CustomerMailCC, settings.OwnerMail, files
 				);
 			} catch(Exception ex) {
 				throw new Exception("Customer Send mail failed: " + ex.Message);

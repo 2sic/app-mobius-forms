@@ -12,7 +12,6 @@
   var helpers = CreateInstance("shared/_Helpers.cshtml");
 }
 
-@* TODO 2RO - FYI ABOUT FORM ENDPOINT *@
 <div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm">
   @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
 

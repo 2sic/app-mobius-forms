@@ -1,7 +1,6 @@
 @inherits ToSic.Sxc.Dnn.RazorComponent
 @using DotNetNuke.Framework.JavaScriptLibraries;
 @{
-// TODO: 2ro - I recommend that we don't pass it around, and just get it here directly
   string Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
   JavaScript.RequestRegistration(CommonJs.jQuery);
 }
@@ -11,8 +10,9 @@
 <script src="@App.Path/@Edition/dist/app-bundle.min.js" data-enableoptimizations="true"></script>
 <link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/style.min.css" data-enableoptimizations="true">
 <script>
-@* TODO: 2ro - shouldn't this maybe be in a $() on ready? *@
-  // initialize the javascripts which will collect the data and send it to the server on send
-  mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
-  mobius.initialize();
+  $(document).ready(function() {
+    // initialize the javascripts which will collect the data and send it to the server on send
+    mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
+    mobius.initialize();
+  });
 </script>

@@ -12,18 +12,35 @@ using DotNetNuke.Entities.Portals;
 // TODO: 2ro - check if we can just log to EAV and not to DNN
 public class MailChimp : ToSic.Sxc.Dnn.DynamicCode
 {
+  // Checks for MailChimp Integration
+  // if true instantiate mailchimp
+  // subscribe for mailchimp
+  public void Validate(Dictionary<string,object> contactFormRequest)
+  {
+    if(contactFormRequest.ContainsKey("MailChimp")) {
+			Log.Add("MailChimp - see if we can add it...");
+			if(contactFormRequest["MailChimp"].ToString() == "True") {
+				Log.Add("...MailChimp - try to add");
+				Subscribe(contactFormRequest);
+			} else {
+				Log.Add("...MailChimp - not wanted by user, won't add");
+			}
+
+			 
+		} else {
+			Log.Add("Won't add to MailChimp");
+		}
+  }
   /* MAILCHIMP SUBSCRIBE */
-  public string Subscribe(ToSic.Sxc.Dnn.ApiController context, 
-    Dictionary<string,object> contactFormRequest)
+  public string Subscribe(Dictionary<string,object> contactFormRequest)
   {
     // Log what's happening in case we run into problems
-    // var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
     var wrapLog = Log.Call();
 
     var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
     var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");
     Log.Add("Name:" + SenderName + ", LastName:" + SenderLastName);
-    var msg = SubscribeToMailChimp(context.App.Settings.MailchimpServer, context.App.Settings.MailchimpListId, context.App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
+    var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
     if(msg != "OK")
     {
       wrapLog("error");

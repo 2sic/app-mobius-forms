@@ -12,7 +12,6 @@ public class Recaptcha : ToSic.Sxc.Dnn.DynamicCode
     ToSic.Sxc.Dnn.ApiController context)
   {
     // Log what's happening in case we run into problems
-    // var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
     var wrapLog = Log.Call();
 
     if(!(EncodedResponse is string) || String.IsNullOrEmpty(EncodedResponse as string)) 

@@ -20,10 +20,8 @@
 }
 
 @functions {
-// TODO: 2ro - we probably don't need the context any more - any where, since 2sxc 10.28+ includes it in all DynamicCode instances
 	public string Subject(dynamic data, dynamic context) {
         // create custom code to generate the subject here...
-
         // or just return the setting configured in the form
 		return !String.IsNullOrWhiteSpace(context.Content.CustomerMailSubject)
             ? context.Content.CustomerMailSubject

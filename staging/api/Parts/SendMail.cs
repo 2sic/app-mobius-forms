@@ -16,12 +16,9 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     string MailTo,
     string MailCC,
     string MailReply,
-    List<ToSic.Sxc.Adam.IFile> files,
-// TODO: 2ro - we probably don't need the context any more - any where, since 2sxc 10.28+ includes it in all DynamicCode instances
-    ToSic.Sxc.Dnn.ApiController context)
+    List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
-    // var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
     var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
     
 		// Check for attachments and add them to the mail
@@ -32,9 +29,8 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     Log.Add("Get MailEngine");
 		// old 2sxc var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
     var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
-// TODO: 2ro - we probably don't need the context any more - any where, since 2sxc 10.28+ includes it in all DynamicCode instances
-		var mailBody = mailEngine.Message(valuesWithMailLabels, context).ToString();
-		var mailSubj = mailEngine.Subject(valuesWithMailLabels, context);
+		var mailBody = mailEngine.Message(valuesWithMailLabels, this).ToString();
+		var mailSubj = mailEngine.Subject(valuesWithMailLabels, this);
 
 		// Send Mail
 		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
