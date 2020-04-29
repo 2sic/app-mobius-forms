@@ -3,17 +3,14 @@
 @using Connect.Koi
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
-  string Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
-  // get form config (data-type, web-api, etc.)
-  var config = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault()  // custom for this form only...
-      ?? (App.Settings.SubmitType as Dynlist).First();    // ...or app-default configuration
-
+  var Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
+  var workflowId = "SupportDefault";
   var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
   var helpers = CreateInstance("shared/_Helpers.cshtml");
 }
 
-<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm">
-  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, Config = config })
+<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
+  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="mobius-form">
     @FieldBuilder.Text("Subject", true)

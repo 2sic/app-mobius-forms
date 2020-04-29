@@ -21,16 +21,14 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 	[HttpPost]
 	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
 	[ValidateAntiForgeryToken]
-	public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest)
+	public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
 	{
 		var wrapLog = Log.Call(useTimer: true);
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
-    var config = Content; // the Content-Object is auto-prefilled with the configuration of the form
-
-
+    
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
-		if(config.Recaptcha ?? false) {
+		if(Content.Recaptcha ?? false) {
 			Log.Add("checking Recaptcha");
 			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey, this);
 		}
@@ -39,9 +37,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		removeKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" }); 
 
 		// get configuration for this Form
-		// it is either customized at Content-level, or we should use the default in the App.Settings
-		// the content-type is stored as the StaticName - but for the simple API we need the "nice name"
-		var saveSendConfig = (config.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
+		var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
 
 		// 1. add IP / host, and save all fields
 		// if you add fields to your content-type, just make sure they are 
@@ -64,7 +60,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		var guid = Guid.NewGuid();
 		contactFormRequest.Add("EntityGuid", guid);
 		Log.Add("Save data to content type");
-		App.Data.Create(saveSendConfig.ContentType, contactFormRequest);
+		App.Data.Create(workflow.ContentType, contactFormRequest);
 
 		var files = new List<ToSic.Sxc.Adam.IFile>();
 
@@ -74,7 +70,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
 			{
 				var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
-				files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: saveSendConfig.ContentType, guid: guid, field: file["Field"]));
+				files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: workflow.ContentType, guid: guid, field: file["Field"]));
 			}
 
 			// Don't keep Files array in ContactFormRequest
@@ -98,7 +94,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 
 		// sending Mails
 		var sendMail = CreateInstance("Parts/SendMail.cs");
-		sendMail.sendMails(contactFormRequest, files);
+		sendMail.sendMails(contactFormRequest, workflowId, files);
 		
 		wrapLog("ok");
 	}

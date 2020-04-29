@@ -10,23 +10,20 @@ using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 {
-  public void sendMails(Dictionary<string,object> contactFormRequest, dynamic files) {
+  public void sendMails(Dictionary<string,object> contactFormRequest, string workflowId, dynamic files) {
     var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
-		var saveSendConfig = (Content.Presentation.SubmitType as Dynlist).FirstOrDefault() ?? (App.Settings.SubmitType as Dynlist).First();
+		var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
 
 		// rewrite the keys to be a nicer format, based on the configuration
-    string mailLabelRewrites = (!String.IsNullOrEmpty(saveSendConfig.MailLabels) 
-			? saveSendConfig.MailLabels
-			: App.Settings.SubmitType[0].MailLabels) ?? "";
-		var valuesWithMailLabels = RewriteKeys(contactFormRequest, mailLabelRewrites);
+		var valuesWithMailLabels = RewriteKeys(contactFormRequest, workflow.MailLabels ?? "");
 
     // assemble all settings to send the mail
 		// background: some settings are made in this module,
 		// but if they are missing we use fallback settings 
 		// which are taken from the App.Settings
     var settings = new {
-			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.OwnerMail,
-			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.OwnerMail
+			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.DefaultMailFrom,
+			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.DefaultOwnerMail
 		};
 
 		// Send Mail to owner
@@ -34,7 +31,7 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 			Log.Add("Send Mail to Owner");
 			try {
 				Send(
-					saveSendConfig.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
+					workflow.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
 				);
 			} catch(Exception ex) {
 				throw new Exception("OwnwerSend mail failed: " + ex.Message);
@@ -46,7 +43,7 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 			Log.Add("Send Mail to Customer");
 			try {
 				Send(
-					saveSendConfig.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files
+					workflow.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files
 				);
 			} catch(Exception ex) {
 				throw new Exception("Customer Send mail failed: " + ex.Message);

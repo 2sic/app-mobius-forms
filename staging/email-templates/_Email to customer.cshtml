@@ -25,6 +25,6 @@
         // or just return the setting configured in the form
 		return !String.IsNullOrWhiteSpace(context.Content.CustomerMailSubject)
             ? context.Content.CustomerMailSubject
-            : context.App.Settings.CustomerMailSubject;
+            : context.App.Resources.CustomerMailSubject;
 	}
 }

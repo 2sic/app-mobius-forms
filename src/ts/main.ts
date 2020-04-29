@@ -73,12 +73,11 @@ export class App {
       const ws = wrapper.find('.mobius-wrapper').data('webservice'); // should be "Form/ProcessForm" or a custom override
       data.Recaptcha = recap;
       data.MailChimp = mailchimp;
-
       // submission
       this.helperFunc.disableInputs(wrapper, true);
       this.helperFunc.showOneAlert(wrapper, 'msgSending'); // show "sending..."
 
-      sxc.webApi.post(ws, {}, data, true)
+      sxc.webApi.post(ws, null, data, true)
         .success(() => {
           const msg = mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
           this.helperFunc.showOneAlert(wrapper, msg);
