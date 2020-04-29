@@ -9,7 +9,7 @@
 @using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
   var Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
-  var workflowId = "ContactDefault";
+  var workflowId = "GenericSave";
   var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
   var helpers = CreateInstance("shared/_Helpers.cshtml");
 }

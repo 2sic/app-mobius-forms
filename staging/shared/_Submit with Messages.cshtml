@@ -15,10 +15,26 @@
     </div>
   </div>
 
-  @if((Content.Mailchimp ?? false) && (App.Settings.MailchimpListId == "00000" || App.Settings.MailchimpAPIKey == "00000")) {
+  @if((Content.Mailchimp ?? false) && (App.Settings.MailChimpShowWarning == null || App.Settings.MailChimpShowWarning)) {
     <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
       <div class="alert alert-warning">
-        @App.Resources.MessageDefaultMailChimpKey
+        @Html.Raw(App.Resources.MessageDefaultMailChimpKey)
+      </div>
+    </div>
+  }
+
+  @if((Content.CustomerSend || Content.OwnerSend) && Content.MailFrom == "" && App.Settings.DefaultMailFrom == "") {
+    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+      <div class="alert alert-warning">
+        @App.Resources.MessageMailFromError
+      </div>
+    </div>
+  }
+
+  @if(Content.OwnerSend && Content.OwnerMail == "" && App.Settings.DefaultOwnerMail == "") {
+    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+      <div class="alert alert-warning">
+        @App.Resources.MessageMailOwnerError
       </div>
     </div>
   }

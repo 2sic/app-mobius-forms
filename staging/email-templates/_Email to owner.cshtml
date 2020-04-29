@@ -15,15 +15,12 @@
         <div>
             @context.App.Resources.MailOwnerContent
         </div>
-        <table width="100%">
-            @foreach (var item in data)
-            {
-                <tr>
-                    <td width="10%"><b>@item.Key</b></td>
-                    <td>@item.Value</td>
-                </tr>
-            }
-        </table>
+        @foreach (var item in data)
+        {
+            <div>
+                <strong>@item.Key:</strong> @item.Value                    
+            </div>
+        }
     </body>
     </html>
 }
