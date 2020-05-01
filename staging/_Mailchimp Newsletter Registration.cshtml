@@ -29,7 +29,7 @@
       <div class="form-group row">
         <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
           <div class="alert alert-warning">
-            @App.Resources.MessageEnableMailchimp
+            @Html.Raw(App.Resources.MessageEnableMailchimp.Replace("<p>", "").Replace("</p>", ""))
           </div>
         </div>
       </div>

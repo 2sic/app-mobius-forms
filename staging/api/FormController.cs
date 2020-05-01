@@ -30,7 +30,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
 			Log.Add("checking Recaptcha");
-			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey, this);
+			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
 		}
 
 		// 0.1. after saving, remove recaptcha fields from the data-package, because we don't want them in the e-mails

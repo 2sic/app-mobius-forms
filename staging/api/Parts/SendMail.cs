@@ -69,10 +69,9 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
     Log.Add("Get MailEngine");
-		// old 2sxc var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
     var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
-		var mailBody = mailEngine.Message(valuesWithMailLabels, this).ToString();
-		var mailSubj = mailEngine.Subject(valuesWithMailLabels, this);
+		var mailBody = mailEngine.Message(valuesWithMailLabels).ToString();
+		var mailSubj = mailEngine.Subject(valuesWithMailLabels);
 
 		// Send Mail
 		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
@@ -107,18 +106,4 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 
 		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
 	}
-  
-  // // get email template - before 10.28 update
-  // keep for a while, in case somebody needs this code to downgrade to a prev. version of 2sxc
-	// private dynamic TemplateInstance(string fileName, string AppPath)
-  // {
-  //   var path = System.IO.Path.Combine("~", CreateInstancePath, "../../email-templates", fileName);
-  //   var compiledType = BuildManager.GetCompiledType(path);
-
-  //   if (compiledType == null)
-  //     throw new Exception("Error while creating mail template instance.");
-  
-  //   var objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-  //   return ((dynamic)objectValue);
-  // }
 }

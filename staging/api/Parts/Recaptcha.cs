@@ -7,9 +7,7 @@ using Newtonsoft.Json;
 // shouldn't really need any modifications, just leave this as is
 public class Recaptcha : ToSic.Sxc.Dnn.DynamicCode
 {
-  public bool Validate(string EncodedResponse, 
-    string PrivateKey,
-    ToSic.Sxc.Dnn.ApiController context)
+  public bool Validate(string EncodedResponse, string PrivateKey)
   {
     // Log what's happening in case we run into problems
     var wrapLog = Log.Call();

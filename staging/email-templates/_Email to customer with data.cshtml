@@ -1,5 +1,5 @@
 @inherits ToSic.Sxc.Dnn.RazorComponent
-@helper Message(dynamic data, ToSic.Sxc.Code.IDynamicCode context)
+@helper Message(Dictionary<string,object> data)
 {
     <!doctype html>
     <html>
@@ -11,13 +11,13 @@
         </style>
     </head>
     <body>
-        <h1>@context.App.Resources.MailCustomerTitle</h1>
+        <h1>@App.Resources.MailCustomerTitle</h1>
         <div>
-            @context.App.Resources.MailCustomerContent
+            @App.Resources.MailCustomerContent
         </div>
         <br />
         <div>
-            @context.App.Resources.MailCustomerContentWithData
+            @App.Resources.MailCustomerContentWithData
         </div>
         @foreach (var item in data)
         {
@@ -30,11 +30,11 @@
 }
 
 @functions {
-	public string Subject(dynamic data, dynamic context) {
+	public string Subject(dynamic data) {
         // create custom code to generate the subject here...
         // or just return the setting configured in the form
-		return !String.IsNullOrWhiteSpace(context.Content.CustomerMailSubject)
-            ? context.Content.CustomerMailSubject
-            : context.App.Resources.CustomerMailSubject;
+		return !String.IsNullOrWhiteSpace(Content.CustomerMailSubject)
+            ? Content.CustomerMailSubject
+            : App.Resources.CustomerMailSubject;
 	}
 }
