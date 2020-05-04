@@ -6,9 +6,51 @@ using System.Web;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
+using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 {
+  public void sendMails(Dictionary<string,object> contactFormRequest, string workflowId, dynamic files) {
+    var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
+		var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
+
+		// rewrite the keys to be a nicer format, based on the configuration
+		var valuesWithMailLabels = RewriteKeys(contactFormRequest, workflow.MailLabels ?? "");
+
+    // assemble all settings to send the mail
+		// background: some settings are made in this module,
+		// but if they are missing we use fallback settings 
+		// which are taken from the App.Settings
+    var settings = new {
+			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.DefaultMailFrom,
+			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.DefaultOwnerMail
+		};
+
+		// Send Mail to owner
+		if(Content.OwnerSend != null && Content.OwnerSend) {
+			Log.Add("Send Mail to Owner");
+			try {
+				Send(
+					workflow.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
+				);
+			} catch(Exception ex) {
+				throw new Exception("OwnwerSend mail failed: " + ex.Message);
+			}
+		}
+
+		// Send Mail to customer
+		if(Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail)) {
+			Log.Add("Send Mail to Customer");
+			try {
+				Send(
+					workflow.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files
+				);
+			} catch(Exception ex) {
+				throw new Exception("Customer Send mail failed: " + ex.Message);
+			}
+		}
+  }
+
   public bool Send(
     string emailTemplateFilename,
     Dictionary<string,object> valuesWithMailLabels,
@@ -16,11 +58,9 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     string MailTo,
     string MailCC,
     string MailReply,
-    List<ToSic.Sxc.Adam.IFile> files,
-    ToSic.Sxc.Dnn.ApiController context)
+    List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
-    var Log = context.Log; // this is a workaround, because 2sxc 10.25.02 didn't put the Log object on DynamicCode
     var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
     
 		// Check for attachments and add them to the mail
@@ -29,9 +69,9 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 					new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
     Log.Add("Get MailEngine");
-		var mailEngine = TemplateInstance(emailTemplateFilename, context.App.Path);
-		var mailBody = mailEngine.Message(valuesWithMailLabels, context).ToString();
-		var mailSubj = mailEngine.Subject(valuesWithMailLabels, context);
+    var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
+		var mailBody = mailEngine.Message(valuesWithMailLabels).ToString();
+		var mailSubj = mailEngine.Subject(valuesWithMailLabels);
 
 		// Send Mail
 		// uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
@@ -56,16 +96,14 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     return sendMailResult == "";
   }
 
-  // get email template
-	private dynamic TemplateInstance(string fileName, string AppPath)
-  {
-    var path = System.IO.Path.Combine("~", CreateInstancePath, "../../email-templates", fileName);
-    var compiledType = BuildManager.GetCompiledType(path);
+  // rewrite the keys to be a nicer format, based on the configuration
+	private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
+	{
+		// create keys-map
+		Dictionary<string, string> newKeys = map
+			.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries)
+			.ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
 
-    if (compiledType == null)
-      throw new Exception("Error while creating mail template instance.");
-  
-    var objectValue = RuntimeHelpers.GetObjectValue(Activator.CreateInstance(compiledType));
-    return ((dynamic)objectValue);
-  }
+		return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
+	}
 }

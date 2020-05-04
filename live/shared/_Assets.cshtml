@@ -1,7 +1,7 @@
 @inherits ToSic.Sxc.Dnn.RazorComponent
 @using DotNetNuke.Framework.JavaScriptLibraries;
 @{
-  string Edition = PageData["Edition"];
+  var Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
   JavaScript.RequestRegistration(CommonJs.jQuery);
 }
 @Edit.Enable(js: true)
@@ -10,7 +10,9 @@
 <script src="@App.Path/@Edition/dist/app-bundle.min.js" data-enableoptimizations="true"></script>
 <link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/style.min.css" data-enableoptimizations="true">
 <script>
-  // initialize the javascripts which will collect the data and send it to the server on send
-  mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
-  mobius.initialize();
+  $(document).ready(function() {
+    // initialize the javascripts which will collect the data and send it to the server on send
+    mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
+    mobius.initialize();
+  });
 </script>

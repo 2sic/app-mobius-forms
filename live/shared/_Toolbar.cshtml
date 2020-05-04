@@ -2,15 +2,13 @@
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
   var Content = PageData["Content"];
-  var Config = PageData["Config"];
+  var WorkflowId = PageData["WorkflowId"];
+
+  var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == WorkflowId).FirstOrDefault();
 }
+
 @Edit.Toolbar(Content)
-@Edit.Toolbar(toolbar: new object[] { 
-  new { 
-    showCondition = true,
-    command = new { action = "contentitems", 
-      contentType = Config.ContentType, 
-      filters = new { ModuleId = Dnn.Module.ModuleID } 
-    }
-  }
-}, settings: new { hover="left", show = "hover" })
+@Edit.Toolbar(toolbar: new [] { 
+  "toolbar=empty&hover=left",
+  "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + Dnn.Module.ModuleID
+})

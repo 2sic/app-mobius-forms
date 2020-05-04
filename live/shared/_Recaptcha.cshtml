@@ -10,7 +10,7 @@
 
 @if(App.Settings.RecaptchaShowWaring == null || App.Settings.RecaptchaShowWaring) {
   <div class="alert alert-warning">
-    @Html.Raw(App.Resources.MessageRecaptchaWarning)
+    @Html.Raw(App.Resources.MessageRecaptchaWarning.Replace("<p>", "").Replace("</p>", ""))
   </div>
 }
 
