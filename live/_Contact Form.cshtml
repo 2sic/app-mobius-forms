@@ -17,6 +17,14 @@
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)
     @FieldBuilder.EMail("SenderMail", true)
+    
+    @if(App.Settings.TermsEnabled) {
+      @RenderPage("shared/_Terms.cshtml")
+    }
+
+    @if(App.Settings.GdprEnabled) {
+      @RenderPage("shared/_GDPR.cshtml")
+    }
 
     @* Recaptcha *@
     @if(Content.Recaptcha ?? false) {

@@ -62,6 +62,9 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		Log.Add("Save data to content type");
 		App.Data.Create(workflow.ContentType, contactFormRequest);
 
+		// Remove Terms and GDPR from the data-package - we don't want them in the e-mails
+		removeKeys(contactFormRequest, new string[] { "GDPR", "Terms" }); 
+
 		var files = new List<ToSic.Sxc.Adam.IFile>();
 
 		// Save files to Adam
@@ -79,7 +82,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 			Log.Add("No files found to save");
 		}
 
-		CreateInstance("Parts/MailChimp.cs").Validate(contactFormRequest);
+		// CreateInstance("Parts/MailChimp.cs").Validate(contactFormRequest);
 		// after subscribe, remove mailchimp field from the data-package,
 		// because we don't want them in the e-mails
 		removeKeys(contactFormRequest, new string[] { "MailChimp" });

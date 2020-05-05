@@ -23,6 +23,14 @@
     @FieldBuilder.File("Attachments", false, "", "File2_1")
     @* since multiple files are sent to Attachments, in needs a unique form id *@
     @FieldBuilder.File("Attachments", false, "", "File2_2")
+    
+    @if(App.Settings.TermsEnabled) {
+      @RenderPage("shared/_Terms.cshtml")
+    }
+
+    @if(App.Settings.GdprEnabled) {
+      @RenderPage("shared/_GDPR.cshtml")
+    }
 
     @* Recaptcha *@
     @if(Content.Recaptcha ?? false) {

@@ -1,0 +1,14 @@
+@inherits ToSic.Sxc.Dnn.RazorComponent
+@using Connect.Koi
+
+@* Sender AcceptGDPR *@
+<div class="form-group">
+  <div class="row">
+    <div @Koi.Class("bs3='col col-xs-1' bs4,oth='col-1'")>
+      <input type="checkbox" id="GDPR" name="GDPR" required data-smk-msg="@App.Resources.LabelRequired" >
+    </div>
+    <div @Koi.Class("bs3='col col-xs-11' bs4,oth='col-11'")>
+      <label for="GDPR" class="control-label">@Html.Raw(App.Resources.GdprLabel)</label>
+    </div>
+  </div>
+</div>

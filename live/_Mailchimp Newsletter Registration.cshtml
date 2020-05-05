@@ -18,7 +18,13 @@
     @FieldBuilder.Text("SenderName", true)
     @FieldBuilder.Text("SenderLastName", true)
     
-    @RenderPage("shared/_DSGVO.cshtml")
+    @if(App.Settings.TermsEnabled) {
+      @RenderPage("shared/_Terms.cshtml")
+    }
+
+    @if(App.Settings.GdprEnabled) {
+      @RenderPage("shared/_GDPR.cshtml")
+    }
 
     @* Recaptcha *@
     @if(Content.Recaptcha ?? false) {
