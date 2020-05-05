@@ -41,6 +41,9 @@ export class CollectFieldsAutomatic {
         if (element.is(':checked')) {
           data[propName] = element.val();
         }
+      } else if (element.attr('type') && element.attr('type').toLowerCase() == 'checkbox') { // For radio fields get checked values
+        const checkValue = element.is(':checked') ? "True" : "False";
+        data[propName] = checkValue;
       } else { // For all standard fields, set value directly
         data[propName] = element.val();
       }

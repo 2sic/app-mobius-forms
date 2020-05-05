@@ -20,7 +20,7 @@
     
     @RenderPage("shared/_DSGVO.cshtml")
 
-    <!-- Recaptcha -->
+    @* Recaptcha *@
     @if(Content.Recaptcha ?? false) {
       @RenderPage("shared/_Recaptcha.cshtml")
     }
@@ -35,7 +35,7 @@
       </div>
     }
 
-    <!-- Messages / Send Button -->
+    @* Messages / Send Button *@
     @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
   

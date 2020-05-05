@@ -24,12 +24,12 @@
     @* since multiple files are sent to Attachments, in needs a unique form id *@
     @FieldBuilder.File("Attachments", false, "", "File2_2")
 
-    <!-- Recaptcha -->
-    @if (Content.Recaptcha ?? false) {
+    @* Recaptcha *@
+    @if(Content.Recaptcha ?? false) {
         @RenderPage("shared/_Recaptcha.cshtml")
     }
 
-    <!-- Messages / Send Button -->
+    @* Messages / Send Button *@
     @RenderPage("shared/_Submit with Messages.cshtml")
   </div>
 
