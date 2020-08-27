@@ -8,7 +8,7 @@
   </div>
 </div>
 
-@if(App.Settings.RecaptchaShowWaring == null || App.Settings.RecaptchaShowWaring) {
+@if(App.Settings.RecaptchaShowWarning == null || App.Settings.RecaptchaShowWarning) {
   <div class="alert alert-warning">
     @Html.Raw(App.Resources.MessageRecaptchaWarning.Replace("<p>", "").Replace("</p>", ""))
   </div>

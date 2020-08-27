@@ -49,8 +49,8 @@
   internal string InputWrapperClasses = (Koi.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8");
 
   // Add a placeholder text to the inputs
-  internal string Placeholder(string key) {
-    var labelTranslated = App.Resources.Get("Label" + key);
+  internal string Placeholder(string key, bool required) {
+    var labelTranslated = App.Resources.Get("Label" + key) + (required ? "*" : "");
     return LabelInPlaceholder ? " placeholder='" + labelTranslated + "'" : "";
   }
 }
@@ -59,7 +59,7 @@
 returns an input with common attributes and a possible placeholder
 *@
 @helper Text(string idString, bool required) {
-  var content = "<input type='text' " + Placeholder(idString) + " " + CommonAttributes(idString, required) + ">";
+  var content = "<input type='text' " + Placeholder(idString, required) + " " + CommonAttributes(idString, required) + ">";
   @Field(idString, required, content);
 }
 
@@ -67,7 +67,7 @@ returns an input with common attributes and a possible placeholder
 returns an input of type email with common attributes and a possible placeholder
 *@
 @helper EMail(string idString, bool required) {
-  var content = "<input type='email' " + Placeholder(idString) + " " + CommonAttributes(idString, required, App.Resources.LabelValidEmail) + ">";
+  var content = "<input type='email' " + Placeholder(idString, required) + " " + CommonAttributes(idString, required, App.Resources.LabelValidEmail) + ">";
   @Field(idString, required, content);
 }
 
@@ -75,7 +75,7 @@ returns an input of type email with common attributes and a possible placeholder
 returns a textarea with common attributes and a possible placeholder
 *@
 @helper Multiline(string idString, bool required) {
-  var content = "<textarea rows='5' " + Placeholder(idString) + " " + CommonAttributes(idString, required) + "></textarea>";
+  var content = "<textarea rows='5' " + Placeholder(idString, required) + " " + CommonAttributes(idString, required) + "></textarea>";
   @Field(idString, required, content);
 }
 
