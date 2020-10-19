@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="11.04.01" ExportDate="2020-09-02T08:54:07.5412072+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.00.00" ModuleVersion="11.07.03" ExportDate="2020-10-19T13:23:41.8519738+02:00">
   <Header>
     <App Guid="74c59dba-8e66-463a-b6fc-752b98c71a57" />
-    <Language Default="en-US" />
+    <Language Default="en-us" />
     <Dimensions>
       <Dimension DimensionID="32" Name="English (United States)" SystemKey="" ExternalKey="en-US" Active="true" />
       <Dimension DimensionID="33" Name="Deutsch (Deutschland)" SystemKey="" ExternalKey="de-DE" Active="true" />
@@ -2884,7 +2884,7 @@
           </Entity>
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="485e634c-c0b3-4b1b-acf8-e05d17ed0cd4" Json="True" KeyNumber="4565" />
         </Attribute>
-        <Attribute StaticName="SenderSurname" Type="String" IsTitle="false">
+        <Attribute StaticName="SenderLastName" Type="String" IsTitle="false">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="aef6abe3-055e-4ec0-93b4-d708b1b9044b" Json="True" KeyNumber="4566">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
@@ -4939,7 +4939,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="04.01.01" Type="String">
+      <Value Key="Version" Value="04.01.02" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
