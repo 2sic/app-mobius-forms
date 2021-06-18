@@ -1,8 +1,6 @@
 @inherits ToSic.Sxc.Dnn.RazorComponent
 @using Connect.Koi;
 @using ToSic.Eav.Configuration;
-@using ToSic.Razor.Blade;
-
 @functions {
   /* 
     this file is for creating different fields e.g. input, textarea, file, dropdown and showing them in the template
@@ -124,7 +122,7 @@ shows a wrapping div with choosen content
   <!-- Field @idString -->
   <div class="@FormClasses()">
     @if(!LabelInPlaceholder) {
-      <label for="@idString" class="@LabelClasses(required)">@Text.First(labelTranslated, idString)</label>
+      <label for="@idString" class="@LabelClasses(required)">@ToSic.Razor.Blade.Text.First(labelTranslated, idString)</label>
     }
     <div class="@(!LabelInPlaceholder ? InputWrapperClasses : "")">
       @Html.Raw(contents)
