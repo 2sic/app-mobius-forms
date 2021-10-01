@@ -1,14 +1,28 @@
-[//]: # "*******************************************************"
-[//]: # "Read this first!!! "
-[//]: # "This text should always be identical in the Wiki/Home and Readme.md"
-[//]: # "So always update it first in the wiki, then copy-paste everything into readme.md"
-[//]: # "*******************************************************"
-
 <img src="app-icon.png" width="250" align="right">
 
-## The Mobius Forms App
+# Mobius Forms 5 App for .net CMSs
 
-This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form extension_ in the DNN ecosystem. This means that it
+> This is a [2sxc](https://2sxc.org) App for [DNN ☢️](https://www.dnnsoftware.com/) and [Oqtane 💧](https://www.oqtane.org/)
+
+This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form extension_ in the DNN ecosystem.
+
+| Aspect              | Status | Comments or Version |
+| ------------------- | :----: | ------------------- |
+| 2sxc                | ✅    | requires 2sxc v12.05
+| Dnn                 | ✅    | For v7, v8 and v9
+| Oqtane 2            | ✅    | Requires v2.02
+| No jQuery           | ?    | 
+| Live Demo           | ➖    |
+| Install Checklist   | ✅    | See [Installation](TODO) on [azing.org](https://azing.org/2sxc)
+| Source & License    | ✅    | included, ISC/MIT
+| App Catalog         | ✅    | See [app catalog](TODO)
+| Screenshots         | ✅    | See [app catalog](TODO)
+| Best Practices      | ✅    | Uses v12.05 conventions
+| Bootstrap 3         | ✔️    | Works well, not optimized
+| Bootstrap 4         | ✅    |
+| Bootstrap 5         | ✔️    | Works well, not optimized
+
+This means that it
 
 1. can be used to create a simple contact form in one minute
 2. can be modified to be any other form you need
