@@ -1,8 +1,8 @@
-@inherits ToSic.Sxc.Dnn.RazorComponent
+@inherits Custom.Hybrid.Razor12
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
-  var Content = PageData["Content"];
-  var WorkflowId = PageData["WorkflowId"];
+  var Content = DynamicModel.Content;
+  var WorkflowId = DynamicModel.WorkflowId;
 
   var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == WorkflowId).FirstOrDefault();
 }
@@ -10,5 +10,5 @@
 @Edit.Toolbar(Content)
 @Edit.Toolbar(toolbar: new [] { 
   "toolbar=empty&hover=left",
-  "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + Dnn.Module.ModuleID
+  "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + CmsContext.Module.Id
 })

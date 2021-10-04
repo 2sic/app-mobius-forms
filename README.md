@@ -55,6 +55,7 @@ Because it's so simple and uses 2sxc, you can easily
 * create [more custom forms][add-forms] which store into further content-types
 
 ## Getting Started
+
 This app is only useful is you use DNN. So assuming you have a DNN installation, all you need to do is install 2sxc and this app. 
 
 * Here's how to [install 2sxc and an App of your Choice](http://2sxc.org/en/blog/post/install-2sxc-and-an-app-of-your-choice)
@@ -66,9 +67,12 @@ This app is only useful is you use DNN. So assuming you have a DNN installation,
 
 
 ## Credits
+
 The icon was built using the CC icon [_optical illusion by pedro baños cancer_ from the Noun Project](https://thenounproject.com/term/mobius-strip/182380/)
 
+## History
 
+TODO: 2dm
 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

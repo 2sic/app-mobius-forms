@@ -20,10 +20,10 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
     // assemble all settings to send the mail
 		// background: some settings are made in this module,
 		// but if they are missing we use fallback settings 
-		// which are taken from the App.Settings
+		// which are taken from the Settings
     var settings = new {
-			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : App.Settings.DefaultMailFrom,
-			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : App.Settings.DefaultOwnerMail
+			MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : Settings.DefaultMailFrom,
+			OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : Settings.DefaultOwnerMail
 		};
 
 		// Send Mail to owner
@@ -34,7 +34,7 @@ public class SendMail : ToSic.Sxc.Dnn.DynamicCode
 					workflow.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
 				);
 			} catch(Exception ex) {
-				throw new Exception("OwnwerSend mail failed: " + ex.Message);
+				throw new Exception("OwnerSend mail failed: " + ex.Message);
 			}
 		}
 

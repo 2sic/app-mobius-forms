@@ -1,7 +1,8 @@
-@inherits ToSic.Sxc.Dnn.RazorComponent
+@inherits Custom.Hybrid.Razor12
+@* // TODO 2mh: change to turnon *@
 @using DotNetNuke.Framework.JavaScriptLibraries;
 @{
-  var Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
+  var Edition = (Edit.Enabled ? "staging" : "live");
   JavaScript.RequestRegistration(CommonJs.jQuery);
 }
 @Edit.Enable(js: true)
@@ -12,7 +13,7 @@
 <script>
   $(document).ready(function() {
     // initialize the javascripts which will collect the data and send it to the server on send
-    mobius = new mobiusforms.App(@Dnn.Module.ModuleID);
+    mobius = new mobiusforms.App(@CmsContext.Module.Id);
     mobius.initialize();
   });
 </script>

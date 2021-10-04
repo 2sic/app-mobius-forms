@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using Newtonsoft.Json;
 using DotNetNuke.Common;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Entities.Users;

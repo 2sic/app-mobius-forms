@@ -1,16 +1,16 @@
-@inherits ToSic.Sxc.Dnn.RazorComponent
+@inherits Custom.Hybrid.Razor12
 @using Connect.Koi
 
 <div class="form-group mobius-support-disable row">
-  <label for="" @Koi.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@App.Resources.LabelRecaptcha</label>
+  <label for="" @Koi.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>@Resources.LabelRecaptcha</label>
   <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-    <div class="g-recaptcha" data-sitekey="@App.Settings.RecaptchaSiteKey" data-size="normal"></div>
+    <div class="g-recaptcha" data-sitekey="@Settings.RecaptchaSiteKey" data-size="normal"></div>
   </div>
 </div>
 
-@if(App.Settings.RecaptchaShowWarning == null || App.Settings.RecaptchaShowWarning) {
+@if(Settings.RecaptchaShowWarning == null || Settings.RecaptchaShowWarning) {
   <div class="alert alert-warning">
-    @Html.Raw(App.Resources.MessageRecaptchaWarning.Replace("<p>", "").Replace("</p>", ""))
+    @Html.Raw(Resources.MessageRecaptchaWarning.Replace("<p>", "").Replace("</p>", ""))
   </div>
 }
 

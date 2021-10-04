@@ -1,3 +1,18 @@
+// Add namespaces to enable security in Oqtane & Dnn despite the differences
+#if NETCOREAPP
+using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
+using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
+#else
+using System.Web.Http;		// this enables [HttpGet] and [AllowAnonymous]
+using DotNetNuke.Web.Api;	// this is to verify the AntiForgeryToken
+using DotNetNuke.Services.Log.EventLog;
+using DotNetNuke.Services.Mail;
+using DotNetNuke.Security;
+using DotNetNuke.Web.Api;
+#endif
+using System.Linq;
+using System.Xml;
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,19 +23,13 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Compilation;
 using System.Runtime.CompilerServices;
-using DotNetNuke.Services.Log.EventLog;
-using DotNetNuke.Services.Mail;
-using DotNetNuke.Security;
-using DotNetNuke.Web.Api;
-using ToSic.SexyContent.WebApi;
 using Newtonsoft.Json;
-using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
+using ToSic.Razor.Blade;
 
-public class FormController : ToSic.Sxc.Dnn.ApiController
+[AllowAnonymous]	// define that all commands can be accessed without a login
+public class FormController : Custom.Hybrid.Api12
 {
 	[HttpPost]
-	[DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.Anonymous)]
-	[ValidateAntiForgeryToken]
 	public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
 	{
 		var wrapLog = Log.Call(useTimer: true);
@@ -30,7 +39,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
 			Log.Add("checking Recaptcha");
-			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, App.Settings.RecaptchaSecretKey);
+			CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string, Settings.RecaptchaSecretKey);
 		}
 
 		// 0.1. after saving, remove recaptcha fields from the data-package, because we don't want them in the e-mails
@@ -44,7 +53,7 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// in the request with the correct name, they will be added automatically
 		contactFormRequest.Add("Timestamp", DateTime.Now);
 		contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
-		contactFormRequest.Add("ModuleId", Dnn.Module.ModuleID);
+		contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
 		// add raw-data, in case the content-type has a "RawData" field
 		contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
 		// add Title (if non given), in case the Content-Type would benefit of an automatic title
@@ -70,9 +79,10 @@ public class FormController : ToSic.Sxc.Dnn.ApiController
 		// Save files to Adam
 		if(contactFormRequest.ContainsKey("Files")) {
 			Log.Add("Found files, will save");
+			// TODO: 2mh Convert.Json.xy ?
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
 			{
-				var data = Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
+				var data = System.Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
 				files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: workflow.ContentType, guid: guid, field: file["Field"]));
 			}
 

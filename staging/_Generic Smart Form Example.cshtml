@@ -1,4 +1,4 @@
-@inherits ToSic.Sxc.Dnn.RazorComponent
+@inherits Custom.Hybrid.Razor12
 @*
   Experimental stuff, don't use yet :)
   this is just some testing stuff
@@ -6,16 +6,15 @@
 *@
 @using System.Linq
 @using Connect.Koi
-@using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
-  var Edition = (Dnn.User.IsSuperUser ? "staging" : "live");
+  var Edition = (Edit.Enabled ? "staging" : "live");
   var workflowId = "GenericSave";
-  var FieldBuilder = CreateInstance("shared/_Field Builders.cshtml");
-  var helpers = CreateInstance("shared/_Helpers.cshtml");
+  var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
+  var helpers = CreateInstance("shared/Helpers.cs");
 }
 
 <div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
-  @RenderPage("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
+  @Html.Partial("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="mobius-form">
     @FieldBuilder.Text("Subject", true)
@@ -45,22 +44,22 @@
       </div>
     </div>
 
-    @if(App.Settings.TermsEnabled) {
-      @RenderPage("shared/_Terms.cshtml")
+    @if(Settings.TermsEnabled) {
+      @Html.Partial("shared/_Terms.cshtml")
     }
 
-    @if(App.Settings.GdprEnabled) {
-      @RenderPage("shared/_GDPR.cshtml")
+    @if(Settings.GdprEnabled) {
+      @Html.Partial("shared/_GDPR.cshtml")
     }
 
     @* Recaptcha *@
     @if(Content.Recaptcha ?? false) {
-      @RenderPage("shared/_Recaptcha.cshtml")
+      @Html.Partial("shared/_Recaptcha.cshtml")
     }
 
     @* Messages / Send Button *@
-    @RenderPage("shared/_Submit with Messages.cshtml")
+    @Html.Partial("shared/_Submit with Messages.cshtml")
   </div>
 </div>
 
-@RenderPage("shared/_Assets.cshtml")
+@Html.Partial("shared/_Assets.cshtml")
