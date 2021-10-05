@@ -1,23 +1,18 @@
-// rename to UiActions
 export class UiActions {
-  showOneAlert(wrapper: JQuery, showId: string) {
-    wrapper.find('.alert').hide();
+  showOneAlert(wrapper: Element, showId: string) {
+    wrapper.querySelectorAll('.alert').forEach((elem: HTMLElement, index) => {
+      elem.style.display = 'none'
+    });
+    
     if (showId !== '') {
-      wrapper.find('#' + showId).show();
+      (wrapper.querySelector(`#${showId}`) as HTMLElement).style.display = 'block';
     }
   }
 
-  disableInputs(wrapper: JQuery, state: boolean) {
-    wrapper.toggleClass('disable', state)
-    wrapper.find(':input').prop('disabled', state);
-  }
-
-  attachFieldValidateOnBlur() {
-    // skif if validation is already enabled
-    if ($(this).data('alreadyRun')) return;
-
-    // not yet enabled, let's enable and remember...
-    ($(this) as any).smkValidate();
-    $(this).data('alreadyRun', true);
+  disableInputs(wrapper: Element, state: boolean) {
+    wrapper.classList.toggle('disable', state)
+    wrapper.querySelectorAll('input,textarea,select').forEach((elem: HTMLElement, index) => {
+      elem.setAttribute('disabled', 'true');
+    })
   }
 }

@@ -7,17 +7,17 @@
 export class CollectFieldsManual {
   // automatically build the send-object with all properties, 
   // based on all form-fields which have a item-property=""
-  collect(wrapper: JQuery) {
+  collect(wrapper: Element) {
     const data: any = {
-      Subject: wrapper.find('#Subject'),
-      Message: wrapper.find('#Message'),
-      SenderName: wrapper.find('#Sendername'),
-      SenderMail: wrapper.find('#Sendermail')
+      Subject: wrapper.querySelector('#Subject'),
+      Message: wrapper.querySelector('#Message'),
+      SenderName: wrapper.querySelector('#Sendername'),
+      SenderMail: wrapper.querySelector('#Sendermail')
     };
 
     for (let prop in data) {
       if (data.hasOwnProperty(prop)) {
-        data[prop] = data[prop].val();
+        data[prop] = data[prop].value;
       }
     }
 

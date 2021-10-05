@@ -79,7 +79,6 @@ public class FormController : Custom.Hybrid.Api12
 		// Save files to Adam
 		if(contactFormRequest.ContainsKey("Files")) {
 			Log.Add("Found files, will save");
-			// TODO: 2mh Convert.Json.xy ?
 			foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
 			{
 				var data = System.Convert.FromBase64String((file["Encoded"]).Split(',')[1]);

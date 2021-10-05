@@ -1,4 +1,4 @@
-<img src="app-icon.png" width="250" align="right">
+<image src="app-icon.png" align="right" width="200px">
 
 # Mobius Forms 5 App for .net CMSs
 
@@ -64,6 +64,9 @@ This app is only useful is you use DNN. So assuming you have a DNN installation,
 
 * It probably helps to review the [Overview][overview] about how the parts play together by default, so you can then change as little as necessary to get it to do what you want
 
+## Customize the App
+
+TODO: @2dm
 
 
 ## Credits
@@ -72,7 +75,7 @@ The icon was built using the CC icon [_optical illusion by pedro baños cancer_ 
 
 ## History
 
-TODO: 2dm
+TODO: @2dm
 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

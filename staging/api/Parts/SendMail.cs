@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
-public class SendMail : ToSic.Sxc.Dnn.DynamicCode
+public class SendMail : Custom.Hybrid.Code12
 {
   public void sendMails(Dictionary<string,object> contactFormRequest, string workflowId, dynamic files) {
     var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";

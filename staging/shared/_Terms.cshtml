@@ -1,13 +1,15 @@
 @inherits Custom.Hybrid.Razor12
-@using Connect.Koi
+@{
+  var pageCss = GetService<Connect.Koi.ICss>();
+}
 
 @* Sender AcceptTerms *@
 <div class="form-group">
   <div class="row">
-    <div @Koi.Class("bs3='col col-xs-1' bs4,oth='col-1'")>
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
       <input type="checkbox" id="Terms" name="Terms" required data-smk-msg="@Resources.LabelRequired" >
     </div>
-    <div @Koi.Class("bs3='col col-xs-11' bs4,oth='col-11'")>
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>
       <label for="Terms" class="control-label">@Html.Raw(Resources.TermsLabel)</label>
     </div>
   </div>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 // Helper to do Recaptcha server-validation
 // based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
 // shouldn't really need any modifications, just leave this as is
-public class Recaptcha : ToSic.Sxc.Dnn.DynamicCode
+public class Recaptcha : Custom.Hybrid.Code12
 {
   public bool Validate(string EncodedResponse, string PrivateKey)
   {

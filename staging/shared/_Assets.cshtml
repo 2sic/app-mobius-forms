@@ -1,19 +1,15 @@
 @inherits Custom.Hybrid.Razor12
-@* // TODO 2mh: change to turnon *@
+@using ToSic.Razor.Blade;
 @using DotNetNuke.Framework.JavaScriptLibraries;
 @{
   var Edition = (Edit.Enabled ? "staging" : "live");
-  JavaScript.RequestRegistration(CommonJs.jQuery);
+  var page = GetService<ToSic.Sxc.Web.IPageService>();  // Service to set titles etc. on the page
+  page.Activate("turnOn");
+
+  var mobiusDomId = "app-mobius-" + @CmsContext.Module.Id;
 }
 @Edit.Enable(js: true)
 
-<script src="@App.Path/src/libs/smoke.min.js" data-enableoptimizations="100"></script>
-<script src="@App.Path/@Edition/dist/app-bundle.min.js" data-enableoptimizations="true"></script>
-<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/style.min.css" data-enableoptimizations="true">
-<script>
-  $(document).ready(function() {
-    // initialize the javascripts which will collect the data and send it to the server on send
-    mobius = new mobiusforms.App(@CmsContext.Module.Id);
-    mobius.initialize();
-  });
-</script>
+<turnOn turn-on='{ "run": "window.appMobius5.init()", "data": { "domId": "@mobiusDomId" } }'></turnOn>
+<script src="@App.Path/@Edition/dist/scripts.min.js" data-enableoptimizations="true"></script>
+<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/styles.min.css" data-enableoptimizations="true">

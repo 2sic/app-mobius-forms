@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "@types/jquery": "^3.5.6",
-    "smokejs": "^3.1.0"
+    "pristinejs": "^0.1.9"
   }
 }

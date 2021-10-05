@@ -5,12 +5,12 @@
   not for production!!!
 *@
 @using System.Linq
-@using Connect.Koi
 @{
   var Edition = (Edit.Enabled ? "staging" : "live");
   var workflowId = "GenericSave";
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   var helpers = CreateInstance("shared/Helpers.cs");
+  var pageCss = GetService<Connect.Koi.ICss>();
 }
 
 <div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
@@ -26,20 +26,20 @@
     @{
       // will show/hide the additional field, and set it's "Required" state
       // create a unique name, to ensure it works if multiple forms are on the page
-      var custFieldId = "app-form-cid-" + Dnn.Module.ModuleID;
+      var custFieldId = "app-form-cid-" + CmsContext.Module.Id;
     }
     <div class="form-group row">
-      <label for="IsCustomer" @Koi.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
-      <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
+      <label for="IsCustomer" @pageCss.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
+      <div @pageCss.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
-        <input type="checkbox" class="form-control" name="IsCustomer" onclick="$('#@custFieldId').toggle(this.checked).find('input').prop('required', this.checked)" required>
+        <input type="checkbox" class="form-control" name="IsCustomer" onclick="document.getElementById('#@custFieldId').style.display = document.getElementById('#@custFieldId').style.display === 'none' ? 'block' : 'none'; document.getElementById('#@custFieldId').querySelector('input').setAttribute('required', this.checked)" required>
       </div>
     </div>
 
     <!-- Customer ID (if is customer) -->
     <div id="@custFieldId" class="form-group row" style="display:none">
-      <label for="CustomerId" @Koi.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
-      <div @Koi.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
+      <label for="CustomerId" @pageCss.Class("all='control-label mobius-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
+      <div @pageCss.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
         <input type="text" class="form-control" id="CustomerId" value="">
       </div>
     </div>

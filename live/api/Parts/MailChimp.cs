@@ -5,14 +5,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using Newtonsoft.Json;
 using DotNetNuke.Common;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Portals;
+using Newtonsoft.Json;
 
 // TODO: 2ro - check if we can just log to EAV and not to DNN
-public class MailChimp : ToSic.Sxc.Dnn.DynamicCode
+public class MailChimp : Custom.Hybrid.Code12
 {
   // Checks for MailChimp Integration
   // if true instantiate mailchimp

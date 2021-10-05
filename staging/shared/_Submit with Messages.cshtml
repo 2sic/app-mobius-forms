@@ -1,8 +1,10 @@
 @inherits Custom.Hybrid.Razor12
-@using Connect.Koi
+@{
+  var pageCss = GetService<Connect.Koi.ICss>();
+}
 <div class="form-group row">
   <!-- form error messages, invisible at first --> 
-  <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+  <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
     <div id="msgIncomplete" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
     <div id="msgRecap" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
     <div id="msgError" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
@@ -16,7 +18,7 @@
   </div>
 
   @if((Content.Mailchimp ?? false) && (Settings.MailChimpShowWarning == null || Settings.MailChimpShowWarning)) {
-    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
       <div class="alert alert-warning">
         @Html.Raw(Resources.MessageDefaultMailChimpKey.Replace("<p>", "").Replace("</p>", ""))
       </div>
@@ -24,7 +26,7 @@
   }
 
   @if((Content.CustomerSend || Content.OwnerSend) && Content.MailFrom == "" && Settings.DefaultMailFrom == "") {
-    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
       <div class="alert alert-warning">
         @Html.Raw(Resources.MessageMailFromError.Replace("<p>", "").Replace("</p>", ""))
       </div>
@@ -32,7 +34,7 @@
   }
 
   @if(Content.OwnerSend && Content.OwnerMail == "" && Settings.DefaultOwnerMail == "") {
-    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
       <div class="alert alert-warning">
         @Html.Raw(Resources.MessageMailOwnerError.Replace("<p>", "").Replace("</p>", ""))
       </div>
@@ -40,8 +42,8 @@
   }
 
   <!-- send button -->
-  <div @Koi.Class("all='' bs3='col col-xs-12' bs4,oth='col-12'")>
-    <button id="sendFormWithApi" type="button" class="btn btn-primary">@Resources.ButtonSend</button>
+  <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
+    <button type="button" class="btn btn-primary btn-send-mobius-form">@Resources.ButtonSend</button>
   </div>
 </div>
 

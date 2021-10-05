@@ -1,47 +1,49 @@
-@inherits ToSic.Sxc.Dnn.RazorComponent
-@using Connect.Koi
+@inherits Custom.Hybrid.Razor12
+@{
+  var pageCss = GetService<Connect.Koi.ICss>();
+}
 <div class="form-group row">
   <!-- form error messages, invisible at first --> 
-  <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
-    <div id="msgIncomplete" class="alert alert-danger mobius-message" role="alert">@Html.Raw(App.Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgRecap" class="alert alert-danger mobius-message" role="alert">@Html.Raw(App.Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgError" class="alert alert-danger mobius-message" role="alert">@Html.Raw(App.Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgSending" class="alert alert-warning mobius-message" role="alert">@Html.Raw(App.Resources.MessageSending.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgNewsletterSuccess" class="alert alert-success mobius-message">@App.Resources.MessageNewsletterSuccess</div>
-    <div id="msgNewsletterFailed" class="alert alert-danger mobius-message">@App.Resources.MessageNewsletterUnexpectedError</div>
+  <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
+    <div id="msgIncomplete" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgRecap" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgError" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgSending" class="alert alert-warning mobius-message" role="alert">@Html.Raw(Resources.MessageSending.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgNewsletterSuccess" class="alert alert-success mobius-message">@Resources.MessageNewsletterSuccess</div>
+    <div id="msgNewsletterFailed" class="alert alert-danger mobius-message">@Resources.MessageNewsletterUnexpectedError</div>
     <div id="msgOk" class="alert alert-success mobius-message" role="alert">
-      @Html.Raw( App.Resources.MessageSendOk )
-      @Html.Raw( Content.CustomerSend != null && Content.CustomerSend ? App.Resources.MessageCustomerMailSend : "")
+      @Html.Raw(Resources.MessageSendOk)
+      @Html.Raw(Content.CustomerSend != null && Content.CustomerSend ? Resources.MessageCustomerMailSend : "")
     </div>
   </div>
 
-  @if((Content.Mailchimp ?? false) && (App.Settings.MailChimpShowWarning == null || App.Settings.MailChimpShowWarning)) {
-    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+  @if((Content.Mailchimp ?? false) && (Settings.MailChimpShowWarning == null || Settings.MailChimpShowWarning)) {
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
       <div class="alert alert-warning">
-        @Html.Raw(App.Resources.MessageDefaultMailChimpKey.Replace("<p>", "").Replace("</p>", ""))
+        @Html.Raw(Resources.MessageDefaultMailChimpKey.Replace("<p>", "").Replace("</p>", ""))
       </div>
     </div>
   }
 
-  @if((Content.CustomerSend || Content.OwnerSend) && Content.MailFrom == "" && App.Settings.DefaultMailFrom == "") {
-    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+  @if((Content.CustomerSend || Content.OwnerSend) && Content.MailFrom == "" && Settings.DefaultMailFrom == "") {
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
       <div class="alert alert-warning">
-        @Html.Raw(App.Resources.MessageMailFromError.Replace("<p>", "").Replace("</p>", ""))
+        @Html.Raw(Resources.MessageMailFromError.Replace("<p>", "").Replace("</p>", ""))
       </div>
     </div>
   }
 
-  @if(Content.OwnerSend && Content.OwnerMail == "" && App.Settings.DefaultOwnerMail == "") {
-    <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+  @if(Content.OwnerSend && Content.OwnerMail == "" && Settings.DefaultOwnerMail == "") {
+    <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
       <div class="alert alert-warning">
-        @Html.Raw(App.Resources.MessageMailOwnerError.Replace("<p>", "").Replace("</p>", ""))
+        @Html.Raw(Resources.MessageMailOwnerError.Replace("<p>", "").Replace("</p>", ""))
       </div>
     </div>
   }
 
   <!-- send button -->
-  <div @Koi.Class("all='' bs3='col col-xs-12' bs4,oth='col-12'")>
-    <button id="sendFormWithApi" type="button" class="btn btn-primary">@App.Resources.ButtonSend</button>
+  <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
+    <button type="button" class="btn btn-primary btn-send-mobius-form">@Resources.ButtonSend</button>
   </div>
 </div>
 

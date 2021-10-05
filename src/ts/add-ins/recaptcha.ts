@@ -5,38 +5,32 @@ import { UiActions } from './uiActions';
 export class Recaptcha {
   helperFunc = new UiActions();
 
-  c  = {
-    recapId: "recapId",
-    clsRecap: "g-recaptcha"
-  };
-
   constructor() { }
 
   /*
     Initialize Recaptcha and create a Recapcha Checkbox below the Formfields 
   */
-  init(wrapper: JQuery) {
-    const recap = wrapper.find(this.c.clsRecap);
+  init(wrapper: HTMLElement) {
+    const recap = wrapper.querySelector('g-recaptcha') as HTMLElement;
 
-    if(!isNaN(wrapper.data(this.c.recapId))) {
+    if(!isNaN(parseInt(wrapper.dataset.recapId))) {
         return;
     }
 
     const id = grecaptcha.render(recap, {
-      'sitekey' : recap.data("sitekey"),
+      'sitekey' : recap.dataset.sitekey,
       'size' : 'normal'
     });
 
-    wrapper.data(this.c.recapId, id); // remember for later use       
+    wrapper.setAttribute('recapId', id); // remember for later use       
   }
-
-
   
   /* 
     Checks if a recaptcha is implemented in the current Form
   */
-  check(wrapper: JQuery) {
-    const recap = wrapper.find("." + this.c.clsRecap);
+  check(wrapper: Element) {
+    const recap = wrapper.getElementsByClassName('g-recaptcha');
+
     // if no recaptcha found, probably ok
     if(recap.length === 0) {
       return true;

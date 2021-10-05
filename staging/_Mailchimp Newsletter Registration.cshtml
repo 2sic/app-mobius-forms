@@ -1,5 +1,4 @@
 @inherits Custom.Hybrid.Razor12
-@using Connect.Koi
 @using System.Linq
 @{
   var Edition = (Edit.Enabled ? "staging" : "live");
@@ -7,6 +6,7 @@
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   FieldBuilder.LabelInPlaceholder = true;
   var helpers = CreateInstance("shared/Helpers.cs");
+  var pageCss = GetService<Connect.Koi.ICss>();
 }
 
 <div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
@@ -32,7 +32,7 @@
 
     @if(!Content.Mailchimp) {
       <div class="form-group row">
-        <div @Koi.Class("bs3='col col-xs-12' bs4,oth='col-12'")>
+        <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
           <div class="alert alert-warning">
             @Html.Raw(Resources.MessageEnableMailchimp.Replace("<p>", "").Replace("</p>", ""))
           </div>
