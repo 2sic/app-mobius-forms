@@ -15,7 +15,7 @@ function initAppMobius5({ domId } : { domId: string }) {
   const mobuisWrapper = document.getElementsByClassName(domId)[0];
   const helperFunc = new UiActions();
 
-  document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
+  if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
   mobuisWrapper.getElementsByClassName('btn-send-mobius-form')[0].addEventListener('click', (event: Event) => {
     event.preventDefault();
