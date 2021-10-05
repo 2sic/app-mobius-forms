@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-10-05T11:46:55.7734829+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.05.00" ExportDate="2021-10-05T12:35:12.0341233+02:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -6925,6 +6925,12 @@
       <Value Key="Timestamp" Value="2021-10-05T11:28:31" Type="DateTime">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="5e5e3bdf-76a1-4982-9908-ef1220d507df" Json="True">
+      <Value Key="Template" Value="6bc262cd-cb74-445e-81e6-1e2fd126458d" Type="Entity" />
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="11936bd4-e9a6-4d63-9bd2-89c220e54fbf" Json="True">
+      <Value Key="Template" Value="cd30719b-5e6e-4a55-b3f3-d175b9cc24c9" Type="Entity" />
     </Entity>
   </Entities>
   <PortalFiles />
