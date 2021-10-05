@@ -27,8 +27,6 @@ public class MailChimp : Custom.Hybrid.Code12
 			} else {
 				Log.Add("...MailChimp - not wanted by user, won't add");
 			}
-
-			 
 		} else {
 			Log.Add("Won't add to MailChimp");
 		}
