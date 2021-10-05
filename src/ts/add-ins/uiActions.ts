@@ -1,11 +1,11 @@
 export class UiActions {
-  showOneAlert(wrapper: Element, showId: string) {
+  showOneAlert(wrapper: Element, responseMessageElement: string) {
     wrapper.querySelectorAll('.alert').forEach((elem: HTMLElement, index) => {
       elem.style.display = 'none'
     });
     
-    if (showId !== '') {
-      (wrapper.querySelector(`#${showId}`) as HTMLElement).style.display = 'block';
+    if (responseMessageElement !== '') {
+      (wrapper.querySelector(`#${responseMessageElement}`) as HTMLElement).style.display = 'block';
     }
   }
 
