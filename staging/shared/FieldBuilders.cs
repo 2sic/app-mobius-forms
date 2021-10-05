@@ -37,7 +37,7 @@ public class FieldBuilders: Custom.Hybrid.Code12
   // Choose CSS classes for the labels
   internal string LabelClasses(bool required) {
     return "control-label "
-      + (required ? "mobius-field-required " : "")
+      + (required ? "app-mobius5-field-required " : "")
       + (PageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4");
   } 
 

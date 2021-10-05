@@ -5,13 +5,13 @@
 <div class="form-group row">
   <!-- form error messages, invisible at first --> 
   <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    <div id="msgIncomplete" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgRecap" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgError" class="alert alert-danger mobius-message" role="alert">@Html.Raw(Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgSending" class="alert alert-warning mobius-message" role="alert">@Html.Raw(Resources.MessageSending.Replace("<p>", "").Replace("</p>", ""))</div>
-    <div id="msgNewsletterSuccess" class="alert alert-success mobius-message">@Resources.MessageNewsletterSuccess</div>
-    <div id="msgNewsletterFailed" class="alert alert-danger mobius-message">@Resources.MessageNewsletterUnexpectedError</div>
-    <div id="msgOk" class="alert alert-success mobius-message" role="alert">
+    <div id="msgIncomplete" class="alert alert-danger app-mobius5-message" role="alert">@Html.Raw(Resources.MessageFormIncomplete.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgRecap" class="alert alert-danger app-mobius5-message" role="alert">@Html.Raw(Resources.MessageRecaptchaMissing.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgError" class="alert alert-danger app-mobius5-message" role="alert">@Html.Raw(Resources.MessageSendError.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgSending" class="alert alert-warning app-mobius5-message" role="alert">@Html.Raw(Resources.MessageSending.Replace("<p>", "").Replace("</p>", ""))</div>
+    <div id="msgNewsletterSuccess" class="alert alert-success app-mobius5-message">@Resources.MessageNewsletterSuccess</div>
+    <div id="msgNewsletterFailed" class="alert alert-danger app-mobius5-message">@Resources.MessageNewsletterUnexpectedError</div>
+    <div id="msgOk" class="alert alert-success app-mobius5-message" role="alert">
       @Html.Raw(Resources.MessageSendOk)
       @Html.Raw(Content.CustomerSend != null && Content.CustomerSend ? Resources.MessageCustomerMailSend : "")
     </div>
@@ -43,7 +43,7 @@
 
   <!-- send button -->
   <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    <button type="button" class="btn btn-primary btn-send-mobius-form">@Resources.ButtonSend</button>
+    <button type="button" class="btn btn-primary btn-send-mobius5-form">@Resources.ButtonSend</button>
   </div>
 </div>
 

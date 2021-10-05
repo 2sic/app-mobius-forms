@@ -2,8 +2,8 @@
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
 }
-<div class="form-group mobius-support-disable row">
-  <label for="" class='control-label mobius-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>@Resources.LabelRecaptcha</label>
+<div class="form-group app-mobius5-support-disable row">
+  <label for="" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>@Resources.LabelRecaptcha</label>
   <div class='@(pageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
     <div class="g-recaptcha" data-sitekey="@Settings.RecaptchaSiteKey" data-size="normal"></div>
   </div>

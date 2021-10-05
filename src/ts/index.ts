@@ -17,7 +17,7 @@ function initAppMobius5({ domId } : { domId: string }) {
 
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
-  mobuisWrapper.getElementsByClassName('btn-send-mobius-form')[0].addEventListener('click', (event: Event) => {
+  mobuisWrapper.getElementsByClassName('btn-send-mobius5-form')[0].addEventListener('click', (event: Event) => {
     event.preventDefault();
     send(mobuisWrapper, event)
   })
