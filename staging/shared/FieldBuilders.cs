@@ -116,13 +116,13 @@ public class FieldBuilders: Custom.Hybrid.Code12
   public dynamic Field(string idString, bool required, dynamic contents) {
     InputWrapperClasses = _inputWrapperClasses ?? (_inputWrapperClasses = (PageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8"));
     var labelTranslated = Resources.Get("Label" + idString);
+    var field = Tag.Div().Class(FormClasses());
 
-    var labelInPlaceholder = Tag.Label();
     if (!LabelInPlaceholder) {
-      labelInPlaceholder = Tag.Label(ToSic.Razor.Blade.Text.First(labelTranslated, idString)).Class(LabelClasses(required)).For(idString);
+      field = field.Add(Tag.Label(ToSic.Razor.Blade.Text.First(labelTranslated, idString)).Class(LabelClasses(required)).For(idString));
     }
-
-    return Tag.Div(labelInPlaceholder, Tag.Div(contents).Class(!LabelInPlaceholder ? InputWrapperClasses : "")).Class(FormClasses());
+    
+    return field.Add(Tag.Div(contents).Class(!LabelInPlaceholder ? InputWrapperClasses : ""));
   }
 }
 

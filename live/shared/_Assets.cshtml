@@ -1,14 +1,11 @@
 @inherits Custom.Hybrid.Razor12
 @using ToSic.Razor.Blade;
-@using DotNetNuke.Framework.JavaScriptLibraries;
 @{
   var Edition = (Edit.Enabled ? "staging" : "live");
   var page = GetService<ToSic.Sxc.Web.IPageService>();  // Service to set titles etc. on the page
   page.Activate("turnOn");
-
   var mobiusDomId = "app-mobius-" + @CmsContext.Module.Id;
 }
-@Edit.Enable(js: true)
 
 <turnOn turn-on='{ "run": "window.appMobius5.init()", "data": { "domId": "@mobiusDomId" } }'></turnOn>
 <script src="@App.Path/@Edition/dist/scripts.min.js" data-enableoptimizations="true"></script>
