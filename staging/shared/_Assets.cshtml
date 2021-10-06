@@ -4,7 +4,7 @@
   var Edition = (Edit.Enabled ? "staging" : "live");
   var page = GetService<ToSic.Sxc.Web.IPageService>();  // Service to set titles etc. on the page
   page.Activate("turnOn");
-  var mobiusDomId = "app-mobius5-" + @CmsContext.Module.Id;
+  var mobiusDomId = "app-mobius5-js-" + CmsContext.Module.Id;
 }
 @Edit.Enable(js: true)
 
