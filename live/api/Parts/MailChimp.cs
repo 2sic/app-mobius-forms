@@ -9,7 +9,6 @@ using DotNetNuke.Common;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Portals;
-using Newtonsoft.Json;
 
 // TODO: 2ro - check if we can just log to EAV and not to DNN
 public class MailChimp : Custom.Hybrid.Code12
@@ -67,17 +66,17 @@ public class MailChimp : Custom.Hybrid.Code12
     var response = MailchimpRequest(subscriberUrl, "GET", "", apiKey);
     if(response.StatusCode == HttpStatusCode.OK)
     {
-      var currentStatus = JsonConvert.DeserializeObject<dynamic>(response.Response).status;
+      var currentStatus = Convert.Json.To<dynamic>(response.Response).status;
 
       // Do nothing if user is already subscribed
       if (currentStatus == "subscribed") return "OK";
       
       // Update existing subscriber
-      return MailchimpRequest(subscriberUrl, "PUT", JsonConvert.SerializeObject(body), apiKey).StatusCode.ToString();
+      return MailchimpRequest(subscriberUrl, "PUT", Convert.Json.ToJson(body), apiKey).StatusCode.ToString();
     }
     else
     {
-      return MailchimpRequest(baseUrl, "POST", JsonConvert.SerializeObject(body), apiKey).StatusCode.ToString();
+      return MailchimpRequest(baseUrl, "POST", Convert.Json.ToJson(body), apiKey).StatusCode.ToString();
     }
   }
 

@@ -115,7 +115,7 @@ public class FormController : Custom.Hybrid.Api12
 	{
 		var data = new Dictionary<string, object>(formRequest, StringComparer.OrdinalIgnoreCase);
 		data.Remove("Files");
-		return JsonConvert.SerializeObject(data);
+		return Convert.Json.ToJson(data);
 	}
 
 	// helpers
