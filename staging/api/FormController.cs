@@ -3,8 +3,9 @@
 using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
+using System.Runtime.CompilerServices;
+using System.Web.Compilation;
 using System.Web.Http;		// this enables [HttpGet] and [AllowAnonymous]
-using DotNetNuke.Web.Api;	// this is to verify the AntiForgeryToken
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
 using DotNetNuke.Security;
@@ -20,9 +21,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
-using System.Web.Http;
-using System.Web.Compilation;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using ToSic.Razor.Blade;
 
@@ -35,7 +33,7 @@ public class FormController : Custom.Hybrid.Api12
 		var wrapLog = Log.Call(useTimer: true);
 		// Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
 		contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
-    
+
 		// 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
 		if(Content.Recaptcha ?? false) {
 			Log.Add("checking Recaptcha");
@@ -43,17 +41,21 @@ public class FormController : Custom.Hybrid.Api12
 		}
 
 		// 0.1. after saving, remove recaptcha fields from the data-package, because we don't want them in the e-mails
-		removeKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" }); 
+		removeKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" });
 
 		// get configuration for this Form
 		var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
 
 		// 1. add IP / host, and save all fields
-		// if you add fields to your content-type, just make sure they are 
+		// if you add fields to your content-type, just make sure they are
 		// in the request with the correct name, they will be added automatically
 		contactFormRequest.Add("Timestamp", DateTime.Now);
-		contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
-		contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
+#if NETCOREAPP
+        // contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress);
+#else
+        contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
+#endif
+        contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
 		// add raw-data, in case the content-type has a "RawData" field
 		contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
 		// add Title (if non given), in case the Content-Type would benefit of an automatic title
@@ -72,7 +74,7 @@ public class FormController : Custom.Hybrid.Api12
 		App.Data.Create(workflow.ContentType, contactFormRequest);
 
 		// Remove Terms and GDPR from the data-package - we don't want them in the e-mails
-		removeKeys(contactFormRequest, new string[] { "GDPR", "Terms" }); 
+		removeKeys(contactFormRequest, new string[] { "GDPR", "Terms" });
 
 		var files = new List<ToSic.Sxc.Adam.IFile>();
 
@@ -99,15 +101,15 @@ public class FormController : Custom.Hybrid.Api12
 		// Improve keys / values for nicer presentation in the mail
 		// after saving, remove raw-data and the generated title
 		// because we don't want them in the e-mails
-		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" }); 
-		
+		removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" });
+
 		// remove App informations from data-package
-		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" }); 
+		removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" });
 
 		// sending Mails
 		var sendMail = CreateInstance("Parts/SendMail.cs");
 		sendMail.sendMails(contactFormRequest, workflowId, files);
-		
+
 		wrapLog("ok");
 	}
 
@@ -123,7 +125,7 @@ public class FormController : Custom.Hybrid.Api12
 	private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
 	{
 		foreach (var key in badKeys)
-			if(contactFormRequest.ContainsKey(key)) 
+			if(contactFormRequest.ContainsKey(key))
 				contactFormRequest.Remove(key);
 	}
 }
