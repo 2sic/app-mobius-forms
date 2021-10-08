@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
+using ToSic.Eav.Run;
 #if NETCOREAPP // Oqtane
 using System.Net;
 using System.Net.Mail;
@@ -83,11 +84,10 @@ public class SendMail : Custom.Hybrid.Code12
         var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
 
         // Check for attachments and add them to the mail
+        var serverPaths = GetService<IServerPaths>();
         var attachments = files.Select(f =>
                 new System.Net.Mail.Attachment(
-                    // TODO: 2dm
-                    // new FileStream(Link.To(api: f.Url, type: "full"), FileMode.Open), f.FullName)).ToList();
-                    new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
+                     new FileStream(serverPaths.FullContentPath(f.Path + "/" + f.FullName), FileMode.Open), f.FullName)).ToList();
 
         Log.Add("Get MailEngine");
         var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
