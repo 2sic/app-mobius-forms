@@ -45,7 +45,7 @@ function send(wrapper: Element, event: Event) {
   if (!recap)
     return helperFunc.showOneAlert(wrapper, 'msgRecap');    
 
-  const mailchimp = wrapper.classList.contains('mobius-mailchimp');
+  const mailchimp = wrapper.classList.contains('app-mobius5-mailchimp');
 
   const ws = (wrapper as HTMLElement).dataset.webservice; // should be "Form/ProcessForm" or a custom override
   // get data
@@ -60,6 +60,8 @@ function send(wrapper: Element, event: Event) {
 
   helperFunc.disableInputs(wrapper, true);
   helperFunc.showOneAlert(wrapper, 'msgSending');
+
+  console.log(data)
 
   sxc.webApi.post(ws, null, data, true)
     .success(() => {

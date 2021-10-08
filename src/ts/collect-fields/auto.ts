@@ -31,6 +31,7 @@ export class CollectFieldsAutomatic {
           });
         }, false);
         reader.readAsDataURL(file);
+        
       } else if (element.getAttribute('type') && element.getAttribute('type').toLowerCase() == 'radio') { // For radio fields get checked values
         if (element.checked) {
           data[propName] = element.value;
