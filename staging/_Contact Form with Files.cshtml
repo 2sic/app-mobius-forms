@@ -11,9 +11,6 @@
   @Html.Partial("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="app-mobius5-form">
-    @FieldBuilder.Text("Subject", true)
-    @FieldBuilder.Multiline("Message", true)
-    @FieldBuilder.Text("SenderName", false)
     @FieldBuilder.EMail("SenderMail", true)
 
     @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg", "SingleFile")

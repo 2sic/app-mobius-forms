@@ -8,6 +8,9 @@ using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
+// 2sxclint:disable:no-....?
+using System.Web;
+using System.Web.Http;
 #endif
 using System.Linq;
 using System.Xml;

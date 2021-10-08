@@ -1,12 +1,13 @@
 export class CollectFieldsAutomatic {
   // automatically build the send-object with all properties, 
   // based on all form-fields which have a item-property=""
-  collect(wrapper: Element) {
+  collect(wrapper: Element, callback: any) {
     let data: any = {
       Files: []
     };
     const fields = wrapper.querySelectorAll('input,textarea,select');
     const inputData = fields.forEach((field: HTMLInputElement, index: number) => { add(index, field) });
+    let filesLoaded = wrapper.querySelector('input[type="file"]') ? false : true;
     
     function add(i: number, element: HTMLInputElement) {
       // get the property name from special-attribut, name OR id
@@ -18,9 +19,11 @@ export class CollectFieldsAutomatic {
       // extract data from file fields
       if (element.getAttribute('type') && element.getAttribute('type').toLowerCase() == 'file') {
         const file = element.files[0];
-        if (!file)
+        if (!file) {
+          filesLoaded = true;
           return;
-
+        }
+          
         const reader = new FileReader();
 
         reader.addEventListener('load', function () {
@@ -29,7 +32,12 @@ export class CollectFieldsAutomatic {
             Name: file.name,
             Field: propName
           });
-        }, false);
+        }, true);
+
+        reader.onloadend = () => {  
+          filesLoaded = true;
+        }
+
         reader.readAsDataURL(file);
         
       } else if (element.getAttribute('type') && element.getAttribute('type').toLowerCase() == 'radio') { // For radio fields get checked values
@@ -44,6 +52,12 @@ export class CollectFieldsAutomatic {
       }      
     }
 
-    return data;
+    let checkInterval = setInterval(() => {
+      if(filesLoaded) {
+        clearInterval(checkInterval);
+        return callback(data, wrapper);
+      }  
+    })
+    
   }
 }

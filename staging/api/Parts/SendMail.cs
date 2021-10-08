@@ -85,7 +85,9 @@ public class SendMail : Custom.Hybrid.Code12
         // Check for attachments and add them to the mail
         var attachments = files.Select(f =>
                 new System.Net.Mail.Attachment(
-                    new FileStream(Link.To(api: f.Url, type: "full"), FileMode.Open), f.FullName)).ToList();
+                    // TODO: 2dm
+                    // new FileStream(Link.To(api: f.Url, type: "full"), FileMode.Open), f.FullName)).ToList();
+                    new FileStream(System.Web.Hosting.HostingEnvironment.MapPath("~/") + f.Url, FileMode.Open), f.FullName)).ToList();
 
         Log.Add("Get MailEngine");
         var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);

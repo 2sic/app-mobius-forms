@@ -19,17 +19,15 @@ function initAppMobius5({ domId } : { domId: string }) {
 
   mobuisWrapper.getElementsByClassName('btn-send-mobius5-form')[0].addEventListener('click', (event: Event) => {
     event.preventDefault();
-    send(mobuisWrapper, event)
+    validate(mobuisWrapper, event)
   })
 }
 
-function send(wrapper: Element, event: Event) {
+function validate(wrapper: Element, event: Event) {
   const helperFunc = new UiActions();
-  const recaptcha = new Recaptcha();
   const collectFieldsAutomatic = new CollectFieldsAutomatic();
   const pristine = new Pristine(wrapper);
   const btn = event.currentTarget as HTMLElement;
-  const sxc = $2sxc(btn);
   const label = btn.innerText;
 
   helperFunc.showOneAlert(wrapper, '');
@@ -41,38 +39,47 @@ function send(wrapper: Element, event: Event) {
   if (!valid)
     return helperFunc.showOneAlert(wrapper, 'msgIncomplete');
 
+  collectFieldsAutomatic.collect(wrapper, collectCallback);
+}
+
+function collectCallback(data: any, wrapper: HTMLElement) {
+  const helperFunc = new UiActions();
+  const recaptcha = new Recaptcha();
+
   const recap = recaptcha.check(wrapper);
   if (!recap)
     return helperFunc.showOneAlert(wrapper, 'msgRecap');    
 
   const mailchimp = wrapper.classList.contains('app-mobius5-mailchimp');
 
-  const ws = (wrapper as HTMLElement).dataset.webservice; // should be "Form/ProcessForm" or a custom override
-  // get data
-  // alternative example with manual build, but we prefer automatic
-  // const collectFieldsManual = new CollectFieldsManual();
-  // let data;
-  // data = collectFieldsManual.collect(wrapper);
-
-  let data = collectFieldsAutomatic.collect(wrapper);
   data.Recaptcha = recap;
   data.MailChimp = mailchimp;
 
   helperFunc.disableInputs(wrapper, true);
   helperFunc.showOneAlert(wrapper, 'msgSending');
 
-  console.log(data)
+  sendForm(data, wrapper)
+}
 
+function sendForm(data: any, wrapper: HTMLElement) {
+  const helperFunc = new UiActions();
+  const ws = (wrapper as HTMLElement).dataset.webservice; // should be "Form/ProcessForm" or a custom override
+  const btn = (wrapper.querySelector('.btn-send-mobius5-form') as HTMLElement);
+  const label = btn.innerText;
+  const sxc = $2sxc(btn);
+
+  console.log(data);
+  
   sxc.webApi.post(ws, null, data, true)
     .success(() => {
-      const msg = mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
+      const msg = data.mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
       helperFunc.showOneAlert(wrapper, msg);
 
       const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'success', label: label } });
       document.dispatchEvent(trackingEvent);
     })
     .error(() => {
-      const msg = mailchimp ? 'msgNewsletterFailed' : 'msgError';
+      const msg = data.mailchimp ? 'msgNewsletterFailed' : 'msgError';
       helperFunc.showOneAlert(wrapper, msg);
       helperFunc.disableInputs(wrapper, false);
 
