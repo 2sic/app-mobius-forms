@@ -87,7 +87,12 @@ public class SendMail : Custom.Hybrid.Code12
         var serverPaths = GetService<IServerPaths>();
         var attachments = files.Select(f =>
                 new System.Net.Mail.Attachment(
-                     new FileStream(serverPaths.FullContentPath(f.Path + "/" + f.FullName), FileMode.Open), f.FullName)).ToList();
+#if NETCOREAPP // Oqtane
+                     new FileStream(serverPaths.FullContentPath(f.Path + "/" + f.FullName), FileMode.Open), f.FullName) // In Oqtane cant use Url property
+#else // DNN
+                     new FileStream(serverPaths.FullContentPath(f.Url), FileMode.Open), f.FullName) // In DNN cant use Path property
+#endif
+                     ).ToList();
 
         Log.Add("Get MailEngine");
         var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
@@ -185,18 +190,18 @@ public class SendMail : Custom.Hybrid.Code12
                 }
 
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(mailFrom); // 1
-                AddMailAddresses(mailMessage.To, mailTo); // 2 - what if we have more emails
-                AddMailAddresses(mailMessage.CC, cc); // 3 - what if we have more emails
+                mailMessage.From = new MailAddress(mailFrom);
+                AddMailAddresses(mailMessage.To, mailTo);
+                AddMailAddresses(mailMessage.CC, cc);
                 AddMailAddresses(mailMessage.Bcc, bcc);
-                if (!string.IsNullOrEmpty(replyTo)) mailMessage.ReplyTo = new MailAddress(replyTo); // 5
-                mailMessage.Priority = priority; // 6
-                mailMessage.Subject = subject; // 7
-                mailMessage.IsBodyHtml = isBodyHtml; // 8
-                mailMessage.BodyEncoding = bodyEncoding; // 9
-                mailMessage.Body = body; // 10
+                if (!string.IsNullOrEmpty(replyTo)) mailMessage.ReplyTo = new MailAddress(replyTo);
+                mailMessage.Priority = priority;
+                mailMessage.Subject = subject;
+                mailMessage.IsBodyHtml = isBodyHtml;
+                mailMessage.BodyEncoding = bodyEncoding;
+                mailMessage.Body = body;
 
-                foreach (var attachment in attachments) // 11
+                foreach (var attachment in attachments)
                 {
                     mailMessage.Attachments.Add(attachment);
                 }
