@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Autho
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
 using System.Runtime.CompilerServices;
-using System.Web.Compilation;
-using System.Web.Http;		// this enables [HttpGet] and [AllowAnonymous]
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
 using DotNetNuke.Security;
@@ -20,7 +18,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using Newtonsoft.Json;
 using ToSic.Razor.Blade;
 

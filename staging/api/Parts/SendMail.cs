@@ -12,8 +12,6 @@ using Oqtane.Models;
 using Oqtane.Repository;
 using Oqtane.Shared;
 #else // DNN
-using System.Web;
-using System.Web.Compilation;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 #endif
