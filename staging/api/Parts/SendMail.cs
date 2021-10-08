@@ -88,11 +88,11 @@ public class SendMail : Custom.Hybrid.Code12
         var attachments = files.Select(f =>
                 new System.Net.Mail.Attachment(
 #if NETCOREAPP // Oqtane
-                     new FileStream(serverPaths.FullContentPath(f.Path + "/" + f.FullName), FileMode.Open), f.FullName) // In Oqtane cant use Url property
+                     new FileStream(serverPaths.FullContentPath(f.Path + "/" + f.FullName), FileMode.Open, FileAccess.Read, FileShare.Read) // In Oqtane cant use Url property
 #else // DNN
-                     new FileStream(serverPaths.FullContentPath(f.Url), FileMode.Open), f.FullName) // In DNN cant use Path property
+                     new FileStream(serverPaths.FullContentPath(f.Url), FileMode.Open) // In DNN cant use Path property
 #endif
-                     ).ToList();
+            , f.FullName)).ToList();
 
         Log.Add("Get MailEngine");
         var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
