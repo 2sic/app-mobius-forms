@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text;
-using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
-using ToSic.Eav.Run;
 #if NETCOREAPP // Oqtane
 using System.Net;
 using System.Net.Mail;
@@ -16,8 +9,13 @@ using Oqtane.Shared;
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 #endif
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Text;
+using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
-// TODO: file attachments are not working, because are not provided by form.
 public class SendMail : Custom.Hybrid.Code12
 {
     public void sendMails(Dictionary<string, object> contactFormRequest, string workflowId, dynamic files)
@@ -84,15 +82,9 @@ public class SendMail : Custom.Hybrid.Code12
         var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
 
         // Check for attachments and add them to the mail
-        var serverPaths = GetService<IServerPaths>();
         var attachments = files.Select(f =>
                 new System.Net.Mail.Attachment(
-#if NETCOREAPP // Oqtane
-                     new FileStream(serverPaths.FullContentPath(f.Path + "/" + f.FullName), FileMode.Open, FileAccess.Read, FileShare.Read) // In Oqtane cant use Url property
-#else // DNN
-                     new FileStream(serverPaths.FullContentPath(f.Url), FileMode.Open) // In DNN cant use Path property
-#endif
-            , f.FullName)).ToList();
+                    new FileStream(f.PhysicalPath, FileMode.Open, FileAccess.Read, FileShare.Read), f.FullName)).ToList();
 
         Log.Add("Get MailEngine");
         var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
