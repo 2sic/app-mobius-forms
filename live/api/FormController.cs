@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
+// 2sxclint:disable:no-dnn-namespaces
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;

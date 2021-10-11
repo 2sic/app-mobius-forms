@@ -28,7 +28,7 @@ public class EmailToCustomer: Custom.Hybrid.Code12
                     </tr>
                     <tr>
                         <td>Customer</td>
-                        <td>" + data["Name"] + " " + data['E-Mail'] + @"</td>
+                        <td>" + data["Name"] + " " + data["E-Mail"] + @"</td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
@@ -48,10 +48,7 @@ public class EmailToCustomer: Custom.Hybrid.Code12
     }
 
     public string Subject(dynamic data) {
-        // create custom code to generate the subject here...
-        // or just return the setting configured in the form
-        return !String.IsNullOrWhiteSpace(Content.OwnerMailSubject)
-            ? Content.OwnerMailSubject.ToString()
-            : Resources.OwnerMailSubject.ToString();
-	}
+      // create custom code to generate the subject here...or just return the setting configured in the form
+          return Text.First(Content.OwnerMailSubject, Resources.OwnerMailSubject);
+    }
 }

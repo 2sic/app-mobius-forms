@@ -6,6 +6,7 @@ using Oqtane.Models;
 using Oqtane.Repository;
 using Oqtane.Shared;
 #else // DNN
+// 2sxclint:disable:no-dnn-namespaces
 using System.Runtime.CompilerServices;
 using DotNetNuke.Services.Mail;
 #endif
