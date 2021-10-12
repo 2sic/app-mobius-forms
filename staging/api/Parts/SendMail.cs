@@ -1,10 +1,3 @@
-#if NETCOREAPP // Oqtane
-// using Microsoft.Extensions.DependencyInjection;
-#else // DNN
-// 2sxclint:disable:no-dnn-namespaces
-// using System.Runtime.CompilerServices;
-// using DotNetNuke.Services.Mail;
-#endif
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -92,8 +85,6 @@ public class SendMail : Custom.Hybrid.Code12
 
         // Send Mail
         Log.Add("sending...");
-
-        // get services
         var mailService = GetService<IMailService>();
         var sendMailResult = mailService.Send(
             mailFrom: MailFrom,
@@ -115,10 +106,8 @@ public class SendMail : Custom.Hybrid.Code12
         message.AppendFormat("{0}: {1}{2}", "MailCC", MailCC, Environment.NewLine);
         message.AppendFormat("{0}: {1}{2}", "MailReply", MailReply, Environment.NewLine);
         message.AppendFormat("{0}: {1}{2}", "MailSubject", mailSubj, Environment.NewLine);
-        // message.AppendFormat("{0}: {1}{2}", "SSL", DotNetNuke.Entities.Host.Host.EnableSMTPSSL.ToString(), Environment.NewLine);
         message.AppendFormat("{0}: {1}{2}", "Result", sendMailResult, Environment.NewLine);
 
-        // get services
         var platformLogService = GetService<ILogService>();
         platformLogService.Add("SendMail", message.ToString());
 

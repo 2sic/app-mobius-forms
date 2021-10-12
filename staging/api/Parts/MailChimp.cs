@@ -1,11 +1,3 @@
-#if NETCOREAPP // Oqtane
-#else // DNN
-// 2sxclint:disable:no-dnn-namespaces
-// using DotNetNuke.Common;
-// using DotNetNuke.Services.Log.EventLog;
-// using DotNetNuke.Entities.Users;
-// using DotNetNuke.Entities.Portals;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
