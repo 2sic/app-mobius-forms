@@ -1,16 +1,17 @@
+#if NETCOREAPP // Oqtane
+#else // DNN
+// 2sxclint:disable:no-dnn-namespaces
+// using DotNetNuke.Common;
+// using DotNetNuke.Services.Log.EventLog;
+// using DotNetNuke.Entities.Users;
+// using DotNetNuke.Entities.Portals;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Http;
-#if NETCOREAPP // Oqtane
-#else // DNN
-// 2sxclint:disable:no-dnn-namespaces
-using DotNetNuke.Common;
-using DotNetNuke.Services.Log.EventLog;
-using DotNetNuke.Entities.Users;
-using DotNetNuke.Entities.Portals;
-#endif
+using ToSic.Sxc.Services; // platformLogService
 
 // TODO: Please take a care, that in Oqtane, code is compiling, but it is not tested that is working with MailChip.
 // TODO: 2ro - check if we can just log to EAV and not to DNN
@@ -119,8 +120,10 @@ public class MailChimp : Custom.Hybrid.Code12
 
     private MailchimpResponse MailchimpRequest(string url, string method, string body, string apiKey)
     {
+        var platformLogService = GetService<ILogService>();
+
         var logTimeStamp = DateTime.Now;
-        EventLog("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
+        platformLogService.Add("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
 
         String encodedApiKey = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes("anystring" + ":" + apiKey));
 
@@ -143,21 +146,7 @@ public class MailChimp : Custom.Hybrid.Code12
             StatusCode = responseMessage.StatusCode,
             Response = response
         };
-        EventLog("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
+        platformLogService.Add("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
         return r;
     }
-
-    /* EVENTLOGGER */
-    private void EventLog(string title, string message)
-    {
-#if NETCOREAPP // Oqtane
-      // TODO: Log to Oqtane EventLog
-#else // DNN
-        PortalSettings portalSettings = Globals.GetPortalSettings();
-        var userInfo = UserController.Instance.GetCurrentUserInfo();
-        var objEventLog = new EventLogController();
-        objEventLog.AddLog(title, message, portalSettings, userInfo.UserID, EventLogController.EventLogType.ADMIN_ALERT);
-#endif
-    }
-
 }

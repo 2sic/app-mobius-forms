@@ -1,238 +1,139 @@
 #if NETCOREAPP // Oqtane
-using System.Net;
-using System.Net.Mail;
-using Microsoft.Extensions.DependencyInjection;
-using Oqtane.Models;
-using Oqtane.Repository;
-using Oqtane.Shared;
+// using Microsoft.Extensions.DependencyInjection;
 #else // DNN
 // 2sxclint:disable:no-dnn-namespaces
-using System.Runtime.CompilerServices;
-using DotNetNuke.Services.Mail;
+// using System.Runtime.CompilerServices;
+// using DotNetNuke.Services.Mail;
 #endif
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
-using ToSic.Sxc.Web;
+using ToSic.Sxc.Services; // platformLogService
+using ToSic.Sxc.Web; // mailService
 
 public class SendMail : Custom.Hybrid.Code12
 {
-  public void sendMails(Dictionary<string, object> contactFormRequest, string workflowId, dynamic files)
-  {
-    var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
-    var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
-
-    // rewrite the keys to be a nicer format, based on the configuration
-    var valuesWithMailLabels = RewriteKeys(contactFormRequest, workflow.MailLabels ?? "");
-
-    // assemble all settings to send the mail
-    // background: some settings are made in this module,
-    // but if they are missing we use fallback settings
-    // which are taken from the Settings
-    var settings = new
+    public void sendMails(Dictionary<string, object> contactFormRequest, string workflowId, dynamic files)
     {
-      MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : Settings.DefaultMailFrom,
-      OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : Settings.DefaultOwnerMail
-    };
+        var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
+        var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
 
-    // Send Mail to owner
-    if (Content.OwnerSend != null && Content.OwnerSend)
-    {
-      Log.Add("Send Mail to Owner");
-      try
-      {
-        Send(
-            workflow.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
-        );
-      }
-      catch (Exception ex)
-      {
-        throw new Exception("OwnerSend mail failed: " + ex.Message);
-      }
-    }
+        // rewrite the keys to be a nicer format, based on the configuration
+        var valuesWithMailLabels = RewriteKeys(contactFormRequest, workflow.MailLabels ?? "");
 
-    // Send Mail to customer
-    if (Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail))
-    {
-      Log.Add("Send Mail to Customer");
-      try
-      {
-        Send(
-            workflow.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files
-        );
-      }
-      catch (Exception ex)
-      {
-        throw new Exception("Customer Send mail failed: " + ex.Message);
-      }
-    }
-  }
-
-  public bool Send(
-      string emailTemplateFilename,
-      Dictionary<string, object> valuesWithMailLabels,
-      string MailFrom,
-      string MailTo,
-      string MailCC,
-      string MailReply,
-      List<ToSic.Sxc.Adam.IFile> files)
-  {
-    // Log what's happening in case we run into problems
-    var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
-
-    // Check for attachments and add them to the mail
-    var attachments = files.Select(f =>
-            new System.Net.Mail.Attachment(
-                new FileStream(f.PhysicalPath, FileMode.Open, FileAccess.Read, FileShare.Read), f.FullName)).ToList();
-
-    Log.Add("Get MailEngine");
-    var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
-    var mailBody = mailEngine.Message(valuesWithMailLabels).ToString();
-    var mailSubj = mailEngine.Subject(valuesWithMailLabels);
-
-    // Send Mail
-    Log.Add("sending...");
-
-#if NETCOREAPP // Oqtane
-        var sendMailResult = OqtSendMail(MailFrom, MailTo, MailCC, "", MailReply, MailPriority.Normal, mailSubj, true, Encoding.UTF8, mailBody, attachments);
-#else // DNN
-    // uses the DNN command: http://www.dnnsoftware.com/dnn-api/html/886d0ac8-45e8-6472-455a-a7adced60ada.htm
-    var sendMailResult = Mail.SendMail(MailFrom, MailTo, MailCC, "", MailReply, MailPriority.Normal, mailSubj, MailFormat.Html, Encoding.UTF8, mailBody, attachments, "", "", "", "", DotNetNuke.Entities.Host.Host.EnableSMTPSSL);
-#endif
-    // Log to Platform - just as a last resort in case something is lost, to track down why
-    var message = new StringBuilder();
-    message.AppendFormat("{0}: {1}{2}", "MailFrom", MailFrom, Environment.NewLine);
-    message.AppendFormat("{0}: {1}{2}", "MailTo", MailTo, Environment.NewLine);
-    message.AppendFormat("{0}: {1}{2}", "MailCC", MailCC, Environment.NewLine);
-    message.AppendFormat("{0}: {1}{2}", "MailReply", MailReply, Environment.NewLine);
-    message.AppendFormat("{0}: {1}{2}", "MailSubject", mailSubj, Environment.NewLine);
-    // message.AppendFormat("{0}: {1}{2}", "SSL", DotNetNuke.Entities.Host.Host.EnableSMTPSSL.ToString(), Environment.NewLine);
-    message.AppendFormat("{0}: {1}{2}", "Result", sendMailResult, Environment.NewLine);
-
-    // get services
-    var eventLogService = GetService<IEventLogService>();
-    eventLogService.AddEvent("SendMail", message.ToString());
-
-    wrapLog("ok");
-    return sendMailResult == "";
-  }
-
-  // rewrite the keys to be a nicer format, based on the configuration
-  private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
-  {
-    // create keys-map
-    Dictionary<string, string> newKeys = map
-        .Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
-        .ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
-
-    return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
-  }
-
-#if NETCOREAPP // Oqtane
-    private string OqtSendMail(
-        string mailFrom,
-        string mailTo,
-        string cc,
-        string bcc,
-        string replyTo,
-        MailPriority priority,
-        string subject,
-        bool isBodyHtml,
-        Encoding bodyEncoding,
-        string body,
-        List<Attachment> attachments
-    )
-    {
-        string log = "";
-
-        // get services
-        var siteRepository = GetService<ISiteRepository>();
-        var userRepository = GetService<IUserRepository>();
-        var settingRepository = GetService<ISettingRepository>();
-        var notificationRepository = GetService<INotificationRepository>();
-
-        Site site = siteRepository.GetSite(CmsContext.Site.Id);
-
-        // get site settings
-        List<Setting> sitesettings = settingRepository.GetSettings(EntityNames.Site, site.SiteId).ToList();
-        Dictionary<string, string> settings = GetSettings(sitesettings);
-        if (settings.ContainsKey("SMTPHost") && settings["SMTPHost"] != "" &&
-            settings.ContainsKey("SMTPPort") && settings["SMTPPort"] != "" &&
-            settings.ContainsKey("SMTPSSL") && settings["SMTPSSL"] != "" &&
-            settings.ContainsKey("SMTPSender") && settings["SMTPSender"] != "")
+        // assemble all settings to send the mail
+        // background: some settings are made in this module,
+        // but if they are missing we use fallback settings
+        // which are taken from the Settings
+        var settings = new
         {
-            // send mail
+            MailFrom = !String.IsNullOrEmpty(Content.MailFrom) ? Content.MailFrom : Settings.DefaultMailFrom,
+            OwnerMail = !String.IsNullOrEmpty(Content.OwnerMail) ? Content.OwnerMail : Settings.DefaultOwnerMail
+        };
+
+        // Send Mail to owner
+        if (Content.OwnerSend != null && Content.OwnerSend)
+        {
+            Log.Add("Send Mail to Owner");
             try
             {
-                // construct SMTP Client
-                var client = new SmtpClient()
-                {
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Host = settings["SMTPHost"],
-                    Port = int.Parse(settings["SMTPPort"]),
-                    EnableSsl = bool.Parse(settings["SMTPSSL"])
-                };
-
-                if (settings["SMTPUsername"] != "" && settings["SMTPPassword"] != "")
-                {
-                    client.Credentials = new NetworkCredential(settings["SMTPUsername"], settings["SMTPPassword"]);
-                }
-
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(mailFrom);
-                AddMailAddresses(mailMessage.To, mailTo);
-                AddMailAddresses(mailMessage.CC, cc);
-                AddMailAddresses(mailMessage.Bcc, bcc);
-                if (!string.IsNullOrEmpty(replyTo)) mailMessage.ReplyTo = new MailAddress(replyTo);
-                mailMessage.Priority = priority;
-                mailMessage.Subject = subject;
-                mailMessage.IsBodyHtml = isBodyHtml;
-                mailMessage.BodyEncoding = bodyEncoding;
-                mailMessage.Body = body;
-
-                foreach (var attachment in attachments)
-                {
-                    mailMessage.Attachments.Add(attachment);
-                }
-
-                client.Send(mailMessage);
-                log += "OK: Email sent. ";
+                Send(
+                    workflow.OwnerMailTemplate, valuesWithMailLabels, settings.MailFrom, settings.OwnerMail, Content.OwnerMailCC, custMail, files
+                );
             }
             catch (Exception ex)
             {
-                // error
-                log += $"Error: {ex.Message}. ";
+                throw new Exception("OwnerSend mail failed: " + ex.Message);
             }
         }
-        else
+
+        // Send Mail to customer
+        if (Content.CustomerSend != null && Content.CustomerSend && !String.IsNullOrEmpty(custMail))
         {
-            log += "SMTP Not Configured Properly In Site Settings - Host, Port, SSL, And Sender Are All Required.";
+            Log.Add("Send Mail to Customer");
+            try
+            {
+                Send(
+                    workflow.CustomerMailTemplate, valuesWithMailLabels, settings.MailFrom, custMail, Content.CustomerMailCC, settings.OwnerMail, files
+                );
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Customer Send mail failed: " + ex.Message);
+            }
         }
-        return log;
     }
 
-    private Dictionary<string, string> GetSettings(List<Setting> settings)
+    public bool Send(
+        string emailTemplateFilename,
+        Dictionary<string, object> valuesWithMailLabels,
+        string MailFrom,
+        string MailTo,
+        string MailCC,
+        string MailReply,
+        List<ToSic.Sxc.Adam.IFile> files)
     {
-        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-        foreach (Setting setting in settings.OrderBy(item => item.SettingName).ToList())
-        {
-            dictionary.Add(setting.SettingName, setting.SettingValue);
-        }
-        return dictionary;
+        // Log what's happening in case we run into problems
+        var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
+
+        // Check for attachments and add them to the mail
+        var attachments = files.Select(f =>
+                new System.Net.Mail.Attachment(
+                    new FileStream(f.PhysicalPath, FileMode.Open, FileAccess.Read, FileShare.Read), f.FullName)).ToList();
+
+        Log.Add("Get MailEngine");
+        var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
+        var mailBody = mailEngine.Message(valuesWithMailLabels).ToString();
+        var mailSubj = mailEngine.Subject(valuesWithMailLabels);
+
+        // Send Mail
+        Log.Add("sending...");
+
+        // get services
+        var mailService = GetService<IMailService>();
+        var sendMailResult = mailService.Send(
+            mailFrom: MailFrom,
+            mailTo: MailTo,
+            cc: MailCC,
+            bcc: "",
+            replyTo: MailReply,
+            priority: MailPriority.Normal,
+            subject: mailSubj,
+            isBodyHtml: true,
+            bodyEncoding: Encoding.UTF8,
+            body: mailBody,
+            attachments: attachments);
+
+        // Log to Platform - just as a last resort in case something is lost, to track down why
+        var message = new StringBuilder();
+        message.AppendFormat("{0}: {1}{2}", "MailFrom", MailFrom, Environment.NewLine);
+        message.AppendFormat("{0}: {1}{2}", "MailTo", MailTo, Environment.NewLine);
+        message.AppendFormat("{0}: {1}{2}", "MailCC", MailCC, Environment.NewLine);
+        message.AppendFormat("{0}: {1}{2}", "MailReply", MailReply, Environment.NewLine);
+        message.AppendFormat("{0}: {1}{2}", "MailSubject", mailSubj, Environment.NewLine);
+        // message.AppendFormat("{0}: {1}{2}", "SSL", DotNetNuke.Entities.Host.Host.EnableSMTPSSL.ToString(), Environment.NewLine);
+        message.AppendFormat("{0}: {1}{2}", "Result", sendMailResult, Environment.NewLine);
+
+        // get services
+        var platformLogService = GetService<ILogService>();
+        platformLogService.Add("SendMail", message.ToString());
+
+        wrapLog("ok");
+        return sendMailResult == "";
     }
 
-    private void AddMailAddresses(MailAddressCollection mails, string emails)
+    // rewrite the keys to be a nicer format, based on the configuration
+    private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
     {
-        if (string.IsNullOrEmpty(emails)) return;
-        foreach (var email in emails.Split(",;".ToCharArray()))
-        {
-            mails.Add(new MailAddress(email));
-        }
-    }
-#endif
+        // create keys-map
+        Dictionary<string, string> newKeys = map
+            .Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            .ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
 
+        return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
+    }
 }
