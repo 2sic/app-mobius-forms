@@ -84,6 +84,7 @@ public class SendMail : Custom.Hybrid.Code12
         var mailSubj = mailEngine.Subject(valuesWithMailLabels);
 
         // Send Mail
+        // TODO: @2ro - what do we send the browser if an error occurs? must verify
         Log.Add("sending...");
         var mailService = GetService<IMailService>();
         var sendMailResult = mailService.Send(
@@ -92,10 +93,10 @@ public class SendMail : Custom.Hybrid.Code12
             cc: MailCC,
             bcc: "",
             replyTo: MailReply,
-            priority: MailPriority.Normal,
+            // priority: MailPriority.Normal,
             subject: mailSubj,
-            isBodyHtml: true,
-            bodyEncoding: Encoding.UTF8,
+            // isBodyHtml: true,
+            // bodyEncoding: Encoding.UTF8,
             body: mailBody,
             attachments: attachments);
 
