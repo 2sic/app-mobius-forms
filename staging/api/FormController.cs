@@ -53,7 +53,7 @@ public class FormController : Custom.Hybrid.Api12
     contactFormRequest.Add("Timestamp", DateTime.Now);
 #if NETCOREAPP
 // todo: what can we do here?
-        // contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress);
+        contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
 #else
         contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
 #endif
