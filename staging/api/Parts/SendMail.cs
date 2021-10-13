@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
-using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
+using ToSic.Razor.Blade;
 using ToSic.Sxc.Services; // platformLogService, mailService
+using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class SendMail : Custom.Hybrid.Code12
 {
