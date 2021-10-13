@@ -1,9 +1,10 @@
 import { UiActions } from './add-ins/uiActions';
 import { Recaptcha } from './add-ins/recaptcha';
-import { CollectFieldsManual } from './collect-fields/manual';
 import { CollectFieldsAutomatic } from './collect-fields/auto';
 
 let Pristine = require('../../node_modules/pristinejs')
+
+const debug = true;
 
 declare let $2sxc: any;
 
@@ -11,21 +12,28 @@ var winAny = window as any;
 winAny.appMobius5 ??= {};
 winAny.appMobius5.init ??= initAppMobius5;
 
-function initAppMobius5({ domId } : { domId: string }) {
-  const mobuisWrapper = document.getElementsByClassName(domId)[0];
+function initAppMobius5({ domAttribute } : { domAttribute: string }) {
+
+  if (debug) console.log("Mobius5 loading, debug is enabled");
+  domAttribute
+  const mobiusWrapper = document.querySelectorAll(`[${domAttribute}]`)[0];
   const helperFunc = new UiActions();
 
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
-  mobuisWrapper.getElementsByClassName('btn-send-mobius5-form')[0].addEventListener('click', (event: Event) => {
+  // todo: 2mh rename to app-mobius5-send
+  mobiusWrapper.getElementsByClassName('btn-send-mobius5-form')[0].addEventListener('click', (event: Event) => {
     event.preventDefault();
-    validate(mobuisWrapper, event)
+    var valid = validate(mobiusWrapper, event);
+    if (valid) {
+      new CollectFieldsAutomatic().collect(mobiusWrapper, sendWhenReady);
+    }
   })
 }
 
-function validate(wrapper: Element, event: Event) {
+function validate(wrapper: Element, event: Event): boolean {
   const helperFunc = new UiActions();
-  const collectFieldsAutomatic = new CollectFieldsAutomatic();
+  // const collectFieldsAutomatic = new CollectFieldsAutomatic();
   const pristine = new Pristine(wrapper);
   const btn = event.currentTarget as HTMLElement;
   const label = btn.innerText;
@@ -37,12 +45,14 @@ function validate(wrapper: Element, event: Event) {
   
   const valid = pristine.validate();
   if (!valid)
-    return helperFunc.showOneAlert(wrapper, 'msgIncomplete');
+    helperFunc.showOneAlert(wrapper, 'msgIncomplete');
 
-  collectFieldsAutomatic.collect(wrapper, collectCallback);
+  return valid;
+
+  // collectFieldsAutomatic.collect(wrapper, sendWhenReady);
 }
 
-function collectCallback(data: any, wrapper: HTMLElement) {
+function sendWhenReady(data: any, wrapper: HTMLElement) {
   const helperFunc = new UiActions();
   const recaptcha = new Recaptcha();
 
@@ -68,22 +78,42 @@ function sendForm(data: any, wrapper: HTMLElement) {
   const label = btn.innerText;
   const sxc = $2sxc(btn);
 
-  console.log(data);
+  if(debug) console.log(data);
   
-  sxc.webApi.post(ws, null, data, true)
-    .success(() => {
-      const msg = data.mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
-      helperFunc.showOneAlert(wrapper, msg);
+  var saveCall = sxc.webApi.post(ws, null, data, true);
 
-      const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'success', label: label } });
-      document.dispatchEvent(trackingEvent);
-    })
-    .error(() => {
-      const msg = data.mailchimp ? 'msgNewsletterFailed' : 'msgError';
-      helperFunc.showOneAlert(wrapper, msg);
-      helperFunc.disableInputs(wrapper, false);
+  function showSuccess() {
+    const msg = data.mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
+    helperFunc.showOneAlert(wrapper, msg);
 
-      const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'error', label: label } });
-      document.dispatchEvent(trackingEvent);
+    // Send browser event in case an Analytics-listener wants to get notified
+    const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'success', label: label } });
+    document.dispatchEvent(trackingEvent);
+  }
+  
+  function showError() {
+    const msg = data.mailchimp ? 'msgNewsletterFailed' : 'msgError';
+    helperFunc.showOneAlert(wrapper, msg);
+    helperFunc.disableInputs(wrapper, false);
+
+    // Send browser event in case an Analytics-listener wants to get notified
+    const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'error', label: label } });
+    document.dispatchEvent(trackingEvent);
+  }
+  
+  saveCall.success((successData: unknown) => {
+      if(debug) console.log('success', successData);
+      showSuccess();
+    });
+  saveCall.error((errorData: unknown) => {
+      if(debug) console.log('error', errorData);
+
+      // Special case - in Oqtane the promise runs into a ParseError for reasons we don't know yet
+      // It seems that the headers in the WebApi make Oqtane try to parse json, for an empty object
+      // So we only show the error if it was a real server error, since we don't care about the response
+      if ((errorData as any).status == 200)
+        showSuccess();
+      else
+        showError();
     });
 }

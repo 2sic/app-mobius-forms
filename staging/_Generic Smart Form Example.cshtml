@@ -11,9 +11,10 @@
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   var helpers = CreateInstance("shared/Helpers.cs");
   var pageCss = GetService<Connect.Koi.ICss>();
+  var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 
-<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
+<div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
   @Html.Partial("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="app-mobius5-form">
@@ -62,4 +63,4 @@
   </div>
 </div>
 
-@Html.Partial("shared/_Assets.cshtml")
+@Html.Partial("shared/_Assets.cshtml", new { DomAttribute = domAttribute })
