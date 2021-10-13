@@ -4,26 +4,12 @@ using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Autho
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
 // 2sxclint:disable:no-dnn-namespaces 2sxclint:disable:no-web-namespaces
-// TODO: @2mh - check which of these namespace are actually used (delete one-by-one, test the form, see if it still works)
-using System.Runtime.CompilerServices;
-using DotNetNuke.Services.Log.EventLog;
-using DotNetNuke.Services.Mail;
-using DotNetNuke.Security;
-using DotNetNuke.Web.Api;
-using System.Web;
 using System.Web.Http;
 #endif
-using System.Linq;
-using System.Xml;
-using System.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using Newtonsoft.Json;
-using ToSic.Razor.Blade;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class FormController : Custom.Hybrid.Api12
@@ -51,13 +37,13 @@ public class FormController : Custom.Hybrid.Api12
     // if you add fields to your content-type, just make sure they are
     // in the request with the correct name, they will be added automatically
     contactFormRequest.Add("Timestamp", DateTime.Now);
-#if NETCOREAPP
-// todo: what can we do here?
-        contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
-#else
-        contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
-#endif
-        contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
+    #if NETCOREAPP
+    // todo: what can we do here?
+      contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
+    #else
+      contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
+    #endif
+      contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
     // add raw-data, in case the content-type has a "RawData" field
     contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
     // add Title (if non given), in case the Content-Type would benefit of an automatic title
