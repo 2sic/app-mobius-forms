@@ -5,8 +5,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
-using ToSic.Sxc.Services; // platformLogService
-using ToSic.Sxc.Web; // mailService
+using ToSic.Sxc.Services; // platformLogService, mailService
 
 public class SendMail : Custom.Hybrid.Code12
 {
@@ -61,7 +60,7 @@ public class SendMail : Custom.Hybrid.Code12
         }
     }
 
-    public bool Send(
+    public void Send(
         string emailTemplateFilename,
         Dictionary<string, object> valuesWithMailLabels,
         string MailFrom,
@@ -73,11 +72,6 @@ public class SendMail : Custom.Hybrid.Code12
         // Log what's happening in case we run into problems
         var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + MailFrom + ", to:" + MailTo + ", cc:" + MailCC + ", reply:" + MailReply);
 
-        // Check for attachments and add them to the mail
-        var attachments = files.Select(f =>
-                new System.Net.Mail.Attachment(
-                    new FileStream(f.PhysicalPath, FileMode.Open, FileAccess.Read, FileShare.Read), f.FullName)).ToList();
-
         Log.Add("Get MailEngine");
         var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
         var mailBody = mailEngine.Message(valuesWithMailLabels).ToString();
@@ -87,18 +81,15 @@ public class SendMail : Custom.Hybrid.Code12
         // TODO: @2ro - what do we send the browser if an error occurs? must verify
         Log.Add("sending...");
         var mailService = GetService<IMailService>();
-        var sendMailResult = mailService.Send(
-            mailFrom: MailFrom,
-            mailTo: MailTo,
+        mailService.Send(
+            from: MailFrom,
+            to: MailTo,
             cc: MailCC,
             bcc: "",
             replyTo: MailReply,
-            // priority: MailPriority.Normal,
             subject: mailSubj,
-            // isBodyHtml: true,
-            // bodyEncoding: Encoding.UTF8,
             body: mailBody,
-            attachments: attachments);
+            attachments: files);
 
         // Log to Platform - just as a last resort in case something is lost, to track down why
         var message = new StringBuilder();
@@ -107,13 +98,12 @@ public class SendMail : Custom.Hybrid.Code12
         message.AppendFormat("{0}: {1}{2}", "MailCC", MailCC, Environment.NewLine);
         message.AppendFormat("{0}: {1}{2}", "MailReply", MailReply, Environment.NewLine);
         message.AppendFormat("{0}: {1}{2}", "MailSubject", mailSubj, Environment.NewLine);
-        message.AppendFormat("{0}: {1}{2}", "Result", sendMailResult, Environment.NewLine);
+        //message.AppendFormat("{0}: {1}{2}", "Result", "", Environment.NewLine);
 
         var platformLogService = GetService<ILogService>();
         platformLogService.Add("SendMail", message.ToString());
 
         wrapLog("ok");
-        return sendMailResult == "";
     }
 
     // rewrite the keys to be a nicer format, based on the configuration
