@@ -107,13 +107,6 @@ function sendForm(data: any, wrapper: HTMLElement) {
     });
   saveCall.error((errorData: unknown) => {
       if(debug) console.log('error', errorData);
-
-      // Special case - in Oqtane the promise runs into a ParseError for reasons we don't know yet
-      // It seems that the headers in the WebApi make Oqtane try to parse json, for an empty object
-      // So we only show the error if it was a real server error, since we don't care about the response
-      if ((errorData as any).status == 200)
-        showSuccess();
-      else
-        showError();
+      showError();
     });
 }
