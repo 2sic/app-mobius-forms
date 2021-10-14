@@ -7,16 +7,21 @@ using Newtonsoft.Json;
 // shouldn't really need any modifications, just leave this as is
 public class Recaptcha : Custom.Hybrid.Code12
 {
-  public bool Validate(string EncodedResponse, string PrivateKey)
+  public bool Validate(string encodedResponse)
   {
     // Log what's happening in case we run into problems
     var wrapLog = Log.Call();
 
-    if(!(EncodedResponse is string) || String.IsNullOrEmpty(EncodedResponse as string)) 
+    if(!(encodedResponse is string) || String.IsNullOrEmpty(encodedResponse as string)) 
       throw new Exception("recaptcha is empty");
 
+    // Get the private key from Settings - if it's from presets, it is encrypted
+    var secData = GetService<ToSic.Sxc.Services.ISecureDataService>();
+    var privateKey = secData.Parse(Settings.GoogleRecaptcha.PrivateKey).Value;
+
+    // Ask google if the verification is valid
     var client = new System.Net.WebClient();
-    var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", PrivateKey, EncodedResponse));
+    var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", privateKey, encodedResponse));
     var captchaResponse = Convert.Json.To<RecaptchaResponse>(GoogleReply);
 
     var status = captchaResponse.Success;
@@ -41,14 +46,13 @@ public class RecaptchaResponse {
     get { return m_Success; }
     set { m_Success = value; }
   }
-
   private bool m_Success;
+
   [JsonProperty("error-codes")]
   public List<string> ErrorCodes
   {
     get { return m_ErrorCodes; }
     set { m_ErrorCodes = value; }
   }
-
   private List<string> m_ErrorCodes;
 }

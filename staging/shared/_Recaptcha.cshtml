@@ -1,15 +1,22 @@
 @inherits Custom.Hybrid.Razor12
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
+
+  // Initially the key comes from the preset and is encrypted
+  // So we must run it through the SecureDataService to verify
+  var secData = GetService<ToSic.Sxc.Services.ISecureDataService>();
+  var secureKey = secData.Parse(Settings.GoogleRecaptcha.SiteKey);
+  var siteKey = secureKey.Value;
+  var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
 }
 <div class="form-group app-mobius5-support-disable row">
   <label for="" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>@Resources.LabelRecaptcha</label>
   <div class='@(pageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
-    <div class="g-recaptcha" data-sitekey="@Settings.RecaptchaSiteKey" data-size="normal"></div>
+    <div class="g-recaptcha" data-sitekey="@siteKey" data-size="normal"></div>
   </div>
 </div>
 
-@if(Settings.RecaptchaShowWarning == null || Settings.RecaptchaShowWarning) {
+@if(showWarning) {
   <div class="alert alert-warning">
     @Html.Raw(Resources.MessageRecaptchaWarning.Replace("<p>", "").Replace("</p>", ""))
   </div>
