@@ -21,7 +21,7 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
 
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
-  // todo: 2mh rename to app-mobius5-send
+  // todo: 2mh rename to app-mobius5-send and make sure it's not a class
   mobiusWrapper.getElementsByClassName('btn-send-mobius5-form')[0].addEventListener('click', (event: Event) => {
     event.preventDefault();
     var valid = validate(mobiusWrapper, event);
@@ -33,7 +33,6 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
 
 function validate(wrapper: Element, event: Event): boolean {
   const helperFunc = new UiActions();
-  // const collectFieldsAutomatic = new CollectFieldsAutomatic();
   const pristine = new Pristine(wrapper);
   const btn = event.currentTarget as HTMLElement;
   const label = btn.innerText;
@@ -48,8 +47,6 @@ function validate(wrapper: Element, event: Event): boolean {
     helperFunc.showOneAlert(wrapper, 'msgIncomplete');
 
   return valid;
-
-  // collectFieldsAutomatic.collect(wrapper, sendWhenReady);
 }
 
 function sendWhenReady(data: any, wrapper: HTMLElement) {
