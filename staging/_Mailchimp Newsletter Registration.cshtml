@@ -31,18 +31,8 @@
       @Html.Partial("shared/_Recaptcha.cshtml")
     }
 
-    @if(!Content.Mailchimp) {
-      <div class="form-group row">
-        <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
-          <div class="alert alert-warning">
-            @Html.Raw(Resources.MessageEnableMailchimp.Replace("<p>", "").Replace("</p>", ""))
-          </div>
-        </div>
-      </div>
-    }
-
     @* Messages / Send Button *@
-    @Html.Partial("shared/_Submit with Messages.cshtml")
+    @Html.Partial("shared/_Submit with Messages.cshtml", new { IsMailChimpForm = true })
   </div>
   
 </div>

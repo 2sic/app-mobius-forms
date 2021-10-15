@@ -9,6 +9,11 @@ export class UiActions {
     }
   }
 
+  showConfigWarnings(wrapper: Element) {
+    wrapper.querySelectorAll('[app-mobius5-config-warning]')
+      .forEach((elem: HTMLElement) => elem.style.display = 'block');
+  }
+
   disableInputs(wrapper: Element, state: boolean) {
     wrapper.classList.toggle('disable', state)
     wrapper.querySelectorAll('input,textarea,select').forEach((elem: HTMLElement, index) => {

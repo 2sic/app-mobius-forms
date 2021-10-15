@@ -21,8 +21,7 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
 
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
-  // todo: 2mh rename to app-mobius5-send and make sure it's not a class
-  mobiusWrapper.getElementsByClassName('btn-send-mobius5-form')[0].addEventListener('click', (event: Event) => {
+  mobiusWrapper.querySelectorAll('[app-mobius5-send]')[0].addEventListener('click', (event: Event) => {
     event.preventDefault();
     var valid = validate(mobiusWrapper, event);
     if (valid) {
@@ -71,18 +70,19 @@ function sendWhenReady(data: any, wrapper: HTMLElement) {
 function sendForm(data: any, wrapper: HTMLElement) {
   const helperFunc = new UiActions();
   const ws = (wrapper as HTMLElement).dataset.webservice; // should be "Form/ProcessForm" or a custom override
-  const btn = (wrapper.querySelector('.btn-send-mobius5-form') as HTMLElement);
+  const btn = (wrapper.querySelectorAll('[app-mobius5-send]')[0] as HTMLButtonElement);
   const label = btn.innerText;
   const sxc = $2sxc(btn);
-
+  
   if(debug) console.log(data);
   
   var saveCall = sxc.webApi.post(ws, null, data, true);
-
+  
   function showSuccess() {
     const msg = data.mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
     helperFunc.showOneAlert(wrapper, msg);
-
+    helperFunc.showConfigWarnings(wrapper);
+    
     // Send browser event in case an Analytics-listener wants to get notified
     const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'success', label: label } });
     document.dispatchEvent(trackingEvent);
@@ -91,6 +91,7 @@ function sendForm(data: any, wrapper: HTMLElement) {
   function showError() {
     const msg = data.mailchimp ? 'msgNewsletterFailed' : 'msgError';
     helperFunc.showOneAlert(wrapper, msg);
+    helperFunc.showConfigWarnings(wrapper);
     helperFunc.disableInputs(wrapper, false);
 
     // Send browser event in case an Analytics-listener wants to get notified
@@ -99,11 +100,13 @@ function sendForm(data: any, wrapper: HTMLElement) {
   }
   
   saveCall.success((successData: unknown) => {
-      if(debug) console.log('success', successData);
-      showSuccess();
-    });
+    if(debug) console.log('success', successData);
+    btn.setAttribute("disabled", "")
+    showSuccess();
+  });
+  
   saveCall.error((errorData: unknown) => {
-      if(debug) console.log('error', errorData);
-      showError();
-    });
+    if(debug) console.log('error', errorData);
+    showError();
+  });
 }
