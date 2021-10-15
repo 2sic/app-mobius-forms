@@ -28,10 +28,7 @@ public class EmailToCustomer: Custom.Hybrid.Code12
     }
 
     public string Subject(dynamic data) {
-        // create custom code to generate the subject here...
-        // or just return the setting configured in the form
-		return !String.IsNullOrWhiteSpace(Content.CustomerMailSubject)
-            ? Content.CustomerMailSubject
-            : Resources.CustomerMailSubject;
-	}
+      // create custom code to generate the subject here...or just return the setting configured in the form
+      return Text.First(Content.CustomerMailSubject, Resources.CustomerMailSubject);
+    }
 }

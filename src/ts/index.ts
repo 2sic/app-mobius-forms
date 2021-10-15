@@ -1,5 +1,5 @@
+import { getRecaptchaToken } from './add-ins/recaptcha';
 import { UiActions } from './add-ins/uiActions';
-import { Recaptcha } from './add-ins/recaptcha';
 import { CollectFieldsAutomatic } from './collect-fields/auto';
 
 let Pristine = require('../../node_modules/pristinejs')
@@ -48,17 +48,16 @@ function validate(wrapper: Element, event: Event): boolean {
   return valid;
 }
 
-function sendWhenReady(data: any, wrapper: HTMLElement) {
+async function sendWhenReady(data: any, wrapper: HTMLElement) {
   const helperFunc = new UiActions();
-  const recaptcha = new Recaptcha();
-
-  const recap = recaptcha.check(wrapper);
-  if (!recap)
-    return helperFunc.showOneAlert(wrapper, 'msgRecap');    
-
+  
+  let token = await getRecaptchaToken(wrapper)
+  if (!token) return helperFunc.showOneAlert(wrapper, 'msgRecap');    
   const mailchimp = wrapper.classList.contains('app-mobius5-mailchimp');
 
-  data.Recaptcha = recap;
+  // set if valid token returned
+  if (typeof token == "string")
+    data.Recaptcha = token;
   data.MailChimp = mailchimp;
 
   helperFunc.disableInputs(wrapper, true);

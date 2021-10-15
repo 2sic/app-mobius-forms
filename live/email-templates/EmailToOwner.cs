@@ -32,11 +32,9 @@ public class EmailToOwner: Custom.Hybrid.Code12
         
         return message;
     }
-	public string Subject(dynamic data) {
-        // create custom code to generate the subject here...
-        // or just return the setting configured in the form
-        return !String.IsNullOrWhiteSpace(Content.OwnerMailSubject)
-            ? Content.OwnerMailSubject.ToString()
-            : Resources.OwnerMailSubject.ToString();
-	}
+
+  public string Subject(dynamic data) {
+      // create custom code to generate the subject here...or just return the setting configured in the form
+      return Text.First(Content.OwnerMailSubject, Resources.OwnerMailSubject);
+  }
 }

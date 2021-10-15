@@ -1,49 +1,16 @@
 declare let grecaptcha: any;
 
-import { UiActions } from './uiActions';
+// Checks if a recaptcha is implemented in the current Form and returns promise with token if existing
 
-export class Recaptcha {
-  helperFunc = new UiActions();
+export function getRecaptchaToken(wrapper: Element) {
+  const recap = wrapper.getElementsByClassName('app-mobius5-g-recaptcha')[0] as HTMLElement;
 
-  constructor() { }
-
-  /*
-    Initialize Recaptcha and create a Recapcha Checkbox below the Formfields 
-  */
-  init(wrapper: HTMLElement) {
-    const recap = wrapper.querySelector('g-recaptcha') as HTMLElement;
-
-    if(!isNaN(parseInt(wrapper.dataset.recapId))) {
-        return;
-    }
-
-    const id = grecaptcha.render(recap, {
-      'sitekey' : recap.dataset.sitekey,
-      'size' : 'normal'
-    });
-
-    wrapper.setAttribute('recapId', id); // remember for later use       
-  }
+  // if no recaptcha found, probably ok
+  if(!recap) return Promise.resolve(true);
   
-  /* 
-    Checks if a recaptcha is implemented in the current Form
-  */
-  check(wrapper: Element) {
-    const recap = wrapper.getElementsByClassName('g-recaptcha');
+  // if many found, probably not ok
+  if(wrapper.getElementsByClassName('app-mobius5-g-recaptcha').length !== 1) throw "recaptcha not found";
 
-    // if no recaptcha found, probably ok
-    if(recap.length === 0) {
-      return true;
-    }
-
-    // if many found, probably not ok
-    if(recap.length !== 1) {
-      throw "recaptcha not found";
-    }
-
-    // return google response for the recap
-    const res = grecaptcha.getResponse(); // null if failed, something cryptic if ok
-
-    return res || false; 
-  }
+  // return promise of google response for the recap
+  return grecaptcha.execute(recap.dataset.sitekey, {action: 'submit'}) // null if failed, something cryptic if ok
 }

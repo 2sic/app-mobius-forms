@@ -7,9 +7,10 @@
   FieldBuilder.LabelInPlaceholder = true;
   var helpers = CreateInstance("shared/Helpers.cs");
   var pageCss = GetService<Connect.Koi.ICss>();
+  var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 
-<div class="@helpers.WrapperClasses(Content)" data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
+<div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
   @Html.Partial("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="app-mobius5-form">
@@ -30,20 +31,10 @@
       @Html.Partial("shared/_Recaptcha.cshtml")
     }
 
-    @if(!Content.Mailchimp) {
-      <div class="form-group row">
-        <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
-          <div class="alert alert-warning">
-            @Html.Raw(Resources.MessageEnableMailchimp.Replace("<p>", "").Replace("</p>", ""))
-          </div>
-        </div>
-      </div>
-    }
-
     @* Messages / Send Button *@
-    @Html.Partial("shared/_Submit with Messages.cshtml")
+    @Html.Partial("shared/_Submit with Messages.cshtml", new { IsMailChimpForm = true })
   </div>
   
 </div>
 
-@Html.Partial("shared/_Assets.cshtml")
+@Html.Partial("shared/_Assets.cshtml", new { DomAttribute = domAttribute })

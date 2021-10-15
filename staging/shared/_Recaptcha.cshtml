@@ -9,12 +9,8 @@
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
 }
-<div class="form-group app-mobius5-support-disable row">
-  <label for="" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>@Resources.LabelRecaptcha</label>
-  <div class='@(pageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
-    <div class="g-recaptcha" data-sitekey="@siteKey" data-size="normal"></div>
-  </div>
-</div>
+
+<div class="app-mobius5-g-recaptcha" data-sitekey="@siteKey"></div>
 
 @if(showWarning) {
   <div class="alert alert-warning">
@@ -22,4 +18,4 @@
   </div>
 }
 
-<script src="https://www.google.com/recaptcha/api.js" async defer data-enableoptimizations="true"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=@siteKey" async defer data-enableoptimizations="true"></script>
