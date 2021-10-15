@@ -1,4 +1,4 @@
-import { getRecaptchaToken } from './add-ins/recaptcha';
+import { getRecaptchaToken, requiresRecaptcha } from './add-ins/recaptcha';
 import { UiActions } from './add-ins/uiActions';
 import { CollectFieldsAutomatic } from './collect-fields/auto';
 
@@ -13,7 +13,6 @@ winAny.appMobius5 ??= {};
 winAny.appMobius5.init ??= initAppMobius5;
 
 function initAppMobius5({ domAttribute } : { domAttribute: string }) {
-
   if (debug) console.log("Mobius5 loading, debug is enabled");
   domAttribute
   const mobiusWrapper = document.querySelectorAll(`[${domAttribute}]`)[0];
@@ -51,13 +50,15 @@ function validate(wrapper: Element, event: Event): boolean {
 async function sendWhenReady(data: any, wrapper: HTMLElement) {
   const helperFunc = new UiActions();
   
-  let token = await getRecaptchaToken(wrapper)
-  if (!token) return helperFunc.showOneAlert(wrapper, 'msgRecap');    
-  const mailchimp = wrapper.classList.contains('app-mobius5-mailchimp');
+  if (requiresRecaptcha(wrapper)) {
+    let token = await getRecaptchaToken(wrapper)
+    if (!token) return helperFunc.showOneAlert(wrapper, 'msgRecap');    
 
-  // set if valid token returned
-  if (typeof token == "string")
+    // set token for backend
     data.Recaptcha = token;
+  }
+
+  const mailchimp = wrapper.classList.contains('app-mobius5-mailchimp');
   data.MailChimp = mailchimp;
 
   helperFunc.disableInputs(wrapper, true);
