@@ -10,7 +10,7 @@ using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class SendMail : Custom.Hybrid.Code12
 {
-  public void sendMails(Dictionary<string, object> contactFormRequest, string workflowId, dynamic files)
+  public void SendMails(Dictionary<string, object> contactFormRequest, string workflowId, dynamic files)
   {
     var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
     var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
@@ -71,11 +71,12 @@ public class SendMail : Custom.Hybrid.Code12
 
     // Log to Platform - just as a last resort in case something is lost, to track down why
     var message = new StringBuilder()
-      .AppendLine("MailFrom: " + from)
-      .AppendLine("MailTo: "+ to)
-      .AppendLine("MailCC: "+ cc)
-      .AppendLine("MailReply: "+ replyTo)
-      .AppendLine("MailSubject: "+ subject)
+      .AppendLine("Send Mail")
+      .AppendLine("From:    " + from)
+      .AppendLine("To:      " + to)
+      .AppendLine("CC:      " + cc)
+      .AppendLine("Reply:   " + replyTo)
+      .AppendLine("Subject: " + subject)
       .ToString();
 
     GetService<ILogService>().Add("SendMail", message);
