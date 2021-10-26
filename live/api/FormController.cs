@@ -95,7 +95,7 @@ public class FormController : Custom.Hybrid.Api12
 
     // sending Mails
     var sendMail = CreateInstance("Parts/SendMail.cs");
-    sendMail.sendMails(contactFormRequest, workflowId, files);
+    sendMail.SendMails(contactFormRequest, workflowId, files);
 
     wrapLog("ok");
   }

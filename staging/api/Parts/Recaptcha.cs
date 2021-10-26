@@ -25,14 +25,15 @@ public class Recaptcha : Custom.Hybrid.Code12
     var captchaResponse = Convert.Json.To<RecaptchaResponse>(GoogleReply);
 
     var status = captchaResponse.Success;
+    var isSameSite = captchaResponse.Hostname == CmsContext.Site.Url.Replace("https://", "").Split('/')[0];
 
-    if(!status) {
+    if(!status || !isSameSite) {
       Log.Add("recaptcha check failed:" + status);
       throw new Exception("bad recaptcha '" + status + "'" );
     }
 
     wrapLog("ok");
-    return status;
+    return status && isSameSite;
   }
 
 }
@@ -55,4 +56,12 @@ public class RecaptchaResponse {
     set { m_ErrorCodes = value; }
   }
   private List<string> m_ErrorCodes;
+
+  [JsonProperty("hostname")]
+  public string Hostname
+  {
+    get { return m_Hostname; }
+    set { m_Hostname = value; }
+  }
+  private string m_Hostname;
 }

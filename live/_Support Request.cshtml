@@ -12,6 +12,11 @@
   @Html.Partial("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="app-mobius5-form">
+    @* Recaptcha *@
+    @if(Content.Recaptcha ?? false) {
+      @Html.Partial("shared/_Recaptcha.cshtml")
+    }
+    
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)
@@ -33,11 +38,6 @@
 
     @if(Settings.GdprEnabled) {
       @Html.Partial("shared/_GDPR.cshtml")
-    }
-
-    @* Recaptcha *@
-    @if(Content.Recaptcha ?? false) {
-      @Html.Partial("shared/_Recaptcha.cshtml")
     }
 
     @* Messages / Send Button *@
