@@ -8,6 +8,8 @@
   var secureKey = secData.Parse(Settings.GoogleRecaptcha.SiteKey);
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
+
+  // TODO: @2mh - why the "-g-recaptcha" class? the "-g-" feels bad, pls clean up
 }
 
 <div class="app-mobius5-g-recaptcha" data-sitekey="@siteKey"></div>

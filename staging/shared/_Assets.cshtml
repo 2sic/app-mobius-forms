@@ -1,7 +1,8 @@
 @inherits Custom.Hybrid.Razor12
 @using ToSic.Razor.Blade;
 @{
-  var Edition = (Edit.Enabled ? "staging" : "live");
+  // TODO: @2mh - pls replace all the Edit.Enabled checks in all files to use the CmsContext.View.Edition
+  var Edition = CmsContext.View.Edition; // (Edit.Enabled ? "staging" : "live");
   var page = GetService<ToSic.Sxc.Web.IPageService>();  // Service to set titles etc. on the page
   page.Activate("turnOn");
 }

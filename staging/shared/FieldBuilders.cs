@@ -23,13 +23,18 @@ public class FieldBuilders: Custom.Hybrid.Code12
 
   // handles the visibility of a label or a placeholder
   public bool LabelInPlaceholder = false;
+
+  #region Koi based class selection
+
+  // The PageCss - cached for re-use
   internal dynamic PageCss { get { return _pageCss ?? (_pageCss = GetService<Connect.Koi.ICss>()); } }
   private dynamic _pageCss;
+
+  // TODO: @2mh document what this is for
   internal string FormClasses() {
     return "form-group " + (LabelInPlaceholder ? "" : "row");
   }
 
-  #region Koi based class selection
   // Choose CSS classes based on the framework
   // if you customize this, you probably know what css framework you want,
   // in which case you can skip framework detection and just write the classes
@@ -41,28 +46,37 @@ public class FieldBuilders: Custom.Hybrid.Code12
       + (PageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4");
   } 
 
-  // Choose CSS classes for the wrapping div of an input
-  internal string InputWrapperClasses;
-  private string _inputWrapperClasses;
   #endregion
 
   // Add a placeholder text to the inputs
-  internal string Placeholder(string key, bool required) {
+  internal string PhLabel(string key, bool required) {
     return LabelInPlaceholder ? Resources.Get("Label" + key) + (required ? "*" : "") : "";
+  }
+
+  // Sets a RazorBlade Input/TextArea to required and adds the message which is different for each field type
+  internal void SetRequired(dynamic content, bool required, string message) {
+    if (!required) return;
+    content.Attr("data-pristine-required-message", message).Required();
+    // TODO: @2mh - why this strange, long attribute? I believe something more like 'app-mobius5-required-message' would be better, pls check
   }
 
   // returns an input with common attributes and a possible placeholder
   public dynamic Text(string idString, bool required) {
-    var content = Tag.Input().Type("text").Id(idString).Attr("placeholder", Placeholder(idString, required)).Class("form-control");
-    if(required) {
-      content = content.Attr("data-pristine-required-message", Resources.LabelRequired).Required();
-    }
+    // TODO: @2mh - change all other functions like this one, to use .Placeholder instead of .Attr("placeholder", ...)
+    var content = Tag.Input().Type("text").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
+    // var content = Tag.Input().Type("text").Id(idString).Attr("placeholder", Placeholder(idString, required)).Class("form-control");
+
+    // TODO: @2mh - much duplicate code, replace with something like this
+    SetRequired(content, required, Resources.LabelRequired);
+    // if(required) {
+    //   content = content.Attr("data-pristine-required-message", Resources.LabelRequired).Required();
+    // }
     return Field(idString, required, content);
   }
 
   // returns an input of type email with common attributes and a possible placeholder
   public dynamic EMail(string idString, bool required) {
-    var content = Tag.Input().Type("email").Id(idString).Attr("placeholder", Placeholder(idString, required)).Class("form-control");
+    var content = Tag.Input().Type("email").Id(idString).Attr("placeholder", PhLabel(idString, required)).Class("form-control");
     if(required) {
       content = content.Attr("data-pristine-required-message", Resources.LabelValidEmail).Required();
     }
@@ -71,7 +85,7 @@ public class FieldBuilders: Custom.Hybrid.Code12
 
   // returns a textarea with common attributes and a possible placeholder
   public dynamic Multiline(string idString, bool required) {
-    var content = Tag.Textarea().Id(idString).Attr("placeholder", Placeholder(idString, required)).Class("form-control");
+    var content = Tag.Textarea().Id(idString).Attr("placeholder", PhLabel(idString, required)).Class("form-control");
     if(required) {
       content = content.Attr("data-pristine-required-message", Resources.LabelRequired).Required();
     }
@@ -106,6 +120,9 @@ public class FieldBuilders: Custom.Hybrid.Code12
     // show warning if the save-attachments in web api isn't activated
     // this is a security feature to protect your installation from unwanted uploads
 
+    // TODO: bug @2mh - this is broken - the code warns if a feature is disabled, 
+    // but the code never runs - because it's after the return-statement above
+
     var features = GetService<IFeaturesService>();
     if(!features.Enabled(FeatureIds.UseAdamInWebApi)) {
       return Tag.Div(Resources.MessageDisabledFeature).Class("alert alert-warning");
@@ -114,16 +131,22 @@ public class FieldBuilders: Custom.Hybrid.Code12
 
   // shows a wrapping div with choosen content
   public dynamic Field(string idString, bool required, dynamic contents) {
-    InputWrapperClasses = _inputWrapperClasses ?? (_inputWrapperClasses = (PageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8"));
+    var inputWrapperClasses = PageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8";
     var labelTranslated = Resources.Get("Label" + idString);
     var field = Tag.Div().Class(FormClasses());
 
+    // If the label is _not_ in the placeholder, add the label first
     if (!LabelInPlaceholder) {
-      field = field.Add(Tag.Label(ToSic.Razor.Blade.Text.First(labelTranslated, idString)).Class(LabelClasses(required)).For(idString));
+      field = field.Add(
+        Tag.Label(ToSic.Razor.Blade.Text.First(labelTranslated, idString))
+          .Class(LabelClasses(required))
+          .For(idString)
+      );
     }
     
-    return field.Add(Tag.Div(contents).Class(!LabelInPlaceholder ? InputWrapperClasses : ""));
+    return field.Add(Tag.Div(contents).Class(!LabelInPlaceholder ? inputWrapperClasses : ""));
   }
+
 }
 
 

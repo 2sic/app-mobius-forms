@@ -13,13 +13,13 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 | Oqtane 2            | ✅    | Requires v2.02
 | No jQuery           | ?    | 
 | Live Demo           | ➖    |
-| Install Checklist   | ✅    | See [Installation](TODO) on [azing.org](https://azing.org/2sxc)
+| Install Checklist   | ✅    | See [Installation](TODO: @2mh) on [azing.org](https://azing.org/2sxc)
 | Source & License    | ✅    | included, ISC/MIT
-| App Catalog         | ✅    | See [app catalog](TODO)
-| Screenshots         | ✅    | See [app catalog](TODO)
+| App Catalog         | ✅    | See [app catalog](TODO: @2mh)
+| Screenshots         | ✅    | See [app catalog](TODO: @2mh)
 | Best Practices      | ✅    | Uses v12.05 conventions
-| Bootstrap 3         | ✔️    | Works well, not optimized
-| Bootstrap 4         | ✅    |
+| Bootstrap 3         | ✅    | optimized
+| Bootstrap 4         | ✅    | optimized
 | Bootstrap 5         | ✔️    | Works well, not optimized
 
 This means that it
@@ -28,7 +28,8 @@ This means that it
 2. can be modified to be any other form you need
 4. can be used as a starting point for your own AJAX forms in DNN
 
-The app is built with the [pattern **Don't be DAFT**][daft] (DAFT = Densely Abstract Features for Techies), aka the **Anti-Abstraction** pattern. So customizing it is mostly done using common technologies like HTML and if necessary, jQuery and C#. 
+The app is built with the [pattern **Don't be DAFT**][daft] (DAFT = Densely Abstract Features for Techies), aka the **Anti-Abstraction** pattern. 
+So customizing it is mostly done using common technologies like HTML, JS and some C#. 
 
 ## Quick Intro To The Mobius Forms App for DNN
 A [DNN App][2sxc] is like a DNN module, just way better :). Since this is an open-code/open-source 2sxc-app, you can customize it to be anything you want! This list just shows what it already does, so you know what you get out-of-the-first-box.
@@ -66,16 +67,16 @@ This app is only useful is you use DNN. So assuming you have a DNN installation,
 
 ## Customize the App
 
-TODO: @2dm
+The Source Code is all here - so you can easily customize to your hearts desire!
 
-
-## Credits
-
-The icon was built using the CC icon [_optical illusion by pedro baños cancer_ from the Noun Project](https://thenounproject.com/term/mobius-strip/182380/)
+---
 
 ## History
 
-TODO: @2dm
+* 2021-11
+    * Updated to v12 best-practices
+    * Removed all jQuery dependencies
+    * Hybrid - now works in Dnn and Oqtane
 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

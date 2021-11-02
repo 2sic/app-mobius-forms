@@ -1,6 +1,20 @@
 @inherits Custom.Hybrid.Razor12
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
+
+  // TODO: @2mh
+  // 1. Some of the divs are not done well, the </div> is at the end of the line - pls put on own line so it's clean
+}
+@functions {
+  // TODO: @2mh 
+  // The code is very duplicate, incl. the multi-replace on each value. Better to do it like this:
+  // - create a function probably like this below
+  // - then clean up the stuff underneath to simplify
+  dynamic AddHiddenMessage(string message, string type = "warning", string id = "") {
+    // todo here
+    return null;
+  }
+
 }
 <div class="form-group row">
   <!-- form error messages, invisible at first -->
