@@ -5,14 +5,16 @@
   var WorkflowId = DynamicModel.WorkflowId;
 
   var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == WorkflowId).FirstOrDefault();
-
-  // TODO: @2mh unclear what is up with this file, it mentions "registration of this course" and the toolbar is commented out?
 }
-<div class="text-right text-end" >
-  @* @Edit.Toolbar(Content, toolbar: new [] { 
-    "edit&filter:ModuleId=" + CmsContext.Module.Id,
-    "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + CmsContext.Module.Id
-  }) *@
-  @Edit.Toolbar(Content)
+<div class="row justify-content-between">
+  <div class="col">
+    @Edit.Toolbar(toolbar: new [] { 
+      "toolbar=empty&hover=left",
+      "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + CmsContext.Module.Id
+    })
+  </div>
+  <div class="col text-right">
+    @Edit.Toolbar(Content)
+  </div>
 </div>
 

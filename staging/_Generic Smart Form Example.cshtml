@@ -6,7 +6,7 @@
 *@
 @using System.Linq
 @{
-  var Edition = (Edit.Enabled ? "staging" : "live");
+  var Edition = CmsContext.View.Edition;
   var workflowId = "GenericSave";
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   var helpers = CreateInstance("shared/Helpers.cs");
@@ -14,15 +14,22 @@
   var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 
+<script>
+
+  // toggles visibility and sets provided domElement to required
+  function showAndMakeRequired(domId) {
+    console.log(domId)
+    const customField = document.querySelector(domId);
+    console.log(customField)
+    customField.style.display = customField.style.display === 'none' ? 'flex' : 'none'; 
+    customField.querySelector('input').setAttribute('required', this.checked)
+  }
+</script>
+
 <div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
   @Html.Partial("shared/_Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
 
   <div class="app-mobius5-form">
-    @* Recaptcha *@
-    @if(Content.Recaptcha ?? false) {
-      @Html.Partial("shared/_Recaptcha.cshtml")
-    }
-    
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)
@@ -32,45 +39,28 @@
     @{
       // will show/hide the additional field, and set it's "Required" state
       // create a unique name, to ensure it works if multiple forms are on the page
-      var custFieldId = "app-form-cid-" + CmsContext.Module.Id;
-
-      // TODO: @2mh
-      // - This form is missing on the page so you never see that it actually doesn't work
-      // - pls create an own page in Dnn and Oqtane to show this, sync etc.
-      // - fix all pageCss.Class calls
-      // - the script which trigger show-hide is very complex, it shouldn't be inline
-      //   - please put it on this page as a simple <script> tag and call it with showAndMakeRequired('#@custFieldId')
+      var customFieldId = "app-mobius5-cid-" + CmsContext.Module.Id;
     }
 
     <div class="form-group row">
-      <label for="IsCustomer" @pageCss.Class("all='control-label app-mobius5-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>I'm a Customer</label>
-      <div @pageCss.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
+      <label for="IsCustomer-@CmsContext.Module.Id" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>I'm a Customer</label>
+      <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
-        <input type="checkbox" class="form-control" name="IsCustomer" 
-          onclick="document.getElementById('#@custFieldId').style.display = document.getElementById('#@custFieldId').style.display === 'none' ? 'block' : 'none'; document.getElementById('#@custFieldId').querySelector('input').setAttribute('required', this.checked)" required>
+        <input type="checkbox" class="form-control" data-pristine-required-message="Required" id="IsCustomer-@CmsContext.Module.Id" name="IsCustomer-@CmsContext.Module.Id" required onclick="showAndMakeRequired('#@customFieldId')">
       </div>
     </div>
 
     <!-- Customer ID (if is customer) -->
-    @{
-      // TODO: @2mh
-      // - fix to use page.Is("bs3") and not the old .Class(...)
-      // - also check the classes if they are still correct - they are probably wrong
-    }
-    <div id="@custFieldId" class="form-group row" style="display:none">
-      <label for="CustomerId" @pageCss.Class("all='control-label app-mobius5-field-required' bs3='col col-xs-12 col-sm-4' bs4,oth='col-12 col-md-4'")>Customer ID</label>
-      <div @pageCss.Class("bs3='col col-xs-12 col-sm-8' bs4,oth='col-12 col-md-8'")>
-        <input type="text" class="form-control" id="CustomerId" value="">
+    <div id="@customFieldId" class="form-group row" style="display:none">
+      <label for="CustomerId" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>Customer ID</label>
+      <div class='@(pageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
+        <input type="text" class="form-control" data-pristine-required-message="Required" id="CustomerId" value="">
       </div>
     </div>
 
-    @if(Settings.TermsEnabled) {
-      @Html.Partial("shared/_Terms.cshtml")
-    }
-
-    @if(Settings.GdprEnabled) {
-      @Html.Partial("shared/_GDPR.cshtml")
-    }
+    @if(Settings.TermsEnabled) { @Html.Partial("shared/_Terms.cshtml") }
+    @if(Settings.GdprEnabled) { @Html.Partial("shared/_GDPR.cshtml") }
+    @if(Content.Recaptcha ?? false) { @Html.Partial("shared/_Recaptcha.cshtml") }
 
     @* Messages / Send Button *@
     @Html.Partial("shared/_Submit with Messages.cshtml")

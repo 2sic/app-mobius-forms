@@ -2,14 +2,14 @@
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
 }
-@* Sender AcceptGDPR *@
+
 <div class="form-group">
   <div class="row">
     <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
-      <input type="checkbox" id="GDPR" name="GDPR" required data-smk-msg="@Resources.LabelRequired" >
+      <input type="checkbox" id="GDPR-@CmsContext.Module.Id" name="GDPR-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired" >
     </div>
     <div class='@(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>
-      <label for="GDPR" class="control-label">@Html.Raw(Resources.GdprLabel)</label>
+      <label for="GDPR-@CmsContext.Module.Id" class="control-label">@Html.Raw(Resources.GdprLabel)</label>
     </div>
   </div>
 </div>

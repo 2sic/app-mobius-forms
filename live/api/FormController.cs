@@ -38,12 +38,12 @@ public class FormController : Custom.Hybrid.Api12
     // in the request with the correct name, they will be added automatically
     contactFormRequest.Add("Timestamp", DateTime.Now);
     #if NETCOREAPP
-    // todo: what can we do here?
+    // TODO: @2dm what can we do here?
       contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
     #else
       contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
     #endif
-      contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
+    contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
     // add raw-data, in case the content-type has a "RawData" field
     contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
     // add Title (if non given), in case the Content-Type would benefit of an automatic title
@@ -81,7 +81,7 @@ public class FormController : Custom.Hybrid.Api12
       Log.Add("No files found to save");
     }
 
-    CreateInstance("Parts/MailChimp.cs").Validate(contactFormRequest);
+    CreateInstance("Parts/MailChimp.cs").SubscribeIfEnabled(contactFormRequest);
     // after subscribe, remove mailchimp fields from the data-package because we don't want them in the e-mails
     removeKeys(contactFormRequest, new string[] { "MailChimp" });
 

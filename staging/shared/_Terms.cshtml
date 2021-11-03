@@ -1,18 +1,16 @@
 @inherits Custom.Hybrid.Razor12
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
-
-  // TODO: @2mh the name should also include the module-id, otherwise the label-click activates the wrong chebox of another form on the same page
 }
 
 @* Sender AcceptTerms *@
 <div class="form-group">
   <div class="row">
     <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
-      <input type="checkbox" id="Terms" name="Terms" required data-smk-msg="@Resources.LabelRequired" >
+      <input type="checkbox" id="Terms-@CmsContext.Module.Id" name="Terms-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired" >
     </div>
     <div class='@(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>
-      <label for="Terms" class="control-label">@Html.Raw(Resources.TermsLabel)</label>
+      <label for="Terms-@CmsContext.Module.Id" class="control-label">@Html.Raw(Resources.TermsLabel)</label>
     </div>
   </div>
 </div>

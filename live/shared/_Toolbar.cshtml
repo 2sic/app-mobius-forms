@@ -6,11 +6,15 @@
 
   var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == WorkflowId).FirstOrDefault();
 }
-<div class="text-right text-end" >
-  @* @Edit.Toolbar(Content, toolbar: new [] { 
-    "edit&filter:ModuleId=" + CmsContext.Module.Id,
-    "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + CmsContext.Module.Id
-  }) *@
-  @Edit.Toolbar(Content)
+<div class="row justify-content-between">
+  <div class="col">
+    @Edit.Toolbar(toolbar: new [] { 
+      "toolbar=empty&hover=left",
+      "contentitems?contentType=" + workflow.ContentType + "&filter:ModuleId=" + CmsContext.Module.Id
+    })
+  </div>
+  <div class="col text-right">
+    @Edit.Toolbar(Content)
+  </div>
 </div>
 

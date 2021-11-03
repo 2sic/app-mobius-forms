@@ -10,7 +10,7 @@
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
 }
 
-<div class="app-mobius5-g-recaptcha" data-sitekey="@siteKey"></div>
+<div class="app-mobius5-recaptcha" data-sitekey="@siteKey"></div>
 @if(Edit.Enabled) {
   <div class="alert alert-warning">
     @Html.Raw(Resources.MessageContainsRecaptcha.Replace("<p>", "").Replace("</p>", ""))

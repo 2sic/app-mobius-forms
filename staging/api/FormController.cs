@@ -81,7 +81,7 @@ public class FormController : Custom.Hybrid.Api12
       Log.Add("No files found to save");
     }
 
-    CreateInstance("Parts/MailChimp.cs").Validate(contactFormRequest);
+    CreateInstance("Parts/MailChimp.cs").SubscribeIfEnabled(contactFormRequest);
     // after subscribe, remove mailchimp fields from the data-package because we don't want them in the e-mails
     removeKeys(contactFormRequest, new string[] { "MailChimp" });
 

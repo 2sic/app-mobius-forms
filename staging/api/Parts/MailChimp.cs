@@ -12,8 +12,7 @@ public class MailChimp : Custom.Hybrid.Code12
   // Checks for MailChimp Integration
   // if true instantiate mailchimp
   // subscribe for mailchimp
-  // TODO: @2mh - this name is really bad, pls change to "SubscribeIfEnabled" or something
-  public void Validate(Dictionary<string, object> contactFormRequest)
+  public void SubscribeIfEnabled(Dictionary<string, object> contactFormRequest)
   {
     if (contactFormRequest.ContainsKey("MailChimp"))
     {
