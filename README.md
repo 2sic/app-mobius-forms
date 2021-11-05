@@ -59,7 +59,7 @@ Because it's so simple and uses 2sxc, you can easily
 
 This app is only useful is you use DNN. So assuming you have a DNN installation, all you need to do is install 2sxc and this app. 
 
-* Here's how to [install 2sxc and an App of your Choice](http://2sxc.org/en/blog/post/install-2sxc-and-an-app-of-your-choice)
+* Here's how to [install 2sxc and an App of your Choice](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 
 * Now you can use this app as-is, or customize it to be whatever you need it to be. 
 
