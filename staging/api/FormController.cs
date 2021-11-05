@@ -28,7 +28,7 @@ public class FormController : Custom.Hybrid.Api12
     }
 
     // 0.1. after saving, remove recaptcha fields from the data-package, because we don't want them in the e-mails
-    removeKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" });
+    RemoveKeys(contactFormRequest, new string[] { "g-recaptcha-response", "useRecaptcha",  "Recaptcha", "submit" });
 
     // get configuration for this Form
     var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
@@ -46,7 +46,7 @@ public class FormController : Custom.Hybrid.Api12
     // Add the ModuleId to assign each sent form to a specific module
     contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
     // add raw-data, in case the content-type has a "RawData" field
-    contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
+    contactFormRequest.Add("RawData", CreateRawDataEntry(contactFormRequest));
     // add Title (if non given), in case the Content-Type would benefit of an automatic title
     var addTitle = !contactFormRequest.ContainsKey("Title");
     if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
@@ -63,7 +63,7 @@ public class FormController : Custom.Hybrid.Api12
     App.Data.Create(workflow.ContentType, contactFormRequest);
 
     // Remove Terms and GDPR from the data-package - we don't want them in the e-mails
-    removeKeys(contactFormRequest, new string[] { "GDPR", "Terms" });
+    RemoveKeys(contactFormRequest, new string[] { "GDPR", "Terms" });
 
     var files = new List<ToSic.Sxc.Adam.IFile>();
 
@@ -77,22 +77,22 @@ public class FormController : Custom.Hybrid.Api12
       }
 
       // Don't keep Files array in ContactFormRequest
-      removeKeys(contactFormRequest, new string[] { "Files" });
+      RemoveKeys(contactFormRequest, new string[] { "Files" });
     } else {
       Log.Add("No files found to save");
     }
 
     CreateInstance("Parts/MailChimp.cs").SubscribeIfEnabled(contactFormRequest);
     // after subscribe, remove mailchimp fields from the data-package because we don't want them in the e-mails
-    removeKeys(contactFormRequest, new string[] { "MailChimp" });
+    RemoveKeys(contactFormRequest, new string[] { "MailChimp" });
 
     // Improve keys / values for nicer presentation in the mail
     // after saving, remove raw-data and the generated title
     // because we don't want them in the e-mails
-    removeKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" });
+    RemoveKeys(contactFormRequest, new string[] { "RawData", addTitle ? "Title" : "some-fake-key" });
 
     // remove App informations from data-package
-    removeKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" });
+    RemoveKeys(contactFormRequest, new string[] { "EntityGuid", "ModuleId",  "SenderIP", "Timestamp" });
 
     // sending Mails
     var sendMail = CreateInstance("Parts/SendMail.cs");
