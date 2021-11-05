@@ -37,12 +37,13 @@ public class FormController : Custom.Hybrid.Api12
     // if you add fields to your content-type, just make sure they are
     // in the request with the correct name, they will be added automatically
     contactFormRequest.Add("Timestamp", DateTime.Now);
+    // Add the SenderIP in case we need to track down abuse
     #if NETCOREAPP
-    // TODO: @2dm what can we do here?
       contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
     #else
       contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
     #endif
+    // Add the ModuleId to assign each sent form to a specific module
     contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
     // add raw-data, in case the content-type has a "RawData" field
     contactFormRequest.Add("RawData", createRawDataEntry(contactFormRequest));
@@ -100,7 +101,7 @@ public class FormController : Custom.Hybrid.Api12
     wrapLog("ok");
   }
 
-  private dynamic createRawDataEntry(Dictionary<string,object> formRequest)
+  private dynamic CreateRawDataEntry(Dictionary<string,object> formRequest)
   {
     var data = new Dictionary<string, object>(formRequest, StringComparer.OrdinalIgnoreCase);
     data.Remove("Files");
@@ -108,8 +109,7 @@ public class FormController : Custom.Hybrid.Api12
   }
 
   // helpers
-  // remove key from header
-  private void removeKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
+  private void RemoveKeys(Dictionary<string,object> contactFormRequest, string[] badKeys)
   {
     foreach (var key in badKeys)
       if(contactFormRequest.ContainsKey(key))

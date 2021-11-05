@@ -22,16 +22,16 @@
     @FieldBuilder.File("Attachments", false, "", "File2_2")
     
     @* Show/Hide features like Terms, Gdpr, Recaptcha *@
-    @if(Settings.TermsEnabled) { @Html.Partial("shared/_Terms.cshtml") }
-    @if(Settings.GdprEnabled) { @Html.Partial("shared/_GDPR.cshtml") }
-    @if(Content.Recaptcha ?? false) { @Html.Partial("shared/_Recaptcha.cshtml") }
+    @if (Settings.TermsEnabled)       { @Html.Partial("shared/_Terms.cshtml") }
+    @if (Settings.GdprEnabled)        { @Html.Partial("shared/_GDPR.cshtml") }
+    @if (Content.Recaptcha ?? false)  { @Html.Partial("shared/_Recaptcha.cshtml") }
 
     @* Messages / Send Button *@
     @Html.Partial("shared/_Submit with Messages.cshtml")
 
     @* show warning if the save-attachments in web api isn't activated
     this is a security feature to protect your installation from unwanted uploads *@
-    @if(!features.Enabled(FeatureIds.UseAdamInWebApi)) {
+    @if (!features.Enabled(FeatureIds.UseAdamInWebApi)) {
       <div class="alert alert-warning">@Resources.MessageDisabledFeature</div>
     }
   </div>

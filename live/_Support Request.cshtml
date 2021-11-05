@@ -27,9 +27,10 @@
       }
     )
 
-    @if(Settings.TermsEnabled) { @Html.Partial("shared/_Terms.cshtml") }
-    @if(Settings.GdprEnabled) { @Html.Partial("shared/_GDPR.cshtml") }
-    @if(Content.Recaptcha ?? false) { @Html.Partial("shared/_Recaptcha.cshtml") }
+    @* Show/Hide features like Terms, Gdpr, Recaptcha *@
+    @if (Settings.TermsEnabled)       { @Html.Partial("shared/_Terms.cshtml") }
+    @if (Settings.GdprEnabled)        { @Html.Partial("shared/_GDPR.cshtml") }
+    @if (Content.Recaptcha ?? false)  { @Html.Partial("shared/_Recaptcha.cshtml") }
 
     @* Messages / Send Button *@
     @Html.Partial("shared/_Submit with Messages.cshtml")

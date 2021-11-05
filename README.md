@@ -13,10 +13,10 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 | Oqtane 2            | ✅    | Requires v2.02
 | No jQuery           | ?    | 
 | Live Demo           | ➖    |
-| Install Checklist   | ✅    | See [Installation](TODO: @2mh) on [azing.org](https://azing.org/2sxc)
+| Install Checklist   | ✅    | See [Installation] on [azing.org](https://azing.org/2sxc)
 | Source & License    | ✅    | included, ISC/MIT
-| App Catalog         | ✅    | See [app catalog](TODO: @2mh)
-| Screenshots         | ✅    | See [app catalog](TODO: @2mh)
+| App Catalog         | ✅    | See [app catalog]
+| Screenshots         | ✅    | See [app catalog]
 | Best Practices      | ✅    | Uses v12.05 conventions
 | Bootstrap 3         | ✅    | optimized
 | Bootstrap 4         | ✅    | optimized

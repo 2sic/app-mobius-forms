@@ -5,8 +5,6 @@ using System.Net;
 using System.Net.Http;
 using ToSic.Sxc.Services; // platformLogService
 
-// TODO: Please take a care, that in Oqtane, code is compiling, but it is not tested that is working with MailChip.
-// TODO: 2ro - check if we can just log to EAV and not to DNN
 public class MailChimp : Custom.Hybrid.Code12
 {
   // Checks for MailChimp Integration
