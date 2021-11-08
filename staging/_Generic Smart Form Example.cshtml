@@ -1,8 +1,6 @@
 @inherits Custom.Hybrid.Razor12
 @*
-  Experimental stuff, don't use yet :)
-  this is just some testing stuff
-  not for production!!!
+  This is a demo how you can use JavaScript to show/hide fields based on other selections
 *@
 @using System.Linq
 @{
@@ -15,12 +13,10 @@
 }
 
 <script>
-
+  // 2sxclint:disable:no-inline-script
   // toggles visibility and sets provided domElement to required
   function showAndMakeRequired(domId) {
-    console.log(domId)
     const customField = document.querySelector(domId);
-    console.log(customField)
     customField.style.display = customField.style.display === 'none' ? 'flex' : 'none'; 
     customField.querySelector('input').setAttribute('required', this.checked)
   }
