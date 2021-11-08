@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System;
 public class EmailToCustomer: Custom.Hybrid.Code12
 {
+  // create custom subject here
+  public string Subject(dynamic data) {
+    // create custom code to generate the subject here...or just return the setting configured in the form
+    return Text.First(Content.CustomerMailSubject, Resources.CustomerMailSubject);
+  }
+
   public string Message(Dictionary<string,object> data)
   {
     var message = @"
@@ -24,10 +30,5 @@ public class EmailToCustomer: Custom.Hybrid.Code12
     </html>";
     
     return message;
-  }
-
-  public string Subject(dynamic data) {
-    // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(Content.CustomerMailSubject, Resources.CustomerMailSubject);
   }
 }

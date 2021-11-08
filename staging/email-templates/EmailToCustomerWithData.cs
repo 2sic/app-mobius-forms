@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System;
 public class EmailToCustomerWithData: Custom.Hybrid.Code12 
 {
+  // create custom subject here
+  public string Subject(dynamic data) {
+    // create custom code to generate the subject here...or just return the setting configured in the form
+    return Text.First(Content.CustomerMailSubject, App.Resources.CustomerMailSubject);
+  }
+
   public string Message(Dictionary<string,object> data) {
     var message = @"
     <!doctype html>
@@ -15,14 +21,13 @@ public class EmailToCustomerWithData: Custom.Hybrid.Code12
         </style>
     </head>
     <body>
+        <strong>" + data.Subject + @"</strong>
         <h1>" + Resources.MailCustomerTitle + @"</h1>
         <div>"
             + Resources.MailCustomerContent +
         @"</div>
         <br/>
-        <div>
-            " + Resources.MailCustomerContentWithData +
-        "</div>";
+        <div>" + Resources.MailCustomerContentWithData + @"</div>";
 
     foreach (var item in data)
     {
@@ -34,10 +39,5 @@ public class EmailToCustomerWithData: Custom.Hybrid.Code12
     message += "</body></html>";
     
     return message;
-  }
-
-  public string Subject(dynamic data) {
-    // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(Content.CustomerMailSubject, App.Resources.CustomerMailSubject);
   }
 }

@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System;
 public class EmailToCustomer: Custom.Hybrid.Code12
 {
-  // TODO: 2mh - pls move the subject to the top on all e-mail templates, it's easier to see (otherwise I may miss that it exists)
+  // create custom subject here
+  public string Subject(dynamic data) {
+    // create custom code to generate the subject here...or just return the setting configured in the form
+    return Text.First(Content.OwnerMailSubject, Resources.OwnerMailSubject);
+  }
+
   public string Message(Dictionary<string,object> data)
   {
     var message = @"
@@ -45,10 +50,5 @@ public class EmailToCustomer: Custom.Hybrid.Code12
     </html>";
     
     return message;
-  }
-
-  public string Subject(dynamic data) {
-    // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(Content.OwnerMailSubject, Resources.OwnerMailSubject);
   }
 }
