@@ -82,6 +82,7 @@ function sendForm(data: any, wrapper: HTMLElement) {
     if(!result.ok) {
       if(debug) console.log('error', result.status());
       showError();
+      return
     }
     
     // success
