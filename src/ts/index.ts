@@ -76,7 +76,20 @@ function sendForm(data: any, wrapper: HTMLElement) {
   
   if(debug) console.log(data);
   
-  var saveCall = sxc.webApi.post(ws, null, data, true);
+  sxc.webApi.fetch(ws, data)
+  .then((result: any) => {
+    // error
+    if(!result.ok) {
+      if(debug) console.log('error', result.status());
+      showError();
+    }
+    
+    // success
+    if(debug) console.log('success', result.json());
+    btn.setAttribute("disabled", "")
+    showSuccess();
+  })
+
   
   function showSuccess() {
     const msg = data.mailchimp ? 'msgNewsletterSuccess' : 'msgOk';
@@ -98,15 +111,4 @@ function sendForm(data: any, wrapper: HTMLElement) {
     const trackingEvent = new CustomEvent('trackMobiusForm', { detail: { category: 'mobius-form', action: 'error', label: label } });
     document.dispatchEvent(trackingEvent);
   }
-  
-  saveCall.success((successData: unknown) => {
-    if(debug) console.log('success', successData);
-    btn.setAttribute("disabled", "")
-    showSuccess();
-  });
-  
-  saveCall.error((errorData: unknown) => {
-    if(debug) console.log('error', errorData);
-    showError();
-  });
 }

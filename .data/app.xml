@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.08.02" ExportDate="2021-11-08T09:40:42.3922602+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="12.10.00" ExportDate="2021-11-29T14:01:07.5310856+01:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -3900,28 +3900,31 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="RawData" Type="Custom" IsTitle="false">
-          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="c2e071f4-33f4-4531-8bde-498cdb3e38a6" Json="True" KeyNumber="4591">
+        <Attribute StaticName="RawData" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="2200ceb8-9eaa-476e-957c-d96f7a331ef2" Json="True" KeyNumber="4938">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
             <Value Key="DefaultValue" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="Disabled" Value="False" Type="Boolean">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="InputType" Value="custom-json-editor" Type="String">
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="Name" Value="Raw Data" Type="String">
+            <Value Key="InputType" Value="string-json" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="Name" Value="Rohdaten" Type="String">
-              <Dimension DimensionID="33" ReadOnly="false" />
+            <Value Key="Name" Value="RawData" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="Notes" Value="&lt;p&gt;This is&amp;nbsp;all the data stored in a raw JSON-Format - ideal for catch-everything and debug-scenarios.&lt;/p&gt;" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="Notes" Value="&lt;p&gt;Alle Formulardaten im rohen JSON-Format. Ideal f&amp;uuml;r&amp;nbsp;generische Szenarien oder um Probleme einzugrenzen.&lt;/p&gt;" Type="String">
-              <Dimension DimensionID="33" ReadOnly="false" />
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="Required" Value="False" Type="Boolean">
               <Dimension DimensionID="32" ReadOnly="false" />
@@ -3929,7 +3932,35 @@
             <Value Key="ValidationRegExJavaScript" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="VisibleInEditUI" Value="False" Type="Boolean">
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="f18ee169-45c5-404b-ace2-a89e9cf419e7" Json="True" KeyNumber="4938">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-json" AttributeSetName="@string-json" EntityGUID="5bd4ebcc-8f33-41ea-84e5-22a7065c3526" Json="True" KeyNumber="4938">
+            <Value Key="JsonSchemaMode" Value="none" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonSchemaRaw" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonSchemaSource" Value="link" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonSchemaUrl" Value="" Type="Hyperlink">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonValidation" Value="strict" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Rows" Value="30" Type="Number">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
           </Entity>
@@ -4528,45 +4559,67 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="RawData" Type="Custom" IsTitle="false">
-          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="49da1c11-ada6-41ad-b907-c847d1b0c259" Json="True" KeyNumber="4616">
+        <Attribute StaticName="RawData" Type="String" IsTitle="false">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="568153dc-41a0-4385-b168-c71f145f5a40" Json="True" KeyNumber="4937">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="DefaultValue" Value="" Type="String">
-              <Dimension DimensionID="33" ReadOnly="false" />
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="Disabled" Value="False" Type="Boolean">
-              <Dimension DimensionID="33" ReadOnly="false" />
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="InputType" Value="custom-json-editor" Type="String">
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
-            <Value Key="Name" Value="Raw Data" Type="String">
-              <Dimension DimensionID="33" ReadOnly="false" />
+            <Value Key="InputType" Value="string-json" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="RawData" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="Notes" Value="&lt;p&gt;This is&amp;nbsp;all the data stored in a raw JSON-Format - ideal for catch-everything and debug-scenarios.&lt;/p&gt;" Type="String">
-              <Dimension DimensionID="33" ReadOnly="false" />
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="Required" Value="False" Type="Boolean">
-              <Dimension DimensionID="33" ReadOnly="false" />
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="ValidationRegExJavaScript" Value="" Type="String">
-              <Dimension DimensionID="33" ReadOnly="false" />
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
-              <Dimension DimensionID="33" ReadOnly="false" />
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
           </Entity>
-          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@custom-json-editor" AttributeSetName="@custom-json-editor" EntityGUID="3382d955-bf50-4776-8b30-f04b3d15c844" Json="True" KeyNumber="4616">
-            <Value Key="Rows" Value="10" Type="Number">
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="ab73f7fa-f54c-442d-bb1f-daf1ca4cd09b" Json="True" KeyNumber="4937">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-json" AttributeSetName="@string-json" EntityGUID="d580eef4-61fc-4593-ba06-62eb35d30121" Json="True" KeyNumber="4937">
+            <Value Key="JsonSchemaMode" Value="none" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonSchemaRaw" Value="" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonSchemaSource" Value="link" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonSchemaUrl" Value="" Type="Hyperlink">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="JsonValidation" Value="strict" Type="String">
+              <Dimension DimensionID="32" ReadOnly="false" />
+            </Value>
+            <Value Key="Rows" Value="30" Type="Number">
               <Dimension DimensionID="32" ReadOnly="false" />
             </Value>
           </Entity>
@@ -4994,13 +5047,13 @@
       <Value Key="RequiredOqtaneVersion" Value="02.02.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredVersion" Value="12.05.00" Type="String">
+      <Value Key="RequiredVersion" Value="12.10.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="05.00.01" Type="String">
+      <Value Key="Version" Value="05.02.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -5014,13 +5067,13 @@
       <Value Key="GdprEnabled" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="MailchimpAPIKey" Value="" Type="String">
+      <Value Key="MailchimpAPIKey" Value="876e16e1dc9a500666307e520fae15e9-us20" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="MailchimpListId" Value="" Type="String">
+      <Value Key="MailchimpListId" Value="19d0fdca58" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="MailchimpServer" Value="" Type="String">
+      <Value Key="MailchimpServer" Value="us20" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="MailChimpShowWarning" Value="True" Type="Boolean">
@@ -5264,10 +5317,16 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="7d3a9033-983e-4825-8091-1599cf6e36d0" Json="True">
-      <Value Key="ContentDemoEntity" Value="null" Type="Entity">
+      <Value Key="ContentDemoEntity" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ContentTypeStaticName" Value="fa801736-f678-432d-b389-8272cca1cd92" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="IsHidden" Value="False" Type="Boolean">
@@ -5279,7 +5338,7 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
+      <Value Key="Location" Value="Site" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Contact Form" Type="String">
@@ -5294,6 +5353,12 @@
       <Value Key="PublishData" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="StreamsToPublish" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5301,6 +5366,9 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewController" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
@@ -5408,10 +5476,16 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="6bc262cd-cb74-445e-81e6-1e2fd126458d" Json="True">
-      <Value Key="ContentDemoEntity" Value="null" Type="Entity">
+      <Value Key="ContentDemoEntity" Value="ed59ffcd-b6a4-4c30-86d9-6c3e88e1fffb" Type="Entity">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ContentTypeStaticName" Value="fa801736-f678-432d-b389-8272cca1cd92" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="IsHidden" Value="False" Type="Boolean">
@@ -5423,7 +5497,7 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
+      <Value Key="Location" Value="Site" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Form for Support Request" Type="String">
@@ -5441,6 +5515,12 @@
       <Value Key="PublishData" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="StreamsToPublish" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5448,6 +5528,9 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewController" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
@@ -5620,10 +5703,16 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="b5807c59-ae2c-4ae1-8452-c67de87f81fa" Json="True">
-      <Value Key="ContentDemoEntity" Value="null" Type="Entity">
+      <Value Key="ContentDemoEntity" Value="4ecf0cfa-e8dc-4327-9378-93df5b837a0c" Type="Entity">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ContentTypeStaticName" Value="fa801736-f678-432d-b389-8272cca1cd92" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="IsHidden" Value="False" Type="Boolean">
@@ -5635,7 +5724,7 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
+      <Value Key="Location" Value="Site" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Contact Form with Address" Type="String">
@@ -5650,6 +5739,12 @@
       <Value Key="PublishData" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="StreamsToPublish" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5657,6 +5752,9 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewController" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
@@ -5681,10 +5779,16 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="25bfbd7f-8c35-4baf-8e96-03475196980a" Json="True">
-      <Value Key="ContentDemoEntity" Value="null" Type="Entity">
+      <Value Key="ContentDemoEntity" Value="8c7a4990-845f-4e48-a56f-d2944e4e410d" Type="Entity">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ContentTypeStaticName" Value="fa801736-f678-432d-b389-8272cca1cd92" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="IsHidden" Value="False" Type="Boolean">
@@ -5696,7 +5800,7 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
+      <Value Key="Location" Value="Site" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Mailchimp Form" Type="String">
@@ -5711,6 +5815,12 @@
       <Value Key="PublishData" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="StreamsToPublish" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5720,15 +5830,24 @@
       <Value Key="UseForList" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="ViewController" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="cd30719b-5e6e-4a55-b3f3-d175b9cc24c9" Json="True">
-      <Value Key="ContentDemoEntity" Value="null" Type="Entity">
+      <Value Key="ContentDemoEntity" Value="3920f10c-5160-4ddd-b0d8-0272a1f6cd2b" Type="Entity">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ContentTypeStaticName" Value="fa801736-f678-432d-b389-8272cca1cd92" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="IsHidden" Value="False" Type="Boolean">
@@ -5740,7 +5859,7 @@
       <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Location" Value="Portal File System" Type="String">
+      <Value Key="Location" Value="Site" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Name" Value="Contact Form with Files" Type="String">
@@ -5755,6 +5874,12 @@
       <Value Key="PublishData" Value="False" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="StreamsToPublish" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5762,6 +5887,9 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewController" Value="" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="ViewNameInUrl" Value="" Type="String">
@@ -5874,17 +6002,17 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="210c29cf-2cde-4620-b521-f6a2bce65b67" Json="True">
-      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Content" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="7d3a9033-983e-4825-8091-1599cf6e36d0" Type="Entity" />
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="e36f1ff1-ea4f-498e-9a05-aeeafa3d85cd" Json="True">
-      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Content" Value="4ecf0cfa-e8dc-4327-9378-93df5b837a0c" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="b5807c59-ae2c-4ae1-8452-c67de87f81fa" Type="Entity" />
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="2558e871-a285-4d67-9edc-9705fc3559b3" Json="True">
-      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Content" Value="8c7a4990-845f-4e48-a56f-d2944e4e410d" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="25bfbd7f-8c35-4baf-8e96-03475196980a" Type="Entity" />
     </Entity>
@@ -5915,10 +6043,12 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="5e5e3bdf-76a1-4982-9908-ef1220d507df" Json="True">
+      <Value Key="Content" Value="ed59ffcd-b6a4-4c30-86d9-6c3e88e1fffb" Type="Entity" />
+      <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="6bc262cd-cb74-445e-81e6-1e2fd126458d" Type="Entity" />
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="11936bd4-e9a6-4d63-9bd2-89c220e54fbf" Json="True">
-      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Content" Value="3920f10c-5160-4ddd-b0d8-0272a1f6cd2b" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="cd30719b-5e6e-4a55-b3f3-d175b9cc24c9" Type="Entity" />
     </Entity>
@@ -5928,7 +6058,7 @@
       <Value Key="Template" Value="7d3a9033-983e-4825-8091-1599cf6e36d0" Type="Entity" />
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="233e2232-382e-497b-9b0c-22c3beb03ff5" Json="True">
-      <Value Key="ContentDemoEntity" Value="null" Type="Entity" />
+      <Value Key="ContentDemoEntity" Value="9db8337e-df67-44d2-bbba-22d7dc2e107e" Type="Entity" />
       <Value Key="ContentTypeStaticName" Value="fa801736-f678-432d-b389-8272cca1cd92" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5953,7 +6083,7 @@
       <Value Key="Name" Value="Generic Smart Form" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Path" Value="staging/_Generic Smart Form Example.cshtml" Type="String">
+      <Value Key="Path" Value="live/_Generic Smart Form Example.cshtml" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="PresentationTypeStaticName" Value="" Type="String">
@@ -5985,9 +6115,239 @@
       </Value>
     </Entity>
     <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="76a6c46d-b26c-42df-93ff-a8baf2b6f59e" Json="True">
-      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Content" Value="9db8337e-df67-44d2-bbba-22d7dc2e107e" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="233e2232-382e-497b-9b0c-22c3beb03ff5" Type="Entity" />
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="6012078b-23a0-4938-95a7-7ff53d3076c3">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Demo Customer Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Mailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="testsender@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Demo Contact Form" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Demo Owner Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="8c7a4990-845f-4e48-a56f-d2944e4e410d">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Demo Customer Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Mailchimp" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="testsender@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Demo Mailchimp Form" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Demo Owner Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="ed59ffcd-b6a4-4c30-86d9-6c3e88e1fffb">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Demo Customer Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Mailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="testsender@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Demo Support Form" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Demo Owner Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="3920f10c-5160-4ddd-b0d8-0272a1f6cd2b">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Demo Customer Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Mailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="testsender@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Demo Contact Form (with files)" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Demo Owner Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="4ecf0cfa-e8dc-4327-9378-93df5b837a0c">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Demo Customer Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Mailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="testsender@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Demo Contact Form (with address)" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Demo Owner Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="f60c8861-f49b-449b-a322-c9b0b5dc3a1c" Json="True">
+      <Value Key="Template" Value="7d3a9033-983e-4825-8091-1599cf6e36d0" Type="Entity" />
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormInstanceConfiguration" EntityGUID="9db8337e-df67-44d2-bbba-22d7dc2e107e">
+      <Value Key="CustomerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerMailSubject" Value="Demo Customer Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="CustomerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Mailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="MailFrom" Value="testsender@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Demo Smart Form" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailCC" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerMailSubject" Value="Demo Owner Subject" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="OwnerSend" Value="True" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="63b3c90c-3007-4fd2-983d-c1bb51c5a90b">
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Subject&quot;:&quot;test 14.00&quot;,&quot;Message&quot;:&quot;test 14.00&quot;,&quot;SenderName&quot;:&quot;test 14.00&quot;,&quot;SenderMail&quot;:&quot;testmail@2sic.net&quot;,&quot;Terms-5506&quot;:&quot;True&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2021-11-29T13:59:36.9779804+01:00&quot;,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:5506}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2021-11-29T13:59:36" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2021-11-29T13:59:36" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
     </Entity>
   </Entities>
   <PortalFiles>
