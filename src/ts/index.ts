@@ -15,68 +15,68 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
 
   const mobiusWrapper = document.querySelectorAll(`[${domAttribute}]`)[0];
 
-  if(mobiusWrapper != null) {
-    const submitButtom = (mobiusWrapper.querySelectorAll('[app-mobius5-send]')[0] as HTMLButtonElement)
-    submitButtom.addEventListener('click', async (event: Event) => {
-      event.preventDefault();
-  
-      const eventBtn = event.currentTarget as HTMLElement;
-      addTrackingEvent('trackMobiusForm', 'mobius-form', eventBtn.innerText)
-      
-      var valid = validateForm(mobiusWrapper)
-      if (!valid) {
-        showAlert(mobiusWrapper, 'msgIncomplete')
-        return
-      }
-      
-      const formValues = await getFormValues(mobiusWrapper)
-  
-      if (requiresRecaptcha(mobiusWrapper)) {
-        let token = await getRecaptchaToken(mobiusWrapper)
-        if (!token) return showAlert(mobiusWrapper, 'msgRecap')
-    
-        // set token for backend
-        formValues.Recaptcha = token
-      }
-  
-      const mailchimp = mobiusWrapper.classList.contains('app-mobius5-mailchimp');
-      formValues.MailChimp = mailchimp; 
-  
-      // imply that message is sending by ui modifications 
-      
-      disableInputs(mobiusWrapper, true)
-      showAlert(mobiusWrapper, 'msgSending')
-        
-      //#region request handling
+  if(!mobiusWrapper) return
 
-      let endpoint = (mobiusWrapper as HTMLElement).dataset.webservice // (should be "Form/ProcessForm" or a custom override)
+  const submitButtom = (mobiusWrapper.querySelectorAll('[app-mobius5-send]')[0] as HTMLButtonElement)
+  submitButtom.addEventListener('click', async (event: Event) => {
+    event.preventDefault();
 
-      sendForm(formValues, submitButtom, endpoint) 
-        .then((result: any) => {
-          // error
-          if(!result.ok) {
-            if(debug) console.log('error', result.status);
-      
-            showAlert(mobiusWrapper, 'msgError')
-            showConfigWarnings(mobiusWrapper, 'app-mobius5-config-warning')
-            enableInputs(mobiusWrapper)
-      
-            addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
-            return
-          }
-          
-          // success
-          if(debug) console.log('success', result.json())
-          submitButtom.setAttribute("disabled", "")
+    const eventBtn = event.currentTarget as HTMLElement;
+    addTrackingEvent('trackMobiusForm', 'mobius-form', eventBtn.innerText)
     
-          showAlert(mobiusWrapper, 'msgOk')
+    var valid = validateForm(mobiusWrapper)
+    if (!valid) {
+      showAlert(mobiusWrapper, 'msgIncomplete')
+      return
+    }
+    
+    const formValues = await getFormValues(mobiusWrapper)
+
+    if (requiresRecaptcha(mobiusWrapper)) {
+      let token = await getRecaptchaToken(mobiusWrapper)
+      if (!token) return showAlert(mobiusWrapper, 'msgRecap')
+  
+      // set token for backend
+      formValues.Recaptcha = token
+    }
+
+    const mailchimp = mobiusWrapper.classList.contains('app-mobius5-mailchimp');
+    formValues.MailChimp = mailchimp; 
+
+    // imply that message is sending by ui modifications 
+
+    disableInputs(mobiusWrapper, true)
+    showAlert(mobiusWrapper, 'msgSending')
+      
+    //#region request handling
+
+    let endpoint = (mobiusWrapper as HTMLElement).dataset.webservice // (should be "Form/ProcessForm" or a custom override)
+
+    sendForm(formValues, submitButtom, endpoint) 
+      .then((result: any) => {
+        // error
+        if(!result.ok) {
+          if(debug) console.log('error', result.status);
+    
+          showAlert(mobiusWrapper, 'msgError')
           showConfigWarnings(mobiusWrapper, 'app-mobius5-config-warning')
-          disableInputs(mobiusWrapper, false)
+          enableInputs(mobiusWrapper)
     
           addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
-        })
+          return
+        }
+        
+        // success
+        if(debug) console.log('success', result.json())
+        submitButtom.setAttribute("disabled", "")
+  
+        showAlert(mobiusWrapper, 'msgOk')
+        showConfigWarnings(mobiusWrapper, 'app-mobius5-config-warning')
+        disableInputs(mobiusWrapper, false)
+  
+        addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
+      })
 
-      //#endregion
-    })
-  }
+    //#endregion
+  })
 }
