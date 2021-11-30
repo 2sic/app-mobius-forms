@@ -43,6 +43,21 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
       formValues.MailChimp = mailchimp; 
   
       // imply that message is sending by ui modifications 
+  // sxc.webApi.fetch(ws, data)
+  // .then((result: any) => {
+  //   // error
+  //   if(!result.ok) {
+  //     if(debug) console.log('error', result.status());
+  //     showError();
+  //     return
+  //   }
+    
+  //   // success
+  //   if(debug) console.log('success', result.json());
+  //   btn.setAttribute("disabled", "")
+  //   showSuccess();
+  // })
+
   
       disableInputs(mobiusWrapper, true)
       showAlert(mobiusWrapper, 'msgSending')
