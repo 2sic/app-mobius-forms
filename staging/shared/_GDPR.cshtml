@@ -3,7 +3,7 @@
   var pageCss = GetService<Connect.Koi.ICss>();
 }
 
-<div class="form-group">
+<div class="mb-3">
   <div class="row">
     <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
       <input type="checkbox" id="GDPR-@CmsContext.Module.Id" name="GDPR-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired" >

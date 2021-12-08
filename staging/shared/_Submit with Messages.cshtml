@@ -4,7 +4,7 @@
   var pageCss = GetService<Connect.Koi.ICss>();
 }
 
-<div class="form-group row">
+<div class="mb-3 row">
   <!-- form error messages, invisible at first -->
   <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
     @AddHiddenMessage(Resources.MessageFormIncomplete, "danger", "msgIncomplete")

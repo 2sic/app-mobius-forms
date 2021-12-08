@@ -38,16 +38,16 @@
       var customFieldId = "app-mobius5-cid-" + CmsContext.Module.Id;
     }
 
-    <div class="form-group row">
+    <div class="mb-3 row">
       <label for="IsCustomer-@CmsContext.Module.Id" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>I'm a Customer</label>
-      <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
+      <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1") d-flex justify-content-end'>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
-        <input type="checkbox" class="form-control" data-pristine-required-message="Required" id="IsCustomer-@CmsContext.Module.Id" name="IsCustomer-@CmsContext.Module.Id" required onclick="showAndMakeRequired('#@customFieldId')">
+        <input type="checkbox" data-pristine-required-message="Required" id="IsCustomer-@CmsContext.Module.Id" name="IsCustomer-@CmsContext.Module.Id" required onclick="showAndMakeRequired('#@customFieldId')">
       </div>
     </div>
 
     <!-- Customer ID (if is customer) -->
-    <div id="@customFieldId" class="form-group row" style="display:none">
+    <div id="@customFieldId" class="mb-3 row" style="display:none">
       <label for="CustomerId" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>Customer ID</label>
       <div class='@(pageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
         <input type="text" class="form-control" data-pristine-required-message="Required" id="CustomerId" value="">
