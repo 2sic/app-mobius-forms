@@ -20,7 +20,7 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 | Best Practices      | ✅    | Uses v12.05 conventions
 | Bootstrap 3         | ✅    | optimized
 | Bootstrap 4         | ✅    | optimized
-| Bootstrap 5         | ✔️    | Works well, not optimized
+| Bootstrap 5         | ✅    | optimized
 
 This means that it
 

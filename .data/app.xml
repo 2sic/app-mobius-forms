@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.00" ExportDate="2021-12-08T10:58:26.7217446+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.00" ExportDate="2021-12-14T17:19:42.6047213+01:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -9,7 +9,7 @@
     </Dimensions>
   </Header>
   <AttributeSets>
-    <AttributeSet StaticName="App-Resources" Name="App-Resources" Description="Stores resources like translations for an app" Scope="2SexyContent-App" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="App-Resources" Name="App-Resources" Description="Stores resources like translations for an app" Scope="System.App" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="GroupBasicFields" Type="Empty" IsTitle="false">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="db261f2b-7d3b-4993-95a9-9219302eb488" Json="True" KeyNumber="4488">
@@ -1888,7 +1888,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="App-Settings" Name="App-Settings" Description="Stores settings for an app" Scope="2SexyContent-App" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="App-Settings" Name="App-Settings" Description="Stores settings for an app" Scope="System.App" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="GroupOwner" Type="Empty" IsTitle="false">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="b63912e2-78a0-4f4a-9dde-ebc8fdc91358" Json="True" KeyNumber="4538">
@@ -2357,7 +2357,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="7a1a6841-f37a-4bad-953a-f204612693b9" Name="ContactSimple" Description="Simple contact form requests" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="7a1a6841-f37a-4bad-953a-f204612693b9" Name="ContactSimple" Description="Simple contact form requests" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Subject" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e09be595-05ba-4197-84d7-436a2be5f7d3" Json="True" KeyNumber="4553">
@@ -2811,7 +2811,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="2f6205bf-ac1a-4db0-b343-90675dd047f9" Name="FormContactAddress" Description="" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="2f6205bf-ac1a-4db0-b343-90675dd047f9" Name="FormContactAddress" Description="" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Subject" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="017bcd81-7cb2-4d8b-ba4d-aa78653b0a77" Json="True" KeyNumber="4563">
@@ -3287,7 +3287,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="fa801736-f678-432d-b389-8272cca1cd92" Name="FormInstanceConfiguration" Description="Configuration for the contact form" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="fa801736-f678-432d-b389-8272cca1cd92" Name="FormInstanceConfiguration" Description="Configuration for the contact form" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Name" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d7bce398-7ccc-4d21-8efe-bcb064e263c5" Json="True" KeyNumber="4575">
@@ -3885,7 +3885,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="080f40f9-bea4-427c-b951-253bb146346d" Name="GenericForm" Description="Use this to just take all data without creating a content-type" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="080f40f9-bea4-427c-b951-253bb146346d" Name="GenericForm" Description="Use this to just take all data without creating a content-type" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Title" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="a3967f00-172b-4910-890b-35adffea7376" Json="True" KeyNumber="4590">
@@ -4039,7 +4039,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="ae6619d6-72e6-4ce0-950a-dd4493d2a4d7" Name="MailChimp" Description="Mail Chimp Form" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="ae6619d6-72e6-4ce0-950a-dd4493d2a4d7" Name="MailChimp" Description="Mail Chimp Form" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Title" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="b213e01a-f98d-43e9-9aeb-3b4f6acb6480" Json="True" KeyNumber="4596">
@@ -4345,7 +4345,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="720aea68-d031-47c6-95e2-447f4ac73afc" Name="SupportRequest" Description="Support request" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="720aea68-d031-47c6-95e2-447f4ac73afc" Name="SupportRequest" Description="Support request" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Subject" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="f841b3f1-efca-4438-a09f-c5dc63fe073d" Json="True" KeyNumber="4606">
@@ -4544,7 +4544,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" Name="SystemProtocol" Description="Protocol of all forms sent - as safety net" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" Name="SystemProtocol" Description="Protocol of all forms sent - as safety net" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="Title" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d3d692e0-2c63-4a1a-88b4-35b17ac13a5a" Json="True" KeyNumber="4615">
@@ -4707,7 +4707,7 @@
         </Attribute>
       </Attributes>
     </AttributeSet>
-    <AttributeSet StaticName="15ad4672-7b74-4586-888f-4884abad523a" Name="Workflow" Description="Config for each type of form" Scope="2SexyContent" AlwaysShareConfiguration="false">
+    <AttributeSet StaticName="15ad4672-7b74-4586-888f-4884abad523a" Name="Workflow" Description="Config for each type of form" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
         <Attribute StaticName="WorkflowId" Type="String" IsTitle="true">
           <Entity AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e4561fe2-0510-45a7-86b6-52f0d713a309" Json="True" KeyNumber="4621">
@@ -5053,7 +5053,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="05.02.02" Type="String">
+      <Value Key="Version" Value="05.03.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
