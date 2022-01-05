@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.00" ExportDate="2021-12-14T17:19:42.6047213+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.00.01" ExportDate="2022-01-05T09:10:52.6052685+01:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -5053,7 +5053,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="05.03.00" Type="String">
+      <Value Key="Version" Value="05.03.01" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -6383,6 +6383,7 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
+    <Entity AssignmentObjectType="Entity" AttributeSetStaticName="529ba3a2-d7d4-4f40-a81b-ff819de03a9e" AttributeSetName="IsDefaultDecorator" EntityGUID="dfd45793-db9e-4564-93c7-233415162dad" Json="True" KeyGuid="7d3a9033-983e-4825-8091-1599cf6e36d0" />
   </Entities>
   <PortalFiles>
     <File Id="6040" RelativePath="adam\MobiusForms5\dUTtzVIWgUCy2ElKI3Ersw\SingleFile\Demo-2.jpg" />
