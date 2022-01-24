@@ -31,6 +31,7 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
     }
     
     const formValues = await getFormValues(mobiusWrapper)
+    console.log(formValues)
 
     if (requiresRecaptcha(mobiusWrapper)) {
       let token = await getRecaptchaToken(mobiusWrapper)

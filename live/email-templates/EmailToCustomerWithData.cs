@@ -21,7 +21,7 @@ public class EmailToCustomerWithData: Custom.Hybrid.Code12
         </style>
     </head>
     <body>
-        <strong>" + data.Subject + @"</strong>
+        <strong>" + data["Subject"] + @"</strong>
         <h1>" + Resources.MailCustomerTitle + @"</h1>
         <div>"
             + Resources.MailCustomerContent +

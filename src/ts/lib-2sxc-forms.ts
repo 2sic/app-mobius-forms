@@ -10,9 +10,11 @@ declare let $2sxc: any
   Because this is shared, all parameters like DOM-IDs etc. must be provided in the Init-call that it can work across apps
 */
 
-const promiseFileMap = (promise: Promise<unknown>) => {
-  if (!promise) return promise
-  return promise.then((result) => result)
+const promiseFileMap = (file: { Encoded: Promise<unknown>}) => {
+  if (!file.Encoded) return file
+  return new Promise((resolve) => {
+    file.Encoded.then((result) => resolve({...file, Encoded: result}))
+  })
 };
 
 // automatically build the send-object with all properties, 
@@ -25,9 +27,14 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
   const fields = formWrapper.querySelectorAll('input,textarea,select');
   fields.forEach((formField: HTMLInputElement) => {
     const fieldKey = getFieldKey(formField)
-    if (!fieldKey) return
+    if (!fieldKey || !formField.value) return
     if (formField.getAttribute('type') && formField.getAttribute('type').toLowerCase() == 'file') {
-      data['Files'].push(getFieldValue(formField))
+      data['Files'].push(
+        {
+          ...getFieldValue(formField) as object,
+          Field: fieldKey
+        }
+      )
       return
     }
     data[fieldKey] = getFieldValue(formField)
@@ -43,17 +50,21 @@ function getFieldKey(formField: HTMLInputElement): string {
   return formField.getAttribute('name') || formField.getAttribute('id');
 }
 
-function getFieldValue(formField: HTMLInputElement): Promise<unknown> | unknown {
+function getFieldValue(formField: HTMLInputElement): { Encoded: Promise<unknown>, Name: string } | unknown {
   // extract data from file fields
   if (!formField.getAttribute('type')) return formField.value
   switch (formField.getAttribute('type').toLowerCase()) {
     case 'file':
       const file = formField.files[0];
       if (!file) return;
-      return Promise.resolve(() => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file);
-      })
+      return {
+        Name: file.name,
+        Encoded: new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = (e) => { resolve(e.target.result) };
+        })
+      }
     case 'radio': return formField.value
     case 'checkbox': return formField.checked ? "True" : "False"
     default: return formField.value
