@@ -31,7 +31,7 @@ public class FieldBuilders: Custom.Hybrid.Code12
 
   // returns form-classes based on whether label is shown as placeholder or besides form - as row  
   internal string FormClasses() {
-    return "mb-3 " + (LabelInPlaceholder ? "" : "row");
+    return "form-group mb-3 " + (LabelInPlaceholder ? "" : "row");
   }
 
   // Choose CSS classes based on the framework
