@@ -43,7 +43,7 @@ A [DNN App][2sxc] is like a DNN module, just way better :). Since this is an ope
 2. data is saved, together with the _Timestamp_, _SenderIP_, optionaly generated _Title_ or even raw JSON-data
 3. sends [various e-mails][cust-mail], which are **razor-templateable** and has **Reply-To** and **CC** options
 4. **multi-language** labels and messages, already translated into English and German/Deutsch
-6. field validation uses [html5 and jQueryValidation][jqval] and works with multiple forms on the same page
+6. field validation uses [html5 and pristinejs][pristine-js] and works with multiple forms on the same page
 7. you can easily **review / manage / filter** the submitted items in a table-view
 8. **export all submissions** into an Excel-compatible XML format
 1. **open code C# WebApi** easy to customize if you ever need to
@@ -57,7 +57,7 @@ Because it's so simple and uses 2sxc, you can easily
 
 ## Getting Started
 
-This app is only useful is you use DNN. So assuming you have a DNN installation, all you need to do is install 2sxc and this app. 
+This app is only useful is you use DNN or Oqtane. So assuming you have a DNN installation, all you need to do is install 2sxc and this app. 
 
 * Here's how to [install 2sxc and an App of your Choice](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 
@@ -77,13 +77,15 @@ The Source Code is all here - so you can easily customize to your hearts desire!
     * Updated to v12 best-practices
     * Removed all jQuery dependencies
     * Hybrid - now works in Dnn and Oqtane
+* 2022-03
+    * Added web.config with required assemblies
 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
 [cust-field]: https://github.com/2sic/app-form-jquery-simple/wiki/Customize-Field
 [cust-mail]: https://github.com/2sic/app-form-jquery-simple/wiki/Customize-Mails
-[jqval]: https://jqueryvalidation.org/
+[pristine-js]: https://github.com/sha256/Pristine
 [add-forms]: https://github.com/2sic/app-form-jquery-simple/wiki/Add-Forms
 [translate]: https://github.com/2sic/app-form-jquery-simple/wiki/Translate
 [cust-webapi]: https://github.com/2sic/app-form-jquery-simple/wiki/Customize-WebApi
