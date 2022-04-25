@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using ToSic.Sxc.Services;
 
 // Helper to do Recaptcha server-validation
 // based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
@@ -16,7 +17,7 @@ public class Recaptcha : Custom.Hybrid.Code12
       throw new Exception("recaptcha is empty");
 
     // Get the private key from Settings - if it's from presets, it is encrypted
-    var secData = GetService<ToSic.Sxc.Services.ISecureDataService>();
+    var secData = GetService<ISecureDataService>();
     var privateKey = secData.Parse(Settings.GoogleRecaptcha.PrivateKey).Value;
 
     // Ask google if the verification is valid

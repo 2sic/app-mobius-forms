@@ -1,10 +1,11 @@
 @inherits Custom.Hybrid.Razor12
+@using ToSic.Sxc.Services;
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
 
   // Initially the key comes from the preset and is encrypted
   // So we must run it through the SecureDataService to verify
-  var secData = GetService<ToSic.Sxc.Services.ISecureDataService>();
+  var secData = GetService<ISecureDataService>();
   var secureKey = secData.Parse(Settings.GoogleRecaptcha.SiteKey);
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
