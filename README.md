@@ -79,7 +79,10 @@ The Source Code is all here - so you can easily customize to your hearts desire!
     * Hybrid - now works in Dnn and Oqtane
 * 2022-03
     * Added web.config with required assemblies
-
+* 2022-04 05.04.00 
+    * Changed all access to services to ToSic.Sxc.Services
+    * Changed instances of Edit.Enable to page.Activate()
+    
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
