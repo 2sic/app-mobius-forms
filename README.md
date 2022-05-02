@@ -82,6 +82,7 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * 2022-04 05.04.00 
     * Changed all access to services to ToSic.Sxc.Services
     * Changed instances of Edit.Enable to page.Activate()
+    * Changed uses of the `Eav.Configuration.IFeaturesService` to `Sxc.Services.IFeaturesService`
     
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

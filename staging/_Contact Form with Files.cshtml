@@ -1,6 +1,6 @@
 @inherits Custom.Hybrid.Razor12
 @using System.Linq
-@using ToSic.Eav.Configuration
+@using ToSic.Sxc.Services
 @{
   var Edition = CmsContext.View.Edition;
   var workflowId = "ContactDefault";
@@ -31,7 +31,7 @@
 
     @* show warning if the save-attachments in web api isn't activated
     this is a security feature to protect your installation from unwanted uploads *@
-    @if (!features.Enabled(FeatureIds.UseAdamInWebApi)) {
+    @if (!features.IsEnabled("SaveInAdamApi")) {
       <div class="alert alert-warning">@Resources.MessageDisabledFeature</div>
     }
   </div>
