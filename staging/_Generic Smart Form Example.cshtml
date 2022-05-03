@@ -9,10 +9,11 @@
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   var helpers = CreateInstance("shared/Helpers.cs");
   var pageCss = GetService<Connect.Koi.ICss>();
+  var page = GetService<IPageService>(); // Page Service for CSP
   var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 
-<script>
+<script @(page.CspWhitelistAttribute)>
   // 2sxclint:disable:no-inline-script
   // toggles visibility and sets provided domElement to required
   function showAndMakeRequired(domId) {

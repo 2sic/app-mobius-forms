@@ -2,6 +2,8 @@
 @using ToSic.Sxc.Services;
 @{
   var pageCss = GetService<Connect.Koi.ICss>();
+  // Page Service for CSP
+  var page = GetService<IPageService>();
 
   // Initially the key comes from the preset and is encrypted
   // So we must run it through the SecureDataService to verify
@@ -24,4 +26,4 @@
   </div>
 }
 
-<script src="https://www.google.com/recaptcha/api.js?render=@siteKey" async defer data-enableoptimizations="true"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=@siteKey" async defer @(page.CspWhitelistAttribute) data-enableoptimizations="true"></script>

@@ -20,7 +20,7 @@ public class SendMail : Custom.Hybrid.Code12
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    // var from = Text.Has(Content.MailFrom) ? Content.MailFrom : Settings.DefaultMailFrom;
+    var from = Text.Has(Content.MailFrom) ? Content.MailFrom : Settings.DefaultMailFrom;
     var owner = Text.Has(Content.OwnerMail) ? Content.OwnerMail : Settings.DefaultOwnerMail;
 
     // Send Mail to owner
