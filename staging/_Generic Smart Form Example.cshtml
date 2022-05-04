@@ -3,6 +3,7 @@
   This is a demo how you can use JavaScript to show/hide fields based on other selections
 *@
 @using System.Linq
+@using ToSic.Sxc.Services;
 @{
   var Edition = CmsContext.View.Edition;
   var workflowId = "GenericSave";
@@ -12,7 +13,6 @@
   var page = GetService<IPageService>(); // Page Service for CSP
   var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
-
 <script @(page.AssetAttributes())>
   // 2sxclint:disable:no-inline-script
   // toggles visibility and sets provided domElement to required
