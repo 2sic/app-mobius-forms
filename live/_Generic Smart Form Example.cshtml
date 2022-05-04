@@ -13,7 +13,7 @@
   var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 
-<script @(page.CspWhitelistAttribute)>
+<script @(page.AssetAttributes())>
   // 2sxclint:disable:no-inline-script
   // toggles visibility and sets provided domElement to required
   function showAndMakeRequired(domId) {
