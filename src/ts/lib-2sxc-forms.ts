@@ -78,7 +78,7 @@ export function validateForm(formWrapper: Element): boolean {
 
 export function sendForm(formData: any, submitButtom: HTMLButtonElement, endpoint: string = "Form/ProcessForm"): Promise<unknown> {
   const sxc = $2sxc(submitButtom);
-  return sxc.webApi.fetch(endpoint, formData)
+  return sxc.webApi.fetchRaw(endpoint, formData)
 }
 
 export function disableInputs(wrapper: Element, state: boolean) {
