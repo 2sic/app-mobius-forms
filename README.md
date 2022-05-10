@@ -83,6 +83,7 @@ The Source Code is all here - so you can easily customize to your hearts desire!
     * Changed all access to services to ToSic.Sxc.Services
     * Changed instances of Edit.Enable to page.Activate()
     * Changed uses of the `Eav.Configuration.IFeaturesService` to `Sxc.Services.IFeaturesService`
+    * Updated JS to use new webapi methods (fetch -> fetchRaw)
     
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
