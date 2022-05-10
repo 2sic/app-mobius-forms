@@ -3,10 +3,10 @@
 @using ToSic.Sxc.Services;
 @{
   var Edition = CmsContext.View.Edition;
-  var page = GetService<IPageService>();  // Service to set titles etc. on the page
-  page.Activate("turnOn", "2sxc.JsCore");
+  var pageSvc = GetService<IPageService>();  // Service to set titles etc. on the page
+  pageSvc.Activate("turnOn", "2sxc.JsCore");
 }
 
 <turnOn turn-on='{ "run": "window.appMobius5.init()", "data": { "domAttribute": "@DynamicModel.DomAttribute" } }'></turnOn>
-<script src="@App.Path/@Edition/dist/scripts.min.js" @(page.AssetAttributes())></script>
-<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/styles.min.css" @(page.AssetAttributes())>
+<script src="@App.Path/@Edition/dist/scripts.min.js" @pageSvc.AssetAttributes()></script>
+<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/styles.min.css" @pageSvc.AssetAttributes()>
