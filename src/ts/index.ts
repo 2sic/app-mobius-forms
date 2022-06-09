@@ -3,7 +3,7 @@ import { disableInputs, enableInputs, getFormValues, sendForm, validateForm } fr
 import { getRecaptchaToken, requiresRecaptcha } from './lib-2sxc-recaptcha';
 import { addTrackingEvent } from './lib-2sxc-tracking';
 
-const debug = true;
+const debug = false;
 
 var winAny = window as any;
 winAny.appMobius5 ??= {};
@@ -53,7 +53,7 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
     let endpoint = (mobiusWrapper as HTMLElement).dataset.webservice // (should be "Form/ProcessForm" or a custom override)
 
     sendForm(formValues, submitButtom, endpoint) 
-      .then((result: any) => {
+      .then((result: any) => {        
         // error
         if(!result.ok) {
           if(debug) console.log('error', result.status);
@@ -67,7 +67,7 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
         }
         
         // success
-        if(debug) console.log('success', result.json())
+        if(debug) console.log('success', result)
         submitButtom.setAttribute("disabled", "")
   
         showAlert(mobiusWrapper, 'msgOk')
