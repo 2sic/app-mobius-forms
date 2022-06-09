@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="13.11.00" ExportDate="2022-05-10T14:58:58.5962926+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="14.02.00" ExportDate="2022-06-09T13:56:24.1465934+02:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -6138,7 +6138,7 @@
       <Value Key="Name" Value="Demo Contact Form" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="OwnerMail" Value="roman.opalko@2sic.com" Type="String">
+      <Value Key="OwnerMail" Value="testmail@2sic.net" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="OwnerMailCC" Value="" Type="String">
@@ -6365,6 +6365,14 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="UrlParametersCaseSensitive" Value="False" Type="Boolean">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="813a3cb7-1a89-4477-bdfe-8863ab3ae59a" AttributeSetName="SettingsSystem" EntityGUID="5154d5ce-9d2a-4b40-881d-6d6ba88c1f19" Json="True">
+      <Value Key="SettingsEntityScope" Value="" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="System Settings" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
