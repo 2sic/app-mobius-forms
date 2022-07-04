@@ -1,14 +1,8 @@
-@inherits Custom.Hybrid.Razor12
-@using ToSic.Sxc.Services;
+@inherits Custom.Hybrid.Razor14
 @{
-  var pageCss = GetService<Connect.Koi.ICss>();
-  // Page Service for CSP
-  var pageSvc = GetService<IPageService>();
-
   // Initially the key comes from the preset and is encrypted
   // So we must run it through the SecureDataService to verify
-  var secData = GetService<ISecureDataService>();
-  var secureKey = secData.Parse(Settings.GoogleRecaptcha.SiteKey);
+  var secureKey = Kit.SecureData.Parse(Settings.GoogleRecaptcha.SiteKey);
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
 }
@@ -26,4 +20,4 @@
   </div>
 }
 
-<script src="https://www.google.com/recaptcha/api.js?render=@siteKey" async defer @pageSvc.AssetAttributes()></script>
+<script src="https://www.google.com/recaptcha/api.js?render=@siteKey" async defer @Kit.Page.AssetAttributes()></script>

@@ -79,11 +79,16 @@ The Source Code is all here - so you can easily customize to your hearts desire!
     * Hybrid - now works in Dnn and Oqtane
 * 2022-03
     * Added web.config with required assemblies
-* 2022-04 05.04.00 
+* 2022-04 v05.04.00 
     * Changed all access to services to ToSic.Sxc.Services
     * Changed instances of Edit.Enable to page.Activate()
     * Changed uses of the `Eav.Configuration.IFeaturesService` to `Sxc.Services.IFeaturesService`
     * Updated JS to use new webapi methods (fetch -> fetchRaw)
+* 2022-06 v05.05.00
+    * Replaced all base classes with their 2sxc 14 equivalents
+    * Replaced all GetService<> with the new ServiceKit14
+    * Updated webpack 
+    * Updated all toolbar configurations to use the IToolbarService
     
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Http;
-using ToSic.Sxc.Services; // platformLogService
 
-public class MailChimp : Custom.Hybrid.Code12
+public class MailChimp : Custom.Hybrid.Code14
 {
   // Checks for MailChimp Integration
   // if true instantiate mailchimp
@@ -66,17 +65,17 @@ public class MailChimp : Custom.Hybrid.Code12
     var response = MailchimpRequest(subscriberUrl, "GET", "", apiKey);
     if (response.StatusCode == HttpStatusCode.OK)
     {
-      var currentStatus = Convert.Json.To<dynamic>(response.Response).status;
+      var currentStatus = Kit.Json.To<dynamic>(response.Response).status;
 
       // Do nothing if user is already subscribed
       if (currentStatus == "subscribed") return "OK";
 
       // Update existing subscriber
-      return MailchimpRequest(subscriberUrl, "PUT", Convert.Json.ToJson(body), apiKey).StatusCode.ToString();
+      return MailchimpRequest(subscriberUrl, "PUT", Kit.Json.ToJson(body), apiKey).StatusCode.ToString();
     }
     else
     {
-      return MailchimpRequest(baseUrl, "POST", Convert.Json.ToJson(body), apiKey).StatusCode.ToString();
+      return MailchimpRequest(baseUrl, "POST", Kit.Json.ToJson(body), apiKey).StatusCode.ToString();
     }
   }
 
@@ -110,10 +109,8 @@ public class MailChimp : Custom.Hybrid.Code12
 
   private MailchimpResponse MailchimpRequest(string url, string method, string body, string apiKey)
   {
-    var platformLogService = GetService<ILogService>();
-
     var logTimeStamp = DateTime.Now;
-    platformLogService.Add("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
+    Kit.Log.Add("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
 
     String encodedApiKey = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes("anystring" + ":" + apiKey));
 
@@ -136,7 +133,7 @@ public class MailChimp : Custom.Hybrid.Code12
       StatusCode = responseMessage.StatusCode,
       Response = response
     };
-    platformLogService.Add("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
+    Kit.Log.Add("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
     return r;
   }
 }

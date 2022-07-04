@@ -1,14 +1,11 @@
-@inherits Custom.Hybrid.Razor12
-@{
-  var pageCss = GetService<Connect.Koi.ICss>();
-}
+@inherits Custom.Hybrid.Razor14
 
 <div class="mb-3">
   <div class="row">
-    <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1")'>
+    <div class='@(Kit.Css.Is("bs3") ? "col col-xs-1" : "col-1")'>
       <input type="checkbox" id="GDPR-@CmsContext.Module.Id" name="GDPR-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired" >
     </div>
-    <div class='@(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>
+    <div class='@(Kit.Css.Is("bs3") ? "col col-xs-11" : "col-11")'>
       <label for="GDPR-@CmsContext.Module.Id" class="control-label">@Html.Raw(Resources.GdprLabel)</label>
     </div>
   </div>

@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class FormController : Custom.Hybrid.Api12
+public class FormController : Custom.Hybrid.Api14
 {
   [HttpPost]
   public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
@@ -105,7 +105,7 @@ public class FormController : Custom.Hybrid.Api12
   {
     var data = new Dictionary<string, object>(formRequest, StringComparer.OrdinalIgnoreCase);
     data.Remove("Files");
-    return Convert.Json.ToJson(data);
+    return Kit.Json.ToJson(data);
   }
 
   // helpers

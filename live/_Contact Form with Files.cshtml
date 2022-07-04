@@ -1,13 +1,11 @@
-@inherits Custom.Hybrid.Razor12
+@inherits Custom.Hybrid.Razor14
 @using System.Linq
-@using ToSic.Sxc.Services
 @{
   var Edition = CmsContext.View.Edition;
   var workflowId = "ContactDefault";
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   var helpers = CreateInstance("shared/Helpers.cs");
   var domAttribute = "mobius-" + CmsContext.Module.Id;
-  var features = GetService<IFeaturesService>();
 }
 
 
@@ -31,7 +29,7 @@
 
     @* show warning if the save-attachments in web api isn't activated
     this is a security feature to protect your installation from unwanted uploads *@
-    @if (!features.IsEnabled("SaveInAdamApi")) {
+    @if (!Kit.Feature.IsEnabled("SaveInAdamApi")) {
       <div class="alert alert-warning">@Resources.MessageDisabledFeature</div>
     }
   </div>

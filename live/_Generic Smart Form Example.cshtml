@@ -1,19 +1,16 @@
-@inherits Custom.Hybrid.Razor12
+@inherits Custom.Hybrid.Razor14
 @*
   This is a demo how you can use JavaScript to show/hide fields based on other selections
 *@
 @using System.Linq
-@using ToSic.Sxc.Services;
 @{
   var Edition = CmsContext.View.Edition;
   var workflowId = "GenericSave";
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   var helpers = CreateInstance("shared/Helpers.cs");
-  var pageCss = GetService<Connect.Koi.ICss>();
-  var pageSvc = GetService<IPageService>(); // Page Service for CSP
   var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
-<script @pageSvc.AssetAttributes()>
+<script @Kit.Page.AssetAttributes()>
   // 2sxclint:disable:no-inline-script
   // toggles visibility and sets provided domElement to required
   function showAndMakeRequired(domId) {
@@ -40,8 +37,8 @@
     }
 
     <div class="mb-3 row">
-      <label for="IsCustomer-@CmsContext.Module.Id" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-11" : "col-11")'>I'm a Customer</label>
-      <div class='@(pageCss.Is("bs3") ? "col col-xs-1" : "col-1") d-flex justify-content-end'>
+      <label for="IsCustomer-@CmsContext.Module.Id" class='control-label app-mobius5-field-required @(Kit.Css.Is("bs3") ? "col col-xs-11" : "col-11")'>I'm a Customer</label>
+      <div class='@(Kit.Css.Is("bs3") ? "col col-xs-1" : "col-1") d-flex justify-content-end'>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
         <input type="checkbox" data-pristine-required-message="Required" id="IsCustomer-@CmsContext.Module.Id" name="IsCustomer-@CmsContext.Module.Id" required onclick="showAndMakeRequired('#@customFieldId')">
       </div>
@@ -49,8 +46,8 @@
 
     <!-- Customer ID (if is customer) -->
     <div id="@customFieldId" class="mb-3 row" style="display:none">
-      <label for="CustomerId" class='control-label app-mobius5-field-required @(pageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>Customer ID</label>
-      <div class='@(pageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
+      <label for="CustomerId" class='control-label app-mobius5-field-required @(Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4")'>Customer ID</label>
+      <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8")'>
         <input type="text" class="form-control" data-pristine-required-message="Required" id="CustomerId" value="">
       </div>
     </div>

@@ -1,4 +1,4 @@
-@inherits Custom.Hybrid.Razor12
+@inherits Custom.Hybrid.Razor14
 @using System.Linq
 @{
   var Edition = CmsContext.View.Edition;
@@ -6,7 +6,6 @@
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   FieldBuilder.LabelInPlaceholder = true;
   var helpers = CreateInstance("shared/Helpers.cs");
-  var pageCss = GetService<Connect.Koi.ICss>();
   var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 

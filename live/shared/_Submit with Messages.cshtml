@@ -1,12 +1,9 @@
 @using ToSic.Razor.Blade;
-@inherits Custom.Hybrid.Razor12
-@{
-  var pageCss = GetService<Connect.Koi.ICss>();
-}
+@inherits Custom.Hybrid.Razor14
 
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
-  <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
+  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
     @AddHiddenMessage(Resources.MessageFormIncomplete, "danger", "msgIncomplete")
     @AddHiddenMessage(Resources.MessageRecaptchaMissing, "danger", "msgRecap")
     @AddHiddenMessage(Resources.MessageSendError, "danger", "msgError")
@@ -40,7 +37,7 @@
   </div>
 
   <!-- send button -->
-  <div class='@(pageCss.Is("bs3") ? "col col-xs-12" : "col-12")'>
+  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
     <button app-mobius5-send type="button" class="btn btn-primary">@Resources.ButtonSend</button>
   </div>
 </div>

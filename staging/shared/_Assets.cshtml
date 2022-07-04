@@ -1,12 +1,10 @@
-@inherits Custom.Hybrid.Razor12
+@inherits Custom.Hybrid.Razor14
 @using ToSic.Razor.Blade;
-@using ToSic.Sxc.Services;
 @{
   var Edition = CmsContext.View.Edition;
-  var pageSvc = GetService<IPageService>();  // Service to set titles etc. on the page
-  pageSvc.Activate("turnOn", "2sxc.JsCore");
+  Kit.Page.Activate("turnOn", "2sxc.JsCore");
 }
 
 <turnOn turn-on='{ "run": "window.appMobius5.init()", "data": { "domAttribute": "@DynamicModel.DomAttribute" } }'></turnOn>
-<script src="@App.Path/@Edition/dist/scripts.min.js" @pageSvc.AssetAttributes()></script>
-<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/styles.min.css" @pageSvc.AssetAttributes()>
+<script src="@App.Path/@Edition/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
+<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/styles.min.css" @Kit.Page.AssetAttributes()>

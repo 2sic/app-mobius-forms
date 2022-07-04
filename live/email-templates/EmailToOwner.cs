@@ -1,7 +1,7 @@
 using ToSic.Razor.Blade;
 using System.Collections.Generic;
 using System;
-public class EmailToOwner: Custom.Hybrid.Code12
+public class EmailToOwner: Custom.Hybrid.Code14
 {
   // create custom subject here
   public string Subject(dynamic data) {
