@@ -1,4 +1,4 @@
-import { showAlert, showConfigWarnings } from './lib-2sxc-alerts';
+import { showAlert } from './lib-2sxc-alerts';
 import { disableInputs, enableInputs, getFormValues, sendForm, validateForm } from './lib-2sxc-forms';
 import { getRecaptchaToken, requiresRecaptcha } from './lib-2sxc-recaptcha';
 import { addTrackingEvent } from './lib-2sxc-tracking';
@@ -59,7 +59,6 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
           if(debug) console.log('error', result.status);
     
           showAlert(mobiusWrapper, 'msgError')
-          showConfigWarnings(mobiusWrapper, 'app-mobius5-config-warning')
           enableInputs(mobiusWrapper)
     
           addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
@@ -71,7 +70,6 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
         submitButtom.setAttribute("disabled", "")
   
         showAlert(mobiusWrapper, 'msgOk')
-        showConfigWarnings(mobiusWrapper, 'app-mobius5-config-warning')
         disableInputs(mobiusWrapper, false)
   
         addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
