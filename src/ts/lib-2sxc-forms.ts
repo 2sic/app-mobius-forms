@@ -1,3 +1,4 @@
+import { CommandNames } from '@2sic.com/2sxc-typings';
 let Pristine = require('../../node_modules/pristinejs')
 declare let $2sxc: any
 
