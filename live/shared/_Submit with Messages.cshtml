@@ -16,23 +16,16 @@
       @Html.Raw(Content.CustomerSend != null && Content.CustomerSend ? Resources.MessageCustomerMailSend : "")
     </div>
 
-    @if(!Content.Mailchimp && DynamicModel.IsMailChimpForm == true) {
-      @AddHiddenMessage(Resources.MessageEnableMailchimp, "warning", "", "app-mobius5-config-warning")
+    @if (Edit.Enabled && (Content.CustomerSend || Content.OwnerSend) && !Text.Has(Content.MailFrom) && !Text.Has(Settings.DefaultMailFrom)) {
+      <div class="alert alert-warning">
+        @Html.Raw(Resources.MessageMailFromError.Replace("<p>", "").Replace("</p>", ""))
+      </div>
     }
 
-    @if ((Content.Mailchimp ?? false) && (Settings.MailChimpShowWarning == null || Settings.MailChimpShowWarning))
-    {
-      @AddHiddenMessage(Resources.MessageDefaultMailChimpKey, "warning", "", "app-mobius5-config-warning")
-    }
-
-    @if ((Content.CustomerSend || Content.OwnerSend) && Content.MailFrom == "" && Settings.DefaultMailFrom == "")
-    {
-      @AddHiddenMessage(Resources.MessageMailFromError, "warning", "", "app-mobius5-config-warning")
-    }
-
-    @if (Content.OwnerSend && Content.OwnerMail == "" && Settings.DefaultOwnerMail == "")
-    {
-      @AddHiddenMessage(Resources.MessageMailOwnerError, "warning", "", "app-mobius5-config-warning")
+    @if (Edit.Enabled && Content.OwnerSend && !Text.Has(Content.OwnerMail) && !Text.Has(Settings.DefaultOwnerMail)) {
+      <div class="alert alert-warning">
+        @Html.Raw(Resources.MessageMailOwnerError.Replace("<p>", "").Replace("</p>", ""))
+      </div>
     }
   </div>
 
