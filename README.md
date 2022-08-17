@@ -89,6 +89,8 @@ The Source Code is all here - so you can easily customize to your hearts desire!
     * Replaced all GetService<> with the new ServiceKit14
     * Updated webpack 
     * Updated all toolbar configurations to use the IToolbarService
+* 2022-08 v05.05.01
+    * Fixed the warning messages for the forms
     
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

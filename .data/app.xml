@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="14.07.02" ExportDate="2022-07-04T10:31:54.4403745+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="14.07.05" ExportDate="2022-08-17T14:34:48.9762986+02:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -955,6 +955,13 @@
             </Value>
           </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="704237a6-bcd4-4a17-b0dd-10b60b6fcb34" Json="True" KeyNumber="4510" />
+        </Attribute>
+        <Attribute StaticName="MessageContainsMailChimp" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="ead69456-9fa8-4138-8f9a-0a72a373b1b2" Json="True" KeyNumber="5465">
+            <Value Key="InputType" Value="string-wysiwyg" Type="String" />
+            <Value Key="Name" Value="MessageContainsMailChimp" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
         </Attribute>
         <Attribute StaticName="GroupMessages" Type="Empty" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="aa22a627-ee4f-499d-8ce9-a6b3d7af3598" Json="True" KeyNumber="4511">
@@ -5053,7 +5060,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="05.05.00" Type="String">
+      <Value Key="Version" Value="05.05.01" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -5222,6 +5229,9 @@
       <Value Key="MailOwnerTitle" Value="Neue Anfrage" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
+      <Value Key="MessageContainsMailChimp" Value="&lt;p&gt;Mobius: This app contains MailChimp.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
       <Value Key="MessageContainsRecaptcha" Value="&lt;p&gt;Mobius: This app contains reCAPTCHA.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
@@ -5285,7 +5295,7 @@
       <Value Key="MessageRecaptchaMissing" Value="&lt;p&gt;Bitte das Formular vollst&amp;auml;ndig ausf&amp;uuml;llen.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
-      <Value Key="MessageRecaptchaWarning" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; This recaptcha uses a demo API-Key, which will cause problems on live web sites. Change the RecaptchaApiKey using &lt;a class=&quot;alert-link target=&quot; href=&quot;https://azing.org/2sxc/r/mVhYG02x&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these instructions&lt;/a&gt;&lt;/p&gt;" Type="String">
+      <Value Key="MessageRecaptchaWarning" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Recaptcha API-Key not set yet. This will cause problems on live web sites. Add the RecaptchaApiKey using &lt;a class=&quot;alert-link target=&quot; href=&quot;https://azing.org/2sxc/r/mVhYG02x&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these instructions&lt;/a&gt;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="MessageSendError" Value="&lt;p&gt;An unexpected error occured while sending. Please try again. If it fails again, please send it by E-Mail.&lt;/p&gt;" Type="String">
@@ -6129,7 +6139,7 @@
       <Value Key="CustomerSend" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
+      <Value Key="Mailchimp" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="MailFrom" Value="" Type="String">
@@ -6150,7 +6160,7 @@
       <Value Key="OwnerSend" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Recaptcha" Value="False" Type="Boolean">
+      <Value Key="Recaptcha" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -6373,6 +6383,46 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="Title" Value="System Settings" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="8cbd58fd-0ad5-4ded-89fa-86c3ea0f75a2">
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Subject&quot;:&quot;DAS IST EIN TEST VON 2sic&quot;,&quot;Message&quot;:&quot;adasd&quot;,&quot;SenderName&quot;:&quot;Roman Opalko&quot;,&quot;SenderMail&quot;:&quot;roman@opalko.de&quot;,&quot;Terms-5506&quot;:&quot;True&quot;,&quot;Timestamp&quot;:&quot;2022-08-16T09:59:41.9140147+02:00&quot;,&quot;MailChimp&quot;:true,&quot;SenderIP&quot;:&quot;194.0.212.23&quot;,&quot;ModuleId&quot;:5506}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2022-08-16T09:59:41" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2022-08-16T09:59:41" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="785d1113-5190-4b20-a753-1ee353c6ba75">
+      <Value Key="Message" Value="adasd" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.23" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="roman@opalko.de" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="Roman Opalko" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Subject" Value="DAS IST EIN TEST VON 2sic" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2022-08-16T09:59:41" Type="DateTime">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
