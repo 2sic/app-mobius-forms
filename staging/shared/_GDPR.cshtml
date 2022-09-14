@@ -1,12 +1,18 @@
 @inherits Custom.Hybrid.Razor14
 
-<div class="mb-3">
-  <div class="row">
-    <div class='@(Kit.Css.Is("bs3") ? "col col-xs-1" : "col-1")'>
-      <input type="checkbox" id="GDPR-@CmsContext.Module.Id" name="GDPR-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired" >
-    </div>
-    <div class='@(Kit.Css.Is("bs3") ? "col col-xs-11" : "col-11")'>
-      <label for="GDPR-@CmsContext.Module.Id" class="control-label">@Html.Raw(Resources.GdprLabel)</label>
+@if(Kit.Css.Is("bs3")) {
+  <div class="form-group">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired"> @Html.Raw(Resources.GdprLabel.Replace("<p>", "").Replace("</p>", ""))
+      </label>
     </div>
   </div>
-</div>
+} else {
+  <div class="form-group form-check mb-3">
+    <input class="form-check-input" type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired">
+    <label class="form-check-label" for="GDPR-@CmsContext.Module.Id">
+      @Html.Raw(Resources.GdprLabel.Replace("<p>", "").Replace("</p>", ""))
+    </label>
+  </div>
+}

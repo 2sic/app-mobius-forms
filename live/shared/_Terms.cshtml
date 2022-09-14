@@ -1,13 +1,19 @@
 @inherits Custom.Hybrid.Razor14
 
 @* Sender AcceptTerms *@
-<div class="mb-3">
-  <div class="row">
-    <div class='@(Kit.Css.Is("bs3") ? "col col-xs-1" : "col-1")'>
-      <input type="checkbox" id="Terms-@CmsContext.Module.Id" name="Terms-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired" >
-    </div>
-    <div class='@(Kit.Css.Is("bs3") ? "col col-xs-11" : "col-11")'>
-      <label for="Terms-@CmsContext.Module.Id" class="control-label">@Html.Raw(Resources.TermsLabel)</label>
+@if(Kit.Css.Is("bs3")) {
+  <div class="form-group">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired"> @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
+      </label>
     </div>
   </div>
-</div>
+} else {
+  <div class="form-group form-check mb-3">
+    <input class="form-check-input" type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired">
+    <label class="form-check-label" for="Terms-@CmsContext.Module.Id">
+      @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
+    </label>
+  </div>
+}

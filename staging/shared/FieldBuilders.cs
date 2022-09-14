@@ -94,7 +94,11 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
   // returns a input of type file with common attributes
   public dynamic File(string name, bool required, string acceptType, string idString = "") {
-    var content = Tag.Input().Type("file").Id(idString).Attr("name", name).Attr("accept", acceptType).Class("form-control-file");
+    var content = Tag.Input().Type("file").Id(idString).Attr("name", name).Class("form-control-file");
+    
+    if(ToSic.Razor.Blade.Text.Has(acceptType)) {
+      content = content.Attr("accept", acceptType);
+    }
     SetRequired(content, required, Resources.LabelValidFile);
     return Field(idString, required, content);
   }
