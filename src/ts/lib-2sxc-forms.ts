@@ -38,6 +38,9 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
       )
       return
     }
+    if (formField.getAttribute('type') && (formField.getAttribute('type').toLowerCase() == 'checkbox' || formField.getAttribute('type').toLowerCase() == 'radio') && !formField.checked) {
+      return;
+    }
     data[fieldKey] = getFieldValue(formField)
   })
 
@@ -67,7 +70,7 @@ function getFieldValue(formField: HTMLInputElement): { Encoded: Promise<unknown>
         })
       }
     case 'radio': return formField.value
-    case 'checkbox': return formField.checked ? "True" : "False"
+    case 'checkbox': return formField.checked ? formField.value : ""
     default: return formField.value
   }
 }
