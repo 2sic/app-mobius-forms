@@ -5,13 +5,13 @@
   <div class="form-group">
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired"> @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
+        <input type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired"> @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
       </label>
     </div>
   </div>
 } else {
   <div class="form-group form-check mb-3">
-    <input class="form-check-input" type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-smk-msg="@Resources.LabelRequired">
+    <input class="form-check-input" type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired">
     <label class="form-check-label" for="Terms-@CmsContext.Module.Id">
       @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
     </label>
