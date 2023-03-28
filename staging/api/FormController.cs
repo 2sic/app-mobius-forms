@@ -12,10 +12,10 @@ using System.IO;
 using System.Linq;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class FormController : Custom.Hybrid.Api14
+public class FormController : Custom.Hybrid.Api15
 {
   [HttpPost]
-  public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
+  public dynamic ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
   {
     var wrapLog = Log.Call(useTimer: true);
     // Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
@@ -36,20 +36,20 @@ public class FormController : Custom.Hybrid.Api14
     // 1. add IP / host, and save all fields
     // if you add fields to your content-type, just make sure they are
     // in the request with the correct name, they will be added automatically
-    contactFormRequest.Add("Timestamp", DateTime.Now);
+    contactFormRequest["Timestamp"] = DateTime.Now;
     // Add the SenderIP in case we need to track down abuse
     #if NETCOREAPP
-      contactFormRequest.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
+      contactFormRequest["SenderIP"] = Request.HttpContext.Connection.RemoteIpAddress?.ToString();
     #else
-      contactFormRequest.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
+      contactFormRequest["SenderIP"] = System.Web.HttpContext.Current.Request.UserHostAddress;
     #endif
     // Add the ModuleId to assign each sent form to a specific module
-    contactFormRequest.Add("ModuleId", CmsContext.Module.Id);
+    contactFormRequest["ModuleId"] = CmsContext.Module.Id;
     // add raw-data, in case the content-type has a "RawData" field
-    contactFormRequest.Add("RawData", CreateRawDataEntry(contactFormRequest));
+    contactFormRequest["RawData"] = CreateRawDataEntry(contactFormRequest);
     // add Title (if non given), in case the Content-Type would benefit of an automatic title
     var addTitle = !contactFormRequest.ContainsKey("Title");
-    if(addTitle) contactFormRequest.Add("Title", "Form " + DateTime.Now.ToString("s"));
+    if(addTitle) contactFormRequest["Title"] = "Form " + DateTime.Now.ToString("s");
 
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
@@ -58,9 +58,11 @@ public class FormController : Custom.Hybrid.Api14
 
     // Add guid to identify entity after saving (because we need to find it afterwards)
     var guid = Guid.NewGuid();
-    contactFormRequest.Add("EntityGuid", guid);
+    contactFormRequest["EntityGuid"] = guid;
     Log.Add("Save data to content type");
     App.Data.Create(workflow.ContentType, contactFormRequest);
+
+    return contactFormRequest;
 
     // Remove Terms and GDPR from the data-package - we don't want them in the e-mails
     RemoveKeys(contactFormRequest, new string[] { "GDPR", "Terms" });
@@ -70,7 +72,7 @@ public class FormController : Custom.Hybrid.Api14
     // Save files to Adam
     if(contactFormRequest.ContainsKey("Files")) {
       Log.Add("Found files, will save");
-      foreach(var file in ((Newtonsoft.Json.Linq.JArray)contactFormRequest["Files"]).ToObject<IEnumerable<Dictionary<string, string>>>())
+      foreach(var file in (AsDynamic(contactFormRequest["Files"])))
       {
         var data = System.Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
         files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file["Name"], contentType: workflow.ContentType, guid: guid, field: file["Field"]));
