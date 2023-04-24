@@ -10,12 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ToSic.Sxc.WebApi;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class FormController : Custom.Hybrid.Api15
+[JsonFormatter]   // Use modern JSON formatter
+public class FormController : Custom.Hybrid.Api14
 {
   [HttpPost]
-  public dynamic ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
+  public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
   {
     var wrapLog = Log.Call(useTimer: true);
     // Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
@@ -61,8 +63,6 @@ public class FormController : Custom.Hybrid.Api15
     contactFormRequest["EntityGuid"] = guid;
     Log.Add("Save data to content type");
     App.Data.Create(workflow.ContentType, contactFormRequest);
-
-    return contactFormRequest;
 
     // Remove Terms and GDPR from the data-package - we don't want them in the e-mails
     RemoveKeys(contactFormRequest, new string[] { "GDPR", "Terms" });

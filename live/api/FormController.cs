@@ -10,20 +10,22 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ToSic.Sxc.WebApi;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class FormController : Custom.Hybrid.Api15
+[JsonFormatter]   // Use modern JSON formatter
+public class FormController : Custom.Hybrid.Api14
 {
   [HttpPost]
   public void ProcessForm([FromBody]Dictionary<string,object> contactFormRequest, string workflowId)
   {
-    // var wrapLog = Log.Call(useTimer: true);
+    var wrapLog = Log.Call(useTimer: true);
     // Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
     contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
     // 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
     if(Content.Recaptcha ?? false) {
-      // Log.Add("checking Recaptcha");
+      Log.Add("checking Recaptcha");
       CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string);
     }
 
@@ -53,13 +55,13 @@ public class FormController : Custom.Hybrid.Api15
 
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
-    // Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
+    Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
     App.Data.Create("SystemProtocol", contactFormRequest);
 
     // Add guid to identify entity after saving (because we need to find it afterwards)
     var guid = Guid.NewGuid();
     contactFormRequest["EntityGuid"] = guid;
-    // Log.Add("Save data to content type");
+    Log.Add("Save data to content type");
     App.Data.Create(workflow.ContentType, contactFormRequest);
 
     // Remove Terms and GDPR from the data-package - we don't want them in the e-mails
@@ -69,7 +71,7 @@ public class FormController : Custom.Hybrid.Api15
 
     // Save files to Adam
     if(contactFormRequest.ContainsKey("Files")) {
-      // Log.Add("Found files, will save");
+      Log.Add("Found files, will save");
       foreach(var file in (AsDynamic(contactFormRequest["Files"])))
       {
         var data = System.Convert.FromBase64String((file["Encoded"]).Split(',')[1]);
@@ -79,7 +81,7 @@ public class FormController : Custom.Hybrid.Api15
       // Don't keep Files array in ContactFormRequest
       RemoveKeys(contactFormRequest, new string[] { "Files" });
     } else {
-      // Log.Add("No files found to save");
+      Log.Add("No files found to save");
     }
 
     CreateInstance("Parts/MailChimp.cs").SubscribeIfEnabled(contactFormRequest);
@@ -98,7 +100,7 @@ public class FormController : Custom.Hybrid.Api15
     var sendMail = CreateInstance("Parts/SendMail.cs");
     sendMail.SendMails(contactFormRequest, workflowId, files);
 
-    // wrapLog("ok");
+    wrapLog("ok");
   }
 
   private dynamic CreateRawDataEntry(Dictionary<string,object> formRequest)
