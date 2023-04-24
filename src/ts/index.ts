@@ -1,5 +1,6 @@
 import { showAlert } from './lib-2sxc-alerts';
 import { disableInputs, enableInputs, getFormValues, sendForm, validateForm } from './lib-2sxc-forms';
+import { PristineOptions } from './lib-2sxc-pristine-options';
 import { getRecaptchaToken, requiresRecaptcha } from './lib-2sxc-recaptcha';
 import { addTrackingEvent } from './lib-2sxc-tracking';
 
@@ -9,7 +10,8 @@ var winAny = window as any;
 winAny.appMobius5 ??= {};
 winAny.appMobius5.init ??= initAppMobius5;
 
-function initAppMobius5({ domAttribute } : { domAttribute: string }) {
+function initAppMobius5({ domAttribute, options } : { domAttribute: string, options: PristineOptions }) {
+  console.log(options)
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
   if (debug) console.log("Mobius5 loading, debug is enabled");
 
@@ -24,7 +26,7 @@ function initAppMobius5({ domAttribute } : { domAttribute: string }) {
     const eventBtn = event.currentTarget as HTMLElement;
     addTrackingEvent('trackMobiusForm', 'mobius-form', eventBtn.innerText)
     
-    var valid = validateForm(mobiusWrapper)
+    var valid = validateForm(mobiusWrapper, options)
     if (!valid) {
       showAlert(mobiusWrapper, 'msgIncomplete')
       return

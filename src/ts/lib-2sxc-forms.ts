@@ -1,4 +1,6 @@
 import { CommandNames } from '@2sic.com/2sxc-typings';
+import { PristineOptions } from "./lib-2sxc-pristine-options";
+
 let Pristine = require('../../node_modules/pristinejs')
 declare let $2sxc: any
 
@@ -75,8 +77,8 @@ function getFieldValue(formField: HTMLInputElement): { Encoded: Promise<unknown>
   }
 }
 
-export function validateForm(formWrapper: Element): boolean {
-  const pristine = new Pristine(formWrapper);
+export function validateForm(formWrapper: Element, options: PristineOptions): boolean {
+  const pristine = new Pristine(formWrapper, options);
   return pristine.validate();
 }
 

@@ -30,8 +30,11 @@ public class FieldBuilders: Custom.Hybrid.Code14
   private dynamic _pageCss;
 
   // returns form-classes based on whether label is shown as placeholder or besides form - as row  
-  internal string FormClasses() {
-    return "form-group mb-3 " + (LabelInPlaceholder ? "" : "row");
+ internal string FormClasses()
+  {
+    return "app-mobius5-form-fields "
+      + (LabelInPlaceholder ? "" : "row ")
+      + (PageCss.Is("bs3") ? "form-group" : "mb-3");
   }
 
   // Choose CSS classes based on the framework
