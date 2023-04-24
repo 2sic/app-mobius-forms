@@ -1,7 +1,7 @@
 @inherits Custom.Hybrid.Razor14
 
 @if(Kit.Css.Is("bs3")) {
-  <div class="form-group">
+  <div class="app-mobius5-form-fields form-group">
     <div class="checkbox">
       <label>
         <input type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired"> @Html.Raw(Resources.GdprLabel.Replace("<p>", "").Replace("</p>", ""))
@@ -9,7 +9,7 @@
     </div>
   </div>
 } else {
-  <div class="form-group form-check mb-3">
+  <div class="app-mobius5-form-fields form-check mb-3">
     <input class="form-check-input" type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired">
     <label class="form-check-label" for="GDPR-@CmsContext.Module.Id">
       @Html.Raw(Resources.GdprLabel.Replace("<p>", "").Replace("</p>", ""))

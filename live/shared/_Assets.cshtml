@@ -1,10 +1,32 @@
 @inherits Custom.Hybrid.Razor14
-@using ToSic.Razor.Blade;
+@using ToSic.Razor.Blade
 @{
+
+  var pristineOptions = new {
+    classTo = "app-mobius5-form-fields",
+    errorClass = "has-danger",
+    successClass = "has-success",
+    // class of the parent element where error text element is appended
+    errorTextParent = "app-mobius5-form-fields",
+    // type of element to create for the error text
+    errorTextTag = "div",
+    // class of the error text element
+    errorTextClass = "text-help" 
+  };
+
+  var data = new {
+   domAttribute = DynamicModel.DomAttribute,
+   options = pristineOptions
+  };
+
   var Edition = CmsContext.View.Edition;
-  Kit.Page.Activate("turnOn", "2sxc.JsCore");
 }
 
-<turnOn turn-on='{ "run": "window.appMobius5.init()", "data": { "domAttribute": "@DynamicModel.DomAttribute" } }'></turnOn>
+@* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page *@
+@Kit.Page.Activate(condition: Kit.Css.IsUnknown, features: "Bootstrap5")
+
+@Edit.Enable(js: true)
+@Kit.Page.TurnOn("window.appMobius5.init()", data: data)
+<link rel="stylesheet" href="@App.Path/@Edition/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 <script src="@App.Path/@Edition/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
-<link rel="stylesheet" type="text/css" href="@App.Path/@Edition/dist/styles.min.css" @Kit.Page.AssetAttributes()>
+
