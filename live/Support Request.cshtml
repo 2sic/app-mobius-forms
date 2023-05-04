@@ -1,0 +1,40 @@
+@inherits Custom.Hybrid.Razor14
+@using System.Linq
+@{
+  var Edition = CmsContext.View.Edition;
+  var workflowId = "SupportDefault";
+  var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
+  var helpers = CreateInstance("shared/Helpers.cs");
+  var domAttribute = "mobius-" + CmsContext.Module.Id;
+}
+
+<div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
+  @Html.Partial("shared/Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
+
+  <div class="app-mobius5-form"> 
+    @FieldBuilder.Text("Subject", true)
+    @FieldBuilder.Multiline("Message", true)
+    @FieldBuilder.Text("SenderName", false)
+    @FieldBuilder.EMail("SenderMail", true)
+    @FieldBuilder.DropDown("ChargeMe", true, 
+      new string[] {
+        "This is just feedback, don't charge me",
+        "It's ok to charge me 1h = 160.-",
+        "It's ok to charge me 4h = 640.-",
+        "It's ok to charge me 1d = 1'280.-",
+        "It's ok to charge me 10h = 1'600.-",
+        "This could be more than 10h, please contact me"
+      }
+    )
+
+    @* Show/Hide features like Terms, Gdpr, Recaptcha *@
+    @if (Settings.TermsEnabled)       { @Html.Partial("shared/Terms.cshtml") }
+    @if (Settings.GdprEnabled)        { @Html.Partial("shared/GDPR.cshtml") }
+    @if (Content.Recaptcha ?? false)  { @Html.Partial("shared/Recaptcha.cshtml") }
+
+    @* Messages / Send Button *@
+    @Html.Partial("shared/Submit with Messages.cshtml")
+  </div>
+</div>
+
+@Html.Partial("shared/Assets.cshtml", new { DomAttribute = domAttribute })

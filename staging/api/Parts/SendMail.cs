@@ -77,7 +77,7 @@ public class SendMail : Custom.Hybrid.Code14
       .AppendLine("Subject: " + subject)
       .ToString();
 
-    Kit.Log.Add("SendMail", message);
+    Kit.SystemLog.Add("SendMail", message);
 
     wrapLog("ok");
   }

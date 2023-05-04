@@ -110,7 +110,7 @@ public class MailChimp : Custom.Hybrid.Code14
   private MailchimpResponse MailchimpRequest(string url, string method, string body, string apiKey)
   {
     var logTimeStamp = DateTime.Now;
-    Kit.Log.Add("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
+    Kit.SystemLog.Add("Mailchimp controller", logTimeStamp + " - will send " + method + " request to " + url + " with body " + body);
 
     String encodedApiKey = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes("anystring" + ":" + apiKey));
 
@@ -133,7 +133,7 @@ public class MailChimp : Custom.Hybrid.Code14
       StatusCode = responseMessage.StatusCode,
       Response = response
     };
-    Kit.Log.Add("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
+    Kit.SystemLog.Add("Mailchimp controller", logTimeStamp + " - got response: " + r.StatusCode + " with content " + r.Response);
     return r;
   }
 }

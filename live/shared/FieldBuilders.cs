@@ -88,7 +88,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
     SetRequired(content, required, Resources.LabelRequired);
 
     content.Add(Tag.Option("--Please Select--").Attr("value", ""));
-    foreach(var value in values){
+    foreach (var value in values){
       content.Add(Tag.Option(value));
     }
     
@@ -99,7 +99,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
   public dynamic File(string name, bool required, string acceptType, string idString = "") {
     var content = Tag.Input().Type("file").Id(idString).Attr("name", name).Class("form-control-file");
     
-    if(ToSic.Razor.Blade.Text.Has(acceptType)) {
+    if (ToSic.Razor.Blade.Text.Has(acceptType)) {
       content = content.Attr("accept", acceptType);
     }
     SetRequired(content, required, Resources.LabelValidFile);

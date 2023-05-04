@@ -1,0 +1,32 @@
+@inherits Custom.Hybrid.Razor14
+@using System.Linq
+@{
+  var Edition = CmsContext.View.Edition;
+  var workflowId = "MailChimpDefault";
+  var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
+  FieldBuilder.LabelInPlaceholder = true;
+  var helpers = CreateInstance("shared/Helpers.cs");
+  var domAttribute = "mobius-" + CmsContext.Module.Id;
+}
+
+<div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
+  @Html.Partial("shared/Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
+
+  <div class="app-mobius5-form">
+    @FieldBuilder.Text("SenderMail", true)
+    @FieldBuilder.Text("SenderName", true)
+    @FieldBuilder.Text("SenderLastName", true)
+    
+    @* Show/Hide features like Terms, Gdpr, Recaptcha *@
+    @if (Settings.TermsEnabled)       { @Html.Partial("shared/Terms.cshtml") }
+    @if (Settings.GdprEnabled)        { @Html.Partial("shared/GDPR.cshtml") }
+    @if (Content.Recaptcha ?? false)  { @Html.Partial("shared/Recaptcha.cshtml") }
+
+    @Html.Partial("shared/Mailchimp.cshtml")
+
+    @* Messages / Send Button *@
+    @Html.Partial("shared/Submit with Messages.cshtml")
+  </div>
+</div>
+
+@Html.Partial("shared/Assets.cshtml", new { DomAttribute = domAttribute })

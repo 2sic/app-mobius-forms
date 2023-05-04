@@ -8,10 +8,10 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 
 | Aspect              | Status | Comments or Version |
 | ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v12.05
+| 2sxc                | ✅    | requires 2sxc v16
 | Dnn                 | ✅    | For v7, v8 and v9
 | Oqtane 2            | ✅    | Requires v2.02
-| No jQuery           | ?    | 
+| No jQuery           | ?    |
 | Live Demo           | ➖    |
 | Install Checklist   | ✅    | See [Installation] on [azing.org](https://azing.org/2sxc)
 | Source & License    | ✅    | included, ISC/MIT
@@ -54,7 +54,6 @@ Because it's so simple and uses 2sxc, you can easily
 * [customize the e-mail templates][cust-mail]
 * send more e-mails, trigger other [custom WebApi actions][cust-webapi]
 * create [more custom forms][add-forms] which store into further content-types
-
 ## Getting Started
 
 This app is only useful is you use DNN or Oqtane. So assuming you have a DNN installation, all you need to do is install 2sxc and this app. 
@@ -70,28 +69,29 @@ This app is only useful is you use DNN or Oqtane. So assuming you have a DNN ins
 The Source Code is all here - so you can easily customize to your hearts desire!
 
 ---
-
 ## History
 
 * 2021-11
-    * Updated to v12 best-practices
-    * Removed all jQuery dependencies
-    * Hybrid - now works in Dnn and Oqtane
+  * Updated to v12 best-practices
+  * Removed all jQuery dependencies
+  * Hybrid - now works in Dnn and Oqtane
 * 2022-03
-    * Added web.config with required assemblies
-* 2022-04 v05.04.00 
-    * Changed all access to services to ToSic.Sxc.Services
-    * Changed instances of Edit.Enable to page.Activate()
-    * Changed uses of the `Eav.Configuration.IFeaturesService` to `Sxc.Services.IFeaturesService`
-    * Updated JS to use new webapi methods (fetch -> fetchRaw)
-* 2022-06 v05.05.00
-    * Replaced all base classes with their 2sxc 14 equivalents
-    * Replaced all GetService<> with the new ServiceKit14
-    * Updated webpack 
-    * Updated all toolbar configurations to use the IToolbarService
-* 2022-08 v05.05.01
-    * Fixed the warning messages for the forms
-    
+  * Added web.config with required assemblies
+* v05.04.00 2022-04
+  * Changed all access to services to ToSic.Sxc.Services
+  * Changed instances of Edit.Enable to page.Activate()
+  * Changed uses of the `Eav.Configuration.IFeaturesService` to `Sxc.Services.IFeaturesService`
+  * Updated JS to use new webapi methods (fetch -> fetchRaw)
+* v05.05.00 2022-06
+  * Replaced all base classes with their 2sxc 14 equivalents
+  * Replaced all GetService<> with the new ServiceKit14
+  * Updated webpack
+  * Updated all toolbar configurations to use the IToolbarService
+* v05.05.01 2022-08
+  * Fixed the warning messages for the forms
+* v05.06.00 2023-05
+  * Removed _ from Filenames
+  * Replaced turnOn Tag with `Kit.Page.TurnOn`
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
