@@ -1,17 +1,17 @@
 @inherits Custom.Hybrid.Razor14
 @{
   var formConfig = DynamicModel.FormConfig;
+  var FieldBuilder = CreateInstance("../tools/FieldBuilders.cs");
 }
 @* Show/Hide features like Terms, Gdpr, Recaptcha *@
 @if (DynamicModel.SkipConditions != true) {
   // TermsAndGdprCombined is a custom property that combines TermsEnabled and GdprEnabled
   if (Settings.TermsEnabled && Settings.GdprEnabled && Settings.TermsAndGdprCombined) {
-    @Html.Partial("Footer Terms All.cshtml")
+    @FieldBuilder.Checkbox("TermsAll", true)
   } else {
-    if (Settings.TermsEnabled)           { @Html.Partial("Footer Terms General.cshtml") }
-    if (Settings.GdprEnabled)            { @Html.Partial("Footer Terms GDPR.cshtml") }
+    if (Settings.TermsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
+    if (Settings.GdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }
   }
-
   if (formConfig.Get<bool>("Recaptcha")) { @Html.Partial("Footer Recaptcha.cshtml") }
 }
 @* Messages / Send Button *@

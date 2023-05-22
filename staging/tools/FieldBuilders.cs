@@ -88,7 +88,6 @@ public class FieldBuilders: Custom.Hybrid.Code14
     var selectClass = Kit.Css.Is("bs5") ? "form-select" : "form-control";
     var select = Tag.Select().Id(idString).Class(selectClass);
     SetRequired(select, required, Resources.LabelRequired);
-    // TODO 2dg select 
     select.Add(Tag.Option(Resources.LabelSelect).Attr("value", ""));
     foreach (var value in values){
       select.Add(Tag.Option(value));

@@ -1,6 +1,5 @@
 @using ToSic.Razor.Blade;
 @inherits Custom.Hybrid.Razor14
-@* TODO: @2DG - always use Kit.Scrub...., not Replace("p", ...) *@
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
@@ -38,7 +37,7 @@
 @functions {
   dynamic AddHiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
     var classes = "alert alert-" + type + " app-mobius5-message";
-    var rawMessage = Html.Raw(Kit.Scrub.Only(Resources.message, "p"));
+    var rawMessage = Html.Raw(Kit.Scrub.Only(message, "p"));
     var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
     if (attribute != "") { messageDiv.Attr(attribute, ""); }
     return messageDiv;
