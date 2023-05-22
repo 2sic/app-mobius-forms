@@ -1,11 +1,13 @@
 @inherits Custom.Hybrid.Razor14
 
 @* TODO: @2DG - always use Kit.Scrub...., not Replace("p", ...) *@
+@* TODO: @2DG - try to make it use the FormBuilder *@
 @if (Kit.Css.Is("bs3")) {
   <div class="app-mobius5-form-fields form-group">
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired"> @Html.Raw(Resources.GdprLabel.Replace("<p>", "").Replace("</p>", ""))
+        <input type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired"> 
+        @Html.Raw(Kit.Scrub.Only(Resources.GdprLabel, "p"))
       </label>
     </div>
   </div>
@@ -13,7 +15,7 @@
   <div class="app-mobius5-form-fields form-check mb-3">
     <input class="form-check-input" type="checkbox" value="" name="GDPR-@CmsContext.Module.Id" id="GDPR-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired">
     <label class="form-check-label" for="GDPR-@CmsContext.Module.Id">
-      @Html.Raw(Resources.GdprLabel.Replace("<p>", "").Replace("</p>", ""))
+      @Html.Raw(Kit.Scrub.Only(Resources.GdprLabel, "p"))
     </label>
   </div>
 }

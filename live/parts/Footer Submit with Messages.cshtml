@@ -18,13 +18,13 @@
 
     @if (Edit.Enabled && (Content.CustomerSend || Content.OwnerSend) && !Text.Has(Content.MailFrom) && !Text.Has(Settings.DefaultMailFrom)) {
       <div class="alert alert-warning">
-        @Html.Raw(Resources.MessageMailFromError.Replace("<p>", "").Replace("</p>", ""))
+        @Html.Raw(Kit.Scrub.Only(Resources.MessageMailFromError, "p"))
       </div>
     }
 
     @if (Edit.Enabled && Content.OwnerSend && !Text.Has(Content.OwnerMail) && !Text.Has(Settings.DefaultOwnerMail)) {
       <div class="alert alert-warning">
-        @Html.Raw(Resources.MessageMailOwnerError.Replace("<p>", "").Replace("</p>", ""))
+        @Html.Raw(Kit.Scrub.Only(Resources.MessageMailOwnerError, "p"))
       </div>
     }
   </div>
@@ -38,7 +38,7 @@
 @functions {
   dynamic AddHiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
     var classes = "alert alert-" + type + " app-mobius5-message";
-    var rawMessage = message.Replace("<p>", "").Replace("</p>", "");
+    var rawMessage = Html.Raw(Kit.Scrub.Only(Resources.message, "p"));
     var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
     if (attribute != "") { messageDiv.Attr(attribute, ""); }
     return messageDiv;

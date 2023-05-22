@@ -83,7 +83,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
   public IHtmlTag DropDown(string idString, bool required, string[] values) {
     var select = Tag.Select().Id(idString).Class("form-control");
     SetRequired(select, required, Resources.LabelRequired);
-
+    // TODO 2dg select 
     select.Add(Tag.Option("--Please Select--").Attr("value", ""));
     foreach (var value in values){
       select.Add(Tag.Option(value));
@@ -91,6 +91,18 @@ public class FieldBuilders: Custom.Hybrid.Code14
     
     return Field(idString, required, select);
   }
+
+    // returns a checkbox with common attributes and a possible placeholder
+  public IHtmlTag Checkbox(string idString, bool required) {
+    var checkbox = Tag.Input().Attr("type", "checkbox").Id(idString).Class("form-check-input");
+    SetRequired(checkbox, required, Resources.LabelRequired);
+    if (  Kit.Css.Is("bs3") ){
+    return FieldCheckboxBs3(idString, required, checkbox);
+    } else {
+    return FieldCheckbox(idString, required, checkbox);
+    }
+  }
+
 
   // returns a input of type file with common attributes
   public IHtmlTag File(string name, bool required, string acceptType, string idString = "") {
@@ -116,4 +128,25 @@ public class FieldBuilders: Custom.Hybrid.Code14
     
     return field.Add(Tag.Div(contents).Class(!LabelInPlaceholder ? inputWrapperClasses : ""));
   }
+
+public IHtmlTag FieldCheckbox(string idString, bool required, dynamic contents) {
+    var labelTranslated = Kit.Scrub.Only(Resources.Get(idString + "Label"), "p");
+    var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
+    var field = Tag.Div().Class("app-mobius5-form-fields mb-3 form-check" );
+
+    field.Add(contents);
+
+    return field.Add(Tag.Label(label).Class("form-check-label").For(idString));
+  }
+
+  public IHtmlTag FieldCheckboxBs3(string idString, bool required, dynamic contents) {
+    var labelTranslated = Kit.Scrub.Only(Resources.Get(idString + "Label"), "p");
+    var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
+    var field = Tag.Div().Class("app-mobius5-form-fields mb-3 form-group" );
+
+    field.Add(contents);
+
+    return Tag.Div().Class("form-group").Add(field.Add(Tag.Label(label).Class("form-check-label").For(idString)));
+  }
+
 }

@@ -83,7 +83,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
   public IHtmlTag DropDown(string idString, bool required, string[] values) {
     var select = Tag.Select().Id(idString).Class("form-control");
     SetRequired(select, required, Resources.LabelRequired);
-
+    // TODO 2dg select 
     select.Add(Tag.Option("--Please Select--").Attr("value", ""));
     foreach (var value in values){
       select.Add(Tag.Option(value));
