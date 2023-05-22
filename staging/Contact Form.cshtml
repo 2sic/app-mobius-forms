@@ -9,7 +9,7 @@
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
 }
 
-<div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId() @helpers.WrapperAttributes(workflowId)>
+<div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
   @Html.Partial("shared/Toolbar.cshtml", new { formConfig, workflowId })
 
   <div class="app-mobius5-form">

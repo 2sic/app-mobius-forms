@@ -10,8 +10,8 @@ var winAny = window as any;
 winAny.appMobius5 ??= {};
 winAny.appMobius5.init ??= initAppMobius5;
 
-function initAppMobius5({ domAttribute, options } : { domAttribute: string, options: PristineOptions }) {
-  if (debug) console.log("Mobius5 loading, debug is enabled", options);
+function initAppMobius5({ domAttribute, webApiUrl, validationOptions } : { domAttribute: string, webApiUrl: string, validationOptions: PristineOptions }) {
+  if (debug) console.log("Mobius5 loading, debug is enabled", domAttribute);
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
   const mobiusWrapper = document.querySelectorAll(`[${domAttribute}]`)[0];
@@ -25,7 +25,7 @@ function initAppMobius5({ domAttribute, options } : { domAttribute: string, opti
     const eventBtn = event.currentTarget as HTMLElement;
     addTrackingEvent('trackMobiusForm', 'mobius-form', eventBtn.innerText)
     
-    var valid = validateForm(mobiusWrapper, options)
+    var valid = validateForm(mobiusWrapper, validationOptions)
     if (!valid) {
       showAlert(mobiusWrapper, 'msgIncomplete')
       return
@@ -51,7 +51,7 @@ function initAppMobius5({ domAttribute, options } : { domAttribute: string, opti
       
     //#region request handling
 
-    let endpoint = (mobiusWrapper as HTMLElement).dataset.webservice // (should be "Form/ProcessForm" or a custom override)
+    let endpoint = webApiUrl // (should be "Form/ProcessForm" or a custom override)
 
     sendForm(formValues, submitButtom, endpoint) 
       .then((result: any) => {        

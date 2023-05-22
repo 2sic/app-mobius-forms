@@ -14,7 +14,11 @@
 @Kit.Page.TurnOn("window.appMobius5.init()", data: new {
   // This is the attribute on the wrapper tag which should be processed
   domAttribute = helpers.FormMobiusId(),
-  options = new {
+  // web api url to send the form data to
+  webApiUrl = helpers.WebApiUrl(DynamicModel.WorkflowId),
+  // options for the pristine validation plugin
+  validationOptions = new {
+    // class of the parent element where the error/success class is added
     classTo = "app-mobius5-form-fields",
     errorClass = "has-danger",
     successClass = "has-success",
@@ -24,9 +28,6 @@
     errorTextTag = "div",
     // class of the error text element
     errorTextClass = "text-help",
-    // TODO: @2ro - make it use this and not the attribute
-    // web api url to send the form data to
-    webApiUrl = helpers.WebApiUrl(DynamicModel.WorkflowId),
   }
 })
 
