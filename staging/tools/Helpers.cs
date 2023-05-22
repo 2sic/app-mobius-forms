@@ -16,9 +16,4 @@ public class Helpers: Custom.Hybrid.Code14
   public string WrapperClasses(dynamic formConfig) { 
     return "app-mobius5-wrapper" + (formConfig.Get<bool>("Mailchimp") ? " app-mobius5-mailchimp" : "");
   }
-
-  // TODO: @2ro - remove once the JS is updated
-  public IHtmlTag WrapperAttributes(string workflowId) {
-    return Kit.HtmlTags.RawHtml("data-webservice='" + WebApiUrl(workflowId) + "'");
-  }
 }

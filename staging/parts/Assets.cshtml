@@ -4,12 +4,12 @@
 @* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page *@
 @Kit.Page.Activate(condition: Kit.Css.IsUnknown, features: "Bootstrap5")
 
-@* TODO: @2DM - use Kit.Page.Activate *@
-@Edit.Enable(js: true)
+@* Activate JS features of 2sxc *@
+@Kit.Page.Activate("2sxc.JsCore")
 
 @* Run the JS and give it all the parameters to process the current form *@
 @{
-  var helpers = CreateInstance("Helpers.cs");
+  var helpers = CreateInstance("../tools/Helpers.cs");
 }
 @Kit.Page.TurnOn("window.appMobius5.init()", data: new {
   // This is the attribute on the wrapper tag which should be processed

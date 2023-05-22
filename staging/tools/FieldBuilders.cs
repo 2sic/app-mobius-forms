@@ -1,5 +1,5 @@
-using ToSic.Razor.Blade;
 using System;
+using ToSic.Razor.Blade;
 
 public class FieldBuilders: Custom.Hybrid.Code14
 {
@@ -7,14 +7,14 @@ public class FieldBuilders: Custom.Hybrid.Code14
     this file is for creating different fields e.g. input, textarea, file, dropdown and showing them in the template
 
     Example: 
-    Shows a required input of type text with a label infront of it
+    Shows a required input of type text with a label in front of it
     
-    var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
+    var FieldBuilder = CreateInstance("tools/FieldBuilders.cs");
     @FieldBuilder.Text("Subject", true)
 
-    Shows a required input of type text with a label infront of it
+    Shows a required input of type text with a label in front of it
     
-    var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
+    var FieldBuilder = CreateInstance("tools/FieldBuilders.cs");
     FieldBuilder.LabelInPlaceholder = true
     @FieldBuilder.EMail("Email", true)
 
@@ -27,7 +27,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
   #region Koi based class selection
 
   // returns form-classes based on whether label is shown as placeholder or besides form - as row  
- internal string FormClasses()
+  private string FormClasses()
   {
     return "app-mobius5-form-fields "
       + (LabelInPlaceholder ? "" : "row ")
@@ -39,7 +39,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
   // in which case you can skip framework detection and just write the classes
 
   // Choose CSS classes for the labels
-  internal string LabelClasses(bool required) {
+  private string LabelClasses(bool required) {
     return "control-label "
       + (required ? "app-mobius5-field-required " : "")
       + (Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4");
@@ -48,78 +48,72 @@ public class FieldBuilders: Custom.Hybrid.Code14
   #endregion
 
   // Add a placeholder text to the inputs
-  internal string PhLabel(string key, bool required) {
+  private string PhLabel(string key, bool required) {
     return LabelInPlaceholder ? Resources.Get("Label" + key) + (required ? "*" : "") : "";
   }
 
   // Sets a RazorBlade Input/TextArea to required and adds the message which is different for each field type
-  internal void SetRequired(dynamic content, bool required, string message) {
+  private void SetRequired(dynamic content, bool required, string message) {
     if (!required) return;
     content.Attr("data-pristine-required-message", message).Required();
   }
 
   // returns an input with common attributes and a possible placeholder
   public dynamic Text(string idString, bool required) {
-    var content = Tag.Input().Type("text").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
-    SetRequired(content, required, Resources.LabelRequired);
-    return Field(idString, required, content);
+    var input = Tag.Input().Type("text").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
+    SetRequired(input, required, Resources.LabelRequired);
+    return Field(idString, required, input);
   }
 
   // returns an input of type email with common attributes and a possible placeholder
-  public dynamic EMail(string idString, bool required) {
-    var content = Tag.Input().Type("email").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
-    SetRequired(content, required, Resources.LabelValidEmail);
-    return Field(idString, required, content);
+  public IHtmlTag EMail(string idString, bool required) {
+    var input = Tag.Input().Type("email").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
+    SetRequired(input, required, Resources.LabelValidEmail);
+    return Field(idString, required, input);
   }
 
   // returns a textarea with common attributes and a possible placeholder
-  public dynamic Multiline(string idString, bool required) {
-    var content = Tag.Textarea().Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
-    SetRequired(content, required, Resources.LabelRequired);
-    return Field(idString, required, content);
+  public IHtmlTag Multiline(string idString, bool required) {
+    var textarea = Tag.Textarea().Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
+    SetRequired(textarea, required, Resources.LabelRequired);
+    return Field(idString, required, textarea);
   }
 
   // returns a select and options with common attributes
-  public dynamic DropDown(string idString, bool required, string[] values) {
-    var content = Tag.Select().Id(idString).Class("form-control");
-    SetRequired(content, required, Resources.LabelRequired);
+  public IHtmlTag DropDown(string idString, bool required, string[] values) {
+    var select = Tag.Select().Id(idString).Class("form-control");
+    SetRequired(select, required, Resources.LabelRequired);
 
-    content.Add(Tag.Option("--Please Select--").Attr("value", ""));
+    select.Add(Tag.Option("--Please Select--").Attr("value", ""));
     foreach (var value in values){
-      content.Add(Tag.Option(value));
+      select.Add(Tag.Option(value));
     }
     
-    return Field(idString, required, content);
+    return Field(idString, required, select);
   }
 
   // returns a input of type file with common attributes
-  public dynamic File(string name, bool required, string acceptType, string idString = "") {
-    var content = Tag.Input().Type("file").Id(idString).Attr("name", name).Class("form-control-file");
+  public IHtmlTag File(string name, bool required, string acceptType, string idString = "") {
+    var input = Tag.Input().Type("file").Id(idString).Name(name).Class("form-control-file");
     
     if (ToSic.Razor.Blade.Text.Has(acceptType)) {
-      content = content.Attr("accept", acceptType);
+      input = input.Attr("accept", acceptType);
     }
-    SetRequired(content, required, Resources.LabelValidFile);
-    return Field(idString, required, content);
+    SetRequired(input, required, Resources.LabelValidFile);
+    return Field(idString, required, input);
   }
 
-  // shows a wrapping div with choosen content
-  public dynamic Field(string idString, bool required, dynamic contents) {
+  // shows a wrapping div with chosen content
+  public IHtmlTag Field(string idString, bool required, dynamic contents) {
     var inputWrapperClasses = Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8";
     var labelTranslated = Resources.Get("Label" + idString);
+    var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString);
     var field = Tag.Div().Class(FormClasses());
 
     // If the label is _not_ in the placeholder, add the label first
-    if (!LabelInPlaceholder) {
-      field = field.Add(
-        Tag.Label(ToSic.Razor.Blade.Text.First(labelTranslated, idString))
-          .Class(LabelClasses(required))
-          .For(idString)
-      );
-    }
+    if (!LabelInPlaceholder)
+      field = field.Add(Tag.Label(label).Class(LabelClasses(required)).For(idString));
     
     return field.Add(Tag.Div(contents).Class(!LabelInPlaceholder ? inputWrapperClasses : ""));
   }
 }
-
-

@@ -52,7 +52,7 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
 }
 
 function getFieldKey(formField: HTMLInputElement): string {
-  // get the property name from special-attribut, name OR id
+  // get the property name from special-attribute, name OR id
   return formField.getAttribute('name') || formField.getAttribute('id');
 }
 

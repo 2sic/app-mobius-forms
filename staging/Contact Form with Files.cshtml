@@ -1,17 +1,19 @@
 @inherits Custom.Hybrid.Razor14
 @using System.Linq
 @{
+  // Configuration for this form - eg. Recipient mail etc.
   var formConfig = Content;
+  // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "ContactDefault";
 
   // Helpers and Form Builder
-  var helpers = CreateInstance("shared/Helpers.cs");
-  var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
+  var helpers = CreateInstance("./tools/Helpers.cs");
+  var FieldBuilder = CreateInstance("./tools/FieldBuilders.cs");
 }
 
 
 <div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
-  @Html.Partial("shared/Toolbar.cshtml", new { formConfig, workflowId })
+  @Html.Partial("./parts/Toolbar.cshtml", new { formConfig, workflowId })
 
   <div class="app-mobius5-form">
     @FieldBuilder.EMail("SenderMail", true)
@@ -31,4 +33,4 @@
   </div>
 </div>
 
-@Html.Partial("shared/Assets.cshtml", new { formConfig, workflowId })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
