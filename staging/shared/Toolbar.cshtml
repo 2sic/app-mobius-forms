@@ -1,20 +1,25 @@
 @inherits Custom.Hybrid.Razor14
+
+@* Return directly if we don't have edit permissions *@
+@if (!CmsContext.User.IsContentAdmin) {
+  return;
+}
+
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
-  var Content = DynamicModel.Content;
+  var formConfig = DynamicModel.FormConfig;
   var WorkflowId = DynamicModel.WorkflowId;
 
   var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == WorkflowId).FirstOrDefault();
 
-  var toolbarConfig = Kit.Toolbar.Empty()
+  var toolbarFormData = Kit.Toolbar.Empty()
     .Settings(hover: "left")
-    .Data(workflow.ContentType, filter:"ModuleId=" + CmsContext.Module.Id);
+    .Data(workflow.ContentType, filter: "ModuleId=" + CmsContext.Module.Id);
 }
 <div class="row justify-content-between">
-  <div class="col" @toolbarConfig>
+  <div class="col" @toolbarFormData>
   </div>
   <div class="col text-right text-end" >
-    @Kit.Toolbar.Default(Content).AsTag()
+    @Kit.Toolbar.Default(formConfig).AsTag()
   </div>
 </div>
-

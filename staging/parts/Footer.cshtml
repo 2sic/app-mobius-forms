@@ -1,0 +1,14 @@
+@inherits Custom.Hybrid.Razor14
+@{
+  var formConfig = DynamicModel.FormConfig;
+}
+@* Show/Hide features like Terms, Gdpr, Recaptcha *@
+@if (DynamicModel.SkipConditions != true) {
+  if (Settings.TermsEnabled)             { @Html.Partial("Footer Terms.cshtml") }
+  if (Settings.GdprEnabled)              { @Html.Partial("Footer GDPR.cshtml") }
+  if (formConfig.Get<bool>("Recaptcha")) { @Html.Partial("Footer Recaptcha.cshtml") }
+}
+@* Messages / Send Button *@
+@if (DynamicModel.SkipSubmit != true) {
+  @Html.Partial("Footer Submit with Messages.cshtml")
+}

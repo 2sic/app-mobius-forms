@@ -1,5 +1,6 @@
 using ToSic.Razor.Blade;
 using System;
+
 public class FieldBuilders: Custom.Hybrid.Code14
 {
   /* 
@@ -25,16 +26,12 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
   #region Koi based class selection
 
-  // The PageCss - cached for re-use
-  internal dynamic PageCss { get { return _pageCss ?? (_pageCss = Kit.Css); } }
-  private dynamic _pageCss;
-
   // returns form-classes based on whether label is shown as placeholder or besides form - as row  
  internal string FormClasses()
   {
     return "app-mobius5-form-fields "
       + (LabelInPlaceholder ? "" : "row ")
-      + (PageCss.Is("bs3") ? "form-group" : "mb-3");
+      + (Kit.Css.Is("bs3") ? "form-group" : "mb-3");
   }
 
   // Choose CSS classes based on the framework
@@ -45,7 +42,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
   internal string LabelClasses(bool required) {
     return "control-label "
       + (required ? "app-mobius5-field-required " : "")
-      + (PageCss.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4");
+      + (Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-4" : "col-12 col-md-4");
   } 
 
   #endregion
@@ -108,7 +105,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
   // shows a wrapping div with choosen content
   public dynamic Field(string idString, bool required, dynamic contents) {
-    var inputWrapperClasses = PageCss.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8";
+    var inputWrapperClasses = Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8";
     var labelTranslated = Resources.Get("Label" + idString);
     var field = Tag.Div().Class(FormClasses());
 

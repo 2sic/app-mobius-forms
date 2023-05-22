@@ -1,32 +1,32 @@
 @inherits Custom.Hybrid.Razor14
 @using System.Linq
 @{
-  var Edition = CmsContext.View.Edition;
+  var formConfig = Content;
   var workflowId = "MailChimpDefault";
+
+  // Helpers and Form Builder
+  var helpers = CreateInstance("shared/Helpers.cs");
   var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
   FieldBuilder.LabelInPlaceholder = true;
-  var helpers = CreateInstance("shared/Helpers.cs");
-  var domAttribute = "mobius-" + CmsContext.Module.Id;
 }
 
-<div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
-  @Html.Partial("shared/Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
+<div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId() @helpers.WrapperAttributes(workflowId)>
+  @Html.Partial("shared/Toolbar.cshtml", new { formConfig, workflowId })
 
   <div class="app-mobius5-form">
     @FieldBuilder.Text("SenderMail", true)
     @FieldBuilder.Text("SenderName", true)
     @FieldBuilder.Text("SenderLastName", true)
     
-    @* Show/Hide features like Terms, Gdpr, Recaptcha *@
-    @if (Settings.TermsEnabled)       { @Html.Partial("shared/Terms.cshtml") }
-    @if (Settings.GdprEnabled)        { @Html.Partial("shared/GDPR.cshtml") }
-    @if (Content.Recaptcha ?? false)  { @Html.Partial("shared/Recaptcha.cshtml") }
+    @* Show/Hide features like Terms, Gdpr, Recaptcha without Submit *@
+    @Html.Partial("./parts/Footer.cshtml", new { formConfig, SkipSubmit = true })
 
     @Html.Partial("shared/Mailchimp.cshtml")
 
-    @* Messages / Send Button *@
-    @Html.Partial("shared/Submit with Messages.cshtml")
+    @* Show/Hide features like Terms, Gdpr, Recaptcha without Submit *@
+    @Html.Partial("./parts/Footer.cshtml", new { formConfig, SkipConditions = true })
+
   </div>
 </div>
 
-@Html.Partial("shared/Assets.cshtml", new { DomAttribute = domAttribute })
+@Html.Partial("shared/Assets.cshtml", new { formConfig, workflowId })

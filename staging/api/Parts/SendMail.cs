@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using ToSic.Razor.Blade;
-using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 
 public class SendMail : Custom.Hybrid.Code14
 {

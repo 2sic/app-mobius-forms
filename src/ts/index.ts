@@ -11,9 +11,8 @@ winAny.appMobius5 ??= {};
 winAny.appMobius5.init ??= initAppMobius5;
 
 function initAppMobius5({ domAttribute, options } : { domAttribute: string, options: PristineOptions }) {
-  console.log(options)
+  if (debug) console.log("Mobius5 loading, debug is enabled", options);
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
-  if (debug) console.log("Mobius5 loading, debug is enabled");
 
   const mobiusWrapper = document.querySelectorAll(`[${domAttribute}]`)[0];
 
