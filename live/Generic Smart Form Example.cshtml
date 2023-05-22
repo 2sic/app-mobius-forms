@@ -1,15 +1,20 @@
 @inherits Custom.Hybrid.Razor14
+@using System.Linq
 @*
   This is a demo how you can use JavaScript to show/hide fields based on other selections
 *@
-@using System.Linq
 @{
-  var Edition = CmsContext.View.Edition;
+  // Configuration for this form - eg. Recipient mail etc.
+  var formConfig = Content;
+  // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "GenericSave";
-  var FieldBuilder = CreateInstance("shared/FieldBuilders.cs");
-  var helpers = CreateInstance("shared/Helpers.cs");
-  var domAttribute = "mobius-" + CmsContext.Module.Id;
+
+  // Helpers and Form Builder
+  var helpers = CreateInstance("./tools/Helpers.cs");
+  var FieldBuilder = CreateInstance("./tools/FieldBuilders.cs");
 }
+
+
 <script @Kit.Page.AssetAttributes()>
   // 2sxclint:disable:no-inline-script
   // toggles visibility and sets provided domElement to required
@@ -20,8 +25,8 @@
   }
 </script>
 
-<div class="@helpers.WrapperClasses(Content)" @domAttribute data-webservice="app/auto/@Edition/api/Form/ProcessForm?workflowId=@workflowId">
-  @Html.Partial("shared/Toolbar.cshtml", new { Content = Content, WorkflowId = workflowId })
+<div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
+  @Html.Partial("./parts/Toolbar.cshtml", new { formConfig, workflowId })
 
   <div class="app-mobius5-form">
     @FieldBuilder.Text("Subject", true)
@@ -52,14 +57,9 @@
       </div>
     </div>
 
-    @* Show/Hide features like Terms, Gdpr, Recaptcha *@
-    @if (Settings.TermsEnabled)       { @Html.Partial("shared/Terms.cshtml") }
-    @if (Settings.GdprEnabled)        { @Html.Partial("shared/GDPR.cshtml") }
-    @if (Content.Recaptcha ?? false)  { @Html.Partial("shared/Recaptcha.cshtml") }
-
-    @* Messages / Send Button *@
-    @Html.Partial("shared/Submit with Messages.cshtml")
+    @* Show/Hide features like Terms, Gdpr, Recaptcha and Submit *@
+    @Html.Partial("./parts/Footer.cshtml", new { formConfig })
   </div>
 </div>
 
-@Html.Partial("shared/Assets.cshtml", new { DomAttribute = domAttribute })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })

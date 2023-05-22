@@ -1,11 +1,12 @@
 @inherits Custom.Hybrid.Razor14
-
+@* TODO: @2DG - always use Kit.Scrub...., not Replace("p", ...) *@
 @* Sender AcceptTerms *@
 @if (Kit.Css.Is("bs3")) {
   <div class="app-mobius5-form-fields form-group">
     <div class="checkbox">
       <label>
-        <input type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired"> @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
+        <input type="checkbox" value="" name="Terms-@CmsContext.Module.Id" id="Terms-@CmsContext.Module.Id" required data-pristine-required-message="@Resources.LabelRequired">
+        @Html.Raw(Resources.TermsLabel.Replace("<p>", "").Replace("</p>", ""))
       </label>
     </div>
   </div>

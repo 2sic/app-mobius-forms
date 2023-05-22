@@ -1,6 +1,7 @@
 using ToSic.Razor.Blade;
 using System.Collections.Generic;
 using System;
+
 public class EmailToCustomer: Custom.Hybrid.Code14
 {
   // create custom subject here
@@ -9,7 +10,7 @@ public class EmailToCustomer: Custom.Hybrid.Code14
     return Text.First(Content.OwnerMailSubject, Resources.OwnerMailSubject);
   }
 
-  public string Message(Dictionary<string,object> data)
+  public string Message(Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>

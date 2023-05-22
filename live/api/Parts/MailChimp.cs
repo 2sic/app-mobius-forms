@@ -18,17 +18,14 @@ public class MailChimp : Custom.Hybrid.Code14
       {
         Log.Add("...MailChimp - try to add");
         Subscribe(contactFormRequest);
+        return;
       }
-      else
-      {
-        Log.Add("...MailChimp - not wanted by user, won't add");
-      }
+      Log.Add("...MailChimp - not wanted by user, won't add");
+      return;
     }
-    else
-    {
-      Log.Add("Won't add to MailChimp");
-    }
+    Log.Add("Won't add to MailChimp");
   }
+  
   /* MAILCHIMP SUBSCRIBE */
   public string Subscribe(Dictionary<string, object> contactFormRequest)
   {
@@ -73,10 +70,7 @@ public class MailChimp : Custom.Hybrid.Code14
       // Update existing subscriber
       return MailchimpRequest(subscriberUrl, "PUT", Kit.Json.ToJson(body), apiKey).StatusCode.ToString();
     }
-    else
-    {
-      return MailchimpRequest(baseUrl, "POST", Kit.Json.ToJson(body), apiKey).StatusCode.ToString();
-    }
+    return MailchimpRequest(baseUrl, "POST", Kit.Json.ToJson(body), apiKey).StatusCode.ToString();
   }
 
   private class MailchimpResponse

@@ -6,7 +6,7 @@
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
 }
-
+@* TODO: @2DG - always use Kit.Scrub...., not Replace("p", ...) *@
 <div class="app-mobius5-recaptcha" data-sitekey="@siteKey"></div>
 @if (Edit.Enabled) {
   <div class="alert alert-warning">
