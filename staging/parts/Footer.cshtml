@@ -8,10 +8,6 @@
   // TermsAndGdprCombined is a custom property that combines TermsEnabled and GdprEnabled
   if (Settings.TermsEnabled && Settings.GdprEnabled && Settings.TermsAndGdprCombined) {
     @FieldBuilder.Checkbox("TermsAll", true)
-    
-    // LOSWERDEN
-    @* @Html.Partial("Footer Terms All.cshtml") *@
-
   } else {
     if (Settings.TermsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
     if (Settings.GdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }

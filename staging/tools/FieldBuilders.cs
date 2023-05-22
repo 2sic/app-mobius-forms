@@ -26,10 +26,14 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
   #region Koi based class selection
 
+  // returns form validation class 
+  private string FormValidationClass() {
+    return "app-mobius5-form-fields ";
+  }
   // returns form-classes based on whether label is shown as placeholder or besides form - as row  
   private string FormClasses()
   {
-    return "app-mobius5-form-fields "
+    return FormValidationClass()
       + (LabelInPlaceholder ? "" : "row ")
       + (Kit.Css.Is("bs3") ? "form-group" : "mb-3");
   }
@@ -81,10 +85,11 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
   // returns a select and options with common attributes
   public IHtmlTag DropDown(string idString, bool required, string[] values) {
-    var select = Tag.Select().Id(idString).Class("form-control");
+    var selectClass = Kit.Css.Is("bs5") ? "form-select" : "form-control";
+    var select = Tag.Select().Id(idString).Class(selectClass);
     SetRequired(select, required, Resources.LabelRequired);
     // TODO 2dg select 
-    select.Add(Tag.Option("--Please Select--").Attr("value", ""));
+    select.Add(Tag.Option(Resources.LabelSelect).Attr("value", ""));
     foreach (var value in values){
       select.Add(Tag.Option(value));
     }
@@ -96,10 +101,10 @@ public class FieldBuilders: Custom.Hybrid.Code14
   public IHtmlTag Checkbox(string idString, bool required) {
     var checkbox = Tag.Input().Attr("type", "checkbox").Id(idString).Class("form-check-input");
     SetRequired(checkbox, required, Resources.LabelRequired);
-    if (  Kit.Css.Is("bs3") ){
-    return FieldCheckboxBs3(idString, required, checkbox);
+    if (Kit.Css.Is("bs3")){
+      return FieldCheckboxBs3(idString, required, checkbox);
     } else {
-    return FieldCheckbox(idString, required, checkbox);
+      return FieldCheckbox(idString, required, checkbox);
     }
   }
 
@@ -132,7 +137,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
 public IHtmlTag FieldCheckbox(string idString, bool required, dynamic contents) {
     var labelTranslated = Kit.Scrub.Only(Resources.Get(idString + "Label"), "p");
     var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
-    var field = Tag.Div().Class("app-mobius5-form-fields mb-3 form-check" );
+    var field = Tag.Div().Class(FormValidationClass() + "mb-3 form-check" );
 
     field.Add(contents);
 
@@ -142,11 +147,12 @@ public IHtmlTag FieldCheckbox(string idString, bool required, dynamic contents) 
   public IHtmlTag FieldCheckboxBs3(string idString, bool required, dynamic contents) {
     var labelTranslated = Kit.Scrub.Only(Resources.Get(idString + "Label"), "p");
     var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
-    var field = Tag.Div().Class("app-mobius5-form-fields mb-3 form-group" );
+    var field = Tag.Div().Class(FormValidationClass() + "form-group" );
 
-    field.Add(contents);
+    var labelWithInput = Tag.Label(contents + label);
+    var checkboxDiv = Tag.Div().Class("checkbox").Add(labelWithInput);
 
-    return Tag.Div().Class("form-group").Add(field.Add(Tag.Label(label).Class("form-check-label").For(idString)));
+    return field.Add(checkboxDiv);
   }
 
 }

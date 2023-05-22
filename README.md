@@ -92,6 +92,8 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * v05.06.00 2023-05
   * Removed _ from Filenames
   * Replaced turnOn Tag with `Kit.Page.TurnOn`
+  * Change Replace("p", ...) to Kit.Scrub()
+  * New FieldBuilder for Checkboxes
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
