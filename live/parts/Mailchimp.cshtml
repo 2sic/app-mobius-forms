@@ -2,19 +2,19 @@
 
 @if (Edit.Enabled && Content.Mailchimp && !Settings.MailChimpShowWarning) {
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(MessageContainsMailchimp, "p"));
+    @Html.Raw(Kit.Scrub.Only(Resources.MessageContainsMailchimp, "p"));
   </div>
 }
 
 @if (Edit.Enabled && !Content.Mailchimp) {
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(MessageEnableMailchimp, "p"));
+    @Html.Raw(Kit.Scrub.Only(Resources.MessageEnableMailchimp, "p"));
   </div>
 }
 
 @if (Edit.Enabled && Content.Mailchimp && Settings.MailChimpShowWarning) {
   <div class="alert alert-warning">
-     @Html.Raw(Kit.Scrub.Only(MessageDefaultMailChimpKey, "p"));
+     @Html.Raw(Kit.Scrub.Only(Resources.MessageDefaultMailChimpKey, "p"));
   </div>  
 }
 

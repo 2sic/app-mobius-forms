@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.01.00" ExportDate="2023-05-22T16:25:30.1890009+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.01.00" ExportDate="2023-05-24T12:45:55.1410072+02:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -6671,46 +6671,8 @@
       </Value>
     </Entity>
   </Entities>
-  <PortalFiles>
-    <File Id="6110" RelativePath="adam\MobiusForms5\CBlEH-pgbkyZIL8QRStNKQ\Attachments\original-koi (1).jpg" />
-    <File Id="6111" RelativePath="adam\MobiusForms5\CBlEH-pgbkyZIL8QRStNKQ\Attachments\original-koi (1)-1.jpg" />
-    <File Id="6109" RelativePath="adam\MobiusForms5\CBlEH-pgbkyZIL8QRStNKQ\SingleFile\original-koi.jpg" />
-    <File Id="6040" RelativePath="adam\MobiusForms5\dUTtzVIWgUCy2ElKI3Ersw\SingleFile\Demo-2.jpg" />
-    <File Id="6333" RelativePath="adam\MobiusForms5\dZ_ctLrECE6TBRajHtL-uw\Attachments\dummy.pdf" />
-    <File Id="6332" RelativePath="adam\MobiusForms5\dZ_ctLrECE6TBRajHtL-uw\SingleFile\Demo-2.jpg" />
-    <File Id="6337" RelativePath="adam\MobiusForms5\HPhLMWin8Uqqe99YhSSDrw\SingleFile\2018-05-2sxc9-33.JPG" />
-    <File Id="6108" RelativePath="adam\MobiusForms5\lXel11iLrEeYY6Xr_ic2RQ\SingleFile\original-koi.jpg" />
-    <File Id="6165" RelativePath="adam\MobiusForms5\MMMsQrnIyUud86TwEdFUbg\SingleFile\man-placeholder - Copy.jpeg" />
-    <File Id="6042" RelativePath="adam\MobiusForms5\QnCk_wcfH06U2efn7yEing\SingleFile\Demo-2.jpg" />
-    <File Id="6039" RelativePath="adam\MobiusForms5\SAkwVsUA4EeESD0HNprTPw\SingleFile\Demo-1.jpg" />
-    <File Id="6340" RelativePath="adam\MobiusForms5\VC1QzcA2IEOdl5e-rIqDug\Attachments\wp9388875.jpg" />
-    <File Id="6339" RelativePath="adam\MobiusForms5\VC1QzcA2IEOdl5e-rIqDug\SingleFile\582d96a1df2d94bb439af1594639ccfe.jpg" />
-    <File Id="6041" RelativePath="adam\MobiusForms5\XysI1P4juEm9xnKea2Bv4A\SingleFile\Demo-2.jpg" />
-  </PortalFiles>
+  <PortalFiles />
   <PortalFolders>
-    <Folder Id="13667" RelativePath="adam/MobiusForms5/CBlEH-pgbkyZIL8QRStNKQ/Attachments/" />
-    <Folder Id="13666" RelativePath="adam/MobiusForms5/CBlEH-pgbkyZIL8QRStNKQ/SingleFile/" />
-    <Folder Id="13460" RelativePath="adam/MobiusForms5/dUTtzVIWgUCy2ElKI3Ersw/SingleFile/" />
-    <Folder Id="13913" RelativePath="adam/MobiusForms5/dZ_ctLrECE6TBRajHtL-uw/Attachments/" />
-    <Folder Id="13912" RelativePath="adam/MobiusForms5/dZ_ctLrECE6TBRajHtL-uw/SingleFile/" />
-    <Folder Id="13922" RelativePath="adam/MobiusForms5/HPhLMWin8Uqqe99YhSSDrw/SingleFile/" />
-    <Folder Id="13664" RelativePath="adam/MobiusForms5/lXel11iLrEeYY6Xr_ic2RQ/SingleFile/" />
-    <Folder Id="13747" RelativePath="adam/MobiusForms5/MMMsQrnIyUud86TwEdFUbg/SingleFile/" />
-    <Folder Id="13464" RelativePath="adam/MobiusForms5/QnCk_wcfH06U2efn7yEing/SingleFile/" />
-    <Folder Id="13458" RelativePath="adam/MobiusForms5/SAkwVsUA4EeESD0HNprTPw/SingleFile/" />
-    <Folder Id="13933" RelativePath="adam/MobiusForms5/VC1QzcA2IEOdl5e-rIqDug/Attachments/" />
-    <Folder Id="13932" RelativePath="adam/MobiusForms5/VC1QzcA2IEOdl5e-rIqDug/SingleFile/" />
-    <Folder Id="13462" RelativePath="adam/MobiusForms5/XysI1P4juEm9xnKea2Bv4A/SingleFile/" />
     <Folder Id="13453" RelativePath="adam/MobiusForms5/" />
-    <Folder Id="13665" RelativePath="adam/MobiusForms5/CBlEH-pgbkyZIL8QRStNKQ/" />
-    <Folder Id="13459" RelativePath="adam/MobiusForms5/dUTtzVIWgUCy2ElKI3Ersw/" />
-    <Folder Id="13911" RelativePath="adam/MobiusForms5/dZ_ctLrECE6TBRajHtL-uw/" />
-    <Folder Id="13921" RelativePath="adam/MobiusForms5/HPhLMWin8Uqqe99YhSSDrw/" />
-    <Folder Id="13663" RelativePath="adam/MobiusForms5/lXel11iLrEeYY6Xr_ic2RQ/" />
-    <Folder Id="13746" RelativePath="adam/MobiusForms5/MMMsQrnIyUud86TwEdFUbg/" />
-    <Folder Id="13463" RelativePath="adam/MobiusForms5/QnCk_wcfH06U2efn7yEing/" />
-    <Folder Id="13457" RelativePath="adam/MobiusForms5/SAkwVsUA4EeESD0HNprTPw/" />
-    <Folder Id="13931" RelativePath="adam/MobiusForms5/VC1QzcA2IEOdl5e-rIqDug/" />
-    <Folder Id="13461" RelativePath="adam/MobiusForms5/XysI1P4juEm9xnKea2Bv4A/" />
   </PortalFolders>
 </SexyContent>

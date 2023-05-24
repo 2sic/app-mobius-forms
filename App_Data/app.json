@@ -19,7 +19,10 @@
 
       // Webpack 5 temporary folder and NPM folders
       ".temp_cache/",
-      "node_modules/"
+      "node_modules/",
+
+      // Skip the following files
+      "App_Data/SiteFiles/adam/"
 
       // Other examples
       // ".vs",
