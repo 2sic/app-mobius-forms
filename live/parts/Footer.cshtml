@@ -1,6 +1,7 @@
 @inherits Custom.Hybrid.Razor14
+@using ToSic.Sxc.Data;
 @{
-  var formConfig = DynamicModel.FormConfig;
+  ITypedItem formConfig = DynamicModel.FormConfig;
   var FieldBuilder = CreateInstance("../tools/FieldBuilders.cs");
 }
 @* Show/Hide features like Terms, Gdpr, Recaptcha *@
@@ -12,9 +13,10 @@
     if (Settings.TermsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
     if (Settings.GdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }
   }
-  if (formConfig.Get<bool>("Recaptcha")) { @Html.Partial("Footer Recaptcha.cshtml") }
+  // Optional recaptcha
+  if (formConfig.Bool("Recaptcha"))      { @Html.Partial("Footer Recaptcha.cshtml") }
 }
 @* Messages / Send Button *@
 @if (DynamicModel.SkipSubmit != true) {
-  @Html.Partial("Footer Submit with Messages.cshtml")
+  @Html.Partial("Footer Submit with Messages.cshtml", new { formConfig })
 }

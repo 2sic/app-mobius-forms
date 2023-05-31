@@ -1,4 +1,5 @@
 @inherits Custom.Hybrid.Razor14
+@using ToSic.Sxc.Data;
 
 @* Return directly if we don't have edit permissions *@
 @if (!CmsContext.User.IsContentAdmin) {
@@ -7,8 +8,9 @@
 
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
-  object formConfig = DynamicModel.FormConfig;
-  var workflowId = DynamicModel.WorkflowId;
+  // Parameters handed in - must be typed, as the compiler cannot tell the type from the dynamic
+  ITypedItem formConfig = DynamicModel.FormConfig;
+  string workflowId = DynamicModel.WorkflowId;
 
   var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
 
