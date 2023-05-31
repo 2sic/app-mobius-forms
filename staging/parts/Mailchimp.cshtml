@@ -1,18 +1,29 @@
 @inherits Custom.Hybrid.Razor14
+@using ToSic.Sxc.Data;
+@{
+  // Exit if not editor, as this file only adds messages for the editor
+  if (!Edit.Enabled) {
+    return;
+  }
+  
+  ITypedItem formConfig = DynamicModel.FormConfig;
+}
+@* Show mailchimp-not-enabled message *@
+@if (!formConfig.Bool("Mailchimp")) {
+  <div class="alert alert-warning">
+    @Html.Raw(Kit.Scrub.Only(Resources.MessageEnableMailchimp, "p"));
+  </div>
+  return;
+}
 
-@if (Edit.Enabled && Content.Mailchimp && !Settings.MailChimpShowWarning) {
+@if (!Settings.MailChimpShowWarning) {
   <div class="alert alert-warning">
     @Html.Raw(Kit.Scrub.Only(Resources.MessageContainsMailchimp, "p"));
   </div>
 }
 
-@if (Edit.Enabled && !Content.Mailchimp) {
-  <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(Resources.MessageEnableMailchimp, "p"));
-  </div>
-}
 
-@if (Edit.Enabled && Content.Mailchimp && Settings.MailChimpShowWarning) {
+@if (Settings.MailChimpShowWarning) {
   <div class="alert alert-warning">
      @Html.Raw(Kit.Scrub.Only(Resources.MessageDefaultMailChimpKey, "p"));
   </div>  

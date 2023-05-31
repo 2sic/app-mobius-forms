@@ -1,16 +1,17 @@
-using ToSic.Razor.Blade;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using ToSic.Razor.Blade;
+using ToSic.Sxc.Data;
 
 public class EmailToCustomer: Custom.Hybrid.Code14
 {
   // create custom subject here
-  public string Subject(dynamic data) {
+  public string Subject(ITypedItem formConfig, Dictionary<string, object> data) {
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(Content.OwnerMailSubject, Resources.OwnerMailSubject);
+    return Text.First(formConfig.String("OwnerMailSubject"), Resources.OwnerMailSubject);
   }
 
-  public string Message(Dictionary<string, object> data)
+  public string Message(ITypedItem formConfig, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>

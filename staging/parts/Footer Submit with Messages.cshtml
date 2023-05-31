@@ -1,5 +1,11 @@
-@using ToSic.Razor.Blade;
 @inherits Custom.Hybrid.Razor14
+@using ToSic.Razor.Blade;
+@using ToSic.Sxc.Data;
+@{
+  ITypedItem formConfig = DynamicModel.FormConfig;
+  var sendToCustomer = formConfig.Bool("CustomerSend");
+  var sendToOwner = formConfig.Bool("OwnerSend");
+}
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
@@ -12,19 +18,22 @@
 
     <div id="msgOk" class="alert alert-success app-mobius5-message" role="alert">
       @Html.Raw(Resources.MessageSendOk)
-      @Html.Raw(Content.CustomerSend != null && Content.CustomerSend ? Resources.MessageCustomerMailSend : "")
+      @Html.Raw(sendToCustomer ? Resources.MessageCustomerMailSend : "")
     </div>
 
-    @if (Edit.Enabled && (Content.CustomerSend || Content.OwnerSend) && !Text.Has(Content.MailFrom) && !Text.Has(Settings.DefaultMailFrom)) {
-      <div class="alert alert-warning">
-        @Html.Raw(Kit.Scrub.Only(Resources.MessageMailFromError, "p"))
-      </div>
-    }
+    @* Prepared messages for admin only *@
+    @if (Edit.Enabled) {
+      if ((sendToCustomer || sendToOwner) && !Text.Has(formConfig.String("MailFrom")) && !Text.Has(Settings.DefaultMailFrom)) {
+        <div class="alert alert-warning">
+          @Html.Raw(Kit.Scrub.Only(Resources.MessageMailFromError, "p"))
+        </div>
+      }
 
-    @if (Edit.Enabled && Content.OwnerSend && !Text.Has(Content.OwnerMail) && !Text.Has(Settings.DefaultOwnerMail)) {
-      <div class="alert alert-warning">
-        @Html.Raw(Kit.Scrub.Only(Resources.MessageMailOwnerError, "p"))
-      </div>
+      if (sendToOwner && !Text.Has(formConfig.String("OwnerMail")) && !Text.Has(Settings.DefaultOwnerMail)) {
+        <div class="alert alert-warning">
+          @Html.Raw(Kit.Scrub.Only(Resources.MessageMailOwnerError, "p"))
+        </div>
+      }
     }
   </div>
 
@@ -35,9 +44,9 @@
 </div>
 
 @functions {
-  dynamic AddHiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
+  IHtmlTag AddHiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
     var classes = "alert alert-" + type + " app-mobius5-message";
-    var rawMessage = Html.Raw(Kit.Scrub.Only(message, "p"));
+    var rawMessage = Kit.Scrub.Only(message, "p");
     var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
     if (attribute != "") { messageDiv.Attr(attribute, ""); }
     return messageDiv;

@@ -98,7 +98,7 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
     // returns a checkbox with common attributes and a possible placeholder
   public IHtmlTag Checkbox(string idString, bool required) {
-    var checkbox = Tag.Input().Attr("type", "checkbox").Id(idString).Class("form-check-input");
+    var checkbox = Tag.Input().Attr("type", "checkbox").Id(idString).Name(idString).Class("form-check-input");
     SetRequired(checkbox, required, Resources.LabelRequired);
     if (Kit.Css.Is("bs3")){
       return FieldCheckboxBs3(idString, required, checkbox);

@@ -8,16 +8,16 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 
 | Aspect              | Status | Comments or Version |
 | ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v16
-| Dnn                 | ✅    | For v7, v8 and v9
-| Oqtane 2            | ✅    | Requires v2.02
+| 2sxc                | ✅    | requires 2sxc v16.01
+| Dnn                 | ✅    | For v9.6.1
+| Oqtane 2            | ✅    | Requires v3.04
 | No jQuery           | ?    |
 | Live Demo           | ➖    |
 | Install Checklist   | ✅    | See [Installation] on [azing.org](https://azing.org/2sxc)
 | Source & License    | ✅    | included, ISC/MIT
 | App Catalog         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 | Screenshots         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
-| Best Practices      | ✅    | Uses v12.05 conventions
+| Best Practices      | ✅    | Uses v16.01 conventions
 | Bootstrap 3         | ✅    | optimized
 | Bootstrap 4         | ✅    | optimized
 | Bootstrap 5         | ✅    | optimized
@@ -26,13 +26,16 @@ This means that it
 
 1. can be used to create a simple contact form in one minute
 2. can be modified to be any other form you need
-4. can be used as a starting point for your own AJAX forms in DNN
+3. can be used as a starting point for your own AJAX forms in DNN
 
-The app is built with the [pattern **Don't be DAFT**][daft] (DAFT = Densely Abstract Features for Techies), aka the **Anti-Abstraction** pattern. 
-So customizing it is mostly done using common technologies like HTML, JS and some C#. 
+The app is built with the [pattern **Don't be DAFT**][daft] (DAFT = Densely Abstract Features for Techies), aka the **Anti-Abstraction** pattern.
+So customizing it is mostly done using common technologies like HTML, JS and some C#.
 
 ## Quick Intro To The Mobius Forms App for DNN
-A [DNN App][2sxc] is like a DNN module, just way better :). Since this is an open-code/open-source 2sxc-app, you can customize it to be anything you want! This list just shows what it already does, so you know what you get out-of-the-first-box.
+
+A [DNN App][2sxc] is like a DNN module, just way better 😉.
+Since this is an open-code/open-source 2sxc-app, you can customize it to be anything you want!
+This list just shows what it already does, so you know what you get out-of-the-first-box.
 
 1. Pre-Built Forms for use or learning
     1. Basic contact form with _Subject, Message, Name, E-Mail_
@@ -40,27 +43,29 @@ A [DNN App][2sxc] is like a DNN module, just way better :). Since this is an ope
     1. An example with JS show/hide logic and saving raw JSON-data
 1. **AJAX**, so no page reloads for validation, sending or messages
 1. **Recaptcha** (optional) validation on client and server
-2. data is saved, together with the _Timestamp_, _SenderIP_, optionaly generated _Title_ or even raw JSON-data
-3. sends [various e-mails][cust-mail], which are **razor-templateable** and has **Reply-To** and **CC** options
-4. **multi-language** labels and messages, already translated into English and German/Deutsch
-6. field validation uses [html5 and pristinejs][pristine-js] and works with multiple forms on the same page
-7. you can easily **review / manage / filter** the submitted items in a table-view
-8. **export all submissions** into an Excel-compatible XML format
+1. data is saved, together with the _Timestamp_, _SenderIP_, optionaly generated _Title_ or even raw JSON-data
+1. sends [various e-mails][cust-mail], which are **razor-templateable** and has **Reply-To** and **CC** options
+1. **multi-language** labels and messages, already translated into English and German/Deutsch
+1. field validation uses [html5 and pristinejs][pristine-js] and works with multiple forms on the same page
+1. you can easily **review / manage / filter** the submitted items in a table-view
+1. **export all submissions** into an Excel-compatible XML format
 1. **open code C# WebApi** easy to customize if you ever need to
 
 Because it's so simple and uses 2sxc, you can easily
+
 * [translate it into any other language in minutes][translate]
 * [add more fields, even with special validation in minutes][cust-field]
 * [customize the e-mail templates][cust-mail]
 * send more e-mails, trigger other [custom WebApi actions][cust-webapi]
 * create [more custom forms][add-forms] which store into further content-types
+
 ## Getting Started
 
-This app is only useful is you use DNN or Oqtane. So assuming you have a DNN installation, all you need to do is install 2sxc and this app. 
+This app is only useful is you use DNN or Oqtane. So assuming you have a DNN installation, all you need to do is install 2sxc and this app.
 
 * Here's how to [install 2sxc and an App of your Choice](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 
-* Now you can use this app as-is, or customize it to be whatever you need it to be. 
+* Now you can use this app as-is, or customize it to be whatever you need it to be.
 
 * It probably helps to review the [Overview][overview] about how the parts play together by default, so you can then change as little as necessary to get it to do what you want
 
@@ -69,6 +74,7 @@ This app is only useful is you use DNN or Oqtane. So assuming you have a DNN ins
 The Source Code is all here - so you can easily customize to your hearts desire!
 
 ---
+
 ## History
 
 * 2021-11
@@ -94,6 +100,9 @@ The Source Code is all here - so you can easily customize to your hearts desire!
   * Replaced turnOn Tag with `Kit.Page.TurnOn`
   * Change Replace("p", ...) to Kit.Scrub()
   * New FieldBuilder for Checkboxes
+* v05.07.00 2023-06
+  * Updated to 16.01 conventions
+  * All Razor code now fully typed
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/

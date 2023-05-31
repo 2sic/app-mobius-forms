@@ -1,10 +1,10 @@
 // Add namespaces to enable security in Oqtane & Dnn despite the differences
 #if NETCOREAPP
-using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
-using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
+  using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
+  using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
-// 2sxclint:disable:no-dnn-namespaces 2sxclint:disable:no-web-namespaces
-using System.Web.Http;
+  // 2sxclint:disable:no-dnn-namespaces 2sxclint:disable:no-web-namespaces
+  using System.Web.Http;
 #endif
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,8 @@ public class FormController : Custom.Hybrid.Api14
     contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
     // 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
-    if (Content.Recaptcha ?? false) {
+    var formConfig = AsTyped(Data.MyContent);
+    if (formConfig.Bool("Recaptcha")) {
       Log.Add("checking Recaptcha");
       CreateInstance("Parts/Recaptcha.cs").Validate(contactFormRequest["Recaptcha"] as string);
     }

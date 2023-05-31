@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using ToSic.Razor.Blade;
+using ToSic.Sxc.Data;
 
 public class SendMail : Custom.Hybrid.Code14
 {
@@ -18,16 +19,17 @@ public class SendMail : Custom.Hybrid.Code14
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    var from = Text.Has(Content.MailFrom) ? Content.MailFrom : Settings.DefaultMailFrom;
-    var owner = Text.Has(Content.OwnerMail) ? Content.OwnerMail : Settings.DefaultOwnerMail;
+    var formConfig = AsTyped(Data.MyContent);
+    var from = Text.First(formConfig.String("MailFrom"), Settings.DefaultMailFrom);
+    var owner = Text.First(formConfig.String("OwnerMail"), Settings.DefaultOwnerMail);
 
     // Send Mail to owner
-    if (Content.OwnerSend == true)
+    if (formConfig.Bool("OwnerSend"))
     {
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(workflow.OwnerMailTemplate, valuesRelabled, from, owner, Content.OwnerMailCC, custMail, files);
+        Send(formConfig, workflow.OwnerMailTemplate, valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), custMail, files);
       }
       catch (Exception ex)
       {
@@ -36,12 +38,12 @@ public class SendMail : Custom.Hybrid.Code14
     }
 
     // Send Mail to customer
-    if (Content.CustomerSend == true && Text.Has(custMail))
+    if (formConfig.Bool("CustomerSend") && Text.Has(custMail))
     {
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(workflow.CustomerMailTemplate, valuesRelabled, from, custMail, Content.CustomerMailCC, owner, files);
+        Send(formConfig, workflow.CustomerMailTemplate, valuesRelabled, from, custMail, formConfig.String("CustomerMailCC"), owner, files);
       }
       catch (Exception ex)
       {
@@ -50,7 +52,7 @@ public class SendMail : Custom.Hybrid.Code14
     }
   }
 
-  public void Send(string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels, 
+  public void Send(ITypedItem formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels, 
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
@@ -58,8 +60,8 @@ public class SendMail : Custom.Hybrid.Code14
 
     Log.Add("Get MailEngine");
     var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
-    var mailBody = mailEngine.Message(valuesWithMailLabels).ToString();
-    var subject = mailEngine.Subject(valuesWithMailLabels);
+    var mailBody = mailEngine.Message(formConfig, valuesWithMailLabels).ToString();
+    var subject = mailEngine.Subject(formConfig, valuesWithMailLabels);
 
     // Send Mail
     // Note that if an error occurs, this will bubble up, the caller will convert it to format for the client
