@@ -3,7 +3,6 @@
   using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
   using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
-  // 2sxclint:disable:no-dnn-namespaces 2sxclint:disable:no-web-namespaces
   using System.Web.Http;
 #endif
 using System;
@@ -23,7 +22,7 @@ public class FormController : Custom.Hybrid.Api14
     // Pre-work: help the dictionary with the values uses case-insensitive key AccessLevel
     contactFormRequest = new Dictionary<string, object>(contactFormRequest, StringComparer.OrdinalIgnoreCase);
 
-    // 0. Pre-Check - validate recaptcha if enabled in the Content object (the form configuration)
+    // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
     var formConfig = AsTyped(Data.MyContent);
     if (formConfig.Bool("Recaptcha")) {
       Log.Add("checking Recaptcha");
@@ -50,7 +49,7 @@ public class FormController : Custom.Hybrid.Api14
     contactFormRequest["ModuleId"] = CmsContext.Module.Id;
     // add raw-data, in case the content-type has a "RawData" field
     contactFormRequest["RawData"] = CreateRawDataEntry(contactFormRequest);
-    // add Title (if non given), in case the Content-Type would benefit of an automatic title
+    // add Title (if non given), in case the content-type would benefit of an automatic title
     var addTitle = !contactFormRequest.ContainsKey("Title");
     if (addTitle) contactFormRequest["Title"] = "Form " + DateTime.Now.ToString("s");
 
@@ -119,3 +118,6 @@ public class FormController : Custom.Hybrid.Api14
         contactFormRequest.Remove(key);
   }
 }
+// 2sxclint:disable:no-dnn-namespaces
+// 2sxclint:disable:no-web-namespaces
+// 2sxclint:disable:no-EntityGuid-in-quotes
