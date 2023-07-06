@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.02.00" ExportDate="2023-06-08T20:15:05.7201634+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.02.00" ExportDate="2023-07-06T08:54:42.0643475+02:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -1891,7 +1891,7 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="TermsAllLabel" Type="String" IsTitle="false">
+        <Attribute StaticName="LabelTermsAll" Type="String" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="8200dd0b-28b5-4e17-93ca-0cd9e5f3371b" Json="True" KeyNumber="5732">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
@@ -1965,7 +1965,7 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="TermsLabel" Type="String" IsTitle="false">
+        <Attribute StaticName="LabelTerms" Type="String" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="6947fd72-8943-4c32-aea6-8bb55026101e" Json="True" KeyNumber="4536">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
@@ -2015,7 +2015,7 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="GdprLabel" Type="String" IsTitle="false">
+        <Attribute StaticName="LabelGdpr" Type="String" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="ce9b05e7-5605-4762-97ca-d95a0d5decf8" Json="True" KeyNumber="4537">
             <Value Key="InputType" Value="string-wysiwyg" Type="String">
               <Dimension DimensionID="32" ReadOnly="false" />
@@ -5273,7 +5273,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="05.07.00" Type="String">
+      <Value Key="Version" Value="05.07.02" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -5322,16 +5322,16 @@
       <Value Key="CustomerMailSubject" Value="Mobius Test - Your Online Inquiry" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="GdprLabel" Value="&lt;p&gt;I agree that my data will be transferred for the processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="GdprLabel" Value="&lt;p&gt;Ich stimme zu, dass meine Daten f&amp;uuml;r die Auftragsabwicklung &amp;uuml;bertragen und gem&amp;auml;ss&amp;nbsp;&lt;a href=&quot;/datenschutz&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzerkl&amp;auml;rung&lt;/a&gt;&amp;nbsp;verarbeitet werden.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
       <Value Key="LabelChargeMe" Value="It's ok to charge me" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="LabelChargeMe" Value="Bitte so verrechnen" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelGdpr" Value="&lt;p&gt;I agree that my data will be transferred for the processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelGdpr" Value="&lt;p&gt;Ich stimme zu, dass meine Daten f&amp;uuml;r die Auftragsabwicklung &amp;uuml;bertragen und gem&amp;auml;ss&amp;nbsp;&lt;a href=&quot;/datenschutz&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzerkl&amp;auml;rung&lt;/a&gt;&amp;nbsp;verarbeitet werden.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
       <Value Key="LabelMessage" Value="Message" Type="String">
@@ -5410,6 +5410,18 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="LabelSubject" Value="Betreff" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelTerms" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt;.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelTerms" Value="&lt;p&gt;Ich stimme den &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Allgemeinen Gesch&amp;auml;ftsbedingungen (AGB)&lt;/a&gt; zu. &amp;nbsp;&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelTermsAll" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt; as well as processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelTermsAll" Value="&lt;p&gt;Ich stimme den&amp;nbsp;&lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;AGBs&lt;/a&gt; zu und gebe meine Einwilligung, dass meine Daten gem&amp;auml;ss &lt;a href=&quot;/datenschutz&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzerkl&amp;auml;rung&lt;/a&gt; verarbeitet werden.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
       <Value Key="LabelValidEmail" Value="Requires valid e-mail address" Type="String">
@@ -5540,18 +5552,6 @@
       </Value>
       <Value Key="OwnerMailSubject" Value="Mobius Test - Mail from your website" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="TermsAllLabel" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt; as well as processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="TermsAllLabel" Value="&lt;p&gt;Ich stimme den&amp;nbsp;&lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;AGBs&lt;/a&gt; zu und gebe meine Einwilligung, dass meine Daten gem&amp;auml;ss &lt;a href=&quot;/datenschutz&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzerkl&amp;auml;rung&lt;/a&gt; verarbeitet werden.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
-      </Value>
-      <Value Key="TermsLabel" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt;.&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="32" ReadOnly="false" />
-      </Value>
-      <Value Key="TermsLabel" Value="&lt;p&gt;Ich stimme den &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Allgemeinen Gesch&amp;auml;ftsbedingungen (AGB)&lt;/a&gt; zu. &amp;nbsp;&lt;/p&gt;" Type="String">
-        <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
       <Value Key="ToolbarConfigure" Value="Configure this form" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
@@ -6674,5 +6674,8 @@
   <PortalFiles />
   <PortalFolders>
     <Folder Id="13453" RelativePath="adam/MobiusForms5/" />
+    <Folder Id="13995" RelativePath="adam/MobiusForms5/_HykMy4Rz0Coi0bBap5qng/" />
+    <Folder Id="13997" RelativePath="adam/MobiusForms5/_HykMy4Rz0Coi0bBap5qng/Attachments/" />
+    <Folder Id="13996" RelativePath="adam/MobiusForms5/_HykMy4Rz0Coi0bBap5qng/SingleFile/" />
   </PortalFolders>
 </SexyContent>
