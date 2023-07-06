@@ -1,7 +1,8 @@
 using System;
 using ToSic.Razor.Blade;
+using ToSic.Sxc.Data;
 
-public class FieldBuilders: Custom.Hybrid.Code14
+public class FieldBuilders: Custom.Hybrid.CodePro
 {
   /* 
     this file is for creating different fields e.g. input, textarea, file, dropdown and showing them in the template
@@ -9,12 +10,12 @@ public class FieldBuilders: Custom.Hybrid.Code14
     Example: 
     Shows a required input of type text with a label in front of it
     
-    var FieldBuilder = CreateInstance("tools/FieldBuilders.cs");
+    var FieldBuilder = GetCode("tools/FieldBuilders.cs");
     @FieldBuilder.Text("Subject", true)
 
     Shows a required input of type text with a label in front of it
     
-    var FieldBuilder = CreateInstance("tools/FieldBuilders.cs");
+    var FieldBuilder = GetCode("tools/FieldBuilders.cs");
     FieldBuilder.LabelInPlaceholder = true
     @FieldBuilder.EMail("Email", true)
 
@@ -53,33 +54,36 @@ public class FieldBuilders: Custom.Hybrid.Code14
 
   // Add a placeholder text to the inputs
   private string PhLabel(string key, bool required) {
-    return LabelInPlaceholder ? Resources.Get("Label" + key) + (required ? "*" : "") : "";
+    return LabelInPlaceholder ? App.Resources.String("Label" + key) + (required ? "*" : "") : "";
   }
 
   // Sets a RazorBlade Input/TextArea to required and adds the message which is different for each field type
-  private void SetRequired(dynamic content, bool required, string message) {
+  internal void SetRequired(IHtmlTag item, bool required, string message) 
+  {
     if (!required) return;
-    content.Attr("data-pristine-required-message", message).Required();
+    item.Attr("data-pristine-required-message", message).Attr("required");
   }
 
+
+
   // returns an input with common attributes and a possible placeholder
-  public dynamic Text(string idString, bool required) {
+  public IHtmlTag Text(string idString, bool required) {
     var input = Tag.Input().Type("text").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
-    SetRequired(input, required, Resources.LabelRequired);
+    SetRequired(input, required, App.Resources.String("LabelRequired"));
     return Field(idString, required, input);
   }
 
   // returns an input of type email with common attributes and a possible placeholder
   public IHtmlTag EMail(string idString, bool required) {
     var input = Tag.Input().Type("email").Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
-    SetRequired(input, required, Resources.LabelValidEmail);
+    SetRequired(input, required, App.Resources.String("LabelValidEmail"));
     return Field(idString, required, input);
   }
 
   // returns a textarea with common attributes and a possible placeholder
   public IHtmlTag Multiline(string idString, bool required) {
     var textarea = Tag.Textarea().Id(idString).Placeholder(PhLabel(idString, required)).Class("form-control");
-    SetRequired(textarea, required, Resources.LabelRequired);
+    SetRequired(textarea, required, App.Resources.String("LabelRequired"));
     return Field(idString, required, textarea);
   }
 
@@ -87,8 +91,8 @@ public class FieldBuilders: Custom.Hybrid.Code14
   public IHtmlTag DropDown(string idString, bool required, string[] values) {
     var selectClass = Kit.Css.Is("bs5") ? "form-select" : "form-control";
     var select = Tag.Select().Id(idString).Class(selectClass);
-    SetRequired(select, required, Resources.LabelRequired);
-    select.Add(Tag.Option(Resources.LabelSelect).Attr("value", ""));
+    SetRequired(select, required, App.Resources.String("LabelRequired"));
+    select.Add(Tag.Option(App.Resources.String("LabelSelect")).Attr("value", ""));
     foreach (var value in values){
       select.Add(Tag.Option(value));
     }
@@ -99,14 +103,25 @@ public class FieldBuilders: Custom.Hybrid.Code14
     // returns a checkbox with common attributes and a possible placeholder
   public IHtmlTag Checkbox(string idString, bool required) {
     var checkbox = Tag.Input().Attr("type", "checkbox").Id(idString).Name(idString).Class("form-check-input");
-    SetRequired(checkbox, required, Resources.LabelRequired);
-    if (Kit.Css.Is("bs3")){
-      return FieldCheckboxBs3(idString, required, checkbox);
+    SetRequired(checkbox, required, App.Resources.String("LabelRequired"));
+    var labelTranslated = Kit.Scrub.Only(App.Resources.String("Label" + idString), "p");
+    var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
+
+    // Slightly different HTML for Bootstrap3
+    if (Kit.Css.Is("bs3")) {
+      return Tag.Div().Class(FormValidationClass() + "form-group").Wrap(
+        Tag.Div().Class("checkbox").Wrap(
+          Tag.Label().Wrap(checkbox, label)
+        )
+      ); 
     } else {
-      return FieldCheckbox(idString, required, checkbox);
+    // Bootstrap4 and 5
+    return Tag.Div().Class(FormValidationClass() + "mb-3 form-check" ).Wrap(
+      checkbox,
+      Tag.Label(label).Class("form-check-label").For(idString)
+    );
     }
   }
-
 
   // returns a input of type file with common attributes
   public IHtmlTag File(string name, bool required, string acceptType, string idString = "") {
@@ -115,43 +130,23 @@ public class FieldBuilders: Custom.Hybrid.Code14
     if (ToSic.Razor.Blade.Text.Has(acceptType)) {
       input = input.Attr("accept", acceptType);
     }
-    SetRequired(input, required, Resources.LabelValidFile);
+    SetRequired(input, required, App.Resources.String("LabelValidFile"));
     return Field(idString, required, input);
   }
 
   // shows a wrapping div with chosen content
-  public IHtmlTag Field(string idString, bool required, dynamic contents) {
+  private IHtmlTag Field(string idString, bool required, IHtmlTag contents) {
     var inputWrapperClasses = Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-8" : "col-12 col-md-8";
-    var labelTranslated = Resources.Get("Label" + idString);
+    var labelTranslated = App.Resources.String("Label" + idString);
     var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString);
+    // var label = "tt";
     var field = Tag.Div().Class(FormClasses());
 
     // If the label is _not_ in the placeholder, add the label first
     if (!LabelInPlaceholder)
       field = field.Add(Tag.Label(label).Class(LabelClasses(required)).For(idString));
     
-    return field.Add(Tag.Div(contents).Class(!LabelInPlaceholder ? inputWrapperClasses : ""));
-  }
-
-public IHtmlTag FieldCheckbox(string idString, bool required, dynamic contents) {
-    var labelTranslated = Kit.Scrub.Only(Resources.Get(idString + "Label"), "p");
-    var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
-    var field = Tag.Div().Class(FormValidationClass() + "mb-3 form-check" );
-
-    field.Add(contents);
-
-    return field.Add(Tag.Label(label).Class("form-check-label").For(idString));
-  }
-
-  public IHtmlTag FieldCheckboxBs3(string idString, bool required, dynamic contents) {
-    var labelTranslated = Kit.Scrub.Only(Resources.Get(idString + "Label"), "p");
-    var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
-    var field = Tag.Div().Class(FormValidationClass() + "form-group" );
-
-    var labelWithInput = Tag.Label(contents + label);
-    var checkboxDiv = Tag.Div().Class("checkbox").Add(labelWithInput);
-
-    return field.Add(checkboxDiv);
+    return field.Add(Tag.Div(contents).Class(LabelInPlaceholder ? "" : inputWrapperClasses));
   }
 
 }

@@ -1,27 +1,25 @@
-@inherits Custom.Hybrid.Razor14
-@using ToSic.Sxc.Data;
+@inherits Custom.Hybrid.RazorPro
 
 @* Return directly if we don't have edit permissions *@
-@if (!CmsContext.User.IsContentAdmin) {
+@if (!MyUser.IsContentAdmin) {
   return;
 }
 
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
-  // Parameters handed in - must be typed, as the compiler cannot tell the type from the dynamic
-  ITypedItem formConfig = DynamicModel.FormConfig;
-  string workflowId = DynamicModel.WorkflowId;
+  // Parameters handed in from the calling Razor
+  var formConfig = MyModel.Item("FormConfig");
 
-  var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
+  var workflowId = MyModel.String("WorkflowId");
+
+  var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
 
   var toolbar = Kit.Toolbar.Default()
     .Settings(show: "always")
     // Show a data-button which filters the submits by this content-type and module
-    .Data(workflow.ContentType as string, tweak: b => b.Filter("ModuleId",  CmsContext.Module.Id).Note(Resources.ToolbarViewData))
+    .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  MyContext.Module.Id).Note(App.Resources.String("ToolbarViewData")))
     // Remove edit and add a new one with custom note
     .Edit("-")
-    .Edit(formConfig, tweak: b => b.Note(Resources.ToolbarConfigure));
+    .Edit(formConfig, tweak: b => b.Note(App.Resources.String("ToolbarConfigure")));
 }
-<div @toolbar.For(formConfig)>
-  <br>
-</div>
+<div @toolbar.For(formConfig)></div>

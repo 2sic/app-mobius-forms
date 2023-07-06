@@ -4,7 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Http;
 
-public class MailChimp : Custom.Hybrid.Code14
+public class MailChimp : Custom.Hybrid.CodePro
 {
   // Checks for MailChimp Integration
   // if true instantiate mailchimp
@@ -35,7 +35,7 @@ public class MailChimp : Custom.Hybrid.Code14
     var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
     var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");
     Log.Add("Name:" + SenderName + ", LastName:" + SenderLastName);
-    var msg = SubscribeToMailChimp(App.Settings.MailchimpServer, App.Settings.MailchimpListId, App.Settings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
+    var msg = SubscribeToMailChimp(App.Settings.String("MailchimpServer"), App.Settings.String("MailchimpListId"), App.Settings.String("MailchimpAPIKey"), contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
     if (msg != "OK")
     {
       wrapLog("error");
@@ -62,8 +62,8 @@ public class MailChimp : Custom.Hybrid.Code14
     var response = MailchimpRequest(subscriberUrl, "GET", "", apiKey);
     if (response.StatusCode == HttpStatusCode.OK)
     {
-      var currentStatus = Kit.Json.To<dynamic>(response.Response).status;
-
+      var typedJson = Kit.Json.ToTyped(response.Response);
+      var currentStatus = typedJson.String("status");
       // Do nothing if user is already subscribed
       if (currentStatus == "subscribed") return "OK";
 

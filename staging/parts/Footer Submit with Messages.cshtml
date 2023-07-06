@@ -1,37 +1,39 @@
-@inherits Custom.Hybrid.Razor14
+@inherits Custom.Hybrid.RazorPro
 @using ToSic.Razor.Blade;
 @using ToSic.Sxc.Data;
 @{
-  ITypedItem formConfig = DynamicModel.FormConfig;
+  var formConfig = MyModel.Item("FormConfig");
+
   var sendToCustomer = formConfig.Bool("CustomerSend");
   var sendToOwner = formConfig.Bool("OwnerSend");
+  var res = App.Resources;
 }
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    @AddHiddenMessage(Resources.MessageFormIncomplete, "danger", "msgIncomplete")
-    @AddHiddenMessage(Resources.MessageRecaptchaMissing, "danger", "msgRecap")
-    @AddHiddenMessage(Resources.MessageSendError, "danger", "msgError")
-    @AddHiddenMessage(Resources.MessageSending, "warning", "msgSending")
-    @AddHiddenMessage(Resources.MessageNewsletterSuccess, "success", "msgNewsletterSuccess")
-    @AddHiddenMessage(Resources.MessageNewsletterUnexpectedError, "danger", "msgNewsletterFailed")
+    @AddHiddenMessage(res.String("MessageFormIncomplete"), "danger", "msgIncomplete")
+    @AddHiddenMessage(res.String("MessageRecaptchaMissing"), "danger", "msgRecap")
+    @AddHiddenMessage(res.String("MessageSendError"), "danger", "msgError")
+    @AddHiddenMessage(res.String("MessageSending"), "warning", "msgSending")
+    @AddHiddenMessage(res.String("MessageNewsletterSuccess"), "success", "msgNewsletterSuccess")
+    @AddHiddenMessage(res.String("MessageNewsletterUnexpectedError"), "danger", "msgNewsletterFailed")
 
     <div id="msgOk" class="alert alert-success app-mobius5-message" role="alert">
-      @Html.Raw(Resources.MessageSendOk)
-      @Html.Raw(sendToCustomer ? Resources.MessageCustomerMailSend : "")
+      @Html.Raw(res.String("MessageSendOk"))
+      @Html.Raw(sendToCustomer ? res.String("MessageCustomerMailSend") : "")
     </div>
 
     @* Prepared messages for admin only *@
-    @if (Edit.Enabled) {
-      if ((sendToCustomer || sendToOwner) && !Text.Has(formConfig.String("MailFrom")) && !Text.Has(Settings.DefaultMailFrom)) {
+    @if (MyUser.IsContentAdmin) {
+      if ((sendToCustomer || sendToOwner) && !Text.Has(formConfig.String("MailFrom")) && !Text.Has(App.Settings.String("DefaultMailFrom"))) {
         <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(Resources.MessageMailFromError, "p"))
+          @Html.Raw(Kit.Scrub.Only(res.String("MessageMailFromError"), "p"))
         </div>
       }
 
-      if (sendToOwner && !Text.Has(formConfig.String("OwnerMail")) && !Text.Has(Settings.DefaultOwnerMail)) {
+      if (sendToOwner && !Text.Has(formConfig.String("OwnerMail")) && !Text.Has(App.Settings.String("DefaultOwnerMail"))) {
         <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(Resources.MessageMailOwnerError, "p"))
+          @Html.Raw(Kit.Scrub.Only(res.String("MessageMailOwnerError"), "p"))
         </div>
       }
     }
@@ -39,7 +41,7 @@
 
   <!-- send button -->
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    <button app-mobius5-send type="button" class="btn btn-primary">@Resources.ButtonSend</button>
+    <button app-mobius5-send type="button" class="btn btn-primary">@res.String("ButtonSend")</button>
   </div>
 </div>
 

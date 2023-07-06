@@ -1,22 +1,25 @@
-@inherits Custom.Hybrid.Razor14
-@using ToSic.Sxc.Data;
+@inherits Custom.Hybrid.RazorPro
 @{
-  ITypedItem formConfig = DynamicModel.FormConfig;
-  var FieldBuilder = CreateInstance("../tools/FieldBuilders.cs");
+  var formConfig = MyModel.Item("FormConfig");
+
+  var FieldBuilder = GetCode("../tools/FieldBuilders.cs");
 }
 @* Show/Hide features like Terms, Gdpr, Recaptcha *@
-@if (DynamicModel.SkipConditions != true) {
+@if (!MyModel.Bool("SkipConditions", required: false)) {
   // TermsAndGdprCombined is a custom property that combines TermsEnabled and GdprEnabled
-  if (Settings.TermsEnabled && Settings.GdprEnabled && Settings.TermsAndGdprCombined) {
+  var termsEnabled = App.Settings.Bool("TermsEnabled");
+  var gdprEnabled = App.Settings.Bool("GdprEnabled");
+  if (termsEnabled && gdprEnabled && App.Settings.Bool("TermsAndGdprCombined")) {
     @FieldBuilder.Checkbox("TermsAll", true)
   } else {
-    if (Settings.TermsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
-    if (Settings.GdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }
+    if (termsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
+    if (gdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }
   }
   // Optional recaptcha
   if (formConfig.Bool("Recaptcha"))      { @Html.Partial("Footer Recaptcha.cshtml") }
 }
+
 @* Messages / Send Button *@
-@if (DynamicModel.SkipSubmit != true) {
+@if (!MyModel.Bool("SkipSubmit", required: false)) {
   @Html.Partial("Footer Submit with Messages.cshtml", new { formConfig })
 }

@@ -1,21 +1,20 @@
-@inherits Custom.Hybrid.Razor14
-@using ToSic.Sxc.Data;
+@inherits Custom.Hybrid.RazorPro
 @{
   // Initially the key comes from the preset and is encrypted
   // So we must run it through the SecureDataService to verify
-  var secureKey = Kit.SecureData.Parse(Settings.GoogleRecaptcha.SiteKey);
+  var secureKey = Kit.SecureData.Parse(AllSettings.String("GoogleRecaptcha.SiteKey"));
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
 }
 <div class="app-mobius5-recaptcha" data-sitekey="@siteKey"></div>
-@if (Edit.Enabled) {
+@if (MyUser.IsContentAdmin) {
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(Resources.MessageContainsRecaptcha, "p"))
+    @Html.Raw(Kit.Scrub.Only(App.Resources.String("MessageContainsRecaptcha"), "p"))
   </div>
 }
 @if (showWarning) {
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(Resources.MessageRecaptchaWarning, "p"))
+    @Html.Raw(Kit.Scrub.Only(App.Resources.String("MessageRecaptchaWarning"), "p"))
   </div>
 }
 

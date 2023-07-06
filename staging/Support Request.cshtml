@@ -1,14 +1,14 @@
-@inherits Custom.Hybrid.Razor14
+@inherits Custom.Hybrid.RazorPro
 @using System.Linq
 @{
   // Configuration for this form - eg. Recipient mail etc.
-  var formConfig = AsTyped(Data.MyContent);
+  var formConfig = MyItem;
   // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "SupportDefault";
 
   // Helpers and Form Builder
-  var helpers = CreateInstance("./tools/Helpers.cs");
-  var FieldBuilder = CreateInstance("./tools/FieldBuilders.cs");
+  var helpers = GetCode("./tools/Helpers.cs");
+  var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
 }
 
 <div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>

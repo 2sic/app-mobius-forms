@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
 
-public class EmailToOwner: Custom.Hybrid.Code14
+public class EmailToOwner: Custom.Hybrid.CodePro
 {
   // create custom subject here
   public string Subject(ITypedItem formConfig, Dictionary<string, object> data) {
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(formConfig.String("OwnerMailSubject"), Resources.OwnerMailSubject);
+    return Text.First(formConfig.String("OwnerMailSubject"), App.Resources.String("OwnerMailSubject"));
   }
 
   public string Message(ITypedItem formConfig, Dictionary<string, object> data)
@@ -24,9 +24,9 @@ public class EmailToOwner: Custom.Hybrid.Code14
         </style>
     </head>
     <body>
-        <h1>" + Resources.MailOwnerTitle + @"</h1>
+        <h1>" + App.Resources.String("MailOwnerTitle") + @"</h1>
         <div>"
-            + Resources.MailOwnerContent +
+            + App.Resources.String("MailOwnerContent") +
         "</div>";
 
     foreach (var item in data)

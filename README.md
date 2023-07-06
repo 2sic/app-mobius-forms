@@ -8,7 +8,7 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 
 | Aspect              | Status | Comments or Version |
 | ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v16.01
+| 2sxc                | ✅    | requires 2sxc v16.1
 | Dnn                 | ✅    | For v9.6.1
 | Oqtane 2            | ✅    | Requires v3.04
 | No jQuery           | ?    |
@@ -101,7 +101,7 @@ The Source Code is all here - so you can easily customize to your hearts desire!
   * Change Replace("p", ...) to Kit.Scrub()
   * New FieldBuilder for Checkboxes
 * v05.07.00 2023-06
-  * Updated to 16.01 conventions
+  * Updated to 16.02 conventions
   * All Razor code now fully typed
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"

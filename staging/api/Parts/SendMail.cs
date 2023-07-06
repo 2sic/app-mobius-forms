@@ -7,21 +7,22 @@ using System.Text;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
 
-public class SendMail : Custom.Hybrid.Code14
+public class SendMail : Custom.Hybrid.CodePro
 {
-  public void SendMails(Dictionary<string, object> contactFormRequest, string workflowId, dynamic files)
+  public void SendMails(Dictionary<string, object> contactFormRequest, string workflowId, List<ToSic.Sxc.Adam.IFile>  files)
+
   {
     var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
-    var workflow = AsList(App.Data["Workflow"]).Where(w => w.WorkflowId == workflowId).FirstOrDefault();
+    var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
 
     // rewrite the keys to be a nicer format, based on the configuration
-    var valuesRelabled = RewriteKeys(contactFormRequest, workflow.MailLabels ?? "");
+    var valuesRelabled = RewriteKeys(contactFormRequest, workflow.String("MailLabels") ?? "");
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    var formConfig = AsTyped(Data.MyContent);
-    var from = Text.First(formConfig.String("MailFrom"), Settings.DefaultMailFrom);
-    var owner = Text.First(formConfig.String("OwnerMail"), Settings.DefaultOwnerMail);
+    var formConfig = MyItem;
+    var from = Text.First(formConfig.String("MailFrom"), App.Settings.String("DefaultMailFrom"));
+    var owner = Text.First(formConfig.String("OwnerMail"), App.Settings.String("DefaultOwnerMail"));
 
     // Send Mail to owner
     if (formConfig.Bool("OwnerSend"))
@@ -29,7 +30,7 @@ public class SendMail : Custom.Hybrid.Code14
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(formConfig, workflow.OwnerMailTemplate, valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), custMail, files);
+        Send(formConfig, workflow.String("OwnerMailTemplate"), valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), custMail, files);
       }
       catch (Exception ex)
       {
@@ -43,7 +44,7 @@ public class SendMail : Custom.Hybrid.Code14
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(formConfig, workflow.CustomerMailTemplate, valuesRelabled, from, custMail, formConfig.String("CustomerMailCC"), owner, files);
+        Send(formConfig, workflow.String("CustomerMailTemplate"), valuesRelabled, from, custMail, formConfig.String("CustomerMailCC"), owner, files);
       }
       catch (Exception ex)
       {
@@ -59,7 +60,7 @@ public class SendMail : Custom.Hybrid.Code14
     var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + from + ", to:" + to + ", cc:" + cc + ", reply:" + replyTo);
 
     Log.Add("Get MailEngine");
-    var mailEngine = CreateInstance("../../email-templates/" + emailTemplateFilename);
+    var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
     var mailBody = mailEngine.Message(formConfig, valuesWithMailLabels).ToString();
     var subject = mailEngine.Subject(formConfig, valuesWithMailLabels);
 
