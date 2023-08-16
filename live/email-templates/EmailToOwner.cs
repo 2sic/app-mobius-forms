@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
 
-public class EmailToOwner: Custom.Hybrid.CodePro
+public class EmailToOwner: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
   public string Subject(ITypedItem formConfig, Dictionary<string, object> data) {

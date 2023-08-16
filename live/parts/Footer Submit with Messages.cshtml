@@ -1,4 +1,4 @@
-@inherits Custom.Hybrid.RazorPro
+@inherits Custom.Hybrid.RazorTyped
 @using ToSic.Razor.Blade;
 @using ToSic.Sxc.Data;
 @{
@@ -27,13 +27,13 @@
     @if (MyUser.IsContentAdmin) {
       if ((sendToCustomer || sendToOwner) && !Text.Has(formConfig.String("MailFrom")) && !Text.Has(App.Settings.String("DefaultMailFrom"))) {
         <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(res.String("MessageMailFromError"), "p"))
+          @Html.Raw(res.String("MessageMailFromError", scrubHtml: "p"))
         </div>
       }
 
       if (sendToOwner && !Text.Has(formConfig.String("OwnerMail")) && !Text.Has(App.Settings.String("DefaultOwnerMail"))) {
         <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(res.String("MessageMailOwnerError"), "p"))
+          @Html.Raw(res.String("MessageMailOwnerError", scrubHtml: "p"))
         </div>
       }
     }
@@ -48,6 +48,7 @@
 @functions {
   IHtmlTag AddHiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
     var classes = "alert alert-" + type + " app-mobius5-message";
+    // TODO: 2ro
     var rawMessage = Kit.Scrub.Only(message, "p");
     var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
     if (attribute != "") { messageDiv.Attr(attribute, ""); }

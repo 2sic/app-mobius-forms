@@ -7,7 +7,7 @@ using System.Text;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
 
-public class SendMail : Custom.Hybrid.CodePro
+public class SendMail : Custom.Hybrid.CodeTyped
 {
   public void SendMails(Dictionary<string, object> contactFormRequest, string workflowId, List<ToSic.Sxc.Adam.IFile>  files)
 

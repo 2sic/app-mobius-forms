@@ -1,4 +1,4 @@
-@inherits Custom.Hybrid.RazorPro
+@inherits Custom.Hybrid.RazorTyped
 
 @* Return directly if we don't have edit permissions *@
 @if (!MyUser.IsContentAdmin) {
@@ -20,6 +20,7 @@
     .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  MyContext.Module.Id).Note(App.Resources.String("ToolbarViewData")))
     // Remove edit and add a new one with custom note
     .Edit("-")
-    .Edit(formConfig, tweak: b => b.Note(App.Resources.String("ToolbarConfigure")));
+    .Edit(formConfig, tweak: b => b.Note(App.Resources.String("ToolbarConfigure")))
+    .AppResources(tweak: b => b.Color("#15585F").Note(App.Resources.String("ToolbarAppResources")));
 }
 <div @toolbar.For(formConfig)></div>

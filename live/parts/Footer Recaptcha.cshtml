@@ -1,4 +1,4 @@
-@inherits Custom.Hybrid.RazorPro
+@inherits Custom.Hybrid.RazorTyped
 @{
   // Initially the key comes from the preset and is encrypted
   // So we must run it through the SecureDataService to verify
@@ -9,12 +9,12 @@
 <div class="app-mobius5-recaptcha" data-sitekey="@siteKey"></div>
 @if (MyUser.IsContentAdmin) {
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(App.Resources.String("MessageContainsRecaptcha"), "p"))
+    @Html.Raw(App.Resources.String("MessageContainsRecaptcha", scrubHtml: "p"))
   </div>
 }
 @if (showWarning) {
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(App.Resources.String("MessageRecaptchaWarning"), "p"))
+    @Html.Raw(App.Resources.String("MessageRecaptchaWarning", scrubHtml: "p"))
   </div>
 }
 

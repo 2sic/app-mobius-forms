@@ -1,4 +1,4 @@
-@inherits Custom.Hybrid.RazorPro
+@inherits Custom.Hybrid.RazorTyped
 @using System.Linq
 @{
   // Configuration for this form - eg. Recipient mail etc.
@@ -17,10 +17,10 @@
 
   <div class="app-mobius5-form">
     @FieldBuilder.EMail("SenderMail", true)
-    @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg", "SingleFile")
+    @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg", "File")
     @* since multiple files are sent to Attachments, in needs a unique form id *@
-    @FieldBuilder.File("Attachments", false, "", "File2_1")
-    @FieldBuilder.File("Attachments", false, "", "File2_2")
+    @FieldBuilder.File("Attachments", false, "", "File")
+    @FieldBuilder.File("Attachments", false, "", "File")
     
     @* Show/Hide features like Terms, Gdpr, Recaptcha and Submit *@
     @Html.Partial("./parts/Footer.cshtml", new { formConfig })

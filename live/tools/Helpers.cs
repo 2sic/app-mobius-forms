@@ -2,7 +2,7 @@
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
 
-public class Helpers: Custom.Hybrid.CodePro
+public class Helpers: Custom.Hybrid.CodeTyped
 {
   // The custom marker so the JS can find the form
   public string FormMobiusId() {

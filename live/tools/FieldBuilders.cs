@@ -2,7 +2,7 @@ using System;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
 
-public class FieldBuilders: Custom.Hybrid.CodePro
+public class FieldBuilders: Custom.Hybrid.CodeTyped
 {
   /* 
     this file is for creating different fields e.g. input, textarea, file, dropdown and showing them in the template
@@ -104,7 +104,7 @@ public class FieldBuilders: Custom.Hybrid.CodePro
   public IHtmlTag Checkbox(string idString, bool required) {
     var checkbox = Tag.Input().Attr("type", "checkbox").Id(idString).Name(idString).Class("form-check-input");
     SetRequired(checkbox, required, App.Resources.String("LabelRequired"));
-    var labelTranslated = Kit.Scrub.Only(App.Resources.String("Label" + idString), "p");
+    var labelTranslated = App.Resources.String("Label" + idString, scrubHtml: "p");
     var label = ToSic.Razor.Blade.Text.First(labelTranslated, idString) + (required ? "*" : "");
 
     // Slightly different HTML for Bootstrap3

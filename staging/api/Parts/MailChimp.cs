@@ -4,7 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Http;
 
-public class MailChimp : Custom.Hybrid.CodePro
+public class MailChimp : Custom.Hybrid.CodeTyped
 {
   // Checks for MailChimp Integration
   // if true instantiate mailchimp
