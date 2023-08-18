@@ -62,7 +62,8 @@ public class FormController: Custom.Hybrid.ApiTyped
     var guid = Guid.NewGuid();
     contactFormRequest["EntityGuid"] = guid;
     Log.Add("Save data to content type");
-    App.Data.Create(workflow.Dyn.ContentType, contactFormRequest);
+    var dataTypeToCreate = workflow.String("ContentType");
+    App.Data.Create(dataTypeToCreate, contactFormRequest);
 
     // Remove Terms and GDPR from the data-package - we don't want them in the e-mails
     RemoveKeys(contactFormRequest, new string[] { "GDPR", "Terms" });
@@ -75,7 +76,7 @@ public class FormController: Custom.Hybrid.ApiTyped
       foreach (var file in AsTypedList(contactFormRequest["Files"]))
       {
         var data = System.Convert.FromBase64String(file.String("Encoded").Split(',')[1]);
-        files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file.String("Name"), contentType: workflow.Dyn.ContentType, guid: guid, field: file.String("Field")));
+        files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: file.String("Name"), contentType: dataTypeToCreate, guid: guid, field: file.String("Field")));
       }
 
       // Don't keep Files array in ContactFormRequest
