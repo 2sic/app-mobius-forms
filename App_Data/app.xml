@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.02.00" ExportDate="2023-07-10T08:01:28.6668584+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.03.00" ExportDate="2023-08-23T08:29:02.6109678+02:00">
   <Header>
     <App Guid="ea777610-00e3-462f-8a3e-90a09a6e1109" />
     <Language Default="en-us" />
@@ -415,6 +415,13 @@
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="cd3cc74e-73ae-428e-a4c9-d74f9287ab3e" Json="True" KeyNumber="5734">
             <Value Key="InputType" Value="string-default" Type="String" />
             <Value Key="Name" Value="LabelSelect" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="LabelFile" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="5b4529a5-cd5e-487f-96b4-749cacf006b2" Json="True" KeyNumber="5873">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="LabelFile" Type="String" />
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
@@ -2046,6 +2053,13 @@
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="3d5c5f6b-d89b-44b4-a205-312b0e4156c0" Json="True" KeyNumber="5731">
             <Value Key="InputType" Value="string-default" Type="String" />
             <Value Key="Name" Value="ToolbarConfigure" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="ToolbarAppResources" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="6b2d1158-9808-49c4-8fbb-1521b4d524f6" Json="True" KeyNumber="5871">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="ToolbarAppResources" Type="String" />
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
@@ -5267,13 +5281,13 @@
       <Value Key="RequiredOqtaneVersion" Value="03.04.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredVersion" Value="16.02.00" Type="String">
+      <Value Key="RequiredVersion" Value="16.03.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="05.07.02" Type="String">
+      <Value Key="Version" Value="05.08.00" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
@@ -5326,6 +5340,12 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
       <Value Key="LabelChargeMe" Value="Bitte so verrechnen" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelFile" Value="Upload File(s)" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelFile" Value="Datei(en) hochladen" Type="String">
         <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
       <Value Key="LabelGdpr" Value="&lt;p&gt;I agree that my data will be transferred for the processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
@@ -5552,6 +5572,12 @@
       </Value>
       <Value Key="OwnerMailSubject" Value="Mobius Test - Mail from your website" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ToolbarAppResources" Value="Edit App Resources" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ToolbarAppResources" Value="App-Ressourcen editieren" Type="String">
+        <Dimension DimensionID="33" ReadOnly="false" />
       </Value>
       <Value Key="ToolbarConfigure" Value="Configure this form" Type="String">
         <Dimension DimensionID="32" ReadOnly="false" />
@@ -6670,12 +6696,244 @@
         <Dimension DimensionID="32" ReadOnly="false" />
       </Value>
     </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="93279aaa-3d1a-4ecb-a380-f58371a1359b">
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Subject&quot;:&quot;test &quot;,&quot;Message&quot;:&quot;test&quot;,&quot;SenderName&quot;:&quot;test&quot;,&quot;SenderMail&quot;:&quot;daniel.mettler@2sic.com&quot;,&quot;TermsAll&quot;:&quot;on&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2023-07-31T17:44:20Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:5506}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-07-31T17:44:20" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-07-31T17:44:20" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="83adb2c7-c6ce-40c6-8f38-8db767a6090a">
+      <Value Key="Message" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="daniel.mettler@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Subject" Value="test " Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-07-31T17:44:20" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="3320e949-0e48-4c76-8b4f-477522d3e5eb">
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Subject&quot;:&quot;test&quot;,&quot;Message&quot;:&quot;test&quot;,&quot;SenderName&quot;:&quot;test&quot;,&quot;SenderMail&quot;:&quot;daniel.mettler@2sic.com&quot;,&quot;TermsAll&quot;:&quot;on&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2023-08-08T12:00:48Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:5506}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T12:00:48" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-08-08T12:00:48" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="5161dc2c-b39b-4ddf-af8a-a857c01767a0">
+      <Value Key="Message" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="daniel.mettler@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Subject" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T12:00:48" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="bf3252be-c88e-46db-a0a6-09ee4d825af2">
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Subject&quot;:&quot;test&quot;,&quot;Message&quot;:&quot;test&quot;,&quot;SenderName&quot;:&quot;test&quot;,&quot;SenderMail&quot;:&quot;daniel.mettler@2sic.com&quot;,&quot;TermsAll&quot;:&quot;on&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2023-08-08T12:00:55Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:5506}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T12:00:55" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-08-08T12:00:55" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="5e451bf6-df4a-4357-868c-b3bd7e87b36d">
+      <Value Key="Message" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="daniel.mettler@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Subject" Value="test" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T12:00:55" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="649d0f00-be27-4a1a-8903-58b9c64034e1">
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Subject&quot;:&quot;DAS IST EIN TEST VON 2sic / 2ro&quot;,&quot;Message&quot;:&quot;DAS IST EIN TEST VON 2sic&quot;,&quot;SenderName&quot;:&quot;Roman Opalko&quot;,&quot;SenderMail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;TermsAll&quot;:&quot;on&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2023-08-08T13:17:06Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:5506}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T13:17:06" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-08-08T13:17:06" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="43061a39-83ab-495b-9712-8c8eddc41af1">
+      <Value Key="Message" Value="DAS IST EIN TEST VON 2sic" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="5506" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="roman.opalko@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderName" Value="Roman Opalko" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Subject" Value="DAS IST EIN TEST VON 2sic / 2ro" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T13:17:06" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="62faf511-b247-47bb-b9d9-6e156b6f8713">
+      <Value Key="ModuleId" Value="5509" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;SenderMail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;TermsAll&quot;:&quot;on&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2023-08-08T13:21:59Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:5509}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T13:21:59" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-08-08T13:21:59" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="da73bd66-50a0-4338-9d1d-2f40f3004133">
+      <Value Key="ModuleId" Value="5509" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="roman.opalko@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T13:21:59" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="dab8b0fe-9aa0-454c-9996-83629d3f1de8">
+      <Value Key="ModuleId" Value="5509" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;SenderMail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;TermsAll&quot;:&quot;on&quot;,&quot;MailChimp&quot;:false,&quot;Timestamp&quot;:&quot;2023-08-08T13:23:09Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:5509}" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T13:23:09" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-08-08T13:23:09" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="7a1a6841-f37a-4bad-953a-f204612693b9" AttributeSetName="ContactSimple" EntityGUID="82d8b6fa-96ca-450e-af83-3639058e8b6d">
+      <Value Key="ModuleId" Value="5509" Type="Number">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderMail" Value="roman.opalko@2sic.com" Type="String">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-08-08T13:23:09" Type="DateTime">
+        <Dimension DimensionID="32" ReadOnly="false" />
+      </Value>
+    </Entity>
   </Entities>
-  <PortalFiles />
+  <PortalFiles>
+    <File Id="6404" RelativePath="adam\MobiusForms5\-rbYgsqWDkWvgzY5BY6LbQ\Attachments\dummy.pdf" />
+    <File Id="6405" RelativePath="adam\MobiusForms5\-rbYgsqWDkWvgzY5BY6LbQ\Attachments\dummy2.pdf" />
+    <File Id="6403" RelativePath="adam\MobiusForms5\-rbYgsqWDkWvgzY5BY6LbQ\SingleFile\Demo-2.jpg" />
+    <File Id="6402" RelativePath="adam\MobiusForms5\Zr1z2qBQOEOdHS9A8wBBMw\SingleFile\Demo-1.jpg" />
+  </PortalFiles>
   <PortalFolders>
+    <Folder Id="14062" RelativePath="adam/MobiusForms5/-rbYgsqWDkWvgzY5BY6LbQ/Attachments/" />
+    <Folder Id="14061" RelativePath="adam/MobiusForms5/-rbYgsqWDkWvgzY5BY6LbQ/SingleFile/" />
+    <Folder Id="14059" RelativePath="adam/MobiusForms5/Zr1z2qBQOEOdHS9A8wBBMw/SingleFile/" />
     <Folder Id="13453" RelativePath="adam/MobiusForms5/" />
     <Folder Id="13995" RelativePath="adam/MobiusForms5/_HykMy4Rz0Coi0bBap5qng/" />
     <Folder Id="13997" RelativePath="adam/MobiusForms5/_HykMy4Rz0Coi0bBap5qng/Attachments/" />
     <Folder Id="13996" RelativePath="adam/MobiusForms5/_HykMy4Rz0Coi0bBap5qng/SingleFile/" />
+    <Folder Id="14060" RelativePath="adam/MobiusForms5/-rbYgsqWDkWvgzY5BY6LbQ/" />
+    <Folder Id="14058" RelativePath="adam/MobiusForms5/Zr1z2qBQOEOdHS9A8wBBMw/" />
   </PortalFolders>
 </SexyContent>
