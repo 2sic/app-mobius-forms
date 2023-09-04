@@ -6,7 +6,7 @@ public class Helpers: Custom.Hybrid.CodeTyped
 {
   // The custom marker so the JS can find the form
   public string FormMobiusId() {
-    return "mobius-" + MyContext.Module.Id;
+    return "mobius-" + UniqueKey;
   }
 
   // The URL to the API endpoint - which uses the current edition (staging/live) and the workflow ID

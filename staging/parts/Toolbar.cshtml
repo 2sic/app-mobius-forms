@@ -17,7 +17,7 @@
   var toolbar = Kit.Toolbar.Default()
     .Settings(show: "always")
     // Show a data-button which filters the submits by this content-type and module
-    .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  MyContext.Module.Id).Note(App.Resources.String("ToolbarViewData")))
+    .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  UniqueKey).Note(App.Resources.String("ToolbarViewData")))
     // Remove edit and add a new one with custom note
     .Edit("-")
     .Edit(formConfig, tweak: b => b.Note(App.Resources.String("ToolbarConfigure")))
