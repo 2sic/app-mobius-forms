@@ -103,6 +103,14 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * v05.07.00 2023-06
   * Updated to 16.02 conventions
   * All Razor code now fully typed
+* v05.08 2023-8
+  * Renamed
+    * Custom.Hybrid.ApiPro -> ApiTyped
+    * Custom.Hybrid.CodePro -> CodeTyped
+    * Custom.Hybrid.RazorPro -> RazorTyped
+* v05.08.01 2023-10
+  * Bugfix Multiple File Upload (Conversion to type was wrong)
+
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
