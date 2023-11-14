@@ -11,10 +11,10 @@
   var gdprEnabled = App.Settings.Bool("GdprEnabled");
   
   if (termsEnabled && gdprEnabled && App.Settings.Bool("TermsAndGdprCombined")) {
-    @FieldBuilder.Checkbox("TermsAll", true)
+    @FieldBuilder.Checkbox("TermsAll", true, true)
   } else {
-    if (termsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
-    if (gdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }
+    if (termsEnabled)           { @FieldBuilder.Checkbox("Terms", true, true) }
+    if (gdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true, true) }
   }
   
   // Optional recaptcha
