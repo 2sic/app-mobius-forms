@@ -108,8 +108,10 @@ The Source Code is all here - so you can easily customize to your hearts desire!
     * Custom.Hybrid.ApiPro -> ApiTyped
     * Custom.Hybrid.CodePro -> CodeTyped
     * Custom.Hybrid.RazorPro -> RazorTyped
-* v05.08.01 2023-10
+* v05.08.01 2023-11
   * Bugfix Multiple File Upload (Conversion to type was wrong)
+* v05.09.00 2023-11
+  * Typed contactFormRequest and refactore code
 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
