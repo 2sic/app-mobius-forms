@@ -70,8 +70,7 @@ public class FormController : Custom.Hybrid.ApiTyped
     {
       foreach (var fileObj in contactFormRequest.Files)
       {
-        var data = System.Convert.FromBase64String(fileObj.Encoded.Split(',')[1]);
-        files.Add(SaveInAdam(stream: new MemoryStream(data), fileName: fileObj.Name, contentType: dataTypeToCreate, guid: guid, field: fileObj.Field));
+        files.Add(SaveInAdam(stream: new MemoryStream(fileObj.Contents), fileName: fileObj.Name, contentType: dataTypeToCreate, guid: guid, field: fileObj.Field));
       }
     }
     else
