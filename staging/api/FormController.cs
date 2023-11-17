@@ -56,12 +56,10 @@ public class FormController : Custom.Hybrid.ApiTyped
     Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
     App.Data.Create("SystemProtocol", contactFormRequest.Fields);
 
-    // Add guid to identify entity after saving (because we need to find it afterwards)
-    var guid = Guid.NewGuid();
-    contactFormRequest.Fields.Add("EntityGuid", guid);
     Log.Add("Save data to content type");
+    
     var dataTypeToCreate = workflow.String("ContentType");
-    App.Data.Create(dataTypeToCreate, contactFormRequest.Fields);
+    var contentEntity = App.Data.Create(dataTypeToCreate, contactFormRequest.Fields);
 
     var files = new List<ToSic.Sxc.Adam.IFile>();
 
@@ -70,7 +68,11 @@ public class FormController : Custom.Hybrid.ApiTyped
     {
       foreach (var fileObj in contactFormRequest.Files)
       {
-        files.Add(SaveInAdam(stream: new MemoryStream(fileObj.Contents), fileName: fileObj.Name, contentType: dataTypeToCreate, guid: guid, field: fileObj.Field));
+        files.Add(SaveInAdam(stream: new MemoryStream(fileObj.Contents),
+         fileName: fileObj.Name,
+         contentType: dataTypeToCreate,
+         guid: contentEntity.EntityGuid,
+         field: fileObj.Field));
       }
     }
     else
