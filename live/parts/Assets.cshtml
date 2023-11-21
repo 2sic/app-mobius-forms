@@ -15,7 +15,7 @@
   // This is the attribute on the wrapper tag which should be processed
   domAttribute = helpers.FormMobiusId(),
   // web api url to send the form data to
-  webApiUrl = helpers.WebApiUrl(MyModel.String("WorkflowId")),
+  webApiUrl = helpers.WebApiUrl(MyModel.String("WorkflowId"), MyModel.String("FormType")),
   // options for the pristine validation plugin
   validationOptions = new {
     // class of the parent element where the error/success class is added
@@ -30,6 +30,7 @@
     errorTextClass = "text-help",
   }
 })
+
 
 <link rel="stylesheet" href="@MyView.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 <script src="@MyView.Path/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>

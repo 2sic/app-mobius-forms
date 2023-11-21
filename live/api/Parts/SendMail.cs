@@ -9,18 +9,33 @@ using ToSic.Sxc.Data;
 
 public class SendMail : Custom.Hybrid.CodeTyped
 {
-  public void SendMails(Dictionary<string, object> contactFormRequest, string workflowId, List<ToSic.Sxc.Adam.IFile>  files)
+  public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, string workflowId, List<ToSic.Sxc.Adam.IFile> files)
 
   {
-    var custMail = contactFormRequest.ContainsKey("SenderMail") ? contactFormRequest["SenderMail"].ToString() : "";
+    // rewrite the keys to be a nicer format, based on the configuration
     var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
 
-    // rewrite the keys to be a nicer format, based on the configuration
-    var valuesRelabled = RewriteKeys(contactFormRequest, workflow.String("MailLabels") ?? "");
+    // for Dyn Form
+    var mailLabels = "";
+
+    if(contactFormRequest.ContainsKey("FormId")) {
+      var dynFormConfig = AsItems(App.Data["DynForm"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
+      
+      foreach (var item in dynFormConfig.Children("Fields"))
+      {
+        var fieldId = item.String("FieldId");
+        var title = item.String("Title");
+        mailLabels += fieldId + "=" + title + "\n";
+      }
+    }
+    
+
+    var valuesRelabled = RewriteKeys(contactFormRequest, Text.First(mailLabels, workflow.String("MailLabels")) ?? "");
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    var formConfig = MyItem;
+    var formConfig = MyItem.ContainsKey("Config") ? MyItem.Child("Config") : MyItem;
+
     var from = Text.First(formConfig.String("MailFrom"), App.Settings.String("DefaultMailFrom"));
     var owner = Text.First(formConfig.String("OwnerMail"), App.Settings.String("DefaultOwnerMail"));
 
@@ -30,7 +45,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(formConfig, workflow.String("OwnerMailTemplate"), valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), custMail, files);
+        Send(formConfig, workflow.String("OwnerMailTemplate"), valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), customerMails, files);
       }
       catch (Exception ex)
       {
@@ -39,12 +54,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
 
     // Send Mail to customer
-    if (formConfig.Bool("CustomerSend") && Text.Has(custMail))
+    if (formConfig.Bool("CustomerSend") && Text.Has(customerMails))
     {
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(formConfig, workflow.String("CustomerMailTemplate"), valuesRelabled, from, custMail, formConfig.String("CustomerMailCC"), owner, files);
+        Send(formConfig, workflow.String("CustomerMailTemplate"), valuesRelabled, from, customerMails, formConfig.String("CustomerMailCC"), owner, files);
       }
       catch (Exception ex)
       {
@@ -53,7 +68,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
   }
 
-  public void Send(ITypedItem formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels, 
+  public void Send(ITypedItem formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems

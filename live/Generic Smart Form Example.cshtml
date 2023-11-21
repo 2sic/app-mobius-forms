@@ -8,6 +8,7 @@
   var formConfig = MyItem;
   // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "GenericSave";
+  var formType = "Form";
 
   // Helpers and Form Builder
   var helpers = GetCode("./tools/Helpers.cs");
@@ -62,4 +63,4 @@
   </div>
 </div>
 
-@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId, formType })
