@@ -9,19 +9,14 @@
   // TermsAndGdprCombined is a custom property that combines TermsEnabled and GdprEnabled
   var termsEnabled = App.Settings.Bool("TermsEnabled");
   var gdprEnabled = App.Settings.Bool("GdprEnabled");
-  
   if (termsEnabled && gdprEnabled && App.Settings.Bool("TermsAndGdprCombined")) {
     @FieldBuilder.Checkbox("TermsAll", true)
   } else {
     if (termsEnabled)           { @FieldBuilder.Checkbox("Terms", true) }
     if (gdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true) }
   }
-  
   // Optional recaptcha
   if (formConfig.Bool("Recaptcha"))      { @Html.Partial("Footer Recaptcha.cshtml") }
-  
-  // Optional mailchimp
-  if (formConfig.Bool("Mailchimp"))      { @Html.Partial("Footer Mailchimp.cshtml", new { formConfig }) }
 }
 
 @* Messages / Send Button *@

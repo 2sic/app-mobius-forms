@@ -38,14 +38,14 @@
     @{
       // will show/hide the additional field, and set it's "Required" state
       // create a unique name, to ensure it works if multiple forms are on the page
-      var customFieldId = "app-mobius5-cid-" + UniqueKey;
+      var customFieldId = "app-mobius5-cid-" + MyContext.Module.Id;
     }
 
     <div class="mb-3 row">
-      <label for="IsCustomer-@UniqueKey" class='control-label app-mobius5-field-required @(Kit.Css.Is("bs3") ? "col col-xs-11" : "col-11")'>I'm a Customer</label>
+      <label for="IsCustomer-@MyContext.Module.Id" class='control-label app-mobius5-field-required @(Kit.Css.Is("bs3") ? "col col-xs-11" : "col-11")'>I'm a Customer</label>
       <div class='@(Kit.Css.Is("bs3") ? "col col-xs-1" : "col-1") d-flex justify-content-end'>
         <!-- Important: That the validation works in checkboxes they have to have the "name" attribute instead of "id" -->
-        <input type="checkbox" data-pristine-required-message="Required" id="IsCustomer-@UniqueKey" name="IsCustomer-@UniqueKey" required onclick="showAndMakeRequired('#@customFieldId')">
+        <input type="checkbox" data-pristine-required-message="Required" id="IsCustomer-@MyContext.Module.Id" name="IsCustomer-@MyContext.Module.Id" required onclick="showAndMakeRequired('#@customFieldId')">
       </div>
     </div>
 

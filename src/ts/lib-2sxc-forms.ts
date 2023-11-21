@@ -27,12 +27,59 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
     Files: [],
     Fields: {},
     Terms: {},
+    CustomerMails: "",
   };
 
   const fields = formWrapper.querySelectorAll("input,textarea,select");
+
   fields.forEach((formField: HTMLInputElement) => {
     const fieldKey = getFieldKey(formField);
     if (!fieldKey || !formField.value) return;
+
+    // for checkboxList to get a array with fieldId and the values
+    if (formField.hasAttribute("data-checkbox")) {
+      const fieldId = formField.getAttribute("data-checkbox");
+      const fieldValue = getFieldValue(formField);
+      // Check if the array for this fieldId exists, if not, create it in the data object
+
+      if (!data["Fields"][fieldId]) {
+        data["Fields"][fieldId] = [];
+      }
+
+      if (fieldValue !== "") {
+        data["Fields"][fieldId].push(fieldValue);
+      }
+    }
+
+    // for Multiple Dropdown to get a array with fieldId and the values
+    if (
+      formField.hasAttribute("data-multiple-dropdown") &&
+      formField.tagName == "SELECT"
+    ) {
+      const fieldId = formField.id; // Use the ID of the select element
+      const selectedOptions = (formField as any).selectedOptions;
+
+      // Check if the array for this fieldId exists, if not, create it in the data object
+      if (!data["Fields"][fieldId]) {
+        data["Fields"][fieldId] = [];
+      }
+      // loop for each option Value
+      for (let i = 0; i < selectedOptions.length; i++) {
+        const optionValue = selectedOptions[i].value;
+        if (optionValue !== "") {
+          data["Fields"][fieldId].push(optionValue);
+        }
+      }
+      return;
+    }
+
+    // if it has a recipient email
+    if (formField.getAttribute("mail") === "recipientEmail") {
+      if (data["CustomerMails"] !== "") {
+        data["CustomerMails"] += "; ";
+      }
+      data["CustomerMails"] += getFieldValue(formField);
+    }
 
     // If it is an attachment then add it to Files
     if (
@@ -45,7 +92,7 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
       });
       return;
     }
-    // If Checkbox or Radio not checked, data will not add in the Request 
+    // If Checkbox or Radio not checked, data will not add in the Request
     if (
       formField.getAttribute("type") &&
       (formField.getAttribute("type").toLowerCase() == "checkbox" ||
@@ -55,6 +102,7 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
       return;
     }
     // If the type is a checkbox with an attribute terms, then it will add it to the terms
+
     if (
       formField.getAttribute("type") &&
       formField.getAttribute("type").toLowerCase() == "checkbox" &&
@@ -62,9 +110,10 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
     ) {
       data["Terms"][fieldKey] = getFieldValue(formField);
       return;
+    } else if (!formField.hasAttribute("data-checkbox")) {
+      // If it is a normal field, e.g. first name, then it is added to the field.
+      data["Fields"][fieldKey] = getFieldValue(formField);
     }
-    // If it is a normal field, e.g. first name, then it is added to the field.
-    data["Fields"][fieldKey] = getFieldValue(formField);
   });
 
   return Promise.all(data.Files.map(promiseFileMap)).then((loadedFiles) => {
@@ -119,7 +168,6 @@ export function sendForm(
   endpoint: string = "Form/ProcessForm"
 ): Promise<unknown> {
   const sxc = $2sxc(submitButtom);
-  // console.log("sendform",formData)
   return sxc.webApi.fetchRaw(endpoint, formData);
 }
 

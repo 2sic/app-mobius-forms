@@ -8,9 +8,9 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 
 | Aspect              | Status | Comments or Version |
 | ------------------- | :----: | ------------------- |
-| 2sxc                | ✅    | requires 2sxc v16.04
+| 2sxc                | ✅    | requires 2sxc v16.1
 | Dnn                 | ✅    | For v9.6.1
-| Oqtane 2            | ✅    | Requires v4.00+
+| Oqtane 2            | ✅    | Requires v3.04
 | No jQuery           | ?    |
 | Live Demo           | ➖    |
 | Install Checklist   | ✅    | See [Installation] on [azing.org](https://azing.org/2sxc)
@@ -103,16 +103,6 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * v05.07.00 2023-06
   * Updated to 16.02 conventions
   * All Razor code now fully typed
-* v05.08 2023-8
-  * Renamed
-    * Custom.Hybrid.ApiPro -> ApiTyped
-    * Custom.Hybrid.CodePro -> CodeTyped
-    * Custom.Hybrid.RazorPro -> RazorTyped
-* v05.08.01 2023-11
-  * Bugfix Multiple File Upload (Conversion to type was wrong)
-* v05.09.00 2023-11
-  * Typed contactFormRequest and refactore code
-
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/

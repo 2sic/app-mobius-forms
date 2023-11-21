@@ -11,19 +11,18 @@ using System.IO;
 using System.Linq;
 using ToSic.Sxc.WebApi;
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class FormController : Custom.Hybrid.ApiTyped
+public class DynFormController : Custom.Hybrid.ApiTyped
 {
   [HttpPost]
   public void ProcessForm([FromBody] SaveRequest contactFormRequest, string workflowId)
   {
-
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
 
     var wrapLog = Log.Call(useTimer: true);
 
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
-    var formConfig = MyItem;
+    var formConfig = MyItem.Child("Config");
     if (formConfig.Bool("Recaptcha"))
     {
       Log.Add("checking Recaptcha");
@@ -53,14 +52,13 @@ public class FormController : Custom.Hybrid.ApiTyped
     if (addTitle) contactFormRequest.Fields.Add("Title", "Form " + DateTime.Now.ToString("s"));
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
+   
     Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
-    App.Data.Create("SystemProtocol", contactFormRequest.Fields);
+
+    // App.Data.Create("SystemProtocol", contactFormRequest.Fields);
+    var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
 
     Log.Add("Save data to content type");
-    
-    var dataTypeToCreate = workflow.String("ContentType");
-    var contentEntity = App.Data.Create(dataTypeToCreate, contactFormRequest.Fields);
-
     var files = new List<ToSic.Sxc.Adam.IFile>();
 
     // Save files to Adam
@@ -68,11 +66,12 @@ public class FormController : Custom.Hybrid.ApiTyped
     {
       foreach (var fileObj in contactFormRequest.Files)
       {
-        files.Add(SaveInAdam(stream: new MemoryStream(fileObj.Contents),
-         fileName: fileObj.Name,
-         contentType: dataTypeToCreate,
-         guid: contentEntity.EntityGuid,
-         field: fileObj.Field));
+        files.Add(SaveInAdam(
+          stream: new MemoryStream(fileObj.Contents),
+          fileName: fileObj.Name,
+          contentType: "DynData" /*"6f304dd3-d513-478e-a585-4c7fdd6a6a66" */,
+          guid: dynDataEntity.EntityGuid,
+          field: "Files"));
       }
     }
     else
@@ -84,21 +83,19 @@ public class FormController : Custom.Hybrid.ApiTyped
 
     // sending Mails
     var sendMail = GetCode("Parts/SendMail.cs");
-    // fieldsFormRequest are only the Form Data 
     sendMail.SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, workflowId, files);
-
     wrapLog("ok");
   }
 
-  private object CreateRawDataEntry(SaveRequest formRequest)
+private object CreateRawDataEntry(SaveRequest formRequest)
   {
     var data = new Dictionary<string, object>();
     data.Add("Fields", formRequest.Fields);
     data.Add("Terms", formRequest.Terms);
     return Kit.Json.ToJson(data);
   }
-
 }
+
 public class FileUpload
 {
   public string Field { get; set; }

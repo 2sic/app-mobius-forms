@@ -5,6 +5,7 @@
   var formConfig = MyItem;
   // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "AddressDefault";
+  var formType = "Form";
 
   // Helpers and Form Builder
   var helpers = GetCode("./tools/Helpers.cs");
@@ -23,7 +24,7 @@
     @FieldBuilder.Text("SenderPhone", true)
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
-    @FieldBuilder.EMail("SenderMail", true)
+    @FieldBuilder.EMail("SenderMail", true, MyItem.Bool("CustomerSend"))
 
     @* Show/Hide features like Terms, Gdpr, Recaptcha and Submit *@
     @Html.Partial("./parts/Footer.cshtml", new { formConfig })
@@ -31,4 +32,4 @@
 
 </div>
 
-@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId, formType })

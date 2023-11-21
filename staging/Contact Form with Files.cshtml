@@ -5,6 +5,7 @@
   var formConfig = MyItem;
   // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "ContactDefault";
+  var formType = "Form";
 
   // Helpers and Form Builder
   var helpers = GetCode("./tools/Helpers.cs");
@@ -16,7 +17,7 @@
   @Html.Partial("./parts/Toolbar.cshtml", new { formConfig, workflowId })
 
   <div class="app-mobius5-form">
-    @FieldBuilder.EMail("SenderMail", true)
+    @FieldBuilder.EMail("SenderMail", true, MyItem.Bool("CustomerSend"))
     @FieldBuilder.File("SingleFile", true, ".jpg, .jpeg", "File")
     @* since multiple files are sent to Attachments, in needs a unique form id *@
     @FieldBuilder.File("Attachments", false, "", "File")
@@ -33,4 +34,4 @@
   </div>
 </div>
 
-@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId, formType })

@@ -5,6 +5,7 @@
   var formConfig = MyItem;
   // Configuration what mail templates to use, what content-type to save on etc. - stored in the Type "Workflow"
   var workflowId = "SupportDefault";
+  var formType = "Form";
 
   // Helpers and Form Builder
   var helpers = GetCode("./tools/Helpers.cs");
@@ -18,7 +19,7 @@
     @FieldBuilder.Text("Subject", true)
     @FieldBuilder.Multiline("Message", true)
     @FieldBuilder.Text("SenderName", false)
-    @FieldBuilder.EMail("SenderMail", true)
+    @FieldBuilder.EMail("SenderMail", true, MyItem.Bool("CustomerSend"))
     @FieldBuilder.DropDown("ChargeMe", true, 
       new string[] {
         "This is just feedback, don't charge me",
@@ -35,4 +36,4 @@
   </div>
 </div>
 
-@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId, formType })

@@ -1,0 +1,179 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ToSic.Razor.Blade
+
+@{
+  var dynForm = MyItem;
+  var formConfig = dynForm.Child("Config");
+  var workflowId = "DynData";
+  var formType = "DynForm";
+  
+  var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
+  FieldBuilder.LabelInPlaceholder = dynForm.Bool("PlaceHolder");
+  
+  var helpers = GetCode("./tools/Helpers.cs");
+}
+
+<div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
+
+  @if(@dynForm.String("Title").Length < 0){
+    <h3>Dyn Form</h3>
+  } else {
+    <h2>@dynForm.String("Title")</h2>   
+  }
+
+  <div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
+    <div class="app-mobius5-form">
+      @foreach (var field in dynForm.Children("Fields"))
+      {
+        var isPlaceHolder = dynForm.Bool("PlaceHolder");
+        // Main Form Data
+        var label = field.String("Title");
+        var fieldId = field.Url("FieldId");
+        var fieldType = field.String("FieldType");
+        var required = field.Bool("Required");
+        var pickerType = field.String("PickerType");
+
+        <input type="hidden" id="FormId" value="@dynForm.Id">
+        <div @Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: ...")).MoveDown().New().Remove()>
+          @switch (fieldType)
+          {
+            case "string":
+              if (field.Int("StringLines") == 0)
+              {
+                @FieldBuilder.Text(fieldId, required, label)
+              }
+              else
+              {
+                @FieldBuilder.Multiline(fieldId, required, label, false, "", field.Int("StringLines").ToString())
+              }
+              break;
+            case "email":
+              @FieldBuilder.EMail(fieldId, required, field.Bool("RecipientEmail"), label)
+              break;
+            case "number":
+              @FieldBuilder.Number(fieldId, required, label, field.Int("MinLength"), field.Int("MaxLength"))
+              break;
+            case "boolean":
+            if(field.Bool("LabelRigth")){
+              @FieldBuilder.Checkbox(fieldId, required, false, label)
+            } else {
+              if(isPlaceHolder){
+              <strong>@label</strong>
+              }
+              @FieldBuilder.CheckboxFieldAligment(fieldId, required, label)
+            }
+              break;
+            case "picker":
+              if(isPlaceHolder){
+                <strong>@label</strong>
+                }
+              if (pickerType == "radio")
+              {
+                @FieldBuilder.DynRadio(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), label)
+              }
+              if (pickerType == "dropdown")
+              {
+                @FieldBuilder.DynDropDown(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), field.Bool("MultiSelect"), label, field.String("PlaceHolderSelect")) 
+              }
+              if (pickerType == "checkbox")
+              {
+                if(field.Bool("CheckboxWithHeadline")){
+                  @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), label)
+                } else {
+                  @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")))
+                }
+              }
+              break;
+               case "file":
+                if(isPlaceHolder){
+                <strong>@label</strong>
+                }
+                  @FieldBuilder.DynFile(fieldId, required, "", label)
+              break;
+            case "label":
+              <h4>@label</h4>
+              break;
+                case "hidden":
+                if(MyUser.IsContentAdmin) {
+                  <div class="alert alert-warning" role="alert">
+                  <strong>Show Hidden Field for Admin</strong>
+                   @FieldBuilder.Text(fieldId, required, label, field.String("HiddenValue"), true)
+                  </div>
+                } else {
+                @FieldBuilder.Hidden(fieldId, label, field.String("HiddenValue"))
+                }
+              break;
+            case "advanced":
+              @Html.Partial("./custom-fields/" + @field.String("RazorFile")  , new { field })
+               break;
+              case "terms":
+                var termsEnabled = field.Bool("TermsEnabled");
+                var gdprEnabled = field.Bool("GdprEnabled");
+                if (termsEnabled && gdprEnabled && field.Bool("TermsAndGdprCombined")) {
+                  @FieldBuilder.Checkbox("TermsAll", true, true)
+                } else {
+                  if (termsEnabled)           { @FieldBuilder.Checkbox("Terms", true, true) }
+                  if (gdprEnabled)            { @FieldBuilder.Checkbox("Gdpr", true, true) }
+                  }
+                  // Optional recaptcha
+                if (formConfig.Bool("Recaptcha"))      { @Html.Partial("Footer Recaptcha.cshtml") }
+              break;
+            default:
+              <p>@pickerType</p>
+              <h3>Default: @fieldType</h3>
+              break;
+          }
+        </div>
+      }
+    </div>
+
+    @if (!dynForm.Bool("SkipSubmit", required: false)) {
+      @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
+    }
+
+  </div>
+</div>
+
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId, formType })
+
+@* Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown *@
+@functions {
+  Dictionary<string, string> GetKeyValue(string valuesDropdownRadio)
+  {
+    Dictionary<string, string> valueDictionaryRadio = new Dictionary<string, string>();
+    foreach (var item in valuesDropdownRadio.Split('\n'))
+    {
+      var values = item.Split(':');
+      // If values has Key and Value
+      if (values.Length == 2)
+      {
+        string key = values[0].Trim();
+        string value = values[1].Trim();
+        valueDictionaryRadio[key] = value;
+      }
+      // If only have a Value
+      else if (values.Length == 1)
+      {
+        string key = values[0];
+        string value = values[0];
+        valueDictionaryRadio[key] = value;
+      }
+      else
+      {
+        string key = "Empty";
+        string value = "Empty";
+        valueDictionaryRadio[key] = value;
+      }
+    }
+    return valueDictionaryRadio;
+  }
+}
+
+
+
+
+
+
+
+
+

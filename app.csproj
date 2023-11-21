@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- This file helps VS Code provide IntelliSense - see https://go.2sxc.org/vscode -->
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <RootNamespace>App</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Tell Visual Studio & VSCode to respect all ToSic.* DLLs in the root bin folder -->
+    <Reference Include="..\..\..\..\bin\ToSic.*.dll" />
+    <Reference Include="..\..\..\..\bin\DotNetNuke.*.dll" />
+    <Reference Include="..\..\..\..\bin\System.Web.Http.dll" />
+  </ItemGroup>
+</Project>

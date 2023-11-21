@@ -1,0 +1,32 @@
+@inherits Custom.Hybrid.RazorTyped
+@{
+  // Exit if not editor, as this file only adds messages for the editor
+  if (!MyUser.IsContentAdmin) {
+    return;
+  }
+
+  var formConfig = MyModel.Item("FormConfig");
+
+}
+@* Show mailchimp-not-enabled message *@
+@if (!formConfig.Bool("Mailchimp")) {
+  <div class="alert alert-warning">
+    @Html.Raw(App.Resources.String("MessageEnableMailchimp", scrubHtml: "p"));
+  </div>
+  return;
+}
+
+@if (!App.Settings.Bool("MailChimpShowWarning")) {
+  <div class="alert alert-warning">
+    @Html.Raw(App.Resources.String("MessageContainsMailchimp", scrubHtml: "p"));
+  </div>
+}
+
+
+@if (App.Settings.Bool("MailChimpShowWarning")) {
+  <div class="alert alert-warning">
+     @Html.Raw(App.Resources.String("MessageDefaultMailChimpKey", scrubHtml: "p"));
+  </div>  
+}
+
+

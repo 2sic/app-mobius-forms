@@ -1,0 +1,8 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ToSic.Razor.Blade
+@{
+  var FieldBuilder = GetCode(".././tools/FieldBuilders.cs");
+  var field = MyModel.Item("field");
+}
+
+@FieldBuilder.Text(field.Url("FieldId"), field.Bool("Required"), @field.String("Title"))
