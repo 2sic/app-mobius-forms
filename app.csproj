@@ -11,5 +11,7 @@
     <Reference Include="..\..\..\..\bin\ToSic.*.dll" />
     <Reference Include="..\..\..\..\bin\DotNetNuke.*.dll" />
     <Reference Include="..\..\..\..\bin\System.Web.Http.dll" />
+    <Reference Include="..\..\..\..\bin\System.Net.Http.dll" />
+    <Reference Include="..\..\..\..\bin\CSVHelper.dll" />
   </ItemGroup>
 </Project>

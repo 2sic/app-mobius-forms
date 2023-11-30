@@ -139,7 +139,9 @@
     @if (!dynForm.Bool("SkipSubmit", required: false)) {
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
     }
-
+    @if(MyUser.IsContentAdmin) {
+      <a href="/mobius/en-us/FromData/id/@MyContext.Module.Id">Form Data</a>
+     }
   </div>
 </div>
 

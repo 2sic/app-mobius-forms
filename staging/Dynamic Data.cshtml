@@ -1,0 +1,138 @@
+@inherits Custom.Hybrid.RazorTyped
+@{
+  var data = AsItems(Kit.Data.GetQuery("DynamicData"));
+}
+<div class="overflow-x-auto">
+  @{
+    // List of all Header Props
+    List<string> headerProps = new List<string>();
+    // List of props to be displayed at the end
+    List<string> endSortedProps = new List<string> { "Timestamp", "ModuleId", "FormId", };
+    // List of props that should not be displayed
+    List<string> hiddenProps = new List<string> { "SenderIP" };
+    var moduleId = 0;
+  }
+  @* Loop each Data from Query *@
+  @foreach (var dynamicData in data)
+  {
+    // Change to Typed Json
+    var rawData = Kit.Json.ToTyped(dynamicData.Get("RawData").ToString());
+    var fields = Kit.Json.ToTyped(rawData.Get("Fields").ToString());
+
+    moduleId = fields.Int("moduleId");
+    // Loop each Key from Json
+    foreach (var prop in fields.Keys())
+    {
+      headerProps.Add(prop);
+    }
+  }
+
+  @{
+    // Distinct each Header Key / no key should be in the list twice, but keys added later that were not there at the
+    beginning should also be in the List
+  List<string> headerPropsDistinct = headerProps.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+  }
+
+  @* Loop each endSort Props and remove, add to the end of headerPropsDistinct *@
+  @foreach (var prop in endSortedProps)
+  {
+    if (headerPropsDistinct.Contains(prop))
+    {
+      headerPropsDistinct.Remove(prop);
+      headerPropsDistinct.Add(prop);
+    }
+  }
+
+  @* Loop each endSort Props and remove it *@
+  @foreach (var prop in hiddenProps)
+  {
+    if (headerPropsDistinct.Contains(prop))
+    {
+      headerPropsDistinct.Remove(prop);
+    }
+  }
+
+  <table class="table">
+    <thead>
+      <tr>
+        @* Generate the Tabele Header form headerPropsDistinct *@
+        @foreach (var prop in headerPropsDistinct)
+        {
+          <th>@prop</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @* Loop each data from Query for the Value  *@
+      @foreach (var dynamicData in data)
+      {
+        // Get the RawData Field
+        var rawData = Kit.Json.ToTyped(dynamicData.Get("RawData").ToString());
+        var fields = Kit.Json.ToTyped(rawData.Get("Fields").ToString());
+        <tr>
+         @* Loop each prop from headerPropsDistinct, if the prop not use, will be generate a empty td (prop generate later) *@
+          @foreach (var prop in headerPropsDistinct)
+          {
+            <td>
+              @* Check, witch Type it is, an display the rigth Format *@
+              @if (fields.Get(prop, required: false) != null)
+              {
+                switch (Type.GetTypeCode(fields.Get(prop).GetType()))
+                {
+                  case TypeCode.String:
+                    <p>@fields.String(prop)</p>
+                    break;
+                  case TypeCode.Int32:
+                    <p>@fields.Int(prop)</p>
+                    break;
+                  case TypeCode.DateTime:
+                    <p>@fields.DateTime(prop).ToString("MM/dd/yyyy HH:mm")</p>
+                    break;
+                  case TypeCode.Boolean:
+                    <p>@fields.Bool(prop)</p>
+                    break;
+                    // For List (List of Checkbox, Dropdown Multiselect)
+                  case TypeCode.Object:
+                    var objValue = fields.Get(prop);
+
+                    if (objValue != null)
+                    {
+                      if (objValue is IList<object> objectList)
+                      {
+                        foreach (var listItem in objectList)
+                        {
+                          @listItem
+                        }
+                      }
+                      else
+                      {
+                        <p>Not from Typed List</p>
+                      }
+                    }
+                    else
+                    {
+                    <td></td>
+                    }
+                    break;
+                  default:
+                  <td>Unknow Type</td>
+                    break;
+                }
+              }
+              else
+              {
+                // Get empty td
+                @* <td></td> *@
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary">CSV Export</button>
+  @* @moduleId *@
+  @* @(Edit.Enabled ? "/api/2sxc/app/EventsAndCourses6/api/export/csv?moduleId=" + moduleId : "")' *@
+
+</div>
