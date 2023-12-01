@@ -32,6 +32,9 @@ public class CsvController : Custom.Hybrid.ApiTyped
     List<string> headerProps = helpers.CreateHeader(jsonTyped); // Create the Header with all specifications
     List<List<string>> dataRows = CreateDataRows(jsonTyped, headerProps); // Create Csv Data
 
+
+return jsonTyped;
+
     // Write CSV data to the file
 
     var csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture) {

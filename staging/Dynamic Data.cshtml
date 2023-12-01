@@ -29,8 +29,9 @@
           <th>@prop</th>
         }
       </tr>
-    </thead>
-    <tbody>
+    </thead> 
+    @* TODO:: Toolbar funktioniert nicht, sollte eine Remove geben  *@
+    <tbody @Kit.Toolbar.Empty(jsonTyped).Remove()>  
       @foreach (var fields in jsonTyped) // Loop each data from Query for the Value
       {
          <tr>

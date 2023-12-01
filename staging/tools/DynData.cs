@@ -6,16 +6,44 @@ using ToSic.Sxc.Data;
 public class DynData : Custom.Hybrid.CodeTyped
 
 {
-    public List<ITyped> GetDataJsonTyped(object data)
+
+  public List<ITyped> GetDataJsonTyped(object data)
   {
-    return AsItems(data).Select(i =>
-  {
-    var jsonDoc = Kit.Json.ToTyped(i.String("RawData"));
-    return AsTyped(jsonDoc.Get("Fields"));
-  }).ToList();
+
+    List<ITyped> fields = GetRawData(data);
+
+
+    return fields;
+
   }
 
-  public List<string> CreateHeader(List<ToSic.Sxc.Data.ITyped> jsonTyped)
+  public List<ITyped> GetRawData(object data)
+  {
+
+    return AsItems(data).Select(i =>
+      {
+        var rawData = Kit.Json.ToTyped(i.String("RawData"));
+        return AsTyped(rawData.Get("Fields"));
+      }).ToList();
+  }
+
+// TODO:: Hier möchte ich die Id und Timestamp noch hinzufügen und eine neue liste erstellen 
+  // public List<ITyped> GetRawData(object data)
+  // {
+
+  //   return AsItems(data).Select(i =>
+  //     {
+  //       var id = i.Int("Id");
+  //       var timestamp = i.DateTime("Timestamp");
+  //       var rawData = Kit.Json.ToTyped(i.String("RawData"));
+  //       var field = AsTyped(rawData.Get("Fields"));
+        
+  //       return 
+  //     }).ToList();
+  // }
+
+
+  public List<string> CreateHeader(List<ITyped> jsonTyped)
   {
     List<string> fieldKeysList = new List<string>();
     foreach (var rows in jsonTyped)
@@ -25,7 +53,7 @@ public class DynData : Custom.Hybrid.CodeTyped
 
     List<string> fieldKeysListDistinct = fieldKeysList.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
     List<string> endSortedProps = new List<string> { "Timestamp" };
-    List<string> hiddenProps = new List<string> { "SenderIP","ModuleId","FormId" };
+    List<string> hiddenProps = new List<string> { "SenderIP", "ModuleId", "FormId" };
     List<string> header = new List<string>();
 
     foreach (var prop in endSortedProps)
