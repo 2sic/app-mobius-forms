@@ -1,81 +1,43 @@
 @inherits Custom.Hybrid.RazorTyped
+@using ToSic.Razor.Blade
+@using ToSic.Sxc.Data;
 @{
   var data = AsItems(Kit.Data.GetQuery("DynamicData"));
+  var helpers = GetCode("../staging/tools/DynData.cs");
+
+  List<ITyped> jsonTyped = helpers.GetDataJsonTyped(data); // Initialize lists to store CSV-related data
+  @* List<ITyped> jsonTyped = helpers.GetDataJsonTyped(); *@
+    List<string> headerProps = helpers.CreateHeader(jsonTyped); // Create the Header with all specifications
+    var moduleId = jsonTyped.First().Int("moduleId");
+    var formId = jsonTyped.First().String("formId");
+    var count = jsonTyped.Count();
+    var firstRecord = jsonTyped.First().DateTime("Timestamp");
+    var lastRecord = jsonTyped.Last().DateTime("Timestamp");
+
 }
+
+<div class="alert alert-primary" role="alert">
+ <strong>ModuleId: </strong> @moduleId <strong>FormId:</strong> @formId <strong>Total:</strong> 
+ @count <strong>First:</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>Last:</strong> @lastRecord.ToString("yyyy-MM-dd")
+</div>
+
 <div class="overflow-x-auto">
-  @{
-    // List of all Header Props
-    List<string> headerProps = new List<string>();
-    // List of props to be displayed at the end
-    List<string> endSortedProps = new List<string> { "Timestamp", "ModuleId", "FormId", };
-    // List of props that should not be displayed
-    List<string> hiddenProps = new List<string> { "SenderIP" };
-    var moduleId = 0;
-  }
-  @* Loop each Data from Query *@
-  @foreach (var dynamicData in data)
-  {
-    // Change to Typed Json
-    var rawData = Kit.Json.ToTyped(dynamicData.Get("RawData").ToString());
-    var fields = Kit.Json.ToTyped(rawData.Get("Fields").ToString());
-
-    moduleId = fields.Int("moduleId");
-    // Loop each Key from Json
-    foreach (var prop in fields.Keys())
-    {
-      headerProps.Add(prop);
-    }
-  }
-
-  @{
-    // Distinct each Header Key / no key should be in the list twice, but keys added later that were not there at the
-    beginning should also be in the List
-  List<string> headerPropsDistinct = headerProps.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-  }
-
-  @* Loop each endSort Props and remove, add to the end of headerPropsDistinct *@
-  @foreach (var prop in endSortedProps)
-  {
-    if (headerPropsDistinct.Contains(prop))
-    {
-      headerPropsDistinct.Remove(prop);
-      headerPropsDistinct.Add(prop);
-    }
-  }
-
-  @* Loop each endSort Props and remove it *@
-  @foreach (var prop in hiddenProps)
-  {
-    if (headerPropsDistinct.Contains(prop))
-    {
-      headerPropsDistinct.Remove(prop);
-    }
-  }
-
-  <table class="table">
+   <table class="table">
     <thead>
       <tr>
-        @* Generate the Tabele Header form headerPropsDistinct *@
-        @foreach (var prop in headerPropsDistinct)
-        {
+        @foreach (var prop in headerProps) { // Generate the Tabele Header form headerPropsDistinct
           <th>@prop</th>
         }
       </tr>
     </thead>
     <tbody>
-      @* Loop each data from Query for the Value  *@
-      @foreach (var dynamicData in data)
+      @foreach (var fields in jsonTyped) // Loop each data from Query for the Value
       {
-        // Get the RawData Field
-        var rawData = Kit.Json.ToTyped(dynamicData.Get("RawData").ToString());
-        var fields = Kit.Json.ToTyped(rawData.Get("Fields").ToString());
-        <tr>
-         @* Loop each prop from headerPropsDistinct, if the prop not use, will be generate a empty td (prop generate later) *@
-          @foreach (var prop in headerPropsDistinct)
+         <tr>
+          @foreach (var prop in headerProps) // Loop each prop from headerProps, if the prop not use, will be generate a empty td (prop generate later)
           {
             <td>
-              @* Check, witch Type it is, an display the rigth Format *@
-              @if (fields.Get(prop, required: false) != null)
+              @if (fields.Get(prop, required: false) != null) //  Check, witch Type it is, an display the rigth Format 
               {
                 switch (Type.GetTypeCode(fields.Get(prop).GetType()))
                 {
@@ -86,12 +48,11 @@
                     <p>@fields.Int(prop)</p>
                     break;
                   case TypeCode.DateTime:
-                    <p>@fields.DateTime(prop).ToString("MM/dd/yyyy HH:mm")</p>
+                    <p>@fields.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
                     break;
                   case TypeCode.Boolean:
                     <p>@fields.Bool(prop)</p>
                     break;
-                    // For List (List of Checkbox, Dropdown Multiselect)
                   case TypeCode.Object:
                     var objValue = fields.Get(prop);
 
@@ -122,17 +83,20 @@
               else
               {
                 // Get empty td
-                @* <td></td> *@
               }
             </td>
           }
-        </tr>
+        </tr> 
       }
     </tbody>
-  </table>
+  </table> 
 
-  <button type="button" class="btn btn-primary">CSV Export</button>
-  @* @moduleId *@
-  @* @(Edit.Enabled ? "/api/2sxc/app/EventsAndCourses6/api/export/csv?moduleId=" + moduleId : "")' *@
+  <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
 
 </div>
+
+@* TODO::  https://docs.2sxc.org/api/dot-net/ToSic.Sxc.Services.ILinkService.html#ToSic_Sxc_Services_ILinkService_To_System_String_System_Nullable_System_Int32__System_String_System_Object_System_String_System_String_ *@
+ @* @{
+    var linkToUrl = Link.To(pageId = @MyContext.Page.Id , api ="Csv/Csv", parameters = new {  ModuleId = @MyContext.Module.Id, id = moduleId });
+}
+@linkToUrl  *@

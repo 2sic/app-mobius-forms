@@ -140,8 +140,13 @@
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
     }
     @if(MyUser.IsContentAdmin) {
-      <a href="/mobius/en-us/FromData/id/@MyContext.Module.Id">Form Data</a>
-     }
+    <div class="alert alert-warning" role="alert">
+      Admin Info:
+        <a class="btn btn-primary" href="@MyContext.Site.Url/FormData/id/@MyContext.Module.Id">Form Data</a>
+        @* TODO::Link noch falsch (LinkTo) *@
+        <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>
+    </div>
+    }
   </div>
 </div>
 
