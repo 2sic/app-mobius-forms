@@ -32,18 +32,23 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     // get configuration for this Form
     var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
 
+    // Same the TechnicalValues
+    Dictionary<string, object> formTechnicalValues = new Dictionary<string, object>();
+
     // 1. add IP / host, and save all fields
     // if you add fields to your content-type, just make sure they are
     // in the request with the correct name, they will be added automatically
-    contactFormRequest.Fields.Add("Timestamp", DateTime.Now);
+    formTechnicalValues["Timestamp"] = DateTime.Now;
     // Add the SenderIP in case we need to track down abuse
 #if NETCOREAPP
-    contactFormRequest.Fields.Add("SenderIP", Request.HttpContext.Connection.RemoteIpAddress?.ToString());
+    formTechnicalValues["SenderIP"] = Request.HttpContext.Connection.RemoteIpAddress?.ToString();
 #else
-    contactFormRequest.Fields.Add("SenderIP", System.Web.HttpContext.Current.Request.UserHostAddress);
+    formTechnicalValues["SenderIP"] = System.Web.HttpContext.Current.Request.UserHostAddress;
 #endif
     // Add the ModuleId to assign each sent form to a specific module
-    contactFormRequest.Fields.Add("ModuleId", MyContext.Module.Id);
+    formTechnicalValues["ModuleId"] = MyContext.Module.Id;
+    // Add the FormId to assign each sent form to a specific Form
+    formTechnicalValues["FormId"] = contactFormRequest.Fields["FormId"].ToString();
     // add raw-data, in case the content-type has a "RawData" field
     contactFormRequest.Fields.Add("RawData", CreateRawDataEntry(contactFormRequest));
 
@@ -52,11 +57,13 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     if (addTitle) contactFormRequest.Fields.Add("Title", "Form " + DateTime.Now.ToString("s"));
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
-   
+
     Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
 
-    // App.Data.Create("SystemProtocol", contactFormRequest.Fields);
+    // Create Fields Data
     var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
+    // Update (Update to the same Entity) formTechnicalValues
+    App.Data.Update(dynDataEntity.EntityId, formTechnicalValues);
 
     Log.Add("Save data to content type");
     var files = new List<ToSic.Sxc.Adam.IFile>();
@@ -112,7 +119,6 @@ public class SaveRequest
   public string Recaptcha { get; set; }
   public bool MailChimp { get; set; }
   public string CustomerMails { get; set; }
-
 }
 
 // 2sxclint:disable:no-dnn-namespaces

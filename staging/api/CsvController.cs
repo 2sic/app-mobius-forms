@@ -2,7 +2,7 @@
   using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
   using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
-  using System.Web.Http;
+using System.Web.Http;
 #endif
 
 using System.Collections.Generic;
@@ -23,28 +23,29 @@ public class CsvController : Custom.Hybrid.ApiTyped
   [HttpGet]
   public object Csv(string id = "6573")
   {
-    var helpers = GetCode("../tools/DynData.cs");
+    var dynDataHelper = GetCode("../tools/DynData.cs");
     var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = id }); // Get the dynamic data from Query by ModuleId
-    var data = query.List;
     // Initialize lists to store CSV-related data
+    List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(query.List); // Initialize Data
 
-    List<ITyped> jsonTyped = helpers.GetDataJsonTyped(data); // Initialize lists to store CSV-related data
-    List<string> headerProps = helpers.CreateHeader(jsonTyped); // Create the Header with all specifications
-    List<List<string>> dataRows = CreateDataRows(jsonTyped, headerProps); // Create Csv Data
+    List<string> headerProps = dynDataHelper.ListOfHeaderProps(dataPairs.Select(p => p.Json).ToList()); // Create the Header with all specifications
 
+    List<List<string>> dataRows = GetRowDataList(dataPairs, headerProps); // Get Csv Data in a String List
 
-return jsonTyped;
+    var formId = dataPairs.Select(p => p.Item.String("formId")).FirstOrDefault();
 
     // Write CSV data to the file
-
-    var csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture) {
-        Delimiter = ";"
+    var csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
+    {
+      Delimiter = ";"
     };
     using (var memoryStream = new MemoryStream())
     using (var writer = new StreamWriter(memoryStream, Encoding.Default))
     using (var csv = new CsvWriter(writer, csvConfiguration))
     {
       // Write the CSV header
+      csv.WriteField("Id");
+      csv.WriteField("Timestamp");
       foreach (var header in headerProps)
       {
         csv.WriteField(header);
@@ -66,45 +67,52 @@ return jsonTyped;
 
       var csvString = Encoding.UTF8.GetString(memoryStream.ToArray());
 
-      return File(download: true, virtualPath: null, contentType: "text/csv", fileDownloadName: "csvDynFormData.csv", contents: csvString);
+      string fileName = $"csvDynFormData_{formId}.csv";
+
+      return File(download: true, virtualPath: null, contentType: "text/csv", fileDownloadName: fileName, contents: csvString);
     }
   }
 
-  private List<List<string>> CreateDataRows(List<ITyped> jsonTyped, List<string> headerProps)
+  private List<List<string>> GetRowDataList(List<(ITyped Json, ITypedItem Item)> dataPairs, List<string> headerProps)
   {
-    var dataRowsNew = jsonTyped
-      .Select(fields => headerProps
-          .Where(key => Text.Has(key))
-          .Select(key => {
-            object valueObj = fields.Get(key, required: false); // Get the value for the key or set an empty value
+    return dataPairs
+        .Select(pair =>
+        {
+          int? idValue = pair.Item.Id;
+          DateTime? timestampValue = pair.Item.DateTime("Timestamp");
 
-            // Debug WIP (turn off during production)
-            Log.Add($"CreateDataRows: {key}: '{valueObj}' ({valueObj?.GetType()})");
+          var rowData = new List<string>
+            {
+                idValue.HasValue ? idValue.ToString() : string.Empty,
+                timestampValue.HasValue ? timestampValue.Value.ToString("yyyy-MM-dd") : string.Empty
+            };
 
-            try {
-              // If it's a DateTime, format it accordingly
-              if (valueObj is DateTime dateTimeValue)
-                return dateTimeValue.ToString("yyyy-MM-ddTHH:mm");
+          rowData.AddRange(headerProps.Select(key => FormatFieldValue(pair.Json.Get(key, required: false))));
+          return rowData;
+        })
+        .ToList();
+  }
 
-              // If it's a list, convert it to a string
-              if (valueObj is IList<object> objectList)
-                return string.Join(", ", objectList.Select(item => item?.ToString() ?? string.Empty));
+  private string FormatFieldValue(object value)
+  {
+    try
+    {
+      // DateTime
+      if (value is DateTime dateTimeValue)
+        return dateTimeValue.ToString("yyyy-MM-ddTHH:mm");
 
-              // Test how exceptions work
-              // throw new Exception("test");
+      // List
+      if (value is IList<object> objectList)
+        return string.Join(", ", objectList.Select(item => item?.ToString() ?? string.Empty));
 
-              // Otherwise, add the value as a string
-              return valueObj?.ToString() ?? string.Empty;
-            } catch (Exception ex) {
-              Log.Exception(ex);
-              return "error";
-            }
-          })
-          .ToList()
-      )
-      .ToList();
-    
-    return dataRowsNew;
+      // Strings
+      return value?.ToString() ?? string.Empty;
+    }
+    catch (Exception ex)
+    {
+      Log.Exception(ex);
+      return "error";
+    }
   }
 
 }

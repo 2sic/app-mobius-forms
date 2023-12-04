@@ -1,70 +1,75 @@
 @inherits Custom.Hybrid.RazorTyped
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data;
+@using ToSic.Sxc.Adam;
+
 @{
-  var data = AsItems(Kit.Data.GetQuery("DynamicData"));
-  var helpers = GetCode("../staging/tools/DynData.cs");
+  var dataItems = AsItems(Kit.Data.GetQuery("DynamicData"));
+  var dynDataHelper = GetCode("./tools/DynData.cs");
 
-  List<ITyped> jsonTyped = helpers.GetDataJsonTyped(data); // Initialize lists to store CSV-related data
-  @* List<ITyped> jsonTyped = helpers.GetDataJsonTyped(); *@
-    List<string> headerProps = helpers.CreateHeader(jsonTyped); // Create the Header with all specifications
-    var moduleId = jsonTyped.First().Int("moduleId");
-    var formId = jsonTyped.First().String("formId");
-    var count = jsonTyped.Count();
-    var firstRecord = jsonTyped.First().DateTime("Timestamp");
-    var lastRecord = jsonTyped.Last().DateTime("Timestamp");
-
+  List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(dataItems); // Initialize Data
+  List<string> headerProps = dynDataHelper.ListOfHeaderProps(dataPairs.Select(p => p.Json).ToList()); // Create the Header with all specifications
+  var moduleId = dataPairs.Select(p => p.Item.Int("moduleId")).FirstOrDefault();
+  var formId = dataPairs.Select(p => p.Item.String("formId")).FirstOrDefault();
+  var firstRecord = dataPairs.First().Item.DateTime("Timestamp");
+  var lastRecord = dataPairs.Last().Item.DateTime("Timestamp");
+  var count = dataPairs.Count();
 }
 
-<div class="alert alert-primary" role="alert">
+<div class="alert alert-primary" role="alert" @Kit.Toolbar.Default()>
  <strong>ModuleId: </strong> @moduleId <strong>FormId:</strong> @formId <strong>Total:</strong> 
- @count <strong>First:</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>Last:</strong> @lastRecord.ToString("yyyy-MM-dd")
+ @count <strong>@App.Resources.String("LabelFirst"):</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@App.Resources.String("LabelLast"):</strong> @lastRecord.ToString("yyyy-MM-dd")
 </div>
 
 <div class="overflow-x-auto">
    <table class="table">
     <thead>
       <tr>
+        <th>Id</th>
+        <th>@App.Resources.String("LabelTimestamp")</th>
         @foreach (var prop in headerProps) { // Generate the Tabele Header form headerPropsDistinct
           <th>@prop</th>
         }
+        <th>File</th>
       </tr>
     </thead> 
-    @* TODO:: Toolbar funktioniert nicht, sollte eine Remove geben  *@
-    <tbody @Kit.Toolbar.Empty(jsonTyped).Remove()>  
-      @foreach (var fields in jsonTyped) // Loop each data from Query for the Value
+    <tbody>  
+      @foreach (var pair in dataPairs) // Loop each data from Query for the Value
       {
-         <tr>
+        var row = pair.Json;
+        var item = pair.Item;
+        var accordionId = $"accordion-{item.Id}";
+        <tr @Kit.Toolbar.Empty(item).Delete()>
+          <td>@item.Id</td>  
+          <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
           @foreach (var prop in headerProps) // Loop each prop from headerProps, if the prop not use, will be generate a empty td (prop generate later)
           {
             <td>
-              @if (fields.Get(prop, required: false) != null) //  Check, witch Type it is, an display the rigth Format 
+              @if (row.Get(prop, required: false) != null) //  Check, witch Type it is, an display the rigth Format 
               {
-                switch (Type.GetTypeCode(fields.Get(prop).GetType()))
+                switch (Type.GetTypeCode(row.Get(prop).GetType()))
                 {
                   case TypeCode.String:
-                    <p>@fields.String(prop)</p>
+                    <p>@row.String(prop)</p>
                     break;
                   case TypeCode.Int32:
-                    <p>@fields.Int(prop)</p>
+                    <p>@row.Int(prop)</p>
                     break;
                   case TypeCode.DateTime:
-                    <p>@fields.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
+                    <p>@row.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
                     break;
                   case TypeCode.Boolean:
-                    <p>@fields.Bool(prop)</p>
+                    <p>@row.Bool(prop)</p>
                     break;
                   case TypeCode.Object:
-                    var objValue = fields.Get(prop);
+                    var objValue = row.Get(prop);
 
                     if (objValue != null)
                     {
                       if (objValue is IList<object> objectList)
                       {
-                        foreach (var listItem in objectList)
-                        {
-                          @listItem
-                        }
+                          string joinedList = string.Join(", ", objectList.Select(i => i?.ToString() ?? string.Empty));
+                          @joinedList
                       }
                       else
                       {
@@ -81,21 +86,42 @@
                     break;
                 }
               }
-              else
-              {
-                // Get empty td
-              }
             </td>
           }
-        </tr> 
+          @if(item.Folder("Files").Files.Count() > 0){
+            <td>
+              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#file-@accordionId" aria-expanded="false" aria-controls="@accordionId">
+              <path d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"/>
+              </svg>             
+            </td>
+          } else {
+            <td></td>
+          }
+      </tr>
+        if(item.Folder("Files").Files.Count() > 0){
+        <tr id="@accordionId">
+          <td class="accordion-item" colspan="@(headerProps.Count() + 3)">
+            <div id="file-@accordionId" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                @foreach(IFile file in item.Folder("Files").Files)
+                {
+                  <div>
+                  <a href="@file.Url" download="@file.Name">
+                    @file.FullName
+                  </a>
+                  </div>
+                }
+              </div>
+            </div>
+          </td>
+        </tr>
+        }
       }
     </tbody>
-  </table> 
-
-  <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
-
+  </table>
 </div>
 
+  <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
 @* TODO::  https://docs.2sxc.org/api/dot-net/ToSic.Sxc.Services.ILinkService.html#ToSic_Sxc_Services_ILinkService_To_System_String_System_Nullable_System_Int32__System_String_System_Object_System_String_System_String_ *@
  @* @{
     var linkToUrl = Link.To(pageId = @MyContext.Page.Id , api ="Csv/Csv", parameters = new {  ModuleId = @MyContext.Module.Id, id = moduleId });
