@@ -27,8 +27,8 @@
       <tr>
         <th>Id</th>
         <th>@App.Resources.String("LabelTimestamp")</th>
-        @foreach (var prop in headerProps) { // Generate the Tabele Header form headerPropsDistinct
-          <th>@prop</th>
+        @foreach (var headerProp in headerProps) { // Generate the Tabele Header form headerPropsDistinct
+          <th>@headerProp</th>
         }
         <th>File</th>
       </tr>
@@ -39,7 +39,7 @@
         var row = pair.Json;
         var item = pair.Item;
         var accordionId = $"accordion-{item.Id}";
-        <tr @Kit.Toolbar.Empty(item).Delete()>
+        <tr @Kit.Toolbar.Empty(item).Delete().Settings(autoAddMore: "end", hover: "left")>
           <td>@item.Id</td>  
           <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
           @foreach (var prop in headerProps) // Loop each prop from headerProps, if the prop not use, will be generate a empty td (prop generate later)
