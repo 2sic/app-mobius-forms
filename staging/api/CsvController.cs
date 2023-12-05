@@ -34,6 +34,8 @@ public class CsvController : Custom.Hybrid.ApiTyped
 
     var formId = dataPairs.Select(p => p.Item.String("formId")).FirstOrDefault();
 
+    Dictionary<string, string> fieldHeaderDictionary = dynDataHelper.GetFieldDictionary(formId);
+
     // Write CSV data to the file
     var csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
     {
@@ -46,9 +48,11 @@ public class CsvController : Custom.Hybrid.ApiTyped
       // Write the CSV header
       csv.WriteField("Id");
       csv.WriteField("Timestamp");
-      foreach (var header in headerProps)
+      // TODO:: Übersetzung fehlt im CSV
+      // csv.WriteField(App.Resources.String("LabelTimestamp"));
+      foreach (var headerProp in headerProps)
       {
-        csv.WriteField(header);
+        csv.WriteField(dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp));
       }
       csv.NextRecord();
 
@@ -66,8 +70,8 @@ public class CsvController : Custom.Hybrid.ApiTyped
       memoryStream.Seek(0, SeekOrigin.Begin); // reset stream position
 
       var csvString = Encoding.UTF8.GetString(memoryStream.ToArray());
-
-      string fileName = $"csvDynFormData_{formId}.csv";
+      string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
+      string fileName = $"csvDynFormData_{formId}_{todayDate}.csv";
 
       return File(download: true, virtualPath: null, contentType: "text/csv", fileDownloadName: fileName, contents: csvString);
     }

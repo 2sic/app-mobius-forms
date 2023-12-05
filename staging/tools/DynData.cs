@@ -36,5 +36,25 @@ public class DynData : Custom.Hybrid.CodeTyped
         header.Add(prop);
 
     return header;
+
   }
+
+  public Dictionary<string, string> GetFieldDictionary(string formId)
+  {
+    var dynFormFields = AsItems(App.Data["DynForm"]).Where(f => f.Id == Int32.Parse(formId)).FirstOrDefault().Children("Fields");
+    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+
+    foreach (var field in dynFormFields)
+    {
+      dictionary[field.Url("FieldId")] = field.String("Title");
+    }
+
+    return dictionary;
+  }
+
+  public string GetFieldValueOrKey(Dictionary<string, string> dictionary, string key)
+  {
+    return dictionary.ContainsKey(key) ? dictionary[key] : key;
+  }
+
 }

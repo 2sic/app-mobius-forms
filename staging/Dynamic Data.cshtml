@@ -14,11 +14,19 @@
   var firstRecord = dataPairs.First().Item.DateTime("Timestamp");
   var lastRecord = dataPairs.Last().Item.DateTime("Timestamp");
   var count = dataPairs.Count();
-}
+  Dictionary<string, string> fieldHeaderDictionary = dynDataHelper.GetFieldDictionary(formId);
+} 
 
 <div class="alert alert-primary" role="alert" @Kit.Toolbar.Default()>
- <strong>ModuleId: </strong> @moduleId <strong>FormId:</strong> @formId <strong>Total:</strong> 
- @count <strong>@App.Resources.String("LabelFirst"):</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@App.Resources.String("LabelLast"):</strong> @lastRecord.ToString("yyyy-MM-dd")
+  <strong>Total:</strong> @count 
+ <strong>@App.Resources.String("LabelFirst"):</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@App.Resources.String("LabelLast"):</strong> @lastRecord.ToString("yyyy-MM-dd")
+ <strong>ModuleId: </strong> @moduleId <strong>FormId:</strong> @formId
+ <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
+  @* TODO::  https://docs.2sxc.org/api/dot-net/ToSic.Sxc.Services.ILinkService.html#ToSic_Sxc_Services_ILinkService_To_System_String_System_Nullable_System_Int32__System_String_System_Object_System_String_System_String_ *@
+  @* @{
+      var linkToUrl = Link.To(pageId = @MyContext.Page.Id , api ="Csv/Csv", parameters = new {  ModuleId = @MyContext.Module.Id, id = moduleId });
+  }
+  @linkToUrl  *@
 </div>
 
 <div class="overflow-x-auto">
@@ -28,7 +36,7 @@
         <th>Id</th>
         <th>@App.Resources.String("LabelTimestamp")</th>
         @foreach (var headerProp in headerProps) { // Generate the Tabele Header form headerPropsDistinct
-          <th>@headerProp</th>
+       <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
         }
         <th>File</th>
       </tr>
@@ -106,9 +114,11 @@
                 @foreach(IFile file in item.Folder("Files").Files)
                 {
                   <div>
-                  <a href="@file.Url" download="@file.Name">
+                  <a class="link-dark" href="@file.Url" download="@file.Name">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
                     @file.FullName
                   </a>
+                  Size: @Math.Round((double)@file.Size / 1024, 1) KB
                   </div>
                 }
               </div>
@@ -121,9 +131,6 @@
   </table>
 </div>
 
-  <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
-@* TODO::  https://docs.2sxc.org/api/dot-net/ToSic.Sxc.Services.ILinkService.html#ToSic_Sxc_Services_ILinkService_To_System_String_System_Nullable_System_Int32__System_String_System_Object_System_String_System_String_ *@
- @* @{
-    var linkToUrl = Link.To(pageId = @MyContext.Page.Id , api ="Csv/Csv", parameters = new {  ModuleId = @MyContext.Module.Id, id = moduleId });
-}
-@linkToUrl  *@
+ 
+
+
