@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="16.17.00" ExportDate="2023-11-28T16:37:35.1503251+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.00.00" ExportDate="2023-12-21T11:32:31.807777+01:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -2006,6 +2006,34 @@
             </Value>
           </Entity>
         </Attribute>
+        <Attribute StaticName="LabelTimestamp" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="e33fb433-b353-41b6-9a6d-b1d72c183a93" Json="True" KeyNumber="6278">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="LabelTimestamp" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="LabelFirst" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="79a8ed3b-e65b-49f3-8e9b-d59975c8009b" Json="True" KeyNumber="6279">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="LabelFirst" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="LabelLast" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="ce7634fd-925b-41d6-bdfa-db80bcfe9a90" Json="True" KeyNumber="6280">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="LabelLast" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="LabelFromDataAvaible" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="825860be-a508-4c30-9cd3-f844e1ededd1" Json="True" KeyNumber="6281">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="LabelFromDataAvaible" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
       </Attributes>
     </AttributeSet>
     <AttributeSet StaticName="App-Settings" Name="App-Settings" Scope="System.App" AlwaysShareConfiguration="false">
@@ -3060,13 +3088,54 @@
         </Attribute>
         <Attribute StaticName="Timestamp" Type="DateTime" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="a1f027f3-031f-499b-a837-bb3da13863d4" Json="True" KeyNumber="6173">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="HelpLink" Value="" Type="Hyperlink">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Information" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
             <Value Key="InputType" Value="datetime-default" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="Name" Value="Timestamp" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+            <Value Key="Name" Value=" Zeitstempel" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Tooltip" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@DateTime" AttributeSetName="@DateTime" EntityGUID="24e95a9d-5d1f-442f-83d2-d8a015640130" Json="True" KeyNumber="6173">
+            <Value Key="UseTimePicker" Value="False" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
@@ -3095,6 +3164,13 @@
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="FormId" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="a09c0a4c-03d8-4d70-9d0f-7c24f9559dba" Json="True" KeyNumber="6275">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="FormId" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
       </Attributes>
@@ -3217,6 +3293,13 @@
             <Value Key="InputFontFamily" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="ReuseConfig" Type="Boolean" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="3d8645d4-9145-479a-97bd-3cad45b343c9" Json="True" KeyNumber="6284">
+            <Value Key="InputType" Value="boolean-tristate" Type="String" />
+            <Value Key="Name" Value="ReuseConfig" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
         <Attribute StaticName="Fields" Type="Entity" IsTitle="false">
@@ -5049,6 +5132,65 @@
             <Value Key="Value" Value="Name" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="GroupLabel" Type="Empty" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="baa87d29-661e-4512-92d0-2e05fc4d3db3" Json="True" KeyNumber="6282">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Formulas" Value="5bb05e2d-522e-4996-b558-5adc807281e1" Type="Entity" />
+            <Value Key="HelpLink" Value="" Type="Hyperlink">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Information" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="empty-default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Label Settings" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Tooltip" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="a06b089d-9e0c-44dd-9811-6d3de0e72e00" Json="True" KeyNumber="6282">
+            <Value Key="DefaultCollapsed" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="IsSet" Type="Boolean" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="03300088-841d-405b-a763-2b0ece78274d" Json="True" KeyNumber="6283">
+            <Value Key="InputType" Value="boolean-default" Type="String" />
+            <Value Key="Name" Value="IsSet" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
       </Attributes>
@@ -7139,7 +7281,7 @@
       <Value Key="DisplayName" Value="Mobius Forms 6" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Folder" Value="MobiusForms" Type="String">
+      <Value Key="Folder" Value="MobiusForms6" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="Hidden" Value="False" Type="Boolean">
@@ -7165,10 +7307,10 @@
       </Value>
     </Entity>
     <Entity TargetType="3" AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="f6bea776-f082-4717-b63a-4861ffa22183" KeyNumber="320">
-      <Value Key="DefaultMailFrom" Value="roman.opalko@2sic.com" Type="String">
+      <Value Key="DefaultMailFrom" Value="dominik.graf@2sic.com" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="DefaultOwnerMail" Value="roman.opalko@2sic.com" Type="String">
+      <Value Key="DefaultOwnerMail" Value="dominik.graf@2sic.com" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="GdprEnabled" Value="True" Type="Boolean">
@@ -7209,8 +7351,26 @@
       <Value Key="LabelFile" Value="Upload File(s)" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="LabelFirst" Value="First" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelFirst" Value="Erster" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelFromDataAvaible" Value="No form data available" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelFromDataAvaible" Value="Keine Formulardaten vorhanden" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
       <Value Key="LabelGdpr" Value="&lt;p&gt;I agree that my data will be transferred for the processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelLast" Value="Last" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelLast" Value="Letzter" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="LabelMessage" Value="Message" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -7256,6 +7416,12 @@
       </Value>
       <Value Key="LabelTermsAll" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt; as well as processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelTimestamp" Value="Timestamp" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelTimestamp" Value="Datum" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="LabelValidEmail" Value="Requires valid e-mail address" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -13886,57 +14052,6 @@
       <Value Key="Content" Value="null" Type="Entity" />
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="ae57b1ca-c4c9-4487-a599-9d4d3fa8458d">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;das ist ein test&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T09:50:18Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T09:50:18" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T09:50:18" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="68163470-8198-47b3-be5a-16562b87f57f">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;asdasdasdasdasdasd&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T10:19:55Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T10:19:55" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T10:19:55" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="b38eddd5-1d16-4ba5-8352-4c4493960a96">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;ycyxcyxcyxcasdasd&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T10:21:44Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T10:21:44" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T10:21:44" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="6d5c2f4b-db88-4791-b57a-f6c21e9d1cb2" Json="True">
       <Value Key="Template" Value="6bc262cd-cb74-445e-81e6-1e2fd126458d" Type="Entity" />
     </Entity>
@@ -14020,40 +14135,6 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="29fbf364-67b0-4f27-96d0-0699f481c95b">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;ycxyxcycycx&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T10:37:39Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T10:37:39" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T10:37:39" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="f4d847f7-48af-4389-b9a5-9c90d8a14b24">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;asdasdasdasdasd&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T10:37:59Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T10:37:59" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T10:37:59" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="6f304dd3-d513-478e-a585-4c7fdd6a6a66" AttributeSetName="SystemProtocol" EntityGUID="ba55a873-4618-4b97-8f6e-51fe6bcec224">
       <Value Key="ModuleId" Value="6574" Type="Number">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -14091,23 +14172,6 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="Timestamp" Value="2023-11-21T10:50:33" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="4df5f65e-9780-44b9-8a8d-46ddc37ff17c">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;asdasdasd&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T10:50:36Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T10:50:36" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T10:50:36" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -14228,23 +14292,6 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="Timestamp" Value="2023-11-21T11:01:10" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="849d8a1b-aa77-462e-8f1b-c894753cbdd5">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;yxcyxcyxcyxc&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T11:01:39Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T11:01:39" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T11:01:39" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -14425,25 +14472,8 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="dafff5ae-30dc-4acf-ae47-1ea15e65f19f">
-      <Value Key="ModuleId" Value="6573" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;28829&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;message&quot;:&quot;asdadasd&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T14:16:39Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{&quot;Terms&quot;:&quot;on&quot;}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T14:16:39" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T14:16:39" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="d8263944-6fe8-49aa-a9f9-d267ad58d388" Json="True">
-      <Value Key="Content" Value="null" Type="Entity" />
+      <Value Key="Content" Value="65ca525d-eea6-4a4d-ac1d-4c297e3fe27a" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
     </Entity>
@@ -14801,43 +14831,9 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="ce12094d-2a06-4cbc-9e6b-61cde6f1b3ad">
-      <Value Key="ModuleId" Value="6575" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29166&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;email&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;question-1&quot;:&quot;Answer 1.1&quot;,&quot;question-2&quot;:&quot;Answer 2.1&quot;,&quot;querstion-3&quot;:&quot;Answer 3.1&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T15:18:01Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6575},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T15:18:01" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T15:18:01" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="513b88af-3f09-4461-abea-c2fd4a251e12">
-      <Value Key="ModuleId" Value="6575" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29166&quot;,&quot;first-name&quot;:&quot;asdyxcyxc&quot;,&quot;email&quot;:&quot;roman.opalko@2sic.com&quot;,&quot;question-1&quot;:[&quot;Answer 1.1&quot;,&quot;Answer 1.2&quot;],&quot;question-2&quot;:&quot;Answer 2.4&quot;,&quot;querstion-3&quot;:&quot;Answer 3.2&quot;,&quot;Timestamp&quot;:&quot;2023-11-21T15:18:36Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6575},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2023-11-21T15:18:36" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2023-11-21T15:18:36" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="92f0ea4a-9e86-44c7-9a6a-be5f09141e31" AttributeSetName="DynForm" EntityGUID="6f414e86-2e6d-440d-8352-aa187ffe3ddf">
       <Value Key="Config" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Fields" Value="c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238,13cdac0e-e1ce-47e4-8b35-0bc1379a8e97,1589a377-12eb-4bce-b12c-76bfc2d75c3f,842a4321-88fb-47c5-a2ac-8691bab84e90,4d30b825-0a97-4003-8065-94e37206ef8d" Type="Entity" />
+      <Value Key="Fields" Value="f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,13cdac0e-e1ce-47e4-8b35-0bc1379a8e97,28ffff9c-e11d-4695-95e4-30718e2b2238,1589a377-12eb-4bce-b12c-76bfc2d75c3f,4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537" Type="Entity" />
       <Value Key="PlaceHolder" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -15330,10 +15326,16 @@
       <Value Key="FieldType" Value="picker" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="FieldType" Value="picker" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
       <Value Key="GdprEnabled" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsSet" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="LabelRight" Value="False" Type="Boolean">
@@ -15350,6 +15352,9 @@
       </Value>
       <Value Key="PickerType" Value="radio" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="radio" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -15396,9 +15401,693 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="DataPipeline" AttributeSetName="DataPipeline" EntityGUID="3a0fb91f-5736-4f17-bfab-bd7fcfb2edd2" Json="True">
+      <Value Key="AllowEdit" Value="True" Type="Boolean" />
+      <Value Key="Description" Value="Get the Data from the Dynamic Form by ModuleId" Type="String" />
+      <Value Key="HiddenInQueryPicker" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="DynamicData" Type="String" />
+      <Value Key="Params" Value="ModuleId=[QueryString:Id]" Type="String" />
+      <Value Key="StreamsOut" Value="Default,Header" Type="String" />
+      <Value Key="StreamWiring" Value="147d0006-b200-4966-be4c-5df0f0cbf278:Default&gt;c431dbe4-ca0a-4e50-a46f-2a4cf9a9a17e:Default&#xD;&#xA;c431dbe4-ca0a-4e50-a46f-2a4cf9a9a17e:Default&gt;2cbc5a38-274b-47c2-948f-79802b771046:Default&#xD;&#xA;2cbc5a38-274b-47c2-948f-79802b771046:Default&gt;Out:Default" Type="String" />
+      <Value Key="TestParameters" Value="[QueryString:Id]=6573" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&quot;ShowDataSourceDetails&quot;:true}" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-Template" AttributeSetName="2SexyContent-Template" EntityGUID="e5caa3b8-fce7-4e1e-b568-1941e600bded" Json="True">
+      <Value Key="ContentTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Icon" Value="" Type="Hyperlink">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Identifier" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsHidden" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ListContentTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ListPresentationTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Location" Value="Site" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Name" Value="Dynamic Data" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Path" Value="live/Dynamic Data.cshtml" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Pipeline" Value="3a0fb91f-5736-4f17-bfab-bd7fcfb2edd2" Type="Entity" />
+      <Value Key="PresentationTypeStaticName" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PublishData" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchIndexingStreams" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StreamsToPublish" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Type" Value="C# Razor" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="UseForList" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewController" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ViewNameInUrl" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="DataPipelinePart" AttributeSetName="DataPipelinePart" EntityGUID="147d0006-b200-4966-be4c-5df0f0cbf278" Json="True" KeyGuid="3a0fb91f-5736-4f17-bfab-bd7fcfb2edd2">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Name" Value="App" Type="String" />
+      <Value Key="PartAssemblyAndType" Value="ToSic.Eav.DataSources.App, ToSic.Eav.DataSources" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 700,&#xD;&#xA;  &quot;Left&quot;: 320&#xD;&#xA;}" Type="String" />
+    </Entity>
+    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="DataPipelinePart" AttributeSetName="DataPipelinePart" EntityGUID="c431dbe4-ca0a-4e50-a46f-2a4cf9a9a17e" Json="True" KeyGuid="3a0fb91f-5736-4f17-bfab-bd7fcfb2edd2">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Name" Value="Type-Filter" Type="String" />
+      <Value Key="PartAssemblyAndType" Value="ToSic.Eav.DataSources.EntityTypeFilter, ToSic.Eav.DataSources" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 440,&#xD;&#xA;  &quot;Left&quot;: 500&#xD;&#xA;}" Type="String" />
+    </Entity>
+    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="|Config ToSic.Eav.DataSources.EntityTypeFilter" AttributeSetName="ToSic.Eav.DataSources.EntityTypeFilter" EntityGUID="bb6a4cc6-96b4-4050-aecb-dc7c026f7de3" Json="True" KeyGuid="c431dbe4-ca0a-4e50-a46f-2a4cf9a9a17e">
+      <Value Key="TypeName" Value="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="DataPipelinePart" AttributeSetName="DataPipelinePart" EntityGUID="2cbc5a38-274b-47c2-948f-79802b771046" Json="True" KeyGuid="3a0fb91f-5736-4f17-bfab-bd7fcfb2edd2">
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Name" Value="Value Filter" Type="String" />
+      <Value Key="PartAssemblyAndType" Value="ToSic.Eav.DataSources.ValueFilter, ToSic.Eav.DataSources" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 220,&#xD;&#xA;  &quot;Left&quot;: 180&#xD;&#xA;}" Type="String" />
+    </Entity>
+    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="|Config ToSic.Eav.DataSources.ValueFilter" AttributeSetName="ToSic.Eav.DataSources.ValueFilter" EntityGUID="57ad244e-63f2-4b6c-8b76-544e8cb3dbca" Json="True" KeyGuid="2cbc5a38-274b-47c2-948f-79802b771046">
+      <Value Key="Attribute" Value="ModuleId" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Languages" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Operator" Value="==" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Take" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Value" Value="[Params:ModuleId]" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="86a11f60-4232-4e8c-b956-901df1fd5c31">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="first-name" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="string" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="First Name" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="Key:Value&#xA;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="92f0ea4a-9e86-44c7-9a6a-be5f09141e31" AttributeSetName="DynForm" EntityGUID="65ca525d-eea6-4a4d-ac1d-4c297e3fe27a">
+      <Value Key="Config" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
+      <Value Key="Fields" Value="86a11f60-4232-4e8c-b956-901df1fd5c31,59c1a314-edc4-4473-9469-63da227045b5,2ceb1ad8-7e6f-4a0e-b70a-0317ef6406c1,ed64d803-5c35-4ef5-9d29-c46e407d58b6,319cfcff-4982-4ff5-8757-5c9c8112ec5d,5f0cd8c1-f9e4-4f00-80d0-1a930b8d3752,42972b59-aa66-42b6-8eaa-6415761083f0" Type="Entity" />
+      <Value Key="PlaceHolder" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Questionnaire" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TitleInternal" Value="Questionnaire" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="59c1a314-edc4-4473-9469-63da227045b5">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="last-name" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="string" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Last Name" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="Key:Value&#xA;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="ed64d803-5c35-4ef5-9d29-c46e407d58b6">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="question-1" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="picker" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="radio" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Question 1" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="answer11:Answer 1.1&#xA;answer12:Answer 1.2&#xA;answer13:Answer 1.3" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="319cfcff-4982-4ff5-8757-5c9c8112ec5d">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="question-2" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="picker" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="radio" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Question 2" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="answer21:Answer 2.1&#xA;answer22:Answer 2.2" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="6328d88e-ea72-4447-9fbc-b6bfb0abd9d8">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="test-bool" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="boolean" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Test bool" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="Key:Value&#xA;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="42972b59-aa66-42b6-8eaa-6415761083f0">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="e-mail" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="email" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="E-Mail" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="Key:Value&#xA;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="3dec9990-fdba-4e8f-afa4-b7d6b2855940">
+      <Value Key="Files" Value="" Type="Hyperlink" />
+      <Value Key="FormId" Value="29173" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6571" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29173&quot;,&quot;first-name&quot;:&quot;dom&quot;,&quot;last-name&quot;:&quot;so&quot;,&quot;subject&quot;:&quot;so&quot;,&quot;message&quot;:&quot;ssdf&quot;,&quot;e-mail&quot;:&quot;dominik.graf@2sic.com&quot;,&quot;age&quot;:&quot;19&quot;,&quot;color-dropdown&quot;:[&quot;green&quot;],&quot;eyxdasd&quot;:&quot;Test&quot;,&quot;Timestamp&quot;:&quot;2023-12-04T09:28:14Z&quot;,&quot;SenderIP&quot;:&quot;194.0.212.88&quot;,&quot;ModuleId&quot;:6573},&quot;Terms&quot;:{}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-12-04T09:28:14" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-12-04T09:28:14" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="7286a636-7f66-41e6-b980-f714fd27f0a0">
+      <Value Key="Files" Value="" Type="Hyperlink" />
+      <Value Key="FormId" Value="29173" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6573" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29173&quot;,&quot;first-name&quot;:&quot;Dominik&quot;,&quot;last-name&quot;:&quot;Graf&quot;,&quot;subject&quot;:&quot;Test 2&quot;,&quot;message&quot;:&quot;Test Case new &quot;,&quot;e-mail&quot;:&quot;dominik.graf@2sic.com&quot;,&quot;age&quot;:&quot;22&quot;,&quot;color-dropdown&quot;:[&quot;green&quot;],&quot;radio&quot;:&quot;mrs&quot;,&quot;testcase&quot;:&quot;190&quot;},&quot;Terms&quot;:{}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-12-04T10:40:39" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-12-04T10:40:39" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="DynData" EntityGUID="f4165f51-4c8f-4389-99e3-d6e7f32c15ff">
+      <Value Key="FormId" Value="29173" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6573" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29173&quot;,&quot;first-name&quot;:&quot;Test&quot;,&quot;last-name&quot;:&quot;Test N&quot;,&quot;subject&quot;:&quot;Test 5&quot;,&quot;message&quot;:&quot;XSSDA&quot;,&quot;e-mail&quot;:&quot;dominik.graf@2sic.com&quot;,&quot;age&quot;:&quot;1321&quot;,&quot;color-dropdown&quot;:[&quot;red&quot;,&quot;green&quot;,&quot;yellow&quot;],&quot;radio&quot;:&quot;mrs&quot;,&quot;testcase&quot;:&quot;1111&quot;},&quot;Terms&quot;:{}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2023-12-05T10:14:51" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2023-12-05T10:14:51" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="5bb05e2d-522e-4996-b558-5adc807281e1" Json="True">
+      <Value Key="Enabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Formula" Value="// new formula syntax - see https://go.2sxc.org/formulas&#xA;v2((data, context) =&gt; {&#xA;  return data.FieldType == &quot;label&quot;;&#xA;});" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Target" Value="Field.Settings.Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Field.Settings.Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="2ceb1ad8-7e6f-4a0e-b70a-0317ef6406c1">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="neues-set" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="label" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsSet" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Neues Set" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="Key:Value&#xA;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="DynFormField" EntityGUID="5f0cd8c1-f9e4-4f00-80d0-1a930b8d3752">
+      <Value Key="CheckboxWithHeadline" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="weiteres-set" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="label" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="HiddenValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsSet" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MaxLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MinLength" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PlaceHolderSelect" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RecipientEmail" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Weiteres Set" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ValuesDropdownRadio" Value="Key:Value&#xA;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
   </Entities>
-  <PortalFiles />
+  <PortalFiles>
+    <File Id="6537" RelativePath="adam\MobiusForms6\ijBlL7n6XEuvVb1Z2Ki9ug\Files\pfannkuchen.jpg" />
+    <File Id="6540" RelativePath="adam\MobiusForms6\NqaGcmZ_5kG5gPcU_SfwoA\Files\demo.png" />
+    <File Id="6538" RelativePath="adam\MobiusForms6\NqaGcmZ_5kG5gPcU_SfwoA\Files\pfannkuchen.jpg" />
+  </PortalFiles>
   <PortalFolders>
-    <Folder Id="14319" RelativePath="adam/MobiusForms/" />
+    <Folder Id="14322" RelativePath="adam/MobiusForms6/ijBlL7n6XEuvVb1Z2Ki9ug/Files/" />
+    <Folder Id="14324" RelativePath="adam/MobiusForms6/NqaGcmZ_5kG5gPcU_SfwoA/Files/" />
+    <Folder Id="14320" RelativePath="adam/MobiusForms6/" />
+    <Folder Id="14321" RelativePath="adam/MobiusForms6/ijBlL7n6XEuvVb1Z2Ki9ug/" />
+    <Folder Id="14323" RelativePath="adam/MobiusForms6/NqaGcmZ_5kG5gPcU_SfwoA/" />
+    <Folder Id="14325" RelativePath="adam/MobiusForms6/NqaGcmZ_5kG5gPcU_SfwoA/Test/" />
   </PortalFolders>
 </SexyContent>
