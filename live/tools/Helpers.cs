@@ -10,8 +10,8 @@ public class Helpers: Custom.Hybrid.CodeTyped
   }
 
   // The URL to the API endpoint - which uses the current edition (staging/live) and the workflow ID
-  public string WebApiUrl(string workflowId, string formType) {
-    return "app/auto/" + MyView.Edition + "/api/" + formType + "/ProcessForm?workflowId=" + workflowId;
+  public string WebApiUrl() {
+    return "app/auto/" + MyView.Edition + "/api/DynForm/ProcessForm";
   }
 
   public string WrapperClasses(ITypedItem formConfig) { 

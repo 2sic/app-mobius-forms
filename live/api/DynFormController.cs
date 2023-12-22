@@ -8,13 +8,12 @@ using System.Web.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using ToSic.Sxc.WebApi;
+
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class DynFormController : Custom.Hybrid.ApiTyped
 {
   [HttpPost]
-  public void ProcessForm([FromBody] SaveRequest contactFormRequest, string workflowId)
+  public void ProcessForm([FromBody] SaveRequest contactFormRequest)
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
@@ -22,15 +21,12 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     var wrapLog = Log.Call(useTimer: true);
 
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
-    var formConfig = MyItem.Child("Config");
+    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
     if (formConfig.Bool("Recaptcha"))
     {
       Log.Add("checking Recaptcha");
       GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);
     }
-
-    // get configuration for this Form
-    var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
 
     // Same the TechnicalValues
     Dictionary<string, object> formTechnicalValues = new Dictionary<string, object>();
@@ -60,6 +56,13 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
 
+    var contentType = MyItem.String("SaveToContentType");
+    if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
+    {
+      var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);
+    }
+    
+
     // Create Fields Data
     var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
     // Update (Update to the same Entity) formTechnicalValues
@@ -76,7 +79,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
         files.Add(SaveInAdam(
           stream: new MemoryStream(fileObj.Contents),
           fileName: fileObj.Name,
-          contentType: "DynData" /*"6f304dd3-d513-478e-a585-4c7fdd6a6a66" */,
+          contentType: "DynData",
           guid: dynDataEntity.EntityGuid,
           field: "Files"));
       }
@@ -90,7 +93,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     // sending Mails
     var sendMail = GetCode("Parts/SendMail.cs");
-    sendMail.SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, workflowId, files);
+    sendMail.SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
     wrapLog("ok");
   }
 
