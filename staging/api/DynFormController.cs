@@ -8,8 +8,7 @@ using System.Web.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using ToSic.Sxc.WebApi;
+
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class DynFormController : Custom.Hybrid.ApiTyped
 {
@@ -57,6 +56,13 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
 
+    var contentType = MyItem.String("SaveToContentType");
+    if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
+    {
+      var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);
+    }
+    
+
     // Create Fields Data
     var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
     // Update (Update to the same Entity) formTechnicalValues
@@ -73,7 +79,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
         files.Add(SaveInAdam(
           stream: new MemoryStream(fileObj.Contents),
           fileName: fileObj.Name,
-          contentType: "DynData" /*"6f304dd3-d513-478e-a585-4c7fdd6a6a66" */,
+          contentType: "DynData",
           guid: dynDataEntity.EntityGuid,
           field: "Files"));
       }
