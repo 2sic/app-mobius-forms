@@ -15,6 +15,7 @@
   var helpers = GetCode("./tools/Helpers.cs");
   var dynDataHelper = GetCode("./tools/DynData.cs");
 }
+
 <div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
 
   @if (Text.Has(dynForm.String("Title"))) {
@@ -144,21 +145,21 @@
     @if (!dynForm.Bool("SkipSubmit", required: false)) {
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
     }
-    @if(MyUser.IsContentAdmin) {
 
-    var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = MyContext.Module.Id }); // Get the dynamic data from Query by ModuleId
-    // Initialize lists to store CSV-related data
-    List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(query.List); // Initialize Data
+    @if (MyUser.IsContentAdmin) {
+      var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = MyContext.Module.Id }); // Get the dynamic data from Query by ModuleId
+      // Initialize lists to store CSV-related data
+      List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(query.List); // Initialize Data
 
-    <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
-      Admin Info: @dataPairs.Count()
-      @if (dataPairs.Count() == 0){
-        @App.Resources.String("LabelFromDataAvaible")
-      } else {
-        <a class="btn btn-primary" href="@MyContext.Site.Url/FormData/id/@MyContext.Module.Id">Form Data</a>
-        <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>
-      }
-    </div>
+      <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
+        Admin Info: @dataPairs.Count()
+        @if (dataPairs.Count() == 0){
+          @App.Resources.String("LabelFromDataAvaible")
+        } else {
+          <a class="btn btn-primary" href="@Link.To(parameters: "id=" + MyContext.Module.Id + "&mid=" + MyContext.Module.Id)" target="_blank">Form Data</a>
+          <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>
+        }
+      </div>
     }
   </div>
 </div>
