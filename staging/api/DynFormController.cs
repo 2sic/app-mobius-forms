@@ -22,7 +22,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     var wrapLog = Log.Call(useTimer: true);
 
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
-    var formConfig = MyItem.Child("Config");
+    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
     if (formConfig.Bool("Recaptcha"))
     {
       Log.Add("checking Recaptcha");

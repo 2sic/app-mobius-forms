@@ -3,17 +3,19 @@
 @using ToSic.Sxc.Data
 @{
   var dynForm = MyItem;
-  var formConfig = dynForm.Child("Config");
+  var usePlaceholder = dynForm.String("DesignField") == "placeholder";
+  
+  var formConfig = dynForm.Bool("ReuseConfig") ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
+  var formFields = dynForm.Bool("ReuseConfig") ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
+  
   var workflowId = "DynData";
-  var formType = "DynForm";
   
   var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
-  FieldBuilder.LabelInPlaceholder = dynForm.Bool("PlaceHolder");
+  FieldBuilder.LabelInPlaceholder = usePlaceholder;
   
   var helpers = GetCode("./tools/Helpers.cs");
   var dynDataHelper = GetCode("./tools/DynData.cs");
-  }
-
+}
 <div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
 
   @if (Text.Has(dynForm.String("Title"))) {
@@ -22,18 +24,22 @@
 
   <div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
     <div class="app-mobius5-form">
-      @foreach (var field in dynForm.Children("Fields"))
+      @foreach (var field in formFields)
       {
-        var isPlaceHolder = dynForm.Bool("PlaceHolder");
         // Main Form Data
         var label = field.String("Title");
         var fieldId = field.Url("FieldId");
         var fieldType = field.String("FieldType");
         var required = field.Bool("Required");
         var pickerType = field.String("PickerType");
+        
+        var toolbar = dynForm.Bool("ReuseConfig")
+          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarReuseInfo"), background: "white"))
+          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: ...")).MoveDown().New().Remove();
 
+        
         <input type="hidden" id="FormId" value="@dynForm.Id">
-        <div @Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: ...")).MoveDown().New().Remove()>
+        <div @toolbar>
           @switch (fieldType)
           {
             case "string":
@@ -57,14 +63,14 @@
               if (field.Bool("LabelRight")){
                 @FieldBuilder.Checkbox(fieldId, required, false, label)
               } else {
-                if (isPlaceHolder) {
+                if (usePlaceholder) {
                   <strong>@label</strong>
                 }
                 @FieldBuilder.CheckboxFieldAligment(fieldId, required, label)
               }
               break;
             case "picker":
-              if (isPlaceHolder) {
+              if (usePlaceholder) {
                 <strong>@label</strong>
               }
 
@@ -86,7 +92,7 @@
               break;
             
             case "file":
-              if(isPlaceHolder){
+              if(usePlaceholder){
                 <strong>@label</strong>
               }
             
@@ -158,7 +164,7 @@
   </div>
 </div>
 
-@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId, formType })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
 
 @* Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown *@
 @functions {

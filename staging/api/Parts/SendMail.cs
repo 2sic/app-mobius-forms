@@ -28,13 +28,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
         mailLabels += fieldId + "=" + title + "\n";
       }
     }
-    
 
     var valuesRelabled = RewriteKeys(contactFormRequest, Text.First(mailLabels, workflow.String("MailLabels")) ?? "");
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    var formConfig = MyItem.ContainsKey("Config") ? MyItem.Child("Config") : MyItem;
+    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
 
     var from = Text.First(formConfig.String("MailFrom"), App.Settings.String("DefaultMailFrom"));
     var owner = Text.First(formConfig.String("OwnerMail"), App.Settings.String("DefaultOwnerMail"));
