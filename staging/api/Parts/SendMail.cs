@@ -9,13 +9,9 @@ using ToSic.Sxc.Data;
 
 public class SendMail : Custom.Hybrid.CodeTyped
 {
-  public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, string workflowId, List<ToSic.Sxc.Adam.IFile> files)
-
+  public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, List<ToSic.Sxc.Adam.IFile> files)
   {
     // rewrite the keys to be a nicer format, based on the configuration
-    var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
-
-    // for Dyn Form
     var mailLabels = "";
 
     if(contactFormRequest.ContainsKey("FormId")) {
@@ -29,7 +25,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
       }
     }
 
-    var valuesRelabled = RewriteKeys(contactFormRequest, Text.First(mailLabels, workflow.String("MailLabels")) ?? "");
+    var valuesRelabled = RewriteKeys(contactFormRequest, mailLabels);
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
@@ -44,7 +40,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(formConfig, workflow.String("OwnerMailTemplate"), valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), customerMails, files);
+        Send(formConfig, formConfig.String("OwnerMailTemplate"), valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), customerMails, files);
       }
       catch (Exception ex)
       {
@@ -58,7 +54,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(formConfig, workflow.String("CustomerMailTemplate"), valuesRelabled, from, customerMails, formConfig.String("CustomerMailCC"), owner, files);
+        Send(formConfig, formConfig.String("CustomerMailTemplate"), valuesRelabled, from, customerMails, formConfig.String("CustomerMailCC"), owner, files);
       }
       catch (Exception ex)
       {

@@ -14,7 +14,7 @@ using ToSic.Sxc.WebApi;
 public class DynFormController : Custom.Hybrid.ApiTyped
 {
   [HttpPost]
-  public void ProcessForm([FromBody] SaveRequest contactFormRequest, string workflowId)
+  public void ProcessForm([FromBody] SaveRequest contactFormRequest)
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
@@ -28,9 +28,6 @@ public class DynFormController : Custom.Hybrid.ApiTyped
       Log.Add("checking Recaptcha");
       GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);
     }
-
-    // get configuration for this Form
-    var workflow = AsItems(App.Data["Workflow"]).Where(w => w.String("WorkflowId") == workflowId).FirstOrDefault();
 
     // Same the TechnicalValues
     Dictionary<string, object> formTechnicalValues = new Dictionary<string, object>();
@@ -90,7 +87,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     // sending Mails
     var sendMail = GetCode("Parts/SendMail.cs");
-    sendMail.SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, workflowId, files);
+    sendMail.SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
     wrapLog("ok");
   }
 

@@ -4,11 +4,10 @@
 @{
   var dynForm = MyItem;
   var usePlaceholder = dynForm.String("DesignField") == "placeholder";
+  var isReusedConfig = dynForm.Bool("ReuseConfig");
   
-  var formConfig = dynForm.Bool("ReuseConfig") ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
-  var formFields = dynForm.Bool("ReuseConfig") ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
-  
-  var workflowId = "DynData";
+  var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
+  var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
   
   var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
   FieldBuilder.LabelInPlaceholder = usePlaceholder;
@@ -33,11 +32,10 @@
         var required = field.Bool("Required");
         var pickerType = field.String("PickerType");
         
-        var toolbar = dynForm.Bool("ReuseConfig")
+        var toolbar = isReusedConfig
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarReuseInfo"), background: "white"))
-          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: ...")).MoveDown().New().Remove();
+          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + label)).MoveDown().New().Remove();
 
-        
         <input type="hidden" id="FormId" value="@dynForm.Id">
         <div @toolbar>
           @switch (fieldType)
@@ -69,6 +67,7 @@
                 @FieldBuilder.CheckboxFieldAligment(fieldId, required, label)
               }
               break;
+
             case "picker":
               if (usePlaceholder) {
                 <strong>@label</strong>
@@ -164,7 +163,7 @@
   </div>
 </div>
 
-@Html.Partial("./parts/Assets.cshtml", new { formConfig, workflowId })
+@Html.Partial("./parts/Assets.cshtml", new { formConfig })
 
 @* Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown *@
 @functions {
