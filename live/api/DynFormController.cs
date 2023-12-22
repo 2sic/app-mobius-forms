@@ -56,7 +56,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
 
-    var contentType = MyItem.String("SaveToContentType");
+    var contentType = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").String("SaveToContentType") : MyItem.String("SaveToContentType");
     if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
     {
       var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);

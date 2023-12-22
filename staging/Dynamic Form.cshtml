@@ -3,8 +3,8 @@
 @using ToSic.Sxc.Data
 @{
   var dynForm = MyItem;
-  var usePlaceholder = dynForm.String("DesignField") == "placeholder";
   var isReusedConfig = dynForm.Bool("ReuseConfig");
+  var usePlaceholder = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm.String("DesignField") == "placeholder";
   
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
