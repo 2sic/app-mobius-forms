@@ -2,16 +2,70 @@
   <!-- This file helps VS Code provide IntelliSense - see https://go.2sxc.org/vscode -->
 
   <PropertyGroup>
-    <TargetFramework>net4.7.2</TargetFramework>
-    <RootNamespace>App</RootNamespace>
+    <!-- Specify the .net Framework you are targeting - this is usually net4.7.2 or net4.8
+      https://learn.microsoft.com/en-us/dotnet/standard/frameworks
+      - eg "net472", "net48", "net8.0" etc.
+      - net472 is the default for DNN 9.8 and earlier but usually net48 works
+      - net8.0 is the default for Oqtane 5
+    -->
+    <TargetFramework>net472</TargetFramework>
+
+    <!-- Specify the default Namespace for code in this specific App -->
+    <RootNamespace>ThisApp</RootNamespace>
+
+    <!-- Specify what C# version to use
+      https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
+      - eg. "7.3", "8.0" or "12.0" (Oqtane 5+)
+    -->
+    <LangVersion>8.0</LangVersion>
+
+    <!-- Variable to path where the DLLs are in Dnn
+      - This allows you to easily adjust the path if you have a different location
+      - For clarity / consistency, we recommend to not end with a slash
+      - Below you will use it using $(PathBin)
+    -->
+    <!-- PathBin for Dnn -->
+    <PathBin>..\..\..\..\bin</PathBin>
+    <!-- PathBin Oqtane production, just up 3 folders, no bin-subfolder -->
+    <!-- <PathBin>..\..\..</PathBin> -->
+    <!-- PathBin Oqtane dev/debug, up 3 folders and current build folder -->
+    <!-- <PathBin>..\..\..\bin\Debug\net8.0</PathBin> -->
   </PropertyGroup>
+
 
   <ItemGroup>
     <!-- Tell Visual Studio & VSCode to respect all ToSic.* DLLs in the root bin folder -->
-    <Reference Include="..\..\..\..\bin\ToSic.*.dll" />
-    <Reference Include="..\..\..\..\bin\DotNetNuke.*.dll" />
-    <Reference Include="..\..\..\..\bin\System.Web.Http.dll" />
-    <Reference Include="..\..\..\..\bin\System.Net.Http.dll" />
-    <Reference Include="..\..\..\..\bin\CSVHelper.dll" />
+    <Reference Include="$(PathBin)\ToSic.*.dll" />
+
+    <!-- also add System.Web and DotNetNuke DLLs - useful when creating APIs, but be aware that it may make your code less hybrid -->
+    <Reference Include="$(PathBin)\DotNetNuke.dll" />
+    <Reference Include="$(PathBin)\DotNetNuke.*.dll" />
+    <Reference Include="$(PathBin)\System.Web.Http.dll" />
+    <Reference Include="$(PathBin)\System.Net.Http.dll" />
+
+  </ItemGroup>
+
+  <!-- Additional DLLs which Mobius needs-->
+  <ItemGroup>
+    <!-- Mobius also needs the CSV helper-->
+    <Reference Include="$(PathBin)\CSVHelper.dll" />
+    <Reference Include="$(PathBin)\Connect.Koi.dll" />
+    
+    <!-- System.Web is not in the DNN folder but in the .net Framework installed on the server -->
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <!-- Polymorphism
+    If you're working with Polymorphism then you have many of the same files, which confuses Intellisense eg.
+    - /live and /staging have the same files
+    - /bs3 /bs4 / bs5 have the same files
+    The following is meant to exclude some of these folders from intellisense
+  -->
+  <!-- Example: exclude /live as we're always working on /staging -->
+  <ItemGroup>
+    <None Remove="live\**" />
+    <Content Remove="live\**" />
+    <Compile Remove="live\**" />
+    <EmbeddedResource Remove="live\**" />
   </ItemGroup>
 </Project>
