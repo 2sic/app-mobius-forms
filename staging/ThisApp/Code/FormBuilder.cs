@@ -4,9 +4,10 @@ using ThisApp.Data;
 
 namespace ThisApp.Code
 {
-  public class FormBuilder: Custom.Hybrid.CodeTyped
+  public class FormBuilder : Custom.Hybrid.CodeTyped
   {
-    public FormBuilder(IHasCodeContext parent, FormBuildParameters formParams): base(parent) {
+    public FormBuilder(IHasCodeContext parent, FormBuildParameters formParams) : base(parent)
+    {
       FormParams = formParams;
     }
 
@@ -24,17 +25,11 @@ namespace ThisApp.Code
     /// <summary>
     /// Find a matching field builder for the given field
     /// </summary>
-    private BuildFieldBase FindBuilder(DynFormField field)
+    private BuildFieldBase FindBuilder(DynFormField field) => field.FieldType switch
     {
-      switch (field.FieldType)
-      {
-        case "string":
-          return new BuildFieldText(FormParams, field);
-        case "number":
-          return new BuildFieldNumber(FormParams, field);
-        default:
-          return null;
-      }
-    }
+      "string" => new BuildFieldText(FormParams, field),
+      "number" => new BuildFieldNumber(FormParams, field),
+      _ => null,
+    };
   }
 }
