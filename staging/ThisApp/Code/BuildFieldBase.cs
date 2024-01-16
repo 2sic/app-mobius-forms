@@ -1,8 +1,5 @@
-using DotNetNuke.Common.Controls;
 using ThisApp.Data;
 using ToSic.Razor.Blade;
-using ToSic.Sxc.Code;
-using ToSic.Sxc.Data;
 
 namespace ThisApp.Code
 {
@@ -16,7 +13,7 @@ namespace ThisApp.Code
     /// <summary>
     /// Constructor which ensures that this class has the same context as the parent, eg. the Kit etc.
     /// </summary>
-    public BuildFieldBase(FormConfiguration form, DynFormField field)
+    public BuildFieldBase(FormBuildParameters form, DynFormField field)
     {
       Form = form;
       Resources = form.Resources;
@@ -24,7 +21,7 @@ namespace ThisApp.Code
       Field = field;
     }
 
-    protected FormConfiguration Form { get; }
+    protected FormBuildParameters Form { get; }
     protected AppResources Resources { get; }
     protected DynForm DynForm { get; }
     protected DynFormField Field { get; }

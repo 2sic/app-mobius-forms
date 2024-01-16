@@ -23,8 +23,8 @@
   // new
   var appRes = new AppResources(App.Resources);
   var dynFormConfig = new DynForm(formConfig);
-  var formConfiguration = new FormConfiguration(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5);
-  var formBuilder = new FormBuilder2(this, formConfiguration);
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5);
+  var formBuilder = new FormBuilder(this, formParams);
 }
 
 <div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
@@ -58,25 +58,27 @@
           }
 
           switch (fieldType) {
+            // new
             case "string":
+            case "number": 
               @formBuilder.Field(dynField)
-
-              @* if (field.Int("StringLines") == 0) {
+              break;
+            @* case "string":
+              if (field.Int("StringLines") == 0) {
                 @formBuilder.Field(dynField)
               } else {
                 @FieldBuilder.Multiline(fieldId, label, required, false, "", field.Int("StringLines").ToString())
-              } *@
+              }
               
-              break;
+              break; *@
 
             case "email":
               @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
               break;
             
-            case "number":
-              @formBuilder.Field(dynField)
-              @* @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength")) *@
-              break;
+            @* case "number":
+              @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength"))
+              break; *@
             
             case "boolean":
               if (field.Bool("LabelRight")){
@@ -169,7 +171,7 @@
         if (hasSets && setIndex > 1) {
           @:</div>
         }
-        </div> @* toolbar div *@
+        @:</div> @* toolbar div *@
       }
     </div>
 

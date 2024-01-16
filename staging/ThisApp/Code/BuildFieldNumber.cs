@@ -6,10 +6,7 @@ namespace ThisApp.Code
 {
   public class BuildFieldNumber : BuildFieldBase
   {
-    /// <summary>
-    /// Constructor which ensures that this class has the same context as the parent, eg. the Kit etc.
-    /// </summary>
-    public BuildFieldNumber(FormConfiguration form, DynFormField field) : base(form, field) { }
+    public BuildFieldNumber(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
     public override Input GetInput()
     {
