@@ -1,6 +1,8 @@
 @inherits Custom.Hybrid.RazorTyped
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data
+@using ThisApp.Code
+@using ThisApp.Data
 @{
   var dynForm = MyItem;
   var isReusedConfig = dynForm.Bool("ReuseConfig");
@@ -8,12 +10,21 @@
   
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
-  
+  var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
+  var hasSets = formFieldsSets.Count() > 0;
+  var setIndex = 1;
+
   var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
   FieldBuilder.LabelInPlaceholder = usePlaceholder;
   
-  var helpers = GetCode("./tools/Helpers.cs");
+  var formHelper = new FormHelpers(this);
   var dynDataHelper = GetCode("./tools/DynData.cs");
+
+  // new
+  var appRes = new AppResources(App.Resources);
+  var dynFormConfig = new DynForm(formConfig);
+  var formConfiguration = new FormConfiguration(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5);
+  var formBuilder = new FormBuilder2(this, formConfiguration);
 }
 
 <div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
@@ -22,10 +33,13 @@
     <h2>@dynForm.String("Title")</h2>   
   }
 
-  <div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
+  <div class="@formHelper.WrapperClasses(formConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius5-form">
-      @foreach (var field in formFields)
-      {
+      <input type="hidden" id="FormId" value="@dynForm.Id">
+
+      @foreach (var field in formFields) {
+        var dynField = new DynFormField(field);
+
         // Main Form Data
         var label = field.String("Title");
         var fieldId = field.Url("FieldId");
@@ -37,16 +51,21 @@
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarReuseInfo"), background: "white"))
           : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + label)).MoveDown().New().Remove();
 
-        <input type="hidden" id="FormId" value="@dynForm.Id">
-        <div @toolbar>
-          @switch (fieldType)
-          {
+
+        @:<div class="@fieldType" @toolbar>
+          if (hasSets && setIndex > 1) {
+            @:<div class="set">
+          }
+
+          switch (fieldType) {
             case "string":
-              if (field.Int("StringLines") == 0) {
-                @FieldBuilder.Text(fieldId, label, required)
+              @formBuilder.Field(dynField)
+
+              @* if (field.Int("StringLines") == 0) {
+                @formBuilder.Field(dynField)
               } else {
                 @FieldBuilder.Multiline(fieldId, label, required, false, "", field.Int("StringLines").ToString())
-              }
+              } *@
               
               break;
 
@@ -55,7 +74,8 @@
               break;
             
             case "number":
-              @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength"))
+              @formBuilder.Field(dynField)
+              @* @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength")) *@
               break;
             
             case "boolean":
@@ -100,6 +120,13 @@
               break;
 
             case "label":
+              if(field.Bool("IsSet")) {
+                if(setIndex > 1) {
+                  
+                }
+
+                setIndex++;
+              }
               <h4>@label</h4>
               break;
             
@@ -136,9 +163,13 @@
             default:
               <p>@pickerType</p>
               <h3>Default: @fieldType</h3>
-              break;
+              break;          
           }
-        </div>
+          
+        if (hasSets && setIndex > 1) {
+          @:</div>
+        }
+        </div> @* toolbar div *@
       }
     </div>
 
