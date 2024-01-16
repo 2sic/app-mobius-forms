@@ -129,10 +129,10 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   //   foreach (var value in values)
   //   {
   //     var radioId = idString + value.ToLower().Replace(" ", "");
-  //     var wrapper = Tag.Div().Class(Kit.Css.Is("bs3") ? "radio" : "form-check");
+  //     var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "radio" : "form-check");
   //     var radio = Tag.Input().Attr("type", "radio").Id(radioId).Name(idString).Value(value);
   //     SetRequired(radio, required);
-  //     if (Kit.Css.Is("bs3"))
+  //     if (CssClasses.IsBs3)
   //     {
   //       var radioLabel = Tag.Label(radio + value).For(radioId);
   //       wrapper.Add(radioLabel);
@@ -156,10 +156,10 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
     foreach (var tempItem in valueDictionary)
     {
       var radioId = idString + tempItem.Value.ToLower().Replace(" ", "");
-      var wrapper = Tag.Div().Class(Kit.Css.Is("bs3") ? "radio" : "form-check");
+      var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "radio" : "form-check");
       var radio = Tag.Input().Attr("type", "radio").Id(radioId).Name(idString).Value(tempItem.Key);
       SetRequired(radio, required);
-      if (Kit.Css.Is("bs3"))
+      if (CssClasses.IsBs3)
       {
         var radioLabel = Tag.Label(radio + tempItem.Value).For(radioId);
         wrapper.Add(radioLabel);
@@ -191,7 +191,7 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
     var checkboxLabel = Text.First(labelTranslated, idString) + (required ? "*" : "");
 
     // Slightly different HTML for Bootstrap3
-    if (Kit.Css.Is("bs3"))
+    if (CssClasses.IsBs3)
     {
       return Tag.Div().Class($"{Constants.ClassMobiusField} form-group").Wrap(
           Tag.Div().Class("checkbox").Wrap(
@@ -227,11 +227,11 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
     foreach (var tempItem in valueDictionary)
     {
       var checkboxId = idString + tempItem.Value.ToLower().Replace(" ", "");
-      var wrapper = Tag.Div().Class(Kit.Css.Is("bs3") ? "checkbox" : "form-check");
+      var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "checkbox" : "form-check");
       var checkbox = Tag.Input().Attr("type", "checkbox").Id(checkboxId).Name(idString).Value(tempItem.Key);
       SetRequired(checkbox, required);
 
-      if (Kit.Css.Is("bs3"))
+      if (CssClasses.IsBs3)
       {
         var checkboxLabel = Tag.Label(checkbox + "").For(checkboxId);
         wrapper.Add(checkboxLabel);
@@ -258,11 +258,11 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
     foreach (var tempItem in valueDictionary)
     {
       var checkboxId = idString + tempItem.Value.ToLower().Replace(" ", "");
-      var wrapper = Tag.Div().Class(Kit.Css.Is("bs3") ? "checkbox" : "form-check");
+      var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "checkbox" : "form-check");
       var checkbox = Tag.Input().Attr("type", "checkbox").Id(checkboxId).Name(idString).Value(tempItem.Key);
       SetRequired(checkbox, required);
 
-      if (Kit.Css.Is("bs3"))
+      if (CssClasses.IsBs3)
       {
         var checkboxLabel = Tag.Label(checkbox + tempItem.Value).For(checkboxId);
         wrapper.Add(checkboxLabel);
@@ -312,7 +312,7 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   // shows a wrapping div with choosen content
   private IHtmlTag WrapWithLabel(string idString, bool required, IHtmlTag items, string label = "")
   {
-    var inputWrapperClasses = Kit.Css.Is("bs3") ? "col col-xs-12 col-sm-9" : "col-12 col-sm-9";
+    var inputWrapperClasses = CssClasses.IsBs3 ? "col col-xs-12 col-sm-9" : "col-12 col-sm-9";
     // TODO: SEEMS TO try to i18n the label, but that doesn't make sense
     var labelTranslated = Text.First(label, App.Resources.String("Label" + idString, required: false));
     var field = Tag.Div().Class(FieldWrapperClasses());

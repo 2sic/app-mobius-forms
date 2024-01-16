@@ -13,5 +13,7 @@ namespace ThisApp.Code
     public AppResources Resources { get; }
     public DynForm Form { get; }
     public CssClasses CssClasses { get; }
+
+    public bool IsBs3 => CssClasses.IsBs3;
   }
 }

@@ -73,6 +73,9 @@
               break; *@
 
             case "email":
+              @* TODO: @2dg #1
+                - create DynFormField.RecipientMail
+                - create BuildFieldEMail.cs  *@
               @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
               break;
             
@@ -81,6 +84,10 @@
               break; *@
             
             case "boolean":
+              @* TODO: @2dg #2
+                - DynFormField.LabelRight (what does it do?)
+                - create BuildFieldCheckbox.cs
+                - create ??? (discuss w/2dm, the name is not clear what it should do) *@
               if (field.Bool("LabelRight")){
                 @FieldBuilder.Checkbox(fieldId, required, false, label)
               } else {
@@ -92,6 +99,9 @@
               break;
 
             case "picker":
+              @* TODO: @2dg #3
+                - fields ValuesDropdownRadio, etc.
+                -  *@
               if (usePlaceholder) {
                 <strong>@label</strong>
               }
