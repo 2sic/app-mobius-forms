@@ -50,10 +50,6 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
     return item;
   }
 
-  // Cache the message after first lookup for performance as we use it quite ofter
-  private string MessageRequired = null;
-
-
   // returns a Hidden Input
   public IHtmlTag Hidden(string idString, string label = "", string value = "")
   {

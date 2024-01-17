@@ -33,9 +33,9 @@ namespace ThisApp.Code
 
     public abstract IHtmlTag GetTag();
 
-    public IHtmlTag SetBasicsAndWrapInLabel(Input item)
+    public IHtmlTag SetBasicsAndWrapInLabel(Input item, bool setDefaultClass = true)
     {
-      var modified = SetBasics(item);
+      var modified = SetBasics(item, setDefaultClass: setDefaultClass);
       return WrapInLabel(modified);
     }
 
@@ -47,11 +47,12 @@ namespace ThisApp.Code
     /// <param name="field"></param>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected TTag SetBasics<TTag>(TTag item) where TTag : ToSic.Razor.Html5.Input
+    protected TTag SetBasics<TTag>(TTag item, bool setDefaultClass = true) where TTag : ToSic.Razor.Html5.Input
     {
       var result = item
         .Id(Field.FieldId)
-        .Placeholder(PlaceholderLabel())
+        .Placeholder(PlaceholderLabel());
+      if (setDefaultClass) result = result
         .Class(CssClasses.InputControl);
 
       if (Field.Required) result = SetRequired(result);

@@ -48,5 +48,12 @@ namespace ThisApp.Data
     public bool GdprEnabled => GetThis(fallback: false);
     
     #endregion
+
+     #region Picker
+    public string PickerType => GetThis(fallback: "");
+    public string ValuesDropdownRadio => GetThis(fallback: "");
+    public bool CheckboxWithHeadline => GetThis(fallback: false);
+    
+    #endregion
   }
 }

@@ -13,45 +13,28 @@ namespace ThisApp.Code
     /// </summary>
     public override IHtmlTag GetTag()
     {
-
-      if (Field.TermsAndGdprCombined || Field.TermsEnabled || Field.GdprEnabled)
-        return CheckboxWithLabelRight();
-
       // If label is to the left, behave as default
-      if (!Field.LabelRight) return SetBasicsAndWrapInLabel(GetCheckbox());
+      if (!Field.LabelRight) return SetBasicsAndWrapInLabel(GetCheckbox(), setDefaultClass: false);
 
       // If label right 
-      return CheckboxWithLabelRight();
+      return CheckboxWithLabelRight(GetCheckbox());
     }
 
     /// <summary>
     /// Just generate the checkbox. In standard use this is all we need
     /// </summary>
-    private Input GetCheckbox()
+    protected Input GetCheckbox()
     {
-      // TODO: check size / class "form-control"
-      var checkbox = Tag.Input().Attr("type", "checkbox").Id(Field.FieldId).Class(Constants.ClassCheckbox);
+      var checkbox = Tag.Input().Type("checkbox").Id(Field.FieldId).Class(Constants.ClassCheckbox);
       return checkbox;
     }
 
-    private IHtmlTag CheckboxWithLabelRight()
+    protected IHtmlTag CheckboxWithLabelRight(Input checkbox, string overrideTitle = default)
     {
-
-      var checkbox = GetCheckbox();
-      string overrideTitle = null;
-
-      if (Field.TermsAndGdprCombined || Field.TermsEnabled || Field.GdprEnabled)
-      {
-        checkbox.Attr("terms", "true");
-        if (Field.TermsAndGdprCombined) overrideTitle = Resources.LabelTermsAll;
-        else if (Field.TermsEnabled)  overrideTitle = Resources.LabelTerms;
-        else if (Field.GdprEnabled) overrideTitle = Resources.LabelGdpr;
-      }
-
       var checkboxLabel = Text.First(overrideTitle, Field.Title, Field.FieldId) + (Field.Required ? "*" : "");
 
       checkbox = checkbox.Value(checkboxLabel);
-      checkbox = SetBasics(checkbox);
+      checkbox = SetBasics(checkbox, false);
 
       if (CssClasses.IsBs3)
         return Tag.Div().Class($"{Constants.ClassMobiusField} form-group").Wrap(

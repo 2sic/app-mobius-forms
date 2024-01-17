@@ -127,8 +127,11 @@
                 <strong>@label</strong>
               } *@
 
-              if (pickerType == "radio") 
+              if (pickerType == "radio") {
+                @formBuilder.Field(dynField)
                 @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), label)
+
+              }
               
               if (pickerType == "dropdown") 
                 @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PlaceHolderSelect")) 
