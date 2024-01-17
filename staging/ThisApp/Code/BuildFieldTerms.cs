@@ -8,7 +8,7 @@ namespace ThisApp.Code
     public BuildFieldTerms(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
     /// <summary>
-    /// Text must override it, because the Checkbox is not an Text input
+    /// Terms checkbox use Title form App Resources and overriedTitle in CheckbocxWithLabelRight
     /// </summary>
     public override IHtmlTag GetTag()
     {
