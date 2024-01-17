@@ -36,5 +36,17 @@ namespace ThisApp.Data
     public string RecipientEmail => GetThis(fallback: "");
 
     #endregion
+
+    #region Boolean
+    public bool LabelRight => GetThis(fallback: false);
+    
+    #endregion
+
+    #region Terms
+    public bool TermsAndGdprCombined => GetThis(fallback: false);
+    public bool TermsEnabled => GetThis(fallback: false);
+    public bool GdprEnabled => GetThis(fallback: false);
+    
+    #endregion
   }
 }

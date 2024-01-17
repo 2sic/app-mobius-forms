@@ -1,5 +1,6 @@
 using ThisApp.Data;
 using ToSic.Razor.Blade;
+using ToSic.Razor.Html5;
 
 namespace ThisApp.Code
 {
@@ -30,14 +31,14 @@ namespace ThisApp.Code
     protected DynFormField Field { get; }
     protected CssClasses CssClasses => Form.CssClasses;
 
-    public virtual IHtmlTag GetTag()
+    public abstract IHtmlTag GetTag();
+
+    public IHtmlTag SetBasicsAndWrapInLabel(Input item)
     {
-      var item = GetInput();
-      item = SetBasics(item);
-      return WrapInLabel(item);
+      var modified = SetBasics(item);
+      return WrapInLabel(modified);
     }
 
-    public abstract ToSic.Razor.Html5.Input GetInput();
 
     /// <summary>
     /// Set all defaults like ID, Required label, common classes etc.

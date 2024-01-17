@@ -62,6 +62,8 @@
             case "string":
             case "number":
             case "email":
+            case "boolean":
+            case "terms":
               @formBuilder.Field(dynField)
               break;
             @* case "string":
@@ -84,36 +86,52 @@
               @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength"))
               break; *@
             
-            case "boolean":
-              @* TODO: @2dg #2
+           @*  case "boolean":
+              TODO: @2dg #2
+
                 - DynFormField.LabelRight (what does it do?)
                 - create BuildFieldCheckbox.cs
-                - create ??? (discuss w/2dm, the name is not clear what it should do) *@
+                - create ??? (discuss w/2dm, the name is not clear what it should do) 
+                if (usePlaceholder) {
+                <strong>@label</strong>
+                 }
               if (field.Bool("LabelRight")){
+                 @formBuilder.Field(dynField)
                 @FieldBuilder.Checkbox(fieldId, required, false, label)
               } else {
-                if (usePlaceholder) {
-                  <strong>@label</strong>
-                }
+        
                 @FieldBuilder.CheckboxFieldAligment(fieldId, required, label)
               }
-              break;
+                 @formBuilder.Field(dynField)
+               *@
 
+              @* TODO: @2dg 
+                - checkbox with Terms
+                -  *@
+              @* case "terms":
+               var termsEnabled = field.Bool("TermsEnabled");
+              var gdprEnabled = field.Bool("GdprEnabled");
+              
+              if (termsEnabled && gdprEnabled && field.Bool("TermsAndGdprCombined")) {
+                @FieldBuilder.Checkbox("TermsAll", true, true)
+              } else {
+                if (termsEnabled) { @FieldBuilder.Checkbox("Terms", true, true) }
+                if (gdprEnabled) { @FieldBuilder.Checkbox("Gdpr", true, true) }
+              } 
+              break; *@
             case "picker":
               @* TODO: @2dg #3
                 - fields ValuesDropdownRadio, etc.
                 -  *@
-              if (usePlaceholder) {
+              @* if (usePlaceholder) {
                 <strong>@label</strong>
-              }
+              } *@
 
-              if (pickerType == "radio") {
+              if (pickerType == "radio") 
                 @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), label)
-              }
-
-              if (pickerType == "dropdown") {
+              
+              if (pickerType == "dropdown") 
                 @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PlaceHolderSelect")) 
-              }
 
               if (pickerType == "checkbox") {
                 if (field.Bool("CheckboxWithHeadline")) {
@@ -157,21 +175,6 @@
             case "advanced":
               @Html.Partial("./custom-fields/" + @field.String("RazorFile")  , new { field })
               break;
-            
-            case "terms":
-              var termsEnabled = field.Bool("TermsEnabled");
-              var gdprEnabled = field.Bool("GdprEnabled");
-              
-              if (termsEnabled && gdprEnabled && field.Bool("TermsAndGdprCombined")) {
-                @FieldBuilder.Checkbox("TermsAll", true, true)
-              } else {
-                if (termsEnabled) { @FieldBuilder.Checkbox("Terms", true, true) }
-                if (gdprEnabled) { @FieldBuilder.Checkbox("Gdpr", true, true) }
-              }
-              
-              // Optional recaptcha
-              if (formConfig.Bool("Recaptcha")) { @Html.Partial("Footer Recaptcha.cshtml") }
-              break;
               
             default:
               <p>@pickerType</p>
@@ -187,6 +190,7 @@
     </div>
 
     @if (!dynForm.Bool("SkipSubmit", required: false)) {
+      if (formConfig.Bool("Recaptcha")) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
     }
 

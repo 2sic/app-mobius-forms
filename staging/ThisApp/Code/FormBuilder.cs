@@ -30,6 +30,8 @@ namespace ThisApp.Code
       "string" => new BuildFieldText(FormParams, field),
       "number" => new BuildFieldNumber(FormParams, field),
       "email" => new BuildFieldEMail(FormParams, field),
+      "boolean" => new BuildFieldCheckbox(FormParams, field),
+      "terms" => new BuildFieldCheckbox(FormParams, field),
       _ => null,
     };
   }

@@ -19,13 +19,11 @@ namespace ThisApp.Code
       return WrapInLabel(item);
     }
 
-    public override Input GetInput() => throw new NotImplementedException();
-
     private Textarea MultiLine()
     {
       var rows = Field.StringLines;
       var item = Tag.Textarea().Rows(rows.ToString());
-      if (Text.Has(Field.InitialValue)) { item.Attr("value", Field.InitialValue); }
+      if (Text.Has(Field.InitialValue)) { item.Wrap(Field.InitialValue); }
       return item;
     }
 

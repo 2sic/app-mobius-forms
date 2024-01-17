@@ -8,7 +8,9 @@ namespace ThisApp.Code
   {
     public BuildFieldNumber(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
-    public override Input GetInput()
+    public override IHtmlTag GetTag() => SetBasicsAndWrapInLabel(NumberField());
+
+    private Input NumberField()
     {
       var item = Tag.Input().Type("number");
 

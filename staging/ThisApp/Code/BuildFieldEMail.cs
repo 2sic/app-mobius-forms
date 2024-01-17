@@ -8,7 +8,9 @@ namespace ThisApp.Code
   {
     public BuildFieldEMail(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
-    public override Input GetInput()
+    public override IHtmlTag GetTag() => SetBasicsAndWrapInLabel(EmailField());
+
+    private Input EmailField()
     {
       var item = Tag.Input().Type("email"); // .Id(idString).Placeholder(PhLabel(label, required)).Class(CssClasses.InputControl);
       // SetRequired(item, required, "LabelValidEmail");

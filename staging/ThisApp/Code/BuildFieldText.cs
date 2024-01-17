@@ -14,13 +14,13 @@ namespace ThisApp.Code
     /// so it can't be handled in the GetInput() method
     /// </summary>
     public override IHtmlTag GetTag() => Field.StringLines <= 1
-        ? base.GetTag()
+        ? SetBasicsAndWrapInLabel(TextField())
         : new BuildFieldTextMultiline(Form, Field).GetTag();
 
-    public override Input GetInput()
+    private Input TextField()
     {
       var item = Tag.Input().Type("text");
-      if (Text.Has(Field.InitialValue)) { item.Attr("value", Field.InitialValue); }
+      if (Text.Has(Field.InitialValue)) { item.Value(Field.InitialValue); }
       return item;
     }
   }
