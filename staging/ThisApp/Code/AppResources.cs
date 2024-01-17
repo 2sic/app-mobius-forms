@@ -10,6 +10,8 @@ namespace ThisApp.Data
     public string LabelTermsAll => GetThis(fallback: "");
     public string LabelTerms => GetThis(fallback: "");
     public string LabelGdpr => GetThis(fallback: "");
+    public string LabelSelect => GetThis(fallback: "");
+
     
     #endregion
 

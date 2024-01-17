@@ -19,7 +19,7 @@ namespace ThisApp.Code
 
       var container = Tag.Div().Class(CssClasses.LabelOutside);
 
-      foreach (var item in GetKeyValue(Field.ValuesDropdownRadio))
+      foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
         var radioId = Field.FieldId + item.Value.ToLower().Replace(" ", "");
         var radio = Tag.Input().Type("radio").Name(Field.FieldId).Value(item.Key);  // Name is the same for all radios in the group

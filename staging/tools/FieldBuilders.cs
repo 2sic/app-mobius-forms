@@ -101,31 +101,31 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
 
 
   // The normal Radio only has an array of strings for the value without a key
-  public IHtmlTag Radio(string idString, bool required, Dictionary<string, string> valueDictionary, string label = "")
-  {
-    var inputLabel = Text.First(label, idString);
-    var item = Tag.Div();
-    foreach (var tempItem in valueDictionary)
-    {
-      var radioId = idString + tempItem.Value.ToLower().Replace(" ", "");
-      var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "radio" : "form-check");
-      var radio = Tag.Input().Attr("type", "radio").Id(radioId).Name(idString).Value(tempItem.Key);
-      SetRequired(radio, required);
-      if (CssClasses.IsBs3)
-      {
-        var radioLabel = Tag.Label(radio + tempItem.Value).For(radioId);
-        wrapper.Add(radioLabel);
-      }
-      else
-      {
-        radio.Class(Constants.ClassCheckbox);
-        var radioLabel = Tag.Label(tempItem.Value).Class("form-check-label").For(radioId);
-        wrapper.Add(radio + radioLabel);
-      }
-      item.Add(wrapper);
-    }
-    return WrapWithLabel(idString, required, item, inputLabel);
-  }
+  // public IHtmlTag Radio(string idString, bool required, Dictionary<string, string> valueDictionary, string label = "")
+  // {
+  //   var inputLabel = Text.First(label, idString);
+  //   var item = Tag.Div();
+  //   foreach (var tempItem in valueDictionary)
+  //   {
+  //     var radioId = idString + tempItem.Value.ToLower().Replace(" ", "");
+  //     var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "radio" : "form-check");
+  //     var radio = Tag.Input().Attr("type", "radio").Id(radioId).Name(idString).Value(tempItem.Key);
+  //     SetRequired(radio, required);
+  //     if (CssClasses.IsBs3)
+  //     {
+  //       var radioLabel = Tag.Label(radio + tempItem.Value).For(radioId);
+  //       wrapper.Add(radioLabel);
+  //     }
+  //     else
+  //     {
+  //       radio.Class(Constants.ClassCheckbox);
+  //       var radioLabel = Tag.Label(tempItem.Value).Class("form-check-label").For(radioId);
+  //       wrapper.Add(radio + radioLabel);
+  //     }
+  //     item.Add(wrapper);
+  //   }
+  //   return WrapWithLabel(idString, required, item, inputLabel);
+  // }
 
 // TODO:: In BuildFieldCheckbox
   // returns a checkbox with common attributes

@@ -51,9 +51,11 @@ namespace ThisApp.Data
 
      #region Picker
     public string PickerType => GetThis(fallback: "");
-    public string ValuesDropdownRadio => GetThis(fallback: "");
+    public string PickerKeyValues => GetThis(fallback: "");
     public bool CheckboxWithHeadline => GetThis(fallback: false);
-    
+    public bool MultiSelect => GetThis(fallback: false);    
+    public string PlaceHolderSelect => GetThis(fallback: "");
+
     #endregion
   }
 }

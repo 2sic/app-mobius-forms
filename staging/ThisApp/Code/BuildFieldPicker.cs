@@ -7,10 +7,10 @@ namespace ThisApp.Code
   {
     public BuildFieldPicker(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
-    protected static Dictionary<string, string> GetKeyValue(string valuesDropdownRadio)
+    protected static Dictionary<string, string> GetKeyValue(string pickerKeyValues)
     {
       Dictionary<string, string> valueDictionaryRadio = new Dictionary<string, string>();
-      foreach (var item in valuesDropdownRadio.Split('\n'))
+      foreach (var item in pickerKeyValues.Split('\n'))
       {
         var values = item.Split(':');
         // If values has Key and Value
