@@ -60,7 +60,8 @@
           switch (fieldType) {
             // new
             case "string":
-            case "number": 
+            case "number":
+            case "email":
               @formBuilder.Field(dynField)
               break;
             @* case "string":
@@ -72,12 +73,12 @@
               
               break; *@
 
-            case "email":
+            @* case "email": *@
               @* TODO: @2dg #1
-                - create DynFormField.RecipientMail
+                ✅ create DynFormField.RecipientMail
                 - create BuildFieldEMail.cs  *@
-              @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
-              break;
+              @* @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
+              break; *@
             
             @* case "number":
               @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength"))

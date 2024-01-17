@@ -30,5 +30,11 @@ namespace ThisApp.Data
     public int MaxLength => GetThis(fallback: 0);
     
     #endregion
+  
+    #region Email
+
+    public string RecipientEmail => GetThis(fallback: "");
+
+    #endregion
   }
 }

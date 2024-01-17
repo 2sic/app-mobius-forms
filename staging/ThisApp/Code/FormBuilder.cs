@@ -29,6 +29,7 @@ namespace ThisApp.Code
     {
       "string" => new BuildFieldText(FormParams, field),
       "number" => new BuildFieldNumber(FormParams, field),
+      "email" => new BuildFieldEMail(FormParams, field),
       _ => null,
     };
   }

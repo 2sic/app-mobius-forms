@@ -74,15 +74,15 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   }
 
   // returns an input of type email with common attributes and a possible placeholder
-  public IHtmlTag EMail(string idString, string label, bool required, bool recipientEmail = false)
-  {
-    var item = Tag.Input().Type("email").Id(idString).Placeholder(PhLabel(label, required)).Class(CssClasses.InputControl);
-    SetRequired(item, required, "LabelValidEmail");
+  // public IHtmlTag EMail(string idString, string label, bool required, bool recipientEmail = false)
+  // {
+  //   var item = Tag.Input().Type("email").Id(idString).Placeholder(PhLabel(label, required)).Class(CssClasses.InputControl);
+  //   SetRequired(item, required, "LabelValidEmail");
     
-    if (recipientEmail) { item.Attr("mail", "recipientEmail"); }
+  //   if (recipientEmail) { item.Attr("mail", "recipientEmail"); }
 
-    return WrapWithLabel(idString, required, item, label);
-  }
+  //   return WrapWithLabel(idString, required, item, label);
+  // }
 
   // returns a select and options with common attributes
   public IHtmlTag DropDown(string idString, Dictionary<string, string> valueDictionary, bool required, bool multiSelect, string label = "", string placeHolderSelect = "")

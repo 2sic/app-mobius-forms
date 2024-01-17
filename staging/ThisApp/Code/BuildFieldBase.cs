@@ -3,6 +3,9 @@ using ToSic.Razor.Blade;
 
 namespace ThisApp.Code
 {
+  /// <summary>
+  /// Base class for all Field Builders
+  /// </summary>
   public abstract class BuildFieldBase
   {
 
@@ -51,13 +54,14 @@ namespace ThisApp.Code
         .Class(CssClasses.InputControl);
 
       if (Field.Required) result = SetRequired(result);
+      // TODO: THIS is not tested, 2dm added the field
       if (Field.IsDisabled) result = result.Disabled();
       return result as TTag;
     }
 
 
     protected string PlaceholderLabel()
-      => LabelInPlaceholder ? Field.Title + (Field.Required ? " *" : "") : "";
+      => "🌟" + (LabelInPlaceholder ? Field.Title + (Field.Required ? " *" : "") : "");
 
     protected TTag SetRequired<TTag>(TTag item, string specialReqMessage = default) where TTag : class, IHtmlTag
     {
