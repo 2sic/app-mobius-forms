@@ -13,9 +13,7 @@ namespace ThisApp.Code
     /// because the MultiLine variant is a TextArea (not input)
     /// so it can't be handled in the GetInput() method
     /// </summary>
-    public override IHtmlTag GetTag() => Field.StringLines <= 1
-        ? SetBasicsAndWrapInLabel(TextField())
-        : new BuildFieldTextMultiline(Form, Field).GetTag();
+    public override IHtmlTag GetTag() => SetBasicsAndWrapInLabel(TextField());
 
     private Input TextField()
     {

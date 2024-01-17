@@ -27,12 +27,13 @@ namespace ThisApp.Code
     /// </summary>
     private BuildFieldBase FindBuilder(DynFormField field) => field.FieldType switch
     {
-      "string" => new BuildFieldText(FormParams, field),
+      "string" when field.StringLines <= 1 => new BuildFieldText(FormParams, field),
+      "string" => new BuildFieldTextMultiline(FormParams, field),
       "number" => new BuildFieldNumber(FormParams, field),
       "email" => new BuildFieldEMail(FormParams, field),
       "boolean" => new BuildFieldCheckbox(FormParams, field),
       "terms" => new BuildFieldTerms(FormParams, field),
-      "picker" => new BuildFieldPicker(FormParams, field),
+      "picker" when field.PickerType == "radio" => new BuildFieldPickerRadio(FormParams, field),
       _ => null,
     };
   }

@@ -11,6 +11,8 @@ namespace ThisApp.Code
     public string LabelOutside { get; set; }
     public string LabelInside { get; set; }
     public string Wrapper { get; set; }
+    public string RadioWrapper { get; set; }
+
 
     public string Label { get; set; }
 
@@ -21,6 +23,7 @@ namespace ThisApp.Code
       LabelOutside = "col-12 col-sm-9",
       LabelInside = "",
       Wrapper = "mb-3",
+      RadioWrapper = "form-check",
     };
 
     public static CssClasses Bs3 = new CssClasses()
@@ -30,6 +33,8 @@ namespace ThisApp.Code
       LabelOutside = "col col-xs-12 col-sm-9",
       LabelInside = "",
       Wrapper = "form-group",
+      RadioWrapper = "radio",
+
     };
 
   }
