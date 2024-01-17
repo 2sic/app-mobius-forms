@@ -12,6 +12,8 @@ namespace ThisApp.Code
     public string LabelInside { get; set; }
     public string Wrapper { get; set; }
     public string RadioWrapper { get; set; }
+    public string CheckboxWrapper { get; set; }
+
 
 
     public string Label { get; set; }
@@ -24,6 +26,7 @@ namespace ThisApp.Code
       LabelInside = "",
       Wrapper = "mb-3",
       RadioWrapper = "form-check",
+      CheckboxWrapper = "form-check",
     };
 
     public static CssClasses Bs3 = new CssClasses()
@@ -34,6 +37,8 @@ namespace ThisApp.Code
       LabelInside = "",
       Wrapper = "form-group",
       RadioWrapper = "radio",
+      CheckboxWrapper = "checkbox",
+
 
     };
 
