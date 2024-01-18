@@ -10,7 +10,7 @@ namespace ThisApp.Code
     public BuildFieldCheckbox(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
     /// <summary>
-    /// Text must override it, because the Checkbox is not an Text input
+    /// Get a checkbox with Left or Right Label
     /// </summary>
     public override IHtmlTag GetTag()
     {
@@ -31,6 +31,9 @@ namespace ThisApp.Code
       return checkbox;
     }
 
+    /// <summary>
+    /// Generate a Checkbox with a label to the right (for long text (terms etc.))
+    /// </summary>
     protected IHtmlTag CheckboxWithLabelRight(Input checkbox, string overrideTitle = default)
     {
       var checkboxLabel = Text.First(overrideTitle, Field.Title, Field.FieldId) + (Field.Required ? "*" : "");

@@ -43,9 +43,10 @@
 
         <div @toolbar>
           @if(dynField.FieldType == "advanced" )  
-            @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field }) // Open Razor File
+            @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field })
            else  
-            @formBuilder.Field(dynField) // All other FieldTypes
+            @* All Other File Type *@
+            @formBuilder.Field(dynField) 
         </div> 
       }
     </div>

@@ -45,9 +45,7 @@ public class DynData : Custom.Hybrid.CodeTyped
     Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
     foreach (var field in dynFormFields)
-    {
       dictionary[field.Url("FieldId")] = field.String("Title");
-    }
 
     return dictionary;
   }

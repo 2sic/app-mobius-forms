@@ -19,8 +19,6 @@ namespace ThisApp.Code
     public string FloatingLabelHidden { get; set; }
 
 
-
-
     public string Label { get; set; }
 
     public static CssClasses Bs5 = new CssClasses()
@@ -38,8 +36,9 @@ namespace ThisApp.Code
 
     public static CssClasses Bs4 = new CssClasses()
     {
-      IsBs3 = false,
       // Same as Bs5
+      IsBs3 = false,
+
       OutsideDiv = " row mb-3",
       Label = "col-12 col-md-3",
       LabelOutside = "col-12 col-sm-9",
@@ -47,7 +46,7 @@ namespace ThisApp.Code
       Wrapper = "mb-3",
       RadioWrapper = "form-check",
       CheckboxWrapper = "form-check",
-
+      //
       FloatingLabelHidden = "d-none",
     };
 

@@ -7,35 +7,18 @@ namespace ThisApp.Code
   public class BuildFieldPickerCheckbox : BuildFieldPicker
   {
     public BuildFieldPickerCheckbox(FormBuildParameters form, DynFormField field) : base(form, field) { }
-
+    /// <summary>
+    /// Generate CheckbocPicker with Headline or without
+    /// </summary>
     public override IHtmlTag GetTag() => CheckBoxPicker();
 
     private IHtmlTag CheckBoxPicker()
     {
       if (Field.CheckboxWithHeadline) return CheckboxPickerWithHeadline();
-
-      return CheckboxPickerBasicNew();
+      return CheckboxPickerBasic();
     }
-
+    // Simple CheckboxPicker List without Headline
     private IHtmlTag CheckboxPickerBasic()
-    {
-      var div = Tag.Div();
-
-      foreach (var item in GetKeyValue(Field.PickerKeyValues))
-      {
-        var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
-
-        var wrapper = Tag.Div(GenerateCheckbox(item)).Class(CssClasses.CheckboxWrapper);
-        var container = Tag.Div(wrapper).Class(CssClasses.LabelOutside);
-        var label = Tag.Label(item.Value).Class(CssClasses.Label).For(GenearateHtmlId(item));
-
-        items.Add(label, container);
-        div.Add(items);
-      }
-      return div;
-    }
-
-    private IHtmlTag CheckboxPickerBasicNew()
     {
       var div = Tag.Div();
 
@@ -48,7 +31,7 @@ namespace ThisApp.Code
         var container = Tag.Div().Class(CssClasses.LabelOutside);
         var label = Tag.Label(item.Value).Class(CssClasses.Label).For(GenearateHtmlId(item));
 
-        if(CssClasses.IsBs3) container.Add(checkbox);
+        if (CssClasses.IsBs3) container.Add(checkbox);
         else container.Add(wrapper);
 
         items.Add(label, container);
@@ -56,7 +39,7 @@ namespace ThisApp.Code
       }
       return div;
     }
-
+    // Simple CheckboxPicker List with Headline (Title) Left
     private IHtmlTag CheckboxPickerWithHeadline()
     {
       var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);

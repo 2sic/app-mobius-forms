@@ -8,13 +8,15 @@ namespace ThisApp.Code
   {
     public BuildFieldPickerDropdown(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
+    /// <summary>
+    /// Generate Dropdown with multiple options
+    /// </summary>
     public override IHtmlTag GetTag()
     {
       var item = Dropdown();
       item = SetBasicsDropdown(item);
       return WrapInLabel(item);
     }
-
 
     private Select Dropdown()
     {

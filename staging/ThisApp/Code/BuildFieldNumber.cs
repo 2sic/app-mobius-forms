@@ -7,7 +7,9 @@ namespace ThisApp.Code
   public class BuildFieldNumber : BuildFieldBase
   {
     public BuildFieldNumber(FormBuildParameters form, DynFormField field) : base(form, field) { }
-
+    /// <summary>
+    /// Generate a Number Input with Min, Max and Value
+    /// </summary>
     public override IHtmlTag GetTag() => SetBasicsAndWrapInLabel(NumberField());
 
     private Input NumberField()

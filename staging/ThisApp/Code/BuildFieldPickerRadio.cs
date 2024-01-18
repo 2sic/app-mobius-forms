@@ -1,15 +1,14 @@
-using System.Collections.Generic;
-using Connect.Koi.Html;
 using ThisApp.Data;
 using ToSic.Razor.Blade;
-using ToSic.Razor.Html5;
 
 namespace ThisApp.Code
 {
   public class BuildFieldPickerRadio : BuildFieldPicker
   {
     public BuildFieldPickerRadio(FormBuildParameters form, DynFormField field) : base(form, field) { }
-
+    /// <summary>
+    /// Generate simple Radio 
+    /// </summary>
     public override IHtmlTag GetTag() => Radio();
 
     private IHtmlTag Radio()
@@ -41,9 +40,7 @@ namespace ThisApp.Code
 
         container.Add(wrapper);
       }
-
       items.Add(container);
-
       return items;
     }
 

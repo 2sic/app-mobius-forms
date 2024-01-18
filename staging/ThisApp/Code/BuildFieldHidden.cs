@@ -1,4 +1,3 @@
-using DotNetNuke.Modules.Admin.Users;
 using ThisApp.Data;
 using ToSic.Razor.Blade;
 
@@ -7,7 +6,9 @@ namespace ThisApp.Code
   public class BuildFieldHidden : BuildFieldBase
   {
     public BuildFieldHidden(FormBuildParameters form, DynFormField field) : base(form, field) { }
-
+    /// <summary>
+    /// Generate a Hidden Input field with Value for E-mail and Db, only visible for Admins
+    /// </summary>
     public override IHtmlTag GetTag() => FileHidden();
 
     private IHtmlTag FileHidden()

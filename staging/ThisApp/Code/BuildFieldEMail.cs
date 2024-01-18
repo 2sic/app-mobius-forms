@@ -8,6 +8,9 @@ namespace ThisApp.Code
   {
     public BuildFieldEMail(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
+    /// <summary>
+    /// Build Email field with RecipientEmail Settings
+    /// </summary>
     public override IHtmlTag GetTag() => SetBasicsAndWrapInLabel(EmailField());
 
     private Input EmailField()

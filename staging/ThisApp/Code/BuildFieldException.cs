@@ -7,6 +7,9 @@ namespace ThisApp.Code
   {
     public BuildFieldException(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
+    /// <summary>
+    /// Get e exception message if a FieldType available
+    /// </summary>
     public override IHtmlTag GetTag() => FileException();
 
     private IHtmlTag FileException()
