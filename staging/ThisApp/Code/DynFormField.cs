@@ -8,7 +8,7 @@ namespace ThisApp.Data
     public DynFormField(ITypedItem item) : base(item) { }
 
     public string FieldId => GetThis(fallback: "");
-    public string Title => GetThis(fallback: "");
+    public new string Title => GetThis(fallback: "");
 
 
     public string FieldType => GetThis(fallback: "");
