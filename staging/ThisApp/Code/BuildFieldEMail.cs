@@ -12,12 +12,9 @@ namespace ThisApp.Code
 
     private Input EmailField()
     {
-      var item = Tag.Input().Type("email"); // .Id(idString).Placeholder(PhLabel(label, required)).Class(CssClasses.InputControl);
-      // SetRequired(item, required, "LabelValidEmail");
-      
+      var item = Tag.Input().Type("email");
       if (Text.Has(Field.RecipientEmail)) { item.Attr("mail", "recipientEmail"); }
-
-      return item; // WrapWithLabel(idString, required, item, label);
+      return item;
     }
   }
 }

@@ -7,6 +7,7 @@ namespace ThisApp.Code
   {
     public BuildFieldPicker(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
+    // Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown 
     protected static Dictionary<string, string> GetKeyValue(string pickerKeyValues)
     {
       Dictionary<string, string> valueDictionaryRadio = new Dictionary<string, string>();
@@ -35,9 +36,10 @@ namespace ThisApp.Code
       return valueDictionaryRadio;
     }
 
-     protected string GenearateHtmlId(KeyValuePair<string, string> tempItem)
+    // Generate the HTML ID for the radio button and Checkbox 
+    protected string GenearateHtmlId(KeyValuePair<string, string> tempItem)
     {
-      return Field.FieldId + tempItem.Value.ToLower().Replace(" ", "");;
+      return Field.FieldId + tempItem.Value.ToLower().Replace(" ", ""); ;
     }
 
   }

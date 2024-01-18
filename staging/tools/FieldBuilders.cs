@@ -81,23 +81,23 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   // }
 
   // returns a select and options with common attributes
-  public IHtmlTag DropDown(string idString, Dictionary<string, string> valueDictionary, bool required, bool multiSelect, string label = "", string placeHolderSelect = "")
-  {
-    var item = Tag.Select().Id(idString).Class(CssClasses.InputControl);
+  // public IHtmlTag DropDown(string idString, Dictionary<string, string> valueDictionary, bool required, bool multiSelect, string label = "", string placeHolderSelect = "")
+  // {
+  //   var item = Tag.Select().Id(idString).Class(CssClasses.InputControl);
 
-    SetRequired(item, required);
+  //   SetRequired(item, required);
 
-    if (multiSelect) { item.Multiple().Attr("data-multiple-dropdown", idString); }
+  //   if (multiSelect) { item.Multiple().Attr("data-multiple-dropdown", idString); }
     
-    item.Add(Tag.Option(Text.First(placeHolderSelect, App.Resources.String("LabelSelect"))));
+  //   item.Add(Tag.Option(Text.First(placeHolderSelect, App.Resources.String("LabelSelect"))));
     
-    foreach (var optionItem in valueDictionary)
-    {
-      item.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));
-    }
+  //   foreach (var optionItem in valueDictionary)
+  //   {
+  //     item.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));
+  //   }
     
-    return WrapWithLabel(idString, required, item, label);
-  }
+  //   return WrapWithLabel(idString, required, item, label);
+  // }
 
 
   // The normal Radio only has an array of strings for the value without a key
@@ -203,50 +203,38 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   // }
 
   // CheckboxListLabel with Label (CheckboxWithHeadline) 
-  public IHtmlTag CheckboxListWithLabel(string idString, bool required, Dictionary<string, string> valueDictionary, string label = "")
-  {
-    var inputLabel = Text.First(label, idString);
-    var item = Tag.Div();
+  // public IHtmlTag CheckboxListWithLabel(string idString, bool required, Dictionary<string, string> valueDictionary, string label = "")
+  // {
+  //   var inputLabel = Text.First(label, idString);
+  //   var item = Tag.Div();
 
-    foreach (var tempItem in valueDictionary)
-    {
-      var checkboxId = idString + tempItem.Value.ToLower().Replace(" ", "");
-      var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "checkbox" : "form-check");
-      var checkbox = Tag.Input().Attr("type", "checkbox").Id(checkboxId).Name(idString).Value(tempItem.Key);
-      SetRequired(checkbox, required);
+  //   foreach (var tempItem in valueDictionary)
+  //   {
+  //     var checkboxId = idString + tempItem.Value.ToLower().Replace(" ", "");
+  //     var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "checkbox" : "form-check");
+  //     var checkbox = Tag.Input().Attr("type", "checkbox").Id(checkboxId).Name(idString).Value(tempItem.Key);
+  //     SetRequired(checkbox, required);
 
-      if (CssClasses.IsBs3)
-      {
-        var checkboxLabel = Tag.Label(checkbox + tempItem.Value).For(checkboxId);
-        wrapper.Add(checkboxLabel);
-      }
-      else
-      {
-        checkbox.Class(Constants.ClassCheckbox).Attr("data-checkbox", idString);
-        var checkboxLabel = Tag.Label(tempItem.Value).Class("form-check-label").For(checkboxId);
-        wrapper.Add(checkbox + checkboxLabel);
-      }
+  //     if (CssClasses.IsBs3)
+  //     {
+  //       var checkboxLabel = Tag.Label(checkbox + tempItem.Value).For(checkboxId);
+  //       wrapper.Add(checkboxLabel);
+  //     }
+  //     else
+  //     {
+  //       checkbox.Class(Constants.ClassCheckbox).Attr("data-checkbox", idString);
+  //       var checkboxLabel = Tag.Label(tempItem.Value).Class("form-check-label").For(checkboxId);
+  //       wrapper.Add(checkbox + checkboxLabel);
+  //     }
 
-      item.Add(wrapper);
-    }
+  //     item.Add(wrapper);
+  //   }
 
-    return WrapWithLabel(idString, required, item, inputLabel);
-  }
+  //   return WrapWithLabel(idString, required, item, inputLabel);
+  // }
 
   // returns a input of type file with common attributes
-  public IHtmlTag File(string label, bool required, string acceptType, string idString = "")
-  {
-    var inputLabel = Text.First(label, idString);
 
-    var input = Tag.Input().Type("file").Id(idString).Name(label).Class("form-control-file");
-
-    if (Text.Has(acceptType))
-    {
-      input = input.Attr("accept", acceptType);
-    }
-    SetRequired(input, required, "LabelValidFile");
-    return WrapWithLabel(idString, required, input, inputLabel);
-  }
   // Input Sort wrong
   public IHtmlTag DynFile(string idString, bool required, string acceptType, string label = "")
   {

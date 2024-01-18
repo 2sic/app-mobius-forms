@@ -64,6 +64,7 @@
             case "email":
             case "boolean":
             case "terms":
+            case "picker":
               @formBuilder.Field(dynField)
               break;
             @* case "string":
@@ -119,7 +120,7 @@
                 if (gdprEnabled) { @FieldBuilder.Checkbox("Gdpr", true, true) }
               } 
               break; *@
-            case "picker":
+            @* case "picker": *@
               @* TODO: @2dg #3
                 - fields ValuesDropdownRadio, etc.
                 -  *@
@@ -127,27 +128,24 @@
                 <strong>@label</strong>
               } *@
 
-              if (pickerType == "radio") {
-                @formBuilder.Field(dynField)
-                @* @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label) *@
+              @* if (pickerType == "radio") {
+                @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label)
               }
               
               if (pickerType == "dropdown") {
-                @formBuilder.Field(dynField)
-                @* @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PickerKeyValues"))  *@
+                @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PickerKeyValues")) 
               }
 
               if (pickerType == "checkbox") {
 
                 if (field.Bool("CheckboxWithHeadline")) {
-                  @formBuilder.Field(dynField)
-                  @* @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label); *@
+                  @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label);
                 } else {
                   @formBuilder.Field(dynField)
-                  @* @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("PickerKeyValues"))) *@
+                  @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("PickerKeyValues")))
                 }
               }
-              break;
+              break; *@
             
             case "file":
               if(usePlaceholder){
@@ -222,7 +220,7 @@
 @Html.Partial("./parts/Assets.cshtml", new { formConfig })
 
 @* Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown *@
-@functions {
+@* @functions {
   Dictionary<string, string> GetKeyValue(string valuesDropdownRadio)
   {
     Dictionary<string, string> valueDictionaryRadio = new Dictionary<string, string>();
@@ -252,7 +250,7 @@
     }
     return valueDictionaryRadio;
   }
-}
+} *@
 
 
 

@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using System.Globalization;
-using System.Web.UI.WebControls;
 using ThisApp.Data;
 using ToSic.Razor.Blade;
-using ToSic.Razor.Html5;
 
 namespace ThisApp.Code
 {
@@ -40,17 +37,15 @@ namespace ThisApp.Code
 
     private IHtmlTag CheckboxPickerWithHeadline()
     {
-
-      var items = Tag.Div().Class(CssClasses.OutsideDiv); // same
+      var items = Tag.Div().Class(CssClasses.OutsideDiv);
       var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(CssClasses.Label);
       items.Add(inputLabels);
-      var container = Tag.Div().Class(CssClasses.LabelOutside); // same
+      var container = Tag.Div().Class(CssClasses.LabelOutside);
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
         var checkbox = GenerateCheckbox(item);
-        var wrapper = Tag.Div().Class(CssClasses.CheckboxWrapper); // same
-
+        var wrapper = Tag.Div().Class(CssClasses.CheckboxWrapper);
         if (CssClasses.IsBs3)
         {
           var radioLabel = Tag.Label(checkbox + item.Value).For(GenearateHtmlId(item));
@@ -71,10 +66,8 @@ namespace ThisApp.Code
 
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {
-
-      var checkboxId = GenearateHtmlId(item);
       var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox);
-      checkbox = SetBasics(checkbox, false, checkboxId);
+      checkbox = SetBasics(checkbox, false, GenearateHtmlId(item));
       return checkbox;
     }
 
