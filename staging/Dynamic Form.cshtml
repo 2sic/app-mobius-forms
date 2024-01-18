@@ -5,14 +5,14 @@
 @using ThisApp.Data
 @{
   var dynForm = MyItem;
-  var isReusedConfig = dynForm.Bool("ReuseConfig");
-  var usePlaceholder = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm.String("DesignField") == "placeholder";
-  
+  @* TODO:: Rename if dynForm child is solved and is also type *@
+  var dynForm2 = new DynForm(MyItem);
+
+  var isReusedConfig = dynForm2.ReuseConfig;
+  var usePlaceholder = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm2.DesignField == "placeholder";
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
   var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
-  var hasSets = formFieldsSets.Count() > 0;
-  var setIndex = 1;
 
   @* var FieldBuilder = GetCode("./tools/FieldBuilders.cs"); *@
   @* FieldBuilder.LabelInPlaceholder = usePlaceholder; *@
@@ -23,7 +23,7 @@
   // new
   var appRes = new AppResources(App.Resources);
   var dynFormConfig = new DynForm(formConfig);
-  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5, MyUser);
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5, MyUser, usePlaceholder);
   var formBuilder = new FormBuilder(this, formParams);
 }
 
@@ -39,12 +39,6 @@
 
       @foreach (var field in formFields) {
         var dynField = new DynFormField(field);
-        // Main Form Data
-        @* var fieldType = field.String("FieldType"); *@
-        @* var label = field.String("Title"); *@
-        @* var fieldId = field.Url("FieldId"); *@
-        @* var required = field.Bool("Required"); *@
-        @* var pickerType = field.String("PickerType"); *@
         
         var toolbar = isReusedConfig
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
@@ -52,111 +46,12 @@
 
         <div class="@dynField.FieldType" @toolbar>
 
-          @switch (dynField.FieldType) {
-            // new
-            case "string":
-            case "number":
-            case "email":
-            case "boolean":
-            case "terms":
-            case "picker":
-            case "file":
-            case "label":
-            case "hidden":
-              @formBuilder.Field(dynField)
-              break;
-
-            @* case "string":
-              if (field.Int("StringLines") == 0) {
-                @formBuilder.Field(dynField)
-              } else {
-                @FieldBuilder.Multiline(fieldId, label, required, false, "", field.Int("StringLines").ToString())
-              }
-              break; *@
-
-            @* case "email": *@
-              @* @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
-              break; *@
-            
-            @* case "number":
-              @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength"))
-              break; *@
-            
-           @*  case "boolean":
-                if (usePlaceholder) {
-                <strong>@label</strong>
-                 }
-              if (field.Bool("LabelRight")){
-                 @formBuilder.Field(dynField)
-                @FieldBuilder.Checkbox(fieldId, required, false, label)
-              } else {
-        
-                @FieldBuilder.CheckboxFieldAligment(fieldId, required, label)
-              }
-                 @formBuilder.Field(dynField)
-               *@
-              @* case "terms":
-               var termsEnabled = field.Bool("TermsEnabled");
-              var gdprEnabled = field.Bool("GdprEnabled");
-              
-              if (termsEnabled && gdprEnabled && field.Bool("TermsAndGdprCombined")) {
-                @FieldBuilder.Checkbox("TermsAll", true, true)
-              } else {
-                if (termsEnabled) { @FieldBuilder.Checkbox("Terms", true, true) }
-                if (gdprEnabled) { @FieldBuilder.Checkbox("Gdpr", true, true) }
-              } 
-              break; *@
-              @* if (usePlaceholder) {
-                <strong>@label</strong>
-              } *@
-
-              @* if (pickerType == "radio") 
-                @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label)
-              if (pickerType == "dropdown") 
-                @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PickerKeyValues")) 
-
-              if (pickerType == "checkbox") {
-
-                if (field.Bool("CheckboxWithHeadline")) {
-                  @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label);
-                } else {
-                  @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("PickerKeyValues")))
-                }
-              }
-              break; *@
-            
-            @* case "file": *@
-              @* if(usePlaceholder){
-                <strong>@label</strong>
-              } *@
-              @* @FieldBuilder.DynFile(fieldId, required, "", label)
-              break; *@
-
-            @* case "label":
-              <h4>@field.String("Title")</h4>
-              break; *@
-            
-            @* case "hidden":
-              if(MyUser.IsContentAdmin) {
-                <div class="alert alert-warning" role="alert">
-                <strong>Show Hidden Field for Admin</strong>
-                  @FieldBuilder.Text(fieldId, label, required, field.String("HiddenValue"), true)
-                </div>
-              } else @formBuilder.Field(dynField)
-                @FieldBuilder.Hidden(fieldId, label, field.String("HiddenValue"))
-              break; *@
-              
-            case "advanced":
-              @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field })
-              break;
-              
-            default:
-              <p>@dynField.PickerType</p>
-              <h3>Default: @dynField.FieldType</h3>
-              break;          
-          }
-
-        </div> @* toolbar div *@
+          @if(dynField.FieldType == "advanced" )  
+            @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field }) // Open Razor File
+           else  
+            @formBuilder.Field(dynField)
+    
+        </div> 
       }
     </div>
 
@@ -184,45 +79,3 @@
 </div>
 
 @Html.Partial("./parts/Assets.cshtml", new { formConfig })
-
-@* Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown *@
-@* @functions {
-  Dictionary<string, string> GetKeyValue(string valuesDropdownRadio)
-  {
-    Dictionary<string, string> valueDictionaryRadio = new Dictionary<string, string>();
-    foreach (var item in valuesDropdownRadio.Split('\n'))
-    {
-      var values = item.Split(':');
-      // If values has Key and Value
-      if (values.Length == 2)
-      {
-        string key = values[0].Trim();
-        string value = values[1].Trim();
-        valueDictionaryRadio[key] = value;
-      }
-      // If only have a Value
-      else if (values.Length == 1)
-      {
-        string key = values[0];
-        string value = values[0];
-        valueDictionaryRadio[key] = value;
-      }
-      else
-      {
-        string key = "Empty";
-        string value = "Empty";
-        valueDictionaryRadio[key] = value;
-      }
-    }
-    return valueDictionaryRadio;
-  }
-} *@
-
-
-
-
-
-
-
-
-

@@ -39,7 +39,7 @@ namespace ThisApp.Code
       "file" => new BuildFieldFile(FormParams, field),
       "hidden" => new BuildFieldHidden(FormParams, field),
       "label" => new BuildFieldLabel(FormParams, field),
-      _ => null,
+      _ => new BuildFieldException(FormParams, field),
     };
   }
 }

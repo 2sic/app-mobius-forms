@@ -1,3 +1,4 @@
+using System;
 using ToSic.Sxc.Data;
 using ToSic.Sxc.Data.Experimental;
 
@@ -8,6 +9,7 @@ namespace ThisApp.Data
     public DynForm(ITypedItem item) : base(item) { }
 
     public string DesignField => GetThis(fallback: "");
+    public Boolean ReuseConfig => GetThis(fallback: false);
 
   }
 }

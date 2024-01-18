@@ -25,15 +25,6 @@
   Dictionary<string, string> fieldHeaderDictionary = dynDataHelper.GetFieldDictionary(formId);
 } 
 
-@* <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.css" rel="stylesheet">
- 
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-      let table = new DataTable('#formdata');
-  });
-</script> *@
-
 <div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
   <strong>Total:</strong> @count 
   <strong>@App.Resources.String("LabelFirst"):</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@App.Resources.String("LabelLast"):</strong> @lastRecord.ToString("yyyy-MM-dd")
