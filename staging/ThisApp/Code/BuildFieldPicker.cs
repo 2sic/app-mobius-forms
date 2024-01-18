@@ -35,5 +35,10 @@ namespace ThisApp.Code
       return valueDictionaryRadio;
     }
 
+     protected string GenearateHtmlId(KeyValuePair<string, string> tempItem)
+    {
+      return Field.FieldId + tempItem.Value.ToLower().Replace(" ", "");;
+    }
+
   }
 }

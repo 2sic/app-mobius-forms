@@ -173,34 +173,34 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   // }
 
   // // Left the Value and rith e empty Checkbox
-  public IHtmlTag CheckboxList(string idString, bool required, Dictionary<string, string> valueDictionary)
-  {
-    var checkboxes = new List<IHtmlTag>();
+  // public IHtmlTag CheckboxList(string idString, bool required, Dictionary<string, string> valueDictionary)
+  // {
+  //   var checkboxes = new List<IHtmlTag>();
 
-    foreach (var tempItem in valueDictionary)
-    {
-      var checkboxId = idString + tempItem.Value.ToLower().Replace(" ", "");
-      var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "checkbox" : "form-check");
-      var checkbox = Tag.Input().Attr("type", "checkbox").Id(checkboxId).Name(idString).Value(tempItem.Key);
-      SetRequired(checkbox, required);
+  //   foreach (var tempItem in valueDictionary)
+  //   {
+  //     var checkboxId = idString + tempItem.Value.ToLower().Replace(" ", "");
+  //     var wrapper = Tag.Div().Class(CssClasses.IsBs3 ? "checkbox" : "form-check");
+  //     var checkbox = Tag.Input().Attr("type", "checkbox").Id(checkboxId).Name(idString).Value(tempItem.Key);
+  //     SetRequired(checkbox, required);
 
-      if (CssClasses.IsBs3)
-      {
-        var checkboxLabel = Tag.Label(checkbox + "").For(checkboxId);
-        wrapper.Add(checkboxLabel);
-      }
-      else
-      {
-        checkbox.Class(Constants.ClassCheckbox).Attr("data-checkbox", idString);
-        var checkboxLabel = Tag.Label("").Class("form-check-label").For(checkboxId);
-        wrapper.Add(checkbox + checkboxLabel);
-      }
+  //     if (CssClasses.IsBs3)
+  //     {
+  //       var checkboxLabel = Tag.Label(checkbox + "").For(checkboxId);
+  //       wrapper.Add(checkboxLabel);
+  //     }
+  //     else
+  //     {
+  //       checkbox.Class(Constants.ClassCheckbox).Attr("data-checkbox", idString);
+  //       var checkboxLabel = Tag.Label("").Class("form-check-label").For(checkboxId);
+  //       wrapper.Add(checkbox + checkboxLabel);
+  //     }
 
-      checkboxes.Add(WrapWithLabel(checkboxId, required, wrapper, tempItem.Value));
-    }
+  //     checkboxes.Add(WrapWithLabel(checkboxId, required, wrapper, tempItem.Value));
+  //   }
 
-    return Tag.Div().Add(checkboxes);
-  }
+  //   return Tag.Div().Add(checkboxes);
+  // }
 
   // CheckboxListLabel with Label (CheckboxWithHeadline) 
   public IHtmlTag CheckboxListWithLabel(string idString, bool required, Dictionary<string, string> valueDictionary, string label = "")

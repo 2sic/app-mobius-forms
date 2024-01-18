@@ -47,11 +47,14 @@ namespace ThisApp.Code
     /// <param name="field"></param>
     /// <param name="item"></param>
     /// <returns></returns>
-    protected TTag SetBasics<TTag>(TTag item, bool setDefaultClass = true) where TTag : ToSic.Razor.Html5.Input
+    protected TTag SetBasics<TTag>(TTag item, bool setDefaultClass = true, string customId = "") where TTag : ToSic.Razor.Html5.Input
     {
       var result = item
-        .Id(Field.FieldId)
         .Placeholder(PlaceholderLabel());
+      if (customId != "")
+        result = result.Id(customId);
+      else
+        result = result.Id(Field.FieldId);
       if (setDefaultClass) result = result
         .Class(CssClasses.InputControl);
 

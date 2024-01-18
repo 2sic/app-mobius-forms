@@ -127,23 +127,24 @@
                 <strong>@label</strong>
               } *@
 
-              @* if (pickerType == "radio") {
+              if (pickerType == "radio") {
                 @formBuilder.Field(dynField)
-                @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label)
-              } *@
+                @* @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label) *@
+              }
               
-              @* if (pickerType == "dropdown") {
+              if (pickerType == "dropdown") {
                 @formBuilder.Field(dynField)
-                @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PickerKeyValues")) 
-              } *@
+                @* @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PickerKeyValues"))  *@
+              }
 
               if (pickerType == "checkbox") {
 
                 if (field.Bool("CheckboxWithHeadline")) {
-                  @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label);
+                  @formBuilder.Field(dynField)
+                  @* @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label); *@
                 } else {
                   @formBuilder.Field(dynField)
-                  @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("PickerKeyValues")))
+                  @* @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("PickerKeyValues"))) *@
                 }
               }
               break;

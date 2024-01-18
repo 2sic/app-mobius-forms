@@ -7,6 +7,7 @@ namespace ThisApp.Code
     /// Relevant for scenarios where the code will have to do more than just set a class
     /// </summary>
     public bool IsBs3 { get; set; } = false;
+    public string OutsideDiv { get; set; }
     public string InputControl { get; set; } = "form-control";
     public string LabelOutside { get; set; }
     public string LabelInside { get; set; }
@@ -21,6 +22,7 @@ namespace ThisApp.Code
     public static CssClasses Bs5 = new CssClasses()
     {
       IsBs3 = false,
+      OutsideDiv = "app-mobius5-form-fields row mb-3",
       Label = "col-12 col-md-3",
       LabelOutside = "col-12 col-sm-9",
       LabelInside = "",
@@ -32,6 +34,7 @@ namespace ThisApp.Code
     public static CssClasses Bs3 = new CssClasses()
     {
       IsBs3 = true,
+      OutsideDiv = "app-mobius5-form-fields row mb-3",
       Label = "col col-xs-12 col-sm-3",
       LabelOutside = "col col-xs-12 col-sm-9",
       LabelInside = "",
