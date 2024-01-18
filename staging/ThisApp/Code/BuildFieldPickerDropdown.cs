@@ -19,7 +19,7 @@ namespace ThisApp.Code
     private Select Dropdown()
     {
       var dropdown = Tag.Select().Class(CssClasses.InputControl);
-
+      
       if (Field.MultiSelect) { dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId); }
 
       dropdown.Add(Tag.Option(Text.First(Field.PlaceHolderSelect, Resources.LabelSelect)));

@@ -1,3 +1,4 @@
+using DotNetNuke.Services.FileSystem;
 using ThisApp.Data;
 using ToSic.Razor.Blade;
 using ToSic.Razor.Html5;
@@ -13,11 +14,12 @@ namespace ThisApp.Code
     /// </summary>
     public override IHtmlTag GetTag()
     {
-      // If label is to the left, behave as default
-      if (!Field.LabelRight) return SetBasicsAndWrapInLabel(GetCheckbox(), setDefaultClass: false);
 
-      // If label right 
-      return CheckboxWithLabelRight(GetCheckbox());
+      // If label right or floating labels, wrap in label
+      if (Field.LabelRight || Form.UseFloatingLabels) return CheckboxWithLabelRight(GetCheckbox());
+
+      // If label is to the left, behave as default
+      return SetBasicsAndWrapInLabel(GetCheckbox(), setDefaultClass: false);
     }
 
     /// <summary>

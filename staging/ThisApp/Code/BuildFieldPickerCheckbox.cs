@@ -23,7 +23,7 @@ namespace ThisApp.Code
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
-        var items = Tag.Div().Class(CssClasses.OutsideDiv);
+        var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
 
         var wrapper = Tag.Div(GenerateCheckbox(item)).Class(CssClasses.CheckboxWrapper);
         var container = Tag.Div(wrapper).Class(CssClasses.LabelOutside);
@@ -41,7 +41,7 @@ namespace ThisApp.Code
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
-        var items = Tag.Div().Class(CssClasses.OutsideDiv);
+        var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
         var checkbox = GenerateCheckbox(item);
         var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
@@ -59,7 +59,7 @@ namespace ThisApp.Code
 
     private IHtmlTag CheckboxPickerWithHeadline()
     {
-      var items = Tag.Div().Class(CssClasses.OutsideDiv);
+      var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
       var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(CssClasses.Label);
       items.Add(inputLabels);
       var container = Tag.Div().Class(CssClasses.LabelOutside);

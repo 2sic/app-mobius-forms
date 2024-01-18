@@ -10,10 +10,6 @@ namespace ThisApp.Code
   public abstract class BuildFieldBase
   {
 
-    // handles the visibility of a label or a placeholder
-    // TODO: move to DynForm
-    public bool LabelInPlaceholder = false;
-
     /// <summary>
     /// Constructor which ensures that this class has the same context as the parent, eg. the Kit etc.
     /// </summary>
@@ -66,7 +62,7 @@ namespace ThisApp.Code
 
 
     protected string PlaceholderLabel()
-      => "🌟" + (LabelInPlaceholder ? Field.Title + (Field.Required ? " *" : "") : "");
+      => Form.UseFloatingLabels ? Field.Title + (Field.Required ? " *" : "") : "";
 
     protected TTag SetRequired<TTag>(TTag item, string specialReqMessage = default) where TTag : class, IHtmlTag
     {
@@ -82,22 +78,39 @@ namespace ThisApp.Code
 
     protected IHtmlTag WrapInLabel(IHtmlTag inputHtml)
     {
+
       var htmlTag = Tag.Div().Class(FieldWrapperClasses());
 
       // If the label is _not_ in the placeholder, add the label first
-      if (!LabelInPlaceholder)
+      if (!Form.UseFloatingLabels)
+      {
         htmlTag = htmlTag.Add(
-          Tag.Label(Text.First(Field.Title, Field.FieldId))
-            .Class(LabelClasses(Field.Required))
-            .For(Field.FieldId)
+            Tag.Label(Text.First(Field.Title, Field.FieldId))
+                .Class(LabelClasses(Field.Required))
+                .For(Field.FieldId)
         );
+        htmlTag = htmlTag.Add(Tag.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside));
+      }
+      else
+      {
+        htmlTag = htmlTag.Add(inputHtml);
+        htmlTag = htmlTag.Add(
+            Tag.Label(Text.First(Field.Title, Field.FieldId))
+                .Class(LabelClasses(Field.Required))
+                .For(Field.FieldId)
+        );
+        
+      }
 
-      return htmlTag.Add(Tag.Div(inputHtml).Class(LabelInPlaceholder ? CssClasses.LabelInside : CssClasses.LabelOutside));
+      return htmlTag;
+
+      // return htmlTag.Add(inputHtml);
     }
 
     private string FieldWrapperClasses()
     {
-      return $"{Constants.ClassMobiusField} {(LabelInPlaceholder ? "" : "row ")}{CssClasses.Wrapper}";
+      return $"{Constants.ClassMobiusField} {(Form.UseFloatingLabels ? "form-floating " : "row ")}{CssClasses.Wrapper}";
+      // return $"{Constants.ClassMobiusField} {(Form.UseFloatingLabels ? "" : "row ")}{CssClasses.Wrapper}";
     }
 
     private string LabelClasses(bool required)

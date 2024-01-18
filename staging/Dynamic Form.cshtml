@@ -9,13 +9,10 @@
   var dynForm2 = new DynForm(MyItem);
 
   var isReusedConfig = dynForm2.ReuseConfig;
-  var usePlaceholder = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm2.DesignField == "placeholder";
+  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm2.DesignField == "placeholder";
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
   var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
-
-  @* var FieldBuilder = GetCode("./tools/FieldBuilders.cs"); *@
-  @* FieldBuilder.LabelInPlaceholder = usePlaceholder; *@
   
   var formHelper = new FormHelpers(this);
   var dynDataHelper = GetCode("./tools/DynData.cs");
@@ -23,7 +20,7 @@
   // new
   var appRes = new AppResources(App.Resources);
   var dynFormConfig = new DynForm(formConfig);
-  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5, MyUser, usePlaceholder);
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5, MyUser, useFloatingLabels);
   var formBuilder = new FormBuilder(this, formParams);
 }
 

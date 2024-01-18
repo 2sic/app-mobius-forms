@@ -6,13 +6,13 @@ namespace ThisApp.Code
 {
   public class FormBuildParameters
   {
-    public FormBuildParameters(AppResources resources, DynForm form, CssClasses cssClasses, ICmsUser user, bool usePlaceholder )
+    public FormBuildParameters(AppResources resources, DynForm form, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels )
     {
       Resources = resources;
       Form = form;
       CssClasses = cssClasses;
       User = user;
-      UsePlaceholder = usePlaceholder;
+      UseFloatingLabels = useFloatingLabels;
     }
 
     public AppResources Resources { get; }
@@ -22,7 +22,7 @@ namespace ThisApp.Code
     public bool IsBs3 => CssClasses.IsBs3;
 
     public ICmsUser User { get; }
-    public Boolean UsePlaceholder { get; }
+    public Boolean UseFloatingLabels { get; }
 
   }
 }
