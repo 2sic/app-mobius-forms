@@ -8,6 +8,8 @@ namespace ThisApp.Data
     public DynFormField(ITypedItem item) : base(item) { }
 
     public string FieldId => GetThis(fallback: "");
+    public string Title => GetThis(fallback: "");
+
 
     public string FieldType => GetThis(fallback: "");
 
@@ -57,5 +59,14 @@ namespace ThisApp.Data
     public string PlaceHolderSelect => GetThis(fallback: "");
 
     #endregion
+
+    #region Hidden
+    public string HiddenValue => GetThis(fallback: "");
+    #endregion
+
+    #region Advanced
+    public string RazorFile => GetThis(fallback: "");
+    #endregion
+
   }
 }

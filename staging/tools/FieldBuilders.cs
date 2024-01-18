@@ -8,73 +8,73 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   private CssClasses _cssClasses;
 
   // handles the visibility of a label or a placeholder
-  public bool LabelInPlaceholder = false;
+  // public bool LabelInPlaceholder = false;
 
-  #region Koi based class selection
+  // #region Koi based class selection
 
   // returns form-classes based on whether label is shown as placeholder or besides form - as row  
-  private string FieldWrapperClasses()
-  {
-    return $"{Constants.ClassMobiusField} {(LabelInPlaceholder ? "" : "row ")}{CssClasses.Wrapper}";
-  }
+  // private string FieldWrapperClasses()
+  // {
+  //   return $"{Constants.ClassMobiusField} {(LabelInPlaceholder ? "" : "row ")}{CssClasses.Wrapper}";
+  // }
 
   // Choose CSS classes based on the framework
   // if you customize this, you probably know what css framework you want,
   // in which case you can skip framework detection and just write the classes
 
   // Choose CSS classes for the labels
-  private string LabelClasses(bool required)
-  {
-    return "control-label "
-      + (required ? "app-mobius5-field-required " : "")
-      + " " + CssClasses.Label;
-  }
+  // private string LabelClasses(bool required)
+  // {
+  //   return "control-label "
+  //     + (required ? "app-mobius5-field-required " : "")
+  //     + " " + CssClasses.Label;
+  // }
 
-  #endregion
+  // #endregion
 
   // Add a placeholder text to the inputs
-  private string PhLabel(string label, bool required)
-  {
-    return LabelInPlaceholder ? label + (required ? " *" : "") : ""; ;
-  }
+  // private string PhLabel(string label, bool required)
+  // {
+  //   return LabelInPlaceholder ? label + (required ? " *" : "") : ""; ;
+  // }
 
-  internal TTag SetRequired<TTag>(TTag item, bool required, string key = null) where TTag : class, IHtmlTag
-  {
-    if (!required) return item;
+  // internal TTag SetRequired<TTag>(TTag item, bool required, string key = null) where TTag : class, IHtmlTag
+  // {
+  //   if (!required) return item;
 
-    var message = key != null
-      ? App.Resources.String(key)
-      : App.Resources.String("LabelRequired");
+  //   var message = key != null
+  //     ? App.Resources.String(key)
+  //     : App.Resources.String("LabelRequired");
 
-    item = item.Attr("data-pristine-required-message", message).Attr("required") as TTag;
-    return item;
-  }
+  //   item = item.Attr("data-pristine-required-message", message).Attr("required") as TTag;
+  //   return item;
+  // }
 
   // returns a Hidden Input
-  public IHtmlTag Hidden(string idString, string label = "", string value = "")
-  {
-    var hiddenInput = Tag.Input().Type("hidden").Id(idString).Value(value);
+  // public IHtmlTag Hidden(string idString, string label = "", string value = "")
+  // {
+  //   var hiddenInput = Tag.Input().Type("hidden").Id(idString).Value(value);
 
-    var field = Tag.Div(hiddenInput);
+  //   var field = Tag.Div(hiddenInput);
 
-    if (!string.IsNullOrEmpty(label))
-    {
-      field = field.Add(
-          Tag.Label(label)
-              .Attr("hidden")
-              .For(idString)
-      );
-    }
+  //   if (!string.IsNullOrEmpty(label))
+  //   {
+  //     field = field.Add(
+  //         Tag.Label(label)
+  //             .Attr("hidden")
+  //             .For(idString)
+  //     );
+  //   }
 
-    return field;
-  }
+  //   return field;
+  // }
 
   // returns an input of type email with common attributes and a possible placeholder
   // public IHtmlTag EMail(string idString, string label, bool required, bool recipientEmail = false)
   // {
   //   var item = Tag.Input().Type("email").Id(idString).Placeholder(PhLabel(label, required)).Class(CssClasses.InputControl);
   //   SetRequired(item, required, "LabelValidEmail");
-    
+
   //   if (recipientEmail) { item.Attr("mail", "recipientEmail"); }
 
   //   return WrapWithLabel(idString, required, item, label);
@@ -88,14 +88,14 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   //   SetRequired(item, required);
 
   //   if (multiSelect) { item.Multiple().Attr("data-multiple-dropdown", idString); }
-    
+
   //   item.Add(Tag.Option(Text.First(placeHolderSelect, App.Resources.String("LabelSelect"))));
-    
+
   //   foreach (var optionItem in valueDictionary)
   //   {
   //     item.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));
   //   }
-    
+
   //   return WrapWithLabel(idString, required, item, label);
   // }
 
@@ -127,7 +127,7 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   //   return WrapWithLabel(idString, required, item, inputLabel);
   // }
 
-// TODO:: In BuildFieldCheckbox
+  // TODO:: In BuildFieldCheckbox
   // returns a checkbox with common attributes
   // public IHtmlTag Checkbox(string idString, bool required, bool terms = false, string label = "")
   // {
@@ -236,39 +236,39 @@ public class FieldBuilders : Custom.Hybrid.CodeTyped
   // returns a input of type file with common attributes
 
   // Input Sort wrong
-  public IHtmlTag DynFile(string idString, bool required, string acceptType, string label = "")
-  {
-    var inputLabel = Text.First(label, idString);
+  // public IHtmlTag DynFile(string idString, bool required, string acceptType, string label = "")
+  // {
+  //   var inputLabel = Text.First(label, idString);
 
-    var input = Tag.Input().Type("file").Id(idString).Name(label).Class("form-control-file");
+  //   var input = Tag.Input().Type("file").Id(idString).Name(label).Class("form-control-file");
 
-    if (Text.Has(acceptType))
-    {
-      input = input.Attr("accept", acceptType);
-    }
-    SetRequired(input, required, "LabelValidFile");
-    return WrapWithLabel(idString, required, input, inputLabel);
-  }
+  //   if (Text.Has(acceptType))
+  //   {
+  //     input = input.Attr("accept", acceptType);
+  //   }
+  //   SetRequired(input, required, "LabelValidFile");
+  //   return WrapWithLabel(idString, required, input, inputLabel);
+  // }
 
   // shows a wrapping div with choosen content
-  private IHtmlTag WrapWithLabel(string idString, bool required, IHtmlTag items, string label = "")
-  {
-    var inputWrapperClasses = CssClasses.IsBs3 ? "col col-xs-12 col-sm-9" : "col-12 col-sm-9";
-    // TODO: SEEMS TO try to i18n the label, but that doesn't make sense
-    var labelTranslated = Text.First(label, App.Resources.String("Label" + idString, required: false));
-    var field = Tag.Div().Class(FieldWrapperClasses());
+  // private IHtmlTag WrapWithLabel(string idString, bool required, IHtmlTag items, string label = "")
+  // {
+  //   var inputWrapperClasses = CssClasses.IsBs3 ? "col col-xs-12 col-sm-9" : "col-12 col-sm-9";
+  //   // TODO: SEEMS TO try to i18n the label, but that doesn't make sense
+  //   var labelTranslated = Text.First(label, App.Resources.String("Label" + idString, required: false));
+  //   var field = Tag.Div().Class(FieldWrapperClasses());
 
-    // If the label is _not_ in the placeholder, add the label first
-    if (!LabelInPlaceholder)
-    {
-      field = field.Add(
-        Tag.Label(Text.First(labelTranslated, idString))
-          .Class(LabelClasses(required))
-          .For(idString)
-      );
-    }
+  //   // If the label is _not_ in the placeholder, add the label first
+  //   if (!LabelInPlaceholder)
+  //   {
+  //     field = field.Add(
+  //       Tag.Label(Text.First(labelTranslated, idString))
+  //         .Class(LabelClasses(required))
+  //         .For(idString)
+  //     );
+  //   }
 
-    return field.Add(Tag.Div(items).Class(!LabelInPlaceholder ? inputWrapperClasses : ""));
-  }
+  //   return field.Add(Tag.Div(items).Class(!LabelInPlaceholder ? inputWrapperClasses : ""));
+  // }
 
 }

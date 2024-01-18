@@ -14,7 +14,7 @@ namespace ThisApp.Code
     {
       if (Field.CheckboxWithHeadline) return CheckboxPickerWithHeadline();
 
-      return CheckboxPickerBasic();
+      return CheckboxPickerBasicNew();
     }
 
     private IHtmlTag CheckboxPickerBasic()
@@ -35,6 +35,28 @@ namespace ThisApp.Code
       return div;
     }
 
+    private IHtmlTag CheckboxPickerBasicNew()
+    {
+      var div = Tag.Div();
+
+      foreach (var item in GetKeyValue(Field.PickerKeyValues))
+      {
+        var items = Tag.Div().Class(CssClasses.OutsideDiv);
+        var checkbox = GenerateCheckbox(item);
+        var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
+
+        var container = Tag.Div().Class(CssClasses.LabelOutside);
+        var label = Tag.Label(item.Value).Class(CssClasses.Label).For(GenearateHtmlId(item));
+
+        if(CssClasses.IsBs3) container.Add(checkbox);
+        else container.Add(wrapper);
+
+        items.Add(label, container);
+        div.Add(items);
+      }
+      return div;
+    }
+
     private IHtmlTag CheckboxPickerWithHeadline()
     {
       var items = Tag.Div().Class(CssClasses.OutsideDiv);
@@ -48,14 +70,14 @@ namespace ThisApp.Code
         var wrapper = Tag.Div().Class(CssClasses.CheckboxWrapper);
         if (CssClasses.IsBs3)
         {
-          var radioLabel = Tag.Label(checkbox + item.Value).For(GenearateHtmlId(item));
-          wrapper.Add(radioLabel);
+          var checkboxLabel = Tag.Label(checkbox + item.Value).For(GenearateHtmlId(item));
+          wrapper.Add(checkboxLabel);
         }
         else
         {
           checkbox.Class(Constants.ClassCheckbox);
-          var radioLabel = Tag.Label(item.Value).Class("form-check-label").For(GenearateHtmlId(item));
-          wrapper.Add(checkbox, radioLabel);
+          var checkboxLabel = Tag.Label(item.Value).Class("form-check-label").For(GenearateHtmlId(item));
+          wrapper.Add(checkbox, checkboxLabel);
         }
         container.Add(wrapper);
       }

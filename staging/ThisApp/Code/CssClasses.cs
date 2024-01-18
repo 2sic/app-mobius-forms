@@ -34,14 +34,13 @@ namespace ThisApp.Code
     public static CssClasses Bs3 = new CssClasses()
     {
       IsBs3 = true,
-      OutsideDiv = "app-mobius5-form-fields row mb-3",
+      OutsideDiv = "app-mobius5-form-fields row form-group",
       Label = "col col-xs-12 col-sm-3",
       LabelOutside = "col col-xs-12 col-sm-9",
       LabelInside = "",
       Wrapper = "form-group",
       RadioWrapper = "radio",
       CheckboxWrapper = "checkbox",
-
 
     };
 

@@ -14,8 +14,8 @@
   var hasSets = formFieldsSets.Count() > 0;
   var setIndex = 1;
 
-  var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
-  FieldBuilder.LabelInPlaceholder = usePlaceholder;
+  @* var FieldBuilder = GetCode("./tools/FieldBuilders.cs"); *@
+  @* FieldBuilder.LabelInPlaceholder = usePlaceholder; *@
   
   var formHelper = new FormHelpers(this);
   var dynDataHelper = GetCode("./tools/DynData.cs");
@@ -23,7 +23,7 @@
   // new
   var appRes = new AppResources(App.Resources);
   var dynFormConfig = new DynForm(formConfig);
-  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5);
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5, MyUser);
   var formBuilder = new FormBuilder(this, formParams);
 }
 
@@ -39,25 +39,20 @@
 
       @foreach (var field in formFields) {
         var dynField = new DynFormField(field);
-
         // Main Form Data
-        var label = field.String("Title");
-        var fieldId = field.Url("FieldId");
-        var fieldType = field.String("FieldType");
-        var required = field.Bool("Required");
-        var pickerType = field.String("PickerType");
+        @* var fieldType = field.String("FieldType"); *@
+        @* var label = field.String("Title"); *@
+        @* var fieldId = field.Url("FieldId"); *@
+        @* var required = field.Bool("Required"); *@
+        @* var pickerType = field.String("PickerType"); *@
         
         var toolbar = isReusedConfig
-          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarReuseInfo"), background: "white"))
-          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + label)).MoveDown().New().Remove();
+          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
+          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + dynField.Title)).MoveDown().New().Remove();
 
+        <div class="@dynField.FieldType" @toolbar>
 
-        @:<div class="@fieldType" @toolbar>
-          if (hasSets && setIndex > 1) {
-            @:<div class="set">
-          }
-
-          switch (fieldType) {
+          @switch (dynField.FieldType) {
             // new
             case "string":
             case "number":
@@ -65,21 +60,21 @@
             case "boolean":
             case "terms":
             case "picker":
+            case "file":
+            case "label":
+            case "hidden":
               @formBuilder.Field(dynField)
               break;
+
             @* case "string":
               if (field.Int("StringLines") == 0) {
                 @formBuilder.Field(dynField)
               } else {
                 @FieldBuilder.Multiline(fieldId, label, required, false, "", field.Int("StringLines").ToString())
               }
-              
               break; *@
 
             @* case "email": *@
-              @* TODO: @2dg #1
-                ✅ create DynFormField.RecipientMail
-                - create BuildFieldEMail.cs  *@
               @* @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
               break; *@
             
@@ -88,11 +83,6 @@
               break; *@
             
            @*  case "boolean":
-              TODO: @2dg #2
-
-                - DynFormField.LabelRight (what does it do?)
-                - create BuildFieldCheckbox.cs
-                - create ??? (discuss w/2dm, the name is not clear what it should do) 
                 if (usePlaceholder) {
                 <strong>@label</strong>
                  }
@@ -105,10 +95,6 @@
               }
                  @formBuilder.Field(dynField)
                *@
-
-              @* TODO: @2dg 
-                - checkbox with Terms
-                -  *@
               @* case "terms":
                var termsEnabled = field.Bool("TermsEnabled");
               var gdprEnabled = field.Bool("GdprEnabled");
@@ -120,77 +106,57 @@
                 if (gdprEnabled) { @FieldBuilder.Checkbox("Gdpr", true, true) }
               } 
               break; *@
-            @* case "picker": *@
-              @* TODO: @2dg #3
-                - fields ValuesDropdownRadio, etc.
-                -  *@
               @* if (usePlaceholder) {
                 <strong>@label</strong>
               } *@
 
-              @* if (pickerType == "radio") {
+              @* if (pickerType == "radio") 
                 @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label)
-              }
-              
-              if (pickerType == "dropdown") {
+              if (pickerType == "dropdown") 
                 @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PickerKeyValues")) 
-              }
 
               if (pickerType == "checkbox") {
 
                 if (field.Bool("CheckboxWithHeadline")) {
                   @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("PickerKeyValues")), label);
                 } else {
-                  @formBuilder.Field(dynField)
                   @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("PickerKeyValues")))
                 }
               }
               break; *@
             
-            case "file":
-              if(usePlaceholder){
+            @* case "file": *@
+              @* if(usePlaceholder){
                 <strong>@label</strong>
-              }
-            
-              @FieldBuilder.DynFile(fieldId, required, "", label)
-              break;
+              } *@
+              @* @FieldBuilder.DynFile(fieldId, required, "", label)
+              break; *@
 
-            case "label":
-              if(field.Bool("IsSet")) {
-                if(setIndex > 1) {
-                  
-                }
-
-                setIndex++;
-              }
-              <h4>@label</h4>
-              break;
+            @* case "label":
+              <h4>@field.String("Title")</h4>
+              break; *@
             
-            case "hidden":
+            @* case "hidden":
               if(MyUser.IsContentAdmin) {
                 <div class="alert alert-warning" role="alert">
                 <strong>Show Hidden Field for Admin</strong>
                   @FieldBuilder.Text(fieldId, label, required, field.String("HiddenValue"), true)
                 </div>
-              } else {
+              } else @formBuilder.Field(dynField)
                 @FieldBuilder.Hidden(fieldId, label, field.String("HiddenValue"))
-              }
-              break;
-            
+              break; *@
+              
             case "advanced":
-              @Html.Partial("./custom-fields/" + @field.String("RazorFile")  , new { field })
+              @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field })
               break;
               
             default:
-              <p>@pickerType</p>
-              <h3>Default: @fieldType</h3>
+              <p>@dynField.PickerType</p>
+              <h3>Default: @dynField.FieldType</h3>
               break;          
           }
-          
-        if (hasSets && setIndex > 1) {
-          @:</div>
-        }
-        @:</div> @* toolbar div *@
+
+        </div> @* toolbar div *@
       }
     </div>
 
@@ -207,7 +173,7 @@
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
         @if (dataPairs.Count() == 0){
-          @App.Resources.String("LabelFromDataAvaible")
+          @appRes.LabelFromDataAvaible
         } else {
           <a class="btn btn-primary" href="@Link.To(parameters: "id=" + MyContext.Module.Id + "&mid=" + MyContext.Module.Id)" target="_blank">Form Data</a>
           <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>

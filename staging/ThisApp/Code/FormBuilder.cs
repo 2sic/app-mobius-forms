@@ -36,7 +36,9 @@ namespace ThisApp.Code
       "picker" when field.PickerType == "radio" => new BuildFieldPickerRadio(FormParams, field),
       "picker" when field.PickerType == "dropdown" => new BuildFieldPickerDropdown(FormParams, field),
       "picker" when field.PickerType == "checkbox" => new BuildFieldPickerCheckbox(FormParams, field),
-
+      "file" => new BuildFieldFile(FormParams, field),
+      "hidden" => new BuildFieldHidden(FormParams, field),
+      "label" => new BuildFieldLabel(FormParams, field),
       _ => null,
     };
   }
