@@ -9,7 +9,7 @@
   var dynForm2 = new DynForm(MyItem);
 
   var isReusedConfig = dynForm2.ReuseConfig;
-  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm2.DesignField == "placeholder";
+  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "floatingLabel" : dynForm2.DesignField == "floatingLabel";
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
   var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
@@ -17,10 +17,10 @@
   var formHelper = new FormHelpers(this);
   var dynDataHelper = GetCode("./tools/DynData.cs");
 
-  // new
   var appRes = new AppResources(App.Resources);
   var dynFormConfig = new DynForm(formConfig);
-  var formParams = new FormBuildParameters(appRes, dynFormConfig, Kit.Css.Is("bs3") ? CssClasses.Bs3 : CssClasses.Bs5, MyUser, useFloatingLabels);
+  var bootrstrapCssClass = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, bootrstrapCssClass , MyUser, useFloatingLabels);
   var formBuilder = new FormBuilder(this, formParams);
 }
 
@@ -41,13 +41,11 @@
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
           : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + dynField.Title)).MoveDown().New().Remove();
 
-        <div class="@dynField.FieldType" @toolbar>
-
+        <div @toolbar>
           @if(dynField.FieldType == "advanced" )  
             @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field }) // Open Razor File
            else  
-            @formBuilder.Field(dynField)
-    
+            @formBuilder.Field(dynField) // All other FieldTypes
         </div> 
       }
     </div>

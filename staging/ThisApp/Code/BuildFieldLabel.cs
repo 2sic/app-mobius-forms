@@ -11,7 +11,7 @@ namespace ThisApp.Code
 
     private IHtmlTag FieldLabel()
     {
-      var label = Tag.H4(Field.Title).Class(CssClasses.Label);
+      var label = Tag.H4(Field.Title);
       return label;
     }
   }

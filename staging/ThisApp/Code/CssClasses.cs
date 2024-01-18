@@ -3,7 +3,7 @@ namespace ThisApp.Code
   public class CssClasses
   {
     /// <summary>
-    /// Info if the set of classes is for Bootstrap 3 or 5.
+    /// Info if the set of classes is for Bootstrap 3 4 or 5.
     /// Relevant for scenarios where the code will have to do more than just set a class
     /// </summary>
     public bool IsBs3 { get; set; } = false;
@@ -16,6 +16,8 @@ namespace ThisApp.Code
     public string Wrapper { get; set; }
     public string RadioWrapper { get; set; }
     public string CheckboxWrapper { get; set; }
+    public string FloatingLabelHidden { get; set; }
+
 
 
 
@@ -31,6 +33,22 @@ namespace ThisApp.Code
       Wrapper = "mb-3",
       RadioWrapper = "form-check",
       CheckboxWrapper = "form-check",
+      FloatingLabelHidden = "",
+    };
+
+    public static CssClasses Bs4 = new CssClasses()
+    {
+      IsBs3 = false,
+      // Same as Bs5
+      OutsideDiv = " row mb-3",
+      Label = "col-12 col-md-3",
+      LabelOutside = "col-12 col-sm-9",
+      LabelInside = "",
+      Wrapper = "mb-3",
+      RadioWrapper = "form-check",
+      CheckboxWrapper = "form-check",
+
+      FloatingLabelHidden = "d-none",
     };
 
     public static CssClasses Bs3 = new CssClasses()
@@ -43,7 +61,7 @@ namespace ThisApp.Code
       Wrapper = "form-group",
       RadioWrapper = "radio",
       CheckboxWrapper = "checkbox",
-
+      FloatingLabelHidden = "hidden",
     };
 
   }

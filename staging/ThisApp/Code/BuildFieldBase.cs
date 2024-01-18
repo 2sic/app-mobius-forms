@@ -81,7 +81,7 @@ namespace ThisApp.Code
 
       var htmlTag = Tag.Div().Class(FieldWrapperClasses());
 
-      // If the label is _not_ in the placeholder, add the label first
+      // Label Right
       if (!Form.UseFloatingLabels)
       {
         htmlTag = htmlTag.Add(
@@ -91,7 +91,7 @@ namespace ThisApp.Code
         );
         htmlTag = htmlTag.Add(Tag.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside));
       }
-      else
+      else // Floating Labels (bs5)
       {
         htmlTag = htmlTag.Add(inputHtml);
         htmlTag = htmlTag.Add(
@@ -99,25 +99,21 @@ namespace ThisApp.Code
                 .Class(LabelClasses(Field.Required))
                 .For(Field.FieldId)
         );
-        
       }
-
       return htmlTag;
-
-      // return htmlTag.Add(inputHtml);
     }
 
     private string FieldWrapperClasses()
     {
       return $"{Constants.ClassMobiusField} {(Form.UseFloatingLabels ? "form-floating " : "row ")}{CssClasses.Wrapper}";
-      // return $"{Constants.ClassMobiusField} {(Form.UseFloatingLabels ? "" : "row ")}{CssClasses.Wrapper}";
     }
 
     private string LabelClasses(bool required)
     {
       return "control-label "
         + (required ? "app-mobius5-field-required " : "")
-        + " " + CssClasses.Label;
+        + " " + CssClasses.Label
+        + " " + CssClasses.FloatingLabelHidden; // Bs3 and Bs4 only - hidden Label
     }
 
   }
