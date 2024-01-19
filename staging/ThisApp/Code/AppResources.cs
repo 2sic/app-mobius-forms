@@ -1,9 +1,8 @@
 using ToSic.Sxc.Data;
-using ToSic.Sxc.Data.Experimental;
 
 namespace ThisApp.Data
 {
-  public partial class AppResources : TypedItem
+  public partial class AppResources : Custom.Data.Item16Experimental
   {
     public AppResources(ITypedItem item) : base(item) { }
 

@@ -1,10 +1,9 @@
 using System;
 using ToSic.Sxc.Data;
-using ToSic.Sxc.Data.Experimental;
 
 namespace ThisApp.Data
 {
-  public partial class DynForm : TypedItem
+  public partial class DynForm : Custom.Data.Item16Experimental
   {
     public DynForm(ITypedItem item) : base(item) { }
 

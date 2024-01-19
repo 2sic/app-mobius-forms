@@ -1,9 +1,8 @@
 using ToSic.Sxc.Data;
-using ToSic.Sxc.Data.Experimental;
 
 namespace ThisApp.Data
 {
-  public partial class DynFormField : TypedItem
+  public partial class DynFormField : Custom.Data.Item16Experimental
   {
     public DynFormField(ITypedItem item) : base(item) { }
 

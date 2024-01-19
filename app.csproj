@@ -43,6 +43,8 @@
     <Reference Include="$(PathBin)\System.Web.Http.dll" />
     <Reference Include="$(PathBin)\System.Net.Http.dll" />
 
+    <!-- System.Web is not in the DNN folder but in the .net Framework installed on the server -->
+    <Reference Include="System.Web" />
   </ItemGroup>
 
   <!-- Additional DLLs which Mobius needs-->
@@ -50,9 +52,6 @@
     <!-- Mobius also needs the CSV helper-->
     <Reference Include="$(PathBin)\CSVHelper.dll" />
     <Reference Include="$(PathBin)\Connect.Koi.dll" />
-    
-    <!-- System.Web is not in the DNN folder but in the .net Framework installed on the server -->
-    <Reference Include="System.Web" />
   </ItemGroup>
 
   <!-- Polymorphism
