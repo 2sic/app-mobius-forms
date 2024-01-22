@@ -13,8 +13,8 @@ namespace ThisApp.Code
 
     private IHtmlTag Radio()
     {
-      var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
-      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(CssClasses.Label);
+      var items = Tag.Div().Class(CssClasses.OutsideDiv + " " +  Constants.ClassMobiusField);
+      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
 
       var container = Tag.Div().Class(CssClasses.LabelOutside);

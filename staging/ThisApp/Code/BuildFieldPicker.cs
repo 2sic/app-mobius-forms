@@ -41,5 +41,12 @@ namespace ThisApp.Code
     {
       return Field.FieldId + tempItem.Value.ToLower().Replace(" ", ""); ;
     }
+
+     protected string LabelClasses(bool required)
+    {
+      return "control-label "
+          + (required ? "app-mobius5-field-required " : "")
+          + " " + CssClasses.Label;
+    }
   }
 }

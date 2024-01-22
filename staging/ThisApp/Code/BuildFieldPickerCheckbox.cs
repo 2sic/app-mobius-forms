@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using ThisApp.Data;
 using ToSic.Razor.Blade;
 
@@ -11,6 +12,9 @@ namespace ThisApp.Code
     /// Generate CheckbocPicker with Headline or without
     /// </summary>
     public override IHtmlTag GetTag() => CheckBoxPicker();
+    // public override IHtmlTag GetTag() {
+    //   return CheckBoxPicker();
+    // }
 
     private IHtmlTag CheckBoxPicker()
     {
@@ -24,12 +28,14 @@ namespace ThisApp.Code
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
-        var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
+        var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
         var checkbox = GenerateCheckbox(item);
         var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
         var container = Tag.Div().Class(CssClasses.LabelOutside);
         var label = Tag.Label(item.Value).Class(CssClasses.Label).For(GenearateHtmlId(item));
+
+        //  (required ? "app-mobius5-field-required " : "")
 
         if (CssClasses.IsBs3) container.Add(checkbox);
         else container.Add(wrapper);
@@ -42,8 +48,8 @@ namespace ThisApp.Code
     // Simple CheckboxPicker List with Headline (Title) Left
     private IHtmlTag CheckboxPickerWithHeadline()
     {
-      var items = Tag.Div().Class(CssClasses.OutsideDiv + Constants.ClassMobiusField);
-      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(CssClasses.Label);
+      var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
+      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
       var container = Tag.Div().Class(CssClasses.LabelOutside);
 
