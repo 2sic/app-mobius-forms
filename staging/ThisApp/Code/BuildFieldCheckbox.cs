@@ -27,7 +27,7 @@ namespace ThisApp.Code
     /// </summary>
     protected Input GetCheckbox()
     {
-      var checkbox = Tag.Input().Type("checkbox").Id(Field.FieldId).Class(Constants.ClassCheckbox);
+      var checkbox = Tag.Input().Type("checkbox").Id(Field.FieldId).Class(CssClasses.FormCheckInput);
       return checkbox;
     }
 

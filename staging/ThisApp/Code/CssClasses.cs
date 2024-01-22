@@ -17,6 +17,8 @@ namespace ThisApp.Code
     public string RadioWrapper { get; set; }
     public string CheckboxWrapper { get; set; }
     public string FloatingLabelHidden { get; set; }
+    public string FormCheckInput { get; set; }
+
 
 
     public string Label { get; set; }
@@ -32,13 +34,12 @@ namespace ThisApp.Code
       RadioWrapper = "form-check",
       CheckboxWrapper = "form-check",
       FloatingLabelHidden = "",
+      FormCheckInput = "form-check-input",
     };
-
     public static CssClasses Bs4 = new CssClasses()
     {
       // Same as Bs5
       IsBs3 = false,
-
       OutsideDiv = " row mb-3",
       Label = "col-12 col-md-3",
       LabelOutside = "col-12 col-sm-9",
@@ -48,6 +49,7 @@ namespace ThisApp.Code
       CheckboxWrapper = "form-check",
       //
       FloatingLabelHidden = "d-none",
+      FormCheckInput = "",
     };
 
     public static CssClasses Bs3 = new CssClasses()
@@ -61,6 +63,7 @@ namespace ThisApp.Code
       RadioWrapper = "radio",
       CheckboxWrapper = "checkbox",
       FloatingLabelHidden = "hidden",
+      FormCheckInput = "",
     };
 
   }
