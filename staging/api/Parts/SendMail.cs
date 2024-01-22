@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
@@ -72,6 +70,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     Log.Add("Get MailEngine");
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
     var mailBody = mailEngine.Message(formConfig, valuesWithMailLabels).ToString();
+
     var subject = mailEngine.Subject(formConfig, valuesWithMailLabels);
 
     // Send Mail

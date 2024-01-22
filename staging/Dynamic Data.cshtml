@@ -2,6 +2,7 @@
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data;
 @using ToSic.Sxc.Adam;
+@using ThisApp.Data
 
 @if(!MyUser.IsContentAdmin){
   return;
@@ -11,6 +12,7 @@
   var dataItems = AsItems(Kit.Data.GetQuery("DynamicData"));
   var dynDataHelper = GetCode("./tools/DynData.cs");
   var page = GetService<ToSic.Sxc.Services.IPageService>();
+  var appRes = new AppResources(App.Resources);
   
   page.Activate("jQuery");
 
@@ -27,7 +29,7 @@
 
 <div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
   <strong>Total:</strong> @count 
-  <strong>@App.Resources.String("LabelFirst"):</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@App.Resources.String("LabelLast"):</strong> @lastRecord.ToString("yyyy-MM-dd")
+  <strong>@appRes.LabelFirst:</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@appRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
   <strong>ModuleId: </strong> @moduleId <strong>FormId:</strong> @formId
   <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
   @* TODO::  https://docs.2sxc.org/api/dot-net/ToSic.Sxc.Services.ILinkService.html#ToSic_Sxc_Services_ILinkService_To_System_String_System_Nullable_System_Int32__System_String_System_Object_System_String_System_String_ *@
@@ -42,7 +44,7 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th>@App.Resources.String("LabelTimestamp")</th>
+        <th>@appRes.LabelTimestamp</th>
         @foreach (var headerProp in headerProps) { // Generate the Tabele Header form headerPropsDistinct
           <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
         }

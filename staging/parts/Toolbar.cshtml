@@ -1,4 +1,5 @@
 @inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Data
 
 @* Return directly if we don't have edit permissions *@
 @if (!MyUser.IsContentAdmin) {
@@ -7,6 +8,7 @@
 
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
+  var appRes = new AppResources(App.Resources);
   // Parameters handed in from the calling Razor
   var formConfig = MyModel.Item("FormConfig");
 
@@ -17,10 +19,10 @@
   var toolbar = Kit.Toolbar.Default()
     .Settings(show: "always")
     // Show a data-button which filters the submits by this content-type and module
-    .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  MyContext.Module.Id).Note(App.Resources.String("ToolbarViewData")))
+    .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  MyContext.Module.Id).Note(appRes.ToolbarViewData))
     // Remove edit and add a new one with custom note
     .Edit("-")
-    .Edit(formConfig, tweak: b => b.Note(App.Resources.String("ToolbarConfigure")))
-    .AppResources(tweak: b => b.Color("#15585F").Note(App.Resources.String("ToolbarAppResources")));
+    .Edit(formConfig, tweak: b => b.Note(appRes.ToolbarConfigure))
+    .AppResources(tweak: b => b.Color("#15585F").Note(appRes.ToolbarAppResources));
 }
 <div @toolbar.For(formConfig)></div>
