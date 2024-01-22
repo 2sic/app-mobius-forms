@@ -76,7 +76,7 @@ namespace ThisApp.Code
       return item;
     }
 
-// Set Label Right or Floating Label (only for Bs5)
+    // Set Label Right or Floating Label (only for Bs5)
     protected IHtmlTag WrapInLabel(IHtmlTag inputHtml)
     {
       var htmlTag = Tag.Div().Class(FieldWrapperClasses());
@@ -95,7 +95,7 @@ namespace ThisApp.Code
         htmlTag = htmlTag.Add(inputHtml);
         htmlTag = htmlTag.Add(
             Tag.Label(Text.First(Field.Title, Field.FieldId))
-                .Class(LabelClasses(Field.Required, Form.UseFloatingLabels ))
+                .Class(LabelClasses(Field.Required, Form.UseFloatingLabels))
                 .For(Field.FieldId)
         );
       }
@@ -107,13 +107,13 @@ namespace ThisApp.Code
       return $"{Constants.ClassMobiusField} {(Form.UseFloatingLabels ? "form-floating " : "row ")}{CssClasses.Wrapper}";
     }
 
-   private string LabelClasses(bool required, bool floatingLabel = false)
-{
-    return "control-label "
-        + (required ? "app-mobius5-field-required " : "")
-        + " " + CssClasses.Label
-        + " " + (floatingLabel ? CssClasses.FloatingLabelHidden : "");  // Bs3 and Bs4 only - hidden Label
-}
+    private string LabelClasses(bool required, bool floatingLabel = false)
+    {
+      return "control-label "
+          + (required ? "app-mobius5-field-required " : "")
+          + " " + CssClasses.Label
+          + " " + (floatingLabel ? CssClasses.FloatingLabelHidden : "");  // Bs3 and Bs4 only - hidden Label
+    }
 
   }
 }

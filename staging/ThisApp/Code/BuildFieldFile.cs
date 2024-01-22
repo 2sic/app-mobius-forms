@@ -16,14 +16,8 @@ namespace ThisApp.Code
     private Input FileField()
     {
       var input = Tag.Input().Type("file").Name(Field.Title).Class("form-control-file");
-
-      // TODO:: Open acceptType ?
-      // if (Text.Has(acceptType))
-      //   input = input.Attr("accept", acceptType);
-
       input = SetBasics(input, false);
       return input;
-
     }
 
   }

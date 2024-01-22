@@ -3,7 +3,7 @@ using ToSic.Razor.Blade;
 
 namespace ThisApp.Code
 {
-    public class BuildFieldTerms : BuildFieldCheckbox
+  public class BuildFieldTerms : BuildFieldCheckbox
   {
     public BuildFieldTerms(FormBuildParameters form, DynFormField field) : base(form, field) { }
 
@@ -16,7 +16,7 @@ namespace ThisApp.Code
       string overrideTitle = default;
       checkbox.Attr("terms", "true");
       if (Field.TermsAndGdprCombined) overrideTitle = Resources.LabelTermsAll;
-      else if (Field.TermsEnabled)  overrideTitle = Resources.LabelTerms;
+      else if (Field.TermsEnabled) overrideTitle = Resources.LabelTerms;
       else if (Field.GdprEnabled) overrideTitle = Resources.LabelGdpr;
 
       return CheckboxWithLabelRight(checkbox, overrideTitle);

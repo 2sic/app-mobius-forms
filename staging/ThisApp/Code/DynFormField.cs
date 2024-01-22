@@ -29,9 +29,9 @@ namespace ThisApp.Data
 
     public int MinLength => GetThis(fallback: 0);
     public int MaxLength => GetThis(fallback: 0);
-    
+
     #endregion
-  
+
     #region Email
 
     public string RecipientEmail => GetThis(fallback: "");
@@ -40,21 +40,21 @@ namespace ThisApp.Data
 
     #region Boolean
     public bool LabelRight => GetThis(fallback: false);
-    
+
     #endregion
 
     #region Terms
     public bool TermsAndGdprCombined => GetThis(fallback: false);
     public bool TermsEnabled => GetThis(fallback: false);
     public bool GdprEnabled => GetThis(fallback: false);
-    
+
     #endregion
 
-     #region Picker
+    #region Picker
     public string PickerType => GetThis(fallback: "");
     public string PickerKeyValues => GetThis(fallback: "");
     public bool CheckboxWithHeadline => GetThis(fallback: false);
-    public bool MultiSelect => GetThis(fallback: false);    
+    public bool MultiSelect => GetThis(fallback: false);
     public string PlaceHolderSelect => GetThis(fallback: "");
 
     #endregion
