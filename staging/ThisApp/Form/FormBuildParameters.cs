@@ -2,7 +2,7 @@ using System;
 using ThisApp.Data;
 using ToSic.Sxc.Context;
 
-namespace ThisApp.Code
+namespace ThisApp.Form
 {
   public class FormBuildParameters
   {

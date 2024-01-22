@@ -1,8 +1,9 @@
 using ThisApp.Data;
+using ThisApp.Form;
 using ToSic.Razor.Blade;
 using ToSic.Razor.Html5;
 
-namespace ThisApp.Code
+namespace ThisApp.Fields
 {
   public class BuildFieldPickerDropdown : BuildFieldPicker
   {
@@ -36,7 +37,7 @@ namespace ThisApp.Code
     {
       var result = item
         .Id(Field.FieldId)
-        .Class(CssClasses.InputControl);
+        .Class(CssClasses.FormSelect);
 
       if (Field.Required) result = SetRequired(result);
       if (Field.IsDisabled) result = result.Disabled();

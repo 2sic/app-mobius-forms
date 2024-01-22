@@ -1,4 +1,4 @@
-namespace ThisApp.Code
+namespace ThisApp
 {
   public class CssClasses
   {
@@ -18,6 +18,7 @@ namespace ThisApp.Code
     public string CheckboxWrapper { get; set; }
     public string FloatingLabelHidden { get; set; }
     public string FormCheckInput { get; set; }
+    public string FormSelect { get; set; }
 
 
 
@@ -35,6 +36,7 @@ namespace ThisApp.Code
       CheckboxWrapper = "form-check",
       FloatingLabelHidden = "",
       FormCheckInput = "form-check-input",
+      FormSelect = "form-select",
     };
     public static CssClasses Bs4 = new CssClasses()
     {
@@ -47,6 +49,7 @@ namespace ThisApp.Code
       Wrapper = "mb-3",
       RadioWrapper = "form-check",
       CheckboxWrapper = "form-check",
+      FormSelect = "form-select",
       //
       FloatingLabelHidden = "d-none",
       FormCheckInput = "",
@@ -64,6 +67,7 @@ namespace ThisApp.Code
       CheckboxWrapper = "checkbox",
       FloatingLabelHidden = "hidden",
       FormCheckInput = "",
+      FormSelect = "form-select",
     };
 
   }

@@ -1,4 +1,4 @@
-namespace ThisApp.Code
+namespace ThisApp
 {
   public static class Constants
   {

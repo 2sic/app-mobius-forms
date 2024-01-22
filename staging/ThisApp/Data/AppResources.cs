@@ -9,11 +9,13 @@ namespace ThisApp.Data
     public string ToolbarReuseInfo => GetThis(fallback: "");
     public string LabelFromDataAvaible => GetThis(fallback: "");
 
-      #region Terms
+    #region Terms
+
     public string LabelTermsAll => GetThis(fallback: "");
     public string LabelTerms => GetThis(fallback: "");
     public string LabelGdpr => GetThis(fallback: "");
     public string LabelSelect => GetThis(fallback: "");
+    
     #endregion
 
   }
