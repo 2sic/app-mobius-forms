@@ -55,7 +55,6 @@ namespace ThisApp.Code
         .Class(CssClasses.InputControl);
 
       if (Field.Required) result = SetRequired(result);
-      // TODO: THIS is not tested, 2dm added the field
       if (Field.IsDisabled) result = result.Disabled();
       return result as TTag;
     }

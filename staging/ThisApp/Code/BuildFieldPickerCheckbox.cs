@@ -33,9 +33,7 @@ namespace ThisApp.Code
         var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
         var container = Tag.Div().Class(CssClasses.LabelOutside);
-        var label = Tag.Label(item.Value).Class(CssClasses.Label).For(GenearateHtmlId(item));
-
-        //  (required ? "app-mobius5-field-required " : "")
+        var label = Tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GenearateHtmlId(item));
 
         if (CssClasses.IsBs3) container.Add(checkbox);
         else container.Add(wrapper);
