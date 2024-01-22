@@ -3,8 +3,9 @@
 @using ToSic.Sxc.Data;
 @using ToSic.Sxc.Adam;
 
-@if(!MyUser.IsContentAdmin) 
+@if(!MyUser.IsContentAdmin){
   return;
+}
 
 @{
   var dataItems = AsItems(Kit.Data.GetQuery("DynamicData"));
