@@ -3,12 +3,14 @@ import { disableInputs, enableInputs, getFormValues, sendForm, validateForm } fr
 import { PristineOptions } from './lib-2sxc-pristine-options';
 import { getRecaptchaToken, requiresRecaptcha } from './lib-2sxc-recaptcha';
 import { addTrackingEvent } from './lib-2sxc-tracking';
+import { initTippy } from './lib-2sxc-tippy';
 
 const debug = false;
 
 var winAny = window as any;
 winAny.appMobius5 ??= {};
 winAny.appMobius5.init ??= initAppMobius5;
+winAny.appMobius5.initTippy ??= initTippy;
 
 function initAppMobius5({ domAttribute, webApiUrl, validationOptions } : { domAttribute: string, webApiUrl: string, validationOptions: PristineOptions }) {
   if (debug) console.log("Mobius5 loading, debug is enabled", domAttribute);

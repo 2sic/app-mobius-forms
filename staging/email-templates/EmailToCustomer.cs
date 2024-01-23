@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
+// using ThisApp.Data;
 
 public class EmailToCustomer: Custom.Hybrid.CodeTyped
 {
@@ -12,6 +13,8 @@ public class EmailToCustomer: Custom.Hybrid.CodeTyped
 
   public string Message(ITypedItem formConfig, Dictionary<string, object> data)
   {
+    // TODO:: @2dg appRes
+    // var appRes = new AppResources(App.Resources);
     var message = @"
     <!doctype html>
     <html>

@@ -26,7 +26,7 @@ module.exports = (env) => {
       compression: 'gzip',
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.scss']
+      extensions: ['.ts', '.tsx', '.js', '.scss', 'css']
     },
     plugins: [
       new MiniCssExtractPlugin({
@@ -36,7 +36,7 @@ module.exports = (env) => {
     ],
     module: {
       rules: [{
-          test: /\.scss$/,
+        test: /\.(s[ac]|c)ss$/,
           exclude: /node_modules/,
           use: [
             MiniCssExtractPlugin.loader,
