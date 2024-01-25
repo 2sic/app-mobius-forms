@@ -43,96 +43,113 @@
   @linkToUrl  *@
 </div>
 
+<div class="top-toolbar d-flex justify-content-between">
 
-<div class="overflow-x-auto">
-   <table id="formdata" class="table table-striped">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>@appRes.LabelTimestamp</th>
-        @foreach (var headerProp in headerProps) { // Generate the Tabele Header form headerPropsDistinct
-          <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
-        }
-        <th>File</th>
-      </tr>
-    </thead> 
-    <tbody>  
-      @foreach (var pair in dataPairs) { // Loop each data from Query for the Value      
-        var row = pair.Json;
-        var item = pair.Item;
-        <tr @Kit.Toolbar.Empty(item).Delete().Settings(autoAddMore: "end", hover: "left")>
-          <td>@item.Id</td>  
-          <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
-          @foreach (var prop in headerProps) { // Loop each prop from headerProps, if the prop not use, will be generate a empty td (prop generate later)
-            <td>
-              @if (row.Get(prop, required: false) != null) {//  Check, witch Type it is, an display the rigth Format 
-                switch (Type.GetTypeCode(row.Get(prop).GetType())) {
-                  case TypeCode.String:
-                    <p>@row.String(prop)</p>
-                    break;
-                  case TypeCode.Int32:
-                    <p>@row.Int(prop)</p>
-                    break;
-                  case TypeCode.DateTime:
-                    <p>@row.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
-                    break;
-                  case TypeCode.Boolean:
-                    <p>@row.Bool(prop)</p>
-                    break;
-                  case TypeCode.Object:
-                    var objValue = row.Get(prop);
-
-                    if (objValue != null) {
-                      if (objValue is IList<object> objectList) {
-                          string joinedList = string.Join(", ", objectList.Select(i => i?.ToString() ?? string.Empty));
-                          @joinedList
-                      } else {
-                        <p>Not from Typed List</p>
-                      }
-                    } else {
-                      <td></td>
-                    }
-                    break;
-                  default:
-                    <td>Unknow Type</td>
-                    break;
-                }
-              }
-            </td>
-          }
-          @if (item.Folder("Files").Files.Count() > 0) {
-          <td>
-            @* File Pill and Tippy *@
-            <span class="app-mobius-tooltip badge rounded-pill text-bg-primary" id="app-mobius-tooltip-btn-@item.Id" data-content="Test Content">
-              @item.Folder("Files").Files.Count()
-              @* Tippy Content *@
-              @foreach (IFile file in item.Folder("Files").Files)
-                {
-                  <div class="d-none app-mobius-tooltip-content d-flex" data-file-id="@item.Id">
-                    <div class="mr-2">
-                        Size: @Math.Round((double)file.Size / 1024, 1) KB
-                    </div>
-                    <div>
-                        <a class="link-info" href="@file.Url" download="@file.Name">
-                            @file.FullName
-                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                                <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
-                            </svg>
-                        </a>
-                    </div>
-                  </div>
-                }
-            </span>
-          </td>
-          } else <td></td>
-      </tr>
-      }
-    </tbody>
-  </table>
 </div>
+<div class="table-responsive">
+   <table id="formdata" class="table table-striped">
+      <thead>
+         <tr>
+            <th>Id</th>
+            <th>@appRes.LabelTimestamp</th>
+            @foreach (var headerProp in headerProps) {
+               <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
+            }
+            <th>File</th>
+         </tr>
+      </thead> 
+      <tbody>  
+         @foreach (var pair in dataPairs) {
+            var row = pair.Json;
+            var item = pair.Item;
+            var i = 0;
+            <tr @Kit.Toolbar.Empty(item).Delete().Settings(autoAddMore: "end", hover: "left")>
+               <td>@item.Id</td>  
+               <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
+               @foreach (var prop in headerProps) {
+                  <td class="nowrap">
+                     @if (row.Get(prop, required: false) != null) {
+                        switch (Type.GetTypeCode(row.Get(prop).GetType())) {
+                           case TypeCode.String:
+                              <p class="app-mobius-tooltip" id="app-mobius-tooltip-btn-@item.Id-@i" data-content="@row.String(prop)"> @Html.Raw(Text.Ellipsis(row.String(prop), 10))</p>
+                              break;
+                           case TypeCode.Int32:
+                              <p>@row.Int(prop)</p>
+                              break;
+                           case TypeCode.DateTime:
+                              <p>@row.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
+                              break;
+                           case TypeCode.Boolean:
+                              <p>@row.Bool(prop)</p>
+                              break;
+                           case TypeCode.Object:
+                              var objValue = row.Get(prop);
+                              if (objValue != null) {
+                                 if (objValue is IList<object> objectList) {
+                                    string joinedList = string.Join(", ", objectList.Select(i => i?.ToString() ?? string.Empty));
+                                    @joinedList
+                                 } else {
+                                    <p>Not from Typed List</p>
+                                 }
+                              } else {
+                                 <td></td>
+                              }
+                              break;
+                           default:
+                              <td>Unknow Type</td>
+                              break;
+                        }
+                     }
+                  </td>
+                  i++;
+               }
+               @if (item.Folder("Files").Files.Count() > 0) {
+               <td>
+                  <span class="app-mobius-tooltip badge rounded-pill text-bg-primary" id="app-mobius-tooltip-btn-@item.Id">
+                     @item.Folder("Files").Files.Count()
+                     @foreach (IFile file in item.Folder("Files").Files) {
+                        <div class="d-none app-mobius-tooltip-content d-flex" data-file-id="@item.Id">
+                           <div>
+                              <a class="link-info" href="@file.Url" download="@file.Name">
+                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="white">
+                                    <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                 </svg>
+                                 &nbsp;
+                                 @file.FullName
+                              </a>
+                           </div>
+                           <div class="mr-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="white">
+                                 <path d="M128 176a128 128 0 1 1 256 0 128 128 0 1 1 -256 0zM391.8 64C359.5 24.9 310.7 0 256 0S152.5 24.9 120.2 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H391.8zM296 224c0-10.6-4.1-20.2-10.9-27.4l33.6-78.3c3.5-8.1-.3-17.5-8.4-21s-17.5 .3-21 8.4L255.7 184c-22 .1-39.7 18-39.7 40c0 22.1 17.9 40 40 40s40-17.9 40-40z"/>
+                              </svg>
+                              &nbsp;
+                              @Math.Round((double)file.Size / 1024, 1) KB
+                           </div>
+                           @if (item.Folder("Files").Files.Count() > 1 && !file.Equals(item.Folder("Files").Files.Last())) {
+                              <br>
+                           }
+                        </div>
+                     }
+                  </span>
+               </td>
+               } else <td></td>
+            </tr>
+         }
+      </tbody>
+   </table>
+</div>
+<div class="bottom-toolbar d-flex justify-content-between"></div>
 
 <script>
   new DataTable('#formdata');
+   document.querySelector(".top-toolbar").append(document.getElementById("formdata_length"))
+
+
+   document.querySelector(".top-toolbar").append(document.getElementById("formdata_filter"))
+
+   document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_info"))
+   document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_paginate"))
+   @* document.getElementById("formdata_paginate").label *@
 </script>
 
 <script src="@MyView.Path/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>

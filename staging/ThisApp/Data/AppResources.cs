@@ -7,7 +7,7 @@ namespace ThisApp.Data
     public AppResources(ITypedItem item) : base(item) { }
 
     public string ToolbarReuseInfo => GetThis(fallback: "");
-    public string LabelFromDataAvaible => GetThis(fallback: "");
+    public string LabelFromDataAvailable => GetThis(fallback: "");
 
     #region Terms
 
@@ -34,7 +34,7 @@ namespace ThisApp.Data
 
     #endregion
 
-     #region Mailchimp and Footer Mailchimp
+    #region Mailchimp and Footer Mailchimp
     
     public string MessageEnableMailchimp => GetThis(fallback: "");
     public string MessageContainsMailchimp => GetThis(fallback: "");

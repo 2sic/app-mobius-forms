@@ -29,6 +29,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // background: some settings are made in this module, but if they are missing we use fallback settings
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
 
+
     var from = Text.First(formConfig.String("MailFrom"), App.Settings.String("DefaultMailFrom"));
     var owner = Text.First(formConfig.String("OwnerMail"), App.Settings.String("DefaultOwnerMail"));
 

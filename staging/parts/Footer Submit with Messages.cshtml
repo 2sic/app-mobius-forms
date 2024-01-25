@@ -3,12 +3,13 @@
 @using ToSic.Sxc.Data;
 @using ThisApp.Data
 @{
-  var formConfig = MyModel.Item("FormConfig");
-
-  var sendToCustomer = formConfig.Bool("CustomerSend");
-  var sendToOwner = formConfig.Bool("OwnerSend");
   var appRes = new AppResources(App.Resources);
+  var appSettings = new AppSettings(App.Settings);
+  var dynFormConfig = new DynForm(MyModel.Item("FormConfig"));
+  var sendToCustomer = dynFormConfig.CustomerSend;
+  var sendToOwner = dynFormConfig.OwnerSend;
 }
+
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
@@ -26,13 +27,13 @@
 
     @* Prepared messages for admin only *@
     @if (MyUser.IsContentAdmin) {
-      if ((sendToCustomer || sendToOwner) && !Text.Has(formConfig.String("MailFrom")) && !Text.Has(App.Settings.String("DefaultMailFrom"))) {
+      if ((sendToCustomer || sendToOwner) && !Text.Has(dynFormConfig.MailFrom) && !Text.Has(appSettings.DefaultMailFrom)) {
         <div class="alert alert-warning">
           @Html.Raw((appRes.MessageMailFromError, scrubHtml: "p"))
         </div>
       }
 
-      if (sendToOwner && !Text.Has(formConfig.String("OwnerMail")) && !Text.Has(App.Settings.String("DefaultOwnerMail"))) {
+      if (sendToOwner && !Text.Has(dynFormConfig.OwnerMail) && !Text.Has(appSettings.DefaultOwnerMail)) {
         <div class="alert alert-warning">
           @Html.Raw((appRes.MessageMailOwnerError, scrubHtml: "p"))
         </div>

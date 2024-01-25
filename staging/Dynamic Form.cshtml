@@ -28,13 +28,13 @@
 
 <div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
 
-  @if (Text.Has(dynForm.String("Title"))) {
-    <h2>@dynForm.String("Title")</h2>   
+  @if (Text.Has(dynForm2.Title)) {
+    <h2>@dynForm2.Title</h2>   
   }
 
   <div class="@formHelper.WrapperClasses(formConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius5-form">
-      <input type="hidden" id="FormId" value="@dynForm.Id">
+      <input type="hidden" id="FormId" value="@dynForm2.Id">
 
       @foreach (var field in formFields) {
         var dynField = new DynFormField(field);
@@ -53,6 +53,7 @@
       }
     </div>
 
+    @* TODO: dynForm2 error? why *@
     @if (!dynForm.Bool("SkipSubmit", required: false)) {
       if (formConfig.Bool("Recaptcha")) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
@@ -66,7 +67,7 @@
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
         @if (dataPairs.Count() == 0){
-          @appRes.LabelFromDataAvaible
+          @appRes.LabelFromDataAvailable
         } else {
           <a class="btn btn-primary" href="@Link.To(parameters: "id=" + MyContext.Module.Id + "&mid=" + MyContext.Module.Id)" target="_blank">Form Data</a>
           <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>
