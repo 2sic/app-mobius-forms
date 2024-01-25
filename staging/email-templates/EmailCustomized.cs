@@ -1,16 +1,21 @@
 using System.Collections.Generic;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
+using ThisApp.Data;
+using ThisApp.Code;
+using ThisApp;
 
-public class EmailToCustomer: Custom.Hybrid.CodeTyped
+public class EmailCustomized: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(ITypedItem formConfig, Dictionary<string, object> data) {
+  public string Subject(DynForm dynFormConfig, Dictionary<string, object> data) {
+    var appRes = new AppResources(App.Resources);
+    
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(formConfig.String("OwnerMailSubject"), App.Resources.String("OwnerMailSubject"));
+    return Text.First(dynFormConfig.OwnerMailSubject, appRes.OwnerMailSubject);
   }
 
-  public string Message(ITypedItem formConfig, Dictionary<string, object> data)
+  public string Message(DynForm dynFormConfig, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>

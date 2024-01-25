@@ -10,6 +10,7 @@
 }
 
 @{
+   // DataTables 
 <link rel="stylesheet" href="@MyView.Path/lib/jquery.dataTables.css" />
 <script src="@MyView.Path/lib/jquery.dataTables.js"></script>
 
@@ -43,9 +44,9 @@
   @linkToUrl  *@
 </div>
 
-<div class="top-toolbar d-flex justify-content-between">
+@* Add Table Top Bar show and search into top-toolbar div *@
+<div class="top-toolbar d-flex justify-content-between"></div>
 
-</div>
 <div class="table-responsive">
    <table id="formdata" class="table table-striped">
       <thead>
@@ -138,20 +139,32 @@
       </tbody>
    </table>
 </div>
-<div class="bottom-toolbar d-flex justify-content-between"></div>
+@* Add Table Bottom Bar side-info and pagination into bottom-toolbar div *@
+<div class="bottom-toolbar d-flex justify-content-between mt-3"></div>
 
 <script>
   new DataTable('#formdata');
+
+   // Formdata Length Div Move to Top-Tollbar
    document.querySelector(".top-toolbar").append(document.getElementById("formdata_length"))
+   // Get Input and Label and add some bs5 classes
+   document.getElementById("formdata_length").getElementsByTagName("label")[0].classList.add("d-flex", "align-items-center", "gap-2");
+   document.getElementById("formdata_length").getElementsByTagName("select")[0].classList.add("form-select");
 
-
+   // Formdata Filter  Div Move to Top-Tollbar
    document.querySelector(".top-toolbar").append(document.getElementById("formdata_filter"))
+   // Get Input and Label and add some bs5 classes
+   document.getElementById("formdata_filter").getElementsByTagName("label")[0].classList.add("d-flex", "align-items-center", "gap-2");
+   document.getElementById("formdata_filter").getElementsByTagName("input")[0].classList.add("form-control");
 
+   // Formdata Info  Div Move to Bottom-Tollbar
    document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_info"))
+
+   // Formdata Paginate  Div Move to Bottom-Tollbar
    document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_paginate"))
-   @* document.getElementById("formdata_paginate").label *@
 </script>
 
+<link rel="stylesheet" href="@MyView.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 <script src="@MyView.Path/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
 @Kit.Page.TurnOn("window.appMobius5.initTippy()", data: new {
   domClass = "app-mobius-tooltip",

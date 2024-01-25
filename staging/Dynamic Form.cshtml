@@ -55,7 +55,7 @@
 
     @* TODO: dynForm2 error? why *@
     @if (!dynForm.Bool("SkipSubmit", required: false)) {
-      if (formConfig.Bool("Recaptcha")) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
+      if (dynFormConfig.Recaptcha) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
     }
 

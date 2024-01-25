@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
+using ThisApp.Data;
+using ThisApp.Code;
+using ThisApp;
+
+
 
 public class SendMail : Custom.Hybrid.CodeTyped
 {
@@ -13,9 +18,9 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var mailLabels = "";
 
     if(contactFormRequest.ContainsKey("FormId")) {
-      var dynFormConfig = AsItems(App.Data["DynForm"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
+      var dynForm = AsItems(App.Data["DynForm"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
       
-      foreach (var item in dynFormConfig.Children("Fields"))
+      foreach (var item in dynForm.Children("Fields"))
       {
         var fieldId = item.String("FieldId");
         var title = item.String("Title");
@@ -29,17 +34,19 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // background: some settings are made in this module, but if they are missing we use fallback settings
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
 
+    var dynFormConfig = new DynForm(formConfig);
+    var appSettings = new AppSettings(App.Settings);
 
-    var from = Text.First(formConfig.String("MailFrom"), App.Settings.String("DefaultMailFrom"));
-    var owner = Text.First(formConfig.String("OwnerMail"), App.Settings.String("DefaultOwnerMail"));
+    var from = Text.First(dynFormConfig.MailFrom, appSettings.DefaultMailFrom);
+    var owner = Text.First(dynFormConfig.OwnerMail, appSettings.DefaultOwnerMail);
 
     // Send Mail to owner
-    if (formConfig.Bool("OwnerSend"))
+    if (dynFormConfig.OwnerSend)
     {
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(formConfig, formConfig.String("OwnerMailTemplate"), valuesRelabled, from, owner, formConfig.String("OwnerMailCC"), customerMails, files);
+        Send(dynFormConfig, dynFormConfig.OwnerMailTemplate, valuesRelabled, from, owner, dynFormConfig.OwnerMailCC, customerMails, files);
       }
       catch (Exception ex)
       {
@@ -48,12 +55,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
 
     // Send Mail to customer
-    if (formConfig.Bool("CustomerSend") && Text.Has(customerMails))
+    if (dynFormConfig.CustomerSend && Text.Has(customerMails))
     {
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(formConfig, formConfig.String("CustomerMailTemplate"), valuesRelabled, from, customerMails, formConfig.String("CustomerMailCC"), owner, files);
+        Send(dynFormConfig, dynFormConfig.CustomerMailTemplate, valuesRelabled, from, customerMails, dynFormConfig.CustomerMailCC, owner, files);
       }
       catch (Exception ex)
       {
@@ -62,7 +69,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
   }
 
-  public void Send(ITypedItem formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
+  public void Send(DynForm formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems

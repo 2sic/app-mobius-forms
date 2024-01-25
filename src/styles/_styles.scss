@@ -1,4 +1,4 @@
-.app-mobius5-wrapper { 
+.app-mobius5-wrapper {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -18,34 +18,75 @@
     color: #a94442;
   }
 
-  .recaptcha { 
+  .recaptcha {
     overflow: hidden;
     clear: both;
   }
 
-  .form-control.select-control { padding: 6px 7px; }
-  .alert { width: 100%; }
+  .form-control.select-control {
+    padding: 6px 7px;
+  }
+  .alert {
+    width: 100%;
+  }
 }
 
 .app-mobius5-field-required:after {
   content: " *";
-  font-size: 12px; 
+  font-size: 12px;
   color: #a94442;
   display: inline-block;
   padding: 0 0 0 5px;
   vertical-align: top;
 }
 
-.app-mobius5-message { display: none; }
+.app-mobius5-message {
+  display: none;
+}
 
 /* this will disable the areas that should be, but not the messages for example */
-.app-mobius5-wrapper.disable .app-mobius5-support-disable { 
+.app-mobius5-wrapper.disable .app-mobius5-support-disable {
   pointer-events: none;
   opacity: 0.4;
 }
 
-.alert > p { font-size: 16px; }
+.alert > p {
+  font-size: 16px;
+}
 
-.grecaptcha-badge { 
+.grecaptcha-badge {
   visibility: hidden;
+}
+
+// TODO:: Add Style for pagination
+.paginate_button {
+  padding: 0.375rem;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  color: #0d6efd;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: #e9ecef;
+    color: #0d6efd;
+  }
+  // &:first{
+  //   border-top-left-radius: 0.375rem;
+  //   border-bottom-left-radius: 0.375rem;
+  // }
+}
+
+.previous {
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.next {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.current {
+  background-color: #0d6efd !important;
+  color: #fff !important;
 }

@@ -35,7 +35,7 @@ namespace ThisApp.Data
     #endregion
 
     #region Mailchimp and Footer Mailchimp
-    
+
     public string MessageEnableMailchimp => GetThis(fallback: "");
     public string MessageContainsMailchimp => GetThis(fallback: "");
     public string MessageDefaultMailChimpKey => GetThis(fallback: "");
@@ -43,7 +43,7 @@ namespace ThisApp.Data
     #endregion
 
     #region Footer Submit with Message
-    
+
     public string MessageFormIncomplete => GetThis(fallback: "");
     public string MessageRecaptchaMissing => GetThis(fallback: "");
     public string MessageSendError => GetThis(fallback: "");
@@ -60,13 +60,37 @@ namespace ThisApp.Data
     #endregion
 
     #region Footer Recaptcha
-    
+
     public string MessageContainsRecaptcha => GetThis(fallback: "");
     public string MessageRecaptchaWarning => GetThis(fallback: "");
 
     #endregion
 
-   
+    #region EmailToCustomized
+
+    public string OwnerMailSubject => GetThis(fallback: "");
+
+    #endregion
+
+    #region EmailToCustomer
+
+    public string CustomerMailSubject => GetThis(fallback: "");
+    public string MailCustomerTitle => GetThis(fallback: "");
+    public string MailCustomerContent => GetThis(fallback: "");
+
+    #endregion
+
+    #region EmailToCustomerWithData
+    public string MailCustomerContentWithData => GetThis(fallback: "");
+
+    #endregion
+
+    #region EmailToOwner
+    public string MailOwnerTitle => GetThis(fallback: "");
+    public string MailOwnerContent => GetThis(fallback: "");
+
+    #endregion
+
 
   }
 }
