@@ -42,6 +42,10 @@
 
 .app-mobius5-message {
   display: none;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 /* this will disable the areas that should be, but not the messages for example */
