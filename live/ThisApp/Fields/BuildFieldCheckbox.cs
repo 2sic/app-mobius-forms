@@ -27,7 +27,7 @@ namespace ThisApp.Fields
     /// </summary>
     protected Input GetCheckbox()
     {
-      var checkbox = Tag.Input().Type("checkbox").Id(Field.FieldId).Class(CssClasses.FormCheckInput);
+      var checkbox = Tag.Input().Type("checkbox").Id(Field.FieldId).Name(Field.FieldId).Class(CssClasses.FormCheckInput);
       return checkbox;
     }
 
@@ -36,7 +36,7 @@ namespace ThisApp.Fields
     /// </summary>
     protected IHtmlTag CheckboxWithLabelRight(Input checkbox, string overrideTitle = default)
     {
-      var checkboxLabel = Text.First(overrideTitle, Field.Title, Field.FieldId) + (Field.Required ? "*" : "");
+      var checkboxLabel = Text.First(overrideTitle, Field.Title, Field.FieldId);
 
       checkbox = checkbox.Value(checkboxLabel);
       checkbox = SetBasics(checkbox, false);
@@ -50,7 +50,7 @@ namespace ThisApp.Fields
 
       return Tag.Div().Class($"{Constants.ClassMobiusField} mb-3 form-check").Wrap(
         checkbox,
-        Tag.Label(checkboxLabel).Class("form-check-label").For(Field.FieldId)
+        Tag.Label(checkboxLabel.Replace("<p>", "").Replace("</p>", "")).Class("form-check-label").Class(Field.Required ? Constants.ClassRequired : "").For(Field.FieldId)
       );
     }
   }

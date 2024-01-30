@@ -12,7 +12,6 @@ namespace ThisApp.Data
     public string DesignField => GetThis(fallback: "");
     public bool ReuseConfig => GetThis(fallback: false);
     public new string Title => GetThis(fallback: "");
-    public bool SkipSubmit => GetThis(fallback: false);
     public bool Recaptcha => GetThis(fallback: false);
 
     #endregion

@@ -46,7 +46,7 @@ namespace ThisApp.Fields
      protected string LabelClasses(bool required)
     {
       return "control-label "
-          + (required ? "app-mobius5-field-required " : "")
+          + (required ? Constants.ClassRequired : "")
           + " " + CssClasses.Label;
     }
   }

@@ -110,7 +110,7 @@ namespace ThisApp.Fields
     private string LabelClasses(bool required, bool floatingLabel = false)
     {
       return "control-label "
-          + (required ? "app-mobius5-field-required " : "")
+          + (required ? Constants.ClassRequired : "")
           + " " + CssClasses.Label
           + " " + (floatingLabel ? CssClasses.FloatingLabelHidden : "");  // Bs3 and Bs4 only - hidden Label
     }
