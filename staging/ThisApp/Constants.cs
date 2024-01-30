@@ -6,5 +6,6 @@ namespace ThisApp
 
     public const string ClassCheckbox = "form-check-input";
 
+    public const string ClassRequired = "app-mobius5-field-required";
   }
 }

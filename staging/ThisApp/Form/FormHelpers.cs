@@ -14,7 +14,7 @@ namespace ThisApp.Form
     /// The custom marker so the JS can find the form
     /// </summary>
       // TODO: probably use UniqueId
-    public string FormMobiusId() => $"mobius-{MyContext.Module.Id}";
+    public string FormMobiusId() => $"mobius-{UniqueKey}";
 
     // The URL to the API endpoint - which uses the current edition (staging/live) and the workflow ID
     public string WebApiUrl()

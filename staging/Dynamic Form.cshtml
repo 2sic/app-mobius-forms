@@ -6,12 +6,10 @@
 @using ThisApp
 
 @{
-  var dynForm = MyItem;
-  @* TODO:: Rename if dynForm child is solved and is also type *@
-  var dynForm2 = new DynForm(MyItem);
+  var dynForm = new DynForm(MyItem);
 
-  var isReusedConfig = dynForm2.ReuseConfig;
-  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "floatingLabel" : dynForm2.DesignField == "floatingLabel";
+  var isReusedConfig = dynForm.ReuseConfig;
+  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "floatingLabel" : dynForm.DesignField == "floatingLabel";
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
   var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
@@ -30,13 +28,13 @@
 
 <div class="app-mobius5-wrapper" @formToolbar>
 
-  @if (Text.Has(dynForm2.Title)) {
-    <h2>@dynForm2.Title</h2>   
+  @if (Text.Has(dynForm.Title)) {
+    <h2>@dynForm.Title</h2>   
   }
 
   <div class="@formHelper.WrapperClasses(formConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius5-form">
-      <input type="hidden" id="FormId" value="@dynForm2.Id">
+      <input type="hidden" id="FormId" value="@dynForm.Id">
 
       @foreach (var field in formFields) {
         var dynField = new DynFormField(field);
@@ -57,11 +55,8 @@
       }
     </div>
 
-    @* TODO: dynForm2 error? why *@
-    @if (!dynForm.Bool("SkipSubmit", required: false)) {
-      if (dynFormConfig.Recaptcha) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
-      @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
-    }
+    @if (dynFormConfig.Recaptcha) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
+    @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
 
     @if (MyUser.IsContentAdmin) {
       var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = MyContext.Module.Id }); // Get the dynamic data from Query by ModuleId
