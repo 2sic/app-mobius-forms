@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Http;
+using ThisApp.Data;
+using ThisApp.Code;
+using ThisApp;
+
+
 
 public class MailChimp : Custom.Hybrid.CodeTyped
 {
@@ -31,11 +36,12 @@ public class MailChimp : Custom.Hybrid.CodeTyped
   {
     // Log what's happening in case we run into problems
     var wrapLog = Log.Call();
+    var appSettings = new AppSettings(App.Settings);
 
     var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
     var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");
     Log.Add("Name:" + SenderName + ", LastName:" + SenderLastName);
-    var msg = SubscribeToMailChimp(App.Settings.String("MailchimpServer"), App.Settings.String("MailchimpListId"), App.Settings.String("MailchimpAPIKey"), contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
+    var msg = SubscribeToMailChimp(appSettings.MailchimpServer, appSettings.MailchimpListId, appSettings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
     if (msg != "OK")
     {
       wrapLog("error");
@@ -80,6 +86,8 @@ public class MailChimp : Custom.Hybrid.CodeTyped
   }
 
   private static readonly HttpClient client = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) };
+
+  
 
   /* HELPERS */
   /* CREATE MD5 OF INPUT */
