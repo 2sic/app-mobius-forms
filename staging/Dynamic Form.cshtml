@@ -24,9 +24,11 @@
   var bootrstrapCssClass = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
   var formParams = new FormBuildParameters(appRes, dynFormConfig, bootrstrapCssClass , MyUser, useFloatingLabels);
   var formBuilder = new FormBuilder(this, formParams);
+
+  var formToolbar = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin ? Kit.Toolbar.Default(dynForm) : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
 }
 
-<div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
+<div class="app-mobius5-wrapper" @formToolbar>
 
   @if (Text.Has(dynForm2.Title)) {
     <h2>@dynForm2.Title</h2>   
@@ -39,9 +41,11 @@
       @foreach (var field in formFields) {
         var dynField = new DynFormField(field);
         
-        var toolbar = isReusedConfig
-          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
-          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + dynField.Title)).MoveDown().New().Remove();
+        var toolbar = !App.Settings.Bool("AdminHasPermission") && !MyContext.User.IsSystemAdmin
+          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo"))) 
+          : isReusedConfig
+            ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
+            : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + dynField.Title)).MoveDown().New().Remove();
 
         <div @toolbar>
           @if(dynField.FieldType == "advanced" )  
