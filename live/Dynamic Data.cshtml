@@ -2,15 +2,22 @@
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data;
 @using ToSic.Sxc.Adam;
+@using ThisApp.Data
+@using System.Text.Json;
 
-@if(!MyUser.IsContentAdmin) {
+@if(!MyUser.IsContentAdmin){
   return;
 }
 
 @{
+   // DataTables 
+<link rel="stylesheet" href="@MyView.Path/lib/jquery.dataTables.css" />
+<script src="@MyView.Path/lib/jquery.dataTables.js"></script>
+
   var dataItems = AsItems(Kit.Data.GetQuery("DynamicData"));
   var dynDataHelper = GetCode("./tools/DynData.cs");
   var page = GetService<ToSic.Sxc.Services.IPageService>();
+  var appRes = new AppResources(App.Resources);
   
   page.Activate("jQuery");
 
@@ -25,18 +32,9 @@
   Dictionary<string, string> fieldHeaderDictionary = dynDataHelper.GetFieldDictionary(formId);
 } 
 
-@* <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.css" rel="stylesheet">
- 
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-      let table = new DataTable('#formdata');
-  });
-</script> *@
-
 <div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
   <strong>Total:</strong> @count 
-  <strong>@App.Resources.String("LabelFirst"):</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@App.Resources.String("LabelLast"):</strong> @lastRecord.ToString("yyyy-MM-dd")
+  <strong>@appRes.LabelFirst:</strong> @firstRecord.ToString("yyyy-MM-dd") <strong>@appRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
   <strong>ModuleId: </strong> @moduleId <strong>FormId:</strong> @formId
   <a href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@moduleId" type="button" class="btn btn-primary">CSV Export</a>
   @* TODO::  https://docs.2sxc.org/api/dot-net/ToSic.Sxc.Services.ILinkService.html#ToSic_Sxc_Services_ILinkService_To_System_String_System_Nullable_System_Int32__System_String_System_Object_System_String_System_String_ *@
@@ -46,94 +44,134 @@
   @linkToUrl  *@
 </div>
 
-<div class="overflow-x-auto">
-   <table id="formdata" class="table table-striped">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>@App.Resources.String("LabelTimestamp")</th>
-        @foreach (var headerProp in headerProps) { // Generate the Tabele Header form headerPropsDistinct
-          <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
-        }
-        <th>File</th>
-      </tr>
-    </thead> 
-    <tbody>  
-      @foreach (var pair in dataPairs) { // Loop each data from Query for the Value      
-        var row = pair.Json;
-        var item = pair.Item;
-        var accordionId = $"accordion-{item.Id}";
-        <tr @Kit.Toolbar.Empty(item).Delete().Settings(autoAddMore: "end", hover: "left")>
-          <td>@item.Id</td>  
-          <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
-          @foreach (var prop in headerProps) { // Loop each prop from headerProps, if the prop not use, will be generate a empty td (prop generate later)
-            <td>
-              @if (row.Get(prop, required: false) != null) {//  Check, witch Type it is, an display the rigth Format 
-                switch (Type.GetTypeCode(row.Get(prop).GetType())) {
-                  case TypeCode.String:
-                    <p>@row.String(prop)</p>
-                    break;
-                  case TypeCode.Int32:
-                    <p>@row.Int(prop)</p>
-                    break;
-                  case TypeCode.DateTime:
-                    <p>@row.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
-                    break;
-                  case TypeCode.Boolean:
-                    <p>@row.Bool(prop)</p>
-                    break;
-                  case TypeCode.Object:
-                    var objValue = row.Get(prop);
+@* Add Table Top Bar show and search into top-toolbar div *@
+<div class="top-toolbar d-flex justify-content-between"></div>
 
-                    if (objValue != null) {
-                      if (objValue is IList<object> objectList) {
-                          string joinedList = string.Join(", ", objectList.Select(i => i?.ToString() ?? string.Empty));
-                          @joinedList
-                      } else {
-                        <p>Not from Typed List</p>
-                      }
-                    } else {
-                      <td></td>
-                    }
-                    break;
-                  default:
-                    <td>Unknow Type</td>
-                    break;
-                }
-              }
-            </td>
-          }
-          @if (item.Folder("Files").Files.Count() > 0) {
-            <td>
-              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#file-@accordionId" aria-expanded="false" aria-controls="@accordionId">
-              <path d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"/>
-              </svg>             
-            </td>
-          } else {
-            <td></td>
-          }
-      </tr>
-        if (item.Folder("Files").Files.Count() > 0) {
-          <tr id="@accordionId">
-            <td class="accordion-item" colspan="@(headerProps.Count() + 3)">
-              <div id="file-@accordionId" class="accordion-collapse collapse">
-                <div class="d-flex align-items-end flex-column">
-                  @foreach(IFile file in item.Folder("Files").Files)
-                  {
-                    <div>
-                      Size: @Math.Round((double)@file.Size / 1024, 1) KB
-                    <a class="link-dark" href="@file.Url" download="@file.Name">
-                      @file.FullName
-                      <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
-                    </a>
-                    </div>
-                  }
-                </div>
-              </div>
-            </td>
-          </tr>
-        }
-      }
-    </tbody>
-  </table>
+<div class="table-responsive">
+   <table id="formdata" class="table table-striped">
+      <thead>
+         <tr>
+            <th>Id</th>
+            <th>@appRes.LabelTimestamp</th>
+            @foreach (var headerProp in headerProps) {
+               <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
+            }
+            <th>File</th>
+         </tr>
+      </thead> 
+      <tbody>  
+         @foreach (var pair in dataPairs) {
+            var row = pair.Json;
+            var item = pair.Item;
+            var i = 0;
+            <tr @Kit.Toolbar.Empty(item).Delete().Settings(autoAddMore: "end", hover: "left")>
+               <td>@item.Id</td>  
+               <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
+               @foreach (var prop in headerProps) {
+                  <td class="nowrap">
+                     @if (row.Get(prop, required: false) != null) {
+                        switch (Type.GetTypeCode(row.Get(prop).GetType())) {
+                           case TypeCode.String:
+                              <p class="app-mobius-tooltip" id="app-mobius-tooltip-btn-@item.Id-@i" data-content="@row.String(prop)"> @Html.Raw(Text.Ellipsis(row.String(prop), 10))</p>
+                              break;
+                           case TypeCode.Int32:
+                              <p>@row.Int(prop)</p>
+                              break;
+                           case TypeCode.DateTime:
+                              <p>@row.DateTime(prop).ToString("yyyy-MM-ddTHH:mm")</p>
+                              break;
+                           case TypeCode.Boolean:
+                              <p>@row.Bool(prop)</p>
+                              break;
+                           case TypeCode.Object:
+                              var objValue = row.Get(prop);
+                              if (objValue != null) {
+                                 if (objValue is IList<object> objectList) {
+                                    string joinedList = string.Join(", ", objectList.Select(i => i?.ToString() ?? string.Empty));
+                                    @joinedList
+                                 } else {
+                                    <p>Not from Typed List</p>
+                                 }
+                              } else {
+                                 <td></td>
+                              }
+                              break;
+                           default:
+                              <td>Unknow Type</td>
+                              break;
+                        }
+                     }
+                  </td>
+                  i++;
+               }
+               @if (item.Folder("Files").Files.Count() > 0) {
+               <td>
+                  <span class="app-mobius-tooltip badge rounded-pill text-bg-primary" id="app-mobius-tooltip-btn-@item.Id">
+                     @item.Folder("Files").Files.Count()
+                     @foreach (IFile file in item.Folder("Files").Files) {
+                        <div class="d-none app-mobius-tooltip-content d-flex" data-file-id="@item.Id">
+                           <div>
+                              <a class="link-info" href="@file.Url" download="@file.Name">
+                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="white">
+                                    <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                 </svg>
+                                 &nbsp;
+                                 @file.FullName
+                              </a>
+                           </div>
+                           <div class="mr-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="white">
+                                 <path d="M128 176a128 128 0 1 1 256 0 128 128 0 1 1 -256 0zM391.8 64C359.5 24.9 310.7 0 256 0S152.5 24.9 120.2 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H391.8zM296 224c0-10.6-4.1-20.2-10.9-27.4l33.6-78.3c3.5-8.1-.3-17.5-8.4-21s-17.5 .3-21 8.4L255.7 184c-22 .1-39.7 18-39.7 40c0 22.1 17.9 40 40 40s40-17.9 40-40z"/>
+                              </svg>
+                              &nbsp;
+                              @Math.Round((double)file.Size / 1024, 1) KB
+                           </div>
+                           @if (item.Folder("Files").Files.Count() > 1 && !file.Equals(item.Folder("Files").Files.Last())) {
+                              <br>
+                           }
+                        </div>
+                     }
+                  </span>
+               </td>
+               } else <td></td>
+            </tr>
+         }
+      </tbody>
+   </table>
 </div>
+@* Add Table Bottom Bar side-info and pagination into bottom-toolbar div *@
+<div class="bottom-toolbar d-flex justify-content-between mt-3"></div>
+
+<script>
+  new DataTable('#formdata');
+
+   // Formdata Length Div Move to Top-Tollbar
+   document.querySelector(".top-toolbar").append(document.getElementById("formdata_length"))
+   // Get Input and Label and add some bs5 classes
+   document.getElementById("formdata_length").getElementsByTagName("label")[0].classList.add("d-flex", "align-items-center", "gap-2");
+   document.getElementById("formdata_length").getElementsByTagName("select")[0].classList.add("form-select");
+
+   // Formdata Filter  Div Move to Top-Tollbar
+   document.querySelector(".top-toolbar").append(document.getElementById("formdata_filter"))
+   // Get Input and Label and add some bs5 classes
+   document.getElementById("formdata_filter").getElementsByTagName("label")[0].classList.add("d-flex", "align-items-center", "gap-2");
+   document.getElementById("formdata_filter").getElementsByTagName("input")[0].classList.add("form-control");
+
+   // Formdata Info  Div Move to Bottom-Tollbar
+   document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_info"))
+
+   // Formdata Paginate  Div Move to Bottom-Tollbar
+   document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_paginate"))
+</script>
+
+<link rel="stylesheet" href="@MyView.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
+<script src="@MyView.Path/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
+@Kit.Page.TurnOn("window.appMobius5.initTippy()", data: new {
+  domClass = "app-mobius-tooltip",
+  options = new {
+    placement = "left",
+    interactive = true,
+    allowHTML = true
+  }
+})
+

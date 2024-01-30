@@ -1,5 +1,8 @@
 @inherits Custom.Hybrid.RazorTyped
 @using ToSic.Razor.Blade
+@using ThisApp.Form
+
+
 
 @* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page *@
 @Kit.Page.Activate(condition: Kit.Css.IsUnknown, features: "Bootstrap5")
@@ -9,13 +12,13 @@
 
 @* Run the JS and give it all the parameters to process the current form *@
 @{
-  var helpers = GetCode("../tools/Helpers.cs");
+  var formHelper = new FormHelpers(this);
 }
 @Kit.Page.TurnOn("window.appMobius5.init()", data: new {
   // This is the attribute on the wrapper tag which should be processed
-  domAttribute = helpers.FormMobiusId(),
+  domAttribute = formHelper.FormMobiusId(),
   // web api url to send the form data to
-  webApiUrl = helpers.WebApiUrl(),
+  webApiUrl = formHelper.WebApiUrl(),
   // options for the pristine validation plugin
   validationOptions = new {
     // class of the parent element where the error/success class is added

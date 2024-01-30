@@ -1,31 +1,33 @@
 @inherits Custom.Hybrid.RazorTyped
+@using ThisApp.Data
 @{
   // Exit if not editor, as this file only adds messages for the editor
   if (!MyUser.IsContentAdmin) {
     return;
   }
-
-  var formConfig = MyModel.Item("FormConfig");
-
+  var dynFormConfig = new DynForm(MyModel.Item("FormConfig"));
+  var appRes = new AppResources(App.Resources);
+  var appSettings = new AppSettings(App.Settings);
 }
+
 @* Show mailchimp-not-enabled message *@
-@if (!formConfig.Bool("Mailchimp")) {
+@if (!dynFormConfig.Mailchimp) {
   <div class="alert alert-warning">
-    @Html.Raw(App.Resources.String("MessageEnableMailchimp", scrubHtml: "p"));
+    @Html.Raw((appRes.MessageEnableMailchimp, scrubHtml: "p"));
   </div>
   return;
 }
 
-@if (!App.Settings.Bool("MailChimpShowWarning")) {
+@if (!appSettings.MailChimpShowWarning) {
   <div class="alert alert-warning">
-    @Html.Raw(App.Resources.String("MessageContainsMailchimp", scrubHtml: "p"));
+    @Html.Raw((appRes.MessageContainsMailchimp, scrubHtml: "p"));
   </div>
 }
 
 
-@if (App.Settings.Bool("MailChimpShowWarning")) {
+@if (appSettings.MailChimpShowWarning) {
   <div class="alert alert-warning">
-     @Html.Raw(App.Resources.String("MessageDefaultMailChimpKey", scrubHtml: "p"));
+     @Html.Raw((appRes.MessageDefaultMailChimpKey, scrubHtml: "p"));
   </div>  
 }
 

@@ -1,17 +1,21 @@
-using System;
 using System.Collections.Generic;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
+using ThisApp.Data;
+using ThisApp.Code;
+using ThisApp;
 
 public class EmailToCustomerWithData: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(ITypedItem formConfig, Dictionary<string, object> data) {
+  public string Subject(DynForm dynFormConfig, Dictionary<string, object> data) {
+     var appRes = new AppResources(App.Resources);
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(formConfig.String("CustomerMailSubject"), App.Resources.String("CustomerMailSubject"));
+    return Text.First(dynFormConfig.CustomerMailSubject, appRes.CustomerMailSubject);
   }
 
-  public string Message(ITypedItem formConfig, Dictionary<string, object> data) {
+  public string Message(DynForm dynFormConfig, Dictionary<string, object> data) {
+    var appRes = new AppResources(App.Resources);
     var message = @"
     <!doctype html>
     <html>
@@ -24,12 +28,12 @@ public class EmailToCustomerWithData: Custom.Hybrid.CodeTyped
     </head>
     <body>
         <strong>" + data["Subject"] + @"</strong>
-        <h1>" + App.Resources.String("MailCustomerTitle") + @"</h1>
+        <h1>" + appRes.MailCustomerTitle + @"</h1>
         <div>"
-            + App.Resources.String("MailCustomerContent") +
+            + appRes.MailCustomerContent +
         @"</div>
         <br/>
-        <div>" + App.Resources.String("MailCustomerContentWithData") + @"</div>";
+        <div>" + appRes.MailCustomerContentWithData + @"</div>";
 
     foreach (var item in data)
     {

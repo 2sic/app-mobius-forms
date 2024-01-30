@@ -8,6 +8,9 @@ using System.Web.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ThisApp.Data;
+using ThisApp.Code;
+using ThisApp;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class DynFormController : Custom.Hybrid.ApiTyped
@@ -22,7 +25,9 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
-    if (formConfig.Bool("Recaptcha"))
+     var dynFormConfig = new DynForm(formConfig);
+
+    if (dynFormConfig.Recaptcha)
     {
       Log.Add("checking Recaptcha");
       GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);

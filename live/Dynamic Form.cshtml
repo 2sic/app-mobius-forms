@@ -1,148 +1,66 @@
 @inherits Custom.Hybrid.RazorTyped
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data
+@using ThisApp.Data
+@using ThisApp.Form
+@using ThisApp
+
 @{
   var dynForm = MyItem;
-  var isReusedConfig = dynForm.Bool("ReuseConfig");
-  var usePlaceholder = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "placeholder" : dynForm.String("DesignField") == "placeholder";
-  
+  @* TODO:: Rename if dynForm child is solved and is also type *@
+  var dynForm2 = new DynForm(MyItem);
+
+  var isReusedConfig = dynForm2.ReuseConfig;
+  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "floatingLabel" : dynForm2.DesignField == "floatingLabel";
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
+  var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
   
-  var FieldBuilder = GetCode("./tools/FieldBuilders.cs");
-  FieldBuilder.LabelInPlaceholder = usePlaceholder;
-  
-  var helpers = GetCode("./tools/Helpers.cs");
+  var formHelper = new FormHelpers(this);
   var dynDataHelper = GetCode("./tools/DynData.cs");
+
+  var appRes = new AppResources(App.Resources);
+  var dynFormConfig = new DynForm(formConfig);
+  var bootrstrapCssClass = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, bootrstrapCssClass , MyUser, useFloatingLabels);
+  var formBuilder = new FormBuilder(this, formParams);
+
+  var formToolbar = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin ? Kit.Toolbar.Default(dynForm) : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
+
 }
 
-<div @Kit.Toolbar.Default(dynForm) class="app-mobius5-wrapper">
+<div class="app-mobius5-wrapper" @formToolbar>
 
-  @if (Text.Has(dynForm.String("Title"))) {
-    <h2>@dynForm.String("Title")</h2>   
+  @if (Text.Has(dynForm2.Title)) {
+    <h2>@dynForm2.Title</h2>   
   }
 
-  <div class="@helpers.WrapperClasses(formConfig)" @helpers.FormMobiusId()>
+  <div class="@formHelper.WrapperClasses(formConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius5-form">
-      @foreach (var field in formFields)
-      {
-        // Main Form Data
-        var label = field.String("Title");
-        var fieldId = field.Url("FieldId");
-        var fieldType = field.String("FieldType");
-        var required = field.Bool("Required");
-        var pickerType = field.String("PickerType");
+      <input type="hidden" id="FormId" value="@dynForm2.Id">
+
+      @foreach (var field in formFields) {
+        var dynField = new DynFormField(field);
         
-        var toolbar = isReusedConfig
-          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarReuseInfo"), background: "white"))
-          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + label)).MoveDown().New().Remove();
+        var toolbar = !App.Settings.Bool("AdminHasPermission") && !MyContext.User.IsSystemAdmin
+          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo"))) 
+          : isReusedConfig
+          ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
+          : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + dynField.Title)).MoveDown().New().Remove();
 
-        <input type="hidden" id="FormId" value="@dynForm.Id">
         <div @toolbar>
-          @switch (fieldType)
-          {
-            case "string":
-              if (field.Int("StringLines") == 0) {
-                @FieldBuilder.Text(fieldId, label, required)
-              } else {
-                @FieldBuilder.Multiline(fieldId, label, required, false, "", field.Int("StringLines").ToString())
-              }
-              
-              break;
-
-            case "email":
-              @FieldBuilder.EMail(fieldId, label, required, field.Bool("RecipientEmail"))
-              break;
-            
-            case "number":
-              @FieldBuilder.Number(fieldId, label, required, field.Int("MinLength"), field.Int("MaxLength"))
-              break;
-            
-            case "boolean":
-              if (field.Bool("LabelRight")){
-                @FieldBuilder.Checkbox(fieldId, required, false, label)
-              } else {
-                if (usePlaceholder) {
-                  <strong>@label</strong>
-                }
-                @FieldBuilder.CheckboxFieldAligment(fieldId, required, label)
-              }
-              break;
-
-            case "picker":
-              if (usePlaceholder) {
-                <strong>@label</strong>
-              }
-
-              if (pickerType == "radio") {
-                @FieldBuilder.Radio(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), label)
-              }
-
-              if (pickerType == "dropdown") {
-                @FieldBuilder.DropDown(fieldId, GetKeyValue(field.String("ValuesDropdownRadio")), required, field.Bool("MultiSelect"), label, field.String("PlaceHolderSelect")) 
-              }
-
-              if (pickerType == "checkbox") {
-                if (field.Bool("CheckboxWithHeadline")) {
-                  @FieldBuilder.CheckboxListWithLabel(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")), label);
-                } else {
-                  @FieldBuilder.CheckboxList(fieldId, required, GetKeyValue(field.String("ValuesDropdownRadio")))
-                }
-              }
-              break;
-            
-            case "file":
-              if(usePlaceholder){
-                <strong>@label</strong>
-              }
-            
-              @FieldBuilder.DynFile(fieldId, required, "", label)
-              break;
-
-            case "label":
-              <h4>@label</h4>
-              break;
-            
-            case "hidden":
-              if(MyUser.IsContentAdmin) {
-                <div class="alert alert-warning" role="alert">
-                <strong>Show Hidden Field for Admin</strong>
-                  @FieldBuilder.Text(fieldId, label, required, field.String("HiddenValue"), true)
-                </div>
-              } else {
-                @FieldBuilder.Hidden(fieldId, label, field.String("HiddenValue"))
-              }
-              break;
-            
-            case "advanced":
-              @Html.Partial("./custom-fields/" + @field.String("RazorFile")  , new { field })
-              break;
-            
-            case "terms":
-              var termsEnabled = field.Bool("TermsEnabled");
-              var gdprEnabled = field.Bool("GdprEnabled");
-              
-              if (termsEnabled && gdprEnabled && field.Bool("TermsAndGdprCombined")) {
-                @FieldBuilder.Checkbox("TermsAll", true, true)
-              } else {
-                if (termsEnabled) { @FieldBuilder.Checkbox("Terms", true, true) }
-                if (gdprEnabled) { @FieldBuilder.Checkbox("Gdpr", true, true) }
-              }
-              
-              // Optional recaptcha
-              if (formConfig.Bool("Recaptcha")) { @Html.Partial("Footer Recaptcha.cshtml") }
-              break;
-              
-            default:
-              <p>@pickerType</p>
-              <h3>Default: @fieldType</h3>
-              break;
-          }
-        </div>
+          @if(dynField.FieldType == "advanced" )  
+            @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field })
+           else  
+            @* All Other File Type *@
+            @formBuilder.Field(dynField) 
+        </div> 
       }
     </div>
 
+    @* TODO: dynForm2 error? why *@
     @if (!dynForm.Bool("SkipSubmit", required: false)) {
+      if (dynFormConfig.Recaptcha) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
       @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
     }
 
@@ -154,7 +72,7 @@
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
         @if (dataPairs.Count() == 0){
-          @App.Resources.String("LabelFromDataAvaible")
+          @appRes.LabelFromDataAvailable
         } else {
           <a class="btn btn-primary" href="@Link.To(parameters: "id=" + MyContext.Module.Id + "&mid=" + MyContext.Module.Id)" target="_blank">Form Data</a>
           <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>
@@ -165,45 +83,3 @@
 </div>
 
 @Html.Partial("./parts/Assets.cshtml", new { formConfig })
-
-@* Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown *@
-@functions {
-  Dictionary<string, string> GetKeyValue(string valuesDropdownRadio)
-  {
-    Dictionary<string, string> valueDictionaryRadio = new Dictionary<string, string>();
-    foreach (var item in valuesDropdownRadio.Split('\n'))
-    {
-      var values = item.Split(':');
-      // If values has Key and Value
-      if (values.Length == 2)
-      {
-        string key = values[0].Trim();
-        string value = values[1].Trim();
-        valueDictionaryRadio[key] = value;
-      }
-      // If only have a Value
-      else if (values.Length == 1)
-      {
-        string key = values[0];
-        string value = values[0];
-        valueDictionaryRadio[key] = value;
-      }
-      else
-      {
-        string key = "Empty";
-        string value = "Empty";
-        valueDictionaryRadio[key] = value;
-      }
-    }
-    return valueDictionaryRadio;
-  }
-}
-
-
-
-
-
-
-
-
-

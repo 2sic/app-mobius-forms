@@ -1,18 +1,21 @@
-using System;
 using System.Collections.Generic;
 using ToSic.Razor.Blade;
 using ToSic.Sxc.Data;
+using ThisApp.Data;
+using ThisApp.Code;
+using ThisApp;
 
 public class EmailToOwner: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(ITypedItem formConfig, Dictionary<string, object> data) {
+  public string Subject(DynForm dynFormConfig, Dictionary<string, object> data) {
+    var appRes = new AppResources(App.Resources);
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(formConfig.String("OwnerMailSubject"), App.Resources.String("OwnerMailSubject"));
+    return Text.First(dynFormConfig.OwnerMailSubject, appRes.OwnerMailSubject);
   }
-
-  public string Message(ITypedItem formConfig, Dictionary<string, object> data)
+  public string Message(DynForm dynFormConfig, Dictionary<string, object> data)
   {
+    var appRes = new AppResources(App.Resources);
     var message = @"
     <!doctype html>
     <html>
@@ -24,9 +27,9 @@ public class EmailToOwner: Custom.Hybrid.CodeTyped
         </style>
     </head>
     <body>
-        <h1>" + App.Resources.String("MailOwnerTitle") + @"</h1>
+        <h1>" + appRes.MailOwnerTitle + @"</h1>
         <div>"
-            + App.Resources.String("MailOwnerContent") +
+            + appRes.MailOwnerContent +
         "</div>";
 
     foreach (var item in data)

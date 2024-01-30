@@ -48,8 +48,6 @@ public class CsvController : Custom.Hybrid.ApiTyped
       // Write the CSV header
       csv.WriteField("Id");
       csv.WriteField("Timestamp");
-      // TODO:: Übersetzung fehlt im CSV
-      // csv.WriteField(App.Resources.String("LabelTimestamp"));
       foreach (var headerProp in headerProps)
       {
         csv.WriteField(dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp));
