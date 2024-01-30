@@ -6,7 +6,7 @@
 @using ThisApp
 
 @{
-  var dynForm = new DynForm(MyItem);
+  var dynForm = As<DynForm>(MyItem);
 
   var isReusedConfig = dynForm.ReuseConfig;
   var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "floatingLabel" : dynForm.DesignField == "floatingLabel";
@@ -17,8 +17,8 @@
   var formHelper = new FormHelpers(this);
   var dynDataHelper = GetCode("./tools/DynData.cs");
 
-  var appRes = new AppResources(App.Resources);
-  var dynFormConfig = new DynForm(formConfig);
+  var appRes = As<AppResources>(App.Resources);
+  var dynFormConfig = As<DynForm>(formConfig);
   var bootrstrapCssClass = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
   var formParams = new FormBuildParameters(appRes, dynFormConfig, bootrstrapCssClass , MyUser, useFloatingLabels);
   var formBuilder = new FormBuilder(this, formParams);
@@ -37,7 +37,7 @@
       <input type="hidden" id="FormId" value="@dynForm.Id">
 
       @foreach (var field in formFields) {
-        var dynField = new DynFormField(field);
+        var dynField = As<DynFormField>(field);
         
         var toolbar = !App.Settings.Bool("AdminHasPermission") && !MyContext.User.IsSystemAdmin
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo"))) 

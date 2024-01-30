@@ -2,9 +2,9 @@ using ToSic.Sxc.Data;
 
 namespace ThisApp.Data
 {
-  public partial class DynFormField : Custom.Data.Item16Experimental
+  public partial class DynFormField : Custom.Data.Item16
   {
-    public DynFormField(ITypedItem item) : base(item) { }
+    // public DynFormField(ITypedItem item) : base(item) { }
 
     public string FieldId => GetThis(fallback: "");
     public new string Title => GetThis(fallback: "");

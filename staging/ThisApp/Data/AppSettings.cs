@@ -2,9 +2,9 @@ using ToSic.Sxc.Data;
 
 namespace ThisApp.Data
 {
-  public partial class AppSettings : Custom.Data.Item16Experimental
+  public partial class AppSettings : Custom.Data.Item16
   {
-    public AppSettings(ITypedItem item) : base(item) { }
+    // public AppSettings(ITypedItem item) : base(item) { }
 
     #region Mailchimp
     public bool MailChimpShowWarning => GetThis(fallback: false);

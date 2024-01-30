@@ -2,9 +2,9 @@ using ToSic.Sxc.Data;
 
 namespace ThisApp.Data
 {
-  public partial class AppResources : Custom.Data.Item16Experimental
+  public partial class AppResources : Custom.Data.Item16
   {
-    public AppResources(ITypedItem item) : base(item) { }
+    // public AppResources(ITypedItem item) : base(item) { }
 
     public string ToolbarReuseInfo => GetThis(fallback: "");
     public string LabelFromDataAvailable => GetThis(fallback: "");

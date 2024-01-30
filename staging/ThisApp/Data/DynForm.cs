@@ -2,9 +2,9 @@ using ToSic.Sxc.Data;
 
 namespace ThisApp.Data
 {
-  public partial class DynForm : Custom.Data.Item16Experimental
+  public partial class DynForm : Custom.Data.Item16
   {
-    public DynForm(ITypedItem item) : base(item) { }
+    // public DynForm(ITypedItem item) : base(item) { }
     
 
     #region Dynamic Form

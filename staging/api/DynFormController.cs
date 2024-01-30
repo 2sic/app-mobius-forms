@@ -25,7 +25,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
 
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
-     var dynFormConfig = new DynForm(formConfig);
+     var dynFormConfig = As<DynForm>(formConfig);
 
     if (dynFormConfig.Recaptcha)
     {

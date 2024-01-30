@@ -8,9 +8,9 @@
 
 @* normal toolbar & toolbar to edit registrations of this course - opens the items and filters by this contentblock *@
 @{
-  var appRes = new AppResources(App.Resources);
+  var appRes = As<AppResources>(App.Resources);
   // Parameters handed in from the calling Razor
-  var dynFormConfig = new DynForm(MyModel.Item("FormConfig"));
+  var dynFormConfig = As<DynForm>(MyModel.Item("FormConfig"));
 
   var workflowId = MyModel.String("WorkflowId");
 
