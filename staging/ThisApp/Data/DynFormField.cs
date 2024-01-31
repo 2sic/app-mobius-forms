@@ -1,70 +1,66 @@
-using ToSic.Sxc.Data;
-
 namespace ThisApp.Data
 {
   public partial class DynFormField : Custom.Data.Item16
   {
-    // public DynFormField(ITypedItem item) : base(item) { }
-
-    public string FieldId => GetThis(fallback: "");
-    public new string Title => GetThis(fallback: "");
+    public string FieldId => String(fallback: "");
+    public new string Title => String(fallback: "");
 
 
-    public string FieldType => GetThis(fallback: "");
+    public string FieldType => String(fallback: "");
 
-    public string InitialValue => GetThis(fallback: "");
+    public string InitialValue => String(fallback: "");
 
-    public bool Required => GetThis(fallback: false);
+    public bool Required => Bool();
 
 
-    public bool IsDisabled => GetThis(fallback: false);
+    public bool IsDisabled => Bool();
 
     #region String
 
-    public int StringLines => GetThis(fallback: 0);
+    public int StringLines => Int();
 
     #endregion
 
     #region Number
 
-    public int MinLength => GetThis(fallback: 0);
-    public int MaxLength => GetThis(fallback: 0);
+    public int MinLength => Int();
+    public int MaxLength => Int();
 
     #endregion
 
     #region Email
 
-    public string RecipientEmail => GetThis(fallback: "");
+    public string RecipientEmail => String(fallback: "");
 
     #endregion
 
     #region Boolean
-    public bool LabelRight => GetThis(fallback: false);
+    public bool LabelRight => Bool();
 
     #endregion
 
     #region Terms
-    public bool TermsAndGdprCombined => GetThis(fallback: false);
-    public bool TermsEnabled => GetThis(fallback: false);
-    public bool GdprEnabled => GetThis(fallback: false);
+    public bool TermsAndGdprCombined => Bool();
+    public bool TermsEnabled => Bool();
+    public bool GdprEnabled => Bool();
 
     #endregion
 
     #region Picker
-    public string PickerType => GetThis(fallback: "");
-    public string PickerKeyValues => GetThis(fallback: "");
-    public bool CheckboxWithHeadline => GetThis(fallback: false);
-    public bool MultiSelect => GetThis(fallback: false);
-    public string PlaceHolderSelect => GetThis(fallback: "");
+    public string PickerType => String(fallback: "");
+    public string PickerKeyValues => String(fallback: "");
+    public bool CheckboxWithHeadline => Bool();
+    public bool MultiSelect => Bool();
+    public string PlaceHolderSelect => String(fallback: "");
 
     #endregion
 
     #region Hidden
-    public string HiddenValue => GetThis(fallback: "");
+    public string HiddenValue => String(fallback: "");
     #endregion
 
     #region Advanced
-    public string RazorFile => GetThis(fallback: "");
+    public string RazorFile => String(fallback: "");
     #endregion
 
   }

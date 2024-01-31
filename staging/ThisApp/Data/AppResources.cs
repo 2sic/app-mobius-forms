@@ -1,93 +1,89 @@
-using ToSic.Sxc.Data;
-
 namespace ThisApp.Data
 {
   public partial class AppResources : Custom.Data.Item16
   {
-    // public AppResources(ITypedItem item) : base(item) { }
-
-    public string ToolbarReuseInfo => GetThis(fallback: "");
-    public string LabelFromDataAvailable => GetThis(fallback: "");
+    public string ToolbarReuseInfo => String(fallback: "");
+    public string LabelFromDataAvailable => String(fallback: "");
 
     #region Terms
 
-    public string LabelTermsAll => GetThis(fallback: "");
-    public string LabelTerms => GetThis(fallback: "");
-    public string LabelGdpr => GetThis(fallback: "");
-    public string LabelSelect => GetThis(fallback: "");
+    public string LabelTermsAll => String(fallback: "");
+    public string LabelTerms => String(fallback: "");
+    public string LabelGdpr => String(fallback: "");
+    public string LabelSelect => String(fallback: "");
 
     #endregion
 
     #region Dynamic Data Table
 
-    public string LabelFirst => GetThis(fallback: "");
-    public string LabelLast => GetThis(fallback: "");
-    public string LabelTimestamp => GetThis(fallback: "");
+    public string LabelFirst => String(fallback: "");
+    public string LabelLast => String(fallback: "");
+    public string LabelTimestamp => String(fallback: "");
 
     #endregion
 
     #region Toolbar
 
-    public string ToolbarViewData => GetThis(fallback: "");
-    public string ToolbarConfigure => GetThis(fallback: "");
-    public string ToolbarAppResources => GetThis(fallback: "");
+    public string ToolbarViewData => String(fallback: "");
+    public string ToolbarConfigure => String(fallback: "");
+    public string ToolbarAppResources => String(fallback: "");
 
     #endregion
 
     #region Mailchimp and Footer Mailchimp
 
-    public string MessageEnableMailchimp => GetThis(fallback: "");
-    public string MessageContainsMailchimp => GetThis(fallback: "");
-    public string MessageDefaultMailChimpKey => GetThis(fallback: "");
+    public string MessageEnableMailchimp => String(fallback: "");
+    public string MessageContainsMailchimp => String(fallback: "");
+    public string MessageDefaultMailChimpKey => String(fallback: "");
 
     #endregion
 
     #region Footer Submit with Message
 
-    public string MessageFormIncomplete => GetThis(fallback: "");
-    public string MessageRecaptchaMissing => GetThis(fallback: "");
-    public string MessageSendError => GetThis(fallback: "");
-    public string MessageSendOk => GetThis(fallback: "");
+    public string MessageFormIncomplete => String(fallback: "");
+    public string MessageRecaptchaMissing => String(fallback: "");
+    public string MessageSendError => String(fallback: "");
+    public string MessageSendOk => String(fallback: "");
 
-    public string MessageSending => GetThis(fallback: "");
-    public string MessageNewsletterSuccess => GetThis(fallback: "");
-    public string MessageNewsletterUnexpectedError => GetThis(fallback: "");
-    public string MessageCustomerMailSend => GetThis(fallback: "");
-    public string MessageMailFromError => GetThis(fallback: "");
-    public string MessageMailOwnerError => GetThis(fallback: "");
-    public string ButtonSend => GetThis(fallback: "");
+    public string MessageSending => String(fallback: "");
+    public string MessageNewsletterSuccess => String(fallback: "");
+    public string MessageNewsletterUnexpectedError => String(fallback: "");
+    public string MessageCustomerMailSend => String(fallback: "");
+    public string MessageMailFromError => String(fallback: "");
+    public string MessageMailOwnerError => String(fallback: "");
+    public string ButtonSend => String(fallback: "");
 
     #endregion
 
     #region Footer Recaptcha
 
-    public string MessageContainsRecaptcha => GetThis(fallback: "");
-    public string MessageRecaptchaWarning => GetThis(fallback: "");
+    public string MessageContainsRecaptcha => String(fallback: "");
+    public string MessageRecaptchaWarning => String(fallback: "");
 
     #endregion
 
     #region EmailToCustomized
 
-    public string OwnerMailSubject => GetThis(fallback: "");
+    public string OwnerMailSubject => String(fallback: "");
 
     #endregion
 
     #region EmailToCustomer
 
-    public string CustomerMailSubject => GetThis(fallback: "");
-    public string MailCustomerTitle => GetThis(fallback: "");
-    public string MailCustomerContent => GetThis(fallback: "");
+    public string CustomerMailSubject => String(fallback: "");
+    public string MailCustomerTitle => String(fallback: "");
+    public string MailCustomerContent => String(fallback: "");
 
     #endregion
 
     #region EmailToCustomerWithData
-    public string MailCustomerContentWithData => GetThis(fallback: "");
+    public string MailCustomerContentWithData => String(fallback: "");
 
     #endregion
 
     #region EmailToOwner
-    public string MailOwnerTitle => GetThis(fallback: "");
-    public string MailOwnerContent => GetThis(fallback: "");
+    public string MailOwnerTitle => String(fallback: "");
+    public string MailOwnerContent => String(fallback: "");
 
     #endregion
 
