@@ -1,50 +1,24 @@
-using ToSic.Sxc.Data;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ThisApp.Data
 {
-  public partial class DynForm : Custom.Data.Item16
+  public partial class DynForm
   {
-    // public DynForm(ITypedItem item) : base(item) { }
-    
+    public bool UseFloatingLabels => _useFloatingLabels ??= UseConfigOf.DesignField == "floatingLabel";
+    private bool? _useFloatingLabels;
 
-    #region Dynamic Form
+    public List<DynFormField> Fields => _fields ??= UseConfigOf.Children<DynFormField>("Fields").ToList();
+    private List<DynFormField> _fields;
 
-    public string DesignField => GetThis(fallback: "");
-    public bool ReuseConfig => GetThis(fallback: false);
-    public new string Title => GetThis(fallback: "");
-    public bool Recaptcha => GetThis(fallback: false);
+    private DynForm InheritedConfig => _inheritedConfig ??= ReuseConfig ? Child<DynForm>("InheritedConfig") : null;
+    private DynForm _inheritedConfig;
 
-    #endregion
-
-    #region Mailchimp
-
-    public bool Mailchimp => GetThis(fallback: false);
-
-    #endregion
-
-    #region Send Mail
-    public string OwnerMailTemplate => GetThis(fallback: "");
-    public string OwnerMailCC => GetThis(fallback: "");
-    public string CustomerMailTemplate => GetThis(fallback: "");
-    public string CustomerMailCC => GetThis(fallback: "");
-
-    public bool CustomerSend => GetThis(fallback: false);
-    public bool OwnerSend => GetThis(fallback: false);
-    public string MailFrom => GetThis(fallback: "");
-    public string OwnerMail => GetThis(fallback: "");
-
-    #endregion
-
-    #region EmailToCustomized
-
-    public string OwnerMailSubject => GetThis(fallback: "");
-
-    #endregion
-
-    #region EmailToCustomer
-    public string CustomerMailSubject => GetThis(fallback: "");
-
-    #endregion
-
+    /// <summary>
+    /// This is the source of the configs - can be the own object, but can also be the one in "InheritedConfig".
+    /// Fallback is "this", in case it doesn't have a child.
+    /// </summary>
+    private DynForm UseConfigOf => _useConfigOf ??= ReuseConfig ? (InheritedConfig ?? this) : this;
+    private DynForm _useConfigOf;
   }
 }

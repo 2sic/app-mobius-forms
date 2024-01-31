@@ -9,63 +9,70 @@
   var dynForm = As<DynForm>(MyItem);
 
   var isReusedConfig = dynForm.ReuseConfig;
-  var useFloatingLabels = isReusedConfig ? dynForm.Child("InheritedConfig").String("DesignField") == "floatingLabel" : dynForm.DesignField == "floatingLabel";
+
+  // TODO: THIS looks fishy!
+  // Why have a child, referencing itself in the "Config" field???
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
-  var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
-  var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
+  var dynFormConfig = As<DynForm>(formConfig);
   
   var formHelper = GetService<FormHelpers>();
   var dynDataHelper = GetCode("./tools/DynData.cs");
 
   var appRes = As<AppResources>(App.Resources);
-  var dynFormConfig = As<DynForm>(formConfig);
-  var bootrstrapCssClass = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
-  var formParams = new FormBuildParameters(appRes, dynFormConfig, bootrstrapCssClass , MyUser, useFloatingLabels);
+  var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
+  var formParams = new FormBuildParameters(appRes, dynFormConfig, cssClasses , MyUser, dynForm.UseFloatingLabels);
   var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
-  var formToolbar = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin ? Kit.Toolbar.Default(dynForm) : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
+  // TODO: should use AppSettings.AdminHasPermission
+  bool enableEditExperience = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin;
+  
+  // TODO: also should use AppResources.ToolbarPermissionInfo
+  var formToolbar = enableEditExperience
+    ? Kit.Toolbar.Default(dynForm)
+    : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
 }
 
 <div class="app-mobius5-wrapper" @formToolbar>
 
-  @if (Text.Has(dynForm.Title)) {
+  @if (Text.Has(dynForm.Title))
     <h2>@dynForm.Title</h2>   
-  }
 
   <div class="@formHelper.WrapperClasses(formConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius5-form">
       <input type="hidden" id="FormId" value="@dynForm.Id">
 
-      @foreach (var field in formFields) {
-        var dynField = As<DynFormField>(field);
-        
-        var toolbar = !App.Settings.Bool("AdminHasPermission") && !MyContext.User.IsSystemAdmin
+      @foreach (var field in dynForm.Fields)
+      {        
+        var toolbar = !enableEditExperience
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo"))) 
           : isReusedConfig
             ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
-            : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + dynField.Title)).MoveDown().New().Remove();
+            : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + field.Title)).MoveDown().New().Remove();
 
         <div @toolbar>
-          @if(dynField.FieldType == "advanced" )  
-            @Html.Partial("./custom-fields/" + @dynField.RazorFile  , new { field })
-           else  
-            @* All Other File Type *@
-            @formBuilder.Field(dynField) 
+          @* If it's a advanced field, use the custom razor - otherwise use standard formBuilder *@
+          @if (field.FieldType == "advanced")
+            @Html.Partial("./custom-fields/" + field.RazorFile, new { field })
+          else
+            @formBuilder.Field(field) 
         </div> 
       }
     </div>
 
-    @if (dynFormConfig.Recaptcha) { @Html.Partial("parts/Footer Recaptcha.cshtml") }
+    @if (dynFormConfig.Recaptcha)
+      @Html.Partial("parts/Footer Recaptcha.cshtml")
+
     @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
 
-    @if (MyUser.IsContentAdmin) {
+    @if (MyUser.IsContentAdmin)
+    {
       var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = MyContext.Module.Id }); // Get the dynamic data from Query by ModuleId
       // Initialize lists to store CSV-related data
       List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(query.List); // Initialize Data
 
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
-        @if (dataPairs.Count() == 0){
+        @if (dataPairs.Count() == 0) {
           @appRes.LabelFromDataAvailable
         } else {
           <a class="btn btn-primary" href="@Link.To(parameters: "id=" + MyContext.Module.Id + "&mid=" + MyContext.Module.Id)" target="_blank">Form Data</a>
