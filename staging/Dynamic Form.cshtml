@@ -10,7 +10,7 @@
 
   var isReusedConfig = dynForm.ReuseConfig;
 
-  // TODO: THIS looks fishy!
+  // TODO: @2dg THIS looks fishy!
   // Why have a child, referencing itself in the "Config" field???
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var dynFormConfig = As<DynForm>(formConfig);
@@ -23,10 +23,10 @@
   var formParams = new FormBuildParameters(appRes, dynFormConfig, cssClasses , MyUser, dynForm.UseFloatingLabels);
   var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
-  // TODO: should use AppSettings.AdminHasPermission
+  // TODO: @2dg should use AppSettings.AdminHasPermission
   bool enableEditExperience = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin;
   
-  // TODO: also should use AppResources.ToolbarPermissionInfo
+  // TODO: @2dg also should use AppResources.ToolbarPermissionInfo
   var formToolbar = enableEditExperience
     ? Kit.Toolbar.Default(dynForm)
     : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
@@ -34,6 +34,7 @@
 
 <div class="app-mobius5-wrapper" @formToolbar>
 
+  @* @2ro / 2dg - interesting: seems the latest Razor doesn't need { ... }  *@
   @if (Text.Has(dynForm.Title))
     <h2>@dynForm.Title</h2>   
 
@@ -51,7 +52,7 @@
 
         <div @toolbar>
           @* If it's a advanced field, use the custom razor - otherwise use standard formBuilder *@
-          @if (field.FieldType == "advanced")
+          @if (field.UseRazorComponent)
             @Html.Partial("./custom-fields/" + field.RazorFile, new { field })
           else
             @formBuilder.Field(field) 
