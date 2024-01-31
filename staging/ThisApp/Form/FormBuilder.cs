@@ -1,5 +1,4 @@
 using ToSic.Razor.Blade;
-using ToSic.Sxc.Code;
 using ThisApp.Data;
 using ThisApp.Fields;
 
@@ -8,12 +7,13 @@ namespace ThisApp.Form
 {
   public class FormBuilder : Custom.Hybrid.CodeTyped
   {
-    public FormBuilder(IHasCodeContext parent, FormBuildParameters formParams) : base(parent)
+    public FormBuilder Setup(FormBuildParameters formParams)
     {
       FormParams = formParams;
+      return this;
     }
 
-    public FormBuildParameters FormParams { get; }
+    public FormBuildParameters FormParams { get; private set; }
 
     /// <summary>
     /// Get the HTML for a single field

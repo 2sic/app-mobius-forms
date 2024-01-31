@@ -1,15 +1,9 @@
-using ToSic.Sxc.Code;
 using ToSic.Sxc.Data;
 
 namespace ThisApp.Form
 {
   public class FormHelpers : Custom.Hybrid.CodeTyped
   {
-    /// <summary>
-    /// Constructor which ensures that this class has the same context as the parent, eg. the Kit etc.
-    /// </summary>
-    public FormHelpers(IHasCodeContext parent) : base(parent) { }
-
     /// <summary>
     /// The custom marker so the JS can find the form
     /// </summary>

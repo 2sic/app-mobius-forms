@@ -12,7 +12,7 @@
 
 @* Run the JS and give it all the parameters to process the current form *@
 @{
-  var formHelper = new FormHelpers(this);
+  var formHelper = GetService<FormHelpers>();
 }
 @Kit.Page.TurnOn("window.appMobius5.init()", data: new {
   // This is the attribute on the wrapper tag which should be processed

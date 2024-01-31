@@ -14,14 +14,14 @@
   var formFields = isReusedConfig ? dynForm.Child("InheritedConfig").Children("Fields") : dynForm.Children("Fields");
   var formFieldsSets = formFields.Where(f => f.String("FieldType") == "label" && f.Bool("IsSet"));
   
-  var formHelper = new FormHelpers(this);
+  var formHelper = GetService<FormHelpers>();
   var dynDataHelper = GetCode("./tools/DynData.cs");
 
   var appRes = As<AppResources>(App.Resources);
   var dynFormConfig = As<DynForm>(formConfig);
   var bootrstrapCssClass = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
   var formParams = new FormBuildParameters(appRes, dynFormConfig, bootrstrapCssClass , MyUser, useFloatingLabels);
-  var formBuilder = new FormBuilder(this, formParams);
+  var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
   var formToolbar = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin ? Kit.Toolbar.Default(dynForm) : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
 }
