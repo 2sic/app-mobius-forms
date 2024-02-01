@@ -34,8 +34,8 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // background: some settings are made in this module, but if they are missing we use fallback settings
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
 
-    var dynFormConfig = new DynForm(formConfig);
-    var appSettings = new AppSettings(App.Settings);
+    var dynFormConfig = As<DynForm>(formConfig);
+    var appSettings = As<AppSettings>(App.Settings);
 
     var from = Text.First(dynFormConfig.MailFrom, appSettings.DefaultMailFrom);
     var owner = Text.First(dynFormConfig.OwnerMail, appSettings.DefaultOwnerMail);

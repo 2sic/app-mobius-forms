@@ -17,7 +17,7 @@
   var dataItems = AsItems(Kit.Data.GetQuery("DynamicData"));
   var dynDataHelper = GetCode("./tools/DynData.cs");
   var page = GetService<ToSic.Sxc.Services.IPageService>();
-  var appRes = new AppResources(App.Resources);
+  var appRes = As<AppResources>(App.Resources);
   
   page.Activate("jQuery");
 

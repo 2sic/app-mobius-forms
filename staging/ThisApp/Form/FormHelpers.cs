@@ -7,7 +7,6 @@ namespace ThisApp.Form
     /// <summary>
     /// The custom marker so the JS can find the form
     /// </summary>
-      // TODO: probably use UniqueId
     public string FormMobiusId() => $"mobius-{UniqueKey}";
 
     // The URL to the API endpoint - which uses the current edition (staging/live) and the workflow ID
@@ -16,9 +15,9 @@ namespace ThisApp.Form
       return "app/auto/" + MyView.Edition + "/api/DynForm/ProcessForm";
     }
 
-    public string WrapperClasses(ITypedItem formConfig)
+    public string WrapperClasses(ITypedItem dynForm)
     {
-      return "app-mobius5-wrapper" + (formConfig.Get<bool>("Mailchimp") ? " app-mobius5-mailchimp" : "");
+      return "app-mobius5-wrapper" + (dynForm.Get<bool>("Mailchimp") ? " app-mobius5-mailchimp" : "");
     }
   }
 }

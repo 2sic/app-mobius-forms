@@ -7,11 +7,11 @@
 
 @{
   var dynForm = As<DynForm>(MyItem);
-
   var isReusedConfig = dynForm.ReuseConfig;
 
   // TODO: @2dg THIS looks fishy!
   // Why have a child, referencing itself in the "Config" field???
+  // 
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
   var dynFormConfig = As<DynForm>(formConfig);
   
@@ -19,26 +19,26 @@
   var dynDataHelper = GetCode("./tools/DynData.cs");
 
   var appRes = As<AppResources>(App.Resources);
+  var appSetting = As<AppSettings>(App.Settings);
+
   var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
   var formParams = new FormBuildParameters(appRes, dynFormConfig, cssClasses , MyUser, dynForm.UseFloatingLabels);
   var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
-  // TODO: @2dg should use AppSettings.AdminHasPermission
-  bool enableEditExperience = App.Settings.Bool("AdminHasPermission") || MyContext.User.IsSystemAdmin;
+  bool enableEditExperience = appSetting.AdminHasPermission || MyContext.User.IsSystemAdmin;
   
-  // TODO: @2dg also should use AppResources.ToolbarPermissionInfo
   var formToolbar = enableEditExperience
     ? Kit.Toolbar.Default(dynForm)
-    : Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo")));
+    : Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarPermissionInfo));
 }
 
 <div class="app-mobius5-wrapper" @formToolbar>
 
-  @* @2ro / 2dg - interesting: seems the latest Razor doesn't need { ... }  *@
-  @if (Text.Has(dynForm.Title))
+  @if (Text.Has(dynForm.Title)) 
     <h2>@dynForm.Title</h2>   
 
-  <div class="@formHelper.WrapperClasses(formConfig)" @formHelper.FormMobiusId()>
+
+  <div class="@formHelper.WrapperClasses(dynForm)" @formHelper.FormMobiusId()>
     <div class="app-mobius5-form">
       <input type="hidden" id="FormId" value="@dynForm.Id">
 
@@ -60,9 +60,11 @@
       }
     </div>
 
-    @if (dynFormConfig.Recaptcha)
-      @Html.Partial("parts/Footer Recaptcha.cshtml")
+    @dynForm.Mailchimp
 
+    @if (dynForm.Recaptcha)
+      @Html.Partial("./parts/Footer Recaptcha.cshtml") 
+  
     @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig })
 
     @if (MyUser.IsContentAdmin)
@@ -73,9 +75,9 @@
 
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
-        @if (dataPairs.Count() == 0) {
+        @if (dataPairs.Count() == 0) 
           @appRes.LabelFromDataAvailable
-        } else {
+         else {
           <a class="btn btn-primary" href="@Link.To(parameters: "id=" + MyContext.Module.Id + "&mid=" + MyContext.Module.Id)" target="_blank">Form Data</a>
           <a class="btn btn-primary" href="@MyContext.Site.Url/api/2sxc/app/auto/@MyView.Edition/api/Csv/Csv?PageId=@MyContext.Page.Id&ModuleId=@MyContext.Module.Id&id=@MyContext.Module.Id" type="button">CSV Export</a>
         }

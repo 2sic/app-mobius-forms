@@ -36,7 +36,7 @@ public class MailChimp : Custom.Hybrid.CodeTyped
   {
     // Log what's happening in case we run into problems
     var wrapLog = Log.Call();
-    var appSettings = new AppSettings(App.Settings);
+    var appSettings = As<AppSettings>(App.Settings);
 
     var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
     var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");

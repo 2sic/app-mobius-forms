@@ -7,24 +7,24 @@
     return;
   }
 
-  var dynFormConfig = As<DynForm>(MyModel.Item("FormConfig"));
+  var dynForm = As<DynForm>(MyItem);
   var appRes = As<AppResources>(App.Resources);
   var appSettings = As<AppSettings>(App.Settings);
 }
 
 @* Show mailchimp-not-enabled message *@
-@if (!dynFormConfig.Mailchimp)
+@if (!dynForm.Mailchimp)
 {
   <div class="alert alert-warning">
-    @Html.Raw((appRes.MessageEnableMailchimp, scrubHtml: "p"))
+    @Html.Raw(Kit.Scrub.Only(appRes.MessageEnableMailchimp, "p"))
   </div>
   return;
 }
 
 @if (!appSettings.MailChimpShowWarning)
 {
-  <div class="alert alert-warning">
-    @Html.Raw((appRes.MessageContainsMailchimp, scrubHtml: "p"))
+  <div class="alert alert-warning">   
+     @Html.Raw(Kit.Scrub.Only(appRes.MessageContainsMailchimp, "p"))
   </div>
 }
 

@@ -6,17 +6,17 @@
   var secureKey = Kit.SecureData.Parse(AllSettings.String("GoogleRecaptcha.SiteKey"));
   var siteKey = secureKey.Value;
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
-  var appRes = new AppResources(App.Resources);
+  var appRes = As<AppResources>(App.Resources);
 }
 <div class="app-mobius5-recaptcha" data-sitekey="@siteKey"></div>
 @if (MyUser.IsContentAdmin) {
   <div class="alert alert-warning">
-    @Html.Raw((appRes.MessageContainsRecaptcha, scrubHtml: "p"))
+    @Html.Raw(Kit.Scrub.Only(appRes.MessageContainsRecaptcha, "p"))
   </div>
 }
 @if (showWarning) {
   <div class="alert alert-warning">
-    @Html.Raw((App.appRes.MessageRecaptchaWarning, scrubHtml: "p"))
+    @Html.Raw(Kit.Scrub.Only(appRes.MessageRecaptchaWarning, "p"))
   </div>
 }
 

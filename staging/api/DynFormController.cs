@@ -11,6 +11,7 @@ using System.IO;
 using ThisApp.Data;
 using ThisApp.Code;
 using ThisApp;
+using ToSic.Razor.Html5;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class DynFormController : Custom.Hybrid.ApiTyped
@@ -24,10 +25,13 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     var wrapLog = Log.Call(useTimer: true);
 
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
-    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
-     var dynFormConfig = As<DynForm>(formConfig);
 
-    if (dynFormConfig.Recaptcha)
+    var dynForm = As<DynForm>(MyItem);
+    // TODO:: after Test remove
+    // var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
+    //  var dynFormConfig = As<DynForm>(formConfig);
+
+    if (dynForm.Recaptcha)
     {
       Log.Add("checking Recaptcha");
       GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);

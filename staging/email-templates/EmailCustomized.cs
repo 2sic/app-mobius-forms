@@ -9,7 +9,7 @@ public class EmailCustomized: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
   public string Subject(DynForm dynFormConfig, Dictionary<string, object> data) {
-    var appRes = new AppResources(App.Resources);
+    var appRes = As<AppResources>(App.Resources);
     
     // create custom code to generate the subject here...or just return the setting configured in the form
     return Text.First(dynFormConfig.OwnerMailSubject, appRes.OwnerMailSubject);
