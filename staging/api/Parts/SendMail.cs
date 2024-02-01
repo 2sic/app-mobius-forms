@@ -9,7 +9,6 @@ using ThisApp.Code;
 using ThisApp;
 
 
-
 public class SendMail : Custom.Hybrid.CodeTyped
 {
   public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, List<ToSic.Sxc.Adam.IFile> files)
@@ -32,9 +31,9 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
+    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
 
-    var dynFormConfig = As<DynForm>(formConfig);
+    var dynFormConfig = As<SendMailConfig>(formConfig);
     var appSettings = As<AppSettings>(App.Settings);
 
     var from = Text.First(dynFormConfig.MailFrom, appSettings.DefaultMailFrom);
@@ -69,7 +68,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
   }
 
-  public void Send(DynForm formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
+  public void Send(SendMailConfig formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
@@ -77,9 +76,15 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     Log.Add("Get MailEngine");
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
-    var mailBody = mailEngine.Message(formConfig, valuesWithMailLabels).ToString();
 
-    var subject = mailEngine.Subject(formConfig, valuesWithMailLabels);
+    // TODO::: 
+    var appRes = As<AppResources>(App.Resources);
+    var dynForm2 = As<DynForm>(MyItem);
+    var fallbackResources = appRes.DefaultFormResources;
+    var formResources = dynForm2.FormResources ?? fallbackResources;
+
+    var subject = mailEngine.Subject(formResources);
+    var mailBody = mailEngine.Message(appRes, formResources, valuesWithMailLabels).ToString();
 
     // Send Mail
     // Note that if an error occurs, this will bubble up, the caller will convert it to format for the client

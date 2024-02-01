@@ -11,8 +11,8 @@ namespace ThisApp.Data
     public List<DynFormField> Fields => _fields ??= UseConfigOf.Children<DynFormField>("Fields").ToList();
     private List<DynFormField> _fields;
 
-    private DynForm InheritedConfig => _inheritedConfig ??= ReuseConfig ? Child<DynForm>("InheritedConfig") : null;
-    private DynForm _inheritedConfig;
+    public FormResources FormResources => _formResources ??= UseConfigOf.Child<FormResources>("FormResources");
+    private FormResources _formResources;
 
     /// <summary>
     /// This is the source of the configs - can be the own object, but can also be the one in "InheritedConfig".
@@ -20,5 +20,8 @@ namespace ThisApp.Data
     /// </summary>
     private DynForm UseConfigOf => _useConfigOf ??= ReuseConfig ? (InheritedConfig ?? this) : this;
     private DynForm _useConfigOf;
+
+    private DynForm InheritedConfig => _inheritedConfig ??= ReuseConfig ? Child<DynForm>("InheritedConfig") : null;
+    private DynForm _inheritedConfig;
   }
 }

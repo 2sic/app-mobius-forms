@@ -27,9 +27,6 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
 
     var dynForm = As<DynForm>(MyItem);
-    // TODO:: after Test remove
-    // var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
-    //  var dynFormConfig = As<DynForm>(formConfig);
 
     if (dynForm.Recaptcha)
     {
@@ -62,8 +59,6 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     if (addTitle) contactFormRequest.Fields.Add("Title", "Form " + DateTime.Now.ToString("s"));
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
-
-    Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
 
     var contentType = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").String("SaveToContentType") : MyItem.String("SaveToContentType");
     if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 

@@ -24,7 +24,7 @@ namespace ThisApp.Fields
 
     protected FormBuildParameters Form { get; }
     protected AppResources Resources { get; }
-    protected DynForm DynForm { get; }
+    protected SendMailConfig DynForm { get; }
     protected DynFormField Field { get; }
     protected CssClasses CssClasses => Form.CssClasses;
 

@@ -27,19 +27,6 @@ namespace ThisApp.Data
 
     #endregion
 
-    #region Send Mail
-    public string OwnerMailTemplate => String(fallback: "");
-    public string OwnerMailCC => String(fallback: "");
-    public string CustomerMailTemplate => String(fallback: "");
-    public string CustomerMailCC => String(fallback: "");
-
-    public bool CustomerSend => Bool();
-    public bool OwnerSend => Bool();
-    public string MailFrom => String(fallback: "");
-    public string OwnerMail => String(fallback: "");
-
-    #endregion
-
     #region EmailToCustomized
 
     public string OwnerMailSubject => String(fallback: "");
@@ -50,6 +37,5 @@ namespace ThisApp.Data
     public string CustomerMailSubject => String(fallback: "");
 
     #endregion
-
   }
 }

@@ -66,10 +66,8 @@ namespace ThisApp.Data
     public string MessageSending => String(fallback: "");
     public string MessageNewsletterSuccess => String(fallback: "");
     public string MessageNewsletterUnexpectedError => String(fallback: "");
-    public string MessageCustomerMailSend => String(fallback: "");
     public string MessageMailFromError => String(fallback: "");
     public string MessageMailOwnerError => String(fallback: "");
-    public string ButtonSend => String(fallback: "");
 
     #endregion
 
@@ -80,15 +78,8 @@ namespace ThisApp.Data
 
     #endregion
 
-    #region EmailToCustomized
-
-    public string OwnerMailSubject => String(fallback: "");
-
-    #endregion
-
     #region EmailToCustomer
 
-    public string CustomerMailSubject => String(fallback: "");
     public string MailCustomerTitle => String(fallback: "");
     public string MailCustomerContent => String(fallback: "");
 

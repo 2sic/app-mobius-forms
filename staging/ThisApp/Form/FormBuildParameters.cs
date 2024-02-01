@@ -6,7 +6,7 @@ namespace ThisApp.Form
 {
   public class FormBuildParameters
   {
-    public FormBuildParameters(AppResources resources, DynForm form, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels )
+    public FormBuildParameters(AppResources resources, SendMailConfig form, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels )
     {
       Resources = resources;
       Form = form;
@@ -16,7 +16,7 @@ namespace ThisApp.Form
     }
 
     public AppResources Resources { get; }
-    public DynForm Form { get; }
+    public SendMailConfig Form { get; }
     public CssClasses CssClasses { get; }
 
     public bool IsBs3 => CssClasses.IsBs3;

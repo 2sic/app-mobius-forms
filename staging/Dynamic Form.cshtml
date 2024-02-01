@@ -12,8 +12,8 @@
   // TODO: @2dg THIS looks fishy!
   // Why have a child, referencing itself in the "Config" field???
   // 
-  var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("Config") : dynForm.Child("Config");
-  var dynFormConfig = As<DynForm>(formConfig);
+  var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("SendMailConfig") : dynForm.Child("SendMailConfig");
+  var dynFormConfig = As<SendMailConfig>(formConfig);
   
   var formHelper = GetService<FormHelpers>();
   var dynDataHelper = GetCode("./tools/DynData.cs");
@@ -60,7 +60,6 @@
       }
     </div>
 
-    @dynForm.Mailchimp
 
     @if (dynForm.Recaptcha)
       @Html.Partial("./parts/Footer Recaptcha.cshtml") 

@@ -10,7 +10,7 @@
 @{
   var appRes = As<AppResources>(App.Resources);
   // Parameters handed in from the calling Razor
-  var dynFormConfig = As<DynForm>(MyModel.Item("FormConfig"));
+  var dynFormConfig = As<SendMailConfig>(MyModel.Item("FormConfig"));
 
   var workflowId = MyModel.String("WorkflowId");
 

@@ -8,14 +8,13 @@ using ThisApp;
 public class EmailCustomized: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(DynForm dynFormConfig, Dictionary<string, object> data) {
-    var appRes = As<AppResources>(App.Resources);
-    
+  public string Subject(FormResources formResources) {
+
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(dynFormConfig.OwnerMailSubject, appRes.OwnerMailSubject);
+    return Kit.Scrub.Only(formResources.OwnerMailSubject, "p");
   }
 
-  public string Message(DynForm dynFormConfig, Dictionary<string, object> data)
+  public string Message(AppResources appRes, FormResources formResources, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>
