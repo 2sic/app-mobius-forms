@@ -6,45 +6,45 @@
   var appRes = As<AppResources>(App.Resources);
   var appSettings = As<AppSettings>(App.Settings);
   var dynForm = As<DynForm>(MyItem);
-    
-  // var sendMailConfig = dynForm.SendMailConfig;
-  var dynFormConfig = As<SendMailConfig>(MyModel.Item("FormConfig"));
+  var sendMailConfig = As<SendMailConfig>(MyModel.Item("FormConfig"));
 
-  var sendToCustomer = dynFormConfig.CustomerSend;
-  var sendToOwner = dynFormConfig.OwnerSend;
+  var sendToCustomer = sendMailConfig.CustomerSend;
+  var sendToOwner = sendMailConfig.OwnerSend;
+  
   var fallbackResources = appRes.DefaultFormResources;
   var formResources = dynForm.FormResources ?? fallbackResources;
+  @* formResources = AsStack(dynForm.FormResources, fallbackResources); *@
+
   // var formResources = GetService<FormResourceHelper>();
-  // var formResources = AsStack(dynForm.FormResources, fallbackResources);
 }
 
 
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    @AddHiddenMessage(appRes.MessageFormIncomplete, "danger", "msgIncomplete")
     @AddHiddenMessage(appRes.MessageRecaptchaMissing, "danger", "msgRecap")
-    @AddHiddenMessage(appRes.MessageSendError, "danger", "msgError")
-    @AddHiddenMessage(appRes.MessageSending, "warning", "msgSending")
-    @AddHiddenMessage(appRes.MessageNewsletterSuccess, "success", "msgNewsletterSuccess")
-    @AddHiddenMessage(appRes.MessageNewsletterUnexpectedError, "danger", "msgNewsletterFailed")
+    @AddHiddenMessage(formResources.MessageFormIncomplete, "danger", "msgIncomplete")
+    @AddHiddenMessage(formResources.MessageSendError, "danger", "msgError")
+    @AddHiddenMessage(formResources.MessageSending, "warning", "msgSending")
+    @AddHiddenMessage(formResources.MessageNewsletterSuccess, "success", "msgNewsletterSuccess")
+    @AddHiddenMessage(formResources.MessageNewsletterUnexpectedError, "danger", "msgNewsletterFailed")
 
     <div id="msgOk" class="alert alert-success app-mobius6-message" role="alert">
-      @Html.Raw(formResources.MessageSuccess)
+      @Html.Raw(formResources.MessageSendOk)
       @Html.Raw(sendToCustomer ? formResources.MessageCustomerMailSend : "")
     </div>
 
     @* Prepared messages for admin only *@
     @if (MyUser.IsContentAdmin) {
-      if ((sendToCustomer || sendToOwner) && !Text.Has(dynFormConfig.MailFrom) && !Text.Has(appSettings.DefaultMailFrom)) {
+      if ((sendToCustomer || sendToOwner) && !Text.Has(sendMailConfig.MailFrom) && !Text.Has(appSettings.DefaultMailFrom)) {
         <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(formResources.MessageError, "p"))
+          @Html.Raw(Kit.Scrub.Only(formResources.MessageSendError, "p"))
         </div>
       }
 
-      if (sendToOwner && !Text.Has(dynFormConfig.OwnerMail) && !Text.Has(appSettings.DefaultOwnerMail)) {
+      if (sendToOwner && !Text.Has(sendMailConfig.OwnerMail) && !Text.Has(appSettings.DefaultOwnerMail)) {
         <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(appRes.MessageMailOwnerError, "p"))
+          @Html.Raw(Kit.Scrub.Only(formResources.MessageMailOwnerError, "p"))
         </div>
       }
     }

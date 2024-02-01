@@ -6,17 +6,20 @@ namespace ThisApp.Form
 {
   public class FormBuildParameters
   {
-    public FormBuildParameters(AppResources resources, SendMailConfig form, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels )
+    public FormBuildParameters(AppResources resources, FormResources formResources, SendMailConfig sendMailConfig, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels )
     {
       Resources = resources;
-      Form = form;
+      FormResources = formResources;
+      SendMailConfig = sendMailConfig;
       CssClasses = cssClasses;
       User = user;
       UseFloatingLabels = useFloatingLabels;
     }
 
     public AppResources Resources { get; }
-    public SendMailConfig Form { get; }
+    public FormResources FormResources { get; }
+
+    public SendMailConfig SendMailConfig { get; }
     public CssClasses CssClasses { get; }
 
     public bool IsBs3 => CssClasses.IsBs3;

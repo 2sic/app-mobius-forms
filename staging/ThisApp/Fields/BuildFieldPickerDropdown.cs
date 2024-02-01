@@ -25,7 +25,7 @@ namespace ThisApp.Fields
 
       if (Field.MultiSelect) { dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId); }
 
-      dropdown.Add(Tag.Option(Text.First(Field.PlaceHolderSelect, Resources.LabelSelect)).Value(""));
+      dropdown.Add(Tag.Option(Text.First(Field.PlaceHolderSelect, Form.FormResources.LabelSelect)).Value(""));
 
       foreach (var optionItem in GetKeyValue(Field.PickerKeyValues))
         dropdown.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));

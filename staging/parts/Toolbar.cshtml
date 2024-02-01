@@ -10,7 +10,7 @@
 @{
   var appRes = As<AppResources>(App.Resources);
   // Parameters handed in from the calling Razor
-  var dynFormConfig = As<SendMailConfig>(MyModel.Item("FormConfig"));
+  var sendMailConfig = As<SendMailConfig>(MyModel.Item("FormConfig"));
 
   var workflowId = MyModel.String("WorkflowId");
 
@@ -22,7 +22,7 @@
     .Data(workflow.String("ContentType"), tweak: b => b.Filter("ModuleId",  MyContext.Module.Id).Note(appRes.ToolbarViewData))
     // Remove edit and add a new one with custom note
     .Edit("-")
-    .Edit(dynFormConfig, tweak: b => b.Note(appRes.ToolbarConfigure))
+    .Edit(sendMailConfig, tweak: b => b.Note(appRes.ToolbarConfigure))
     .AppResources(tweak: b => b.Color("#15585F").Note(appRes.ToolbarAppResources));
 }
-<div @toolbar.For(dynFormConfig)></div>
+<div @toolbar.For(sendMailConfig)></div>

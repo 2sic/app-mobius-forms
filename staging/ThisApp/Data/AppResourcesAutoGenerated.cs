@@ -23,14 +23,6 @@ namespace ThisApp.Data
 
     #endregion
 
-    #region Terms
-
-    public string LabelTermsAll => String(fallback: "");
-    public string LabelTerms => String(fallback: "");
-    public string LabelGdpr => String(fallback: "");
-    public string LabelSelect => String(fallback: "");
-
-    #endregion
 
     #region Dynamic Data Table
 
@@ -58,16 +50,7 @@ namespace ThisApp.Data
 
     #region Footer Submit with Message
 
-    public string MessageFormIncomplete => String(fallback: "");
     public string MessageRecaptchaMissing => String(fallback: "");
-    public string MessageSendError => String(fallback: "");
-    public string MessageSendOk => String(fallback: "");
-
-    public string MessageSending => String(fallback: "");
-    public string MessageNewsletterSuccess => String(fallback: "");
-    public string MessageNewsletterUnexpectedError => String(fallback: "");
-    public string MessageMailFromError => String(fallback: "");
-    public string MessageMailOwnerError => String(fallback: "");
 
     #endregion
 
@@ -77,25 +60,6 @@ namespace ThisApp.Data
     public string MessageRecaptchaWarning => String(fallback: "");
 
     #endregion
-
-    #region EmailToCustomer
-
-    public string MailCustomerTitle => String(fallback: "");
-    public string MailCustomerContent => String(fallback: "");
-
-    #endregion
-
-    #region EmailToCustomerWithData
-    public string MailCustomerContentWithData => String(fallback: "");
-
-    #endregion
-
-    #region EmailToOwner
-    public string MailOwnerTitle => String(fallback: "");
-    public string MailOwnerContent => String(fallback: "");
-
-    #endregion
-
 
   }
 }

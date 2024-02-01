@@ -33,19 +33,19 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // background: some settings are made in this module, but if they are missing we use fallback settings
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
 
-    var dynFormConfig = As<SendMailConfig>(formConfig);
+    var sendMailConfig = As<SendMailConfig>(formConfig);
     var appSettings = As<AppSettings>(App.Settings);
 
-    var from = Text.First(dynFormConfig.MailFrom, appSettings.DefaultMailFrom);
-    var owner = Text.First(dynFormConfig.OwnerMail, appSettings.DefaultOwnerMail);
+    var from = Text.First(sendMailConfig.MailFrom, appSettings.DefaultMailFrom);
+    var owner = Text.First(sendMailConfig.OwnerMail, appSettings.DefaultOwnerMail);
 
     // Send Mail to owner
-    if (dynFormConfig.OwnerSend)
+    if (sendMailConfig.OwnerSend)
     {
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(dynFormConfig, dynFormConfig.OwnerMailTemplate, valuesRelabled, from, owner, dynFormConfig.OwnerMailCC, customerMails, files);
+        Send(sendMailConfig, sendMailConfig.OwnerMailTemplate, valuesRelabled, from, owner, sendMailConfig.OwnerMailCC, customerMails, files);
       }
       catch (Exception ex)
       {
@@ -54,12 +54,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
 
     // Send Mail to customer
-    if (dynFormConfig.CustomerSend && Text.Has(customerMails))
+    if (sendMailConfig.CustomerSend && Text.Has(customerMails))
     {
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(dynFormConfig, dynFormConfig.CustomerMailTemplate, valuesRelabled, from, customerMails, dynFormConfig.CustomerMailCC, owner, files);
+        Send(sendMailConfig, sendMailConfig.CustomerMailTemplate, valuesRelabled, from, customerMails, sendMailConfig.CustomerMailCC, owner, files);
       }
       catch (Exception ex)
       {
@@ -84,7 +84,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var formResources = dynForm2.FormResources ?? fallbackResources;
 
     var subject = mailEngine.Subject(formResources);
-    var mailBody = mailEngine.Message(appRes, formResources, valuesWithMailLabels).ToString();
+    var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();
 
     // Send Mail
     // Note that if an error occurs, this will bubble up, the caller will convert it to format for the client

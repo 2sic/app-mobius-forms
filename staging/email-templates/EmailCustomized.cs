@@ -14,7 +14,7 @@ public class EmailCustomized: Custom.Hybrid.CodeTyped
     return Kit.Scrub.Only(formResources.OwnerMailSubject, "p");
   }
 
-  public string Message(AppResources appRes, FormResources formResources, Dictionary<string, object> data)
+  public string Message(FormResources formResources, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>

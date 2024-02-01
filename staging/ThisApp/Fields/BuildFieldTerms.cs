@@ -16,9 +16,9 @@ namespace ThisApp.Fields
       var checkbox = GetCheckbox();
       string overrideTitle = default;
       checkbox.Attr("terms", "true");
-      if (Field.TermsAndGdprCombined) overrideTitle = Resources.LabelTermsAll;
-      else if (Field.TermsEnabled) overrideTitle = Resources.LabelTerms;
-      else if (Field.GdprEnabled) overrideTitle = Resources.LabelGdpr;
+      if (Field.TermsAndGdprCombined) overrideTitle = Form.FormResources.LabelTermsAll;
+      else if (Field.TermsEnabled) overrideTitle = Form.FormResources.LabelTerms;
+      else if (Field.GdprEnabled) overrideTitle = Form.FormResources.LabelGdpr;
 
       return CheckboxWithLabelRight(checkbox, overrideTitle);
     }

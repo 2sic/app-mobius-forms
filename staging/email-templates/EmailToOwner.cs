@@ -13,7 +13,7 @@ public class EmailToOwner: Custom.Hybrid.CodeTyped
     // create custom code to generate the subject here...or just return the setting configured in the form
     return Kit.Scrub.Only(formResources.OwnerMailSubject, "p");
   }
-  public string Message (AppResources appRes, FormResources formResources, Dictionary<string, object> data)
+  public string Message (FormResources formResources, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>

@@ -9,11 +9,8 @@
   var dynForm = As<DynForm>(MyItem);
   var isReusedConfig = dynForm.ReuseConfig;
 
-  // TODO: @2dg THIS looks fishy!
-  // Why have a child, referencing itself in the "Config" field???
-  // 
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("SendMailConfig") : dynForm.Child("SendMailConfig");
-  var dynFormConfig = As<SendMailConfig>(formConfig);
+  var sendMailConfig = As<SendMailConfig>(formConfig);
   
   var formHelper = GetService<FormHelpers>();
   var dynDataHelper = GetCode("./tools/DynData.cs");
@@ -21,8 +18,13 @@
   var appRes = As<AppResources>(App.Resources);
   var appSetting = As<AppSettings>(App.Settings);
 
+@* TODO:: *@
+  var fallbackResources = appRes.DefaultFormResources;
+  var formResources = dynForm.FormResources ?? fallbackResources;
+
+
   var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
-  var formParams = new FormBuildParameters(appRes, dynFormConfig, cssClasses , MyUser, dynForm.UseFloatingLabels);
+  var formParams = new FormBuildParameters(appRes, formResources, sendMailConfig, cssClasses , MyUser, dynForm.UseFloatingLabels);
   var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
   bool enableEditExperience = appSetting.AdminHasPermission || MyContext.User.IsSystemAdmin;
@@ -42,8 +44,16 @@
     <div class="app-mobius6-form">
       <input type="hidden" id="FormId" value="@dynForm.Id">
 
+@* TODO:: Offen *@
+      @* @if (!dynForm.fields.Any()) {
+          <h1>Test</h1>
+      } *@
+
+
+
       @foreach (var field in dynForm.Fields)
-      {        
+      {    
+
         var toolbar = !enableEditExperience
           ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(App.Resources.String("ToolbarPermissionInfo"))) 
           : isReusedConfig

@@ -14,7 +14,7 @@ public class EmailToCustomer: Custom.Hybrid.CodeTyped
     return Kit.Scrub.Only(formResources.CustomerMailSubject, "p");
   }
 
-  public string Message(AppResources appRes, FormResources formResources, Dictionary<string, object> data)
+  public string Message(FormResources formResources, Dictionary<string, object> data)
   {
 
     var message = @"

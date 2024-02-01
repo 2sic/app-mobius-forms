@@ -18,13 +18,13 @@ namespace ThisApp.Fields
     {
       Form = form;
       Resources = form.Resources;
-      DynForm = form.Form;
+      SendMailConfig = form.SendMailConfig;
       Field = field;
     }
 
     protected FormBuildParameters Form { get; }
     protected AppResources Resources { get; }
-    protected SendMailConfig DynForm { get; }
+    protected SendMailConfig SendMailConfig { get; }
     protected DynFormField Field { get; }
     protected CssClasses CssClasses => Form.CssClasses;
 
@@ -67,7 +67,6 @@ namespace ThisApp.Fields
     protected TTag SetRequired<TTag>(TTag item, string specialReqMessage = default) where TTag : class, IHtmlTag
     {
       if (!Field.Required) return item;
-
       var message = specialReqMessage != null
         ? Resources.String(specialReqMessage)
         : Resources.String("LabelRequired");
