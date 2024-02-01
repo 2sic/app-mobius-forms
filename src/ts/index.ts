@@ -8,11 +8,12 @@ import { initTippy } from './lib-2sxc-tippy';
 const debug = false;
 
 var winAny = window as any;
-winAny.appMobius5 ??= {};
-winAny.appMobius5.init ??= initAppMobius5;
-winAny.appMobius5.initTippy ??= initTippy;
+winAny.appMobius6 ??= {};
+winAny.appMobius6.init ??= initAppMobius;
+winAny.appMobius6.initTippy ??= initTippy;
 
-function initAppMobius5({ domAttribute, webApiUrl, validationOptions } : { domAttribute: string, webApiUrl: string, validationOptions: PristineOptions }) {
+
+function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAttribute: string, webApiUrl: string, validationOptions: PristineOptions }) {
   if (debug) console.log("Mobius5 loading, debug is enabled", domAttribute);
   if (document.getElementsByTagName('form').length) document.getElementsByTagName('form')[0].setAttribute('novalidate', '');
 
@@ -20,7 +21,7 @@ function initAppMobius5({ domAttribute, webApiUrl, validationOptions } : { domAt
 
   if(!mobiusWrapper) return
 
-  const submitButtom = (mobiusWrapper.querySelectorAll('[app-mobius5-send]')[0] as HTMLButtonElement)
+  const submitButtom = (mobiusWrapper.querySelectorAll('[app-mobius6-send]')[0] as HTMLButtonElement)
   submitButtom.addEventListener('click', async (event: Event) => {
     event.preventDefault();
 

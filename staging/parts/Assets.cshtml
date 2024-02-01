@@ -12,7 +12,7 @@
 @{
   var formHelper = GetService<FormHelpers>();
 }
-@Kit.Page.TurnOn("window.appMobius5.init()", data: new {
+@Kit.Page.TurnOn("window.appMobius6.init()", data: new {
   // This is the attribute on the wrapper tag which should be processed
   domAttribute = formHelper.FormMobiusId(),
   // web api url to send the form data to
@@ -20,11 +20,11 @@
   // options for the pristine validation plugin
   validationOptions = new {
     // class of the parent element where the error/success class is added
-    classTo = "app-mobius5-form-fields",
+    classTo = "app-mobius6-form-fields",
     errorClass = "has-danger",
     successClass = "has-success",
     // class of the parent element where error text element is appended
-    errorTextParent = "app-mobius5-form-fields",
+    errorTextParent = "app-mobius6-form-fields",
     // type of element to create for the error text
     errorTextTag = "div",
     // class of the error text element

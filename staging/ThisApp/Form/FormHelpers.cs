@@ -17,7 +17,7 @@ namespace ThisApp.Form
 
     public string WrapperClasses(ITypedItem dynForm)
     {
-      return "app-mobius5-wrapper" + (dynForm.Get<bool>("Mailchimp") ? " app-mobius5-mailchimp" : "");
+      return "app-mobius6-wrapper" + (dynForm.Get<bool>("Mailchimp") ? " app-mobius6-mailchimp" : "");
     }
   }
 }

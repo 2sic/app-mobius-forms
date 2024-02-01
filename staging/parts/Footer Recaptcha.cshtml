@@ -8,7 +8,7 @@
   var showWarning = secureKey.IsSecuredBy("preset");  // show warning if it's from the preset
   var appRes = As<AppResources>(App.Resources);
 }
-<div class="app-mobius5-recaptcha" data-sitekey="@siteKey"></div>
+<div class="app-mobius6-recaptcha" data-sitekey="@siteKey"></div>
 @if (MyUser.IsContentAdmin) {
   <div class="alert alert-warning">
     @Html.Raw(Kit.Scrub.Only(appRes.MessageContainsRecaptcha, "p"))

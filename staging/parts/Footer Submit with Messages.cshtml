@@ -29,7 +29,7 @@
     @AddHiddenMessage(appRes.MessageNewsletterSuccess, "success", "msgNewsletterSuccess")
     @AddHiddenMessage(appRes.MessageNewsletterUnexpectedError, "danger", "msgNewsletterFailed")
 
-    <div id="msgOk" class="alert alert-success app-mobius5-message" role="alert">
+    <div id="msgOk" class="alert alert-success app-mobius6-message" role="alert">
       @Html.Raw(formResources.MessageSuccess)
       @Html.Raw(sendToCustomer ? formResources.MessageCustomerMailSend : "")
     </div>
@@ -51,13 +51,13 @@
   </div>
 
   <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    <button app-mobius5-send type="button" class="btn btn-primary">@formResources.Button</button>
+    <button app-mobius6-send type="button" class="btn btn-primary">@formResources.Button</button>
   </div>
 </div>
 
 @functions {
   IHtmlTag AddHiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
-    var classes = "alert alert-" + type + " app-mobius5-message";
+    var classes = "alert alert-" + type + " app-mobius6-message";
     var rawMessage = Kit.Scrub.Only(message, "p");
     var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
     if (attribute != "") { messageDiv.Attr(attribute, ""); }

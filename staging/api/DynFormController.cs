@@ -60,6 +60,8 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
 
+    // Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
+
     var contentType = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").String("SaveToContentType") : MyItem.String("SaveToContentType");
     if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
     {

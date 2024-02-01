@@ -32,14 +32,14 @@
     : Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarPermissionInfo));
 }
 
-<div class="app-mobius5-wrapper" @formToolbar>
+<div class="app-mobius6-wrapper" @formToolbar>
 
   @if (Text.Has(dynForm.Title)) 
     <h2>@dynForm.Title</h2>   
 
 
   <div class="@formHelper.WrapperClasses(dynForm)" @formHelper.FormMobiusId()>
-    <div class="app-mobius5-form">
+    <div class="app-mobius6-form">
       <input type="hidden" id="FormId" value="@dynForm.Id">
 
       @foreach (var field in dynForm.Fields)
