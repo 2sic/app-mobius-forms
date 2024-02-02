@@ -24,7 +24,7 @@ namespace ThisApp.Form
     /// The FormId is retrieved from the first submitted data.
     /// It's then used to lookup columns names etc.
     /// </summary>
-    public int FormId => _formId ??= FormData.FirstOrDefault(p => p.Item.Int("FormId") != 0)?.Item.Int("FormId") ?? 0;
+    public int FormId => _formId ??= Data.FirstOrDefault(p => p.Item.Int("FormId") != 0)?.Item.Int("FormId") ?? 0;
     private int? _formId;
 
 
@@ -33,8 +33,8 @@ namespace ThisApp.Form
     /// The form data for the current module.
     /// It's cached, so accessing it multiple times won't rerun the query.
     /// </summary>
-    public List<FormDataReader> FormData => _formData ??= GetData();
-    private List<FormDataReader> _formData;
+    public List<FormDataReader> Data => _data ??= GetData();
+    private List<FormDataReader> _data;
 
     private List<FormDataReader> GetData()
     {
@@ -53,7 +53,7 @@ namespace ThisApp.Form
     /// <summary>
     /// Columns in the dynamic json data
     /// </summary>
-    public List<string> Columns => _columns ??= GetColumns(FormData.Select(p => p.Json).ToList());
+    public List<string> Columns => _columns ??= GetColumns(Data.Select(p => p.Json).ToList());
     private List<string> _columns;
 
     // internal helper

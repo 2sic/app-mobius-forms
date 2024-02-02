@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
+using CsvHelper.Configuration;
 using System.Globalization;
 using System;
 using System.Linq;
@@ -22,14 +23,14 @@ public class CsvController : Custom.Hybrid.ApiTyped
   [HttpGet]
   public object Csv(int id)
   {
-    var dynDataHelper = GetService<FormDataService>().Setup(id);// int.TryParse(id, out var intId) ? intId : 0);
+    var formData = GetService<FormDataService>().Setup(id);// int.TryParse(id, out var intId) ? intId : 0);
 
-    var columns = dynDataHelper.Columns; // Create the Header with all specifications
+    var columns = formData.Columns; // Create the Header with all specifications
 
-    var dataRows = GetRowDataList(dynDataHelper.FormData, columns); // Get Csv Data in a String List
+    var dataRows = GetRowDataList(formData.Data, columns); // Get Csv Data in a String List
 
     // Write CSV data to the file
-    var csvConfiguration = new CsvHelper.Configuration.CsvConfiguration(CultureInfo.InvariantCulture)
+    var csvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
     {
       Delimiter = ";"
     };
@@ -38,7 +39,7 @@ public class CsvController : Custom.Hybrid.ApiTyped
     using var csv = new CsvWriter(writer, csvConfiguration);
 
     // Write the CSV header
-    foreach (var headerProp in dynDataHelper.ColumnHeaders)
+    foreach (var headerProp in formData.ColumnHeaders)
       csv.WriteField(headerProp.Value);
     csv.NextRecord();
 
@@ -55,7 +56,7 @@ public class CsvController : Custom.Hybrid.ApiTyped
 
     var csvString = Encoding.UTF8.GetString(memoryStream.ToArray());
     string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
-    string fileName = $"FormData_Form{dynDataHelper.FormId}_{todayDate}.csv";
+    string fileName = $"FormData_Form{formData.FormId}_{todayDate}.csv";
 
     return File(download: true, virtualPath: null, contentType: "text/csv", fileDownloadName: fileName, contents: csvString);
   }

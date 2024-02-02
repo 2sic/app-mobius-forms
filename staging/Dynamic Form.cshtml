@@ -8,7 +8,7 @@
 
 @{
   var formHelper = GetService<FormHelpers>();
-  var dynDataHelper = GetService<FormDataService>().Setup(MyContext.Module.Id);
+  var formData = GetService<FormDataService>().Setup(MyContext.Module.Id);
 
   var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
   var formParams = new FormBuildParameters(AppRes, FormRes, MailConfig, cssClasses, MyUser, FormConfig.UseFloatingLabels);
@@ -91,7 +91,7 @@
     @if (MyUser.IsContentAdmin)
     {
       // Initialize lists to store CSV-related data
-      var dataPairs = dynDataHelper.FormData; // Initialize Data
+      var dataPairs = formData.Data; // Initialize Data
 
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()

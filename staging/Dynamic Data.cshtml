@@ -20,13 +20,13 @@
   var formData = GetService<FormDataService>().Setup(MyContext.Module.Id);
   
   // TODO: this is probably a lot of duplicate code in here and the API
-  var firstRecord = formData.FormData.First().Item.DateTime("Timestamp");
-  var lastRecord = formData.FormData.Last().Item.DateTime("Timestamp");
+  var firstRecord = formData.Data.First().Item.DateTime("Timestamp");
+  var lastRecord = formData.Data.Last().Item.DateTime("Timestamp");
 } 
 
 @* Header Bar showing Stats and CSV download *@
 <div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
-  <strong>Total:</strong> @formData.FormData.Count 
+  <strong>Total:</strong> @formData.Data.Count 
   <strong>@AppRes.LabelFirst:</strong> @firstRecord.ToString("yyyy-MM-dd")
   <strong>@AppRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
   <strong>ModuleId: </strong> @MyContext.Module.Id
@@ -47,7 +47,7 @@
       </tr>
     </thead> 
     <tbody>  
-      @foreach (var pair in formData.FormData) {
+      @foreach (var pair in formData.Data) {
         var keysWithoutLastFiles = formData.ColumnHeaders.Keys.Reverse().Skip(1).Reverse();
         var itemId = pair.Item.Id;
         var files = pair.Item.Folder("Files").Files;
