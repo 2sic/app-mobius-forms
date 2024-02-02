@@ -19,7 +19,7 @@ namespace ThisApp.Fields
     private Input TextField()
     {
       var item = Tag.Input().Type("text");
-      if (Text.Has(Field.InitialValue)) { item.Value(Field.InitialValue); }
+      if (Text.Has(Field.DefaultValue)) { item.Value(Field.DefaultValue); }
       return item;
     }
   }

@@ -10,8 +10,8 @@
 @{
   var appRes = As<AppResources>(App.Resources);
   // Parameters handed in from the calling Razor
-  var sendMailHepler = GetService<SendMailConfigHelper>();
-  var sendMailConfig = sendMailHepler.GetSendMail(appRes, As<SendMailConfig>(MyModel.Item("FormConfig")));
+  var sendMailHepler = GetService<DataStackHelper>();
+  var sendMailConfig = sendMailHepler.GetSendMail(As<SendMailConfig>(MyModel.Item("FormConfig")));
 
 
   var workflowId = MyModel.String("WorkflowId");

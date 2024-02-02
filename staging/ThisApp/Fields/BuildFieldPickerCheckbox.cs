@@ -19,7 +19,7 @@ namespace ThisApp.Fields
 
     private IHtmlTag CheckBoxPicker()
     {
-      if (Field.CheckboxWithHeadline) return CheckboxPickerWithHeadline();
+      if (Field.PickerCheckboxGrouped) return CheckboxPickerWithHeadline();
       return CheckboxPickerBasic();
     }
     // Simple CheckboxPicker List without Headline

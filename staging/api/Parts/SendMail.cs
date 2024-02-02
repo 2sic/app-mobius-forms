@@ -35,8 +35,8 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var appSettings = As<AppSettings>(App.Settings);
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
 
-    var sendMailHepler = GetService<SendMailConfigHelper>();
-    var sendMailConfig = sendMailHepler.GetSendMail(appRes, As<SendMailConfig>(formConfig));
+    var sendMailHepler = GetService<DataStackHelper>();
+    var sendMailConfig = sendMailHepler.GetSendMail(As<SendMailConfig>(formConfig));
 
 
     var from = Text.First(sendMailConfig.MailFrom, appSettings.DefaultMailFrom);
@@ -71,7 +71,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
   }
 
-  public void Send(SendMailConfig formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
+  public void Send(SendMailConfigStack formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
@@ -80,8 +80,8 @@ public class SendMail : Custom.Hybrid.CodeTyped
     Log.Add("Get MailEngine");
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
 
-    var formResourcesHepler = GetService<FormResourceHelper>();
-    var formResources = formResourcesHepler.GetFormResources( As<AppResources>(App.Resources), As<DynForm>(MyItem));
+    var stackHelper = GetService<DataStackHelper>();
+    var formResources = stackHelper.GetFormResources(As<DynForm>(MyItem));
 
     var subject = mailEngine.Subject(formResources);
     var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();

@@ -17,7 +17,7 @@ namespace ThisApp.Fields
     private Input EmailField()
     {
       var item = Tag.Input().Type("email");
-      if (Text.Has(Field.RecipientEmail)) { item.Attr("mail", "recipientEmail"); }
+      if (Text.Has(Field.EmailUseAsRecipient)) { item.Attr("mail", "recipientEmail"); }
       return item;
     }
   }

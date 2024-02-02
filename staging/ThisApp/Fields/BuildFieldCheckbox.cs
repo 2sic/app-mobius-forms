@@ -16,7 +16,7 @@ namespace ThisApp.Fields
     {
 
       // If label right or floating labels, wrap in label
-      if (Field.LabelRight || Form.UseFloatingLabels) return CheckboxWithLabelRight(GetCheckbox());
+      if (Field.BooleanLabelRight || Form.UseFloatingLabels) return CheckboxWithLabelRight(GetCheckbox());
 
       // If label is to the left, behave as default
       return SetBasicsAndWrapInLabel(GetCheckbox(), setDefaultClass: false);

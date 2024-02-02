@@ -11,7 +11,7 @@ namespace ThisApp.Data
   {
 
     public new string Title => String(fallback: "");
-
+    
     #region GroupValidation
     public string LabelRequired => String(fallback: "");
      public string LabelSelect => String(fallback: "");

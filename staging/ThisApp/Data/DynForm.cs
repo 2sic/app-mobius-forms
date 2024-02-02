@@ -14,6 +14,10 @@ namespace ThisApp.Data
     public FormResources FormResources => _formResources ??= UseConfigOf.Child<FormResources>("FormResources");
     private FormResources _formResources;
 
+    public SendMailConfig SendMailConfig => _sendMailConfig ??= UseConfigOf.Child<SendMailConfig>("SendMailConfig");
+    private SendMailConfig _sendMailConfig;
+
+
     /// <summary>
     /// This is the source of the configs - can be the own object, but can also be the one in "InheritedConfig".
     /// Fallback is "this", in case it doesn't have a child.

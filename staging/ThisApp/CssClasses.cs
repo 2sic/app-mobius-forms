@@ -19,6 +19,8 @@ namespace ThisApp
     public string FloatingLabelHidden { get; set; }
     public string FormCheckInput { get; set; }
     public string FormSelect { get; set; }
+    public string HiddenInputStyle { get; set; }
+
 
 
 
@@ -37,6 +39,7 @@ namespace ThisApp
       FloatingLabelHidden = "",
       FormCheckInput = "form-check-input",
       FormSelect = "form-select",
+      HiddenInputStyle = "hiddenInputStyle",
     };
     public static CssClasses Bs4 = new CssClasses()
     {
@@ -50,6 +53,7 @@ namespace ThisApp
       RadioWrapper = "form-check",
       CheckboxWrapper = "form-check",
       FormSelect = "form-select",
+      HiddenInputStyle = "hiddenInputStyle",
       //
       FloatingLabelHidden = "d-none",
       FormCheckInput = "",
@@ -68,6 +72,7 @@ namespace ThisApp
       FloatingLabelHidden = "hidden",
       FormCheckInput = "",
       FormSelect = "form-select",
+      HiddenInputStyle = "hiddenInputStyle",
     };
 
   }

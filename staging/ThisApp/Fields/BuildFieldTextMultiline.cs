@@ -23,7 +23,7 @@ namespace ThisApp.Fields
     {
       var rows = Field.StringLines;
       var item = Tag.Textarea().Rows(rows.ToString());
-      if (Text.Has(Field.InitialValue)) { item.Add(Field.InitialValue); }
+      if (Text.Has(Field.DefaultValue)) { item.Add(Field.DefaultValue); }
       return item;
     }
 

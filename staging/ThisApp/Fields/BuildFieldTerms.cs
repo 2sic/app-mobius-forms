@@ -13,14 +13,20 @@ namespace ThisApp.Fields
     /// </summary>
     public override IHtmlTag GetTag()
     {
-      var checkbox = GetCheckbox();
-      string overrideTitle = default;
-      checkbox.Attr("terms", "true");
-      if (Field.TermsAndGdprCombined) overrideTitle = Form.FormResources.LabelTermsAll;
-      else if (Field.TermsEnabled) overrideTitle = Form.FormResources.LabelTerms;
-      else if (Field.GdprEnabled) overrideTitle = Form.FormResources.LabelGdpr;
+      // Get a checkbox and mark it as a terms checkbox (for JavaScript validation)
+      var checkbox = GetCheckbox().Attr("terms", "true");
 
-      return CheckboxWithLabelRight(checkbox, overrideTitle);
+      // Get correct title based on the purpose of field
+      var res = Form.FormResources;
+      string title = Field.TermsAndGdprCombined
+        ? res.LabelTermsAll
+        : Field.TermsEnabled 
+          ? res.LabelTerms
+          : Field.GdprEnabled 
+            ? res.LabelGdpr
+            : default;
+
+      return CheckboxWithLabelRight(checkbox, title);
     }
   }
 }

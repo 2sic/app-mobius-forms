@@ -7,11 +7,9 @@
   var appSettings = As<AppSettings>(App.Settings);
 
   var dynForm = As<DynForm>(MyItem);
-  var formResourcesHepler = GetService<FormResourceHelper>();
-  var formResources = formResourcesHepler.GetFormResources(appRes, dynForm);
-
-  var sendMailHepler = GetService<SendMailConfigHelper>();
-  var sendMailConfig = sendMailHepler.GetSendMail(appRes, As<SendMailConfig>(MyModel.Item("FormConfig")));
+  var stackHelper = GetService<DataStackHelper>();
+  var formResources = stackHelper.GetFormResources(dynForm);
+  var sendMailConfig = stackHelper.GetSendMail(As<SendMailConfig>(MyModel.Item("FormConfig")));
 
   var sendToCustomer = sendMailConfig.CustomerSend;
   var sendToOwner = sendMailConfig.OwnerSend;

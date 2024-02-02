@@ -15,7 +15,7 @@ namespace ThisApp.Data
 
     public string FieldType => String(fallback: "");
 
-    public string InitialValue => String(fallback: "");
+    public string DefaultValue => String(fallback: "");
 
     public bool Required => Bool();
 
@@ -30,19 +30,19 @@ namespace ThisApp.Data
 
     #region Number
 
-    public int MinLength => Int();
-    public int MaxLength => Int();
+    public int NumberMin => Int();
+    public int NumberMax => Int();
 
     #endregion
 
     #region Email
 
-    public string RecipientEmail => String(fallback: "");
+    public string EmailUseAsRecipient => String(fallback: "");
 
     #endregion
 
     #region Boolean
-    public bool LabelRight => Bool();
+    public bool BooleanLabelRight => Bool();
 
     #endregion
 
@@ -56,19 +56,17 @@ namespace ThisApp.Data
     #region Picker
     public string PickerType => String(fallback: "");
     public string PickerKeyValues => String(fallback: "");
-    public bool CheckboxWithHeadline => Bool();
-    public bool MultiSelect => Bool();
-    public string PlaceHolderSelect => String(fallback: "");
+    public bool PickerCheckboxGrouped => Bool();
+    public bool PickerMultiSelect => Bool();
+    public string PickerPlaceholder => String(fallback: "");
 
-    #endregion
-
-    #region Hidden
-    public string HiddenValue => String(fallback: "");
     #endregion
 
     #region Advanced
     public string RazorFile => String(fallback: "");
     #endregion
+
+    public bool LabelStartsNewGroup => Bool();
 
   }
 }

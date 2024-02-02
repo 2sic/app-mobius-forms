@@ -5,6 +5,6 @@ namespace ThisApp.Data
     /// <summary>
     /// Use a Razor Component instead of the automatic field builder.
     /// </summary>
-    public bool UseRazorComponent => FieldType == "advanced";
+    public bool UseRazorComponent => FieldType == "razor";
   }
 }

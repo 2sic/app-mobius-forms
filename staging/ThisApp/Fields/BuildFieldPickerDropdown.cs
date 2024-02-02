@@ -23,9 +23,9 @@ namespace ThisApp.Fields
     {
       var dropdown = Tag.Select().Class(CssClasses.InputControl);
 
-      if (Field.MultiSelect) { dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId); }
+      if (Field.PickerMultiSelect) { dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId); }
 
-      dropdown.Add(Tag.Option(Text.First(Field.PlaceHolderSelect, Form.FormResources.LabelSelect)).Value(""));
+      dropdown.Add(Tag.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
 
       foreach (var optionItem in GetKeyValue(Field.PickerKeyValues))
         dropdown.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));

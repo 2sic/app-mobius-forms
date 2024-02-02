@@ -17,9 +17,9 @@ namespace ThisApp.Fields
     {
       var item = Tag.Input().Type("number");
 
-      var minValue = Field.MinLength;
-      var maxValue = Field.MaxLength;
-      var value = Field.InitialValue;
+      var minValue = Field.NumberMin;
+      var maxValue = Field.NumberMax;
+      var value = Field.DefaultValue;
 
       if (minValue != 0) { item.Min(minValue.ToString()); }
       if (maxValue != 0) { item.Max(maxValue.ToString()); }

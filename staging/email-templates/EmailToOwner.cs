@@ -9,11 +9,11 @@ using DotNetNuke.Common.Controls;
 public class EmailToOwner: Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(FormResources formResources) {
+  public string Subject(FormResourcesStack formResources) {
     // create custom code to generate the subject here...or just return the setting configured in the form
     return Kit.Scrub.Only(formResources.OwnerMailSubject, "p");
   }
-  public string Message (FormResources formResources, Dictionary<string, object> data)
+  public string Message (FormResourcesStack formResources, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>

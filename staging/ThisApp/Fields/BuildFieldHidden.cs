@@ -1,6 +1,8 @@
+using Connect.Koi.Html;
 using ThisApp.Data;
 using ThisApp.Form;
 using ToSic.Razor.Blade;
+using ToSic.Razor.Html5;
 
 namespace ThisApp.Fields
 {
@@ -10,23 +12,22 @@ namespace ThisApp.Fields
     /// <summary>
     /// Generate a Hidden Input field with Value for E-mail and Db, only visible for Admins
     /// </summary>
-    public override IHtmlTag GetTag() => FileHidden();
+    public override IHtmlTag GetTag()
+    {
+      if (Form.User.IsContentAdmin)
+        return SetBasicsAndWrapInLabel(FileHiddenAdmin(), setDefaultClass: false);
+      else
+        return FileHidden();
+    }
 
+    private Input FileHiddenAdmin()
+    {
+      return Tag.Input().Type("text").Value(Field.DefaultValue).Disabled().Class(CssClasses.HiddenInputStyle + " " + CssClasses.InputControl);
+    }
+    
     private IHtmlTag FileHidden()
     {
-      var field = Form.User.IsContentAdmin
-      // If user is admin, show hidden field with warning and Input Filed
-          ? Tag.Div().Class("alert alert-warning").Attr("role", "alert")
-              .Add(
-                  Tag.Strong("Show Hidden Field for Admin"),
-                  SetBasics(Tag.Input().Type("text").Value(Field.DefaultValue).Disabled())
-              )
-          // Else don't show hidden field and send only the Information
-          : Tag.Div(SetBasics(Tag.Input().Type("hidden").Value(Field.DefaultValue), false));
-
-      if (!string.IsNullOrEmpty(Field.Title))
-        field.Add(Tag.Label(Field.Title).Attr("hidden").For(Field.FieldId));
-      return field;
+      return Tag.Div(SetBasics(Tag.Input().Type("hidden").Value(Field.DefaultValue), false));
     }
   }
 }
