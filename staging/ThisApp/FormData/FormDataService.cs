@@ -83,7 +83,7 @@ namespace ThisApp.FormData
 
     private Dictionary<string, string> GetColumnHeaders()
     {
-      var dynFormFields = AsItems(App.Data["DynForm"])
+      var dynFormFields = AsItems(App.Data["FormConfig"])
         .FirstOrDefault(f => f.Id == FormId)
         ?.Children("Fields");
 

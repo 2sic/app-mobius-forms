@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ThisApp.Data
 {
-  public partial class DynForm
+  public partial class FormConfig
   {
     public bool UseFloatingLabels => _useFloatingLabels ??= UseConfigOf.DesignField == "floatingLabel";
     private bool? _useFloatingLabels;
@@ -22,10 +22,10 @@ namespace ThisApp.Data
     /// This is the source of the configs - can be the own object, but can also be the one in "InheritedConfig".
     /// Fallback is "this", in case it doesn't have a child.
     /// </summary>
-    private DynForm UseConfigOf => _useConfigOf ??= ReuseConfig ? (InheritedConfig ?? this) : this;
-    private DynForm _useConfigOf;
+    private FormConfig UseConfigOf => _useConfigOf ??= ReuseConfig ? (InheritedConfig ?? this) : this;
+    private FormConfig _useConfigOf;
 
-    private DynForm InheritedConfig => _inheritedConfig ??= ReuseConfig ? Child<DynForm>("InheritedConfig") : null;
-    private DynForm _inheritedConfig;
+    private FormConfig InheritedConfig => _inheritedConfig ??= ReuseConfig ? Child<FormConfig>("InheritedConfig") : null;
+    private FormConfig _inheritedConfig;
   }
 }

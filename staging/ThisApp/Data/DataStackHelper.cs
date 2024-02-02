@@ -5,7 +5,7 @@ namespace ThisApp.Data
     /// <summary>
     /// Get formResources back default or from the form
     /// </summary>
-    public FormResourcesStack GetFormResources(DynForm dynForm)
+    public FormResourcesStack GetFormResources(FormConfig dynForm)
     {
       var fallbackResources = AppResources.DefaultFormResources;
       var formResources = dynForm.FormResources ?? fallbackResources;

@@ -17,7 +17,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var mailLabels = "";
 
     if(contactFormRequest.ContainsKey("FormId")) {
-      var dynForm = AsItems(App.Data["DynForm"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
+      var dynForm = AsItems(App.Data["FormConfig"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
       
       foreach (var item in dynForm.Children("Fields"))
       {
@@ -81,7 +81,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
 
     var stackHelper = GetService<DataStackHelper>();
-    var formResources = stackHelper.GetFormResources(As<DynForm>(MyItem));
+    var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem));
 
     var subject = mailEngine.Subject(formResources);
     var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();
