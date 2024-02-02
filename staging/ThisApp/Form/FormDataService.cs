@@ -33,10 +33,10 @@ namespace ThisApp.Form
     /// The form data for the current module.
     /// It's cached, so accessing it multiple times won't rerun the query.
     /// </summary>
-    public List<FormDataItem> FormData => _formData ??= GetData();
-    private List<FormDataItem> _formData;
+    public List<FormDataReader> FormData => _formData ??= GetData();
+    private List<FormDataReader> _formData;
 
-    private List<FormDataItem> GetData()
+    private List<FormDataReader> GetData()
     {
       var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = _moduleId }); // Get the dynamic data from Query by ModuleId
       var data = query.List;
@@ -45,7 +45,7 @@ namespace ThisApp.Form
         .Select(i =>
         {
           var rawData = Kit.Json.ToTyped(i.String("RawData"));
-          return new FormDataItem(i, AsTyped(rawData.Get("Fields")));
+          return new FormDataReader(i, AsTyped(rawData.Get("Fields")));
         })
         .ToList();
     }

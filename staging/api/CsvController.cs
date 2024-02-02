@@ -60,7 +60,7 @@ public class CsvController : Custom.Hybrid.ApiTyped
     return File(download: true, virtualPath: null, contentType: "text/csv", fileDownloadName: fileName, contents: csvString);
   }
 
-  private List<List<string>> GetRowDataList(List<FormDataItem> data, List<string> columns)
+  private List<List<string>> GetRowDataList(List<FormDataReader> data, List<string> columns)
     => data.Select(pair =>
       {
         int? idValue = pair.Item.Id;
