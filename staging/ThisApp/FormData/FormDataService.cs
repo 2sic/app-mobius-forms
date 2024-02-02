@@ -4,7 +4,7 @@ using System.Linq;
 using ToSic.Sxc.Data;
 using ThisApp.Data;
 
-namespace ThisApp.Form
+namespace ThisApp.FormData
 {
   public class FormDataService : Custom.Hybrid.CodeTyped
   {
