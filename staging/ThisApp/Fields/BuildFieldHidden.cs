@@ -19,10 +19,10 @@ namespace ThisApp.Fields
           ? Tag.Div().Class("alert alert-warning").Attr("role", "alert")
               .Add(
                   Tag.Strong("Show Hidden Field for Admin"),
-                  SetBasics(Tag.Input().Type("text").Value(Field.HiddenValue).Disabled())
+                  SetBasics(Tag.Input().Type("text").Value(Field.DefaultValue).Disabled())
               )
           // Else don't show hidden field and send only the Information
-          : Tag.Div(SetBasics(Tag.Input().Type("hidden").Value(Field.HiddenValue), false));
+          : Tag.Div(SetBasics(Tag.Input().Type("hidden").Value(Field.DefaultValue), false));
 
       if (!string.IsNullOrEmpty(Field.Title))
         field.Add(Tag.Label(Field.Title).Attr("hidden").For(Field.FieldId));
