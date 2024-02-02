@@ -69,7 +69,7 @@ namespace ThisApp.Fields
       if (!Field.Required) return item;
       var message = specialReqMessage != null
         ? Resources.String(specialReqMessage)
-        : Resources.String("LabelRequired");
+        : Form.FormResources.LabelRequired;
 
       item = item.Attr("data-pristine-required-message", message).Attr("required") as TTag;
       return item;

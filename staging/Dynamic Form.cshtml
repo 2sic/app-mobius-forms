@@ -6,21 +6,22 @@
 @using ThisApp
 
 @{
+  var appRes = As<AppResources>(App.Resources);
+  var appSetting = As<AppSettings>(App.Settings);
+
   var dynForm = As<DynForm>(MyItem);
   var isReusedConfig = dynForm.ReuseConfig;
 
   var formConfig = isReusedConfig ? dynForm.Child("InheritedConfig").Child("SendMailConfig") : dynForm.Child("SendMailConfig");
-  var sendMailConfig = As<SendMailConfig>(formConfig);
+
+  var sendMailHepler = GetService<SendMailConfigHelper>();
+  var sendMailConfig = sendMailHepler.GetSendMail(appRes, As<SendMailConfig>(formConfig));
   
   var formHelper = GetService<FormHelpers>();
   var dynDataHelper = GetCode("./tools/DynData.cs");
 
-  var appRes = As<AppResources>(App.Resources);
-  var appSetting = As<AppSettings>(App.Settings);
-
-@* TODO:: *@
-  var fallbackResources = appRes.DefaultFormResources;
-  var formResources = dynForm.FormResources ?? fallbackResources;
+  var formResourcesHepler = GetService<FormResourceHelper>();
+  var formResources = formResourcesHepler.GetFormResources(appRes, dynForm);
 
 
   var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 

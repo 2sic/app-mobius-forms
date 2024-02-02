@@ -31,10 +31,13 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
+    var appRes = As<AppResources>(App.Resources);
+    var appSettings = As<AppSettings>(App.Settings);
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
 
-    var sendMailConfig = As<SendMailConfig>(formConfig);
-    var appSettings = As<AppSettings>(App.Settings);
+    var sendMailHepler = GetService<SendMailConfigHelper>();
+    var sendMailConfig = sendMailHepler.GetSendMail(appRes, As<SendMailConfig>(formConfig));
+
 
     var from = Text.First(sendMailConfig.MailFrom, appSettings.DefaultMailFrom);
     var owner = Text.First(sendMailConfig.OwnerMail, appSettings.DefaultOwnerMail);
@@ -77,11 +80,8 @@ public class SendMail : Custom.Hybrid.CodeTyped
     Log.Add("Get MailEngine");
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
 
-    // TODO::: 
-    var appRes = As<AppResources>(App.Resources);
-    var dynForm2 = As<DynForm>(MyItem);
-    var fallbackResources = appRes.DefaultFormResources;
-    var formResources = dynForm2.FormResources ?? fallbackResources;
+    var formResourcesHepler = GetService<FormResourceHelper>();
+    var formResources = formResourcesHepler.GetFormResources( As<AppResources>(App.Resources), As<DynForm>(MyItem));
 
     var subject = mailEngine.Subject(formResources);
     var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();

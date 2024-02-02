@@ -19,5 +19,6 @@ namespace ThisApp.Form
     {
       return "app-mobius6-wrapper" + (dynForm.Get<bool>("Mailchimp") ? " app-mobius6-mailchimp" : "");
     }
+
   }
 }
