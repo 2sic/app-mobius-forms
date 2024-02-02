@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldPickerRadio : BuildFieldPicker
   {
-    public BuildFieldPickerRadio(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldPickerRadio(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate simple Radio 
     /// </summary>

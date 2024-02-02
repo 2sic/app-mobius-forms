@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldText : BuildFieldBase
   {
-    public BuildFieldText(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldText(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Text must override GetTag(),

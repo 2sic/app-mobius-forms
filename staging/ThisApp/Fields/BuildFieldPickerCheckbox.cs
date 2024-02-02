@@ -8,7 +8,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldPickerCheckbox : BuildFieldPicker
   {
-    public BuildFieldPickerCheckbox(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldPickerCheckbox(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate CheckbocPicker with Headline or without
     /// </summary>

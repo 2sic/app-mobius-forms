@@ -8,8 +8,8 @@ namespace ThisApp.Data
     public bool UseFloatingLabels => _useFloatingLabels ??= UseConfigOf.DesignField == "floatingLabel";
     private bool? _useFloatingLabels;
 
-    public List<DynFormField> Fields => _fields ??= UseConfigOf.Children<DynFormField>("Fields").ToList();
-    private List<DynFormField> _fields;
+    public List<FormFieldConfig> Fields => _fields ??= UseConfigOf.Children<FormFieldConfig>("Fields").ToList();
+    private List<FormFieldConfig> _fields;
 
     public FormResources FormResources => _formResources ??= UseConfigOf.Child<FormResources>("FormResources");
     private FormResources _formResources;

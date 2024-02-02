@@ -8,7 +8,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldHidden : BuildFieldBase
   {
-    public BuildFieldHidden(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldHidden(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate a Hidden Input field with Value for E-mail and Db, only visible for Admins
     /// </summary>

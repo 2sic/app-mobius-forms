@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldNumber : BuildFieldBase
   {
-    public BuildFieldNumber(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldNumber(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate a Number Input with Min, Max and Value
     /// </summary>

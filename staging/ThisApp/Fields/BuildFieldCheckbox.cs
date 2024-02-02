@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldCheckbox : BuildFieldBase
   {
-    public BuildFieldCheckbox(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldCheckbox(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Get a checkbox with Left or Right Label

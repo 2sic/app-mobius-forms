@@ -6,7 +6,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldTerms : BuildFieldCheckbox
   {
-    public BuildFieldTerms(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldTerms(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Terms checkbox use Title form App Resources and overriedTitle in CheckbocxWithLabelRight

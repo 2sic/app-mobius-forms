@@ -6,7 +6,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldException : BuildFieldBase
   {
-    public BuildFieldException(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldException(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Get e exception message if a FieldType available

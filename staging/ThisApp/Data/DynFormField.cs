@@ -1,6 +1,6 @@
 namespace ThisApp.Data
 {
-  public partial class DynFormField
+  public partial class FormFieldConfig
   {
     /// <summary>
     /// Use a Razor Component instead of the automatic field builder.

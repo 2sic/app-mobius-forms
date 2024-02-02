@@ -6,7 +6,7 @@ namespace ThisApp.Fields
 {
   public abstract class BuildFieldPicker : BuildFieldBase
   {
-    public BuildFieldPicker(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldPicker(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     // Helper function to create a dictionary with keys and values from the string use in Radio and Dropdown 
     protected static Dictionary<string, string> GetKeyValue(string pickerKeyValues)

@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldPickerDropdown : BuildFieldPicker
   {
-    public BuildFieldPickerDropdown(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldPickerDropdown(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Generate Dropdown with multiple options

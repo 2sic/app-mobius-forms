@@ -14,7 +14,7 @@ namespace ThisApp.Fields
     /// <summary>
     /// Constructor which ensures that this class has the same context as the parent, eg. the Kit etc.
     /// </summary>
-    public BuildFieldBase(FormBuildParameters form, DynFormField field)
+    public BuildFieldBase(FormBuildParameters form, FormFieldConfig field)
     {
       Form = form;
       Resources = form.Resources;
@@ -25,7 +25,7 @@ namespace ThisApp.Fields
     protected FormBuildParameters Form { get; }
     protected AppResources Resources { get; }
     protected SendMailConfigStack SendMailConfig { get; }
-    protected DynFormField Field { get; }
+    protected FormFieldConfig Field { get; }
     protected CssClasses CssClasses => Form.CssClasses;
 
     public abstract IHtmlTag GetTag();

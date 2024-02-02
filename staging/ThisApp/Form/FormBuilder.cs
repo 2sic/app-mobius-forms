@@ -21,13 +21,13 @@ namespace ThisApp.Form
     /// <param name="field"></param>
     /// <returns></returns>
     /// <exception cref="System.Exception"></exception>
-    public IHtmlTag Field(DynFormField field) => FindBuilder(field)?.GetTag()
+    public IHtmlTag Field(FormFieldConfig field) => FindBuilder(field)?.GetTag()
         ?? throw new System.Exception($"The type '{field.FieldType}' is not supported yet in the new FormBuilder");
 
     /// <summary>
     /// Find a matching field builder for the given field
     /// </summary>
-    private BuildFieldBase FindBuilder(DynFormField field) => field.FieldType switch
+    private BuildFieldBase FindBuilder(FormFieldConfig field) => field.FieldType switch
     {
       "string" when field.StringLines <= 1 => new BuildFieldText(FormParams, field),
       "string" => new BuildFieldTextMultiline(FormParams, field),

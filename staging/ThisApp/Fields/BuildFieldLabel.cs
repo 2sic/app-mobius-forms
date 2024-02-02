@@ -6,7 +6,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldLabel : BuildFieldBase
   {
-    public BuildFieldLabel(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldLabel(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Show only the Field Title as Label (Settings open (Size, Position, etc.))
     /// </summary>

@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldTextMultiline : BuildFieldBase
   {
-    public BuildFieldTextMultiline(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldTextMultiline(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Text must override it, because the MultiLine is not an input, but a textarea
