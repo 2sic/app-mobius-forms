@@ -1,8 +1,3 @@
-using ToSic.Razor.Blade;
-using ThisApp.Data;
-using ThisApp.Fields;
-
-
 namespace ThisApp.Csv
 {
   public class CsvHelper : Custom.Hybrid.CodeTyped
@@ -12,7 +7,7 @@ namespace ThisApp.Csv
     public string GetDownloadLink()
     {
       var mid = MyContext.Module.Id;
-      return Link.To(api: $"{MyView.Edition}/api/Csv/Csv?PageId={MyContext.Page.Id}&ModuleId={mid}&id{mid}");
+      return Link.To(api: $"{MyView.Edition}/api/Csv/Csv?PageId={MyContext.Page.Id}&ModuleId={mid}&id={mid}");
     }
 
   }

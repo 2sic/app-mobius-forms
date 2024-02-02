@@ -1,4 +1,5 @@
-@inherits Custom.Hybrid.RazorTyped
+@* Inherit special Base Class which Prepares a lot of commonly used objects *@
+@inherits ThisApp.Razor.MobiusRazorBase
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data
 @using ThisApp.Data
@@ -6,33 +7,21 @@
 @using ThisApp
 
 @{
-  var appRes = As<AppResources>(App.Resources);
-  var appSetting = As<AppSettings>(App.Settings);
-
-  var dynForm = As<DynForm>(MyItem);
-  var isReusedConfig = dynForm.ReuseConfig;
-
-  var stackHelper = GetService<DataStackHelper>();
-  var sendMailConfig = stackHelper.GetSendMail(dynForm.SendMailConfig);
-  var formResources = stackHelper.GetFormResources(dynForm);
-  
   var formHelper = GetService<FormHelpers>();
-  var dynDataHelper = GetCode("./tools/DynData.cs");
+  var dynDataHelper = GetService<FormDataService>().Setup(MyContext.Module.Id);
 
   var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5); 
-  var formParams = new FormBuildParameters(appRes, formResources, sendMailConfig, cssClasses , MyUser, dynForm.UseFloatingLabels);
+  var formParams = new FormBuildParameters(AppRes, FormRes, MailConfig, cssClasses, MyUser, FormConfig.UseFloatingLabels);
   var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
-  bool enableEditExperience = appSetting.AdminHasPermission || MyContext.User.IsSystemAdmin;
-  
-  var formToolbar = enableEditExperience
-    ? Kit.Toolbar.Default(dynForm)
-    : Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarPermissionInfo));
+  var formToolbar = EnableEditExperience
+    ? Kit.Toolbar.Default(FormConfig)
+    : Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarPermissionInfo));
 
   // Group Fields by their Group, which changes on labels with NewGroup...
   var groupIdPrefix = "mobius-group-";
   var groupCount = 0;
-  var fieldsByGroup = dynForm.Fields
+  var fieldsByGroup = FormConfig.Fields
     .Select(f => new {
         LabelStartsNew = f.LabelStartsNewGroup,
         GroupId = groupIdPrefix + (f.LabelStartsNewGroup ? ++groupCount : groupCount),
@@ -45,19 +34,18 @@
 
 <div class="app-mobius6-wrapper" @formToolbar>
 
-  @if (Text.Has(dynForm.Title)) {
-    <h2>@dynForm.Title</h2>
+  @if (Text.Has(FormConfig.Title)) {
+    <h2>@FormConfig.Title</h2>
   }
 
-
-  <div class="@formHelper.WrapperClasses(dynForm)" @formHelper.FormMobiusId()>
+  <div class="@formHelper.WrapperClasses(FormConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius6-form">
-      <input type="hidden" id="FormId" value="@dynForm.Id">
+      <input type="hidden" id="FormId" value="@FormConfig.Id">
 
-      @if (dynForm.Fields.Count == 0) {
-        var toolbar = Kit.Toolbar.Default(dynForm.Children("Fields"));
+      @if (FormConfig.Fields.Count == 0) {
+        var toolbar = Kit.Toolbar.Default(FormConfig.Children("Fields"));
         <div @toolbar class="alert alert-secondary" role="alert">
-          @appRes.NoFieldsInfo
+          @AppRes.NoFieldsInfo
         </div>
       }
 
@@ -65,16 +53,16 @@
       @foreach (var fieldGroup in fieldsByGroup)
       {
         var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
-        <div id="@id" class="" style="border: 1px solid">
-          ID: @id<br>
+
+        <div id="@id" class="mobius-group" data-step="@fieldGroup.Key" style="border: 1px solid">
           @foreach (var field in fieldGroup.Select(f => f.Field))
           {
             // Prepare the toolbar for edit experience
             // If the user has no permission, the toolbar will be empty with a note
-            var toolbar = !enableEditExperience
-              ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarPermissionInfo)) 
-              : isReusedConfig
-                ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(appRes.ToolbarReuseInfo, background: "white"))
+            var toolbar = !EnableEditExperience
+              ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarPermissionInfo)) 
+              : FormConfig.ReuseConfig
+                ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarReuseInfo, background: "white"))
                 : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + field.Title)).MoveDown().New().Remove();
 
             <div @toolbar>
@@ -86,32 +74,33 @@
               }
             </div> 
           }
+          
+          <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">Next Step</a>
         </div>
       }
     </div>
 
 
-    @if (dynForm.Recaptcha) {
+    @if (FormConfig.Recaptcha) {
       @Html.Partial("./parts/Footer Recaptcha.cshtml") 
     }
   
     @* TODO: @2dg should maybe get the SendMailConfigStack instead ? *@
-    @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig = dynForm.SendMailConfig })
+    @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig = FormConfig.SendMailConfig })
 
     @if (MyUser.IsContentAdmin)
     {
-      var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = MyContext.Module.Id }); // Get the dynamic data from Query by ModuleId
       // Initialize lists to store CSV-related data
-      List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(query.List); // Initialize Data
+      var dataPairs = dynDataHelper.FormData; // Initialize Data
 
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
         @if (dataPairs.Count() == 0) {
-          @appRes.LabelFromDataAvailable
+          @AppRes.LabelFromDataAvailable
         } else {
           var mid = MyContext.Module.Id;
           <a class="btn btn-primary" href='@Link.To(parameters: $"id={mid}&mid={mid}")' target="_blank">Form Data</a>
-          <a class="btn btn-primary" href="@(GetService<ThisApp.Csv.CsvHelper>().GetDownloadLink())" type="button">CSV Export</a>
+          <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink()" type="button">CSV Export</a>
         }
       </div>
     }

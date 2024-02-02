@@ -1,9 +1,11 @@
-@inherits Custom.Hybrid.RazorTyped
+@* Inherit special Base Class which Prepares a lot of commonly used objects *@
+@inherits ThisApp.Razor.MobiusRazorBase
 @using ToSic.Razor.Blade
-@using ToSic.Sxc.Data;
-@using ToSic.Sxc.Adam;
+@using ToSic.Sxc.Data
+@using ToSic.Sxc.Adam
 @using ThisApp.Data
-@using System.Text.Json;
+@using ThisApp.Form
+@using System.Text.Json
 
 @if (!MyUser.IsContentAdmin) {
   return;
@@ -15,33 +17,21 @@
 <script src="@MyView.Path/lib/jquery.dataTables.js"></script>
 
 @{
-  var dataItems = AsItems(Kit.Data.GetQuery("DynamicData"));
-
-  // TODO: @2dg - DynData tool should be moved into a service in ThisApp
-  var dynDataHelper = GetCode("./tools/DynData.cs");
-  var appRes = As<AppResources>(App.Resources);
-
-  var csv = GetService<ThisApp.Csv.CsvHelper>();
-  
-  List<(ITyped Json, ITypedItem Item)> dataPairs = dynDataHelper.PrepareData(dataItems); // Initialize Data
-  List<string> headerProps = dynDataHelper.ListOfHeaderProps(dataPairs.Select(p => p.Json).ToList()); // Create the Header with all specifications
+  var formData = GetService<FormDataService>().Setup(MyContext.Module.Id);
   
   // TODO: this is probably a lot of duplicate code in here and the API
-  var moduleId = dataPairs.Select(p => p.Item.Int("moduleId")).FirstOrDefault();
-  var formId = dataPairs.Select(p => p.Item.String("formId")).FirstOrDefault();
-  var firstRecord = dataPairs.First().Item.DateTime("Timestamp");
-  var lastRecord = dataPairs.Last().Item.DateTime("Timestamp");
-  var count = dataPairs.Count();
-  Dictionary<string, string> fieldHeaderDictionary = dynDataHelper.GetFieldDictionary(formId);  
+  var firstRecord = formData.FormData.First().Item.DateTime("Timestamp");
+  var lastRecord = formData.FormData.Last().Item.DateTime("Timestamp");
 } 
 
+@* Header Bar showing Stats and CSV download *@
 <div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
-  <strong>Total:</strong> @count 
-  <strong>@appRes.LabelFirst:</strong> @firstRecord.ToString("yyyy-MM-dd")
-  <strong>@appRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
-  <strong>ModuleId: </strong> @moduleId
-  <strong>FormId:</strong> @formId
-  <a href="@csv.GetDownloadLink()" type="button" class="btn btn-primary">CSV Export</a>
+  <strong>Total:</strong> @formData.FormData.Count 
+  <strong>@AppRes.LabelFirst:</strong> @firstRecord.ToString("yyyy-MM-dd")
+  <strong>@AppRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
+  <strong>ModuleId: </strong> @MyContext.Module.Id
+  <strong>FormId:</strong> @formData.FormId
+  <a href="@CsvHelper.GetDownloadLink()" type="button" class="btn btn-primary">CSV Export</a>
 </div>
 
 @* Add Table Top Bar show and search into top-toolbar div *@
@@ -51,16 +41,13 @@
   <table id="formdata" class="table table-striped">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>@appRes.LabelTimestamp</th>
-        @foreach (var headerProp in headerProps) {
-          <th>@dynDataHelper.GetFieldValueOrKey(fieldHeaderDictionary, headerProp)</th>
+        @foreach (var headerProp in formData.ColumnHeaders) {
+          <th>@headerProp.Value</th>
         }
-        <th>Files</th>
       </tr>
     </thead> 
     <tbody>  
-      @foreach (var pair in dataPairs) {
+      @foreach (var pair in formData.FormData) {
         var row = pair.Json;
         var item = pair.Item;
         var i = 0;
@@ -69,7 +56,7 @@
           <td>@item.DateTime("Timestamp").ToString("yyyy-MM-dd")</td>  
 
           @* Generic Fields from the data *@
-          @foreach (var prop in headerProps) {
+          @foreach (var prop in formData.Columns) {
             // TODO: @2dg - this was cleaned by 2dm - probably the API should also be cleaned
             <td class="nowrap">
               @switch (row.Get(prop, required: false)) {
