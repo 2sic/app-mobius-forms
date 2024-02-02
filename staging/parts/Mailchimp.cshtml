@@ -1,34 +1,33 @@
-@inherits Custom.Hybrid.RazorTyped
+@* Inherit special Base Class which Prepares a lot of commonly used objects *@
+@inherits ThisApp.Razor.MobiusRazorBase
 @using ThisApp.Data
-@{
-  // Exit if not editor, as this file only adds messages for the editor
-  if (!MyUser.IsContentAdmin) {
-    return;
-  }
- 
-  var dynForm = As<DynForm>(MyItem);
-  var appRes = As<AppResources>(App.Resources);
-  var appSettings = As<AppSettings>(App.Settings);
+
+@* Exit if not editor, as this file only adds messages for the editor *@
+@if (!MyUser.IsContentAdmin) {
+  return;
 }
 
 @* Show mailchimp-not-enabled message *@
-@if (!dynForm.Mailchimp) {
+@if (!FormConfig.Mailchimp)
+{
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(appRes.MessageEnableMailchimp, "p"))
+    @Html.Raw(Kit.Scrub.Only(AppRes.MessageEnableMailchimp, "p"))
   </div>
   return;
 }
 
-@if (!appSettings.MailChimpShowWarning) {
+@if (!AppSet.MailChimpShowWarning)
+{
   <div class="alert alert-warning">
-     @Html.Raw(Kit.Scrub.Only(appRes.MessageContainsMailchimp, "p"))
+     @Html.Raw(Kit.Scrub.Only(AppRes.MessageContainsMailchimp, "p"))
   </div>
 }
 
 
-@if (appSettings.MailChimpShowWarning) {
+@if (AppSet.MailChimpShowWarning)
+{
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(appRes.MessageDefaultMailChimpKey, "p"))
+    @Html.Raw(Kit.Scrub.Only(AppRes.MessageDefaultMailChimpKey, "p"))
   </div>  
 }
 
