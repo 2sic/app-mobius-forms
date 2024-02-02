@@ -1,11 +1,10 @@
-@inherits Custom.Hybrid.RazorTyped
+@* Inherit special Base Class which Prepares a lot of commonly used objects *@
+@inherits ThisApp.Razor.MobiusRazorBase
 @using ToSic.Razor.Blade
 @using ThisApp.Form
 @using ThisApp.Data
 
-
-@* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page
-*@
+@* Include bootstrap 5 if the framework isn't known - then this file is still called, and we add Bootstrap to the page *@
 @Kit.Page.Activate(condition: Kit.Css.IsUnknown, features: "Bootstrap5")
 
 @* Activate JS features of 2sxc *@
@@ -14,7 +13,6 @@
 @* Run the JS and give it all the parameters to process the current form *@
 @{
   var formHelper = GetService<FormHelpers>();
-  var dynForm = As<DynForm>(MyItem);
 }
 @Kit.Page.TurnOn("window.appMobius6.init()", data: new
   {
@@ -42,7 +40,7 @@
 <link rel="stylesheet" href="@MyView.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 <script src="@MyView.Path/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
 
-@if (!dynForm.ShowRecaptchaIcon)
+@if (!FormConfig.ShowRecaptchaIcon)
 {
   <style>
     .grecaptcha-badge {
