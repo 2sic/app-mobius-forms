@@ -58,7 +58,6 @@
           @* Generic Fields from the data *@
           @foreach (var key in keysWithoutLastFiles) {
             var value = pair.GetString(key);
-            // TODO: @2dg - this was cleaned by 2dm - probably the API should also be cleaned
             <td class="nowrap">
               @if (value.Length > 12) {
                 <p class="app-mobius-tooltip" id="app-mobius-tooltip-btn-@itemId-@key" data-content="@value">
@@ -93,7 +92,6 @@
                       </svg>
                       &nbsp;
                       @file.SizeInfo.BestSize.ToString("##.#") @file.SizeInfo.BestUnit
-                      @* @Math.Round((double)file.Size / 1024, 1) KB *@
                     </div>
                     @if (files.Count() > 1 && !file.Equals(files.Last())) {
                       <br>

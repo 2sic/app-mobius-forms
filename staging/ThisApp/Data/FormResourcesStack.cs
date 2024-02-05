@@ -34,6 +34,7 @@ namespace ThisApp.Data
 
     #region GroupButtons
     public string Button => FormResources.String(nameof(Button), fallback: "");
+    public string ButtonNextStep => FormResources.String(nameof(ButtonNextStep), fallback: "");
     #endregion
 
     #region GroupMail

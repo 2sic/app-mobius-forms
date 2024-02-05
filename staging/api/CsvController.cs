@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] et
 #else
 using System.Web.Http;
 #endif
-
 using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
@@ -98,5 +97,4 @@ public class CsvController : Custom.Hybrid.ApiTyped
       return "error";
     }
   }
-
 }

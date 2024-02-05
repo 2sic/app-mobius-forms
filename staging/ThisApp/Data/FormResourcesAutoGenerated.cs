@@ -34,6 +34,7 @@ namespace ThisApp.Data
 
     #region GroupButtons
     public string Button => String(fallback: "");
+    public string ButtonNextStep => String(fallback: "");
     #endregion
 
     #region GroupMail

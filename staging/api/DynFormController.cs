@@ -9,9 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
-using ToSic.Razor.Html5;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class DynFormController : Custom.Hybrid.ApiTyped
@@ -21,11 +18,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
-
     var wrapLog = Log.Call(useTimer: true);
-
-    // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
-
     var dynForm = As<FormConfig>(MyItem);
 
     if (dynForm.Recaptcha)
@@ -60,14 +53,11 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
 
-    // Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
-
     var contentType = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").String("SaveToContentType") : MyItem.String("SaveToContentType");
     if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
     {
       var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);
     }
-    
 
     // Create Fields Data
     var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
@@ -112,13 +102,6 @@ private object CreateRawDataEntry(SaveRequest formRequest)
   }
 }
 
-public class FileUpload
-{
-  public string Field { get; set; }
-  public string Name { get; set; }
-  public string Encoded { get; set; }
-  public byte[] Contents { get { return System.Convert.FromBase64String(Encoded.Split(',')[1]); } }
-}
 
 public class SaveRequest
 {
@@ -128,4 +111,12 @@ public class SaveRequest
   public string Recaptcha { get; set; }
   public bool MailChimp { get; set; }
   public string CustomerMails { get; set; }
+}
+
+public class FileUpload
+{
+  public string Field { get; set; }
+  public string Name { get; set; }
+  public string Encoded { get; set; }
+  public byte[] Contents { get { return System.Convert.FromBase64String(Encoded.Split(',')[1]); } }
 }

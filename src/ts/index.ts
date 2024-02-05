@@ -5,6 +5,8 @@ import { getRecaptchaToken, requiresRecaptcha } from './lib-2sxc-recaptcha';
 import { addTrackingEvent } from './lib-2sxc-tracking';
 import { initTippy } from './lib-2sxc-tippy';
 
+let Pristine = require("../../node_modules/pristinejs");
+
 const debug = false;
 
 var winAny = window as any;
@@ -23,14 +25,27 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
   const nextStepButtons = mobiusWrapper.querySelectorAll('.btn-mobius-next-step');
   nextStepButtons.forEach((btn: HTMLElement) => {
+    const sendButton = mobiusWrapper.querySelector('[app-mobius6-send]') as HTMLElement;
+    sendButton.style.display = 'none';
+    
     btn.addEventListener('click', (event: Event) => {
       event.preventDefault();
       const parentNode = btn.closest('.mobius-group') as HTMLElement;
-      
+      const stepForm = new Pristine(parentNode, validationOptions);
+
+      if(stepForm.validate()) {
         const nextStep = parentNode.closest('.mobius-group').nextElementSibling;
-        if(parentNode) {
+        const nextStepButton = nextStep.querySelector('.btn-mobius-next-step');
+        
+        if(parentNode != null) {
           nextStep.classList.add('active');
+
+          if(nextStepButton == null)
+            sendButton.style.display = 'block';
+
         }
+      }
+      
     })
   })
 

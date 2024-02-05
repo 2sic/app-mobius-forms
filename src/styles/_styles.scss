@@ -7,6 +7,10 @@
     display: none;
   }
 
+  div[class*='mobius-group-']:not(.mobius-group-0) {
+    margin-bottom: 15px;
+  }
+
   label {
     font-weight: normal;
   }

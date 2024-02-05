@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ToSic.Razor.Blade;
-using ToSic.Sxc.Data;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
-
 
 public class SendMail : Custom.Hybrid.CodeTyped
 {
@@ -37,7 +33,6 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     var sendMailHepler = GetService<DataStackHelper>();
     var sendMailConfig = sendMailHepler.GetSendMail(As<SendMailConfig>(formConfig));
-
 
     var from = Text.First(sendMailConfig.MailFrom, appSettings.DefaultMailFrom);
     var owner = Text.First(sendMailConfig.OwnerMail, appSettings.DefaultOwnerMail);
@@ -102,7 +97,6 @@ public class SendMail : Custom.Hybrid.CodeTyped
       .ToString();
 
     Kit.SystemLog.Add("SendMail", message);
-
     wrapLog("ok");
   }
 
