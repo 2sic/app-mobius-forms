@@ -83,13 +83,13 @@ namespace ThisApp.FormData
 
     private Dictionary<string, string> GetColumnHeaders()
     {
-      var dynFormFields = AsItems(App.Data["FormConfig"])
+      var formFields = AsItems(App.Data["FormConfig"])
         .FirstOrDefault(f => f.Id == FormId)
         ?.Children("Fields");
 
       var baseDictionary = new Dictionary<string, string>();
 
-      foreach (var field in dynFormFields)
+      foreach (var field in formFields)
         baseDictionary[field.Url("FieldId")] = field.String("Title");
 
       // Create the fill list of headers and "translated" labels

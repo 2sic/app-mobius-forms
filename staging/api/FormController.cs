@@ -11,7 +11,7 @@ using System.IO;
 using ThisApp.Data;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class DynFormController : Custom.Hybrid.ApiTyped
+public class FormController : Custom.Hybrid.ApiTyped
 {
   [HttpPost]
   public void ProcessForm([FromBody] SaveRequest contactFormRequest)
@@ -19,9 +19,9 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
     var wrapLog = Log.Call(useTimer: true);
-    var dynForm = As<FormConfig>(MyItem);
+    var formConfig = As<FormConfig>(MyItem);
 
-    if (dynForm.Recaptcha)
+    if (formConfig.Recaptcha)
     {
       Log.Add("checking Recaptcha");
       GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);
@@ -60,9 +60,9 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     }
 
     // Create Fields Data
-    var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
+    var formDataEntity = App.Data.Create("FormData", contactFormRequest.Fields);
     // Update (Update to the same Entity) formTechnicalValues
-    App.Data.Update(dynDataEntity.EntityId, formTechnicalValues);
+    App.Data.Update(formDataEntity.EntityId, formTechnicalValues);
 
     Log.Add("Save data to content type");
     var files = new List<ToSic.Sxc.Adam.IFile>();
@@ -75,8 +75,8 @@ public class DynFormController : Custom.Hybrid.ApiTyped
         files.Add(SaveInAdam(
           stream: new MemoryStream(fileObj.Contents),
           fileName: fileObj.Name,
-          contentType: "DynData",
-          guid: dynDataEntity.EntityGuid,
+          contentType: "FormData",
+          guid: formDataEntity.EntityGuid,
           field: "Files"));
       }
     }

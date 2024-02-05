@@ -19,8 +19,8 @@ namespace ThisApp.Razor
     /// <summary>
     /// Current form configuration
     /// </summary>
-    protected FormConfig FormConfig => _dynForm ??= As<FormConfig>(MyItem);
-    private FormConfig _dynForm;
+    protected FormConfig FormConfig => _formConfig ??= As<FormConfig>(MyItem);
+    private FormConfig _formConfig;
 
     /// <summary>
     /// Form Resources (typed)
