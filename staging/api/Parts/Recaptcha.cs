@@ -34,7 +34,6 @@ public class Recaptcha : Custom.Hybrid.CodeTyped
     wrapLog("ok");
     return status && isSameSite;
   }
-
 }
 
 

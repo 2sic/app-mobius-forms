@@ -9,57 +9,34 @@
 
 @{
   var formHelper = GetService<FormHelpers>();
-
-
-
   var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5);
-
   var formParams = new FormBuildParameters(AppRes, FormRes, MailConfig, cssClasses, MyUser, FormConfig.UseFloatingLabels);
-
   var formBuilder = GetService<FormBuilder>().Setup(formParams);
 
-
-
   var formToolbar = EnableEditExperience
-
   ? Kit.Toolbar.Default(FormConfig)
-
   : Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarPermissionInfo));
-
-
 
   // Group Fields by their Group, which changes on labels with NewGroup...
 
   var groupIdPrefix = "mobius-group-";
-
   var groupCount = 0;
-
   var fieldsByGroup = FormConfig.Fields
 
   .Select(f => new
-  {
-
-    LabelStartsNew = f.LabelStartsNewGroup,
-
-    GroupId = groupIdPrefix + (f.LabelStartsNewGroup ? ++groupCount : groupCount),
-
-    Field = f
-
-  }
-
+    {
+      LabelStartsNew = f.LabelStartsNewGroup,
+      GroupId = groupIdPrefix + (f.LabelStartsNewGroup ? ++groupCount : groupCount),
+      Field = f
+    }
   )
-
   .GroupBy(f => f.GroupId)
-
   .ToList();
 }
 
 <div class="app-mobius6-wrapper" @formToolbar>
-
   @if (Text.Has(FormConfig.Title))
     <h2>@FormConfig.Title</h2>
-
-
 
   <div class="@formHelper.WrapperClasses(FormConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius6-form">
@@ -67,7 +44,6 @@
 
       @if (FormConfig.Fields.Count == 0)
       {
-
         var toolbar = Kit.Toolbar.Default(FormConfig.Children("Fields"));
         <div @toolbar class="alert alert-secondary" role="alert">
           @AppRes.NoFieldsInfo
@@ -77,37 +53,25 @@
       @* Loop through the field groups and render them *@
       @foreach (var fieldGroup in fieldsByGroup)
       {
-
         var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
-
         <div id="@id" class="mobius-group @fieldGroup.Key" data-step="@fieldGroup.Key">
           @foreach (var field in fieldGroup.Select(f => f.Field))
           {
-
             // Prepare the toolbar for edit experience
-
             // If the user has no permission, the toolbar will be empty with a note
-
             var toolbar = !EnableEditExperience
-
             ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarPermissionInfo))
-
             : FormConfig.ReuseConfig
-
             ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarReuseInfo, background: "white"))
-
             : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + field.Title)).MoveDown().New().Remove();
-
             <div @toolbar>
               @* If it's a advanced field, use the custom razor - otherwise use standard formBuilder *@
               @if (field.UseRazorComponent)
                 @Html.Partial("./razor-fields/" + field.RazorFile, new { field })
               else
                 @formBuilder.Field(field)
-
             </div>
           }
-
           @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
           {
             <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step"
@@ -117,30 +81,20 @@
       }
     </div>
 
-
     @if (FormConfig.Recaptcha)
       @Html.Partial("./parts/Footer Recaptcha.cshtml")
-
-
     @Html.Partial("./parts/Footer Submit with Messages.cshtml")
-
     @if (MyUser.IsContentAdmin)
-
     {
-
       // Initialize lists to store CSV-related data
-
       var formData = GetService<FormDataService>().Setup(MyContext.Module.Id);
-
       var dataPairs = formData.Data; // Initialize Data
-
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
         @if (dataPairs.Count() == 0)
           @AppRes.LabelFromDataAvailable
         else
         {
-
           var mid = MyContext.Module.Id;
           <a class="btn btn-primary" href='@Link.To(parameters: $"id={mid}&mid={mid}")' target="_blank">Form Data</a>
           <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink()" type="button">CSV Export</a>
@@ -149,5 +103,4 @@
     }
   </div>
 </div>
-
 @Html.Partial("./parts/Assets.cshtml")

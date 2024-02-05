@@ -7,8 +7,6 @@ using ThisApp.Data;
 using ThisApp.Code;
 using ThisApp;
 
-
-
 public class MailChimp : Custom.Hybrid.CodeTyped
 {
   // Checks for MailChimp Integration
@@ -86,8 +84,6 @@ public class MailChimp : Custom.Hybrid.CodeTyped
   }
 
   private static readonly HttpClient client = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) };
-
-  
 
   /* HELPERS */
   /* CREATE MD5 OF INPUT */

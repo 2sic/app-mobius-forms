@@ -5,6 +5,7 @@ using System.Text;
 using ToSic.Razor.Blade;
 using ThisApp.Data;
 
+
 public class SendMail : Custom.Hybrid.CodeTyped
 {
   public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, List<ToSic.Sxc.Adam.IFile> files)
@@ -27,8 +28,8 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var valuesRelabled = RewriteKeys(contactFormRequest, mailLabels);
 
     // assemble all settings to send the mail
-    // background: some settings are made in this module, but if they are missing we use fallback settings
-    var appRes = As<AppResources>(App.Resources);
+    // background: some settings are made in this module, but if they are missing we use fallback settings$
+
     var appSettings = As<AppSettings>(App.Settings);
     var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
 
