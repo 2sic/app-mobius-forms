@@ -54,7 +54,7 @@
       {
         var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
 
-        <div id="@id" class="mobius-group" data-step="@fieldGroup.Key" style="border: 1px solid">
+        <div id="@id" class="mobius-group" data-step="@fieldGroup.Key">
           @foreach (var field in fieldGroup.Select(f => f.Field))
           {
             // Prepare the toolbar for edit experience
@@ -75,7 +75,9 @@
             </div> 
           }
           
-          <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">Next Step</a>
+          @if (fieldsByGroup.Count > 1) {
+            <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">Next Step</a>
+          }
         </div>
       }
     </div>
@@ -86,7 +88,7 @@
     }
   
     @* TODO: @2dg should maybe get the SendMailConfigStack instead ? *@
-    @Html.Partial("./parts/Footer Submit with Messages.cshtml", new { formConfig = FormConfig.SendMailConfig })
+    @Html.Partial("./parts/Footer Submit with Messages.cshtml")
 
     @if (MyUser.IsContentAdmin)
     {

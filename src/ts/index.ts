@@ -21,8 +21,21 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
   if(!mobiusWrapper) return
 
-  const submitButtom = (mobiusWrapper.querySelectorAll('[app-mobius6-send]')[0] as HTMLButtonElement)
-  submitButtom.addEventListener('click', async (event: Event) => {
+  const nextStepButtons = mobiusWrapper.querySelectorAll('.btn-mobius-next-step');
+  nextStepButtons.forEach((btn: HTMLElement) => {
+    btn.addEventListener('click', (event: Event) => {
+      event.preventDefault();
+      const parentNode = btn.closest('.mobius-group') as HTMLElement;
+      
+        const nextStep = parentNode.closest('.mobius-group').nextElementSibling;
+        if(parentNode) {
+          nextStep.classList.add('active');
+        }
+    })
+  })
+
+  const submitButton = (mobiusWrapper.querySelectorAll('[app-mobius6-send]')[0] as HTMLButtonElement)
+  submitButton.addEventListener('click', async (event: Event) => {
     event.preventDefault();
 
     const eventBtn = event.currentTarget as HTMLElement;
@@ -56,7 +69,7 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
     let endpoint = webApiUrl // (should be "Form/ProcessForm" or a custom override)
 
-    sendForm(formValues, submitButtom, endpoint) 
+    sendForm(formValues, submitButton, endpoint) 
       .then((result: any) => {        
         // error
         if(!result.ok) {
@@ -65,18 +78,18 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
           showAlert(mobiusWrapper, 'msgError')
           enableInputs(mobiusWrapper)
     
-          addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
+          addTrackingEvent('trackMobiusForm', 'mobius-form', submitButton.innerText)
           return
         }
         
         // success
         if(debug) console.log('success', result)
-        submitButtom.setAttribute("disabled", "")
+        submitButton.setAttribute("disabled", "")
   
         showAlert(mobiusWrapper, 'msgOk')
         disableInputs(mobiusWrapper, false)
   
-        addTrackingEvent('trackMobiusForm', 'mobius-form', submitButtom.innerText)
+        addTrackingEvent('trackMobiusForm', 'mobius-form', submitButton.innerText)
       })
 
     //#endregion

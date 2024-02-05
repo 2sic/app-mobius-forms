@@ -129,7 +129,3 @@ public class SaveRequest
   public bool MailChimp { get; set; }
   public string CustomerMails { get; set; }
 }
-
-// 2sxclint:disable:no-dnn-namespaces
-// 2sxclint:disable:no-web-namespaces
-// 2sxclint:disable:no-EntityGuid-in-quotes

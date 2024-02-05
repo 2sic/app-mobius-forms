@@ -3,6 +3,10 @@
   max-width: 600px;
   margin: 0 auto;
 
+  .mobius-group:not([data-step="mobius-group-1"]):not([data-step="mobius-group-0"]):not(.active) {
+    display: none;
+  }
+
   label {
     font-weight: normal;
   }
@@ -89,6 +93,6 @@
 }
 
 // Style for the hidden input 
-// .hiddenInputStyle {
-
-// }
+.hiddenInputStyle {
+  background: repeating-linear-gradient( 45deg, #dbdff5, #f5f5f5 10px, #ffffff 10px, #b3b5c3 5px );
+}
