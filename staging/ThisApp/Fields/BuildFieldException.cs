@@ -18,10 +18,10 @@ namespace ThisApp.Fields
         Tag.Li("Field ID: " + Field.FieldId),
         Tag.Li("Field Type: " + Field.FieldType)
       );
-      
+
       if (Text.Has(Field.PickerType))
         specs = specs.Add(Tag.Li("PickerType: " + Field.PickerType));
-      
+
       var exception = Tag.Div()
         .Class("alert alert-danger")
         .Attr("role", "alert")

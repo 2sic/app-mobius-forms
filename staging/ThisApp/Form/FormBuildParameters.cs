@@ -6,7 +6,7 @@ namespace ThisApp.Form
 {
   public class FormBuildParameters
   {
-    public FormBuildParameters(AppResources resources, FormResourcesStack formResources, SendMailConfigStack sendMailConfig, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels )
+    public FormBuildParameters(AppResources resources, FormResourcesStack formResources, SendMailConfigStack sendMailConfig, CssClasses cssClasses, ICmsUser user, bool useFloatingLabels)
     {
       Resources = resources;
       FormResources = formResources;

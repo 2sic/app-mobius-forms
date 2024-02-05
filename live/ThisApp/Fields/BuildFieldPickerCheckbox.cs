@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using ThisApp.Data;
 using ThisApp.Form;
-
 using ToSic.Razor.Blade;
 
 namespace ThisApp.Fields
 {
   public class BuildFieldPickerCheckbox : BuildFieldPicker
   {
-    public BuildFieldPickerCheckbox(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldPickerCheckbox(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate CheckbocPicker with Headline or without
     /// </summary>
@@ -19,7 +18,7 @@ namespace ThisApp.Fields
 
     private IHtmlTag CheckBoxPicker()
     {
-      if (Field.CheckboxWithHeadline) return CheckboxPickerWithHeadline();
+      if (Field.PickerCheckboxGrouped) return CheckboxPickerWithHeadline();
       return CheckboxPickerBasic();
     }
     // Simple CheckboxPicker List without Headline
@@ -73,14 +72,11 @@ namespace ThisApp.Fields
 
       return items;
     }
-
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {
       var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox);
       checkbox = SetBasics(checkbox, false, GenearateHtmlId(item));
       return checkbox;
     }
-
   }
 }
-

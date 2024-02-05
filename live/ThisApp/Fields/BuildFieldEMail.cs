@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldEMail : BuildFieldBase
   {
-    public BuildFieldEMail(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldEMail(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Build Email field with RecipientEmail Settings
@@ -17,7 +17,7 @@ namespace ThisApp.Fields
     private Input EmailField()
     {
       var item = Tag.Input().Type("email");
-      if (Text.Has(Field.RecipientEmail)) { item.Attr("mail", "recipientEmail"); }
+      if (Text.Has(Field.EmailUseAsRecipient)) { item.Attr("mail", "recipientEmail"); }
       return item;
     }
   }

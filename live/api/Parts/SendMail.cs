@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ToSic.Razor.Blade;
-using ToSic.Sxc.Data;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
-
-
 
 public class SendMail : Custom.Hybrid.CodeTyped
 {
@@ -17,9 +12,10 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // rewrite the keys to be a nicer format, based on the configuration
     var mailLabels = "";
 
-    if(contactFormRequest.ContainsKey("FormId")) {
-      var dynForm = AsItems(App.Data["DynForm"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
-      
+    if (contactFormRequest.ContainsKey("FormId"))
+    {
+      var dynForm = AsItems(App.Data["FormConfig"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
+
       foreach (var item in dynForm.Children("Fields"))
       {
         var fieldId = item.String("FieldId");
@@ -32,21 +28,23 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     // assemble all settings to send the mail
     // background: some settings are made in this module, but if they are missing we use fallback settings
-    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
+    var appRes = As<AppResources>(App.Resources);
+    var appSettings = As<AppSettings>(App.Settings);
+    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
 
-    var dynFormConfig = new DynForm(formConfig);
-    var appSettings = new AppSettings(App.Settings);
+    var sendMailHepler = GetService<DataStackHelper>();
+    var sendMailConfig = sendMailHepler.GetSendMail(As<SendMailConfig>(formConfig));
 
-    var from = Text.First(dynFormConfig.MailFrom, appSettings.DefaultMailFrom);
-    var owner = Text.First(dynFormConfig.OwnerMail, appSettings.DefaultOwnerMail);
+    var from = Text.First(sendMailConfig.MailFrom, appSettings.DefaultMailFrom);
+    var owner = Text.First(sendMailConfig.OwnerMail, appSettings.DefaultOwnerMail);
 
     // Send Mail to owner
-    if (dynFormConfig.OwnerSend)
+    if (sendMailConfig.OwnerSend)
     {
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(dynFormConfig, dynFormConfig.OwnerMailTemplate, valuesRelabled, from, owner, dynFormConfig.OwnerMailCC, customerMails, files);
+        Send(sendMailConfig, sendMailConfig.OwnerMailTemplate, valuesRelabled, from, owner, sendMailConfig.OwnerMailCC, customerMails, files);
       }
       catch (Exception ex)
       {
@@ -55,12 +53,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
 
     // Send Mail to customer
-    if (dynFormConfig.CustomerSend && Text.Has(customerMails))
+    if (sendMailConfig.CustomerSend && Text.Has(customerMails))
     {
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(dynFormConfig, dynFormConfig.CustomerMailTemplate, valuesRelabled, from, customerMails, dynFormConfig.CustomerMailCC, owner, files);
+        Send(sendMailConfig, sendMailConfig.CustomerMailTemplate, valuesRelabled, from, customerMails, sendMailConfig.CustomerMailCC, owner, files);
       }
       catch (Exception ex)
       {
@@ -69,7 +67,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
   }
 
-  public void Send(DynForm formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
+  public void Send(SendMailConfigStack formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
@@ -77,9 +75,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     Log.Add("Get MailEngine");
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
-    var mailBody = mailEngine.Message(formConfig, valuesWithMailLabels).ToString();
 
-    var subject = mailEngine.Subject(formConfig, valuesWithMailLabels);
+    var stackHelper = GetService<DataStackHelper>();
+    var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem));
+
+    var subject = mailEngine.Subject(formResources);
+    var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();
 
     // Send Mail
     // Note that if an error occurs, this will bubble up, the caller will convert it to format for the client
@@ -97,7 +98,6 @@ public class SendMail : Custom.Hybrid.CodeTyped
       .ToString();
 
     Kit.SystemLog.Add("SendMail", message);
-
     wrapLog("ok");
   }
 

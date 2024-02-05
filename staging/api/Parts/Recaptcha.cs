@@ -11,7 +11,7 @@ public class Recaptcha : Custom.Hybrid.CodeTyped
     // Log what's happening in case we run into problems
     var wrapLog = Log.Call();
 
-    if (!(encodedResponse is string) || String.IsNullOrEmpty(encodedResponse as string)) 
+    if (!(encodedResponse is string) || String.IsNullOrEmpty(encodedResponse as string))
       throw new Exception("recaptcha is empty");
 
     // Get the private key from Settings - if it's from presets, it is encrypted
@@ -25,9 +25,10 @@ public class Recaptcha : Custom.Hybrid.CodeTyped
     var status = captchaResponse.Success;
     var isSameSite = captchaResponse.Hostname == MyContext.Site.Url.Replace("https://", "").Split('/')[0];
 
-    if (!status || !isSameSite) {
+    if (!status || !isSameSite)
+    {
       Log.Add("recaptcha check failed:" + status);
-      throw new Exception("bad recaptcha '" + status + "'" );
+      throw new Exception("bad recaptcha '" + status + "'");
     }
 
     wrapLog("ok");
@@ -38,7 +39,8 @@ public class Recaptcha : Custom.Hybrid.CodeTyped
 
 
 // The response from the Recaptcha Endpoint
-public class RecaptchaResponse {
+public class RecaptchaResponse
+{
   [JsonProperty("success")]
   public bool Success
   {

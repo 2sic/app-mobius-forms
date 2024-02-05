@@ -1,23 +1,17 @@
 using System.Collections.Generic;
-using ToSic.Razor.Blade;
-using ToSic.Sxc.Data;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
 
-
-public class EmailToCustomer: Custom.Hybrid.CodeTyped
+public class EmailToCustomer : Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(DynForm dynFormConfig, Dictionary<string, object> data) {
-    var appRes = new AppResources(App.Resources);
+  public string Subject(FormResourcesStack formResources)
+  {
     // create custom code to generate the subject here...or just return the setting configured in the form
-    return Text.First(dynFormConfig.CustomerMailSubject, appRes.CustomerMailSubject);
+    return Kit.Scrub.Only(formResources.CustomerMailSubject, "p");
   }
 
-  public string Message(DynForm dynFormConfig, Dictionary<string, object> data)
+  public string Message(FormResourcesStack formResources, Dictionary<string, object> data)
   {
-    var appRes = new AppResources(App.Resources);
 
     var message = @"
     <!doctype html>
@@ -30,13 +24,12 @@ public class EmailToCustomer: Custom.Hybrid.CodeTyped
         </style>
     </head>
     <body>
-        <h1>" + appRes.MailCustomerTitle + @"</h1>
         <div>"
-            + appRes.MailCustomerContent +
+            + formResources.MailBodyCustomer +
         @"</div>
     </body>
     </html>";
-    
+
     return message;
   }
 }

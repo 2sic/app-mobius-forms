@@ -24,7 +24,6 @@ namespace ThisApp.Fields
       if (minValue != 0) { item.Min(minValue.ToString()); }
       if (maxValue != 0) { item.Max(maxValue.ToString()); }
       if (value != null) { item.Attr("value", value); }
-
       return item;
     }
   }

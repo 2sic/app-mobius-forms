@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldFile : BuildFieldBase
   {
-    public BuildFieldFile(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldFile(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Build a File Upload Input
@@ -20,6 +20,5 @@ namespace ThisApp.Fields
       input = SetBasics(input, false);
       return input;
     }
-
   }
 }

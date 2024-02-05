@@ -3,7 +3,8 @@
 @using ThisApp.Data
 
 @* Exit if not editor, as this file only adds messages for the editor *@
-@if (!MyUser.IsContentAdmin) {
+@if (!MyUser.IsContentAdmin)
+{
   return;
 }
 
@@ -19,7 +20,7 @@
 @if (!AppSet.MailChimpShowWarning)
 {
   <div class="alert alert-warning">
-     @Html.Raw(Kit.Scrub.Only(AppRes.MessageContainsMailchimp, "p"))
+    @Html.Raw(Kit.Scrub.Only(AppRes.MessageContainsMailchimp, "p"))
   </div>
 }
 
@@ -28,7 +29,5 @@
 {
   <div class="alert alert-warning">
     @Html.Raw(Kit.Scrub.Only(AppRes.MessageDefaultMailChimpKey, "p"))
-  </div>  
+  </div>
 }
-
-

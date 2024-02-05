@@ -54,7 +54,7 @@ public class FormController : Custom.Hybrid.ApiTyped
     // This helps to debug or find submissions in case something wasn't configured right
 
     var contentType = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").String("SaveToContentType") : MyItem.String("SaveToContentType");
-    if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
+    if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType")))
     {
       var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);
     }
@@ -93,7 +93,7 @@ public class FormController : Custom.Hybrid.ApiTyped
     wrapLog("ok");
   }
 
-private object CreateRawDataEntry(SaveRequest formRequest)
+  private object CreateRawDataEntry(SaveRequest formRequest)
   {
     var data = new Dictionary<string, object>();
     data.Add("Fields", formRequest.Fields);

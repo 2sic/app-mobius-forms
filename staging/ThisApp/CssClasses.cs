@@ -22,8 +22,6 @@ namespace ThisApp
     public string HiddenInputStyle { get; set; }
 
 
-
-
     public string Label { get; set; }
 
     public static CssClasses Bs5 = new CssClasses()
@@ -74,6 +72,5 @@ namespace ThisApp
       FormSelect = "form-select",
       HiddenInputStyle = "hiddenInputStyle",
     };
-
   }
 }

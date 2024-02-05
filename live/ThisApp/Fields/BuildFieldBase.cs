@@ -14,18 +14,18 @@ namespace ThisApp.Fields
     /// <summary>
     /// Constructor which ensures that this class has the same context as the parent, eg. the Kit etc.
     /// </summary>
-    public BuildFieldBase(FormBuildParameters form, DynFormField field)
+    public BuildFieldBase(FormBuildParameters form, FormFieldConfig field)
     {
       Form = form;
       Resources = form.Resources;
-      DynForm = form.Form;
+      SendMailConfig = form.SendMailConfig;
       Field = field;
     }
 
     protected FormBuildParameters Form { get; }
     protected AppResources Resources { get; }
-    protected DynForm DynForm { get; }
-    protected DynFormField Field { get; }
+    protected SendMailConfigStack SendMailConfig { get; }
+    protected FormFieldConfig Field { get; }
     protected CssClasses CssClasses => Form.CssClasses;
 
     public abstract IHtmlTag GetTag();
@@ -35,7 +35,6 @@ namespace ThisApp.Fields
       var modified = SetBasics(item, setDefaultClass: setDefaultClass);
       return WrapInLabel(modified);
     }
-
 
     /// <summary>
     /// Set all defaults like ID, Required label, common classes etc.
@@ -60,17 +59,15 @@ namespace ThisApp.Fields
       return result as TTag;
     }
 
-
     protected string PlaceholderLabel()
       => Form.UseFloatingLabels ? Field.Title + (Field.Required ? " *" : "") : "";
 
     protected TTag SetRequired<TTag>(TTag item, string specialReqMessage = default) where TTag : class, IHtmlTag
     {
       if (!Field.Required) return item;
-
       var message = specialReqMessage != null
         ? Resources.String(specialReqMessage)
-        : Resources.String("LabelRequired");
+        : Form.FormResources.LabelRequired;
 
       item = item.Attr("data-pristine-required-message", message).Attr("required") as TTag;
       return item;

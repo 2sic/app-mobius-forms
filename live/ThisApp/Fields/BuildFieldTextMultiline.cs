@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldTextMultiline : BuildFieldBase
   {
-    public BuildFieldTextMultiline(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldTextMultiline(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Text must override it, because the MultiLine is not an input, but a textarea
@@ -23,7 +23,7 @@ namespace ThisApp.Fields
     {
       var rows = Field.StringLines;
       var item = Tag.Textarea().Rows(rows.ToString());
-      if (Text.Has(Field.InitialValue)) { item.Add(Field.InitialValue); }
+      if (Text.Has(Field.DefaultValue)) { item.Add(Field.DefaultValue); }
       return item;
     }
 
@@ -38,6 +38,5 @@ namespace ThisApp.Fields
       if (Field.IsDisabled) result = result.Disabled();
       return result;
     }
-
   }
 }

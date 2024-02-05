@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldNumber : BuildFieldBase
   {
-    public BuildFieldNumber(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldNumber(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate a Number Input with Min, Max and Value
     /// </summary>
@@ -17,14 +17,13 @@ namespace ThisApp.Fields
     {
       var item = Tag.Input().Type("number");
 
-      var minValue = Field.MinLength;
-      var maxValue = Field.MaxLength;
-      var value = Field.InitialValue;
+      var minValue = Field.NumberMin;
+      var maxValue = Field.NumberMax;
+      var value = Field.DefaultValue;
 
       if (minValue != 0) { item.Min(minValue.ToString()); }
       if (maxValue != 0) { item.Max(maxValue.ToString()); }
       if (value != null) { item.Attr("value", value); }
-
       return item;
     }
   }

@@ -1,13 +1,12 @@
 using ThisApp.Data;
 using ThisApp.Form;
-
 using ToSic.Razor.Blade;
 
 namespace ThisApp.Fields
 {
   public class BuildFieldPickerRadio : BuildFieldPicker
   {
-    public BuildFieldPickerRadio(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldPickerRadio(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
     /// Generate simple Radio 
     /// </summary>
@@ -15,7 +14,7 @@ namespace ThisApp.Fields
 
     private IHtmlTag Radio()
     {
-      var items = Tag.Div().Class(CssClasses.OutsideDiv + " " +  Constants.ClassMobiusField);
+      var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
       var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
 
@@ -45,6 +44,5 @@ namespace ThisApp.Fields
       items.Add(container);
       return items;
     }
-
   }
 }

@@ -22,7 +22,8 @@
     @* Prepared messages for admin only *@
     @if (MyUser.IsContentAdmin)
     {
-      if ((MailConfig.CustomerSend || MailConfig.OwnerSend) && !Text.Has(MailConfig.MailFrom) && !Text.Has(AppSet.DefaultMailFrom))
+      if ((MailConfig.CustomerSend || MailConfig.OwnerSend) && !Text.Has(MailConfig.MailFrom) &&
+      !Text.Has(AppSet.DefaultMailFrom))
       {
         <div class="alert alert-warning">
           @Html.Raw(Kit.Scrub.Only(FormRes.MessageSendError, "p"))
@@ -44,7 +45,8 @@
 </div>
 
 @functions {
-  IHtmlTag HiddenMessage(string message, string type = "warning", string id = "", string attribute = "") {
+  IHtmlTag HiddenMessage(string message, string type = "warning", string id = "", string attribute = "")
+  {
     var classes = "alert alert-" + type + " app-mobius6-message";
     var rawMessage = Kit.Scrub.Only(message, "p");
     var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");

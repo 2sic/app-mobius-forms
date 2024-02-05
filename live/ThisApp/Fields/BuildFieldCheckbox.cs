@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldCheckbox : BuildFieldBase
   {
-    public BuildFieldCheckbox(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldCheckbox(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Get a checkbox with Left or Right Label
@@ -16,7 +16,7 @@ namespace ThisApp.Fields
     {
 
       // If label right or floating labels, wrap in label
-      if (Field.LabelRight || Form.UseFloatingLabels) return CheckboxWithLabelRight(GetCheckbox());
+      if (Field.BooleanLabelRight || Form.UseFloatingLabels) return CheckboxWithLabelRight(GetCheckbox());
 
       // If label is to the left, behave as default
       return SetBasicsAndWrapInLabel(GetCheckbox(), setDefaultClass: false);

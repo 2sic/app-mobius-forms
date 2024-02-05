@@ -38,6 +38,5 @@ namespace ThisApp.Fields
       if (Field.IsDisabled) result = result.Disabled();
       return result;
     }
-
   }
 }

@@ -36,7 +36,6 @@ namespace ThisApp.Fields
       return WrapInLabel(modified);
     }
 
-
     /// <summary>
     /// Set all defaults like ID, Required label, common classes etc.
     /// </summary>
@@ -59,7 +58,6 @@ namespace ThisApp.Fields
       if (Field.IsDisabled) result = result.Disabled();
       return result as TTag;
     }
-
 
     protected string PlaceholderLabel()
       => Form.UseFloatingLabels ? Field.Title + (Field.Required ? " *" : "") : "";

@@ -1,15 +1,11 @@
 using System.Collections.Generic;
-using ToSic.Razor.Blade;
-using ToSic.Sxc.Data;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
 
-
-public class EmailToCustomer: Custom.Hybrid.CodeTyped
+public class EmailToCustomer : Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(FormResourcesStack formResources) {
+  public string Subject(FormResourcesStack formResources)
+  {
     // create custom code to generate the subject here...or just return the setting configured in the form
     return Kit.Scrub.Only(formResources.CustomerMailSubject, "p");
   }
@@ -33,7 +29,7 @@ public class EmailToCustomer: Custom.Hybrid.CodeTyped
         @"</div>
     </body>
     </html>";
-    
+
     return message;
   }
 }

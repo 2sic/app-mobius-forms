@@ -9,25 +9,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
-public class DynFormController : Custom.Hybrid.ApiTyped
+public class FormController : Custom.Hybrid.ApiTyped
 {
   [HttpPost]
   public void ProcessForm([FromBody] SaveRequest contactFormRequest)
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
-
     var wrapLog = Log.Call(useTimer: true);
+    var formConfig = As<FormConfig>(MyItem);
 
-    // 0. Pre-Check - validate recaptcha if enabled in the MyContent object (the form configuration)
-    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("Config") : MyItem.Child("Config");
-     var dynFormConfig = new DynForm(formConfig);
-
-    if (dynFormConfig.Recaptcha)
+    if (formConfig.Recaptcha)
     {
       Log.Add("checking Recaptcha");
       GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);
@@ -59,19 +53,16 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     // Automatically full-save each request into a system-protocol content-type
     // This helps to debug or find submissions in case something wasn't configured right
 
-    Log.Add("Save data to SystemProtocol in case we ever need to see what was submitted");
-
     var contentType = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").String("SaveToContentType") : MyItem.String("SaveToContentType");
-    if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType"))) 
+    if (ToSic.Razor.Blade.Text.Has(MyItem.String("SaveToContentType")))
     {
       var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);
     }
-    
 
     // Create Fields Data
-    var dynDataEntity = App.Data.Create("DynData", contactFormRequest.Fields);
+    var formDataEntity = App.Data.Create("FormData", contactFormRequest.Fields);
     // Update (Update to the same Entity) formTechnicalValues
-    App.Data.Update(dynDataEntity.EntityId, formTechnicalValues);
+    App.Data.Update(formDataEntity.EntityId, formTechnicalValues);
 
     Log.Add("Save data to content type");
     var files = new List<ToSic.Sxc.Adam.IFile>();
@@ -84,8 +75,8 @@ public class DynFormController : Custom.Hybrid.ApiTyped
         files.Add(SaveInAdam(
           stream: new MemoryStream(fileObj.Contents),
           fileName: fileObj.Name,
-          contentType: "DynData",
-          guid: dynDataEntity.EntityGuid,
+          contentType: "FormData",
+          guid: formDataEntity.EntityGuid,
           field: "Files"));
       }
     }
@@ -102,7 +93,7 @@ public class DynFormController : Custom.Hybrid.ApiTyped
     wrapLog("ok");
   }
 
-private object CreateRawDataEntry(SaveRequest formRequest)
+  private object CreateRawDataEntry(SaveRequest formRequest)
   {
     var data = new Dictionary<string, object>();
     data.Add("Fields", formRequest.Fields);
@@ -111,13 +102,6 @@ private object CreateRawDataEntry(SaveRequest formRequest)
   }
 }
 
-public class FileUpload
-{
-  public string Field { get; set; }
-  public string Name { get; set; }
-  public string Encoded { get; set; }
-  public byte[] Contents { get { return System.Convert.FromBase64String(Encoded.Split(',')[1]); } }
-}
 
 public class SaveRequest
 {
@@ -129,6 +113,10 @@ public class SaveRequest
   public string CustomerMails { get; set; }
 }
 
-// 2sxclint:disable:no-dnn-namespaces
-// 2sxclint:disable:no-web-namespaces
-// 2sxclint:disable:no-EntityGuid-in-quotes
+public class FileUpload
+{
+  public string Field { get; set; }
+  public string Name { get; set; }
+  public string Encoded { get; set; }
+  public byte[] Contents { get { return System.Convert.FromBase64String(Encoded.Split(',')[1]); } }
+}

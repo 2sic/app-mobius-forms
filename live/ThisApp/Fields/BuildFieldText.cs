@@ -7,7 +7,7 @@ namespace ThisApp.Fields
 {
   public class BuildFieldText : BuildFieldBase
   {
-    public BuildFieldText(FormBuildParameters form, DynFormField field) : base(form, field) { }
+    public BuildFieldText(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
     /// Text must override GetTag(),
@@ -19,7 +19,7 @@ namespace ThisApp.Fields
     private Input TextField()
     {
       var item = Tag.Input().Type("text");
-      if (Text.Has(Field.InitialValue)) { item.Value(Field.InitialValue); }
+      if (Text.Has(Field.DefaultValue)) { item.Value(Field.DefaultValue); }
       return item;
     }
   }

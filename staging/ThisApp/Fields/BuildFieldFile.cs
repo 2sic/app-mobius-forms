@@ -20,6 +20,5 @@ namespace ThisApp.Fields
       input = SetBasics(input, false);
       return input;
     }
-
   }
 }

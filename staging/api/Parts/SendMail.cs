@@ -12,9 +12,10 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // rewrite the keys to be a nicer format, based on the configuration
     var mailLabels = "";
 
-    if(contactFormRequest.ContainsKey("FormId")) {
+    if (contactFormRequest.ContainsKey("FormId"))
+    {
       var dynForm = AsItems(App.Data["FormConfig"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
-      
+
       foreach (var item in dynForm.Children("Fields"))
       {
         var fieldId = item.String("FieldId");

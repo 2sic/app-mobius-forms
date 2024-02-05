@@ -1,19 +1,15 @@
 using System.Collections.Generic;
-using ToSic.Razor.Blade;
-using ToSic.Sxc.Data;
 using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
-using DotNetNuke.Common.Controls;
 
-public class EmailToOwner: Custom.Hybrid.CodeTyped
+public class EmailToOwner : Custom.Hybrid.CodeTyped
 {
   // create custom subject here
-  public string Subject(FormResourcesStack formResources) {
+  public string Subject(FormResourcesStack formResources)
+  {
     // create custom code to generate the subject here...or just return the setting configured in the form
     return Kit.Scrub.Only(formResources.OwnerMailSubject, "p");
   }
-  public string Message (FormResourcesStack formResources, Dictionary<string, object> data)
+  public string Message(FormResourcesStack formResources, Dictionary<string, object> data)
   {
     var message = @"
     <!doctype html>
@@ -32,14 +28,14 @@ public class EmailToOwner: Custom.Hybrid.CodeTyped
 
     foreach (var item in data)
     {
-        message += @"
+      message += @"
         <div>
-            <strong>" + item.Key + "</strong>: " + item.Value +                    
-        "</div>";
+            <strong>" + item.Key + "</strong>: " + item.Value +
+      "</div>";
     }
-    
+
     message += "</body></html>";
-    
+
     return message;
   }
 }

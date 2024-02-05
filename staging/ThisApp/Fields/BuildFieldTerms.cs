@@ -20,9 +20,9 @@ namespace ThisApp.Fields
       var res = Form.FormResources;
       string title = Field.TermsAndGdprCombined
         ? res.LabelTermsAll
-        : Field.TermsEnabled 
+        : Field.TermsEnabled
           ? res.LabelTerms
-          : Field.GdprEnabled 
+          : Field.GdprEnabled
             ? res.LabelGdpr
             : default;
 

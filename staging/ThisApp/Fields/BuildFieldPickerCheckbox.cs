@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using ThisApp.Data;
 using ThisApp.Form;
-
 using ToSic.Razor.Blade;
 
 namespace ThisApp.Fields
@@ -73,14 +72,11 @@ namespace ThisApp.Fields
 
       return items;
     }
-
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {
       var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox);
       checkbox = SetBasics(checkbox, false, GenearateHtmlId(item));
       return checkbox;
     }
-
   }
 }
-
