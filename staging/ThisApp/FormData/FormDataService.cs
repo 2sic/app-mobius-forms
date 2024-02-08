@@ -10,19 +10,20 @@ namespace ThisApp.FormData
     /// <summary>
     /// Setup the service to get data for a specific module
     /// </summary>
-    /// <param name="moduleId"></param>
+    /// <param name="_formId1"></param>
     /// <returns></returns>
-    public FormDataService Setup(int moduleId)
+    public FormDataService Setup(int formId)
     {
-      _moduleId = moduleId;
+      _formId1 = formId;
       return this;
     }
-    private int _moduleId;
+    private int _formId1;
 
     /// <summary>
     /// The FormId is retrieved from the first submitted data.
     /// It's then used to lookup columns names etc.
     /// </summary>
+    /// 
     public int FormId => _formId ??= Data.FirstOrDefault(p => p.Item.Int("FormId") != 0)?.Item.Int("FormId") ?? 0;
     private int? _formId;
 
@@ -37,7 +38,8 @@ namespace ThisApp.FormData
 
     private List<FormDataReader> GetData()
     {
-      var query = Kit.Data.GetQuery("DynamicData", parameters: new { ModuleId = _moduleId }); // Get the dynamic data from Query by ModuleId
+      var query = Kit.Data.GetQuery("DynamicData", parameters: new { FormId = _formId1 }); // Get the dynamic data from Query by FormId
+
       var data = query.List;
 
       return AsItems(data)

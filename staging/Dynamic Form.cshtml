@@ -87,7 +87,7 @@
     @if (MyUser.IsContentAdmin)
     {
       // Initialize lists to store CSV-related data
-      var formData = GetService<FormDataService>().Setup(MyContext.Module.Id);
+      var formData = GetService<FormDataService>().Setup(FormConfig.Id);
       var dataPairs = formData.Data; // Initialize Data
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
@@ -96,8 +96,8 @@
         else
         {
           var mid = MyContext.Module.Id;
-          <a class="btn btn-primary" href='@Link.To(parameters: $"id={mid}&mid={mid}")' target="_blank">Form Data</a>
-          <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink()" type="button">CSV Export</a>
+          <a class="btn btn-primary" href='@Link.To(parameters: $"id={FormConfig.Id}&mid={mid}")' target="_blank">Form Data</a>
+          <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink(FormConfig.Id)" type="button">CSV Export</a>
         }
       </div>
     }

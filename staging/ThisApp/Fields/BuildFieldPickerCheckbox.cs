@@ -74,7 +74,7 @@ namespace ThisApp.Fields
     }
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {
-      var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox);
+      var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox).Attr("data-checkbox", Field.FieldId);
       checkbox = SetBasics(checkbox, false, GenearateHtmlId(item));
       return checkbox;
     }
