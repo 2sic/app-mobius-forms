@@ -32,7 +32,7 @@ namespace ThisApp.Fields
         var checkbox = GenerateCheckbox(item);
         var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
-        var container = Tag.Div().Class(CssClasses.LabelOutside);
+        var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
         var label = Tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GenearateHtmlId(item));
 
         if (CssClasses.IsBs3) container.Add(checkbox);
@@ -49,7 +49,7 @@ namespace ThisApp.Fields
       var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
       var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
-      var container = Tag.Div().Class(CssClasses.LabelOutside);
+      var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {

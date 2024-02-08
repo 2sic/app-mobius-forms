@@ -18,7 +18,7 @@ namespace ThisApp.Fields
       var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
 
-      var container = Tag.Div().Class(CssClasses.LabelOutside);
+      var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
