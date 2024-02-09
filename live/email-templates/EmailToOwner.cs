@@ -30,7 +30,7 @@ public class EmailToOwner : Custom.Hybrid.CodeTyped
     {
       message += @"
         <div>
-            <strong>" + item.Key + "</strong>: " + item.Value +
+            <strong>" + item.Key + "</strong>: " + System.Text.RegularExpressions.Regex.Unescape(item.Value.ToString()) +
       "</div>";
     }
 

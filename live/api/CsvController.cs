@@ -52,7 +52,7 @@ public class CsvController : Custom.Hybrid.ApiTyped
     writer.Flush(); // flush the buffered text to stream
     memoryStream.Seek(0, SeekOrigin.Begin); // reset stream position
 
-    var csvString = Encoding.UTF8.GetString(memoryStream.ToArray());
+    var csvString = memoryStream.ToArray();
     string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
     string fileName = $"FormData_Form{formData.FormId}_{todayDate}.csv";
 
