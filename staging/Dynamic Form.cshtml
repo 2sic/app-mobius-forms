@@ -34,6 +34,7 @@
   .ToList();
 }
 
+
 <div class="app-mobius6-wrapper" @formToolbar>
   @if (Text.Has(FormConfig.Title))
     <h2>@FormConfig.Title</h2>
@@ -84,7 +85,7 @@
     @if (FormConfig.Recaptcha)
       @Html.Partial("./parts/Footer Recaptcha.cshtml")
     @Html.Partial("./parts/Footer Submit with Messages.cshtml")
-    @if (MyUser.IsContentAdmin)
+    @if (MyUser.IsContentAdmin && !FormConfig.IsDemoItem)
     {
       // Initialize lists to store CSV-related data
       var formData = GetService<FormDataService>().Setup(FormConfig.Id);

@@ -39,8 +39,20 @@
     }
   </div>
 
-  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    <button app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
+<div class="row mb-2">
+  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-3" : "col-3")'>
+    <div>
+      <button disabled="@FormConfig.IsDemoItem" app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
+    </div>
+  </div>
+  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-9" : "col-9")'>
+    <div>
+      @if(FormConfig.IsDemoItem){
+        <div class="alert alert-warning" role="alert">
+          @AppRes.MessageDemoItem
+        </div>
+      }
+    </div>
   </div>
 </div>
 

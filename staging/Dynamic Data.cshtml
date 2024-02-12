@@ -19,12 +19,9 @@
 
 @{
   var formData = GetService<FormDataService>().Setup(FormConfig.Id);
-  
   var firstRecord = formData.Data.First().Item.DateTime("Timestamp");
   var lastRecord = formData.Data.Last().Item.DateTime("Timestamp");
 } 
-
-<h1>Test</h1>
 
 @* Header Bar showing Stats and CSV download *@
 <div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
@@ -144,4 +141,3 @@
     allowHTML = true
   }
 })
-

@@ -22,6 +22,8 @@ namespace ThisApp.Data
     public string ToolbarReuseInfo => String(fallback: "");
     public string LabelFromDataAvailable => String(fallback: "");
     public string ToolbarPermissionInfo => String(fallback: "");
+    public string MessageDemoItem => String(fallback: "");
+
 
     #endregion
 
