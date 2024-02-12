@@ -14,7 +14,7 @@ namespace ThisApp.Data
     public FormResources FormResources => _formResources ??= UseConfigOf.Child<FormResources>("FormResources");
     private FormResources _formResources;
 
-    public SendMailConfig SendMailConfig => _sendMailConfig ??= UseConfigOf.Child<SendMailConfig>("SendMailConfig");
+    public SendMailConfig SendMailConfig => _sendMailConfig ??= UseConfigOf.Child<SendMailConfig>("FormSendMailConfig");
     private SendMailConfig _sendMailConfig;
 
 
