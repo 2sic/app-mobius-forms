@@ -1,8 +1,8 @@
 using System;
-using ThisApp.Data;
+using AppCode.Data;
 using ToSic.Sxc.Context;
 
-namespace ThisApp.Form
+namespace AppCode.Form
 {
   public class FormBuildParameters
   {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using ThisApp.Data;
+using ThisApp;
+using AppCode.Data;
 
 public class EmailCustomized : Custom.Hybrid.CodeTyped
 {

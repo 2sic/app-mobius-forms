@@ -1,8 +1,8 @@
 using ToSic.Razor.Blade;
-using ThisApp.Data;
-using ThisApp.Fields;
+using AppCode.Data;
+using AppCode.Fields;
 
-namespace ThisApp.Form
+namespace AppCode.Form
 {
   public class FormBuilder : Custom.Hybrid.CodeTyped
   {

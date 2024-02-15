@@ -3,7 +3,7 @@
   * DO NOT MODIFY IT BY HAND
   * If you need to extend it, create a partial class for "FormConfig" in a separate file.
 */
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   /// <summary>
   /// Empty class to allow for custom code in the FormConfig.cs file.

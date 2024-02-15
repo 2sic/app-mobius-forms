@@ -2,10 +2,11 @@
 @inherits ThisApp.Razor.MobiusRazorBase
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data
-@using ThisApp.Data
-@using ThisApp.Form
-@using ThisApp.FormData
 @using ThisApp
+@using AppCode
+@using AppCode.Data
+@using AppCode.Form
+@using AppCode.FormData
 
 @{
   var formHelper = GetService<FormHelpers>();
@@ -36,8 +37,9 @@
 
 
 <div class="app-mobius6-wrapper" @formToolbar>
-  @if (Text.Has(FormConfig.Title))
+  @if (Text.Has(FormConfig.Title)) {
     <h2>@FormConfig.Title</h2>
+  }
 
   <div class="@formHelper.WrapperClasses(FormConfig)" @formHelper.FormMobiusId()>
     <div class="app-mobius6-form">
@@ -67,10 +69,12 @@
             : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + field.Title)).MoveDown().New().Remove();
             <div @toolbar>
               @* If it's a advanced field, use the custom razor - otherwise use standard formBuilder *@
-              @if (field.UseRazorComponent)
+              @if (field.UseRazorComponent) {
                 @Html.Partial("./razor-fields/" + field.RazorFile, new { field })
-              else
+              }
+              else {
                 @formBuilder.Field(field)
+              }
             </div>
           }
           @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
@@ -82,8 +86,9 @@
       }
     </div>
 
-    @if (FormConfig.Recaptcha)
+    @if (FormConfig.Recaptcha) {
       @Html.Partial("./parts/Footer Recaptcha.cshtml")
+    }
     @Html.Partial("./parts/Footer Submit with Messages.cshtml")
     @if (MyUser.IsContentAdmin && !FormConfig.IsDemoItem)
     {
@@ -92,8 +97,9 @@
       var dataPairs = formData.Data; // Initialize Data
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
-        @if (dataPairs.Count() == 0)
+        @if (dataPairs.Count() == 0) {
           @AppRes.LabelFromDataAvailable
+        }
         else
         {
           var mid = MyContext.Module.Id;

@@ -1,4 +1,4 @@
-namespace ThisApp
+namespace AppCode
 {
   public static class Constants
   {

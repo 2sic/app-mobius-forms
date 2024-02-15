@@ -1,9 +1,9 @@
-using ThisApp.Data;
-using ThisApp.Form;
+using AppCode.Data;
+using AppCode.Form;
 using ToSic.Razor.Blade;
 using ToSic.Razor.Html5;
 
-namespace ThisApp.Fields
+namespace AppCode.Fields
 {
   public class BuildFieldEMail : BuildFieldBase
   {

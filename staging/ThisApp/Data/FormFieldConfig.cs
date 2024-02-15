@@ -1,4 +1,4 @@
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class FormFieldConfig
   {

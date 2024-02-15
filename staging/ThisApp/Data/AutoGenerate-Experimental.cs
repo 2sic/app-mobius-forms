@@ -3,7 +3,7 @@
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "FormConfig.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class FormConfig
   {
@@ -21,7 +21,7 @@ using ToSic.Sxc.Data;
 using ToSic.Sxc.Adam;
 using System;
 
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for FormConfig
   // To extend/modify it, see instructions above.
@@ -107,7 +107,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "FormData.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class FormData
   {
@@ -121,7 +121,7 @@ namespace ThisApp.Data
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
 
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for FormData
   // To extend/modify it, see instructions above.
@@ -183,7 +183,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "FormFieldConfig.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class FormFieldConfig
   {
@@ -196,7 +196,7 @@ namespace ThisApp.Data
 // User:      2sic Web-Developer
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for FormFieldConfig
   // To extend/modify it, see instructions above.
@@ -327,7 +327,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "FormResources.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class FormResources
   {
@@ -340,7 +340,7 @@ namespace ThisApp.Data
 // User:      2sic Web-Developer
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for FormResources
   // To extend/modify it, see instructions above.
@@ -444,7 +444,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "FormSendMailConfig.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class FormSendMailConfig
   {
@@ -457,7 +457,7 @@ namespace ThisApp.Data
 // User:      2sic Web-Developer
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for FormSendMailConfig
   // To extend/modify it, see instructions above.
@@ -519,7 +519,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "Newsletter.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class Newsletter
   {
@@ -532,7 +532,7 @@ namespace ThisApp.Data
 // User:      2sic Web-Developer
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for Newsletter
   // To extend/modify it, see instructions above.
@@ -567,7 +567,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "AppResources.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class AppResources
   {
@@ -580,7 +580,7 @@ namespace ThisApp.Data
 // User:      2sic Web-Developer
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for AppResources
   // To extend/modify it, see instructions above.
@@ -669,7 +669,7 @@ namespace ThisApp.Data
 // See also: https://go.2sxc.org/hotbuild-autogen
 // To extend it, create a "AppSettings.cs" with this contents:
 /*
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public partial class AppSettings
   {
@@ -682,7 +682,7 @@ namespace ThisApp.Data
 // User:      2sic Web-Developer
 // Edition:   /staging
 // When:      2024-02-15 17:51:20Z
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   // This is a generated class for AppSettings
   // To extend/modify it, see instructions above.

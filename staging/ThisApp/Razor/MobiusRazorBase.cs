@@ -1,6 +1,13 @@
-using ThisApp.Data;
+using AppCode.Data;
 
 namespace ThisApp.Razor
+{
+  public abstract class MobiusRazorBase : AppCode.Razor.MobiusRazorBase
+  {
+  }
+}
+
+namespace AppCode.Razor
 {
   public abstract class MobiusRazorBase : Custom.Hybrid.RazorTyped
   {
@@ -45,6 +52,6 @@ namespace ThisApp.Razor
     private bool? _enableEditExperience;
 
     public Csv.CsvHelper CsvHelper => _csvHelper ??= GetService<Csv.CsvHelper>();
-    private ThisApp.Csv.CsvHelper _csvHelper;
+    private AppCode.Csv.CsvHelper _csvHelper;
   }
 }

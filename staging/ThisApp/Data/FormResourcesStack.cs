@@ -1,6 +1,6 @@
 using ToSic.Sxc.Data;
 
-namespace ThisApp.Data
+namespace AppCode.Data
 {
   public class FormResourcesStack
   {

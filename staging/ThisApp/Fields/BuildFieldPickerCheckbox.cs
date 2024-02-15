@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using ThisApp.Data;
-using ThisApp.Form;
+using AppCode.Data;
+using AppCode.Form;
 using ToSic.Razor.Blade;
 
-namespace ThisApp.Fields
+namespace AppCode.Fields
 {
   public class BuildFieldPickerCheckbox : BuildFieldPicker
   {

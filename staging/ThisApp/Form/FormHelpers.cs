@@ -1,6 +1,6 @@
 using ToSic.Sxc.Data;
 
-namespace ThisApp.Form
+namespace AppCode.Form
 {
   public class FormHelpers : Custom.Hybrid.CodeTyped
   {

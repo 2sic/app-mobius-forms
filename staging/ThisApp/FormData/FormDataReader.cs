@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using ToSic.Sxc.Data;
 
-namespace ThisApp.FormData
+namespace AppCode.FormData
 {
   public class FormDataReader
   {

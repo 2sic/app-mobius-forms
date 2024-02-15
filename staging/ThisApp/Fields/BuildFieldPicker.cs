@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using ThisApp.Data;
-using ThisApp.Form;
+using AppCode.Data;
+using AppCode.Form;
 
-namespace ThisApp.Fields
+namespace AppCode.Fields
 {
   public abstract class BuildFieldPicker : BuildFieldBase
   {

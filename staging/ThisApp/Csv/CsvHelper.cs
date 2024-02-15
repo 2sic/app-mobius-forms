@@ -1,5 +1,5 @@
 using System.Linq;
-namespace ThisApp.Csv
+namespace AppCode.Csv
 {
   public class CsvHelper : Custom.Hybrid.CodeTyped
   {
