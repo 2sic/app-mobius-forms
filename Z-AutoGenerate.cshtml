@@ -1,0 +1,15 @@
+@inherits Custom.Hybrid.RazorTyped
+@using ToSic.Sxc.Code.Internal.Generate
+
+<h1>Test Generate</h1>
+@{
+  var generator = GetService<DataModelGenerator>().Setup(App.AppId, "staging");
+}
+
+<hr>
+
+<pre>
+@generator.Dump()
+</pre>
+
+<hr>
