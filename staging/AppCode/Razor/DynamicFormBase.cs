@@ -24,22 +24,13 @@ namespace AppCode.Razor
     /// Get all the fields, grouped together based on separator-fields which are marked as section-changes.
     /// </summary>
     /// <returns></returns>
-    protected List<IGrouping<string, FieldInGroup>> GetFieldsInGroups()
+    protected List<IGrouping<string, FormFieldConfig>> GetFieldsInGroups()
     {
       // Group Fields by their Group, which changes on labels with NewGroup...
       var groupIdPrefix = "mobius-group-";
       var groupCount = 0;
       return FormConfig.Fields
-        .Select(f =>
-        {
-          var startNewGroup = f.LabelStartsNewGroup;
-          return new FieldInGroup
-          {
-            GroupId = groupIdPrefix + (startNewGroup ? ++groupCount : groupCount),
-            Field = f
-          };
-        })
-        .GroupBy(f => f.GroupId)
+        .GroupBy(f => groupIdPrefix + (f.LabelStartsNewGroup ? ++groupCount : groupCount))
         .ToList();
     }
 
@@ -104,7 +95,7 @@ namespace AppCode.Razor
   /// </summary>
   public class FieldInGroup
   {
-    public string GroupId { get; set; }
+    // public string GroupId { get; set; }
     public FormFieldConfig Field { get; set; }
   }
 }
