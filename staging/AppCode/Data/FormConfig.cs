@@ -11,8 +11,8 @@ namespace AppCode.Data
     public List<FormFieldConfig> Fields => _fields ??= UseConfigOf.Children<FormFieldConfig>("Fields").ToList();
     private List<FormFieldConfig> _fields;
 
-    public FormResources FormResources => _formResources ??= UseConfigOf.Child<FormResources>("FormResources");
-    private FormResources _formResources;
+    // public FormResources FormResources => _formResources ??= UseConfigOf.Child<FormResources>("FormResources");
+    // private FormResources _formResources;
 
     public SendMailConfig SendMailConfig => _sendMailConfig ??= UseConfigOf.Child<SendMailConfig>("FormSendMailConfig");
     private SendMailConfig _sendMailConfig;
