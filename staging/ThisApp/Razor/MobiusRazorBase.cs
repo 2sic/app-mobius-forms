@@ -1,12 +1,5 @@
 using AppCode.Data;
 
-namespace ThisApp.Razor
-{
-  public abstract class MobiusRazorBase : AppCode.Razor.MobiusRazorBase
-  {
-  }
-}
-
 namespace AppCode.Razor
 {
   public abstract class MobiusRazorBase : Custom.Hybrid.RazorTyped

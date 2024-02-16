@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using ThisApp;
+
 using AppCode.Data;
 
 public class EmailToCustomer : Custom.Hybrid.CodeTyped
