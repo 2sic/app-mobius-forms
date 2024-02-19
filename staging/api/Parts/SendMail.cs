@@ -33,7 +33,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
 
     var appSettings = As<AppSettings>(App.Settings);
     var formConfig = As<FormConfig>(MyItem);
-    var sendMailConfig = formConfig.SendMailConfig; // MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("FormSendMailConfig") : MyItem.Child("FormSendMailConfig");
+    var sendMailConfig = formConfig.FormSendMailConfig; // SendMailConfig; // MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("FormSendMailConfig") : MyItem.Child("FormSendMailConfig");
 
     var dataStacker = GetService<DataStackHelper>();
     var sendMailConfigStack = dataStacker.GetSendMail(sendMailConfig);

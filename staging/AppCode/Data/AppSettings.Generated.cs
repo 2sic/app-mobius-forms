@@ -14,7 +14,7 @@ namespace AppCode.Data
 // Generator:   DataModelGenerator v17.01.08
 // App/Edition: Mobius Forms 6/staging
 // User:        2sic Web-Developer
-// When:        2024-02-16 18:53:14Z
+// When:        2024-02-19 15:56:29Z
 namespace AppCode.Data
 {
   // This is a generated class for AppSettings
@@ -22,7 +22,7 @@ namespace AppCode.Data
 
   /// <summary>
   /// AppSettings data. <br/>
-  /// Generated 2024-02-16 18:53:14Z. Re-generate whenever you change the ContentType. <br/>
+  /// Generated 2024-02-19 15:56:29Z. Re-generate whenever you change the ContentType. <br/>
   /// <br/>
   /// Default properties such as `.Title` or `.Id` are provided in the base class. <br/>
   /// Most properties have a simple access, such as `.AdminHasPermission`. <br/>

@@ -16,7 +16,7 @@ namespace AppCode.Data
     /// <summary>
     /// Get SendmailConfig back default or from the form
     /// </summary>
-    public SendMailConfigStack GetSendMail(SendMailConfig sendMailConfig)
+    public SendMailConfigStack GetSendMail(FormSendMailConfig sendMailConfig)
     {
       // TODO: @2dm Logik not Work right now, if no sendMailConfig is set, it will not use the default
       var fallbackSendMail = AppResources.DefaultSendMailConfig;

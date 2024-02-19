@@ -14,9 +14,8 @@ namespace AppCode.Data
 // Generator:   DataModelGenerator v17.01.08
 // App/Edition: Mobius Forms 6/staging
 // User:        2sic Web-Developer
-// When:        2024-02-16 18:53:14Z
+// When:        2024-02-19 15:56:29Z
 using System.Collections.Generic;
-using ToSic.Sxc.Data;
 
 namespace AppCode.Data
 {
@@ -25,7 +24,7 @@ namespace AppCode.Data
 
   /// <summary>
   /// FormConfig data. <br/>
-  /// Generated 2024-02-16 18:53:14Z. Re-generate whenever you change the ContentType. <br/>
+  /// Generated 2024-02-19 15:56:29Z. Re-generate whenever you change the ContentType. <br/>
   /// <br/>
   /// Default properties such as `.Title` or `.Id` are provided in the base class. <br/>
   /// Most properties have a simple access, such as `.DesignField`. <br/>
@@ -83,16 +82,16 @@ namespace AppCode.Data
     private FormSendMailConfig _formSendMailConfig;
 
     /// <summary>
-    /// InheritedConfig as single itemof ITypedItem.
+    /// InheritedConfig as single itemof FormConfig.
     /// </summary>
     /// <remarks>
-    /// Generated to only return 1 child because field settings had Multi-Value=false. 
+    /// Generated to only return 1 child because field settings had Multi-Value=false. The type FormConfig was specified in the field settings.
     /// </remarks>
     /// <returns>
     /// A single item OR null if nothing found, so you can use ?? to provide alternate objects.
     /// </returns>
-    public ITypedItem InheritedConfig => _inheritedConfig ??= Child("InheritedConfig");
-    private ITypedItem _inheritedConfig;
+    public FormConfig InheritedConfig => _inheritedConfig ??= Child<FormConfig>("InheritedConfig");
+    private FormConfig _inheritedConfig;
 
     /// <summary>
     /// Mailchimp as bool. <br/>

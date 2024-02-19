@@ -4,20 +4,20 @@ namespace AppCode.Data
 {
   public class SendMailConfigStack
   {
-    public SendMailConfigStack(ITypedStack sendMailConfig)
+    public SendMailConfigStack(ITypedStack configStack)
     {
-      SendMailConfig = sendMailConfig;
+      ConfigStack = configStack;
     }
-    protected ITypedStack SendMailConfig { get; }
+    protected ITypedStack ConfigStack { get; }
 
-    public bool OwnerSend => SendMailConfig.Bool(nameof(OwnerSend));
-    public bool CustomerSend => SendMailConfig.Bool(nameof(OwnerSend));
-    public string OwnerMail => SendMailConfig.String(nameof(OwnerMail), fallback: "");
-    public string OwnerMailCC => SendMailConfig.String(nameof(OwnerMailCC), fallback: "");
-    public string OwnerMailTemplate => SendMailConfig.String(nameof(OwnerMailTemplate), fallback: "");
-    public string CustomerMailCC => SendMailConfig.String(nameof(CustomerMailCC), fallback: "");
-    public string CustomerMailTemplate => SendMailConfig.String(nameof(CustomerMailTemplate), fallback: "");
-    public string MailFrom => SendMailConfig.String(nameof(MailFrom), fallback: "");
+    public bool OwnerSend => ConfigStack.Bool(nameof(OwnerSend));
+    public bool CustomerSend => ConfigStack.Bool(nameof(OwnerSend));
+    public string OwnerMail => ConfigStack.String(nameof(OwnerMail), fallback: "");
+    public string OwnerMailCC => ConfigStack.String(nameof(OwnerMailCC), fallback: "");
+    public string OwnerMailTemplate => ConfigStack.String(nameof(OwnerMailTemplate), fallback: "");
+    public string CustomerMailCC => ConfigStack.String(nameof(CustomerMailCC), fallback: "");
+    public string CustomerMailTemplate => ConfigStack.String(nameof(CustomerMailTemplate), fallback: "");
+    public string MailFrom => ConfigStack.String(nameof(MailFrom), fallback: "");
 
   }
 

@@ -28,7 +28,7 @@
       <input type="hidden" id="FormId" value="@FormConfig.Id">
 
       @* If we don't have any fields yet, show a placeholder so the user can add fields from the toolbar *@
-      @if (FormConfig.Fields.Count == 0)
+      @if (FormConfig.Fields.Count() == 0)
       {
         var toolbar = Kit.Toolbar.Default(FormConfig.Children("Fields"));
         <div @toolbar class="alert alert-secondary" role="alert">

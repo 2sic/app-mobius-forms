@@ -31,7 +31,7 @@ namespace AppCode.Razor
     /// <summary>
     /// Mail Configuration (typed)
     /// </summary>
-    protected SendMailConfigStack MailConfig => _sendMailConfig ??= DataStack.GetSendMail(FormConfig.SendMailConfig);
+    protected SendMailConfigStack MailConfig => _sendMailConfig ??= DataStack.GetSendMail(FormConfig.FormSendMailConfig);
     private SendMailConfigStack _sendMailConfig;
 
     private DataStackHelper DataStack => _dataStackHelper ??= GetService<DataStackHelper>();
