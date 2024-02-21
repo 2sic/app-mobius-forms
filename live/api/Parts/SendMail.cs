@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ToSic.Razor.Blade;
-using ThisApp.Data;
+
+using AppCode.Data;
 
 
 public class SendMail : Custom.Hybrid.CodeTyped
@@ -31,21 +32,22 @@ public class SendMail : Custom.Hybrid.CodeTyped
     // background: some settings are made in this module, but if they are missing we use fallback settings$
 
     var appSettings = As<AppSettings>(App.Settings);
-    var formConfig = MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("SendMailConfig") : MyItem.Child("SendMailConfig");
+    var formConfig = As<FormConfig>(MyItem);
+    var sendMailConfig = formConfig.FormSendMailConfig; // SendMailConfig; // MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("FormSendMailConfig") : MyItem.Child("FormSendMailConfig");
 
-    var sendMailHepler = GetService<DataStackHelper>();
-    var sendMailConfig = sendMailHepler.GetSendMail(As<SendMailConfig>(formConfig));
+    var dataStacker = GetService<DataStackHelper>();
+    var sendMailConfigStack = dataStacker.GetSendMail(sendMailConfig);
 
-    var from = Text.First(sendMailConfig.MailFrom, appSettings.DefaultMailFrom);
-    var owner = Text.First(sendMailConfig.OwnerMail, appSettings.DefaultOwnerMail);
+    var from = Text.First(sendMailConfigStack.MailFrom, appSettings.DefaultMailFrom);
+    var owner = Text.First(sendMailConfigStack.OwnerMail, appSettings.DefaultOwnerMail);
 
     // Send Mail to owner
-    if (sendMailConfig.OwnerSend)
+    if (sendMailConfigStack.OwnerSend)
     {
       Log.Add("Send Mail to Owner");
       try
       {
-        Send(sendMailConfig, sendMailConfig.OwnerMailTemplate, valuesRelabled, from, owner, sendMailConfig.OwnerMailCC, customerMails, files);
+        Send(sendMailConfigStack, sendMailConfigStack.OwnerMailTemplate, valuesRelabled, from, owner, sendMailConfigStack.OwnerMailCC, customerMails, files);
       }
       catch (Exception ex)
       {
@@ -54,12 +56,12 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
 
     // Send Mail to customer
-    if (sendMailConfig.CustomerSend && Text.Has(customerMails))
+    if (sendMailConfigStack.CustomerSend && Text.Has(customerMails))
     {
       Log.Add("Send Mail to Customer");
       try
       {
-        Send(sendMailConfig, sendMailConfig.CustomerMailTemplate, valuesRelabled, from, customerMails, sendMailConfig.CustomerMailCC, owner, files);
+        Send(sendMailConfigStack, sendMailConfigStack.CustomerMailTemplate, valuesRelabled, from, customerMails, sendMailConfigStack.CustomerMailCC, owner, files);
       }
       catch (Exception ex)
       {
@@ -68,7 +70,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     }
   }
 
-  public void Send(SendMailConfigStack formConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
+  public void Send(SendMailConfigStack sendMailConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
     string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
   {
     // Log what's happening in case we run into problems
@@ -78,7 +80,7 @@ public class SendMail : Custom.Hybrid.CodeTyped
     var mailEngine = GetCode("../../email-templates/" + emailTemplateFilename);
 
     var stackHelper = GetService<DataStackHelper>();
-    var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem));
+    var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem)); // TODO:: auf FormConfig umstellen
 
     var subject = mailEngine.Subject(formResources);
     var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();

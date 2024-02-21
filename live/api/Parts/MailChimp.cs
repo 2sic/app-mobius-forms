@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Http;
-using ThisApp.Data;
-using ThisApp.Code;
-using ThisApp;
+
+using AppCode;
+using AppCode.Data;
 
 public class MailChimp : Custom.Hybrid.CodeTyped
 {

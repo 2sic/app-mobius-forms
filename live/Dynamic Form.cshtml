@@ -1,48 +1,34 @@
 @* Inherit special Base Class which Prepares a lot of commonly used objects *@
-@inherits ThisApp.Razor.MobiusRazorBase
+@inherits AppCode.Razor.DynamicFormBase
 @using ToSic.Razor.Blade
 @using ToSic.Sxc.Data
-@using ThisApp.Data
-@using ThisApp.Form
-@using ThisApp.FormData
-@using ThisApp
+@using AppCode
+@using AppCode.Data
+@using AppCode.Form
+@using AppCode.FormData
+@using AppCode.Razor
 
 @{
   var formHelper = GetService<FormHelpers>();
-  var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5);
-  var formParams = new FormBuildParameters(AppRes, FormRes, MailConfig, cssClasses, MyUser, FormConfig.UseFloatingLabels);
-  var formBuilder = GetService<FormBuilder>().Setup(formParams);
-
-  var formToolbar = EnableEditExperience
-  ? Kit.Toolbar.Default(FormConfig)
-  : Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarPermissionInfo));
-
-  // Group Fields by their Group, which changes on labels with NewGroup...
-
-  var groupIdPrefix = "mobius-group-";
-  var groupCount = 0;
-  var fieldsByGroup = FormConfig.Fields
-
-  .Select(f => new
-    {
-      LabelStartsNew = f.LabelStartsNewGroup,
-      GroupId = groupIdPrefix + (f.LabelStartsNewGroup ? ++groupCount : groupCount),
-      Field = f
-    }
-  )
-  .GroupBy(f => f.GroupId)
-  .ToList();
+  var fieldsByGroup = GetFieldsInGroups();
 }
 
-<div class="app-mobius6-wrapper" @formToolbar>
-  @if (Text.Has(FormConfig.Title))
+@* Wrapper with main toolbar *@
+<div class="app-mobius6-wrapper" @FormToolbar()>
+  @* Show optional title *@
+  @if (FormConfig.IsNotEmpty("Title"))
+  {
     <h2>@FormConfig.Title</h2>
+  }
 
-  <div class="@formHelper.WrapperClasses(FormConfig)" @formHelper.FormMobiusId()>
+  @* TODO: @2ro - do we need another div? couldn't we just put this on top around the H1? *@
+  <div class="@WrapperClasses()" @formHelper.FormMobiusId()>
+    @* TODO: @2ro - do we need another div? couldn't we just put this on top around the H1? *@
     <div class="app-mobius6-form">
       <input type="hidden" id="FormId" value="@FormConfig.Id">
 
-      @if (FormConfig.Fields.Count == 0)
+      @* If we don't have any fields yet, show a placeholder so the user can add fields from the toolbar *@
+      @if (FormConfig.Fields.Count() == 0)
       {
         var toolbar = Kit.Toolbar.Default(FormConfig.Children("Fields"));
         <div @toolbar class="alert alert-secondary" role="alert">
@@ -55,21 +41,18 @@
       {
         var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
         <div id="@id" class="mobius-group @fieldGroup.Key" data-step="@fieldGroup.Key">
-          @foreach (var field in fieldGroup.Select(f => f.Field))
+          @foreach (var field in fieldGroup)
           {
-            // Prepare the toolbar for edit experience
-            // If the user has no permission, the toolbar will be empty with a note
-            var toolbar = !EnableEditExperience
-            ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarPermissionInfo))
-            : FormConfig.ReuseConfig
-            ? Kit.Toolbar.Empty().Info(tweak: b => b.Note(AppRes.ToolbarReuseInfo, background: "white"))
-            : Kit.Toolbar.Empty(field).Edit(tweak: b => b.Note("Field: " + field.Title)).MoveDown().New().Remove();
-            <div @toolbar>
-              @* If it's a advanced field, use the custom razor - otherwise use standard formBuilder *@
+            <div @FieldToolbar(field)>
+              @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
               @if (field.UseRazorComponent)
+              {
                 @Html.Partial("./razor-fields/" + field.RazorFile, new { field })
+              }
               else
-                @formBuilder.Field(field)
+              {
+                @FormBuilder.Field(field)
+              }
             </div>
           }
           @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
@@ -81,10 +64,17 @@
       }
     </div>
 
+    @* Recaptcha - if enabled *@
     @if (FormConfig.Recaptcha)
+    {
       @Html.Partial("./parts/Footer Recaptcha.cshtml")
+    }
+
+    @* Submit and hidden message divs to show when needed *@
     @Html.Partial("./parts/Footer Submit with Messages.cshtml")
-    @if (MyUser.IsContentAdmin)
+
+    @* Buttons to see data (if available) *@
+    @if (MyUser.IsContentAdmin && !FormConfig.IsDemoItem)
     {
       // Initialize lists to store CSV-related data
       var formData = GetService<FormDataService>().Setup(FormConfig.Id);
@@ -92,7 +82,9 @@
       <div class="alert alert-warning d-flex align-items-center gap-3" role="alert">
         Admin Info: @dataPairs.Count()
         @if (dataPairs.Count() == 0)
+        {
           @AppRes.LabelFromDataAvailable
+        }
         else
         {
           var mid = MyContext.Module.Id;
@@ -103,4 +95,5 @@
     }
   </div>
 </div>
+
 @Html.Partial("./parts/Assets.cshtml")

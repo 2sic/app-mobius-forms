@@ -1,8 +1,9 @@
 @* Inherit special Base Class which Prepares a lot of commonly used objects *@
-@inherits ThisApp.Razor.MobiusRazorBase
+@inherits AppCode.Razor.MobiusRazorBase
 @using ToSic.Razor.Blade;
 @using ToSic.Sxc.Data;
-@using ThisApp.Data
+
+@using AppCode.Data
 
 <div class="mb-3 row">
   <!-- form error messages, invisible at first -->
@@ -39,8 +40,20 @@
     }
   </div>
 
-  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    <button app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
+<div class="row mb-2">
+  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-3" : "col-3")'>
+    <div>
+      <button disabled="@FormConfig.IsDemoItem" app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
+    </div>
+  </div>
+  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-9" : "col-9")'>
+    <div>
+      @if(FormConfig.IsDemoItem){
+        <div class="alert alert-warning" role="alert">
+          @AppRes.MessageDemoItem
+        </div>
+      }
+    </div>
   </div>
 </div>
 

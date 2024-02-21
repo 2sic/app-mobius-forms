@@ -1,6 +1,7 @@
 @* Inherit special Base Class which Prepares a lot of commonly used objects *@
-@inherits ThisApp.Razor.MobiusRazorBase
-@using ThisApp.Data
+@inherits AppCode.Razor.MobiusRazorBase
+
+@using AppCode.Data
 
 @* Exit if not editor, as this file only adds messages for the editor *@
 @if (!MyUser.IsContentAdmin)
