@@ -5,6 +5,7 @@
     Different editors may complain about the comments. 
     To reconfigure VS Code so it knows comments are ok, do this: https://azing.org/2sxc/r/h9m1l6JO
   */
+  "$schema": "https://schemas.2sxc.org/app/v17/app.json",
 
   // Export-App configuration
   "export": {
@@ -31,5 +32,10 @@
       // "package-lock.json",
       // "nuget.config",
     ]
+  },
+  "editions": {
+    "staging": {
+      "description": "Staging Edition",
+    }
   }
 }

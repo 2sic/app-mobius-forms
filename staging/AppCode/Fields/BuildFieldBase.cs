@@ -73,11 +73,11 @@ namespace AppCode.Fields
       return item;
     }
 
-    // Set Label Right or Floating Label (only for Bs5)
+    // Set Label Left or Floating Label (only for Bs5)
     protected IHtmlTag WrapInLabel(IHtmlTag inputHtml)
     {
       var htmlTag = Tag.Div().Class(FieldWrapperClasses());
-      // Label Right
+      // Label Left
       if (!Form.UseFloatingLabels)
       {
         htmlTag = htmlTag.Add(
@@ -85,7 +85,13 @@ namespace AppCode.Fields
                 .Class(LabelClasses(Field.Required))
                 .For(Field.FieldId)
         );
-        htmlTag = htmlTag.Add(Tag.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside));
+
+        var inputDivWithClasses = Tag.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside);
+
+        if (Field.InfoText != "")
+          inputDivWithClasses = inputDivWithClasses.Add(Tag.Small(Field.InfoText));
+
+        htmlTag = htmlTag.Add(inputDivWithClasses);
       }
       else // Floating Labels (bs5)
       {
@@ -94,8 +100,12 @@ namespace AppCode.Fields
             Tag.Label(Text.First(Field.Title, Field.FieldId))
                 .Class(LabelClasses(Field.Required, Form.UseFloatingLabels))
                 .For(Field.FieldId)
-        );
+        );        
+        
+        if (Field.InfoText != "")
+          htmlTag = htmlTag.Add(Tag.Small(Field.InfoText));
       }
+
       return htmlTag;
     }
 
