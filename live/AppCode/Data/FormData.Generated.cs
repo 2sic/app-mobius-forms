@@ -1,5 +1,5 @@
 // DO NOT MODIFY THIS FILE - IT IS AUTO-GENERATED
-// See also: https://go.2sxc.org/hotbuild-autogen
+// See also: https://go.2sxc.org/copilot-data
 // To extend it, create a "FormData.cs" with this contents:
 /*
 namespace AppCode.Data
@@ -11,10 +11,10 @@ namespace AppCode.Data
 }
 */
 
-// Generator:   DataModelGenerator v17.01.08
+// Generator:   DataModelGenerator v17.02.00
 // App/Edition: Mobius Forms 6/staging
 // User:        2sic Web-Developer
-// When:        2024-02-19 15:56:29Z
+// When:        2024-02-22 12:18:44Z
 using System;
 using ToSic.Sxc.Adam;
 
@@ -25,7 +25,7 @@ namespace AppCode.Data
 
   /// <summary>
   /// FormData data. <br/>
-  /// Generated 2024-02-19 15:56:29Z. Re-generate whenever you change the ContentType. <br/>
+  /// Generated 2024-02-22 12:18:44Z. Re-generate whenever you change the ContentType. <br/>
   /// <br/>
   /// Default properties such as `.Title` or `.Id` are provided in the base class. <br/>
   /// Most properties have a simple access, such as `.Files`. <br/>

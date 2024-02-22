@@ -1,5 +1,5 @@
 // DO NOT MODIFY THIS FILE - IT IS AUTO-GENERATED
-// See also: https://go.2sxc.org/hotbuild-autogen
+// See also: https://go.2sxc.org/copilot-data
 // To extend it, create a "FormConfig.cs" with this contents:
 /*
 namespace AppCode.Data
@@ -11,10 +11,10 @@ namespace AppCode.Data
 }
 */
 
-// Generator:   DataModelGenerator v17.01.08
+// Generator:   DataModelGenerator v17.02.00
 // App/Edition: Mobius Forms 6/staging
 // User:        2sic Web-Developer
-// When:        2024-02-19 15:56:29Z
+// When:        2024-02-22 12:18:44Z
 using System.Collections.Generic;
 
 namespace AppCode.Data
@@ -24,7 +24,7 @@ namespace AppCode.Data
 
   /// <summary>
   /// FormConfig data. <br/>
-  /// Generated 2024-02-19 15:56:29Z. Re-generate whenever you change the ContentType. <br/>
+  /// Generated 2024-02-22 12:18:44Z. Re-generate whenever you change the ContentType. <br/>
   /// <br/>
   /// Default properties such as `.Title` or `.Id` are provided in the base class. <br/>
   /// Most properties have a simple access, such as `.DesignField`. <br/>
@@ -46,7 +46,7 @@ namespace AppCode.Data
     public string DesignField => String("DesignField", fallback: "");
 
     /// <summary>
-    /// Fields as listof FormFieldConfig.
+    /// Fields as list of FormFieldConfig.
     /// </summary>
     /// <remarks>
     /// Generated to return child-list child because field settings had Multi-Value=true. The type FormFieldConfig was specified in the field settings.
@@ -58,7 +58,7 @@ namespace AppCode.Data
     private IEnumerable<FormFieldConfig> _fields;
 
     /// <summary>
-    /// FormResources as single itemof FormResources.
+    /// FormResources as single item of FormResources.
     /// </summary>
     /// <remarks>
     /// Generated to only return 1 child because field settings had Multi-Value=false. The type FormResources was specified in the field settings.
@@ -70,7 +70,7 @@ namespace AppCode.Data
     private FormResources _formResources;
 
     /// <summary>
-    /// FormSendMailConfig as single itemof FormSendMailConfig.
+    /// FormSendMailConfig as single item of FormSendMailConfig.
     /// </summary>
     /// <remarks>
     /// Generated to only return 1 child because field settings had Multi-Value=false. The type FormSendMailConfig was specified in the field settings.
@@ -82,7 +82,7 @@ namespace AppCode.Data
     private FormSendMailConfig _formSendMailConfig;
 
     /// <summary>
-    /// InheritedConfig as single itemof FormConfig.
+    /// InheritedConfig as single item of FormConfig.
     /// </summary>
     /// <remarks>
     /// Generated to only return 1 child because field settings had Multi-Value=false. The type FormConfig was specified in the field settings.

@@ -16,6 +16,10 @@ namespace AppCode.Fields
     {
       var item = Dropdown();
       item = SetBasicsDropdown(item);
+
+      if (Field.InfoText != "")
+        item.Add(Tag.Small(Field.InfoText));
+        
       return WrapInLabel(item);
     }
 

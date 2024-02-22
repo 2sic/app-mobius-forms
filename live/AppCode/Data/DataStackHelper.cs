@@ -9,7 +9,7 @@ namespace AppCode.Data
     {
       var fallbackResources = AppResources.DefaultFormResources;
       var formResources = formConfig.FormResources ?? fallbackResources;
-      var formResourcesStack = AsStack(formResources?.Entity, fallbackResources?.Entity);
+      var formResourcesStack = AsStack(formResources, fallbackResources);
       return new FormResourcesStack(formResourcesStack);
     }
 
@@ -21,7 +21,7 @@ namespace AppCode.Data
       // TODO: @2dm Logik not Work right now, if no sendMailConfig is set, it will not use the default
       var fallbackSendMail = AppResources.DefaultSendMailConfig;
       var sendMailConfiguration = sendMailConfig ?? fallbackSendMail;
-      var sendMailConfigStack = AsStack(sendMailConfiguration?.Entity, fallbackSendMail?.Entity);
+      var sendMailConfigStack = AsStack(sendMailConfiguration, fallbackSendMail);
       return new SendMailConfigStack(sendMailConfigStack);
     }
 

@@ -68,6 +68,10 @@ namespace AppCode.Fields
         }
         container.Add(wrapper);
       }
+
+      if (Field.InfoText != "")
+        container.Add(Tag.Small(Field.InfoText));
+              
       items.Add(container);
 
       return items;

@@ -41,17 +41,29 @@ namespace AppCode.Fields
       checkbox = checkbox.Value(checkboxLabel);
       checkbox = SetBasics(checkbox, false);
 
-      if (CssClasses.IsBs3)
-        return Tag.Div().Class($"{Constants.ClassMobiusField} form-group").Wrap(
+      var checkboxWrapper = Tag.Div();
+      if (CssClasses.IsBs3) {
+        checkboxWrapper.Class($"{Constants.ClassMobiusField} form-group").Wrap(
           Tag.Div().Class("checkbox").Wrap(
             Tag.Label().Wrap(checkbox, checkboxLabel)
           )
         );
 
-      return Tag.Div().Class($"{Constants.ClassMobiusField} mb-3 form-check").Wrap(
+      if (Field.InfoText != "")
+        checkboxWrapper.Add(Tag.Small(Field.InfoText));        
+
+        return checkboxWrapper;
+      }
+
+      checkboxWrapper.Class($"{Constants.ClassMobiusField} mb-3 form-check").Wrap(
         checkbox,
         Tag.Label(checkboxLabel.Replace("<p>", "").Replace("</p>", "")).Class("form-check-label").Class(Field.Required ? Constants.ClassRequired : "").For(Field.FieldId)
       );
+
+      if (Field.InfoText != "")
+        checkboxWrapper.Add(Tag.Small(Field.InfoText));
+
+      return checkboxWrapper;
     }
   }
 }
