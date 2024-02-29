@@ -14,7 +14,7 @@ namespace AppCode.Data
 // Generator:   DataModelGenerator v17.02.01
 // App/Edition: Mobius Forms 6/staging
 // User:        2sic Web-Developer
-// When:        2024-02-29 20:10:05Z
+// When:        2024-02-29 20:24:07Z
 namespace AppCode.Data
 {
   // This is a generated class for FormSendMailConfig
@@ -22,7 +22,7 @@ namespace AppCode.Data
 
   /// <summary>
   /// FormSendMailConfig data. <br/>
-  /// Generated 2024-02-29 20:10:05Z. Re-generate whenever you change the ContentType. <br/>
+  /// Generated 2024-02-29 20:24:07Z. Re-generate whenever you change the ContentType. <br/>
   /// <br/>
   /// Default properties such as `.Title` or `.Id` are provided in the base class. <br/>
   /// Most properties have a simple access, such as `.CustomerMailCC`. <br/>

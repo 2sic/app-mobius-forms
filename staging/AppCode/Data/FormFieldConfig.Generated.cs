@@ -14,7 +14,7 @@ namespace AppCode.Data
 // Generator:   DataModelGenerator v17.02.01
 // App/Edition: Mobius Forms 6/staging
 // User:        2sic Web-Developer
-// When:        2024-02-29 20:10:05Z
+// When:        2024-02-29 20:24:07Z
 namespace AppCode.Data
 {
   // This is a generated class for FormFieldConfig
@@ -22,7 +22,7 @@ namespace AppCode.Data
 
   /// <summary>
   /// FormFieldConfig data. <br/>
-  /// Generated 2024-02-29 20:10:05Z. Re-generate whenever you change the ContentType. <br/>
+  /// Generated 2024-02-29 20:24:07Z. Re-generate whenever you change the ContentType. <br/>
   /// <br/>
   /// Default properties such as `.Title` or `.Id` are provided in the base class. <br/>
   /// Most properties have a simple access, such as `.BooleanLabelRight`. <br/>
@@ -167,6 +167,6 @@ namespace AppCode.Data
     /// Title as string. <br/>
     /// For advanced manipulation like scrubHtml, use .String("Title", scrubHtml: true) etc.
     /// </summary>
-    public string Title => _item.String("Title", fallback: "");
+    public new string Title => _item.String("Title", fallback: "");
   }
 }
