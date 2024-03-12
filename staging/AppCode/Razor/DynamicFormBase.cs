@@ -63,7 +63,7 @@ namespace AppCode.Razor
         return null;
 
       // Prepare some notes so the editor sees what field is being edited
-      var fieldInfo = $"Field: <strong>{field.Title}</strong> (type: {field.FieldType})";
+      var fieldInfo = $"Field: <strong>{field.FieldId}</strong> (type: {field.FieldType})";
 
       // Prepare a special message for admins which don't have permissions
       // or which would have permissions, but shouldn't edit
