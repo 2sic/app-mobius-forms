@@ -5,57 +5,47 @@
 
 @using AppCode.Data
 
-<div class="mb-3 row">
-  <!-- form error messages, invisible at first -->
-  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-12" : "col-12")'>
-    @HiddenMessage(AppRes.MessageRecaptchaMissing, "danger", "msgRecap")
-    @HiddenMessage(FormRes.MessageFormIncomplete, "danger", "msgIncomplete")
-    @HiddenMessage(FormRes.MessageSendError, "danger", "msgError")
-    @HiddenMessage(FormRes.MessageSending, "warning", "msgSending")
-    @HiddenMessage(FormRes.MessageNewsletterSuccess, "success", "msgNewsletterSuccess")
-    @HiddenMessage(FormRes.MessageNewsletterUnexpectedError, "danger", "msgNewsletterFailed")
+<!-- form error messages, invisible at first -->
+<div class="app-mobius6-messages">
+  @HiddenMessage(AppRes.MessageRecaptchaMissing, "danger", "msgRecap")
+  @HiddenMessage(FormRes.MessageFormIncomplete, "danger", "msgIncomplete")
+  @HiddenMessage(FormRes.MessageSendError, "danger", "msgError")
+  @HiddenMessage(FormRes.MessageSending, "warning", "msgSending")
+  @HiddenMessage(FormRes.MessageNewsletterSuccess, "success", "msgNewsletterSuccess")
+  @HiddenMessage(FormRes.MessageNewsletterUnexpectedError, "danger", "msgNewsletterFailed")
 
-    <div id="msgOk" class="alert alert-success app-mobius6-message" role="alert">
-      @Html.Raw(FormRes.MessageSendOk)
-      @Html.Raw(MailConfig.CustomerSend ? FormRes.MessageCustomerMailSend : "")
-    </div>
+  <div id="msgOk" class="alert alert-success app-mobius6-message" role="alert">
+    @Html.Raw(FormRes.MessageSendOk)
+    @Html.Raw(MailConfig.CustomerSend ? FormRes.MessageCustomerMailSend : "")
+  </div>
 
-    @* Prepared messages for admin only *@
-    @if (MyUser.IsContentAdmin)
+  @* Prepared messages for admin only *@
+  @if (MyUser.IsContentAdmin)
+  {
+    if ((MailConfig.CustomerSend || MailConfig.OwnerSend) && !Text.Has(MailConfig.MailFrom) &&
+    !Text.Has(AppSet.DefaultMailFrom))
     {
-      if ((MailConfig.CustomerSend || MailConfig.OwnerSend) && !Text.Has(MailConfig.MailFrom) &&
-      !Text.Has(AppSet.DefaultMailFrom))
-      {
-        <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(FormRes.MessageSendError, "p"))
-        </div>
-      }
-
-      if (MailConfig.OwnerSend && !Text.Has(MailConfig.OwnerMail) && !Text.Has(AppSet.DefaultOwnerMail))
-      {
-        <div class="alert alert-warning">
-          @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailOwnerError, "p"))
-        </div>
-      }
+      <div class="alert alert-warning">
+        @Html.Raw(Kit.Scrub.Only(FormRes.MessageSendError, "p"))
+      </div>
     }
-  </div>
+
+    if (MailConfig.OwnerSend && !Text.Has(MailConfig.OwnerMail) && !Text.Has(AppSet.DefaultOwnerMail))
+    {
+      <div class="alert alert-warning">
+        @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailOwnerError, "p"))
+      </div>
+    }
+  }
 </div>
-<div class="row mb-2">
-  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-3" : "col-3")'>
-    <div>
-      <button disabled="@FormConfig.IsDemoItem" app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
-    </div>
+
+<button disabled="@FormConfig.IsDemoItem" app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
+
+@if(FormConfig.IsDemoItem){
+  <div class="alert alert-warning mt-2" role="alert">
+    @AppRes.MessageDemoItem
   </div>
-  <div class='@(Kit.Css.Is("bs3") ? "col col-xs-9" : "col-9")'>
-    <div>
-      @if(FormConfig.IsDemoItem){
-        <div class="alert alert-warning" role="alert">
-          @AppRes.MessageDemoItem
-        </div>
-      }
-    </div>
-  </div>
-</div>
+}
 
 @functions {
   IHtmlTag HiddenMessage(string message, string type = "warning", string id = "", string attribute = "")
