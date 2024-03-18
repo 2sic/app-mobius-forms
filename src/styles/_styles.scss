@@ -37,6 +37,15 @@
   .alert {
     width: 100%;
   }
+
+  .small-infotext {
+    font-size: 0.875em;
+    opacity: .75;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .app-mobius6-field-required:after {

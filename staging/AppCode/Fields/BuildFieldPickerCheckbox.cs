@@ -69,8 +69,8 @@ namespace AppCode.Fields
         container.Add(wrapper);
       }
 
-      if (Field.InfoText != "")
-        container.Add(Tag.Small(Field.InfoText));
+      if (Text.Has(Field.InfoText))
+        container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
               
       items.Add(container);
 
