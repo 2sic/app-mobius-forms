@@ -18,6 +18,11 @@ namespace AppCode.Fields
     private IHtmlTag FileField()
     {
       var input = Tag.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
+
+      if(Text.Has(Field.AcceptedExtensions)) {
+        input.Attr("accept", Field.AcceptedExtensions);
+      }
+
       input = SetBasics(input, false);
       var container = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
 
@@ -27,6 +32,12 @@ namespace AppCode.Fields
       container.Add(inputLabels);
       innerContainer.Add(input);
       container.Add(innerContainer);
+
+      if (Text.Has(Field.InfoText))
+        container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+        
+      if (Text.Has(Field.AcceptedExtensions))
+        container.Add(Tag.Small(Field.AcceptedExtensions));      
 
       return container;
     }
