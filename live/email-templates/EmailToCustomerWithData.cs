@@ -25,7 +25,6 @@ public class EmailToCustomerWithData : Custom.Hybrid.CodeTyped
         </style>
     </head>
     <body>
-        <strong>" + data["Subject"] + @"</strong>
         <div>"
             + formResources.MailBodyCustomer +
         @"</div>

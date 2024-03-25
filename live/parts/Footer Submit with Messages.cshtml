@@ -41,7 +41,7 @@
 
 <button disabled="@FormConfig.IsDemoItem" app-mobius6-send type="button" class="btn btn-primary">@FormRes.Button</button>
 
-@if(FormConfig.IsDemoItem){
+@if(MyUser.IsContentAdmin && FormConfig.IsDemoItem){
   <div class="alert alert-warning mt-2" role="alert">
     @AppRes.MessageDemoItem
   </div>
