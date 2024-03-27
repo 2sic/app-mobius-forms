@@ -15,11 +15,11 @@
  * Re-generate it using the SASS variables of your theme
 */
 
-// Include needed functions and mixins from Bootstrap 4
+// Include needed functions and mixins from Bootstrap 5
 @import "../../node_modules/bootstrap/scss/_functions";
 
-// Include needed variables and mixins from Bootstrap 4
-// You must adapt these paths to match your Bootstrap 4 skin
+// Include needed variables and mixins from Bootstrap 5
+// You must adapt these paths to match your Bootstrap 5 skin
 @import "../../node_modules/bootstrap/scss/mixins/_breakpoints.scss";
 @import "../../node_modules/bootstrap/scss/variables";
 
