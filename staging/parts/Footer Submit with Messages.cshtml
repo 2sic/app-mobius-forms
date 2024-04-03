@@ -26,7 +26,7 @@
     !Text.Has(AppSet.DefaultMailFrom))
     {
       <div class="alert alert-warning">
-        @Html.Raw(Kit.Scrub.Only(FormRes.MessageSendError, "p"))
+        @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailFromError, "p"))
       </div>
     }
 
