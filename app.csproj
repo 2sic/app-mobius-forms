@@ -43,6 +43,7 @@
     <Reference Include="$(PathBin)\System.Web.Http.dll" />
     <Reference Include="$(PathBin)\System.Web.WebPages.dll" />
     <Reference Include="$(PathBin)\System.Net.Http.dll" />
+    <Reference Include="$(PathBin)\System.Text.Json.dll" />
 
     <!-- System.Web is not in the DNN folder but in the .net Framework installed on the server -->
     <Reference Include="System.Web" />
