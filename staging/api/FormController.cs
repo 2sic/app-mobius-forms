@@ -29,7 +29,6 @@ public class FormController : Custom.Hybrid.ApiTyped
     {
       Log.Add("checking Recaptcha");
       GetService<Recaptcha>().Validate(contactFormRequest.Recaptcha);
-      // GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);
     }
 
     // Same the TechnicalValues
