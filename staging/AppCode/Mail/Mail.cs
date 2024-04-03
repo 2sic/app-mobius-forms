@@ -6,9 +6,9 @@ using ToSic.Razor.Blade;
 
 using AppCode.Data;
 
-namespace AppCode.SendMail
+namespace AppCode.Mail
 {
-  public class SendMail : Custom.Hybrid.CodeTyped
+  public class Mail : Custom.Hybrid.CodeTyped
   {
     public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, List<ToSic.Sxc.Adam.IFile> files)
     {
@@ -80,7 +80,7 @@ namespace AppCode.SendMail
       var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + from + ", to:" + to + ", cc:" + cc + ", reply:" + replyTo);
 
       Log.Add("Get MailEngine");
-      var mailEngine = GetCode("../email-templates/" + emailTemplateFilename);
+      var mailEngine = GetService<IMailTemplate>(typeName: "AppCode.MailTemplates." + emailTemplateFilename.Replace(".cs", ""));
 
       var stackHelper = GetService<DataStackHelper>();
       var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem)); // TODO:: auf FormConfig umstellen

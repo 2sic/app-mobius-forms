@@ -12,7 +12,7 @@ using System.IO;
 using AppCode.Data;
 using AppCode.MailChimp;
 using AppCode.Recaptcha;
-using AppCode.SendMail;
+using AppCode.Mail;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class FormController : Custom.Hybrid.ApiTyped
@@ -91,11 +91,9 @@ public class FormController : Custom.Hybrid.ApiTyped
     }
 
     GetService<MailChimp>().SubscribeIfEnabled(contactFormRequest.Fields);// int.TryParse(id, out var intId) ? intId : 0);
-    // GetCode("Parts/MailChimp.cs").SubscribeIfEnabled(contactFormRequest.Fields);
 
     // sending Mails
-    GetService<SendMail>().SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
-    // var sendMail = GetCode("Parts/SendMail.cs").SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
+    GetService<Mail>().SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
 
     wrapLog("ok");
   }
