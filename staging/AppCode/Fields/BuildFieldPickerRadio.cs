@@ -22,7 +22,7 @@ namespace AppCode.Fields
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
-        var radioId = GenearateHtmlId(item);
+        var radioId = GeneratedHtmlId(item);
         var radio = Tag.Input().Type("radio").Name(Field.FieldId).Value(item.Key);  // Name is the same for all radios in the group
         radio = SetBasics(radio, false, radioId);
 

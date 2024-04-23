@@ -9,7 +9,7 @@ namespace AppCode.Fields
   {
     public BuildFieldPickerCheckbox(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
     /// <summary>
-    /// Generate CheckbocPicker with Headline or without
+    /// Generate CheckboxPicker with Headline or without
     /// </summary>
     public override IHtmlTag GetTag() => CheckBoxPicker();
     // public override IHtmlTag GetTag() {
@@ -33,7 +33,7 @@ namespace AppCode.Fields
         var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
         var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
-        var label = Tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GenearateHtmlId(item));
+        var label = Tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GeneratedHtmlId(item));
 
         if (CssClasses.IsBs3) container.Add(checkbox);
         else container.Add(wrapper);
@@ -57,13 +57,13 @@ namespace AppCode.Fields
         var wrapper = Tag.Div().Class(CssClasses.CheckboxWrapper);
         if (CssClasses.IsBs3)
         {
-          var checkboxLabel = Tag.Label(checkbox + item.Value).For(GenearateHtmlId(item));
+          var checkboxLabel = Tag.Label(checkbox + item.Value).For(GeneratedHtmlId(item));
           wrapper.Add(checkboxLabel);
         }
         else
         {
           checkbox.Class(Constants.ClassCheckbox);
-          var checkboxLabel = Tag.Label(item.Value).Class("form-check-label").For(GenearateHtmlId(item));
+          var checkboxLabel = Tag.Label(item.Value).Class("form-check-label").For(GeneratedHtmlId(item));
           wrapper.Add(checkbox, checkboxLabel);
         }
         container.Add(wrapper);
@@ -79,7 +79,7 @@ namespace AppCode.Fields
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {
       var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox).Attr("data-checkbox", Field.FieldId);
-      checkbox = SetBasics(checkbox, false, GenearateHtmlId(item));
+      checkbox = SetBasics(checkbox, false, GeneratedHtmlId(item));
       return checkbox;
     }
   }

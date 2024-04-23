@@ -42,6 +42,10 @@ namespace AppCode.Mail
       var from = Text.First(sendMailConfigStack.MailFrom, appSettings.DefaultMailFrom);
       var owner = Text.First(sendMailConfigStack.OwnerMail, appSettings.DefaultOwnerMail);
 
+      // If Mail Settings are missing, throw an exception
+      if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(owner))
+        throw new Exception("Mail settings are missing. Please configure 'MailFrom' and 'OwnerMail' settings.");
+
       // Send Mail to owner
       if (sendMailConfigStack.OwnerSend)
       {
