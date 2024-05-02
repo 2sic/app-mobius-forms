@@ -38,7 +38,7 @@ namespace AppCode.Fields
     }
 
     // Generate the HTML ID for the radio button and Checkbox 
-    protected string GenearateHtmlId(KeyValuePair<string, string> tempItem)
+    protected string GeneratedHtmlId(KeyValuePair<string, string> tempItem)
     {
       return Field.FieldId + tempItem.Value.ToLower().Replace(" ", ""); ;
     }

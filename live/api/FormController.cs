@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.IO;
 
 using AppCode.Data;
+using AppCode.MailChimp;
+using AppCode.Recaptcha;
+using AppCode.Mail;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class FormController : Custom.Hybrid.ApiTyped
@@ -25,7 +28,7 @@ public class FormController : Custom.Hybrid.ApiTyped
     if (formConfig.Recaptcha)
     {
       Log.Add("checking Recaptcha");
-      GetCode("Parts/Recaptcha.cs").Validate(contactFormRequest.Recaptcha);
+      GetService<Recaptcha>().Validate(contactFormRequest.Recaptcha);
     }
 
     // Same the TechnicalValues
@@ -86,11 +89,11 @@ public class FormController : Custom.Hybrid.ApiTyped
       Log.Add("No files found to save");
     }
 
-    GetCode("Parts/MailChimp.cs").SubscribeIfEnabled(contactFormRequest.Fields);
+    GetService<MailChimp>().SubscribeIfEnabled(contactFormRequest.Fields);// int.TryParse(id, out var intId) ? intId : 0);
 
     // sending Mails
-    var sendMail = GetCode("Parts/SendMail.cs");
-    sendMail.SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
+    GetService<Mail>().SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
+
     wrapLog("ok");
   }
 
