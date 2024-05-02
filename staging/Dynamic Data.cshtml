@@ -31,7 +31,7 @@
   <strong>@AppRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
   <strong>ModuleId: </strong> @MyContext.Module.Id
   <strong>FormId:</strong> @formData.FormId
-  <a href="@CsvHelper.GetDownloadLink(formData.FormId)" type="button" class="btn btn-primary">CSV Export</a>
+  <a href="@CsvHelper.GetDownloadLink(formData.FormId)" type="button" class="btn btn-primary" target="_blank">CSV Export</a>
 </div>
 
 @* Add Table Top Bar show and search into top-toolbar div *@
