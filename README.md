@@ -10,7 +10,7 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 | ------------------- | :----: | -------------------
 | 2sxc                | ✅    | requires 2sxc v17.07.00
 | Dnn                 | ✅    | For v9.6.1
-| Oqtane              | ✅    | Requires v3.04
+| Oqtane              | ✅    | Requires v5.00
 | No jQuery           | ?    |
 | Live Demo           | ➖    |
 | Install Checklist   | ✅    | See [Installation] on [azing.org](https://azing.org/2sxc)
