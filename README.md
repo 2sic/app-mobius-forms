@@ -1,6 +1,6 @@
 <image src="app-icon.png" align="right" width="200px">
 
-# Mobius Forms 5 App for .net CMSs
+# Mobius Forms Builder 6 App for .net CMSs
 
 > This is a [2sxc](https://2sxc.org) App for [DNN ☢️](https://www.dnnsoftware.com/) and [Oqtane 💧](https://www.oqtane.org/)
 
@@ -11,9 +11,9 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 | 2sxc                | ✅    | requires 2sxc v17.07.00
 | Dnn                 | ✅    | For v9.6.1
 | Oqtane              | ✅    | Requires v5.00
-| No jQuery           | ?    |
+| No jQuery           | ✅    |
 | Live Demo           | ➖    |
-| Install Checklist   | ✅    | See [Installation] on [azing.org](https://azing.org/2sxc)
+| Install Checklist   | ✅    | See [Installation on azing.org](https://azing.org/2sxc)
 | Source & License    | ✅    | included, ISC/MIT
 | App Catalog         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 | Screenshots         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
@@ -41,6 +41,8 @@ This list just shows what it already does, so you know what you get out-of-the-f
     1. Basic contact form with _Subject, Message, Name, E-Mail_
     1. A support-request form with a dropdown-example
     1. An example with JS show/hide logic and saving raw JSON-data
+1. Form builder to add/change fields as you wish without requiring development
+1. Ability to completely re-program how fields are generated
 1. **AJAX**, so no page reloads for validation, sending or messages
 1. **Recaptcha** (optional) validation on client and server
 1. data is saved, together with the _Timestamp_, _SenderIP_, optionaly generated _Title_ or even raw JSON-data
@@ -59,7 +61,7 @@ Because it's so simple and uses 2sxc, you can easily
 * send more e-mails, trigger other [custom WebApi actions][cust-webapi]
 * create [more custom forms][add-forms] which store into further content-types
 
-## Getting Started
+## Get Started
 
 This app is only useful is you use DNN or Oqtane. So assuming you have a DNN installation, all you need to do is install 2sxc and this app.
 
