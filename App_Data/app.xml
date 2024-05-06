@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.07.00" ExportDate="2024-05-03T10:43:30.5674085+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="17.07.00" ExportDate="2024-05-06T13:53:52.4208589+02:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -4505,11 +4505,6 @@
           </Entity>
         </Attribute>
         <Attribute StaticName="GroupGeneral" Type="Empty" IsTitle="false">
-          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="c5844c7a-dec4-40b6-b51f-53868dab664c" Json="True" KeyNumber="6395">
-            <Value Key="DefaultCollapsed" Value="True" Type="Boolean">
-              <Dimension DimensionID="213" ReadOnly="false" />
-            </Value>
-          </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="5ff4a6d6-5a47-4a22-a41d-9d3af87e8c53" Json="True" KeyNumber="6395">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
@@ -4555,6 +4550,11 @@
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="c5844c7a-dec4-40b6-b51f-53868dab664c" Json="True" KeyNumber="6395">
+            <Value Key="DefaultCollapsed" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
@@ -9293,7 +9293,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.01.00" Type="String">
+      <Value Key="Version" Value="06.01.01" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -9773,7 +9773,7 @@
       <Value Key="Advanced" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="ByUrlParameters" Value="False" Type="Boolean">
+      <Value Key="ByUrlParameters" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="Duration" Value="14400" Type="Number">
@@ -13734,40 +13734,6 @@
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="84a8e7b7-a144-4a9e-866d-bcc4f205ce99" Json="True">
-      <Value Key="Enabled" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Formula" Value="// new formula syntax - see https://go.2sxc.org/formulas&#xA;v2((data, context) =&gt; {&#xA;  return data.FieldType != &quot;label&quot;;&#xA;});" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Target" Value="Field.Settings.Visible" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Field.Settings.Visible" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="FormData" EntityGUID="b55dcd3e-86bb-44f4-b513-9a8f917acfdb">
-      <Value Key="FormId" Value="29884" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="ModuleId" Value="6593" Type="Number">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29884&quot;,&quot;radio&quot;:&quot;mr&quot;,&quot;first-name&quot;:&quot;Daniel&quot;,&quot;last-name&quot;:&quot;Mettler&quot;,&quot;subject&quot;:&quot;test&quot;,&quot;message&quot;:&quot;test&quot;,&quot;e-mail&quot;:&quot;test@testtest.test&quot;},&quot;Terms&quot;:{}}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Timestamp" Value="2024-05-02T16:14:02" Type="DateTime">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Form 2024-05-02T16:14:02" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="5" AssignmentObjectType="ContentType" AttributeSetStaticName="ContentType" AttributeSetName="ContentType" EntityGUID="8893e232-ff88-4444-806e-6069ebbbe762" Json="True" KeyString="a9ab93f5-d55f-4710-8353-36f35343ef89">
       <Value Key="AdditionalSettings" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -13892,6 +13858,40 @@
       <Value Key="Content" Value="null" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="84a8e7b7-a144-4a9e-866d-bcc4f205ce99" Json="True">
+      <Value Key="Enabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Formula" Value="// new formula syntax - see https://go.2sxc.org/formulas&#xA;v2((data, context) =&gt; {&#xA;  return data.FieldType != &quot;label&quot;;&#xA;});" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Target" Value="Field.Settings.Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Field.Settings.Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="FormData" EntityGUID="b55dcd3e-86bb-44f4-b513-9a8f917acfdb">
+      <Value Key="FormId" Value="29884" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6593" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29884&quot;,&quot;radio&quot;:&quot;mr&quot;,&quot;first-name&quot;:&quot;Daniel&quot;,&quot;last-name&quot;:&quot;Mettler&quot;,&quot;subject&quot;:&quot;test&quot;,&quot;message&quot;:&quot;test&quot;,&quot;e-mail&quot;:&quot;test@testtest.test&quot;},&quot;Terms&quot;:{}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2024-05-02T16:14:02" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2024-05-02T16:14:02" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
     </Entity>
   </Entities>
   <PortalFiles />
