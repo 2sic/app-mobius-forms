@@ -42,7 +42,7 @@ namespace AppCode.Fields
         container.Add(wrapper);
       }
       
-      if (Text.Has(Field.InfoText))
+      if (Field.IsNotEmpty("InfoText"))
         container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
       
       items.Add(container);

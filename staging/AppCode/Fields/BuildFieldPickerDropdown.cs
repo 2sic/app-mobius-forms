@@ -17,7 +17,7 @@ namespace AppCode.Fields
       var item = Dropdown();
       item = SetBasicsDropdown(item);
 
-      if (Text.Has(Field.InfoText))
+      if (Field.IsNotEmpty("InfoText"))
         item.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
         
       return WrapInLabel(item);

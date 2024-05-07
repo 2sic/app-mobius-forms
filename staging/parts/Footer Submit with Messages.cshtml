@@ -23,14 +23,14 @@
   @if (MyUser.IsContentAdmin)
   {
     if ((MailConfig.CustomerSend || MailConfig.OwnerSend) && !Text.Has(MailConfig.MailFrom) &&
-    !Text.Has(AppSet.DefaultMailFrom))
+    !AppSet.IsNotEmpty("DefaultMailFrom"))
     {
       <div class="alert alert-warning">
         @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailFromError, "p"))
       </div>
     }
 
-    if (MailConfig.OwnerSend && !Text.Has(MailConfig.OwnerMail) && !Text.Has(AppSet.DefaultOwnerMail))
+    if (MailConfig.OwnerSend && !Text.Has(MailConfig.OwnerMail) && !AppSet.IsNotEmpty("DefaultOwnerMail"))
     {
       <div class="alert alert-warning">
         @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailOwnerError, "p"))

@@ -88,7 +88,7 @@ namespace AppCode.Fields
 
         var inputDivWithClasses = Tag.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside);
 
-        if (Text.Has(Field.InfoText))
+        if (Field.IsNotEmpty("InfoText"))
           inputDivWithClasses = inputDivWithClasses.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
 
         htmlTag = htmlTag.Add(inputDivWithClasses);
@@ -102,7 +102,7 @@ namespace AppCode.Fields
                 .For(Field.FieldId)
         );        
         
-        if (Text.Has(Field.InfoText))
+        if (Field.IsNotEmpty("InfoText"))
           htmlTag = htmlTag.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
       }
 

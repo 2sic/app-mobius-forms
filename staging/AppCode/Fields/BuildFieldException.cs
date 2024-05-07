@@ -19,7 +19,7 @@ namespace AppCode.Fields
         Tag.Li("Field Type: " + Field.FieldType)
       );
 
-      if (Text.Has(Field.PickerType))
+      if (Field.IsNotEmpty("PickerType"))
         specs = specs.Add(Tag.Li("PickerType: " + Field.PickerType));
 
       var exception = Tag.Div()

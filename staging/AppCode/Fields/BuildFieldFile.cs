@@ -19,7 +19,7 @@ namespace AppCode.Fields
     {
       var input = Tag.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
 
-      if(Text.Has(Field.AcceptedExtensions)) {
+      if(Field.IsNotEmpty("AcceptedExtensions")) {
         input.Attr("accept", Field.AcceptedExtensions);
       }
 
@@ -33,10 +33,10 @@ namespace AppCode.Fields
       innerContainer.Add(input);
       container.Add(innerContainer);
 
-      if (Text.Has(Field.InfoText))
+      if (Field.IsNotEmpty("InfoText"))
         container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
         
-      if (Text.Has(Field.AcceptedExtensions))
+      if (Field.IsNotEmpty("AcceptedExtensions"))
         container.Add(Tag.Small(Field.AcceptedExtensions));      
 
       return container;

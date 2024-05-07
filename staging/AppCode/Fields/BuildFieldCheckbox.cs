@@ -48,8 +48,8 @@ namespace AppCode.Fields
             Tag.Label().Wrap(checkbox, checkboxLabel)
           )
         );
-
-      if (Text.Has(Field.InfoText))
+        
+      if (Field.IsNotEmpty("InfoText"))
         checkboxWrapper.Add(Tag.Div(Field.InfoText).Class("small-infotext"));        
 
         return checkboxWrapper;
@@ -60,7 +60,7 @@ namespace AppCode.Fields
         Tag.Label(checkboxLabel.Replace("<p>", "").Replace("</p>", "")).Class("form-check-label").Class(Field.Required ? Constants.ClassRequired : "").For(Field.FieldId)
       );
 
-      if (Text.Has(Field.InfoText))
+      if (Field.IsNotEmpty("InfoText"))
         checkboxWrapper.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
 
       return checkboxWrapper;
