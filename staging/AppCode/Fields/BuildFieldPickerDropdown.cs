@@ -14,25 +14,28 @@ namespace AppCode.Fields
     /// </summary>
     public override IHtmlTag GetTag()
     {
+      var tag = Builder.Kit.HtmlTags;
       var item = Dropdown();
       item = SetBasicsDropdown(item);
 
       if (Field.IsNotEmpty("InfoText"))
-        item.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+        item.Add(tag.Div(Field.InfoText).Class("small-infotext"));
         
       return WrapInLabel(item);
     }
 
     private Select Dropdown()
     {
+      // TODO::
+      var tag = Builder.Kit.HtmlTags;
       var dropdown = Tag.Select().Class(CssClasses.InputControl);
 
       if (Field.PickerMultiSelect) { dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId); }
 
-      dropdown.Add(Tag.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
+      dropdown.Add(tag.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
 
       foreach (var optionItem in GetKeyValue(Field.PickerKeyValues))
-        dropdown.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));
+        dropdown.Add(tag.Option(optionItem.Value).Value(optionItem.Key));
 
       return dropdown;
     }

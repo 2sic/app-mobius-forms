@@ -14,8 +14,10 @@ namespace AppCode.Fields
 
     private IHtmlTag Radio()
     {
+      // TODO::
+      var tag = Builder.Kit.HtmlTags;
       var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
-      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
+      var inputLabels = tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
 
       var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
@@ -29,13 +31,13 @@ namespace AppCode.Fields
         var wrapper = Tag.Div().Class(CssClasses.RadioWrapper);
         if (CssClasses.IsBs3)
         {
-          var radioLabel = Tag.Label(radio + item.Value).For(radioId);
+          var radioLabel = tag.Label(radio + item.Value).For(radioId);
           wrapper.Add(radioLabel);
         }
         else
         {
           radio.Class(Constants.ClassCheckbox);
-          var radioLabel = Tag.Label(item.Value).Class("form-check-label").For(radioId);
+          var radioLabel = tag.Label(item.Value).Class("form-check-label").For(radioId);
           wrapper.Add(radio, radioLabel);
         }
 
@@ -43,7 +45,7 @@ namespace AppCode.Fields
       }
       
       if (Field.IsNotEmpty("InfoText"))
-        container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+        container.Add(tag.Div(Field.InfoText).Class("small-infotext"));
       
       items.Add(container);
       return items;

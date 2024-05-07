@@ -12,9 +12,6 @@ namespace AppCode.Fields
     /// Generate CheckboxPicker with Headline or without
     /// </summary>
     public override IHtmlTag GetTag() => CheckBoxPicker();
-    // public override IHtmlTag GetTag() {
-    //   return CheckBoxPicker();
-    // }
 
     private IHtmlTag CheckBoxPicker()
     {
@@ -24,16 +21,18 @@ namespace AppCode.Fields
     // Simple CheckboxPicker List without Headline
     private IHtmlTag CheckboxPickerBasic()
     {
+      var tag = Builder.Kit.HtmlTags;
+      // TODO::
       var div = Tag.Div();
 
       foreach (var item in GetKeyValue(Field.PickerKeyValues))
       {
         var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
         var checkbox = GenerateCheckbox(item);
-        var wrapper = Tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
+        var wrapper = tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
         var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
-        var label = Tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GeneratedHtmlId(item));
+        var label = tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GeneratedHtmlId(item));
 
         if (CssClasses.IsBs3) container.Add(checkbox);
         else container.Add(wrapper);
@@ -46,8 +45,10 @@ namespace AppCode.Fields
     // Simple CheckboxPicker List with Headline (Title) Left
     private IHtmlTag CheckboxPickerWithHeadline()
     {
+      var tag = Builder.Kit.HtmlTags;
+      // TODO::
       var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
-      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
+      var inputLabels = tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
       items.Add(inputLabels);
       var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
 
@@ -63,14 +64,14 @@ namespace AppCode.Fields
         else
         {
           checkbox.Class(Constants.ClassCheckbox);
-          var checkboxLabel = Tag.Label(item.Value).Class("form-check-label").For(GeneratedHtmlId(item));
+          var checkboxLabel = tag.Label(item.Value).Class("form-check-label").For(GeneratedHtmlId(item));
           wrapper.Add(checkbox, checkboxLabel);
         }
         container.Add(wrapper);
       }
 
       if (Field.IsNotEmpty("InfoText"))
-        container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+        container.Add(tag.Div(Field.InfoText).Class("small-infotext"));
               
       items.Add(container);
 
@@ -78,7 +79,8 @@ namespace AppCode.Fields
     }
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {
-      var checkbox = Tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox).Attr("data-checkbox", Field.FieldId);
+      var tag = Builder.Kit.HtmlTags;
+      var checkbox = tag.Input().Type("checkbox").Name(Field.FieldId).Value(item.Key).Class(Constants.ClassCheckbox).Attr("data-checkbox", Field.FieldId);
       checkbox = SetBasics(checkbox, false, GeneratedHtmlId(item));
       return checkbox;
     }
