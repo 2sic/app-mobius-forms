@@ -21,8 +21,9 @@ namespace AppCode.Fields
 
     private Textarea MultiLine()
     {
+       var tag = Builder.Kit.HtmlTags;
       var rows = Field.StringLines;
-      var item = Tag.Textarea().Rows(rows.ToString());
+      var item = tag.Textarea().Rows(rows.ToString());
       if (Field.IsNotEmpty("DefaultValue")) { item.Add(Field.DefaultValue); }
       return item;
     }

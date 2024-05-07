@@ -20,12 +20,14 @@ namespace AppCode.Fields
       Resources = form.Resources;
       SendMailConfig = form.SendMailConfig;
       Field = field;
+      Builder = form.Builder;
     }
 
     protected FormBuildParameters Form { get; }
     protected AppResources Resources { get; }
     protected SendMailConfigStack SendMailConfig { get; }
     protected FormFieldConfig Field { get; }
+    protected FormBuilder Builder { get; }
     protected CssClasses CssClasses => Form.CssClasses;
 
     public abstract IHtmlTag GetTag();
@@ -76,7 +78,7 @@ namespace AppCode.Fields
     // Set Label Left or Floating Label (only for Bs5)
     protected IHtmlTag WrapInLabel(IHtmlTag inputHtml)
     {
-      var htmlTag = Tag.Div().Class(FieldWrapperClasses());
+      var htmlTag = Builder.Kit.HtmlTags.Div().Class(FieldWrapperClasses());
       // Label Left
       if (!Form.UseFloatingLabels)
       {

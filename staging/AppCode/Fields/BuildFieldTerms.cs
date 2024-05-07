@@ -9,7 +9,7 @@ namespace AppCode.Fields
     public BuildFieldTerms(FormBuildParameters form, FormFieldConfig field) : base(form, field) { }
 
     /// <summary>
-    /// Terms checkbox use Title form App Resources and overriedTitle in CheckbocxWithLabelRight
+    /// Terms checkbox use Title form App Resources and overrideTitle in CheckboxWithLabelRight
     /// </summary>
     public override IHtmlTag GetTag()
     {

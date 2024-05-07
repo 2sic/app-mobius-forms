@@ -9,6 +9,7 @@ namespace AppCode.Form
     public FormBuilder Setup(FormBuildParameters formParams)
     {
       FormParams = formParams;
+      FormParams.Builder = this;
       return this;
     }
 
