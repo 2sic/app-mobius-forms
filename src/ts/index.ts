@@ -99,7 +99,6 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
         
         // success
         if(debug) console.log('success', result)
-        submitButton.setAttribute("disabled", "")
   
         showAlert(mobiusWrapper, 'msgOk')
         disableInputs(mobiusWrapper, false)

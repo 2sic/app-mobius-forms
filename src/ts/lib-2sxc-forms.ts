@@ -175,13 +175,13 @@ export function sendForm(
 export function disableInputs(wrapper: Element, state: boolean) {
   wrapper.classList.toggle("disable", state);
   wrapper
-    .querySelectorAll("input,textarea,select")
+    .querySelectorAll("input,textarea,select,button")
     .forEach((elem: HTMLElement) => elem.setAttribute("disabled", "true"));
 }
 
 export function enableInputs(wrapper: Element) {
   wrapper.classList.remove("disable");
   wrapper
-    .querySelectorAll("input,textarea,select")
+    .querySelectorAll("input,textarea,select,button")
     .forEach((elem: HTMLElement) => elem.setAttribute("disabled", "false"));
 }
