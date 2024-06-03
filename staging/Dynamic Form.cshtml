@@ -91,3 +91,12 @@
 </div>
 
 @Html.Partial("./parts/Assets.cshtml")
+
+@if(MyUser.IsContentAdmin)
+{
+  <style>
+    .app-mobius6-wrapper .mobius-group {
+      display: block !important;
+    }
+  </style>
+}

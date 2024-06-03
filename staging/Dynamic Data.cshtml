@@ -9,9 +9,8 @@
 @using AppCode.FormData
 @using System.Text.Json
 
-@if (!MyUser.IsContentAdmin) {
+@if (!MyUser.IsContentAdmin)
   return;
-}
 
 @* DataTables JavaScripts  *@
 @Kit.Page.Activate("jQuery")

@@ -19,7 +19,6 @@ namespace AppCode.Form
     /// Get the HTML for a single field
     /// </summary>
     /// <param name="field"></param>
-    /// <returns></returns>
     /// <exception cref="System.Exception"></exception>
     public IHtmlTag Field(FormFieldConfig field) => FindBuilder(field)?.GetTag()
         ?? throw new System.Exception($"The type '{field.FieldType}' is not supported yet in the new FormBuilder");
