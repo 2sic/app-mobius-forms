@@ -38,6 +38,8 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
         const nextStepButton = nextStep.querySelector('.btn-mobius-next-step');
         
         if(parentNode != null) {
+          btn.style.display = 'none';
+          
           nextStep.classList.add('active');
 
           if(nextStepButton == null)
