@@ -26,7 +26,6 @@ namespace AppCode.Fields
       }
 
       input = SetBasics(input, false);
-      // TODO:: 
       var container = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
 
       var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));

@@ -105,6 +105,11 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * v05.07.00 2023-06
   * Updated to 16.02 conventions
   * All Razor code now fully typed
+* v06.17.01
+  * E-Mail Security improvement
+* v06.17.02
+  * Use new Builder.Kit.HtmlTags instance of Tag.Div
+  * Refactor Code to functional
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/

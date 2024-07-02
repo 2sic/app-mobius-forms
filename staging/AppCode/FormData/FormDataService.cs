@@ -60,48 +60,38 @@ namespace AppCode.FormData
     // internal helper
     private List<string> GetColumns(List<ITyped> jsonTyped)
     {
-      var fieldKeysList = new List<string>();
-      foreach (var rows in jsonTyped)
-        fieldKeysList.AddRange(rows.Keys());
+      var fieldKeysList = jsonTyped.SelectMany(rows => rows.Keys()).ToList();
 
-      var fieldKeysListDistinct = fieldKeysList.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
       var hiddenProps = new List<string> { "FormId" };
-      var header = new List<string>();
 
-      foreach (var prop in hiddenProps)
-        if (fieldKeysListDistinct.Contains(prop))
-          fieldKeysListDistinct.Remove(prop);
+      var fieldKeysListDistinct = fieldKeysList
+          .Distinct(StringComparer.OrdinalIgnoreCase)
+          .Where(prop => !hiddenProps.Contains(prop))
+          .ToList();
 
-      foreach (var prop in fieldKeysListDistinct)
-        if (!hiddenProps.Contains(prop))
-          header.Add(prop);
-
-      return header;
+      return fieldKeysListDistinct.ToList();
     }
-
     public Dictionary<string, string> ColumnHeaders => _columnHeaders ??= GetColumnHeaders();
     private Dictionary<string, string> _columnHeaders;
 
     private Dictionary<string, string> GetColumnHeaders()
     {
       var formFields = AsItems(App.Data["FormConfig"])
-        .FirstOrDefault(f => f.Id == FormId)
-        ?.Children("Fields");
+          .FirstOrDefault(f => f.Id == FormId)
+          ?.Children("Fields");
 
-      var baseDictionary = new Dictionary<string, string>();
+      var baseDictionary = formFields?.ToDictionary(field => field.Url("FieldId"), field => field.String("Title"))
+                              ?? new Dictionary<string, string>();
 
-      foreach (var field in formFields)
-        baseDictionary[field.Url("FieldId")] = field.String("Title");
+      // Create the full list of headers and "translated" labels
+      var headers = new List<string> { "Id", "Timestamp" }
+                        .Concat(Columns)
+                        .Concat(new List<string> { "Files" });
 
-      // Create the fill list of headers and "translated" labels
-      return new List<string> { "Id", "Timestamp" }
-        .Concat(Columns)
-        .Concat(new List<string> { "Files" })
-        .ToDictionary(
+      return headers.ToDictionary(
           k => k,
           v => baseDictionary.ContainsKey(v) ? baseDictionary[v] : v
-        );
+      );
     }
   }
-
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AppCode.Data;
 using AppCode.Form;
 using ToSic.Razor.Blade;
+using System.Linq;
 
 namespace AppCode.Fields
 {
@@ -22,60 +23,84 @@ namespace AppCode.Fields
     private IHtmlTag CheckboxPickerBasic()
     {
       var tag = Builder.Kit.HtmlTags;
-      // TODO::
-      var div = Tag.Div();
 
-      foreach (var item in GetKeyValue(Field.PickerKeyValues))
-      {
-        var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
-        var checkbox = GenerateCheckbox(item);
-        var wrapper = tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
+      // Generate all item wrappers, functional
+      var checkboxes = GetKeyValue(Field.PickerKeyValues)
+          .Select(item =>
+          {
+            var checkboxId = GeneratedHtmlId(item);
+            var checkbox = GenerateCheckbox(item);
+            var wrapper = tag.Div(checkbox).Class(CssClasses.CheckboxWrapper);
 
-        var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
-        var label = tag.Label(item.Value).Class(LabelClasses(Field.Required)).For(GeneratedHtmlId(item));
+            // Create the label for the checkbox
+            var label = tag.Label(item.Value)
+              .Class(LabelClasses(Field.Required))
+              .For(checkboxId);
 
-        if (CssClasses.IsBs3) container.Add(checkbox);
-        else container.Add(wrapper);
+            // Create container and add checkbox or wrapper based on Bootstrap version
+            var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
+            container.Add(CssClasses.IsBs3 ? checkbox : wrapper);
 
-        items.Add(label, container);
-        div.Add(items);
-      }
-      return div;
+            // Create items div and add label and container
+            var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
+            items.Add(label, container);
+
+            return items;
+          });
+
+      // Create div and add all items
+      return tag.Div().Add(checkboxes);
     }
+
     // Simple CheckboxPicker List with Headline (Title) Left
     private IHtmlTag CheckboxPickerWithHeadline()
     {
       var tag = Builder.Kit.HtmlTags;
-      // TODO::
-      var items = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
-      var inputLabels = tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
-      items.Add(inputLabels);
-      var container = Tag.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
 
-      foreach (var item in GetKeyValue(Field.PickerKeyValues))
-      {
-        var checkbox = GenerateCheckbox(item);
-        var wrapper = Tag.Div().Class(CssClasses.CheckboxWrapper);
-        if (CssClasses.IsBs3)
-        {
-          var checkboxLabel = Tag.Label(checkbox + item.Value).For(GeneratedHtmlId(item));
-          wrapper.Add(checkboxLabel);
-        }
-        else
-        {
-          checkbox.Class(Constants.ClassCheckbox);
-          var checkboxLabel = tag.Label(item.Value).Class("form-check-label").For(GeneratedHtmlId(item));
-          wrapper.Add(checkbox, checkboxLabel);
-        }
-        container.Add(wrapper);
-      }
+      // Generate all item wrappers, functional
+      var checkboxes = GetKeyValue(Field.PickerKeyValues)
+          .Select(item =>
+          {
+            var checkboxId = GeneratedHtmlId(item);
+            var checkbox = tag.Input().Type("checkbox")
+              .Name(Field.FieldId)
+              .Value(item.Key)
+              .Class(CssClasses.Checkbox);
+            checkbox = SetBasics(checkbox, false, checkboxId);
 
-      if (Field.IsNotEmpty("InfoText"))
+            // Create the label for the checkbox
+            var label = tag.Label(item.Value)
+              .Class(LabelClasses(Field.Required))
+              .For(checkboxId);
+
+            // BS4+ has the checkbox before the label, BS3 has it inside the label
+            var wrapper = Tag.Div()
+              .Class(CssClasses.CheckboxWrapper)
+              .Add(CssClasses.IsBs3 ? (IHtmlTag)label.Add(checkbox) : checkbox, label);
+
+            return wrapper;
+          })
+          .ToList();
+
+      // Create container for all checkboxes
+      var container = Tag.Div()
+          .Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
+
+      // Add each checkbox wrapper to the container
+      foreach (var checkbox in checkboxes)
+        container.Add(checkbox);
+
+      // Add optional info text if available
+      if (!Field.IsEmpty("InfoText"))
         container.Add(tag.Div(Field.InfoText).Class("small-infotext"));
-              
-      items.Add(container);
 
-      return items;
+      // Create the outside div with label and container
+      var items = tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
+      var inputLabels = tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
+      var itemsLabel = items.Add(inputLabels);
+      var itemsContainer = itemsLabel.Add(container);
+
+      return itemsContainer;
     }
     private IHtmlTag GenerateCheckbox(KeyValuePair<string, string> item)
     {

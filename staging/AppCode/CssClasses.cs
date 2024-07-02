@@ -15,12 +15,13 @@ namespace AppCode
     public string LabelInside { get; set; }
     public string Wrapper { get; set; }
     public string RadioWrapper { get; set; }
+    public string RadioLabel { get; set; }
+    public string Checkbox { get; set; }
     public string CheckboxWrapper { get; set; }
     public string FloatingLabelHidden { get; set; }
     public string FormCheckInput { get; set; }
     public string FormSelect { get; set; }
     public string HiddenInputStyle { get; set; }
-
 
     public string Label { get; set; }
 
@@ -33,6 +34,8 @@ namespace AppCode
       LabelInside = "",
       Wrapper = "mb-3",
       RadioWrapper = "form-check",
+      RadioLabel = "form-check-label",
+      Checkbox = "form-check-input",
       CheckboxWrapper = "form-check",
       FloatingLabelHidden = "",
       FormCheckInput = "form-check-input",
@@ -49,6 +52,8 @@ namespace AppCode
       LabelInside = "",
       Wrapper = "mb-3",
       RadioWrapper = "form-check",
+      RadioLabel = "form-check-label",
+      Checkbox = "form-check-input",
       CheckboxWrapper = "form-check",
       FormSelect = "form-select",
       HiddenInputStyle = "hiddenInputStyle",
@@ -66,6 +71,7 @@ namespace AppCode
       LabelInside = "",
       Wrapper = "form-group",
       RadioWrapper = "radio",
+      RadioLabel = "",
       CheckboxWrapper = "checkbox",
       FloatingLabelHidden = "hidden",
       FormCheckInput = "",

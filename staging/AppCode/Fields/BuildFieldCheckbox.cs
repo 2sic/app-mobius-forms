@@ -28,8 +28,7 @@ namespace AppCode.Fields
     protected Input GetCheckbox()
     {
       var tag = Builder.Kit.HtmlTags;
-      var checkbox = tag.Input().Type("checkbox").Id(Field.FieldId).Name(Field.FieldId).Class(CssClasses.FormCheckInput);
-      return checkbox;
+      return tag.Input().Type("checkbox").Id(Field.FieldId).Name(Field.FieldId).Class(CssClasses.FormCheckInput);
     }
 
     /// <summary>
@@ -42,9 +41,7 @@ namespace AppCode.Fields
       checkbox = checkbox.Value(checkboxLabel);
       checkbox = SetBasics(checkbox, false);
 
-      // TODO::
-       var tag = Builder.Kit.HtmlTags;
-      // var checkboxWrapper = tag.Div();
+      var tag = Builder.Kit.HtmlTags;
       var checkboxWrapper = Tag.Div();
 
       if (CssClasses.IsBs3) {
