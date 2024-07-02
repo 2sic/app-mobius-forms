@@ -6,13 +6,15 @@
 using System.Web.Http;
 #endif
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.IO;
-
 using AppCode.Data;
 using AppCode.MailChimp;
 using AppCode.Recaptcha;
 using AppCode.Mail;
+using System.Linq;
+
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class FormController : Custom.Hybrid.ApiTyped
@@ -21,7 +23,7 @@ public class FormController : Custom.Hybrid.ApiTyped
   public void ProcessForm([FromBody] SaveRequest contactFormRequest)
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
-    var fieldsFormRequest = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
+    var fieldsFormRequest = HtmlEncodeFields(contactFormRequest.Fields);
     var wrapLog = Log.Call(useTimer: true);
     var formConfig = As<FormConfig>(MyItem);
 
@@ -72,26 +74,28 @@ public class FormController : Custom.Hybrid.ApiTyped
     var files = new List<ToSic.Sxc.Adam.IFile>();
 
     // Save files to Adam
-    if (contactFormRequest.Files != null)
+    contactFormRequest.Files?
+    .Select(fileObj =>
     {
-      foreach (var fileObj in contactFormRequest.Files)
-      {
-        files.Add(SaveInAdam(
-          stream: new MemoryStream(fileObj.Contents),
+      var stream = new MemoryStream(fileObj.Contents);
+      return SaveInAdam(
+          stream: stream,
           fileName: fileObj.Name,
           contentType: "FormData",
           guid: formDataEntity.EntityGuid,
-          field: "Files"));
-      }
-    }
-    else
-    {
+          field: "Files"
+      );
+    })
+    .ToList()
+    .ForEach(savedFile => files.Add(savedFile));
+
+    if (contactFormRequest.Files == null || !contactFormRequest.Files.Any())
       Log.Add("No files found to save");
-    }
+
 
     GetService<MailChimp>().SubscribeIfEnabled(contactFormRequest.Fields);// int.TryParse(id, out var intId) ? intId : 0);
 
-    // sending Mails
+    // Sending Mails
     GetService<Mail>().SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
 
     wrapLog("ok");
@@ -104,6 +108,24 @@ public class FormController : Custom.Hybrid.ApiTyped
     data.Add("Terms", formRequest.Terms);
     return Kit.Json.ToJson(data);
   }
+
+  private static Dictionary<string, object> HtmlEncodeFields(Dictionary<string, object> dictionary)
+  {
+      var newDic = dictionary.ToDictionary(
+          kvp => kvp.Key,
+          kvp => {
+              // Try to convert to string, if it fails, it's probably not a string
+              var value = kvp.Value as string;
+              if (value == null)
+                  return kvp.Value;
+
+              // HTML-Encode the string value
+              return (object)HttpUtility.HtmlEncode(value);
+          },
+          StringComparer.OrdinalIgnoreCase
+      );
+      return newDic;
+  }  
 }
 
 

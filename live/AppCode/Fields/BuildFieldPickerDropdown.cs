@@ -2,6 +2,7 @@ using AppCode.Data;
 using AppCode.Form;
 using ToSic.Razor.Blade;
 using ToSic.Razor.Html5;
+using System.Linq;
 
 namespace AppCode.Fields
 {
@@ -14,27 +15,37 @@ namespace AppCode.Fields
     /// </summary>
     public override IHtmlTag GetTag()
     {
+      var tag = Builder.Kit.HtmlTags;
       var item = Dropdown();
       item = SetBasicsDropdown(item);
 
-      if (Text.Has(Field.InfoText))
-        item.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
-        
+      if (Field.IsNotEmpty("InfoText"))
+        item.Add(tag.Div(Field.InfoText).Class("small-infotext"));
+
       return WrapInLabel(item);
     }
 
     private Select Dropdown()
     {
+      var tag = Builder.Kit.HtmlTags;
+
+      // Create the dropdown element
       var dropdown = Tag.Select().Class(CssClasses.InputControl);
 
-      if (Field.PickerMultiSelect) { dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId); }
+      if (Field.PickerMultiSelect) // Add the multiple attribute if necessary
+        dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId);
 
-      dropdown.Add(Tag.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
 
-      foreach (var optionItem in GetKeyValue(Field.PickerKeyValues))
-        dropdown.Add(Tag.Option(optionItem.Value).Value(optionItem.Key));
+      // Add an empty option as a placeholder
+      dropdown.Add(tag.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
 
-      return dropdown;
+      // Add all options from PickerKeyValues
+      var options = GetKeyValue(Field.PickerKeyValues)
+          .Select(optionItem =>
+              tag.Option(optionItem.Value).Value(optionItem.Key)
+          );
+          
+      return dropdown.Add(options);
     }
 
     protected Select SetBasicsDropdown(Select item)

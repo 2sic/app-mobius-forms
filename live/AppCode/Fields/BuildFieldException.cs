@@ -13,20 +13,21 @@ namespace AppCode.Fields
     /// </summary>
     public override IHtmlTag GetTag()
     {
-      var specs = Tag.Ul().Wrap(
-        Tag.Li("Field Title: " + Field.Title),
-        Tag.Li("Field ID: " + Field.FieldId),
-        Tag.Li("Field Type: " + Field.FieldType)
+      var tag = Builder.Kit.HtmlTags;
+      var specs = tag.Ul().Wrap(
+        tag.Li("Field Title: " + Field.Title),
+        tag.Li("Field ID: " + Field.FieldId),
+        tag.Li("Field Type: " + Field.FieldType)
       );
 
-      if (Text.Has(Field.PickerType))
-        specs = specs.Add(Tag.Li("PickerType: " + Field.PickerType));
+      if (Field.IsNotEmpty("PickerType"))
+        specs = specs.Add(tag.Li("PickerType: " + Field.PickerType));
 
-      var exception = Tag.Div()
+      var exception = tag.Div()
         .Class("alert alert-danger")
         .Attr("role", "alert")
         .Wrap(
-          Tag.Strong("Error: Unknown Field Type"),
+          tag.Strong("Error: Unknown Field Type"),
           specs
         );
 

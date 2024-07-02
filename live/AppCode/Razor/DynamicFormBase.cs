@@ -34,8 +34,6 @@ namespace AppCode.Razor
         .ToList();
     }
 
-
-
     /// <summary>
     /// Small helper to figure out the best classes for the wrapper div
     /// </summary>

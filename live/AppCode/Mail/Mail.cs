@@ -42,6 +42,10 @@ namespace AppCode.Mail
       var from = Text.First(sendMailConfigStack.MailFrom, appSettings.DefaultMailFrom);
       var owner = Text.First(sendMailConfigStack.OwnerMail, appSettings.DefaultOwnerMail);
 
+      // If Mail Settings are missing, throw an exception
+      if (string.IsNullOrEmpty(from) || string.IsNullOrEmpty(owner))
+        throw new Exception("Mail settings are missing. Please configure 'MailFrom' and 'OwnerMail' settings.");
+
       // Send Mail to owner
       if (sendMailConfigStack.OwnerSend)
       {
@@ -74,8 +78,6 @@ namespace AppCode.Mail
     public void Send(SendMailConfigStack sendMailConfig, string emailTemplateFilename, Dictionary<string, object> valuesWithMailLabels,
       string from, string to, string cc, string replyTo, List<ToSic.Sxc.Adam.IFile> files)
     {
-      Kit.SystemLog.Add("test", "test");
-
       // Log what's happening in case we run into problems
       var wrapLog = Log.Call("template:" + emailTemplateFilename + ", from:" + from + ", to:" + to + ", cc:" + cc + ", reply:" + replyTo);
 

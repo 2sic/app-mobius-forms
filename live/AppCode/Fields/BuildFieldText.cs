@@ -18,8 +18,9 @@ namespace AppCode.Fields
 
     private Input TextField()
     {
-      var item = Tag.Input().Type("text");
-      if (Text.Has(Field.DefaultValue)) { item.Value(Field.DefaultValue); }
+      var tag = Builder.Kit.HtmlTags;
+      var item = tag.Input().Type("text");
+      if (Field.IsNotEmpty("DefaultValue")) { item.Value(Field.DefaultValue); }
       return item;
     }
   }

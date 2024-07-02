@@ -14,7 +14,8 @@ namespace AppCode.Fields
 
     private IHtmlTag FieldLabel()
     {
-      var label = Tag.H4(Field.Title);
+      var tag = Builder.Kit.HtmlTags;
+      var label = tag.H4(Field.Title);
       return label;
     }
   }

@@ -1,3 +1,4 @@
+using System.CodeDom;
 using AppCode.Data;
 using AppCode.Form;
 using ToSic.Razor.Blade;
@@ -17,9 +18,10 @@ namespace AppCode.Fields
     }
     private IHtmlTag FileField()
     {
-      var input = Tag.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
+      var tag = Builder.Kit.HtmlTags;
+      var input = tag.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
 
-      if(Text.Has(Field.AcceptedExtensions)) {
+      if(Field.IsNotEmpty("AcceptedExtensions")) {
         input.Attr("accept", Field.AcceptedExtensions);
       }
 
@@ -33,11 +35,11 @@ namespace AppCode.Fields
       innerContainer.Add(input);
       container.Add(innerContainer);
 
-      if (Text.Has(Field.InfoText))
-        container.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+      if (Field.IsNotEmpty("InfoText"))
+        container.Add(tag.Div(Field.InfoText).Class("small-infotext"));
         
-      if (Text.Has(Field.AcceptedExtensions))
-        container.Add(Tag.Small(Field.AcceptedExtensions));      
+      if (Field.IsNotEmpty("AcceptedExtensions"))
+        container.Add(tag.Small(Field.AcceptedExtensions));      
 
       return container;
     }

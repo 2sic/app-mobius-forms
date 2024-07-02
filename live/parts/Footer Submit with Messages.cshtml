@@ -23,14 +23,14 @@
   @if (MyUser.IsContentAdmin)
   {
     if ((MailConfig.CustomerSend || MailConfig.OwnerSend) && !Text.Has(MailConfig.MailFrom) &&
-    !Text.Has(AppSet.DefaultMailFrom))
+    !AppSet.IsNotEmpty("DefaultMailFrom"))
     {
       <div class="alert alert-warning">
-        @Html.Raw(Kit.Scrub.Only(FormRes.MessageSendError, "p"))
+        @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailFromError, "p"))
       </div>
     }
 
-    if (MailConfig.OwnerSend && !Text.Has(MailConfig.OwnerMail) && !Text.Has(AppSet.DefaultOwnerMail))
+    if (MailConfig.OwnerSend && !Text.Has(MailConfig.OwnerMail) && !AppSet.IsNotEmpty("DefaultOwnerMail"))
     {
       <div class="alert alert-warning">
         @Html.Raw(Kit.Scrub.Only(FormRes.MessageMailOwnerError, "p"))
@@ -52,7 +52,7 @@
   {
     var classes = "alert alert-" + type + " app-mobius6-message";
     var rawMessage = Kit.Scrub.Only(message, "p");
-    var messageDiv = Tag.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
+    var messageDiv = Kit.HtmlTags.Div(rawMessage).Class(classes).Id(id).Attr("role", "alert");
     if (attribute != "") { messageDiv.Attr(attribute, ""); }
     return messageDiv;
   }

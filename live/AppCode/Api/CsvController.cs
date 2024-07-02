@@ -22,41 +22,43 @@ public class CsvController : Custom.Hybrid.ApiTyped
   [HttpGet]
   public object Csv(int id)
   {
-    var formData = GetService<FormDataService>().Setup(id);// int.TryParse(id, out var intId) ? intId : 0);
+    var formData = GetService<FormDataService>().Setup(id);
 
-    var columns = formData.Columns; // Create the Header with all specifications
+    var columns = formData.Columns;
+    var dataRows = GetRowDataList(formData.Data, columns);
 
-    var dataRows = GetRowDataList(formData.Data, columns); // Get Csv Data in a String List
-
-    // Write CSV data to the file
     var csvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
     {
       Delimiter = ";"
     };
+
+    // Write CSV data to the file
     using var memoryStream = new MemoryStream();
     using var writer = new StreamWriter(memoryStream, Encoding.Default);
     using var csv = new CsvWriter(writer, csvConfiguration);
 
     // Write the CSV header
-    foreach (var headerProp in formData.ColumnHeaders)
-      csv.WriteField(headerProp.Value);
+    formData.ColumnHeaders.Values
+        .ToList()
+        .ForEach(header => csv.WriteField(header));
     csv.NextRecord();
 
     // Write the CSV data rows
-    foreach (var dataRow in dataRows)
+    dataRows.ForEach(dataRow =>
     {
-      foreach (var field in dataRow)
-        csv.WriteField(field);
+      dataRow.ForEach(field => csv.WriteField(field));
       csv.NextRecord();
-    }
+    });
 
-    writer.Flush(); // flush the buffered text to stream
-    memoryStream.Seek(0, SeekOrigin.Begin); // reset stream position
+    writer.Flush(); // Flush the buffered text to stream
+    memoryStream.Seek(0, SeekOrigin.Begin); // Reset stream position
 
-    var csvString = memoryStream.ToArray();
+    // Generate file name
     string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
     string fileName = $"FormData_Form{formData.FormId}_{todayDate}.csv";
 
+    // Return the CSV data as a file
+    var csvString = memoryStream.ToArray();
     return File(download: true, virtualPath: null, contentType: "text/csv", fileDownloadName: fileName, contents: csvString);
   }
 

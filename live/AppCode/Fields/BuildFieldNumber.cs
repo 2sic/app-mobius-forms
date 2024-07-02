@@ -15,7 +15,8 @@ namespace AppCode.Fields
 
     private Input NumberField()
     {
-      var item = Tag.Input().Type("number");
+      var tag = Builder.Kit.HtmlTags;
+      var item = tag.Input().Type("number");
 
       var minValue = Field.NumberMin;
       var maxValue = Field.NumberMax;

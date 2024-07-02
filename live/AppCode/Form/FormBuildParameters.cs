@@ -1,4 +1,3 @@
-using System;
 using AppCode.Data;
 using ToSic.Sxc.Context;
 
@@ -25,7 +24,12 @@ namespace AppCode.Form
     public bool IsBs3 => CssClasses.IsBs3;
 
     public ICmsUser User { get; }
-    public Boolean UseFloatingLabels { get; }
+    public bool UseFloatingLabels { get; }
+
+    /// <summary>
+    /// Hacky handover to get Kit on all Field Builders
+    /// </summary>
+    public FormBuilder Builder {get;set;}
 
   }
 }
