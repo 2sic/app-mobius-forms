@@ -57,7 +57,7 @@ namespace AppCode.Razor
     protected IToolbarBuilder FieldToolbar(FormFieldConfig field)
     {
       // If the user is not admin, exit so save resources
-      if (!MyUser.IsSiteAdmin)
+      if (!MyUser.IsContentAdmin)
         return null;
 
       // Prepare some notes so the editor sees what field is being edited
