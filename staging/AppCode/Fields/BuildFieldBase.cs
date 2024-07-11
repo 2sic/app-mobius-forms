@@ -49,7 +49,7 @@ namespace AppCode.Fields
     {
       var result = item.Placeholder(PlaceholderLabel());
 
-      result = result.Id(string.IsNullOrWhiteSpace(Field.DefaultValue) ? Field.FieldId : customId);
+      result = result.Id(string.IsNullOrWhiteSpace(customId) ? Field.FieldId : customId);
 
       if (setDefaultClass) result = result.Class(CssClasses.InputControl);
       if (Field.Required) result = SetRequired(result);
