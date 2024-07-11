@@ -4,7 +4,7 @@
 
   <!-- Specify the default Namespace for C# code in this specific App -->
   <PropertyGroup>
-    <RootNamespace>AppCode</RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
 
   <!-- First: Detect if it's running in Dnn, Oqtane-Production or Oqtane-Dev -->
