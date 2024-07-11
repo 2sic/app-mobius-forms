@@ -1,5 +1,5 @@
 /node_modules
 npm-debug.log
 .temp_cache
-/obj
-*/bin/
+**/obj/
+**/bin/
