@@ -20,7 +20,7 @@ namespace AppCode.Fields
 
       var minValue = Field.NumberMin;
       var maxValue = Field.NumberMax;
-      var value = Field.DefaultValue;
+      var value = Form.Parse(Field.DefaultValue);
 
       if (minValue != 0) item = item.Min(minValue.ToString());
       if (maxValue != 0) item = item.Max(maxValue.ToString());

@@ -24,7 +24,7 @@ namespace AppCode.Fields
       var tags = Builder.Kit.HtmlTags;
       return tags.Input()
         .Type("text")
-        .Value(Field.DefaultValue)
+        .Value(Form.Parse(Field.DefaultValue))
         .Disabled()
         .Class(CssClasses.HiddenInputStyle + " " + CssClasses.InputControl);
     }
@@ -32,7 +32,9 @@ namespace AppCode.Fields
     private IHtmlTag FileHidden()
     {
       var tags = Builder.Kit.HtmlTags;
-      var hiddenField = tags.Input().Type("hidden").Value(Field.DefaultValue);
+      var hiddenField = tags.Input()
+        .Type("hidden")
+        .Value(Form.Parse(Field.DefaultValue));
       return tags.Div(SetBasics(hiddenField, false));
     }
   }

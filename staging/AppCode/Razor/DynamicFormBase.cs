@@ -15,8 +15,13 @@ namespace AppCode.Razor
     private FormBuilder _formBuilder;
     private FormBuilder CreateFormBuilder()
     {
-      var cssClasses = Kit.Css.Is("bs3") ? CssClasses.Bs3 : (Kit.Css.Is("bs4") ? CssClasses.Bs4 : CssClasses.Bs5);
-      var formParams = new FormBuildParameters(AppRes, FormRes, MailConfig, cssClasses, MyUser, FormConfig.UseFloatingLabels);
+      var cssClasses = Kit.Css.Is("bs3")
+        ? CssClasses.Bs3
+        : (Kit.Css.Is("bs4")
+          ? CssClasses.Bs4
+          : CssClasses.Bs5);
+
+      var formParams = new FormBuildParameters(AppRes, FormRes, MailConfig, cssClasses, MyUser, Kit, FormConfig.UseFloatingLabels);
       return GetService<FormBuilder>().Setup(formParams);
     }
 

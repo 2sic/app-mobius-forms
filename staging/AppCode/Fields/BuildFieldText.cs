@@ -21,7 +21,7 @@ namespace AppCode.Fields
       var tags = Builder.Kit.HtmlTags;
       var item = tags.Input().Type("text");
       if (Field.IsNotEmpty(nameof(Field.DefaultValue)))
-        item = item.Value(Field.DefaultValue);
+        item = item.Value(Form.Parse(Field.DefaultValue));
 
       return item;
     }

@@ -25,7 +25,7 @@ namespace AppCode.Fields
       var rows = Field.StringLines;
       var item = tags.Textarea().Rows(rows.ToString());
       if (Field.IsNotEmpty("DefaultValue"))
-        item = item.Add(Field.DefaultValue);
+        item = item.Add(Form.Parse(Field.DefaultValue));
       return item;
     }
 
