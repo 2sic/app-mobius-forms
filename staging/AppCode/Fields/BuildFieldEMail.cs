@@ -16,8 +16,10 @@ namespace AppCode.Fields
 
     private Input EmailField()
     {
-      var item = Tag.Input().Type("email");
-      if (Field.EmailUseAsRecipient) { item.Attr("mail", "recipientEmail"); }
+      var tags = Builder.Kit.HtmlTags;
+      var item = tags.Input().Type("email");
+      if (Field.EmailUseAsRecipient) 
+        item = item.Attr("mail", "recipientEmail");
       return item;
     }
   }

@@ -15,34 +15,34 @@ namespace AppCode.Fields
     /// </summary>
     public override IHtmlTag GetTag()
     {
-      var tag = Builder.Kit.HtmlTags;
+      var tags = Builder.Kit.HtmlTags;
       var item = Dropdown();
       item = SetBasicsDropdown(item);
 
       if (Field.IsNotEmpty("InfoText"))
-        item.Add(tag.Div(Field.InfoText).Class("small-infotext"));
+        item = item.Add(tags.Div(Field.InfoText).Class("small-infotext"));
 
       return WrapInLabel(item);
     }
 
     private Select Dropdown()
     {
-      var tag = Builder.Kit.HtmlTags;
+      var tags = Builder.Kit.HtmlTags;
 
       // Create the dropdown element
-      var dropdown = Tag.Select().Class(CssClasses.InputControl);
+      var dropdown = tags.Select().Class(CssClasses.InputControl);
 
       if (Field.PickerMultiSelect) // Add the multiple attribute if necessary
-        dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId);
+        dropdown = dropdown.Multiple().Attr("data-multiple-dropdown", Field.FieldId);
 
 
       // Add an empty option as a placeholder
-      dropdown.Add(tag.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
+      dropdown = dropdown.Add(tags.Option(Text.First(Field.PickerPlaceholder, Form.FormResources.LabelSelect)).Value(""));
 
       // Add all options from PickerKeyValues
       var options = GetKeyValue(Field.PickerKeyValues)
           .Select(optionItem =>
-              tag.Option(optionItem.Value).Value(optionItem.Key)
+              tags.Option(optionItem.Value).Value(optionItem.Key)
           );
           
       return dropdown.Add(options);
