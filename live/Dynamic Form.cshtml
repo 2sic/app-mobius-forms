@@ -83,7 +83,7 @@
       else
       {
         var mid = MyContext.Module.Id;
-        <a class="btn btn-primary" href='@Link.To(parameters: $"id={FormConfig.Id}&mid={mid}")' target="_blank">Form Data</a>
+        <a class="btn btn-primary" href='@Link.To(parameters: $"data={FormConfig.Id}&mid={mid}")' target="_blank">Form Data</a>
         <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink(FormConfig.Id)" type="button" target="_blank">CSV Export</a>
       }
     </div>
