@@ -47,15 +47,11 @@ namespace AppCode.Fields
     /// <returns></returns>
     protected TTag SetBasics<TTag>(TTag item, bool setDefaultClass = true, string customId = "") where TTag : ToSic.Razor.Html5.Input
     {
-      var result = item
-        .Placeholder(PlaceholderLabel());
-      if (customId != "")
-        result = result.Id(customId);
-      else
-        result = result.Id(Field.FieldId);
-      if (setDefaultClass) result = result
-        .Class(CssClasses.InputControl);
+      var result = item.Placeholder(PlaceholderLabel());
 
+      result = result.Id(string.IsNullOrWhiteSpace(customId) ? Field.FieldId : customId);
+
+      if (setDefaultClass) result = result.Class(CssClasses.InputControl);
       if (Field.Required) result = SetRequired(result);
       if (Field.IsDisabled) result = result.Disabled();
       return result as TTag;
@@ -78,20 +74,21 @@ namespace AppCode.Fields
     // Set Label Left or Floating Label (only for Bs5)
     protected IHtmlTag WrapInLabel(IHtmlTag inputHtml)
     {
-      var htmlTag = Builder.Kit.HtmlTags.Div().Class(FieldWrapperClasses());
+      var tags = Builder.Kit.HtmlTags;
+      var htmlTag = tags.Div().Class(FieldWrapperClasses());
       // Label Left
       if (!Form.UseFloatingLabels)
       {
         htmlTag = htmlTag.Add(
-            Tag.Label(Text.First(Field.Title, Field.FieldId))
-                .Class(LabelClasses(Field.Required))
-                .For(Field.FieldId)
+          tags.Label(Text.First(Field.Title, Field.FieldId))
+            .Class(LabelClasses(Field.Required))
+            .For(Field.FieldId)
         );
 
-        var inputDivWithClasses = Tag.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside);
+        var inputDivWithClasses = tags.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside);
 
         if (Field.IsNotEmpty("InfoText"))
-          inputDivWithClasses = inputDivWithClasses.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+          inputDivWithClasses = inputDivWithClasses.Add(tags.Div(Field.InfoText).Class("small-infotext"));
 
         htmlTag = htmlTag.Add(inputDivWithClasses);
       }
@@ -99,13 +96,13 @@ namespace AppCode.Fields
       {
         htmlTag = htmlTag.Add(inputHtml);
         htmlTag = htmlTag.Add(
-            Tag.Label(Text.First(Field.Title, Field.FieldId))
-                .Class(LabelClasses(Field.Required, Form.UseFloatingLabels))
-                .For(Field.FieldId)
+          tags.Label(Text.First(Field.Title, Field.FieldId))
+            .Class(LabelClasses(Field.Required, Form.UseFloatingLabels))
+            .For(Field.FieldId)
         );        
         
         if (Field.IsNotEmpty("InfoText"))
-          htmlTag = htmlTag.Add(Tag.Div(Field.InfoText).Class("small-infotext"));
+          htmlTag = htmlTag.Add(tags.Div(Field.InfoText).Class("small-infotext"));
       }
 
       return htmlTag;

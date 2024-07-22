@@ -18,28 +18,27 @@ namespace AppCode.Fields
     }
     private IHtmlTag FileField()
     {
-      var tag = Builder.Kit.HtmlTags;
-      var input = tag.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
+      var tags = Builder.Kit.HtmlTags;
+      var input = tags.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
 
-      if(Field.IsNotEmpty("AcceptedExtensions")) {
-        input.Attr("accept", Field.AcceptedExtensions);
-      }
+      if(Field.IsNotEmpty("AcceptedExtensions"))
+        input = input.Attr("accept", Field.AcceptedExtensions);
 
       input = SetBasics(input, false);
-      var container = Tag.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
+      var container = tags.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
 
-      var inputLabels = Tag.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
-      var innerContainer = Tag.Div().Class(CssClasses.LabelOutside);
+      var inputLabels = tags.Label(Field.Title).For(Field.FieldId).Class(LabelClasses(Field.Required));
+      var innerContainer = tags.Div().Class(CssClasses.LabelOutside);
 
-      container.Add(inputLabels);
-      innerContainer.Add(input);
-      container.Add(innerContainer);
+      container = container.Add(inputLabels);
+      innerContainer = innerContainer.Add(input);
+      container = container.Add(innerContainer);
 
       if (Field.IsNotEmpty("InfoText"))
-        container.Add(tag.Div(Field.InfoText).Class("small-infotext"));
+        container = container.Add(tags.Div(Field.InfoText).Class("small-infotext"));
         
       if (Field.IsNotEmpty("AcceptedExtensions"))
-        container.Add(tag.Small(Field.AcceptedExtensions));      
+        container = container.Add(tags.Small(Field.AcceptedExtensions));      
 
       return container;
     }
@@ -48,7 +47,8 @@ namespace AppCode.Fields
     {
       return "control-label "
           + (required ? Constants.ClassRequired : "")
-          + " " + (Form.UseFloatingLabels ? "col-12" : CssClasses.Label);
+          + " "
+         + (Form.UseFloatingLabels ? "col-12" : CssClasses.Label);
     }
 
   }

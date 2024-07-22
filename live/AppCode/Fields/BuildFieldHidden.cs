@@ -21,14 +21,21 @@ namespace AppCode.Fields
 
     private Input FileHiddenAdmin()
     {
-      var tag = Builder.Kit.HtmlTags;
-      return tag.Input().Type("text").Value(Field.DefaultValue).Disabled().Class(CssClasses.HiddenInputStyle + " " + CssClasses.InputControl);
+      var tags = Builder.Kit.HtmlTags;
+      return tags.Input()
+        .Type("text")
+        .Value(Form.Parse(Field.DefaultValue))
+        .Disabled()
+        .Class(CssClasses.HiddenInputStyle + " " + CssClasses.InputControl);
     }
 
     private IHtmlTag FileHidden()
     {
-      var tag = Builder.Kit.HtmlTags;
-      return tag.Div(SetBasics(tag.Input().Type("hidden").Value(Field.DefaultValue), false));
+      var tags = Builder.Kit.HtmlTags;
+      var hiddenField = tags.Input()
+        .Type("hidden")
+        .Value(Form.Parse(Field.DefaultValue));
+      return tags.Div(SetBasics(hiddenField, false));
     }
   }
 }

@@ -15,16 +15,16 @@ namespace AppCode.Fields
 
     private Input NumberField()
     {
-      var tag = Builder.Kit.HtmlTags;
-      var item = tag.Input().Type("number");
+      var tags = Builder.Kit.HtmlTags;
+      var item = tags.Input().Type("number");
 
       var minValue = Field.NumberMin;
       var maxValue = Field.NumberMax;
-      var value = Field.DefaultValue;
+      var value = Form.Parse(Field.DefaultValue);
 
-      if (minValue != 0) { item.Min(minValue.ToString()); }
-      if (maxValue != 0) { item.Max(maxValue.ToString()); }
-      if (value != null) { item.Attr("value", value); }
+      if (minValue != 0) item = item.Min(minValue.ToString());
+      if (maxValue != 0) item = item.Max(maxValue.ToString());
+      if (value != null) item = item.Attr("value", value);
       return item;
     }
   }

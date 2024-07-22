@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!-- This file helps VS Code provide IntelliSense - see https://go.2sxc.org/vscode -->
+  <!-- Template v2024-06-19. If you have issues, try getting a newer copy from the url above -->
+
+  <!-- Specify the default Namespace for C# code in this specific App -->
+  <PropertyGroup>
+    <RootNamespace></RootNamespace>
+  </PropertyGroup>
+
+  <!-- First: Detect if it's running in Dnn, Oqtane-Production or Oqtane-Dev -->
+  <PropertyGroup>
+    <RunningInDnn Condition="Exists('..\..\..\..\..\bin\DotNetNuke.dll')">true</RunningInDnn>
+    <RunningInOqtane Condition="Exists('..\..\..\..\Oqtane.Server.dll') Or Exists('..\..\..\bin\Debug\net8.0\Oqtane.Server.dll')">true</RunningInOqtane>
+    <OqtaneIsProd Condition="Exists('..\..\..\..\Oqtane.Server.dll')">true</OqtaneIsProd>
+    <OqtaneIsDev Condition="Exists('..\..\..\..\bin\Debug\net8.0\Oqtane.Server.dll')">true</OqtaneIsDev>
+  </PropertyGroup>
+
+  <!-- Settings for Dnn -->
+  <PropertyGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- Specify .net 4.7.2, C# 8.0 and Bin folder for DNN - see https://go.2sxc.org/vscode -->
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <PathBin>..\..\..\..\..\bin</PathBin>
+  </PropertyGroup>
+  
+  <!-- Settings for Oqtane -->
+  <PropertyGroup Condition="'$(RunningInOqtane)' == 'true'">
+    <!-- Oqtane 5+ uses .net 8 and a very new C# language version -->
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+
+    <!-- PathBin Oqtane production, the bin folder is in the root, just up 3 folders, no bin-subfolder -->
+    <PathBin Condition="'$(OqtaneIsProd)' == 'true'">..\..\..\..</PathBin>
+
+    <!-- PathBin Oqtane dev/debug, the bin folder is deeper down, up 3 folders and current build folder -->
+    <PathBin Condition="'$(OqtaneIsDev)' == 'true'">..\..\..\..\bin\Debug\net8.0</PathBin>
+  </PropertyGroup>
+
+
+  <!-- IntelliSense: Load all DLLs which exist in Dnn and Oqtane from the bin folder -->
+  <ItemGroup>
+    <Reference Include="$(PathBin)\ToSic.*.dll" />
+    <Reference Include="$(PathBin)\Connect.Koi.dll" />
+
+    <!-- Common Microsoft DLLs -->
+    <Reference Include="$(PathBin)\System.Text.Json.dll" />
+
+    <!-- Also load files in the Dependencies folder of the current App -->
+    <Reference Include="Dependencies\*.dll" />
+  </ItemGroup>
+
+  <!-- IntelliSense: DNN specific -->
+  <ItemGroup Condition="'$(RunningInDnn)' == 'true'">
+    <!-- also add System.Web and DotNetNuke DLLs - useful when creating APIs, but be aware that it may make your code less hybrid -->
+    <Reference Include="$(PathBin)\DotNetNuke.dll" />
+    <Reference Include="$(PathBin)\DotNetNuke.*.dll" />
+    <Reference Include="$(PathBin)\System.Web.Http.dll" />
+    <Reference Include="$(PathBin)\System.Web.WebPages.dll" />
+
+    <!-- System.Web is not in the DNN folder but in the .net Framework installed on the server -->
+    <Reference Include="System.Web" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <!-- Polymorphism - if have files with the same classes confuse IntelliSense - see https://go.2sxc.org/vscode -->
+  <!-- Example: exclude /live as we're always working on /staging -->
+  <ItemGroup>
+    <None Remove="live\**" />
+    <Content Remove="live\**" />
+    <Compile Remove="live\**" />
+    <EmbeddedResource Remove="live\**" />
+  </ItemGroup>
+
+</Project>

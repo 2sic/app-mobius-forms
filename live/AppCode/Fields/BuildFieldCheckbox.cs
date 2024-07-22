@@ -16,7 +16,8 @@ namespace AppCode.Fields
     {
 
       // If label right or floating labels, wrap in label
-      if (Field.BooleanLabelRight || Form.UseFloatingLabels) return CheckboxWithLabelRight(GetCheckbox());
+      if (Field.BooleanLabelRight || Form.UseFloatingLabels)
+        return CheckboxWithLabelRight(GetCheckbox());
 
       // If label is to the left, behave as default
       return SetBasicsAndWrapInLabel(GetCheckbox(), setDefaultClass: false);
@@ -27,8 +28,12 @@ namespace AppCode.Fields
     /// </summary>
     protected Input GetCheckbox()
     {
-      var tag = Builder.Kit.HtmlTags;
-      return tag.Input().Type("checkbox").Id(Field.FieldId).Name(Field.FieldId).Class(CssClasses.FormCheckInput);
+      var tags = Builder.Kit.HtmlTags;
+      return tags.Input()
+        .Type("checkbox")
+        .Id(Field.FieldId)
+        .Name(Field.FieldId)
+        .Class(CssClasses.FormCheckInput);
     }
 
     /// <summary>
@@ -41,29 +46,34 @@ namespace AppCode.Fields
       checkbox = checkbox.Value(checkboxLabel);
       checkbox = SetBasics(checkbox, false);
 
-      var tag = Builder.Kit.HtmlTags;
-      var checkboxWrapper = Tag.Div();
+      var tags = Builder.Kit.HtmlTags;
+      var checkboxWrapper = tags.Div();
 
       if (CssClasses.IsBs3) {
-        checkboxWrapper.Class($"{Constants.ClassMobiusField} form-group").Wrap(
-          tag.Div().Class("checkbox").Wrap(
-            tag.Label().Wrap(checkbox, checkboxLabel)
+        checkboxWrapper = checkboxWrapper.Class($"{Constants.ClassMobiusField} form-group").Wrap(
+          tags.Div().Class("checkbox").Wrap(
+            tags.Label().Wrap(checkbox, checkboxLabel)
           )
         );
         
-      if (Field.IsNotEmpty("InfoText"))
-        checkboxWrapper.Add(tag.Div(Field.InfoText).Class("small-infotext"));        
+        if (Field.IsNotEmpty("InfoText"))
+          checkboxWrapper = checkboxWrapper.Add(tags.Div(Field.InfoText).Class("small-infotext"));        
 
         return checkboxWrapper;
       }
 
-      checkboxWrapper.Class($"{Constants.ClassMobiusField} mb-3 form-check").Wrap(
-        checkbox,
-        tag.Label(checkboxLabel.Replace("<p>", "").Replace("</p>", "")).Class("form-check-label").Class(Field.Required ? Constants.ClassRequired : "").For(Field.FieldId)
-      );
+      checkboxWrapper = checkboxWrapper
+        .Class($"{Constants.ClassMobiusField} mb-3 form-check")
+        .Wrap(
+          checkbox,
+          tags.Label(checkboxLabel.Replace("<p>", "").Replace("</p>", ""))
+            .Class("form-check-label")
+            .Class(Field.Required ? Constants.ClassRequired : "")
+            .For(Field.FieldId)
+        );
 
       if (Field.IsNotEmpty("InfoText"))
-        checkboxWrapper.Add(tag.Div(Field.InfoText).Class("small-infotext"));
+        checkboxWrapper = checkboxWrapper.Add(tags.Div(Field.InfoText).Class("small-infotext"));
 
       return checkboxWrapper;
     }
