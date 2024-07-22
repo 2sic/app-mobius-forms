@@ -110,7 +110,7 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * v06.17.02
   * Use new Builder.Kit.HtmlTags instance of Tag.Div
   * Refactor Code to functional
-* v06.18.00 WIP
+* v06.18.00
   * Finished 2sxc 17 Tags conventions (functional)
   * Added Tokens for default text to allow QueryString, User etc. properties
   * Made default-text field multiline (2 lines by default, stretchable)
