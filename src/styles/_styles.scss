@@ -39,6 +39,11 @@
   .form-control.select-control {
     padding: 6px 7px;
   }
+
+  textarea.form-control {
+    height: auto;
+  }
+  
   .alert {
     width: 100%;
   }
