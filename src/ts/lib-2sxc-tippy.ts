@@ -8,14 +8,15 @@ interface TippyOptions {
 }
 
 export function initTippy({ domClass, options }: { domClass: string; options: TippyOptions }) {
-  document.querySelectorAll(`.${domClass}`).forEach((element: HTMLElement) => {
+  document.querySelectorAll(`.${domClass}`).forEach((element: Element) => {
     let content = "";
     const fileId = element.id.split("-").pop();
     let hasLength = false
     
     if (element.hasAttribute("data-content")) {
-      content = element.dataset.content;
-      if(element.dataset.content.length > 10) hasLength = true;
+      content = (element as HTMLElement).dataset.content || "";
+      const contentData = (element as HTMLElement).dataset.content;
+      if (contentData && contentData.length > 10) hasLength = true;
     } else {
       const contentElements = document.querySelectorAll(`.app-mobius-tooltip-content[data-file-id="${fileId}"]`);
       if (contentElements.length > 0) {

@@ -1,10 +1,17 @@
 {
     "compilerOptions": {
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "lib": ["es6", "dom"],
-        "target": "es5",
-        "allowJs": true
-    }
-}
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "lib": ["es6", "dom"],
+      "target": "es6",
+      "allowJs": true,
+      "strict": true,
+      "moduleResolution": "node",
+      "esModuleInterop": true, // Helps with default imports from CommonJS modules
+      "skipLibCheck": true, // Speeds up compilation by skipping type-checking for .d.ts files
+      "outDir": "./dist"      
+    },
+    "include": ["src/**/*"], // Include all source files
+    "exclude": ["node_modules", "dist"] // Exclude build artifacts and dependencies      
+  }

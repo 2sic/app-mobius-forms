@@ -33,22 +33,25 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
 
   const fields = formWrapper.querySelectorAll("input,textarea,select");
 
-  fields.forEach((formField: HTMLInputElement) => {
-    const fieldKey = getFieldKey(formField);
-    if (!fieldKey || !formField.value) return;
+  fields.forEach((formField: Element) => {
+    const formFieldElement = formField as HTMLInputElement;
+    const fieldKey = getFieldKey(formFieldElement);
+    if (!fieldKey || !formFieldElement.value) return;
 
     // for checkboxList to get a array with fieldId and the values
     if (formField.hasAttribute("data-checkbox")) {
       const fieldId = formField.getAttribute("data-checkbox");
-      const fieldValue = getFieldValue(formField);
+      const fieldValue = getFieldValue(formFieldElement);
       // Check if the array for this fieldId exists, if not, create it in the data object
 
-      if (!data["Fields"][fieldId]) {
-        data["Fields"][fieldId] = [];
-      }
+      if (fieldId) {
+        if (!data["Fields"][fieldId]) {
+          data["Fields"][fieldId] = [];
+        }
 
-      if (fieldValue !== "") {
-        data["Fields"][fieldId].push(fieldValue);
+        if (fieldValue !== "") {
+          data["Fields"][fieldId].push(fieldValue);
+        }
       }
     }
 
@@ -79,16 +82,16 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
       if (data["CustomerMails"] !== "") {
         data["CustomerMails"] += "; ";
       }
-      data["CustomerMails"] += getFieldValue(formField);
+      data["CustomerMails"] += getFieldValue(formFieldElement);
     }
 
     // If it is an attachment then add it to Files
     if (
       formField.getAttribute("type") &&
-      formField.getAttribute("type").toLowerCase() == "file"
+      formField.getAttribute("type")?.toLowerCase() == "file"
     ) {
       data["Files"].push({
-        ...(getFieldValue(formField) as object),
+        ...(getFieldValue(formFieldElement) as object),
         Field: fieldKey,
       });
       return;
@@ -96,9 +99,9 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
     // If Checkbox or Radio not checked, data will not add in the Request
     if (
       formField.getAttribute("type") &&
-      (formField.getAttribute("type").toLowerCase() == "checkbox" ||
-        formField.getAttribute("type").toLowerCase() == "radio") &&
-      !formField.checked
+      (formField.getAttribute("type")?.toLowerCase() == "checkbox" ||
+        formField.getAttribute("type")?.toLowerCase() == "radio") &&
+      !(formField as HTMLInputElement).checked
     ) {
       return;
     }
@@ -106,14 +109,14 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
 
     if (
       formField.getAttribute("type") &&
-      formField.getAttribute("type").toLowerCase() == "checkbox" &&
+      formField.getAttribute("type")?.toLowerCase() == "checkbox" &&
       formField.getAttribute("terms")
     ) {
-      data["Terms"][fieldKey] = getFieldValue(formField);
+      data["Terms"][fieldKey] = getFieldValue(formFieldElement);
       return;
     } else if (!formField.hasAttribute("data-checkbox")) {
       // If it is a normal field, e.g. first name, then it is added to the field.
-      data["Fields"][fieldKey] = getFieldValue(formField);
+      data["Fields"][fieldKey] = getFieldValue(formFieldElement);
     }
   });
 
@@ -124,7 +127,7 @@ export async function getFormValues(formWrapper: Element): Promise<any> {
 
 function getFieldKey(formField: HTMLInputElement): string {
   // get the property name from special-attribute, name OR id
-  return formField.getAttribute("name") || formField.getAttribute("id");
+  return formField.getAttribute("name") ?? formField.getAttribute("id") ?? "";
 }
 
 function getFieldValue(
@@ -132,9 +135,9 @@ function getFieldValue(
 ): { Encoded: Promise<unknown>; Name: string } | unknown {
   // extract data from file fields
   if (!formField.getAttribute("type")) return formField.value;
-  switch (formField.getAttribute("type").toLowerCase()) {
+  switch (formField.getAttribute("type")?.toLowerCase()) {
     case "file":
-      const file = formField.files[0];
+      const file = formField.files ? formField.files[0] : null;
       if (!file) return;
       return {
         Name: file.name,
@@ -142,7 +145,9 @@ function getFieldValue(
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = (e) => {
-            resolve(e.target.result);
+            if (e.target) {
+              resolve(e.target.result);
+            }
           };
         }),
       };
@@ -176,12 +181,12 @@ export function disableInputs(wrapper: Element, state: boolean) {
   wrapper.classList.toggle("disable", state);
   wrapper
     .querySelectorAll("input,textarea,select,button")
-    .forEach((elem: HTMLElement) => elem.setAttribute("disabled", "true"));
+    .forEach((elem) => (elem as HTMLElement).setAttribute("disabled", "true"));
 }
 
 export function enableInputs(wrapper: Element) {
   wrapper.classList.remove("disable");
   wrapper
     .querySelectorAll("input,textarea,select,button")
-    .forEach((elem: HTMLElement) => elem.setAttribute("disabled", "false"));
+    .forEach((elem) => (elem as HTMLElement).setAttribute("disabled", "false"));
 }

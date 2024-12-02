@@ -24,21 +24,25 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
   if(!mobiusWrapper) return
 
   const nextStepButtons = mobiusWrapper.querySelectorAll('.btn-mobius-next-step');
-  nextStepButtons.forEach((btn: HTMLElement) => {
+  nextStepButtons.forEach((btn: Element) => {
     const sendButton = mobiusWrapper.querySelector('[app-mobius6-send]') as HTMLElement;
     sendButton.style.display = 'none';
     
     btn.addEventListener('click', (event: Event) => {
       event.preventDefault();
+      const btnElement = btn as HTMLElement;
       const parentNode = btn.closest('.mobius-group') as HTMLElement;
       const stepForm = new Pristine(parentNode, validationOptions);
 
       if(stepForm.validate()) {
-        const nextStep = parentNode.closest('.mobius-group').nextElementSibling;
+        const closestGroup = parentNode.closest('.mobius-group');
+        if (!closestGroup) return;
+        const nextStep = closestGroup.nextElementSibling;
+        if (!nextStep) return;
         const nextStepButton = nextStep.querySelector('.btn-mobius-next-step');
         
         if(parentNode != null) {
-          btn.style.display = 'none';
+          btnElement.style.display = 'none';
           
           nextStep.classList.add('active');
 
@@ -47,7 +51,6 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
         }
       }
-      
     })
   })
 
