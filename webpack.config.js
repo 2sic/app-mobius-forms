@@ -1,14 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env) => {
   let lastMessage = '';
-  
+
   return {
-    mode: "production",
     entry: {
       styles: `./src/styles/bs5.scss`,
       scripts: "./src/ts/index.ts",
@@ -17,6 +14,7 @@ module.exports = (env) => {
       path: path.resolve(__dirname, `staging/dist`),
       filename: "[name].min.js",
     },
+    mode: "production",
     devtool: "source-map",
     watch: true,
     cache: {
@@ -25,11 +23,11 @@ module.exports = (env) => {
       compression: "gzip",
     },
     resolve: {
-      extensions: ['.ts', '.js', '.scss']
+      extensions: [".ts", ".js", ".scss", "css"],
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: '[name].min.css',
+        filename: "[name].min.css",
       }),
       new webpack.ProgressPlugin((percentage, message) => {
         const progress = Math.round(percentage * 100);
@@ -39,29 +37,7 @@ module.exports = (env) => {
           lastMessage = message;
         }
       }),
-      new ForkTsCheckerWebpackPlugin({
-        async: false, // Blocks the build on type errors
-        typescript: {
-          configFile: path.resolve(__dirname, 'tsconfig.json'),
-        },
-      }),
     ],
-    optimization: {
-      splitChunks: {
-        chunks: "all",
-      },
-      minimize: true, // Ensure minification is enabled
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            format: {
-              comments: false, // Removes all comments
-            },
-          },
-          extractComments: false, // Disables .LICENSE.txt file generation
-        }),
-      ],
-    },
     module: {
       rules: [
         {
@@ -80,15 +56,10 @@ module.exports = (env) => {
               options: {
                 sourceMap: true,
                 postcssOptions: {
-                  plugins: function () {
-                    return [
-                      require('autoprefixer'),
-                      require('cssnano')({
-                        preset: 'default',
-                      }),
-                    ];
-                  }
-                }
+                  plugins: [
+                    require("autoprefixer")
+                  ]
+                },
               },
             },
             {
@@ -103,30 +74,12 @@ module.exports = (env) => {
           ],
         },
         {
-          test: /\.tsx?$/,
-          use: [
-            {
-              loader: 'babel-loader', // Babel for transformations
-              options: {
-                presets: [
-                  '@babel/preset-env',
-                  '@babel/preset-typescript',
-                ],
-                plugins: [
-                  '@babel/plugin-transform-class-properties',
-                  '@babel/plugin-transform-object-rest-spread',
-                ],
-              }
-            },
-            {
-              loader: 'ts-loader', // Type-checking
-              options: {
-                transpileOnly: true, // Skip type-checking; separate type-checker recommended
-              },
-            },
-          ],
+          test: /\.ts$/,
           exclude: /node_modules/,
-        }
+          use: {
+            loader: "ts-loader",
+          },
+        },
       ],
     },
   };

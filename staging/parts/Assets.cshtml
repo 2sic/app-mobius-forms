@@ -12,6 +12,8 @@
 @* Activate JS features of 2sxc *@
 @Kit.Page.Activate("2sxc.JsCore")
 
+@Kit.Page.Activate("Network.EncryptBody")
+
 @* Run the JS and give it all the parameters to process the current form *@
 @{
   var formHelper = GetService<FormHelpers>();

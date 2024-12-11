@@ -14,12 +14,13 @@ using AppCode.MailChimp;
 using AppCode.Recaptcha;
 using AppCode.Mail;
 using System.Linq;
-
+using ToSic.Sxc.WebApi;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class FormController : Custom.Hybrid.ApiTyped
 {
   [HttpPost]
+  [SecureEndpoint]
   public void ProcessForm([FromBody] SaveRequest contactFormRequest)
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
