@@ -8,7 +8,7 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 
 | Aspect              | Status | Comments or Version
 | ------------------- | :----: | -------------------
-| 2sxc                | ✅    | requires 2sxc v17.07.00
+| 2sxc                | ✅    | requires 2sxc v19.00.00
 | Dnn                 | ✅    | For v9.6.1
 | Oqtane              | ✅    | Requires v5.00
 | No jQuery           | ✅    |
@@ -114,6 +114,11 @@ The Source Code is all here - so you can easily customize to your hearts desire!
   * Finished 2sxc 17 Tags conventions (functional)
   * Added Tokens for default text to allow QueryString, User etc. properties
   * Made default-text field multiline (2 lines by default, stretchable)
+* v06.19.00
+  * Bugfixes
+  * Replaced WebClient with HttpClient
+  * SecureEndpoint for double-encryption
+  * removed app web.config
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
