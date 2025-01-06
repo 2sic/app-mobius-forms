@@ -1,4 +1,6 @@
 using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AppCode.Recaptcha
 {
@@ -7,7 +9,7 @@ namespace AppCode.Recaptcha
   // shouldn't really need any modifications, just leave this as is
   public class Recaptcha : Custom.Hybrid.CodeTyped
   {
-    public bool Validate(string encodedResponse)
+    public async Task<bool> Validate(string encodedResponse)
     {
       // Log what's happening in case we run into problems
       var wrapLog = Log.Call();
@@ -19,8 +21,8 @@ namespace AppCode.Recaptcha
       var privateKey = Kit.SecureData.Parse(AllSettings.String("GoogleRecaptcha.PrivateKey")).Value;
 
       // Ask google if the verification is valid
-      var client = new System.Net.WebClient();
-      var GoogleReply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", privateKey, encodedResponse));
+      var client = new HttpClient();
+      var GoogleReply = await client.GetStringAsync(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", privateKey, encodedResponse));
       var captchaResponse = Kit.Convert.Json.To<RecaptchaResponse>(GoogleReply);
 
       var status = captchaResponse.Success;
