@@ -11,7 +11,7 @@ namespace AppCode.Data
     protected ITypedStack ConfigStack { get; }
 
     public bool OwnerSend => ConfigStack.Bool(nameof(OwnerSend));
-    public bool CustomerSend => ConfigStack.Bool(nameof(OwnerSend));
+    public bool CustomerSend => ConfigStack.Bool(nameof(CustomerSend));
     public string OwnerMail => ConfigStack.String(nameof(OwnerMail), fallback: "");
     public string OwnerMailCC => ConfigStack.String(nameof(OwnerMailCC), fallback: "");
     public string OwnerMailTemplate => ConfigStack.String(nameof(OwnerMailTemplate), fallback: "");
