@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace AppCode.Recaptcha
+namespace AppCode.RecaptchaValidator
 {
   // Helper to do Recaptcha server-validation
   // based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
