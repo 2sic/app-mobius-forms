@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace AppCode.Recaptcha
+namespace AppCode.RecaptchaValidator
 {
     // The response from the Recaptcha Endpoint
   public class RecaptchaResponse

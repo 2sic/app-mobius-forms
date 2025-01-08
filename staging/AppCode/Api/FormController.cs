@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using AppCode.Data;
 using AppCode.MailChimp;
-using AppCode.Recaptcha;
+using AppCode.RecaptchaValidator;
 using AppCode.Mail;
 using System.Linq;
 using ToSic.Sxc.WebApi;
