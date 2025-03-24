@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.00.01" ExportDate="2025-01-06T10:51:57.0810567+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.03.01" ExportDate="2025-03-24T07:37:18.3087774+01:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -2021,6 +2021,9 @@
           </Entity>
         </Attribute>
       </Attributes>
+    </AttributeSet>
+    <AttributeSet StaticName="50d35964-e795-4f04-8199-70f77b6344ed" Name="App-Settings" Scope="System.Configuration" AlwaysShareConfiguration="false">
+      <Attributes />
     </AttributeSet>
     <AttributeSet StaticName="92f0ea4a-9e86-44c7-9a6a-be5f09141e31" Name="FormConfig" Scope="Default" AlwaysShareConfiguration="false">
       <Attributes>
@@ -8006,7 +8009,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.19.00" Type="String">
+      <Value Key="Version" Value="06.20.00" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -8804,64 +8807,30 @@
       </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="DataPipeline" AttributeSetName="DataPipeline" EntityGUID="f732c9fb-82b0-4186-8ae5-4681df831d3a" Json="True">
-      <Value Key="AllowEdit" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Description" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="HiddenInQueryPicker" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Name" Value="DynamicForm-CustomFields" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Params" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="StreamsOut" Value="Default,Header,All,PleaseRename96148" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="StreamWiring" Value="6e6250f3-2604-4bb5-9da7-2a41840722dc:Files&gt;Out:All&#xD;&#xA;6e6250f3-2604-4bb5-9da7-2a41840722dc:Files&gt;706dac87-90f8-4b27-aa1a-9dfe60dc94f1:Default&#xD;&#xA;706dac87-90f8-4b27-aa1a-9dfe60dc94f1:Default&gt;Out:Default" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="TestParameters" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="VisualDesignerData" Value="{&quot;ShowDataSourceDetails&quot;:true}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
+      <Value Key="AllowEdit" Value="True" Type="Boolean" />
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="HiddenInQueryPicker" Value="False" Type="Boolean" />
+      <Value Key="Name" Value="DynamicForm-CustomFields" Type="String" />
+      <Value Key="Params" Value="" Type="String" />
+      <Value Key="StreamsOut" Value="Default,Header,All,PleaseRename96148" Type="String" />
+      <Value Key="StreamWiring" Value="6e6250f3-2604-4bb5-9da7-2a41840722dc:Files&gt;Out:All&#xD;&#xA;6e6250f3-2604-4bb5-9da7-2a41840722dc:Files&gt;706dac87-90f8-4b27-aa1a-9dfe60dc94f1:Default&#xD;&#xA;706dac87-90f8-4b27-aa1a-9dfe60dc94f1:Default&gt;Out:Default" Type="String" />
+      <Value Key="TestParameters" Value="" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&quot;ShowDataSourceDetails&quot;:true}" Type="String" />
     </Entity>
     <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="DataPipelinePart" AttributeSetName="DataPipelinePart" EntityGUID="6e6250f3-2604-4bb5-9da7-2a41840722dc" Json="True" KeyGuid="f732c9fb-82b0-4186-8ae5-4681df831d3a">
-      <Value Key="Description" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Name" Value="AppFiles" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="PartAssemblyAndType" Value="3fe6c215-4c37-45c1-8883-b4b2a47162a7" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 500,&#xD;&#xA;  &quot;Left&quot;: 240&#xD;&#xA;}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Name" Value="AppFiles" Type="String" />
+      <Value Key="PartAssemblyAndType" Value="3fe6c215-4c37-45c1-8883-b4b2a47162a7" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 500,&#xD;&#xA;  &quot;Left&quot;: 240&#xD;&#xA;}" Type="String" />
     </Entity>
     <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="DataPipelinePart" AttributeSetName="DataPipelinePart" EntityGUID="706dac87-90f8-4b27-aa1a-9dfe60dc94f1" Json="True" KeyGuid="f732c9fb-82b0-4186-8ae5-4681df831d3a">
-      <Value Key="Description" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Name" Value="Value Filter" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="PartAssemblyAndType" Value="ToSic.Eav.DataSources.ValueFilter, ToSic.Eav.DataSources" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 200,&#xD;&#xA;  &quot;Left&quot;: 520&#xD;&#xA;}" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="Name" Value="Value Filter" Type="String" />
+      <Value Key="PartAssemblyAndType" Value="ToSic.Eav.DataSources.ValueFilter, ToSic.Eav.DataSources" Type="String" />
+      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 200,&#xD;&#xA;  &quot;Left&quot;: 520&#xD;&#xA;}" Type="String" />
     </Entity>
     <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="|Config ToSic.Eav.DataSources.ValueFilter" AttributeSetName="ToSic.Eav.DataSources.ValueFilter" EntityGUID="08f44ae9-78cd-4881-96ba-216b9a41b2d8" Json="True" KeyGuid="706dac87-90f8-4b27-aa1a-9dfe60dc94f1">
-      <Value Key="Attribute" Value="FullName" Type="String">
+      <Value Key="Attribute" Value="Path" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="Languages" Value="" Type="String">
@@ -8873,7 +8842,7 @@
       <Value Key="Take" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Value" Value="/staging/razor-fields" Type="String">
+      <Value Key="Value" Value="staging/razor-fields" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -13093,112 +13062,6 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="fa801736-f678-432d-b389-8272cca1cd92" AttributeSetName="FormSendMailConfig" EntityGUID="9715732b-12ed-475a-b044-7e42c5bfb13e">
-      <Value Key="CustomerMailCC" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="CustomerMailTemplate" Value="EmailToCustomer.cs" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="CustomerSend" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailFrom" Value="info@2sic.com" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Name" Value="Fabian Demo Email Settings" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerMail" Value="fabian.muegge@2sic.com" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerMailCC" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerMailTemplate" Value="EmailToOwner.cs" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerSend" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="a9ab93f5-d55f-4710-8353-36f35343ef89" AttributeSetName="FormResources" EntityGUID="df095df7-f035-4263-88c0-dddd4ebfd7c0">
-      <Value Key="Button" Value="Jetzt bewerben" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="ButtonNextStep" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="CustomerMailSubject" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelGdpr" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelRequired" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelSelect" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelTerms" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelTermsAll" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelValidEmail" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="LabelValidFile" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailBodyCustomer" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailBodyOwner" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailCustomerContentWithData" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageCustomerMailSend" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageDisabledFeature" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageFormIncomplete" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageMailFromError" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageMailOwnerError" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageNewsletterSuccess" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageNewsletterUnexpectedError" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageSendError" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageSending" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MessageSendOk" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="OwnerMailSubject" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Fabian Demo Text Konfig" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="fa2e8060-b8e5-4496-bf8b-6dbccde59ecd">
       <Value Key="AcceptedExtensions" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -13274,44 +13137,9 @@
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="bb2c719f-1f75-423c-b3f5-de41186edfa1" Json="True">
-      <Value Key="Content" Value="03b796a1-a0bc-4fd5-b6f9-780ef29271ec" Type="Entity" />
+      <Value Key="Content" Value="null" Type="Entity" />
       <Value Key="Presentation" Value="null" Type="Entity" />
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
-    </Entity>
-    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="92f0ea4a-9e86-44c7-9a6a-be5f09141e31" AttributeSetName="FormConfig" EntityGUID="03b796a1-a0bc-4fd5-b6f9-780ef29271ec">
-      <Value Key="DesignField" Value="beside" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Fields" Value="c622d0cf-30c7-49fc-9822-9aab133d2d2f,b9c125f4-4e56-48b4-9704-f773d993ec0e,0c21a748-4de3-4296-b26f-7cc135d29872" Type="Entity" />
-      <Value Key="FormResources" Value="1dd0ca9c-be47-466c-9575-d0dbd19c05bb" Type="Entity" />
-      <Value Key="FormSendMailConfig" Value="9715732b-12ed-475a-b044-7e42c5bfb13e" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="PublishForReuse" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="PublishTitle" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Recaptcha" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="ReuseConfig" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="SaveToContentType" Value="269774b7-2919-4d34-ba78-9801de35dd16" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="ShowRecaptchaIcon" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Title" Value="Anmeldung Newsletter" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="TitleInternal" Value="Anmeldung Newsletter" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="c622d0cf-30c7-49fc-9822-9aab133d2d2f">
       <Value Key="AcceptedExtensions" Value="" Type="String">

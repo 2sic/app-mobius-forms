@@ -119,6 +119,9 @@ The Source Code is all here - so you can easily customize to your hearts desire!
   * Replaced WebClient with HttpClient
   * SecureEndpoint for double-encryption
   * removed app web.config
+* v06.20.00
+  * Changed Recaptcha Namespace 
+  * Added app web.config
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
