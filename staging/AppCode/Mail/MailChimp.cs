@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Http; // is in use Line 86
+using System.Linq;
 
 using AppCode.Data;
 
@@ -10,37 +11,24 @@ namespace AppCode.MailChimp
 {
   public class MailChimp : Custom.Hybrid.CodeTyped
   {
-    // Checks for MailChimp Integration
-    // if true instantiate mailchimp
-    // subscribe for mailchimp
-    public void SubscribeIfEnabled(Dictionary<string, object> contactFormRequest)
-    {
-      if (contactFormRequest.ContainsKey("MailChimp"))
-      {
-        Log.Add("MailChimp - see if we can add it...");
-        if (contactFormRequest["MailChimp"].ToString() == "True")
-        {
-          Log.Add("...MailChimp - try to add");
-          Subscribe(contactFormRequest);
-          return;
-        }
-        Log.Add("...MailChimp - not wanted by user, won't add");
-        return;
-      }
-      Log.Add("Won't add to MailChimp");
-    }
-    
     /* MAILCHIMP SUBSCRIBE */
-    public string Subscribe(Dictionary<string, object> contactFormRequest)
+    public string Subscribe(Dictionary<string, object> formFields, string subscriberMailField, string mailchimpTagConfig)
     {
       // Log what's happening in case we run into problems
+      Log.Add("MailChimp enabled - try to add");
+      var formFieldsDict = formFields.ToDictionary(kvp => kvp.Key, kvp => kvp.Value?.ToString() ?? string.Empty);
+
+      var dicSource = Kit.Template.CreateSource("Form", formFieldsDict);
+      var engine = Kit.Template.Empty(sources: new [] { dicSource });
+
+      var fieldsTemplate = engine.Parse(mailchimpTagConfig);
+      var subscriberMail = engine.Parse(subscriberMailField);
+
       var wrapLog = Log.Call();
       var appSettings = As<AppSettings>(App.Settings);
 
-      var SenderName = (contactFormRequest.ContainsKey("SenderName") ? contactFormRequest["SenderName"].ToString() : "");
-      var SenderLastName = (contactFormRequest.ContainsKey("SenderLastName") ? contactFormRequest["SenderLastName"].ToString() : "");
-      Log.Add("Name:" + SenderName + ", LastName:" + SenderLastName);
-      var msg = SubscribeToMailChimp(appSettings.MailchimpServer, appSettings.MailchimpListId, appSettings.MailchimpAPIKey, contactFormRequest["SenderMail"].ToString(), SenderName, SenderLastName);
+      Log.Add("Email: " + subscriberMail);
+      var msg = SubscribeToMailChimp(appSettings.MailchimpServer, appSettings.MailchimpListId, appSettings.MailchimpAPIKey, subscriberMail, fieldsTemplate);
       if (msg != "OK")
       {
         wrapLog("error");
@@ -50,17 +38,23 @@ namespace AppCode.MailChimp
       return "true";
     }
 
-    private string SubscribeToMailChimp(string srv, string listId, string apiKey, string email, string fname, string lname)
+    private string SubscribeToMailChimp(string srv, string listId, string apiKey, string email, string fieldTemplate)
     {
       var baseUrl = "https://" + srv + ".api.mailchimp.com/3.0/lists/" + listId + "/members";
 
       var subscriberUrl = baseUrl + "/" + CreateMD5(email.ToLower());
 
+      var mergeFields = fieldTemplate
+            .Split('\n')
+            .Select(line => line.Split('='))
+            .Where(parts => parts.Length == 2)
+            .ToDictionary(parts => parts[0], parts => parts[1]);
+
       var body = new
       {
-        email_address = email,
+        email_address = "roman.opalko@2sic.com",
         status = "pending",
-        merge_fields = new { FNAME = fname, LNAME = lname }
+        merge_fields = new { FNAME = "roman", LNAME = "opalko" }
       };
 
       // First check if user is already in list

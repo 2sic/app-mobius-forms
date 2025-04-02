@@ -77,7 +77,7 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
       formValues.Recaptcha = token
     }
 
-    const mailchimp = mobiusWrapper.classList.contains('app-mobius5-mailchimp');
+    const mailchimp = mobiusWrapper.classList.contains('app-mobius6-mailchimp');
     formValues.MailChimp = mailchimp; 
 
     // imply that message is sending by ui modifications 
