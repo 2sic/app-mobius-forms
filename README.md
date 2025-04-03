@@ -122,6 +122,9 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 * v06.20.00
   * Changed Recaptcha Namespace 
   * Added app web.config
+* v06.21.00 
+  * Refactored Mailchimp integration
+  * Added Mailchimp Configuration for merge fields 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/

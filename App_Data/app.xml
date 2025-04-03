@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.03.01" ExportDate="2025-03-24T07:37:18.3087774+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.03.04" ExportDate="2025-04-03T08:52:31.4610014+02:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -577,7 +577,7 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="MessageDefaultMailChimpKey" Type="String" IsTitle="false">
+        <Attribute StaticName="MessageDefaultMailchimpKey" Type="String" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="48445373-e6fe-42a2-b040-5ce574b59358" Json="True" KeyNumber="6111">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
@@ -715,7 +715,7 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="MessageContainsMailChimp" Type="String" IsTitle="false">
+        <Attribute StaticName="MessageContainsMailchimp" Type="String" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="307cc829-c566-4b89-b153-bebfbcf5e2f9" Json="True" KeyNumber="6113">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
@@ -1666,7 +1666,7 @@
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="MailChimpShowWarning" Type="Boolean" IsTitle="false">
+        <Attribute StaticName="MailchimpShowWarning" Type="Boolean" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="810398e1-8b66-4def-9458-056620026209" Json="True" KeyNumber="6154">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
@@ -3076,6 +3076,7 @@
             <Value Key="DisableTranslation" Value="False" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+            <Value Key="Formulas" Value="cc99b9d0-517c-42a7-af5e-c4a324c7248d" Type="Entity" />
             <Value Key="InputType" Value="empty-default" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
@@ -3097,17 +3098,17 @@
             <Value Key="ValidationRegExJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="VisibleInEditUI" Value="False" Type="Boolean">
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@empty-default" AttributeSetName="@empty-default" EntityGUID="49a6908b-41ff-41ce-aa48-85a0cc1cfb82" Json="True" KeyNumber="6394">
-            <Value Key="DefaultCollapsed" Value="False" Type="Boolean">
+            <Value Key="DefaultCollapsed" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
         </Attribute>
-        <Attribute StaticName="Mailchimp" Type="Boolean" IsTitle="false">
+        <Attribute StaticName="EnableMailchimp" Type="Boolean" IsTitle="false">
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="b2feff7e-2487-479c-9d8e-e79be0b38274" Json="True" KeyNumber="6303">
             <Value Key="CustomJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
@@ -3127,7 +3128,7 @@
             <Value Key="Name" Value="Enable Mailchimp" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="Notes" Value="&lt;p&gt;TODO: should also be renamed to EnableMailChimp when actually used&lt;/p&gt;" Type="String">
+            <Value Key="Notes" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="Placeholder" Value="" Type="String">
@@ -3139,7 +3140,7 @@
             <Value Key="ValidationRegExJavaScript" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="VisibleInEditUI" Value="False" Type="Boolean">
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
@@ -3151,6 +3152,115 @@
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="TitleTrue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MailchimpSubscriptionMail" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d3df8b35-df8e-41c0-98ac-6d0bd5f4780c" Json="True" KeyNumber="6667">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Subscription Email" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="cd39d87a-aeb2-40dc-9a6c-3ebd705dd512" Json="True" KeyNumber="6667">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="3b89647d-95ae-4407-8488-5b3823842902" Json="True" KeyNumber="6667">
+            <Value Key="InputFontFamily" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="TextWrapping" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MailchimpTagConfig" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="37980c3d-d21e-41e4-b797-24b044a142ee" Json="True" KeyNumber="6666">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Mailchimp Tags" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="6d91aec4-9d94-4623-9a6c-4c45a34e83fe" Json="True" KeyNumber="6666">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="6d49fe3e-3959-425e-836a-e675bfe9af90" Json="True" KeyNumber="6666">
+            <Value Key="InputFontFamily" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="RowCount" Value="10" Type="Number">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="TextWrapping" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
@@ -8009,7 +8119,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.20.00" Type="String">
+      <Value Key="Version" Value="06.21.00" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -8035,7 +8145,7 @@
       <Value Key="MailchimpServer" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="MailChimpShowWarning" Value="True" Type="Boolean">
+      <Value Key="MailchimpShowWarning" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="TermsAndGdprCombined" Value="True" Type="Boolean">
@@ -8078,10 +8188,10 @@
       <Value Key="LabelTimestamp" Value="Datum" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
-      <Value Key="MessageContainsMailChimp" Value="&lt;p&gt;Mobius: This app contains MailChimp.&lt;/p&gt;" Type="String">
+      <Value Key="MessageContainsMailchimp" Value="&lt;p&gt;Mobius: This app contains Mailchimp.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="MessageContainsMailChimp" Value="&lt;p&gt;Mobius: Diese App enth&amp;auml;lt MailChimp.&lt;/p&gt;" Type="String">
+      <Value Key="MessageContainsMailchimp" Value="&lt;p&gt;Mobius: Diese App enth&amp;auml;lt MailChimp.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="MessageContainsRecaptcha" Value="&lt;p&gt;Mobius: This app contains reCAPTCHA.&lt;/p&gt;" Type="String">
@@ -8090,10 +8200,10 @@
       <Value Key="MessageContainsRecaptcha" Value="&lt;p&gt;Mobius: Diese App enth&amp;auml;lt reCAPTCHA.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
-      <Value Key="MessageDefaultMailChimpKey" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Mailchimp still uses the preset key, which will cause problems on live web sites. Change the Settings using &lt;a class=&quot;alert-link target=&quot; href=&quot;https://azing.org/2sxc/r/uwVITscd&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these instructions&lt;/a&gt;&lt;/p&gt;" Type="String">
+      <Value Key="MessageDefaultMailchimpKey" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Mailchimp still uses the preset key, which will cause problems on live web sites. Change the Settings using &lt;a class=&quot;alert-link target=&quot; href=&quot;https://azing.org/2sxc/r/uwVITscd&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these instructions&lt;/a&gt;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="MessageDefaultMailChimpKey" Value="&lt;p&gt;&lt;strong&gt;Warnung:&lt;/strong&gt; Mailchimp verwendet immer noch den voreingestellten Schl&amp;uuml;ssel, was auf Live-Websites zu Problemen f&amp;uuml;hren wird. &amp;Auml;ndern Sie die Einstellungen mit&amp;nbsp;&lt;a href=&quot;https://azing.org/2sxc/r/uwVITscd&quot;&gt;dieser Anleitungen&lt;/a&gt;&lt;/p&gt;" Type="String">
+      <Value Key="MessageDefaultMailchimpKey" Value="&lt;p&gt;&lt;strong&gt;Warnung:&lt;/strong&gt; Mailchimp verwendet immer noch den voreingestellten Schl&amp;uuml;ssel, was auf Live-Websites zu Problemen f&amp;uuml;hren wird. &amp;Auml;ndern Sie die Einstellungen mit&amp;nbsp;&lt;a href=&quot;https://azing.org/2sxc/r/uwVITscd&quot;&gt;dieser Anleitungen&lt;/a&gt;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="MessageDemoItem" Value="Shows only the demo form, create a new one to submit it" Type="String">
@@ -8862,11 +8972,11 @@
       <Value Key="DesignField" Value="beside" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Fields" Value="4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238" Type="Entity" />
-      <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="Fields" Value="4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238" Type="Entity" />
+      <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
       <Value Key="PublishForReuse" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -10017,12 +10127,12 @@
       <Value Key="DesignField" Value="beside" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
       <Value Key="Fields" Value="964cc973-b075-42ba-aa4b-2379e0cf9601,4a3f9e31-9e94-4cd4-a9a9-5dad84020d03,6b73b1ef-4aa5-44ed-aad7-58ba3a52f432,ed8b6cc5-d073-47c0-b3e0-fe1249ebcafb,bfd9d723-90d9-44d0-b72e-6d3346d63380,a1a50851-e35e-4905-984f-1b09eba4fdcd" Type="Entity" />
       <Value Key="FormResources" Value="25004f22-0300-4d3f-8402-a49c90c418bb" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
       <Value Key="PublishForReuse" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -10060,10 +10170,10 @@
       <Value Key="DesignField" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="InheritedConfig" Value="6f414e86-2e6d-440d-8352-aa187ffe3ddf" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="InheritedConfig" Value="6f414e86-2e6d-440d-8352-aa187ffe3ddf" Type="Entity" />
       <Value Key="PublishForReuse" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -10662,12 +10772,12 @@
       <Value Key="DesignField" Value="beside" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
       <Value Key="Fields" Value="468d789d-53ff-4396-8e20-b197cd4df633,8b7fbcd3-a139-4793-a040-884641bc4940,d4389307-a6ee-406b-b32b-816d681131d8,538e5c08-5f59-4064-8403-e8dde8dbc497" Type="Entity" />
       <Value Key="FormResources" Value="25004f22-0300-4d3f-8402-a49c90c418bb" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
       <Value Key="PublishForReuse" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -11661,12 +11771,12 @@
       <Value Key="DesignField" Value="beside" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
       <Value Key="Fields" Value="26b5acc4-6761-4cc1-8e6e-e969ee006e09,77e5c471-4d30-491f-bfe2-9b4667bc1796,b3bf7b82-84c8-476c-8640-5e31ac50e944,f0a2baba-4f38-44ad-9762-5a30c770b43c,28804a01-263d-4dc6-a117-563364b29824,04782ad5-2163-4059-87ec-ae8b75ae3275,4fafd32a-7ca1-4ad8-a8f7-3360087cb1fa,0292e356-76f9-4f8c-8111-70634d52e963,fe78dd39-942a-45d1-bf02-6c27d718332e,e1321358-747b-47b3-bfa4-622debb54117" Type="Entity" />
       <Value Key="FormResources" Value="25004f22-0300-4d3f-8402-a49c90c418bb" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
       <Value Key="PublishForReuse" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -11808,7 +11918,7 @@
       <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="FieldId" Value="name" Type="String">
+      <Value Key="FieldId" Value="vorname" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="FieldType" Value="string" Type="String">
@@ -11862,7 +11972,7 @@
       <Value Key="TermsEnabled" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Title" Value="Name" Type="String">
+      <Value Key="Title" Value="Vorname" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -11941,10 +12051,16 @@
       <Value Key="DesignField" Value="beside" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Fields" Value="473a9e5c-f30e-4be2-a564-8fcc905699bb,b020ca17-0bca-4c05-aa0e-08dd6e361e3c,ad7f9718-5e8f-4286-b443-557e89fe9072" Type="Entity" />
+      <Value Key="EnableMailchimp" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Fields" Value="473a9e5c-f30e-4be2-a564-8fcc905699bb,a51edb6d-6b49-45f6-84c7-c5e8286eb340,b020ca17-0bca-4c05-aa0e-08dd6e361e3c,ad7f9718-5e8f-4286-b443-557e89fe9072" Type="Entity" />
       <Value Key="FormResources" Value="1dd0ca9c-be47-466c-9575-d0dbd19c05bb" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
+      <Value Key="MailchimpSubscriptionMail" Value="[Form:email]" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpTagConfig" Value="FNAME=[Form:vorname]&#xA;LNAME=[Form:nachname]" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="PublishForReuse" Value="True" Type="Boolean">
@@ -12087,12 +12203,12 @@
       <Value Key="DesignField" Value="beside" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
       <Value Key="Fields" Value="dffe576a-29b6-4748-ada2-388842aa6305,0f1100fd-7087-4e23-9979-020e884daa11,a18f5992-0fad-4dc4-be19-89dde600f253,64b8a00c-ee05-447d-b847-57bb84672292" Type="Entity" />
       <Value Key="FormResources" Value="25004f22-0300-4d3f-8402-a49c90c418bb" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
-      <Value Key="Mailchimp" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
       <Value Key="PublishForReuse" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -13503,6 +13619,136 @@
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="544f8a24-93d1-4ad7-a532-3281eb3d01e1" Json="True">
       <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="a51edb6d-6b49-45f6-84c7-c5e8286eb340">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="nachname" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="string" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Nachname" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="36d2e10d-31b1-49e8-9bae-4a4912de2c8f" Json="True">
+      <Value Key="Enabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Formula" Value="v2((data, context) =&gt; {&#xA;  return false;&#xA;});" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Target" Value="Field.Settings.Disabled" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Field.Settings.Disabled" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="95b9cdd9-30e3-42f8-95e5-e899ca977585" Json="True">
+      <Value Key="Enabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Formula" Value="v2((data, context) =&gt; {&#xA;  return false;&#xA;});" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Target" Value="Field.Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Field.Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="82846733-4036-4699-802f-c18e6c2a41ac" Json="True">
+      <Value Key="Enabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Formula" Value="v2((data, context) =&gt; {&#xA;  return true;&#xA;});" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Target" Value="Field.Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Field.Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="772dfff1-b236-4aa9-8359-5f53c08ff7bf" AttributeSetName="UiFormula" EntityGUID="cc99b9d0-517c-42a7-af5e-c4a324c7248d" Json="True">
+      <Value Key="Enabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Formula" Value="// new formula syntax - see https://go.2sxc.org/formulas&#xA;v2((data, context) =&gt; {&#xA;  return data.ReuseConfig == false;&#xA;});" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Notes" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Target" Value="Field.Settings.Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Setting Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
     </Entity>
   </Entities>
   <PortalFiles />
