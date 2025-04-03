@@ -9,26 +9,17 @@
   return;
 }
 
-@* Show mailchimp-not-enabled message *@
-@if (!FormConfig.Mailchimp)
+@if (AppSet.MailchimpShowWarning)
 {
+  @* Show mailchimp default settings message *@
   <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(AppRes.MessageEnableMailchimp, "p"))
+    @Html.Raw(Kit.Scrub.Only(AppRes.MessageDefaultMailchimpKey, "p"))
   </div>
-  return;
 }
-
-@if (!AppSet.MailChimpShowWarning)
+else
 {
+  @* Show mailchimp-enabled message *@
   <div class="alert alert-warning">
     @Html.Raw(Kit.Scrub.Only(AppRes.MessageContainsMailchimp, "p"))
-  </div>
-}
-
-
-@if (AppSet.MailChimpShowWarning)
-{
-  <div class="alert alert-warning">
-    @Html.Raw(Kit.Scrub.Only(AppRes.MessageDefaultMailChimpKey, "p"))
-  </div>
+  </div>  
 }

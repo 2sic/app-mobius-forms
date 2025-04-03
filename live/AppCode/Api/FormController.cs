@@ -94,7 +94,11 @@ public class FormController : Custom.Hybrid.ApiTyped
       Log.Add("No files found to save");
 
 
-    GetService<MailChimp>().SubscribeIfEnabled(contactFormRequest.Fields);// int.TryParse(id, out var intId) ? intId : 0);
+    if (formConfig.EnableMailchimp)
+    {
+      Log.Add("Mailchimp enabled"); 
+      GetService<MailChimp>().Subscribe(contactFormRequest.Fields, formConfig.MailchimpSubscriptionMail, formConfig.MailchimpTagConfig);// int.TryParse(id, out var intId) ? intId : 0);
+    }
 
     // Sending Mails
     GetService<Mail>().SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
