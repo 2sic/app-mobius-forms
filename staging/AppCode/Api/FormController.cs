@@ -96,8 +96,8 @@ public class FormController : Custom.Hybrid.ApiTyped
 
     if (formConfig.EnableMailchimp)
     {
-      // Log.Add("Mailchimp enabled"); 
-      // GetService<MailChimp>().Subscribe(contactFormRequest.Fields, formConfig.MailchimpSubscriptionMail, formConfig.MailchimpTagConfig);// int.TryParse(id, out var intId) ? intId : 0);
+      Log.Add("Mailchimp enabled"); 
+      GetService<MailChimp>().Subscribe(contactFormRequest.Fields, formConfig.MailchimpSubscriptionMail, formConfig.MailchimpTagConfig);// int.TryParse(id, out var intId) ? intId : 0);
     }
 
     // Sending Mails

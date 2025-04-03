@@ -21,7 +21,11 @@ namespace AppCode.MailChimp
       var dicSource = Kit.Template.CreateSource("Form", formFieldsDict);
       var engine = Kit.Template.Empty(sources: new [] { dicSource });
 
+      // Parse the template with the form fields to get optinal fields
       var fieldsTemplate = engine.Parse(mailchimpTagConfig);
+
+      // Parse the template with the form fields to get the email address
+      // This is the email address that will be used to subscribe the user to MailChimp
       var subscriberMail = engine.Parse(subscriberMailField);
 
       var wrapLog = Log.Call();
@@ -52,9 +56,9 @@ namespace AppCode.MailChimp
 
       var body = new
       {
-        email_address = "roman.opalko@2sic.com",
+        email_address = email,
         status = "pending",
-        merge_fields = new { FNAME = "roman", LNAME = "opalko" }
+        merge_fields = mergeFields
       };
 
       // First check if user is already in list

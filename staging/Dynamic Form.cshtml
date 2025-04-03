@@ -65,6 +65,12 @@
     @Html.Partial("./parts/Footer Recaptcha.cshtml")
   }
 
+  @if (FormConfig.EnableMailchimp)
+  {
+    @Html.Partial("./parts/Mailchimp.cshtml")
+  }
+
+
   @* Submit and hidden message divs to show when needed *@
   @Html.Partial("./parts/Footer Submit with Messages.cshtml")
 
