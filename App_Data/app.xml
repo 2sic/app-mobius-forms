@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.03.04" ExportDate="2025-04-03T08:52:31.4610014+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.03.04" ExportDate="2025-04-07T12:50:33.9201664+02:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -2971,6 +2971,9 @@
             <Value Key="Name" Value="Enable Recaptcha" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+            <Value Key="Name" Value="Recaptcha aktivieren" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
             <Value Key="Notes" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
@@ -3128,6 +3131,9 @@
             <Value Key="Name" Value="Enable Mailchimp" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+            <Value Key="Name" Value="Mailchimp aktivieren" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
             <Value Key="Notes" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
@@ -3176,8 +3182,14 @@
             <Value Key="Name" Value="Subscription Email" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="Notes" Value="" Type="String">
+            <Value Key="Name" Value="Abonnenten E-Mail" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="&lt;p&gt;Choose which field should be use as subscriber e-mail&lt;/p&gt;" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="&lt;p&gt;W&amp;auml;hlen Sie, welches Feld als Teilnehmer-E-Mail verwendet werden soll&lt;/p&gt;" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
             </Value>
             <Value Key="Placeholder" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
@@ -3229,8 +3241,11 @@
             <Value Key="Name" Value="Mailchimp Tags" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="Notes" Value="" Type="String">
+            <Value Key="Notes" Value="&lt;p&gt;Here you could add fields that should be send to mailchimp as &quot;Merge-Tags&quot;&lt;/p&gt;" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="&lt;p&gt;Hier k&amp;ouml;nnen Sie Felder hinzuf&amp;uuml;gen, die als &amp;bdquo;Merge-Tags&amp;ldquo; an Mailchimp gesendet werden sollen.&lt;/p&gt;" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
             </Value>
             <Value Key="Placeholder" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
