@@ -32,6 +32,10 @@ namespace AppCode.Fields
 
       container = container.Add(inputLabels);
       innerContainer = innerContainer.Add(input);
+
+      if (Field.IsNotEmpty("AcceptedExtensions"))
+        innerContainer = innerContainer.Add(tags.Small(Field.AcceptedExtensions)); 
+        
       container = container.Add(innerContainer);
 
       if (Field.IsNotEmpty("InfoText"))
