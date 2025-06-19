@@ -18,8 +18,12 @@ namespace AppCode.Fields
     {
       var tags = Builder.Kit.HtmlTags;
       var item = tags.Input().Type("email");
+
+      item = item.Attr("data-pristine-email-message", Form.FormResources.LabelValidEmail);
+
       if (Field.EmailUseAsRecipient) 
         item = item.Attr("mail", "recipientEmail");
+        
       return item;
     }
   }
