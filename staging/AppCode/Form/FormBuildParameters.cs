@@ -63,7 +63,6 @@ namespace AppCode.Form
       return templateSvc.Parse(template, sources: _lookUps);
     }
 
-    private ILookUp _queryStringLookUp;
     private List<ILookUp> _lookUps;
   }
 }
