@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="19.03.04" ExportDate="2025-04-07T12:50:33.9201664+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="20.00.04" ExportDate="2025-07-29T11:07:06.5107533+02:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -1298,6 +1298,118 @@
           </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="6001b4a8-cabd-4062-b588-f60032462e54" Json="True" KeyNumber="6281">
             <Value Key="InputFontFamily" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="BtnFormData" Type="String" IsTitle="true">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="b0d28489-1f2f-4bf9-9ff1-6ea0f52830e1" Json="True" KeyNumber="6668">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Button: Form Data" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Button: Formulardaten" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="fa46ed0b-1e58-4330-8935-f99ea4959ff5" Json="True" KeyNumber="6668">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="a602e18d-4077-44d1-a0c5-dae800b4fa76" Json="True" KeyNumber="6668">
+            <Value Key="InputFontFamily" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="TextWrapping" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="BtnCSVExport" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="cfec97fa-4a74-4a12-a9fb-b7fd7a07ed18" Json="True" KeyNumber="6669">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Button: CSV Export" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Button: CSV Export" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="391d2fea-e3ed-4e6c-821f-f9342ba03db3" Json="True" KeyNumber="6669">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="f2f6cbbc-e597-4507-9abf-29a89e4ecbf0" Json="True" KeyNumber="6669">
+            <Value Key="InputFontFamily" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="TextWrapping" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
@@ -8134,7 +8246,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.21.00" Type="String">
+      <Value Key="Version" Value="06.22.00" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -8171,6 +8283,18 @@
       </Value>
     </Entity>
     <Entity TargetType="3" AssignmentObjectType="App" AttributeSetStaticName="App-Resources" AttributeSetName="App-Resources" EntityGUID="2231fdc4-3838-4f38-90b2-b29f2054b892" KeyNumber="320">
+      <Value Key="BtnCSVExport" Value="CSV Export" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BtnCSVExport" Value="CSV Export" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
+      <Value Key="BtnFormData" Value="Form Data" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BtnFormData" Value="Formular Daten" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
       <Value Key="DefaultFormResources" Value="25004f22-0300-4d3f-8402-a49c90c418bb" Type="Entity" />
       <Value Key="DefaultSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
       <Value Key="LabelFirst" Value="First" Type="String">
@@ -8937,8 +9061,8 @@
       <Value Key="HiddenInQueryPicker" Value="False" Type="Boolean" />
       <Value Key="Name" Value="DynamicForm-CustomFields" Type="String" />
       <Value Key="Params" Value="" Type="String" />
-      <Value Key="StreamsOut" Value="Default,Header,All,PleaseRename96148" Type="String" />
-      <Value Key="StreamWiring" Value="6e6250f3-2604-4bb5-9da7-2a41840722dc:Files&gt;Out:All&#xD;&#xA;6e6250f3-2604-4bb5-9da7-2a41840722dc:Files&gt;706dac87-90f8-4b27-aa1a-9dfe60dc94f1:Default&#xD;&#xA;706dac87-90f8-4b27-aa1a-9dfe60dc94f1:Default&gt;Out:Default" Type="String" />
+      <Value Key="StreamsOut" Value="Default,Header" Type="String" />
+      <Value Key="StreamWiring" Value="6e6250f3-2604-4bb5-9da7-2a41840722dc:Default&gt;Out:Default" Type="String" />
       <Value Key="TestParameters" Value="" Type="String" />
       <Value Key="VisualDesignerData" Value="{&quot;ShowDataSourceDetails&quot;:true}" Type="String" />
     </Entity>
@@ -8946,30 +9070,7 @@
       <Value Key="Description" Value="" Type="String" />
       <Value Key="Name" Value="AppFiles" Type="String" />
       <Value Key="PartAssemblyAndType" Value="3fe6c215-4c37-45c1-8883-b4b2a47162a7" Type="String" />
-      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 500,&#xD;&#xA;  &quot;Left&quot;: 240&#xD;&#xA;}" Type="String" />
-    </Entity>
-    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="DataPipelinePart" AttributeSetName="DataPipelinePart" EntityGUID="706dac87-90f8-4b27-aa1a-9dfe60dc94f1" Json="True" KeyGuid="f732c9fb-82b0-4186-8ae5-4681df831d3a">
-      <Value Key="Description" Value="" Type="String" />
-      <Value Key="Name" Value="Value Filter" Type="String" />
-      <Value Key="PartAssemblyAndType" Value="ToSic.Eav.DataSources.ValueFilter, ToSic.Eav.DataSources" Type="String" />
-      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 200,&#xD;&#xA;  &quot;Left&quot;: 520&#xD;&#xA;}" Type="String" />
-    </Entity>
-    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="|Config ToSic.Eav.DataSources.ValueFilter" AttributeSetName="ToSic.Eav.DataSources.ValueFilter" EntityGUID="08f44ae9-78cd-4881-96ba-216b9a41b2d8" Json="True" KeyGuid="706dac87-90f8-4b27-aa1a-9dfe60dc94f1">
-      <Value Key="Attribute" Value="Path" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Languages" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Operator" Value="begins" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Take" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="Value" Value="staging/razor-fields" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
+      <Value Key="VisualDesignerData" Value="{&#xD;&#xA;  &quot;Top&quot;: 320,&#xD;&#xA;  &quot;Left&quot;: 400&#xD;&#xA;}" Type="String" />
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="1580d6d0-1d6b-4bac-a5da-7c0c5299c40a" Json="True">
       <Value Key="Content" Value="null" Type="Entity" />
@@ -8990,8 +9091,14 @@
       <Value Key="EnableMailchimp" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Fields" Value="4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238" Type="Entity" />
+      <Value Key="Fields" Value="4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238,12fe9084-6bf2-4842-bbe1-fae671d7cc2d" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
+      <Value Key="MailchimpSubscriptionMail" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpTagConfig" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
       <Value Key="PublishForReuse" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -10822,7 +10929,7 @@
       </Value>
     </Entity>
     <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="d4389307-a6ee-406b-b32b-816d681131d8">
-      <Value Key="AcceptedExtensions" Value="" Type="String">
+      <Value Key="AcceptedExtensions" Value=".pdf, .jpg, .png, .doc, .docx" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
@@ -13762,6 +13869,491 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="Title" Value="Setting Visible" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="2SexyContent-ContentGroup" AttributeSetName="2SexyContent-ContentGroup" EntityGUID="b4c40137-d81d-4c67-afc0-b4b15cf3d467" Json="True">
+      <Value Key="Content" Value="39efbc36-dba6-4116-ab4f-f00e9e70c5d7" Type="Entity" />
+      <Value Key="Presentation" Value="null" Type="Entity" />
+      <Value Key="Template" Value="c90be8fc-10af-4e7d-813b-003c7f2cf4d9" Type="Entity" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="92f0ea4a-9e86-44c7-9a6a-be5f09141e31" AttributeSetName="FormConfig" EntityGUID="39efbc36-dba6-4116-ab4f-f00e9e70c5d7">
+      <Value Key="DesignField" Value="floatingLabel" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EnableMailchimp" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Fields" Value="fadc7ba6-870e-4e6a-a7da-1991aec7a6ad,2d9177ac-81f2-4b0b-aabf-926bf9f6c6c6,d6ed2d63-7e96-41ff-9631-a3f221c10981,0dea9eab-b6a7-46b3-85d0-b704852de975,ce2c1e1a-91ea-4a94-8c4e-8e279bf2098b" Type="Entity" />
+      <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
+      <Value Key="MailchimpSubscriptionMail" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpTagConfig" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PublishForReuse" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PublishTitle" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Recaptcha" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ReuseConfig" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SaveToContentType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ShowRecaptchaIcon" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Demo with Steps" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TitleInternal" Value="Demo with Steps" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="fadc7ba6-870e-4e6a-a7da-1991aec7a6ad">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="step-1" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="label" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Step 1" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="2d9177ac-81f2-4b0b-aabf-926bf9f6c6c6">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="firstname" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="string" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Firstname" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="d6ed2d63-7e96-41ff-9631-a3f221c10981">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="name" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="string" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Name" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="0dea9eab-b6a7-46b3-85d0-b704852de975">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="step-2" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="label" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Step 2" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="ce2c1e1a-91ea-4a94-8c4e-8e279bf2098b">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="street" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="string" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Street" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="12fe9084-6bf2-4842-bbe1-fae671d7cc2d">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="demo-custom-razor" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="razor" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="simpleDemo" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Demo Custom Razor" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="4" AssignmentObjectType="Entity" AttributeSetStaticName="477d5de4-5ffa-43ef-8553-37354cb27660" AttributeSetName="AppFilesDataSourceConfig" EntityGUID="457a09e8-9356-4ae2-aec5-1df4ee0addab" Json="True" KeyGuid="6e6250f3-2604-4bb5-9da7-2a41840722dc">
+      <Value Key="FileFilter" Value="*.cshtml" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RootFolder" Value="/staging/razor-fields" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SearchSubfolders" Value="false" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="App Files" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
