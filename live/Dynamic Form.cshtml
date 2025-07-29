@@ -43,7 +43,7 @@
           @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
           @if (field.UseRazorComponent)
           {
-            @Html.Partial("./razor-fields/" + field.RazorFile, new { field })
+            @Html.Partial("./razor-fields/" + field.RazorFile + ".cshtml", new { field })
           }
           else
           {
