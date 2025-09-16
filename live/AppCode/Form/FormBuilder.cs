@@ -31,6 +31,7 @@ namespace AppCode.Form
       "string" when field.StringLines <= 1 => new BuildFieldText(FormParams, field),
       "string" => new BuildFieldTextMultiline(FormParams, field),
       "number" => new BuildFieldNumber(FormParams, field),
+      "date" => new BuildFieldDate(FormParams, field),
       "email" => new BuildFieldEMail(FormParams, field),
       "boolean" => new BuildFieldCheckbox(FormParams, field),
       "terms" => new BuildFieldTerms(FormParams, field),

@@ -85,7 +85,7 @@ namespace AppCode.Fields
             .For(Field.FieldId)
         );
 
-        var inputDivWithClasses = tags.Div(inputHtml).Class(Form.UseFloatingLabels ? CssClasses.LabelInside : CssClasses.LabelOutside);
+        var inputDivWithClasses = tags.Div(inputHtml).Class(CssClasses.LabelOutside);
 
         if (Field.IsNotEmpty("InfoText"))
           inputDivWithClasses = inputDivWithClasses.Add(tags.Div(Field.InfoText).Class("small-infotext"));
@@ -117,7 +117,7 @@ namespace AppCode.Fields
     {
       return "control-label "
           + (required ? Constants.ClassRequired : "")
-          + " " + CssClasses.Label
+          + " " + (floatingLabel ? CssClasses.LabelInside : CssClasses.Label)
           + " " + (floatingLabel ? CssClasses.FloatingLabelHidden : "");  // Bs3 and Bs4 only - hidden Label
     }
 

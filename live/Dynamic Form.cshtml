@@ -36,10 +36,11 @@
   @foreach (var fieldGroup in fieldsByGroup)
   {
     var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
-    <div id="@id" class="mobius-group @fieldGroup.Key" data-step="@fieldGroup.Key">
+    <div id="@id" class="mobius-group @fieldGroup.Key row" data-step="@fieldGroup.Key">
       @foreach (var field in fieldGroup)
       {
-        <div @FieldToolbar(field)>
+        var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;
+        <div class="col-@colWidth" @FieldToolbar(field)>
           @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
           @if (field.UseRazorComponent)
           {
@@ -53,8 +54,9 @@
       }
       @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
       {
-        <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step"
-          data-id="@fieldGroup.Key">@FormRes.ButtonNextStep</a>
+        <div>
+          <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">@FormRes.ButtonNextStep</a>
+        </div>
       }
     </div>
   }
@@ -102,7 +104,7 @@
 {
   <style>
     .app-mobius6-wrapper .mobius-group {
-      display: block !important;
+      display: flex !important;
     }
   </style>
 }
