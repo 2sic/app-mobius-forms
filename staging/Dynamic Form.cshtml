@@ -36,7 +36,7 @@
   @foreach (var fieldGroup in fieldsByGroup)
   {
     var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
-    <div id="@id" class="mobius-group @fieldGroup.Key row" data-step="@fieldGroup.Key">
+    <div id="@id" class="mobius-group @fieldGroup.Key row@(fieldGroup.Key == fieldsByGroup.First().Key ? " active" : "")" data-step="@fieldGroup.Key">
       @foreach (var field in fieldGroup)
       {
         var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;

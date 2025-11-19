@@ -7,10 +7,7 @@
     display: none;
     margin-bottom: 15px;
   
-    &:nth-child(1) {
-      display: flex;
-    }
-
+    &.mobius-group-0,
     &.active {
       display: flex;
     }
