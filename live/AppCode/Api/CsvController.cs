@@ -12,14 +12,16 @@ using System.Globalization;
 using System;
 using System.Linq;
 using System.Text;
+using DotNetNuke.Web.Api;
 
 using AppCode.FormData;
 
-[AllowAnonymous]
+[DnnAuthorize]
 public class CsvController : Custom.Hybrid.ApiTyped
 {
 
   [HttpGet]
+  [DnnAuthorize(StaticRoles = "Registered Users")]
   public object Csv(int id)
   {
     var formData = GetService<FormDataService>().Setup(id);
