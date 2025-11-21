@@ -32,34 +32,36 @@
     </div>
   }
 
-  @* Loop through the field groups and render them *@
-  @foreach (var fieldGroup in fieldsByGroup)
-  {
-    var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
-    <div id="@id" class="mobius-group @fieldGroup.Key row@(fieldGroup.Key == fieldsByGroup.First().Key ? " active" : "")" data-step="@fieldGroup.Key">
-      @foreach (var field in fieldGroup)
-      {
-        var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;
-        <div class="col-@colWidth" @FieldToolbar(field)>
-          @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
-          @if (field.UseRazorComponent)
-          {
-            @Html.Partial("./razor-fields/" + field.RazorFile + ".cshtml", new { field })
-          }
-          else
-          {
-            @FormBuilder.Field(field)
-          }
-        </div>
-      }
-      @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
-      {
-        <div>
-          <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">@FormRes.ButtonNextStep</a>
-        </div>
-      }
-    </div>
-  }
+  <div class="mobius-groups mobius-groups-simple">
+    @* Loop through the field groups and render them *@
+    @foreach (var fieldGroup in fieldsByGroup)
+    {
+      var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
+      <div id="@id" class="mobius-group @fieldGroup.Key row@(fieldGroup.Key == fieldsByGroup.First().Key ? " active" : "")" data-step="@fieldGroup.Key">
+        @foreach (var field in fieldGroup)
+        {
+          var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;
+          <div class="col-@colWidth" @FieldToolbar(field)>
+            @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
+            @if (field.UseRazorComponent)
+            {
+              @Html.Partial("./razor-fields/" + field.RazorFile + ".cshtml", new { field })
+            }
+            else
+            {
+              @FormBuilder.Field(field)
+            }
+          </div>
+        }
+        @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
+        {
+          <div>
+            <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">@FormRes.ButtonNextStep</a>
+          </div>
+        }
+      </div>
+    }
+  </div>
 
   @* Recaptcha - if enabled *@
   @if (FormConfig.Recaptcha)
@@ -103,8 +105,8 @@
 @if(MyUser.IsContentAdmin)
 {
   <style>
-    .app-mobius6-wrapper .mobius-group {
-      display: flex !important;
+    #module-@(MyContext.Module.Id) .app-mobius6-wrapper .mobius-group {
+      display: flex;
     }
   </style>
 }

@@ -32,36 +32,61 @@
     </div>
   }
 
-  <div class="mobius-groups mobius-groups-simple">
+
+  @if (fieldsByGroup.Count() > 1)
+  {
+    <div class="app-mobius-steps d-flex mb-4">
+      @foreach (var fieldGroup in fieldsByGroup)
+      {
+        <a class='app-mobius-step border border-primary rounded-circle @(fieldGroup.Equals(fieldsByGroup.First()) ? "active" : "")' href="javascript:void(0)" data-step="@fieldGroup.Key">@fieldGroup.Key.Replace("mobius-group-", "")</a>
+
+        @if (!fieldGroup.Equals(fieldsByGroup.Last()))
+        {
+          <span></span>
+        }
+      }
+    </div>
+  }
+
+  <div class="mobius-groups">
     @* Loop through the field groups and render them *@
     @foreach (var fieldGroup in fieldsByGroup)
     {
       var id = Kit.Key.UniqueKeyWith(fieldGroup.Key);
-      <div id="@id" class="mobius-group @fieldGroup.Key row@(fieldGroup.Key == fieldsByGroup.First().Key ? " active" : "")" data-step="@fieldGroup.Key">
+      var isFirstGroup = fieldGroup.Equals(fieldsByGroup.First());
+      var isLastGroup = fieldGroup.Equals(fieldsByGroup.Last());
+      int openCols = 0;
+
+      <div id="@id" class="mobius-group @fieldGroup.Key row @(isFirstGroup ? "active" : "")" data-step="@fieldGroup.Key">
         @foreach (var field in fieldGroup)
         {
           var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;
+
           <div class="col-@colWidth" @FieldToolbar(field)>
-            @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
             @if (field.UseRazorComponent)
             {
-              @Html.Partial("./razor-fields/" + field.RazorFile + ".cshtml", new { field })
+              @Html.Partial($"./razor-fields/{field.RazorFile}.cshtml", new { field })
             }
             else
             {
               @FormBuilder.Field(field)
             }
           </div>
+
         }
-        @if (fieldsByGroup.Count > 1 && fieldGroup.Key != fieldsByGroup.Last().Key)
+
+        @if (fieldsByGroup.Count() > 1 && !isLastGroup)
         {
           <div>
-            <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">@FormRes.ButtonNextStep</a>
+            <a href="javascript:void(0)" class="btn btn-primary btn-mobius-next-step" data-id="@fieldGroup.Key">
+              @FormRes.ButtonNextStep
+            </a>
           </div>
         }
       </div>
     }
   </div>
+
 
   @* Recaptcha - if enabled *@
   @if (FormConfig.Recaptcha)
@@ -84,8 +109,9 @@
     // Initialize lists to store CSV-related data
     var formData = GetService<FormDataService>().Setup(FormConfig.Id);
     var dataPairs = formData.Data; // Initialize Data
-    <div class="alert alert-warning d-flex align-items-center gap-3 mt-2" role="alert">
-      Admin Info: @dataPairs.Count()
+                                   <div class="alert alert-warning d-flex align-items-center gap-3 mt-2" role="alert">
+                                     Admin Info: @dataPairs.Count()
+
       @if (dataPairs.Count() == 0)
       {
         @AppRes.LabelFromDataAvailable
@@ -93,8 +119,8 @@
       else
       {
         var mid = MyContext.Module.Id;
-        <a class="btn btn-primary" href='@Link.To(parameters: $"data={FormConfig.Id}&mid={mid}")' target="_blank">@AppRes.BtnFormData</a>
-        <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink(FormConfig.Id)" type="button" target="_blank">@AppRes.BtnCSVExport</a>
+        <a class="btn btn-primary" href='@Link.To(parameters: $"data={FormConfig.Id}&mid={mid}")' target="_blank">Form Data</a>
+        <a class="btn btn-primary" href="@CsvHelper.GetDownloadLink(FormConfig.Id)" type="button" target="_blank">CSV Export</a>
       }
     </div>
   }
@@ -102,10 +128,10 @@
 
 @Html.Partial("./parts/Assets.cshtml")
 
-@if(MyUser.IsContentAdmin)
+@if (MyUser.IsContentAdmin)
 {
   <style>
-    #module-@(MyContext.Module.Id) .app-mobius6-wrapper .mobius-group {
+    #module-@(MyContext.Module.Id) .app-mobius6-wrapper .mobius-groups .mobius-group {
       display: flex;
     }
   </style>

@@ -3,15 +3,74 @@
   max-width: 600px;
   margin: 0 auto;
 
-  .mobius-group {
-    display: none;
-    margin-bottom: 15px;
-  
-    &.mobius-group-0,
-    &.active {
-      display: flex;
+  .mobius-groups {
+
+    &.mobius-groups-simple {
+      .mobius-group {
+        &.valid {
+          display: flex;
+        }
+      }
+    }
+    .mobius-group {
+      display: none;
+      margin-bottom: 15px;
+
+      &.valid {
+        display: flex;
+      }
+
+      &:nth-child(1) {
+        display: flex;
+      }
+
+      &.active {
+        display: flex;
+      }
     }
   }
+
+  .app-mobius-steps {
+    .app-mobius-step {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2em;
+      height: 2em;
+      border-color: var(--bs-body-color) !important;
+      text-decoration: none;
+
+      &.active {
+        background-color: var(--bs-primary) !important;
+        color: #fff !important;
+        border-color: var(--bs-primary) !important;
+      }
+    }
+
+    .app-mobius-step:has(~ .active) {
+      background-color: var(--bs-body-color);
+      color: #fff;
+      border-color: var(--bs-body-color) !important;
+    }
+
+    .app-mobius-step.finished {
+      background-color: var(--bs-body-color) !important;
+      color: #fff !important;
+      border-color: var(--bs-body-color) !important;
+    }
+
+    span {
+      flex: 1 0 32px;
+      min-width: 1px;
+      min-height: 1px;
+      margin: auto 10px;
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+
+    span:has(~ .active) {
+      background-color: var(--bs-primary) !important;
+    }
+  }  
 
   label {
     font-weight: normal;

@@ -23,38 +23,99 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
   if(!mobiusWrapper) return
 
-  const nextStepButtons = mobiusWrapper.querySelectorAll('.btn-mobius-next-step');
-  nextStepButtons.forEach((btn: Element) => {
-    const sendButton = mobiusWrapper.querySelector('[app-mobius6-send]') as HTMLElement;
-    sendButton.style.display = 'none';
-    
-    btn.addEventListener('click', (event: Event) => {
-      event.preventDefault();
-      const btnElement = btn as HTMLElement;
-      const parentNode = btn.closest('.mobius-group') as HTMLElement;
-      const stepForm = new Pristine(parentNode, validationOptions);
-
-      if(stepForm.validate()) {
-        const closestGroup = parentNode.closest('.mobius-group');
-        if (!closestGroup) return;
-        const nextStep = closestGroup.nextElementSibling;
-        if (!nextStep) return;
-        const nextStepButton = nextStep.querySelector('.btn-mobius-next-step');
-        
-        if(parentNode != null) {
-          btnElement.style.display = 'none';
-          
-          nextStep.classList.add('active');
-
-          if(nextStepButton == null)
-            sendButton.style.display = 'block';
-
-        }
-      }
-    })
-  })
-
   const submitButton = (mobiusWrapper.querySelectorAll('[app-mobius6-send]')[0] as HTMLButtonElement)
+  submitButton.style.display = 'none';
+  const steps = Array.from(mobiusWrapper.querySelectorAll('.app-mobius-step'));
+  const nextStepButtons = mobiusWrapper.querySelectorAll('.btn-mobius-next-step');
+
+  const fadeOut = (el: HTMLElement, callback?: () => void) => {
+    el.style.transition = 'opacity 0.3s';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.style.display = 'none';
+      callback?.();
+    }, 300);
+  };
+
+  const fadeIn = (el: HTMLElement) => {
+    el.style.display = '';
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.3s';
+    setTimeout(() => {
+      el.style.opacity = '1';
+    }, 10);
+  };
+
+  const updateStepperState = (targetStepClass: string) => {
+    steps.forEach((step) => step.classList.remove('active'));
+    const activeStep = mobiusWrapper.querySelector(`.app-mobius-step[data-step="${targetStepClass}"]`);
+    activeStep?.classList.add('active');
+  };
+
+  const toggleSubmitButton = (show: boolean) => {
+    if (show) {
+      submitButton.style.display = '';
+      fadeIn(submitButton);
+    } else {
+      fadeOut(submitButton);
+    }
+  };
+
+  steps.forEach((step: HTMLElement) => {
+    step.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const targetClass = step.dataset.step;
+      const targetNode = mobiusWrapper.querySelector(`.${targetClass}`) as HTMLElement;
+      const activeNode = mobiusWrapper.querySelector('.mobius-group.active') as HTMLElement;
+      const prevNode = targetNode?.previousElementSibling as HTMLElement;
+
+      if (targetNode && targetNode !== activeNode && (targetNode.classList.contains('valid') || prevNode?.classList.contains('valid'))) {
+        fadeOut(activeNode, () => {
+          activeNode.classList.remove('active');
+          targetNode.classList.add('active');
+          fadeIn(targetNode);
+          updateStepperState(targetClass!);
+          toggleSubmitButton(!targetNode.nextElementSibling);
+        });
+      }
+    });
+  });
+
+  nextStepButtons.forEach((btn: HTMLElement) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      
+      const currentGroup = btn.closest('.mobius-group') as HTMLElement;
+      const shouldHideCurrentGroup = !currentGroup.parentElement?.classList.contains('mobius-groups-simple'); 
+
+      const validator = new Pristine(currentGroup, validationOptions);
+
+      if (!validator.validate()) return;
+
+      const nextGroup = currentGroup.nextElementSibling as HTMLElement;
+      const nextStepKey = nextGroup?.dataset.step;
+      const isLastStep = !nextGroup?.querySelector('.btn-mobius-next-step');
+
+      currentGroup.classList.add('valid');
+      if (shouldHideCurrentGroup) {
+        fadeOut(currentGroup, () => {
+          currentGroup.classList.remove('active');
+          nextGroup.classList.add('active');
+          fadeIn(nextGroup);
+          updateStepperState(nextStepKey!);
+          toggleSubmitButton(isLastStep);
+        });
+      } else {
+        currentGroup.classList.remove('active');
+        nextGroup.classList.add('active');
+        fadeIn(nextGroup);
+        toggleSubmitButton(isLastStep);
+      }
+    });
+  });
+
   submitButton.addEventListener('click', async (event: Event) => {
     event.preventDefault();
 
