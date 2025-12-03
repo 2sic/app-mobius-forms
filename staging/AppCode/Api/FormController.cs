@@ -3,38 +3,76 @@
   using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Authorize]
   using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
-using System.Web.Http;
+  using System.Web.Http;
 #endif
+
 using System;
 using System.Web;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using AppCode.Data;
 using AppCode.MailChimp;
 using AppCode.RecaptchaValidator;
 using AppCode.Mail;
-using System.Linq;
 using ToSic.Sxc.WebApi;
 
 [AllowAnonymous]	// define that all commands can be accessed without a login
 public class FormController : Custom.Hybrid.ApiTyped
 {
+#if NETCOREAPP
   [HttpPost]
   [SecureEndpoint]
-  public void ProcessForm([FromBody] SaveRequest contactFormRequest)
+  public async Task<IActionResult> ProcessForm([FromBody] SaveRequest contactFormRequest)
+#else
+  [HttpPost]
+  [SecureEndpoint]
+  public async Task ProcessForm([FromBody] SaveRequest contactFormRequest)
+#endif
   {
     // Copy the data into a new variable, as only this will be sent per Mail and the Other Data is need to Save in the 2sxc
     var fieldsFormRequest = HtmlEncodeFields(contactFormRequest.Fields);
     var wrapLog = Log.Call(useTimer: true);
     var formConfig = As<FormConfig>(MyItem);
 
+    // Determine remoteIp as early as possible (also needed in later technical values)
+    #if NETCOREAPP
+      var remoteIp = Request?.HttpContext?.Connection?.RemoteIpAddress?.ToString();
+    #else
+      var remoteIp = System.Web.HttpContext.Current?.Request?.UserHostAddress;
+    #endif
+
     if (formConfig.Recaptcha)
     {
       Log.Add("checking Recaptcha");
-      GetService<Recaptcha>().Validate(contactFormRequest.Recaptcha);
+      try
+      {
+        var recaptchaService = GetService<AppCode.RecaptchaValidator.Recaptcha>();
+        var recaptchaOk = await recaptchaService.Validate(contactFormRequest.Recaptcha, remoteIp, minScore: 0.7);
+
+        if (!recaptchaOk)
+        {
+          Log.Add("recaptcha validation returned false - aborting");
+          #if NETCOREAPP
+            return BadRequest(new { error = "recaptcha_failed" });
+          #else
+            throw new HttpResponseException(System.Net.HttpStatusCode.Forbidden);
+          #endif
+        }
+      }
+      catch (Exception ex)
+      {
+        Log.Add("recaptcha validation exception: " + ex.Message);
+        #if NETCOREAPP
+          return BadRequest(new { error = "recaptcha_error", message = ex.Message });
+        #else
+          throw;
+        #endif
+      }
     }
 
-    // Same the TechnicalValues
+    // Continue: Save technical values, store data, send mails etc.
     Dictionary<string, object> formTechnicalValues = new Dictionary<string, object>();
 
     // 1. add IP / host, and save all fields
@@ -42,11 +80,7 @@ public class FormController : Custom.Hybrid.ApiTyped
     // in the request with the correct name, they will be added automatically
     formTechnicalValues["Timestamp"] = DateTime.Now;
     // Add the SenderIP in case we need to track down abuse
-#if NETCOREAPP
-    formTechnicalValues["SenderIP"] = Request.HttpContext.Connection.RemoteIpAddress?.ToString();
-#else
-    formTechnicalValues["SenderIP"] = System.Web.HttpContext.Current.Request.UserHostAddress;
-#endif
+    formTechnicalValues["SenderIP"] = remoteIp;
     // Add the ModuleId to assign each sent form to a specific module
     formTechnicalValues["ModuleId"] = MyContext.Module.Id;
     // Add the FormId to assign each sent form to a specific Form
@@ -96,14 +130,18 @@ public class FormController : Custom.Hybrid.ApiTyped
 
     if (formConfig.EnableMailchimp)
     {
-      Log.Add("Mailchimp enabled"); 
-      GetService<MailChimp>().Subscribe(contactFormRequest.Fields, formConfig.MailchimpSubscriptionMail, formConfig.MailchimpTagConfig);// int.TryParse(id, out var intId) ? intId : 0);
+      Log.Add("Mailchimp enabled");
+      GetService<MailChimp>().Subscribe(contactFormRequest.Fields, formConfig.MailchimpSubscriptionMail, formConfig.MailchimpTagConfig);
     }
 
     // Sending Mails
-    GetService<Mail>().SendMails(fieldsFormRequest, contactFormRequest.CustomerMails, files);
+    GetService<Mail>().SendMails(contactFormRequest.Fields, contactFormRequest.CustomerMails, files);
 
     wrapLog("ok");
+    
+    #if NETCOREAPP
+      return Ok(new { status = "ok" });
+    #endif
   }
 
   private object CreateRawDataEntry(SaveRequest formRequest)
@@ -116,23 +154,22 @@ public class FormController : Custom.Hybrid.ApiTyped
 
   private static Dictionary<string, object> HtmlEncodeFields(Dictionary<string, object> dictionary)
   {
-      var newDic = dictionary.ToDictionary(
-          kvp => kvp.Key,
-          kvp => {
-              // Try to convert to string, if it fails, it's probably not a string
-              var value = kvp.Value as string;
-              if (value == null)
-                  return kvp.Value;
+    var newDic = dictionary.ToDictionary(
+      kvp => kvp.Key,
+      kvp => {
+        // Try to convert to string, if it fails, it's probably not a string
+        var value = kvp.Value as string;
+        if (value == null)
+          return kvp.Value;
 
-              // HTML-Encode the string value
-              return (object)HttpUtility.HtmlEncode(value);
-          },
-          StringComparer.OrdinalIgnoreCase
-      );
-      return newDic;
+        // HTML-Encode the string value
+        return (object)System.Web.HttpUtility.HtmlEncode(value);
+      },
+      StringComparer.OrdinalIgnoreCase
+    );
+    return newDic;
   }  
 }
-
 
 public class SaveRequest
 {
