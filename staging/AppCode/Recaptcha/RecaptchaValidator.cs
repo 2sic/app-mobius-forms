@@ -10,7 +10,7 @@ namespace AppCode.RecaptchaValidator
   {
     private static readonly Uri SiteVerifyUri = new Uri("https://www.google.com/recaptcha/api/siteverify");
 
-    public async Task<bool> Validate(string encodedResponse, string remoteIp = null, double minScore = 0.0)
+    public async Task<bool> Validate(string encodedResponse, string remoteIp = null, double minScore = 0.5)
     {
       var wrapLog = Log.Call();
 

@@ -49,7 +49,7 @@ public class FormController : Custom.Hybrid.ApiTyped
       try
       {
         var recaptchaService = GetService<AppCode.RecaptchaValidator.Recaptcha>();
-        var recaptchaOk = await recaptchaService.Validate(contactFormRequest.Recaptcha, remoteIp, minScore: 0.7);
+        var recaptchaOk = await recaptchaService.Validate(contactFormRequest.Recaptcha, remoteIp, minScore: AllSettings.Double("GoogleRecaptcha.ScoreThreshold"));
 
         if (!recaptchaOk)
         {
