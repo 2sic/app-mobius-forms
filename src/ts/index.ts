@@ -24,7 +24,11 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
   if(!mobiusWrapper) return
 
   const submitButton = (mobiusWrapper.querySelectorAll('[app-mobius6-send]')[0] as HTMLButtonElement)
-  submitButton.style.display = 'none';
+
+  if(mobiusWrapper.classList.contains('app-mobius-groupform')) {
+    submitButton.style.display = 'none';
+  }
+  
   const steps = Array.from(mobiusWrapper.querySelectorAll('.app-mobius-step'));
   const nextStepButtons = mobiusWrapper.querySelectorAll('.btn-mobius-next-step');
 
