@@ -43,7 +43,18 @@ namespace AppCode.Razor
     /// Small helper to figure out the best classes for the wrapper div
     /// </summary>
     /// <returns></returns>
-    public string WrapperClasses() => $"app-mobius6-wrapper{(FormConfig.Get<bool>("EnableMailchimp") ? " app-mobius6-mailchimp" : "")}";
+    public string WrapperClasses()
+    {
+      var classes = "app-mobius6-wrapper";
+      
+      if (FormConfig.Get<bool>("EnableMailchimp"))
+        classes += " app-mobius6-mailchimp";
+      
+      if (GetFieldsInGroups().Count > 1)
+        classes += " app-mobius-groupform";
+      
+      return classes;
+    }
 
 
     #region Toolbar Stuff

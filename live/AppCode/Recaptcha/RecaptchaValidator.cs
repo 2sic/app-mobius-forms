@@ -1,44 +1,103 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AppCode.RecaptchaValidator
 {
-  // Helper to do Recaptcha server-validation
-  // based on http://stackoverflow.com/questions/27764692/validating-recaptcha-2-no-captcha-recaptcha-in-asp-nets-server-side
-  // shouldn't really need any modifications, just leave this as is
   public class Recaptcha : Custom.Hybrid.CodeTyped
   {
-    public async Task<bool> Validate(string encodedResponse)
+    private static readonly Uri SiteVerifyUri = new Uri("https://www.google.com/recaptcha/api/siteverify");
+
+    public async Task<bool> Validate(string encodedResponse, string remoteIp = null, double minScore = 0.5)
     {
-      // Log what's happening in case we run into problems
       var wrapLog = Log.Call();
 
-      if (!(encodedResponse is string) || String.IsNullOrEmpty(encodedResponse as string))
-        throw new Exception("recaptcha is empty");
+      if (string.IsNullOrWhiteSpace(encodedResponse))
+        throw new ArgumentException("recaptcha is empty", nameof(encodedResponse));
 
-      // Get the private key from Settings - if it's from presets, it is encrypted
       var privateKey = Kit.SecureData.Parse(AllSettings.String("GoogleRecaptcha.PrivateKey")).Value;
-
-      // Ask google if the verification is valid
-      var client = new HttpClient();
-      var GoogleReply = await client.GetStringAsync(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", privateKey, encodedResponse));
-      var captchaResponse = Kit.Convert.Json.To<RecaptchaResponse>(GoogleReply);
-
-      var status = captchaResponse.Success;
-      var isSameSite = captchaResponse.Hostname == MyContext.Site.Url.Replace("https://", "").Split('/')[0];
-
-      if (!status || !isSameSite)
+      if (string.IsNullOrEmpty(privateKey))
       {
-        Log.Add("recaptcha check failed:" + status);
-        throw new Exception("bad recaptcha '" + status + "'");
+        Log.Add("recaptcha: private key missing");
+        throw new InvalidOperationException("recaptcha private key not configured");
       }
 
-      wrapLog("ok");
-      return status && isSameSite;
+      using (var client = new HttpClient())
+      {
+        // POST (secure) instead of GET
+        var form = new List<KeyValuePair<string, string>>
+        {
+          new KeyValuePair<string, string>("secret", privateKey),
+          new KeyValuePair<string, string>("response", encodedResponse)
+        };
+        if (!string.IsNullOrEmpty(remoteIp))
+          form.Add(new KeyValuePair<string, string>("remoteip", remoteIp));
+
+        var resp = await client.PostAsync(SiteVerifyUri, new FormUrlEncodedContent(form)).ConfigureAwait(false);
+        var body = await resp.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+        RecaptchaResponse captchaResponse = null;
+        try
+        {
+          captchaResponse = JsonSerializer.Deserialize<RecaptchaResponse>(body, new JsonSerializerOptions
+          {
+            PropertyNameCaseInsensitive = true
+          });
+        }
+        catch (Exception ex)
+        {
+          Log.Add("recaptcha: json parse failed: " + ex.Message);
+          throw;
+        }
+
+        if (captchaResponse == null)
+        {
+          Log.Add("recaptcha: empty response from google");
+          return false;
+        }
+
+        // Always log key fields for monitoring (ohne das secret!)
+        Log.Add($"recaptcha: success={captchaResponse.Success}, score={(captchaResponse.Score.HasValue ? captchaResponse.Score.Value.ToString("F2") : "n/a")}, hostname={captchaResponse.Hostname ?? "n/a"}, errors={(captchaResponse.ErrorCodes == null ? "none" : string.Join(",", captchaResponse.ErrorCodes))}");
+
+        if (!captchaResponse.Success)
+        {
+          Log.Add("recaptcha check failed: success=false");
+          return false;
+        }
+
+        // Hostname check - robust using Uri
+        try
+        {
+          if (Uri.TryCreate(MyContext.Site.Url, UriKind.Absolute, out var siteUri))
+          {
+            if (!string.Equals(captchaResponse.Hostname, siteUri.Host, StringComparison.OrdinalIgnoreCase))
+            {
+              Log.Add($"recaptcha hostname mismatch: google='{captchaResponse.Hostname}' expected='{siteUri.Host}'");
+              return false;
+            }
+          }
+        }
+        catch
+        {
+          // fallthrough: if MyContext.Site.Url malformed, don't block entirely but log
+          Log.Add("recaptcha: could not parse MyContext.Site.Url for hostname comparison");
+        }
+
+        // If we have a v3 score: enforce threshold
+        if (captchaResponse.Score.HasValue)
+        {
+          if (minScore > 0.0 && captchaResponse.Score.Value < minScore)
+          {
+            Log.Add($"recaptcha score too low: {captchaResponse.Score.Value:F2} < {minScore:F2}");
+            return false;
+          }
+        }
+
+        wrapLog("ok");
+        return true;
+      }
     }
   }
 }
-
-
-
