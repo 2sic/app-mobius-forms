@@ -1,0 +1,38 @@
+{
+  "comments": "This file contains the list of files in a package with their hashes to check if files were changed.",
+  "version": "00.00.02",
+  "files": [
+    {
+      "file": "/Extensions/google-recaptcha-v3/icon.png",
+      "hash": "fd1a9cf8721dfe3aed4dd7f1c06bdf89fd05ba99bc1797f65066d2796722bb32"
+    },
+    {
+      "file": "/Extensions/google-recaptcha-v3/license.txt",
+      "hash": "eb16362112b0f29c040b23722bcbfc7c48a8b7232f9dafca4761b80d65282229"
+    },
+    {
+      "file": "/Extensions/google-recaptcha-v3/Partial Import Recaptcha.cshtml",
+      "hash": "79dee8e13029ea233861a6a3940ce441cb607096c346e84dcd55121589dbafc4"
+    },
+    {
+      "file": "/AppCode/Extensions/googlerecaptchav3/compile.json",
+      "hash": "b8aaea4c2e5e654bd06e873d2f3c28b2a1e9bd4065d4a8d9a19a8246446e3413"
+    },
+    {
+      "file": "/AppCode/Extensions/googlerecaptchav3/RecaptchaResponse.cs",
+      "hash": "f0b9d05c7204ca67be4afdd2ff7b8a793f30edfe21a15908ac38730944d2587f"
+    },
+    {
+      "file": "/AppCode/Extensions/googlerecaptchav3/RecaptchaResult.cs",
+      "hash": "49b2c92477ef86b03bddf7e344bcbbdac447a25ce3070b4aed20cc22b2526f74"
+    },
+    {
+      "file": "/AppCode/Extensions/googlerecaptchav3/RecaptchaValidator.cs",
+      "hash": "c781880dd7ce5a0366be234458b76a8f0396f1c0f5a7c4761231632e8495fe6a"
+    },
+    {
+      "file": "/Extensions/google-recaptcha-v3/App_Data/extension.json",
+      "hash": "d8b92866fbb79d9827c2525dc547a59850ab4cdc75056ba0084cbc29eabb081f"
+    }
+  ]
+}
