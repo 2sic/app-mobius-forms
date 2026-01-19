@@ -14,7 +14,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppCode.Data;
 using AppCode.MailChimp;
-using AppCode.RecaptchaValidator;
+// using AppCode.RecaptchaValidator;
+using AppCode.Extensions.GoogleRecaptchaV3;
 using AppCode.Mail;
 using ToSic.Sxc.WebApi;
 
@@ -48,11 +49,10 @@ public class FormController : Custom.Hybrid.ApiTyped
       Log.Add("checking Recaptcha");
       try
       {
-        var recaptchaService = GetService<AppCode.RecaptchaValidator.Recaptcha>();
-        var recaptchaOk = await recaptchaService.Validate(contactFormRequest.Recaptcha, remoteIp, minScore: AllSettings.Double("GoogleRecaptcha.ScoreThreshold"));
+        var recaptchaService = GetService<RecaptchaValidator>();
+        var result = await recaptchaService.ValidateAsync(token: contactFormRequest.Recaptcha, remoteIp: remoteIp);
 
-        if (!recaptchaOk)
-        {
+        if(!result.IsValid){
           Log.Add("recaptcha validation returned false - aborting");
           #if NETCOREAPP
             return BadRequest(new { error = "recaptcha_failed" });
@@ -70,6 +70,32 @@ public class FormController : Custom.Hybrid.ApiTyped
           throw;
         #endif
       }
+
+      // Log.Add("checking Recaptcha");
+      // try
+      // {
+      //   var recaptchaService = GetService<AppCode.RecaptchaValidator.Recaptcha>();
+      //   var recaptchaOk = await recaptchaService.Validate(contactFormRequest.Recaptcha, remoteIp, minScore: AllSettings.Double("GoogleRecaptcha.ScoreThreshold"));
+
+      //   if (!recaptchaOk)
+      //   {
+      //     Log.Add("recaptcha validation returned false - aborting");
+      //     #if NETCOREAPP
+      //       return BadRequest(new { error = "recaptcha_failed" });
+      //     #else
+      //       throw new HttpResponseException(System.Net.HttpStatusCode.Forbidden);
+      //     #endif
+      //   }
+      // }
+      // catch (Exception ex)
+      // {
+      //   Log.Add("recaptcha validation exception: " + ex.Message);
+      //   #if NETCOREAPP
+      //     return BadRequest(new { error = "recaptcha_error", message = ex.Message });
+      //   #else
+      //     throw;
+      //   #endif
+      // }
     }
 
     // Continue: Save technical values, store data, send mails etc.
