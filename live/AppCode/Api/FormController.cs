@@ -52,7 +52,7 @@ public class FormController : Custom.Hybrid.ApiTyped
         var recaptchaService = GetService<RecaptchaValidator>();
         var result = await recaptchaService.ValidateAsync(token: contactFormRequest.Recaptcha, remoteIp: remoteIp);
 
-        if(!result.IsValid){
+        if(!result.Success){
           Log.Add("recaptcha validation returned false - aborting");
           #if NETCOREAPP
             return BadRequest(new { error = "recaptcha_failed" });

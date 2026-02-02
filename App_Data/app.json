@@ -35,7 +35,11 @@
   },
   "editions": {
     "staging": {
-      "description": "Staging Edition",
+      "isDefault": true,
+      "description": "Staging Edition"
+    },
+    "live": {
+      "description": "Live Edition"
     }
   }
 }
