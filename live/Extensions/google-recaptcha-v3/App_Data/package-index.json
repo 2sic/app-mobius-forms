@@ -1,6 +1,6 @@
 {
   "comments": "This file contains the list of files in a package with their hashes to check if files were changed.",
-  "version": "01.00.01",
+  "version": "01.00.02",
   "files": [
     {
       "file": "/Extensions/google-recaptcha-v3/icon.png",
@@ -28,7 +28,7 @@
     },
     {
       "file": "/Extensions/google-recaptcha-v3/App_Data/extension.json",
-      "hash": "c68af4bb891a2a72cca23f3d6d94ff79d5b66020036c3b15506baa0d17dde5b9"
+      "hash": "adf0ad2e75d79531e8ba979b4cb51f49554ec3108f9daec5ddaf10a42b26ae3b"
     }
   ]
 }

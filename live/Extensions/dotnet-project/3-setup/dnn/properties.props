@@ -1,0 +1,13 @@
+<Project>
+  <!-- 1. Set defaults if not set from outside -->
+  <PropertyGroup>
+    <DnnLangVersion Condition="'$(DnnLangVersion)' == ''">8.0</DnnLangVersion>
+    <DnnTargetFramework Condition="'$(DnnTargetFramework)' == ''">net48</DnnTargetFramework>
+  </PropertyGroup>
+
+  <!-- Apply DNN-specific framework, language, and references after host resolution selected DNN. -->
+  <PropertyGroup>
+    <TargetFramework>$(DnnTargetFramework)</TargetFramework>
+    <LangVersion>$(DnnLangVersion)</LangVersion>
+  </PropertyGroup>
+</Project>

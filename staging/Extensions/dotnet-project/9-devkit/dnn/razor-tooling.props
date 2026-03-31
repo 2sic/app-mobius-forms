@@ -1,0 +1,25 @@
+<Project>
+  <!-- DNN-only Razor design-time helpers required for legacy Razor IntelliSense -->
+  <PropertyGroup>
+    <_utilsFile>Microsoft.AspNetCore.Razor.Utilities.Shared.dll</_utilsFile>
+    <_objPoolFile>Microsoft.Extensions.ObjectPool.dll</_objPoolFile>
+
+    <_utilsPath Condition="Exists('$(RazorSourceGeneratorsPath)\$(_utilsFile)')">$(RazorSourceGeneratorsPath)\$(_utilsFile)</_utilsPath>
+    <_utilsPath Condition="'$(_utilsPath)' == '' And Exists('$(RazorToolsPath)\$(_utilsFile)')">$(RazorToolsPath)\$(_utilsFile)</_utilsPath>
+    <_objPoolPath Condition="Exists('$(RazorSourceGeneratorsPath)\$(_objPoolFile)')">$(RazorSourceGeneratorsPath)\$(_objPoolFile)</_objPoolPath>
+    <_objPoolPath Condition="'$(_objPoolPath)' == '' And Exists('$(RazorToolsPath)\$(_objPoolFile)')">$(RazorToolsPath)\$(_objPoolFile)</_objPoolPath>
+  </PropertyGroup>
+
+  <!-- DNN-only Razor design-time helpers required for legacy Razor IntelliSense -->
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Razor.Utilities.Shared" Condition="'$(_utilsPath)' != ''">
+      <HintPath>$(_utilsPath)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool" Condition="'$(_objPoolPath)' != ''">
+      <HintPath>$(_objPoolPath)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

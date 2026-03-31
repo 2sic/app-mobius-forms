@@ -1,0 +1,13 @@
+<Project>
+  <!-- 1. Set defaults if not set from outside -->
+  <PropertyGroup>
+    <OqtaneLangVersion Condition="'$(OqtaneLangVersion)' == ''">latest</OqtaneLangVersion>
+    <OqtaneTargetFramework Condition="'$(OqtaneTargetFramework)' == ''">net10.0</OqtaneTargetFramework>
+  </PropertyGroup>
+
+  <!-- Apply Oqtane-specific framework, language, path selection, and references after host resolution selected Oqtane. -->
+  <PropertyGroup>
+    <TargetFramework>$(OqtaneTargetFramework)</TargetFramework>
+    <LangVersion>$(OqtaneLangVersion)</LangVersion>
+  </PropertyGroup>
+</Project>

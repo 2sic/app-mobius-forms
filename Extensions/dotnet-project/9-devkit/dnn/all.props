@@ -1,0 +1,7 @@
+<Project>
+  <!-- Aggregate all Razor design-time pieces needed for VS Code IntelliSense - only for DNN -->
+  <Import Project="razor-tool-paths.props" />
+  <Import Project="razor-analyzers.props" />
+  <Import Project="razor-tooling.props" />
+  <Import Project="include-cshtml.props" />
+</Project>

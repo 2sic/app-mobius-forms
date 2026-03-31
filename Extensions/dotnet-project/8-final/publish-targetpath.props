@@ -1,0 +1,41 @@
+<Project>
+  <!-- Work around a Web SDK publish fallback that can break on content paths containing commas. -->
+  <ItemGroup>
+    <!--
+      MSBuild / .NET SDK 10 workaround
+
+      Why this exists:
+      - The Web SDK can publish Content items even when they do not have an explicit TargetPath.
+      - In that case, Microsoft.NET.Publish.targets falls back to computing TargetPath itself.
+      - The fallback expression currently used by the SDK is:
+          $([MSBuild]::MakeRelative($(MSBuildProjectDirectory), %(Content.FullPath)))
+      - On this project, that expression crashes during evaluation for paths containing commas.
+      - A real example in this repository is:
+          Data\Data-Dynamic\Dynamic - Owner, Created, Modified.cshtml
+
+      Failure observed:
+      - dotnet msbuild failed with MSB4186 from Microsoft.NET.Publish.targets
+      - The error complained that [MSBuild]::MakeRelative was an invalid static method invocation
+      - The important detail is not that MakeRelative is always invalid, but that this specific
+        fallback path evaluation becomes fragile here because the item path is effectively not
+        handled safely for our scenario
+
+      What we do instead:
+      - Pre-populate TargetPath for matching Content items before the SDK fallback runs
+      - We set TargetPath to %(Identity), which preserves the project-relative path
+
+      Why this is safe:
+      - Only items without an existing TargetPath are affected
+      - Items with Link metadata keep using Link as intended elsewhere in the SDK pipeline
+      - Only items that are actually published are affected
+      - %(Identity) is the same logical project-relative path shape we want in publish output
+
+      In short:
+      - If a published Content item has no explicit TargetPath and no Link, give it a TargetPath now
+      - That prevents the SDK from reaching its broken fallback calculation later
+    -->
+    <Content Update="**\*">
+      <TargetPath Condition="'%(TargetPath)' == '' and '%(Link)' == '' and '%(CopyToPublishDirectory)' != '' and '%(CopyToPublishDirectory)' != 'Never'">%(Identity)</TargetPath>
+    </Content>
+  </ItemGroup>
+</Project>

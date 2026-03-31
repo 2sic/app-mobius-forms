@@ -1,0 +1,26 @@
+<Project>
+  <ItemGroup Condition="'$(PathBin)' != ''">
+    <Reference Include="$(PathBin)\DotNetNuke.dll" Condition="Exists('$(PathBin)\DotNetNuke.dll')" />
+    <Reference Include="$(PathBin)\DotNetNuke.*.dll" />
+    <Reference Include="$(PathBin)\System.Web.Http.dll" Condition="Exists('$(PathBin)\System.Web.Http.dll')" />
+    <Reference Include="$(PathBin)\System.Web.WebPages.dll" Condition="Exists('$(PathBin)\System.Web.WebPages.dll')" />
+
+    <Reference Include="$(PathBin)\System.Web.Razor.dll" Condition="Exists('$(PathBin)\System.Web.Razor.dll')" />
+    <Reference Include="$(PathBin)\System.Web.WebPages.Razor.dll" Condition="Exists('$(PathBin)\System.Web.WebPages.Razor.dll')" />
+    <Reference Include="$(PathBin)\DotNetNuke.Web.Razor.dll" Condition="Exists('$(PathBin)\DotNetNuke.Web.Razor.dll')" />
+    <Reference Include="$(PathBin)\DotNetNuke.Modules.RazorHost.dll" Condition="Exists('$(PathBin)\DotNetNuke.Modules.RazorHost.dll')" />
+    <Reference Include="$(PathBin)\ToSic.Sxc.Dnn.Razor.dll" Condition="Exists('$(PathBin)\ToSic.Sxc.Dnn.Razor.dll')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <!-- Legacy ASP.NET Core Razor packages are only needed for editor/design-time support. -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.2.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.0" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

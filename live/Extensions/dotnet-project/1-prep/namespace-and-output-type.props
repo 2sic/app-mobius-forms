@@ -1,0 +1,11 @@
+<Project>
+  <!-- This file is imported by app.csproj to provide the necessary logic for the 2sxc dotnet-project extension. -->
+  <PropertyGroup>
+    <!-- Set the root namespace to match the AppCode folder -->
+    <RootNamespace>AppCode</RootNamespace>
+
+    <!-- Set the output type to Library, which helps VS Code provide IntelliSense -->
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+</Project>

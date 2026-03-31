@@ -1,0 +1,37 @@
+<Project>
+  <!-- 1. Set defaults if not set from outside -->
+  <PropertyGroup>
+    <!-- The host type is 'auto', 'dnn', or 'oqtane' - will set to auto if not previously set -->
+    <CmsType Condition="'$(CmsType)' == ''">auto</CmsType>
+
+    <!-- 1.x. Make sure the host mode is normalized to lowercase from now on for simple comparison. -->
+    <CmsType>$(CmsType.ToLowerInvariant())</CmsType>
+  </PropertyGroup>
+
+  <!-- 2. Resolve platform paths first and detect which one applies. -->
+  <Import Project=".\dnn\paths-and-detect.props" />
+  <Import Project=".\oqtane\paths-and-detect.props" />
+
+  <!-- 3. Figure out the final CmsType, if it is still auto -->
+  <PropertyGroup Condition="'$(CmsType)' == 'auto'">
+    <CmsType Condition="'$(DnnDetected)' == 'true' And '$(OqtaneDetected)' != 'true'">dnn</CmsType>
+    <CmsType Condition="'$(OqtaneDetected)' == 'true' And '$(DnnDetected)' != 'true'">oqtane</CmsType>
+  </PropertyGroup>
+
+  <!-- 4. Validate the final CmsType and detect conflicts -->
+  <Target Name="ValidateHelperHostResolution" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(CmsType)' != 'dnn' And '$(CmsType)' != 'oqtane'" Text="Invalid CmsType '$(CmsType)'. Valid values: auto, dnn, oqtane." />
+    <Error Condition="'$(DnnDetected)' == 'true' And '$(OqtaneDetected)' == 'true'" Text="Auto-detection is ambiguous: both DNN and Oqtane markers were found. Set CmsType to dnn or oqtane, or adjust DnnBinPath|OqtaneProdBinPath|OqtaneDevBinPath." />
+  </Target>
+
+  <!-- 5. Set PathBin as CmsType is now either 'dnn' or 'oqtane' -->
+  <PropertyGroup Condition="'$(CmsType)' == 'dnn'">
+    <PathBin >$(DnnBinPath)</PathBin>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CmsType)' == 'oqtane'">
+    <!-- Set PathBin - fallback to dev if not prod -->
+    <PathBin Condition="'$(OqtaneIsProd)' == 'true'">$(OqtaneProdBinPath)</PathBin>
+    <PathBin Condition="'$(PathBin)' == ''">$(OqtaneDevBinPath)</PathBin>
+  </PropertyGroup>
+</Project>

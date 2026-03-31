@@ -1,0 +1,32 @@
+<Project>
+  <!-- This file helps VS Code provide IntelliSense - see https://go.2sxc.org/vscode -->
+  <!-- Managed by the 2sxc dotnet-project extension -->
+  <!-- Composition root: keep this file small and compose the helper from parts/*.props -->
+
+  <!-- Step 4 1.1: Base project shape: Root Namespace "AppCode" and Output Type "Library" -->
+  <Import Project="1-prep\namespace-and-output-type.props" />
+
+  <!-- Step 4 1.2: C# DevKit build settings (constants and warnings) -->
+  <Import Project="1-prep\constants-and-warnings.props" />
+
+  <!-- Step 4 2: Detect the CMS used - result is valid CmsType and PathBin -->
+  <Import Project="2-detect\detect-cms.props" />
+
+  <!-- Step 4 3.1: If DNN, first set properties, then import DLLs -->
+  <Import Project="3-setup\dnn\properties.props" Condition="'$(CmsType)' == 'dnn'" />
+  <Import Project="3-setup\dnn\import-dlls.props" Condition="'$(CmsType)' == 'dnn'" />
+
+  <!-- Step 4 3.2: If Oqtane, first set properties, then import DLLs -->
+  <Import Project="3-setup\oqtane\properties.props" Condition="'$(CmsType)' == 'oqtane'" />
+  <Import Project="3-setup\oqtane\import-dlls.props" Condition="'$(CmsType)' == 'oqtane'" />
+
+  <!-- Step 4 4: Shared references and final content shaping -->
+  <Import Project=".\8-final\import-dlls.props" />
+  <Import Project=".\8-final\ignore-editions.props" />
+  <Import Project=".\8-final\publish-targetpath.props" />
+
+  <!-- Step 4 5: DNN only: enable the legacy helper-based Razor design-time pipeline for DNN.
+       Oqtane runs on the Web SDK, which already wires up Razor source generators correctly. -->
+  <Import Project=".\9-devkit\dnn\all.props" Condition="'$(DesignTimeBuild)' == 'true' And '$(CmsType)' == 'dnn'" />
+
+</Project>

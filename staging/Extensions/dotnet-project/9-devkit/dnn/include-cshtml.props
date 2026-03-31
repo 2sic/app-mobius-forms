@@ -1,0 +1,10 @@
+<Project>
+  <!-- Common design-time settings and Razor inputs -->
+  <ItemGroup>
+    <AdditionalFiles Include="**\*.cshtml">
+      <TargetPath>%(RecursiveDir)%(Filename)%(Extension)</TargetPath>
+    </AdditionalFiles>
+  </ItemGroup>
+
+
+</Project>

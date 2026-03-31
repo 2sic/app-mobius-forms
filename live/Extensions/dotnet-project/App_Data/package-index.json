@@ -1,0 +1,94 @@
+{
+  "comments": "This file contains the list of files in a package with their hashes to check if files were changed.",
+  "version": "01.00.01",
+  "files": [
+    {
+      "file": "/Extensions/dotnet-project/all-in-one.import.csproj",
+      "hash": "c2f8ec2d8d3445759094962842a3d782c9d9630995111ad235fe0745f68184ef"
+    },
+    {
+      "file": "/Extensions/dotnet-project/icon.png",
+      "hash": "cae97d7cbd97c6b7ec883754f599d2acdd67299f4ea57ee8c67e0500fea66ed3"
+    },
+    {
+      "file": "/Extensions/dotnet-project/1-prep/constants-and-warnings.props",
+      "hash": "ef7de249ff9accdc60a007ef5d7df726d74f674f8066c7f7c1df018e1cd9de7e"
+    },
+    {
+      "file": "/Extensions/dotnet-project/1-prep/namespace-and-output-type.props",
+      "hash": "44f808c24f8b8c2b5fddc477d4cb28a3cdb2ec34f6b7ee01485177b7de6b9dde"
+    },
+    {
+      "file": "/Extensions/dotnet-project/2-detect/detect-cms.props",
+      "hash": "ef319d086ad290eb860bf99ee7e55a2043295c44d6c7dab6f47227b9654eb52e"
+    },
+    {
+      "file": "/Extensions/dotnet-project/2-detect/dnn/paths-and-detect.props",
+      "hash": "5820a7f9a7348cc9e0a247961980557ff6cb596d624f43aa683e2ea86fbbd899"
+    },
+    {
+      "file": "/Extensions/dotnet-project/2-detect/oqtane/paths-and-detect.props",
+      "hash": "7e26bd71ea5b2ca92fb415efca7d0c1e65242659653605379682a565ffaf0a83"
+    },
+    {
+      "file": "/Extensions/dotnet-project/3-setup/dnn/import-dlls.props",
+      "hash": "65c0ac896529b5a4e2c290d44510af8528f567bf20442488a1dd8385968de663"
+    },
+    {
+      "file": "/Extensions/dotnet-project/3-setup/dnn/properties.props",
+      "hash": "16b8139f1307a746f7830908a7a79aac32da1beff1077732cf4b55d1475ae8b1"
+    },
+    {
+      "file": "/Extensions/dotnet-project/3-setup/oqtane/import-dlls.props",
+      "hash": "258ca79a41a13df9b5dfbcf49a2c3bbb2ad3f83b537adde81347560577f01302"
+    },
+    {
+      "file": "/Extensions/dotnet-project/3-setup/oqtane/properties.props",
+      "hash": "5d6084120587eeb7af740c32749d4db7125a05077f18f988c7dac972c1aede12"
+    },
+    {
+      "file": "/Extensions/dotnet-project/8-final/ignore-editions.props",
+      "hash": "5043681f613f2ceb07f6d6c413df5b2e78a63611eab7537880839875fce1387f"
+    },
+    {
+      "file": "/Extensions/dotnet-project/8-final/import-dlls.props",
+      "hash": "0c48f929d708890cf58dc1ebb566d310e72d684fca214f21959bcc8e57aa60a8"
+    },
+    {
+      "file": "/Extensions/dotnet-project/8-final/publish-targetpath.props",
+      "hash": "2177168d5aac48586eca7620a700dbc66462d6c7dca3e82e770f8c1e9a26dee6"
+    },
+    {
+      "file": "/Extensions/dotnet-project/9-devkit/dnn/all.props",
+      "hash": "1e88c3594262c6da60d76be45c9c3b30127c2f7a2a5ea2f82775114cc5dd9bf9"
+    },
+    {
+      "file": "/Extensions/dotnet-project/9-devkit/dnn/include-cshtml.props",
+      "hash": "5386bad14b3b408cc91a518d62e01d2e1e0ef21cf36e9ecbd9073e5fef8b3cbe"
+    },
+    {
+      "file": "/Extensions/dotnet-project/9-devkit/dnn/razor-analyzers.props",
+      "hash": "733edd48d149bdf4297432daa56cdcea17127262c08a64d055bc786d6fd39d3c"
+    },
+    {
+      "file": "/Extensions/dotnet-project/9-devkit/dnn/razor-tool-paths.props",
+      "hash": "7f9e7448b9c685221972555972d7db55cf68f04b6a1b0f6e6d48ca051cf6525a"
+    },
+    {
+      "file": "/Extensions/dotnet-project/9-devkit/dnn/razor-tooling.props",
+      "hash": "ac3320662b3a54d2c350aeb63336f5926d4877c1be4d27be792280fd44f76fd3"
+    },
+    {
+      "file": "/Extensions/dotnet-project/templates/app.csproj",
+      "hash": "ff56d318d43ff5b1fcbc1c197abac1c57420231783aca1cbc985c08cb19ee257"
+    },
+    {
+      "file": "/Extensions/dotnet-project/templates/app.sln",
+      "hash": "6c997c183a13b4ce704f772550cec83c5d524f6f43b9f5386519f233080e2f5f"
+    },
+    {
+      "file": "/Extensions/dotnet-project/App_Data/extension.json",
+      "hash": "14459d6b92c6deb339eb5cf4ef6c6578e7c35033a4e126f353f9edd13805c4fc"
+    }
+  ]
+}

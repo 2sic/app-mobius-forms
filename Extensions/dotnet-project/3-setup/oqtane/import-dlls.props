@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup Condition="'$(PathBin)' != ''">
+    <Reference Include="$(PathBin)\Oqtane.*.dll" />
+  </ItemGroup>
+</Project>

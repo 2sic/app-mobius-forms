@@ -1,0 +1,13 @@
+<Project>
+  <!-- Detect Razor analyzer path - override by setting 'RazorAnalyzerPath' -->
+  <PropertyGroup>
+    <RazorAnalyzerPath Condition="'$(RazorAnalyzerPath)' == '' And Exists('$(RazorSourceGeneratorsPath)\Microsoft.CodeAnalysis.Razor.Compiler.dll')">$(RazorSourceGeneratorsPath)\Microsoft.CodeAnalysis.Razor.Compiler.dll</RazorAnalyzerPath>
+    <RazorAnalyzerPath Condition="'$(RazorAnalyzerPath)' == '' And Exists('$(RazorToolsPath)\Microsoft.CodeAnalysis.Razor.Compiler.dll')">$(RazorToolsPath)\Microsoft.CodeAnalysis.Razor.Compiler.dll</RazorAnalyzerPath>
+    <RazorAnalyzerPath Condition="'$(RazorAnalyzerPath)' == ''">Microsoft.CodeAnalysis.Razor.Compiler.dll</RazorAnalyzerPath>
+  </PropertyGroup>
+
+  <!-- Register the Razor compiler analyzer -->
+  <ItemGroup>
+    <Analyzer Include="$(RazorAnalyzerPath)" />
+  </ItemGroup>
+</Project>

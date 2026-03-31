@@ -1,0 +1,34 @@
+<Project>
+  <!-- 1. Set defaults if not set from outside -->
+  <PropertyGroup>
+    <!-- Name of the DLL to check to verify DNN - could be set before to another value -->
+    <DnnMainDll Condition="'$(DnnMainDll)' == ''">DotNetNuke.dll</DnnMainDll>
+  </PropertyGroup>
+
+  <!-- Resolve the DNN marker path for both standard and edition-based app layouts. -->
+  <PropertyGroup>
+
+    <!-- Path depths to check for the app -->
+    <_binPathDefault>..\..\..\..\bin</_binPathDefault>
+    <_binPathEditions>..\..\..\..\..\bin</_binPathEditions>
+
+    <!-- Check which path to use for DNN. This will be used later to set the BinPath - if DNN is detected
+      - Start with basic path
+      - Then check edition-based path (one more level up)
+      - Then just check basic path without file?
+      - Then check edition-based path without file?
+      - Finally default to basic path even if it doesn't exist
+    -->
+    <DnnBinPath Condition="'$(DnnBinPath)' == '' And Exists('$(_binPathDefault)\$(DnnMainDll)')">$(_binPathDefault)</DnnBinPath>
+    <DnnBinPath Condition="'$(DnnBinPath)' == '' And Exists('$(_binPathEditions)\$(DnnMainDll)')">$(_binPathEditions)</DnnBinPath>
+    <DnnBinPath Condition="'$(DnnBinPath)' == '' And Exists('$(_binPathDefault)')">$(_binPathDefault)</DnnBinPath>
+    <DnnBinPath Condition="'$(DnnBinPath)' == '' And Exists('$(_binPathEditions)')">$(_binPathEditions)</DnnBinPath>
+    <DnnBinPath Condition="'$(DnnBinPath)' == ''">$(_binPathDefault)</DnnBinPath>
+
+
+    <_dnnDetectionPath>$(DnnBinPath)\$(DnnMainDll)</_dnnDetectionPath>
+
+    <!-- This will be used later on to determine if errors should show -->
+    <DnnDetected Condition="Exists('$(_dnnDetectionPath)')">true</DnnDetected>
+  </PropertyGroup>
+</Project>

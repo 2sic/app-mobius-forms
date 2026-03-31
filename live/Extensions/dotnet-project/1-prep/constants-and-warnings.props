@@ -1,0 +1,10 @@
+<Project>
+  <!-- Always-on helper build settings -->
+  <PropertyGroup>
+    <!-- This project exists only to drive editor support, so keep the design-time symbol stable. -->
+    <DefineConstants>$(DefineConstants);DESIGN_TIME_BUILD</DefineConstants>
+
+    <!-- Legacy Razor and partial host assemblies trigger known diagnostics in the helper project. -->
+    <NoWarn>$(NoWarn);CS0108;CS0234;CS0115;CS0534;CS0103;CS0114;MVC1000;MSB3277</NoWarn>
+  </PropertyGroup>
+</Project>
