@@ -1,7 +1,8 @@
 import { SxcGlobal } from "@2sic.com/2sxc-typings";
 import { PristineOptions } from "./lib-2sxc-pristine-options";
 
-let Pristine = require("../../node_modules/pristinejs");
+import Pristine from "pristinejs";
+
 declare let $2sxc: SxcGlobal;
 
 /*

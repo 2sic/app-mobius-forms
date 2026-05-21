@@ -4,8 +4,7 @@ import { PristineOptions } from './lib-2sxc-pristine-options';
 import { getRecaptchaToken, requiresRecaptcha } from './lib-2sxc-recaptcha';
 import { addTrackingEvent } from './lib-2sxc-tracking';
 import { initTippy } from './lib-2sxc-tippy';
-
-let Pristine = require("../../node_modules/pristinejs");
+import Pristine from "pristinejs";
 
 const debug = false;
 
