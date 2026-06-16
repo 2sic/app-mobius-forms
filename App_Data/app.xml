@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="21.06.00" ExportDate="2026-04-01T08:43:25.8976402+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="21.08.00" ExportDate="2026-06-16T08:31:53.9680766+02:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -8291,7 +8291,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.24.00" Type="String">
+      <Value Key="Version" Value="06.24.01" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -10141,7 +10141,7 @@
       <Value Key="LabelGdpr" Value="&lt;p&gt;I agree that my data will be transferred for the processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="LabelGdpr" Value="&lt;p&gt;Ich bin damit einverstanden, dass meine Daten f&amp;uuml;r die Bearbeitung dieser Anfrage gem&amp;auml;ss den &lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzbestimmungen&lt;/a&gt;.&lt;/p&gt;" Type="String">
+      <Value Key="LabelGdpr" Value="&lt;p&gt;Ich bin damit einverstanden, dass meine Daten f&amp;uuml;r die Bearbeitung dieser Anfrage gem&amp;auml;ss den &lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzbestimmungen&lt;/a&gt; verarbeitet werden.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="LabelRequired" Value="Required" Type="String">
@@ -10159,13 +10159,13 @@
       <Value Key="LabelTerms" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt;.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="LabelTerms" Value="&lt;p&gt;Ich stimme der allgemeinen &lt;a href=&quot;/terms&quot;&gt;Bedingungen und Konditionen&lt;/a&gt;&lt;/p&gt;" Type="String">
+      <Value Key="LabelTerms" Value="&lt;p&gt;Ich stimme der allgemeinen &lt;a href=&quot;/terms&quot;&gt;Bedingungen und Konditionen&lt;/a&gt; zu&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="LabelTermsAll" Value="&lt;p&gt;I agree to the general &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;terms and conditions&lt;/a&gt; as well as processing of this inquiry in accordance with the&amp;nbsp;&lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;privacy policy&lt;/a&gt;.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="LabelTermsAll" Value="&lt;p&gt;Ich stimme der allgemeinen &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Bedingungen und Konditionen&lt;/a&gt;&lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;nbsp;&lt;/a&gt;sowie die Bearbeitung dieser Anfrage gem&amp;auml;ss der &lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzbestimmungen&lt;/a&gt;.&lt;/p&gt;" Type="String">
+      <Value Key="LabelTermsAll" Value="&lt;p&gt;Ich stimme der allgemeinen &lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Bedingungen und Konditionen&lt;/a&gt;&lt;a href=&quot;/terms&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&amp;nbsp;&lt;/a&gt;sowie die Bearbeitung dieser Anfrage gem&amp;auml;ss der &lt;a href=&quot;/privacy-policy&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Datenschutzbestimmungen&lt;/a&gt; zu.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="LabelValidEmail" Value="Requires valid e-mail address" Type="String">

@@ -127,6 +127,11 @@ The Source Code is all here - so you can easily customize to your hearts desire!
   * Added Mailchimp Configuration for merge fields 
 * v06.21.01
   * Bugfix category null value
+* v06.24.00 2026-03
+  * Added intellisense Extensions for Visual Studio Code
+* v06.24.01 2026-06
+  * Switched from webpack to Vite for faster builds 
+ 
 
 [//]: # "Note: use full http-link, so we can copy/paste this from wiki to readme.md"
 [2sxc]: https://2sxc.org/en/
