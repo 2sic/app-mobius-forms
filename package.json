@@ -12,17 +12,17 @@
   "author": "2sic internet solutions",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.12.6",
-    "autoprefixer": "^10.4.19",
-    "concurrently": "^9.2.1",
-    "postcss": "^8.4.38",
-    "sass": "^1.74.1",
-    "typescript": "^5.4.4",
-    "vite": "^5.2.8"
+    "@types/node": "^26.1.2",
+    "autoprefixer": "^10.5.4",
+    "concurrently": "^10.0.4",
+    "postcss": "^8.5.25",
+    "sass": "^1.102.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.5"
   },
   "dependencies": {
     "@2sic.com/2sxc-typings": "^14.7.3",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.8",
     "pristinejs": "^1.1.0",
     "tippy.js": "^6.3.7"
   }

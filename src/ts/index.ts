@@ -64,11 +64,11 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
     }
   };
 
-  steps.forEach((step: HTMLElement) => {
+  steps.forEach((step: Element) => {
     step.addEventListener('click', (e) => {
       e.preventDefault();
 
-      const targetClass = step.dataset.step;
+      const targetClass = (step as HTMLElement).dataset.step;
       const targetNode = mobiusWrapper.querySelector(`.${targetClass}`) as HTMLElement;
       const activeNode = mobiusWrapper.querySelector('.mobius-group.active') as HTMLElement;
       const prevNode = targetNode?.previousElementSibling as HTMLElement;
@@ -85,7 +85,7 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
     });
   });
 
-  nextStepButtons.forEach((btn: HTMLElement) => {
+  nextStepButtons.forEach((btn: Element) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
 

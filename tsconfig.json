@@ -3,12 +3,10 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "ESNext",
-        "lib": ["ES2020", "DOM"],
+        "lib": ["ES2020", "dom"],
         "target": "ES2020",
         "allowJs": true,
         "moduleResolution": "bundler",
-        "isolatedModules": true,
-        "esModuleInterop": true,
         "skipLibCheck": true
     },
     "include": ["src/**/*"],
