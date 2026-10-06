@@ -95,7 +95,7 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
       const validator = new Pristine(currentGroup, validationOptions);
 
-      if (!validator.validate()) return;
+      if (!validator.validate(false)) return;
 
       const nextGroup = currentGroup.nextElementSibling as HTMLElement;
       const nextStepKey = nextGroup?.dataset.step;

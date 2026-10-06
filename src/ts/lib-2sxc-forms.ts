@@ -165,7 +165,25 @@ export function validateForm(
   options: PristineOptions
 ): boolean {
   const pristine = new Pristine(formWrapper, options);
-  return pristine.validate();
+  addRequiredTextareaDetailValidator(formWrapper, pristine);
+  // validate(false) skips the problematic input-type branch and still shows errors.
+  return pristine.validate(false);
+}
+
+function addRequiredTextareaDetailValidator(formWrapper: Element, pristine: any) {
+  const requiredTextareas = formWrapper.querySelectorAll("textarea[required]");
+
+  requiredTextareas.forEach((textarea) => {
+    pristine.addValidator(textarea, (value: string) => {
+      const normalizedValue = value.trim();
+
+      // Let the native required validator handle empty fields.
+      if (!normalizedValue) return true;
+
+      const words = normalizedValue.split(/\s+/).filter(Boolean);
+      return words.length >= 4;
+    }, "Bitte geben Sie mehr Details an", 2, false);
+  });
 }
 
 export function sendForm(
