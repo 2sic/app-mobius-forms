@@ -164,7 +164,12 @@ export function validateForm(
   formWrapper: Element,
   options: PristineOptions
 ): boolean {
+  Pristine.addValidator("honeypot", function(value: string, honey: string) {
+    return honey === value;
+  }, "Error", 5, false);
+  
   const pristine = new Pristine(formWrapper, options);
+
   addRequiredTextareaDetailValidator(formWrapper, pristine);
   // validate(false) skips the problematic input-type branch and still shows errors.
   return pristine.validate(false);
