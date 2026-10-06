@@ -21,7 +21,7 @@ namespace AppCode.Fields
       var tags = Builder.Kit.HtmlTags;
       var input = tags.Input().Type("file").Name(Field.Title).Class("form-control-file" + " " + CssClasses.InputControl);
 
-      if(Field.IsNotEmpty("AcceptedExtensions"))
+      if (Field.IsNotEmpty("AcceptedExtensions"))
         input = input.Attr("accept", Field.AcceptedExtensions);
 
       input = SetBasics(input, false);

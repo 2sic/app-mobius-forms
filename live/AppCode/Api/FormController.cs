@@ -52,7 +52,7 @@ public class FormController : Custom.Hybrid.ApiTyped
         var recaptchaService = GetService<RecaptchaValidator>();
         var result = await recaptchaService.ValidateAsync(token: contactFormRequest.Recaptcha, remoteIp: remoteIp);
 
-        if(!result.Success){
+        if (!result.Success) {
           Log.Add("recaptcha validation returned false - aborting");
           #if NETCOREAPP
             return BadRequest(new { error = "recaptcha_failed" });
@@ -71,31 +71,6 @@ public class FormController : Custom.Hybrid.ApiTyped
         #endif
       }
 
-      // Log.Add("checking Recaptcha");
-      // try
-      // {
-      //   var recaptchaService = GetService<AppCode.RecaptchaValidator.Recaptcha>();
-      //   var recaptchaOk = await recaptchaService.Validate(contactFormRequest.Recaptcha, remoteIp, minScore: AllSettings.Double("GoogleRecaptcha.ScoreThreshold"));
-
-      //   if (!recaptchaOk)
-      //   {
-      //     Log.Add("recaptcha validation returned false - aborting");
-      //     #if NETCOREAPP
-      //       return BadRequest(new { error = "recaptcha_failed" });
-      //     #else
-      //       throw new HttpResponseException(System.Net.HttpStatusCode.Forbidden);
-      //     #endif
-      //   }
-      // }
-      // catch (Exception ex)
-      // {
-      //   Log.Add("recaptcha validation exception: " + ex.Message);
-      //   #if NETCOREAPP
-      //     return BadRequest(new { error = "recaptcha_error", message = ex.Message });
-      //   #else
-      //     throw;
-      //   #endif
-      // }
     }
 
     // Continue: Save technical values, store data, send mails etc.
