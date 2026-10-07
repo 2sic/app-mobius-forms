@@ -204,12 +204,12 @@ export function disableInputs(wrapper: Element, state: boolean) {
   wrapper.classList.toggle("disable", state);
   wrapper
     .querySelectorAll("input,textarea,select,button")
-    .forEach((elem) => (elem as HTMLElement).setAttribute("disabled", "true"));
+    .forEach((elem) => (elem as HTMLElement).toggleAttribute("disabled", state));
 }
 
 export function enableInputs(wrapper: Element) {
   wrapper.classList.remove("disable");
   wrapper
     .querySelectorAll("input,textarea,select,button")
-    .forEach((elem) => (elem as HTMLElement).setAttribute("disabled", "false"));
+    .forEach((elem) => (elem as HTMLElement).removeAttribute("disabled"));
 }
