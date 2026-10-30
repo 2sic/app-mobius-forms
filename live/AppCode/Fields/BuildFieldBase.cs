@@ -118,7 +118,7 @@ namespace AppCode.Fields
       return "control-label "
           + (required ? Constants.ClassRequired : "")
           + " " + (floatingLabel ? CssClasses.LabelInside : CssClasses.Label)
-          + " " + (floatingLabel ? CssClasses.FloatingLabelHidden : "");  // Bs3 and Bs4 only - hidden Label
+          + " " + (floatingLabel ? CssClasses.FloatingLabelHidden : "");
     }
 
   }

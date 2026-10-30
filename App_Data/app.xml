@@ -2612,10 +2612,10 @@
             </Value>
           </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-dropdown" AttributeSetName="@string-dropdown" EntityGUID="f46413dc-5e71-4b20-a415-cfce2475b2cd" Json="True" KeyNumber="6289">
-            <Value Key="DropdownValues" Value="beside:Label to the side of the field&#xA;floatingLabel:The label can be floating or used as a placeholder in the input(Bs3 and Bs4)" Type="String">
+            <Value Key="DropdownValues" Value="beside:Label to the side of the field&#xA;floatingLabel:Use a floating label in the input" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="DropdownValues" Value="beside:Label an der Seite des Feldes&#xA;floatingLabel:Die Beschriftung kann fließend sein oder als Platzhalter in der Eingabe verwendet werden (Bs3 und Bs4)" Type="String">
+            <Value Key="DropdownValues" Value="beside:Label an der Seite des Feldes&#xA;floatingLabel:Eine fließende Beschriftung in der Eingabe verwenden" Type="String">
               <Dimension DimensionID="214" ReadOnly="false" />
             </Value>
             <Value Key="DropdownValuesFormat" Value="value-label" Type="String">
@@ -8291,7 +8291,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.24.01" Type="String">
+      <Value Key="Version" Value="06.24.02" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>

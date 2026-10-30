@@ -33,9 +33,9 @@ namespace AppCode.Fields
             var checkbox = GenerateCheckbox(item);
             var wrapper = BuildWrapper(checkbox, BuildLabel(item.Value, checkboxId));
 
-            // Create container and add checkbox or wrapper based on Bootstrap version
+            // Create container and add the Bootstrap 5 wrapper
             var container = tags.Div().Class(Form.UseFloatingLabels ? "col-12" : CssClasses.LabelOutside);
-            container = container.Add(CssClasses.IsBs3 ? checkbox : wrapper);
+            container = container.Add(wrapper);
 
             // Create items div and add label and container
             var items = tags.Div().Class(CssClasses.OutsideDiv + " " + Constants.ClassMobiusField);
@@ -106,15 +106,13 @@ namespace AppCode.Fields
         .For(forId);
     }
 
-    // Helper to build a wrapper handling BS3 vs BS4+ ordering
+    // Helper to build a Bootstrap 5 checkbox wrapper
     private IHtmlTag BuildWrapper(IHtmlTag checkbox, IHtmlTag label)
     {
       var tags = Builder.Kit.HtmlTags;
       var wrapper = tags.Div().Class(CssClasses.CheckboxWrapper);
 
-      // BS4+ has the checkbox before the label, BS3 has it inside the label
-      var content = CssClasses.IsBs3 ? (IHtmlTag)label.Add(checkbox) : checkbox;
-      wrapper = wrapper.Add(content, label);
+      wrapper = wrapper.Add(checkbox, label);
 
       return wrapper;
     }

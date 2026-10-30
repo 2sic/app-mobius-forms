@@ -3,7 +3,7 @@
 
   <!-- Define the default ignored edition directories -->
   <PropertyGroup>
-    <IgnoredEditionDirs Condition="'$(IgnoredEditionDirs)' == ''">live;bs3;bs4</IgnoredEditionDirs>
+    <IgnoredEditionDirs Condition="'$(IgnoredEditionDirs)' == ''">live</IgnoredEditionDirs>
     <_ignoreNormalized>$(IgnoredEditionDirs.Trim().Replace('; ', ';').Replace(' ;', ';'))</_ignoreNormalized>
   </PropertyGroup>
 

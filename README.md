@@ -18,8 +18,8 @@ This **Mobius Forms** App is an add-on to DNN. It is _the most customizable Form
 | App Catalog         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 | Screenshots         | ✅    | See [app catalog](https://2sxc.org/en/apps/app/mobius-forms-v5-with-mailchimp-recaptcha-polymorph-weback-and-more-hybrid-for-dnn-and-oqtane)
 | Best Practices      | ✅    | Uses v16.01 conventions
-| Bootstrap 3         | ✅    | optimized
-| Bootstrap 4         | ✅    | optimized
+| Bootstrap 3         | ❌    | Last supported in v06.24.01
+| Bootstrap 4         | ❌    | Last supported in v06.24.01
 | Bootstrap 5         | ✅    | optimized
 
 This means that it
@@ -78,6 +78,10 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 ---
 
 ## History
+
+* v06.24.02 2026-10
+  * Removed Bootstrap 3 and Bootstrap 4 support; the app is now Bootstrap 5 only
+  * For Bootstrap 3 or Bootstrap 4, use v06.24.01
 
 * 2021-11
   * Updated to v12 best-practices

@@ -49,19 +49,6 @@ namespace AppCode.Fields
       var tags = Builder.Kit.HtmlTags;
       var checkboxWrapper = tags.Div();
 
-      if (CssClasses.IsBs3) {
-        checkboxWrapper = checkboxWrapper.Class($"{Constants.ClassMobiusField} form-group").Wrap(
-          tags.Div().Class("checkbox").Wrap(
-            tags.Label().Wrap(checkbox, checkboxLabel)
-          )
-        );
-        
-        if (Field.IsNotEmpty("InfoText"))
-          checkboxWrapper = checkboxWrapper.Add(tags.Div(Field.InfoText).Class("small-infotext"));        
-
-        return checkboxWrapper;
-      }
-
       checkboxWrapper = checkboxWrapper
         .Class($"{Constants.ClassMobiusField} mb-3 form-check")
         .Wrap(

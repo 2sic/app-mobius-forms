@@ -29,17 +29,9 @@ namespace AppCode.Fields
         radio = SetBasics(radio, false, radioId);
 
         var wrapper = tags.Div().Class(CssClasses.RadioWrapper);
-        if (CssClasses.IsBs3)
-        {
-          var radioLabel = tags.Label(radio + item.Value).For(radioId);
-          wrapper = wrapper.Add(radioLabel);
-        }
-        else
-        {
-          radio = radio.Class(Constants.ClassCheckbox);
-          var radioLabel = tags.Label(item.Value).Class("form-check-label").For(radioId);
-          wrapper = wrapper.Add(radio, radioLabel); // <-- will be needed as well
-        }
+        radio = radio.Class(Constants.ClassCheckbox);
+        var radioLabel = tags.Label(item.Value).Class("form-check-label").For(radioId);
+        wrapper = wrapper.Add(radio, radioLabel);
 
         container = container.Add(wrapper);
       }
@@ -65,12 +57,11 @@ namespace AppCode.Fields
             .Class(CssClasses.Checkbox);
           radio = SetBasics(radio, false, radioId);
 
-          // BS4+ has the radio before the label, BS3 has it inside the label
-          var radioLabel = tags.Label(CssClasses.IsBs3 ? radio : null, item.Value)
+          var radioLabel = tags.Label(item.Value)
             .Class(CssClasses.RadioLabel)
             .For(radioId);
 
-          var wrapper = tags.Div(CssClasses.IsBs3 ? null : radio, radioLabel)
+          var wrapper = tags.Div(radio, radioLabel)
             .Class(CssClasses.RadioWrapper);
           return wrapper;
         })
