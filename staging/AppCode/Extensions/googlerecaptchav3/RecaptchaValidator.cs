@@ -13,6 +13,8 @@ namespace AppCode.Extensions.GoogleRecaptchaV3
   {
     private const string SiteVerifyUrl = "https://www.google.com/recaptcha/api/siteverify";
 
+    public double? Score { get; private set; }
+
     /// <summary>
     /// Validate a reCAPTCHA v3 token against Google.
     /// </summary>
@@ -114,6 +116,9 @@ namespace AppCode.Extensions.GoogleRecaptchaV3
       // Optional hostname check to prevent token reuse on other domains
       if (!string.IsNullOrWhiteSpace(expectedHostname) && !string.Equals(google.Hostname, expectedHostname, StringComparison.OrdinalIgnoreCase))
         return google.ToError(RecaptchaErrors.ActionMismatch);
+
+      if (google.Score.HasValue)
+        Score = google.Score.Value;
 
       // Enforce score threshold if Google provides a score
       if (google.Score.HasValue && minimumScore > 0 && google.Score.Value < minimumScore)

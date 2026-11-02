@@ -1,14 +1,12 @@
-using ToSic.Sxc.Data;
-
 namespace AppCode.Data
 {
   public class SendMailConfigStack
   {
-    public SendMailConfigStack(ITypedStack configStack)
+    public SendMailConfigStack(FormSendMailConfig configStack)
     {
       ConfigStack = configStack;
     }
-    protected ITypedStack ConfigStack { get; }
+    protected FormSendMailConfig ConfigStack { get; }
 
     public bool OwnerSend => ConfigStack.Bool(nameof(OwnerSend));
     public bool CustomerSend => ConfigStack.Bool(nameof(CustomerSend));

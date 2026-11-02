@@ -9,8 +9,8 @@
   <input type='@(MyUser.IsContentAdmin ? "text" : "hidden")' id="Honeypot" required data-pristine-honeypot="@field.String("DefaultValue")" class="hiddenInputStyle form-control mb-3" value="">
 </div>
 
-@if(MyUser.IsContentAdmin) {
-  if(!Text.Has(field.String("DefaultValue"))) {
+@if (MyUser.IsContentAdmin) {
+  if (!Text.Has(field.String("DefaultValue"))) {
     <div class="alert alert-danger">
       <strong>Warnung:</strong> Das Honeypot-Feld hat keinen Standardwert.
     </div>

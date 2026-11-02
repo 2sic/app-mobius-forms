@@ -36,6 +36,7 @@ public class FormController : Custom.Hybrid.ApiTyped
     var fieldsFormRequest = HtmlEncodeFields(contactFormRequest.Fields);
     var wrapLog = Log.Call(useTimer: true);
     var formConfig = As<FormConfig>(MyItem);
+    var score = "0.0";
 
     // Determine remoteIp as early as possible (also needed in later technical values)
     #if NETCOREAPP
@@ -51,6 +52,9 @@ public class FormController : Custom.Hybrid.ApiTyped
       {
         var recaptchaService = GetService<RecaptchaValidator>();
         var result = await recaptchaService.ValidateAsync(token: contactFormRequest.Recaptcha, remoteIp: remoteIp);
+        score = result.Score.ToString();
+
+        Log.Add("recaptcha validation result: " + result.Success + ", score: " + score);
 
         if (!result.Success) {
           Log.Add("recaptcha validation returned false - aborting");
@@ -85,6 +89,9 @@ public class FormController : Custom.Hybrid.ApiTyped
     formTechnicalValues["ModuleId"] = MyContext.Module.Id;
     // Add the FormId to assign each sent form to a specific Form
     formTechnicalValues["FormId"] = contactFormRequest.Fields["FormId"].ToString();
+
+    if (formConfig.Recaptcha) formTechnicalValues["RecaptchaScore"] = score;
+
     // add raw-data, in case the content-type has a "RawData" field
     contactFormRequest.Fields.Add("RawData", CreateRawDataEntry(contactFormRequest));
 
@@ -100,10 +107,20 @@ public class FormController : Custom.Hybrid.ApiTyped
       var contentTypeEntity = App.Data.Create(contentType, contactFormRequest.Fields);
     }
 
-    // Create Fields Data
-    var formDataEntity = App.Data.Create("FormData", contactFormRequest.Fields);
-    // Update (Update to the same Entity) formTechnicalValues
-    App.Data.Update(formDataEntity.EntityId, formTechnicalValues);
+    // // Create Fields Data
+    // var formDataEntity = App.Data.Create("FormData", contactFormRequest.Fields);
+    // // Update (Update to the same Entity) formTechnicalValues
+    // App.Data.Update(formDataEntity.EntityId, formTechnicalValues);
+
+    // Create a combined dictionary of client-sent fields and server-side technical values
+    var dataToSave = new Dictionary<string, object>(contactFormRequest.Fields, StringComparer.OrdinalIgnoreCase);
+
+    // Merge client-sent fields with server-side technical values
+    foreach (var kvp in formTechnicalValues)
+      dataToSave[kvp.Key] = kvp.Value;
+
+    // Save the combined data to the "FormData" content type
+    var formDataEntity = App.Data.Create("FormData", dataToSave);    
 
     Log.Add("Save data to content type");
     var files = new List<ToSic.Sxc.Adam.IFile>();

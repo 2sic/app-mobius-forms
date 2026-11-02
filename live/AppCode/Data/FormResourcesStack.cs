@@ -1,14 +1,12 @@
-using ToSic.Sxc.Data;
-
 namespace AppCode.Data
 {
   public class FormResourcesStack
   {
-    public FormResourcesStack(ITypedStack formResources)
+    public FormResourcesStack(FormResources formResources)
     {
       FormResources = formResources;
     }
-    protected ITypedStack FormResources { get; }
+    protected FormResources FormResources { get; }
 
     public string Title => FormResources.String(nameof(Title), fallback: "");
 

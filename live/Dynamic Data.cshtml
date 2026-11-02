@@ -14,8 +14,8 @@
 
 @* DataTables JavaScripts  *@
 @Kit.Page.Activate("jQuery")
-<link rel="stylesheet" href="@MyView.Path/lib/jquery.dataTables.css" />
-<script src="@MyView.Path/lib/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="@MyView.Folder.Url/lib/jquery.dataTables.css" />
+<script src="@MyView.Folder.Url/lib/jquery.dataTables.js"></script>
 
 @{
   var formData = GetService<FormDataService>().Setup(FormConfig.Id);
@@ -131,8 +131,8 @@
    document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_paginate"))
 </script>
 
-<link rel="stylesheet" href="@MyView.Path/dist/styles.min.css" @Kit.Page.AssetAttributes()>
-<script src="@MyView.Path/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
+<link rel="stylesheet" href="@MyView.Folder.Url/dist/styles.min.css" @Kit.Page.AssetAttributes()>
+<script src="@MyView.Folder.Url/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
 @Kit.Page.TurnOn("window.appMobius6.initTippy()", data: new {
   domClass = "app-mobius-tooltip",
   options = new {

@@ -24,11 +24,11 @@
     },
     {
       "file": "/AppCode/Extensions/GoogleRecaptchaV3/RecaptchaValidator.cs",
-      "hash": "b5245ee6ff25e760c7b2f05ce902ac4e33c4958d5a161d733fd47bde7e39faac"
+      "hash": "24af458a346811374b38cd21e3c639d388f0aac6e98a28e22dc9c833ff262819"
     },
     {
       "file": "/Extensions/google-recaptcha-v3/App_Data/extension.json",
-      "hash": "adf0ad2e75d79531e8ba979b4cb51f49554ec3108f9daec5ddaf10a42b26ae3b"
+      "hash": "b496a8a57f4dd0d7406b599c196d42734c86debbd82d7c691b5884f8f69f1c22"
     }
   ]
 }
