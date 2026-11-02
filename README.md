@@ -75,9 +75,19 @@ This app is only useful if you use DNN or Oqtane. So assuming you have a DNN ins
 
 The Source Code is all here - so you can easily customize to your hearts desire!
 
+## Development
+
+* Run `npm install` to install the dependencies
+* Run `npm run build-prod` to build the files into `staging/dist`
+* The Tabulator code is in `src/ts/data-table.ts`
+
 ---
 
 ## History
+
+* v06.24.03 2026-11
+  * Replaced DataTables with Tabulator in staging
+  * Added dynamic columns, filters and pagination
 
 * v06.24.02 2026-10
   * Removed Bootstrap 3 and Bootstrap 4 support; the app is now Bootstrap 5 only
