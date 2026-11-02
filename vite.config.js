@@ -23,13 +23,19 @@ export default defineConfig({
     rollupOptions: {
       input: {
         scripts: resolve(process.cwd(), 'src/ts/index.ts'),
+        'data-table': resolve(process.cwd(), 'src/ts/data-table.ts'),
       },
       output: {
+        banner: '(function () {',
+        footer: '})();',
         entryFileNames: '[name].min.js',
         chunkFileNames: '[name].min.js',
         assetFileNames: (assetInfo) => {
           if (/\.(png|jpe?g|gif|svg|webp)$/i.test(assetInfo.name)) {
             return 'images/[name]-[hash][extname]';
+          }
+          if (/\.css$/i.test(assetInfo.name)) {
+            return '[name].min[extname]';
           }
           return '[name]-[hash][extname]';
         },
@@ -38,7 +44,7 @@ export default defineConfig({
 
     minify: 'oxc',
     target: 'es2020',
-    cssCodeSplit: false,
+    cssCodeSplit: true,
 
     // Polling required for watch mode on network drives (prevents UNKNOWN fs error)
     watch: {

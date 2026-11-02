@@ -13,6 +13,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.1.2",
+    "@types/tabulator-tables": "6.3.6",
     "autoprefixer": "^10.5.4",
     "concurrently": "^10.0.4",
     "postcss": "^8.5.25",
@@ -24,6 +25,7 @@
     "@2sic.com/2sxc-typings": "^14.7.3",
     "bootstrap": "^5.3.8",
     "pristinejs": "^1.1.0",
+    "tabulator-tables": "6.5.0",
     "tippy.js": "^6.3.7"
   }
 }

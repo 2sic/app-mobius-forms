@@ -1,0 +1,71 @@
+.mobius-data-table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+
+  .tabulator-cell {
+    white-space: nowrap;
+  }
+
+  .tabulator-header-filter input {
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius-sm);
+  }
+}
+
+.mobius-data-toolbar {
+  padding: .75rem;
+  background: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
+.mobius-data-page-size {
+  width: auto;
+}
+
+.mobius-data-search {
+  min-width: 12rem;
+  max-width: 24rem;
+}
+
+.mobius-data-column-picker {
+  > summary {
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+}
+
+.mobius-data-column-options {
+  position: absolute;
+  right: 0;
+  z-index: 1050;
+  width: max-content;
+  min-width: 14rem;
+  max-width: min(24rem, 90vw);
+  max-height: 24rem;
+  overflow: auto;
+
+  label {
+    cursor: pointer;
+  }
+}
+
+.mobius-data-files {
+  position: relative;
+
+  > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+}
+
+.mobius-data-file-list {
+  position: fixed;
+  z-index: 1060;
+  max-width: min(36rem, 90vw);
+}
