@@ -1,143 +1,133 @@
 @* Inherit special Base Class which Prepares a lot of commonly used objects *@
 @inherits AppCode.Razor.MobiusRazorBase
-@using ToSic.Razor.Blade
-@using ToSic.Sxc.Data
 @using ToSic.Sxc.Adam
 
-@using AppCode.Data
-@using AppCode.Form
-@using AppCode.FormData
+@using System.Collections.Generic
+@using System.Linq
 @using System.Text.Json
+
+@using AppCode.FormData
 
 @if (!MyUser.IsContentAdmin)
   return;
 
-@* DataTables JavaScripts  *@
-@Kit.Page.Activate("jQuery")
-<link rel="stylesheet" href="@MyView.Folder.Url/lib/jquery.dataTables.css" />
-<script src="@MyView.Folder.Url/lib/jquery.dataTables.js"></script>
-
 @{
   var formData = GetService<FormDataService>().Setup(FormConfig.Id);
-  var firstRecord = formData.Data.First().Item.DateTime("Timestamp");
-  var lastRecord = formData.Data.Last().Item.DateTime("Timestamp");
-} 
+  var hasData = formData.Data.Any();
+  var firstRecord = hasData ? formData.Data.First().Item.DateTime("Timestamp") : (DateTime?)null;
+  var lastRecord = hasData ? formData.Data.Last().Item.DateTime("Timestamp") : (DateTime?)null;
+
+  // Unique ids
+  var tableId = $"formdata-{MyContext.Module.Id}-{formData.FormId}";
+  var configId = $"{tableId}-config";
+  var rowArtifactsId = $"{tableId}-row-artifacts";
+  var searchId = $"{tableId}-search";
+  var pageSizeId = $"{tableId}-page-size";
+  var columnChooserId = $"{tableId}-columns";
+
+  // Dynamic columns
+  var tableColumns = formData.ColumnHeaders.Select(header => new {
+    title = header.Value,
+    field = header.Key,
+    sorter = header.Key == "Id" || header.Key == "Files" ? "number" : "string"
+  }).ToList();
+
+  var tableRows = new List<Dictionary<string, object>>();
+  foreach (var pair in formData.Data) {
+    
+    var row = new Dictionary<string, object>();
+
+    foreach (var key in formData.ColumnHeaders.Keys) {
+      row[key] = key == "Id" || key == "Files"
+        ? pair.Get(key)
+        : pair.GetString(key);
+    }
+    row["_itemId"] = pair.Item.Id;
+    tableRows.Add(row);
+  }
+
+  // Data for Tabulator
+  var tableConfigJson = JsonSerializer.Serialize(new {
+    columns = tableColumns,
+    rows = tableRows
+  });
+}
 
 @* Header Bar showing Stats and CSV download *@
-<div class="alert alert-primary d-flex align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
-  <strong>Total:</strong> @formData.Data.Count 
-  <strong>@AppRes.LabelFirst:</strong> @firstRecord.ToString("yyyy-MM-dd")
-  <strong>@AppRes.LabelLast:</strong> @lastRecord.ToString("yyyy-MM-dd")
-  <strong>ModuleId: </strong> @MyContext.Module.Id
+<div class="alert alert-primary d-flex flex-wrap align-items-center gap-2" role="alert" @Kit.Toolbar.Default()>
+  <strong>Total:</strong> @formData.Data.Count
+  @if (firstRecord.HasValue) {
+    <strong>@AppRes.LabelFirst:</strong> @firstRecord.Value.ToString("yyyy-MM-dd")
+    <strong>@AppRes.LabelLast:</strong> @lastRecord.Value.ToString("yyyy-MM-dd")
+  }
+  <strong>ModuleId:</strong> @MyContext.Module.Id
   <strong>FormId:</strong> @formData.FormId
   <a href="@CsvHelper.GetDownloadLink(formData.FormId)" type="button" class="btn btn-primary" target="_blank">CSV Export</a>
 </div>
 
-@* Add Table Top Bar show and search into top-toolbar div *@
-<div class="top-toolbar d-flex justify-content-between"></div>
+@* Add Table Tools *@
+<div class="mobius-data-toolbar d-flex flex-wrap align-items-center gap-2 mb-3">
+  <label class="d-flex align-items-center gap-2 mb-0" for="@pageSizeId">
+    Show
+    <select id="@pageSizeId" class="form-select form-select-sm mobius-data-page-size">
+      <option value="10">10</option>
+      <option value="25" selected>25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </label>
 
-<div class="table-responsive">
-  <table id="formdata" class="table table-striped">
-    <thead>
-      <tr>
-        @foreach (var headerProp in formData.ColumnHeaders) {
-          <th>@headerProp.Value</th>
-        }
-      </tr>
-    </thead> 
-    <tbody>  
-      @foreach (var pair in formData.Data) {
-        var keysWithoutLastFiles = formData.ColumnHeaders.Keys.Reverse().Skip(1).Reverse();
-        var itemId = pair.Item.Id;
-        var files = pair.Item.Folder("Files").Files;
+  <label class="d-flex flex-grow-1 align-items-center gap-2 mb-0" for="@searchId">
+    Search
+    <input id="@searchId" class="form-control form-control-sm mobius-data-search" type="search" placeholder="Search all fields…" />
+  </label>
 
-        <tr @Kit.Toolbar.Empty(pair.Item).Delete().Settings(autoAddMore: "end", hover: "left")>
-
-          @* Generic Fields from the data *@
-          @foreach (var key in keysWithoutLastFiles) {
-            var value = pair.GetString(key);
-            <td class="nowrap">
-              @if (value.Length > 12) {
-                <p class="app-mobius-tooltip" id="app-mobius-tooltip-btn-@itemId-@key" data-content="@value">
-                  @Html.Raw(Text.Ellipsis(value, 10))
-                </p>
-              } else {
-                @value
-              }
-            </td>
-          }
-
-          @* Files *@
-          @if (files.Count() > 0) {
-            <td>
-              <span class="app-mobius-tooltip badge rounded-pill text-bg-primary" id="app-mobius-tooltip-btn-@itemId">
-                @files.Count()
-
-                @foreach (IFile file in files) {
-                  <div class="d-none app-mobius-tooltip-content d-flex" data-file-id="@itemId">
-                    <div>
-                      <a class="link-info" href="@file.Url" download="@file.Name">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="white">
-                          <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
-                        </svg>
-                        &nbsp;
-                        @file.FullName
-                      </a>
-                    </div>
-                    <div class="mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill="white">
-                          <path d="M128 176a128 128 0 1 1 256 0 128 128 0 1 1 -256 0zM391.8 64C359.5 24.9 310.7 0 256 0S152.5 24.9 120.2 64H64C28.7 64 0 92.7 0 128V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H391.8zM296 224c0-10.6-4.1-20.2-10.9-27.4l33.6-78.3c3.5-8.1-.3-17.5-8.4-21s-17.5 .3-21 8.4L255.7 184c-22 .1-39.7 18-39.7 40c0 22.1 17.9 40 40 40s40-17.9 40-40z"/>
-                      </svg>
-                      &nbsp;
-                      @file.SizeInfo.BestSize.ToString("##.#") @file.SizeInfo.BestUnit
-                    </div>
-                    @if (files.Count() > 1 && !file.Equals(files.Last())) {
-                      <br>
-                    }
-                  </div>
-                }
-              </span>
-            </td>
-          } else {
-            <td></td>
-          }
-        </tr>
-      }
-    </tbody>
-  </table>
+  <details class="mobius-data-column-picker position-relative">
+    <summary class="btn btn-sm btn-outline-secondary">Columns</summary>
+    <div id="@columnChooserId" class="mobius-data-column-options bg-body border rounded shadow-sm p-2"></div>
+  </details>
 </div>
-@* Add Table Bottom Bar side-info and pagination into bottom-toolbar div *@
-<div class="bottom-toolbar d-flex justify-content-between mt-3"></div>
 
-<script>
-  new DataTable('#formdata');
+<div id="@tableId" class="mobius-data-table"></div>
 
-   // Formdata Length Div Move to Top-Tollbar
-   document.querySelector(".top-toolbar").append(document.getElementById("formdata_length"))
-   // Get Input and Label and add some bs5 classes
-   document.getElementById("formdata_length").getElementsByTagName("label")[0].classList.add("d-flex", "align-items-center", "gap-2");
-   document.getElementById("formdata_length").getElementsByTagName("select")[0].classList.add("form-select");
+@* Hidden 2sxc toolbars and file links for the table rows *@
+<div id="@rowArtifactsId" hidden>
+  @foreach (var pair in formData.Data) {
+    var itemId = pair.Item.Id;
+    var files = pair.Item.Folder("Files").Files;
 
-   // Formdata Filter  Div Move to Top-Tollbar
-   document.querySelector(".top-toolbar").append(document.getElementById("formdata_filter"))
-   // Get Input and Label and add some bs5 classes
-   document.getElementById("formdata_filter").getElementsByTagName("label")[0].classList.add("d-flex", "align-items-center", "gap-2");
-   document.getElementById("formdata_filter").getElementsByTagName("input")[0].classList.add("form-control");
+    <div data-mobius-row-artifact="@itemId" @Kit.Toolbar.Empty(pair.Item).Delete().Settings(autoAddMore: "end", hover: "left")></div>
 
-   // Formdata Info  Div Move to Bottom-Tollbar
-   document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_info"))
+    <div data-mobius-files-artifact="@itemId">
+      @if (files.Any()) {
+        <details class="mobius-data-files">
+          <summary class="badge rounded-pill text-bg-primary">@files.Count()</summary>
+          <div class="mobius-data-file-list bg-body border rounded shadow-sm p-2">
+            @foreach (IFile file in files) {
+              <a class="d-block text-nowrap" href="@file.Url" download="@file.Name">
+                @file.FullName (@file.SizeInfo.BestSize.ToString("##.#") @file.SizeInfo.BestUnit)
+              </a>
+            }
+          </div>
+        </details>
+      }
+    </div>
+  }
+</div>
 
-   // Formdata Paginate  Div Move to Bottom-Tollbar
-   document.querySelector(".bottom-toolbar").append(document.getElementById("formdata_paginate"))
-</script>
+<script type="application/json" id="@configId">@Html.Raw(tableConfigJson)</script>
+
+<link rel="stylesheet" href="@MyView.Folder.Url/dist/data-table.min.css" @Kit.Page.AssetAttributes()>
+<script src="@MyView.Folder.Url/dist/data-table.min.js" @Kit.Page.AssetAttributes()></script>
+@Kit.Page.TurnOn("window.appMobius6.initDataTable()", data: new {
+  tableId,
+  configId,
+  rowArtifactsId,
+  searchId,
+  pageSizeId,
+  columnChooserId,
+  persistenceId = $"mobius-data-{MyContext.Module.Id}-{formData.FormId}"
+})
 
 <link rel="stylesheet" href="@MyView.Folder.Url/dist/styles.min.css" @Kit.Page.AssetAttributes()>
 <script src="@MyView.Folder.Url/dist/scripts.min.js" @Kit.Page.AssetAttributes()></script>
-@Kit.Page.TurnOn("window.appMobius6.initTippy()", data: new {
-  domClass = "app-mobius-tooltip",
-  options = new {
-    placement = "left",
-    interactive = true,
-    allowHTML = true
-  }
-})
