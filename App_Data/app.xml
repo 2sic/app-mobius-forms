@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="21.08.00" ExportDate="2026-06-16T08:31:53.9680766+02:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="22.01.00" ExportDate="2026-11-02T16:16:12.6515905+01:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -2612,10 +2612,10 @@
             </Value>
           </Entity>
           <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-dropdown" AttributeSetName="@string-dropdown" EntityGUID="f46413dc-5e71-4b20-a415-cfce2475b2cd" Json="True" KeyNumber="6289">
-            <Value Key="DropdownValues" Value="beside:Label to the side of the field&#xA;floatingLabel:Use a floating label in the input" Type="String">
+            <Value Key="DropdownValues" Value="beside:Label to the side of the field&#xA;floatingLabel:The label can be floating or used as a placeholder in the input(Bs3 and Bs4)" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="DropdownValues" Value="beside:Label an der Seite des Feldes&#xA;floatingLabel:Eine fließende Beschriftung in der Eingabe verwenden" Type="String">
+            <Value Key="DropdownValues" Value="beside:Label an der Seite des Feldes&#xA;floatingLabel:Die Beschriftung kann fließend sein oder als Platzhalter in der Eingabe verwendet werden (Bs3 und Bs4)" Type="String">
               <Dimension DimensionID="214" ReadOnly="false" />
             </Value>
             <Value Key="DropdownValuesFormat" Value="value-label" Type="String">
@@ -3814,6 +3814,13 @@
             <Value Key="InputFontFamily" Value="" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="RecaptchaScore" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="ef7454c8-e115-4fd1-940c-a74b632761b5" Json="True" KeyNumber="7263">
+            <Value Key="InputType" Value="string-default" Type="String" />
+            <Value Key="Name" Value="RecaptchaScore" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
           </Entity>
         </Attribute>
       </Attributes>
@@ -5753,7 +5760,13 @@
             <Value Key="DisableTranslation" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
+            <Value Key="EnableExperimental" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
             <Value Key="InputType" Value="string-url-path" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="IsUnique" Value="False" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="Name" Value="Field ID" Type="String">
@@ -8291,39 +8304,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.24.03" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-    </Entity>
-    <Entity TargetType="3" AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="f6bea776-f082-4717-b63a-4861ffa22183" KeyNumber="320">
-      <Value Key="AdminHasPermission" Value="False" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="DefaultMailFrom" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="DefaultOwnerMail" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="GdprEnabled" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailchimpAPIKey" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailchimpListId" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailchimpServer" Value="" Type="String">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="MailchimpShowWarning" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="TermsAndGdprCombined" Value="True" Type="Boolean">
-        <Dimension DimensionID="213" ReadOnly="false" />
-      </Value>
-      <Value Key="TermsEnabled" Value="True" Type="Boolean">
+      <Value Key="Version" Value="06.24.01" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -9136,7 +9117,7 @@
       <Value Key="EnableMailchimp" Value="False" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Fields" Value="4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238,2638bc1a-3639-459f-8499-e9fa1dfe5201,ab216743-e1f1-4d47-a98f-b1063694a68f,b8c274bd-89c8-44db-83db-de575a473571,12fe9084-6bf2-4842-bbe1-fae671d7cc2d" Type="Entity" />
+      <Value Key="Fields" Value="4d30b825-0a97-4003-8065-94e37206ef8d,c145a239-0814-4acc-ad68-e4e2a8976537,f9e75f64-d35b-442e-ab41-60d0825529ac,6cad82a0-785a-4456-bc1c-7cdb287335c6,cf6ce3ce-ab17-429a-aa5b-8810ae80064c,28ffff9c-e11d-4695-95e4-30718e2b2238,2638bc1a-3639-459f-8499-e9fa1dfe5201,ab216743-e1f1-4d47-a98f-b1063694a68f,b8c274bd-89c8-44db-83db-de575a473571,12fe9084-6bf2-4842-bbe1-fae671d7cc2d,b15e2afc-7a71-4b4b-b4e3-31b4e6af43ed" Type="Entity" />
       <Value Key="FormSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
       <Value Key="MailchimpSubscriptionMail" Value="" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
@@ -15065,13 +15046,173 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="90a92b7e-bfb6-4559-944d-9bcd485e19e3" AttributeSetName="FormFieldConfig" EntityGUID="b15e2afc-7a71-4b4b-b4e3-31b4e6af43ed">
+      <Value Key="AcceptedExtensions" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="BooleanLabelRight" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ColWidth" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultValue" Value="Q3y5WR^FTeC%il#" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="EmailUseAsRecipient" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldId" Value="honeypot" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="FieldType" Value="razor" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="InfoText" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="IsDisabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelStartsNewGroup" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMax" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="NumberMin" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerCheckboxGrouped" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerKeyValues" Value="Key:Value" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerMultiSelect" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerPlaceholder" Value="--- Please select ---" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="PickerType" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RazorFile" Value="honeypot" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Required" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="StringLines" Value="" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Honeypot" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="FormData" EntityGUID="900d0c1b-382c-4392-a7c1-5f57530f695e">
+      <Value Key="FormId" Value="29880" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6594" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29880&quot;,&quot;subject&quot;:&quot;dasdasd&quot;,&quot;message&quot;:&quot;as das das das das  d&quot;,&quot;name&quot;:&quot;asdasdasd&quot;,&quot;e-mail&quot;:&quot;asdasdas@asdas.dcoasm&quot;,&quot;its-ok-to-charge-me&quot;:&quot;1h&quot;},&quot;Terms&quot;:{&quot;terms&quot;:&quot;\u003Cp\u003EI agree to the general \u003Ca href=\u0022/terms\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eterms and conditions\u003C/a\u003E as well as processing of this inquiry in accordance with the\u0026nbsp;\u003Ca href=\u0022/privacy-policy\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eprivacy policy\u003C/a\u003E.\u003C/p\u003E&quot;}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2026-11-02T12:57:46" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2026-11-02T12:57:46" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="FormData" EntityGUID="a8d893b2-7c15-4236-8718-e85b7aaf93b4">
+      <Value Key="FormId" Value="29907" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6597" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29907&quot;,&quot;e-mail&quot;:&quot;info@romanopalko.de&quot;},&quot;Terms&quot;:{&quot;terms&quot;:&quot;\u003Cp\u003EI agree to the general \u003Ca href=\u0022/terms\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eterms and conditions\u003C/a\u003E as well as processing of this inquiry in accordance with the\u0026nbsp;\u003Ca href=\u0022/privacy-policy\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eprivacy policy\u003C/a\u003E.\u003C/p\u003E&quot;}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2026-11-02T16:02:25" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2026-11-02T16:02:25" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="FormData" EntityGUID="30a00303-8fb1-44e1-b70c-4c3b896747be">
+      <Value Key="FormId" Value="29884" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6593" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29884&quot;,&quot;first-name&quot;:&quot;Roman&quot;,&quot;last-name&quot;:&quot;Opalko&quot;,&quot;subject&quot;:&quot;DAS IST EIN TEST&quot;,&quot;message&quot;:&quot;Token Tests\nQueryString: \nUser: 2sic Web-Developer\nSite: 89\nPage: 3107\nModule: 6593\nDateTime: 2026-11-02T07:02:28.4191924\nTimestamp: 639292321484191924&quot;,&quot;e-mail&quot;:&quot;info@romanopalko.de&quot;,&quot;need-help&quot;:&quot;on&quot;,&quot;industries&quot;:[&quot;IT&quot;,&quot;Health&quot;],&quot;ingredients&quot;:[&quot;Cheese&quot;],&quot;Honeypot&quot;:&quot;Q3y5WR^FTeC%il#&quot;},&quot;Terms&quot;:{}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2026-11-02T16:03:28" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2026-11-02T16:03:28" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="c8b8dc5d-cf09-4e40-b34a-f52a37c438c4" AttributeSetName="FormData" EntityGUID="fa0c1c82-4d79-4705-9bf7-727f6514291f">
+      <Value Key="FormId" Value="29922" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="ModuleId" Value="6598" Type="Number">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="RawData" Value="{&quot;Fields&quot;:{&quot;FormId&quot;:&quot;29922&quot;,&quot;name&quot;:&quot;Roman&quot;,&quot;surname&quot;:&quot;Opalko&quot;,&quot;street&quot;:&quot;Lang\u00E4ulistrasse 62&quot;,&quot;zip-code&quot;:&quot;9470&quot;,&quot;city&quot;:&quot;Buchs&quot;,&quot;phone&quot;:&quot;0817506787&quot;,&quot;subject&quot;:&quot;DAS IST EIN TEST&quot;,&quot;message&quot;:&quot;DAS IST EIN TEST&quot;,&quot;e-mail&quot;:&quot;roman.opalko@2sic.com&quot;},&quot;Terms&quot;:{&quot;terms&quot;:&quot;\u003Cp\u003EI agree to the general \u003Ca href=\u0022/terms\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eterms and conditions\u003C/a\u003E as well as processing of this inquiry in accordance with the\u0026nbsp;\u003Ca href=\u0022/privacy-policy\u0022 target=\u0022_blank\u0022 rel=\u0022noopener\u0022\u003Eprivacy policy\u003C/a\u003E.\u003C/p\u003E&quot;}}" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="SenderIP" Value="194.0.212.88" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Timestamp" Value="2026-11-02T16:04:48" Type="DateTime">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="Title" Value="Form 2026-11-02T16:04:48" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="3" AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="263fa209-f3bc-4659-896e-e37677f73c2b" KeyNumber="320" />
   </Entities>
-  <PortalFiles />
+  <PortalFiles>
+    <File Id="6691" RelativePath="adam/MobiusForms6/spPYqBV8NkKHGOhbeq-TtA/Files/PDF.pdf" />
+    <File Id="6692" RelativePath="adam/MobiusForms6/spPYqBV8NkKHGOhbeq-TtA/Files/PDF2.pdf" />
+  </PortalFiles>
   <PortalFolders>
+    <Folder Id="14804" RelativePath="adam/MobiusForms6/spPYqBV8NkKHGOhbeq-TtA/Files/" />
     <Folder Id="14320" RelativePath="adam/MobiusForms6/" />
     <Folder Id="14563" RelativePath="adam/MobiusForms6/1EQ19KEfhkKTLQcWImGJkw/" />
     <Folder Id="14564" RelativePath="adam/MobiusForms6/1EQ19KEfhkKTLQcWImGJkw/Files/" />
     <Folder Id="14565" RelativePath="adam/MobiusForms6/Cmvgx3RKc0qOmwab1E3ZBQ/" />
     <Folder Id="14566" RelativePath="adam/MobiusForms6/Cmvgx3RKc0qOmwab1E3ZBQ/Files/" />
+    <Folder Id="14803" RelativePath="adam/MobiusForms6/spPYqBV8NkKHGOhbeq-TtA/" />
   </PortalFolders>
 </SexyContent>

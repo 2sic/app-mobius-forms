@@ -1,6 +1,6 @@
 import { CellComponent, ColumnDefinition, RowComponent, TabulatorFull as Tabulator } from 'tabulator-tables';
 import 'tabulator-tables/dist/css/tabulator_bootstrap5.min.css';
-import '../styles/data-table.scss';
+import '../styles/tabulator.scss';
 
 interface FormDataColumn {
   title: string;
@@ -81,7 +81,7 @@ function initDataTable(options: FormDataOptions) {
     columns,
     index: '_itemId',
     height: '70vh',
-    layout: 'fitData',
+    layout: 'fitDataStretch',
     renderHorizontal: 'virtual',
     nestedFieldSeparator: false,
     pagination: true,

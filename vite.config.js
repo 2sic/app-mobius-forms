@@ -23,7 +23,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         scripts: resolve(process.cwd(), 'src/ts/index.ts'),
-        'data-table': resolve(process.cwd(), 'src/ts/data-table.ts'),
+        tabulator: resolve(process.cwd(), 'src/ts/tabulator.ts'),
       },
       output: {
         banner: '(function () {',

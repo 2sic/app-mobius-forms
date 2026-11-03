@@ -117,8 +117,8 @@
 
 <script type="application/json" id="@configId">@Html.Raw(tableConfigJson)</script>
 
-<link rel="stylesheet" href="@MyView.Folder.Url/dist/data-table.min.css" @Kit.Page.AssetAttributes()>
-<script src="@MyView.Folder.Url/dist/data-table.min.js" @Kit.Page.AssetAttributes()></script>
+<link rel="stylesheet" href="@MyView.Folder.Url/dist/tabulator.min.css" @Kit.Page.AssetAttributes()>
+<script src="@MyView.Folder.Url/dist/tabulator.min.js" @Kit.Page.AssetAttributes()></script>
 @Kit.Page.TurnOn("window.appMobius6.initDataTable()", data: new {
   tableId,
   configId,

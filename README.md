@@ -79,7 +79,7 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 
 * Run `npm install` to install the dependencies
 * Run `npm run build-prod` to build the files into `staging/dist`
-* The Tabulator code is in `src/ts/data-table.ts`
+* The Tabulator code is in `src/ts/tabulator.ts`
 
 ---
 
