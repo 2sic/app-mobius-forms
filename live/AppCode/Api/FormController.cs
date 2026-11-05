@@ -7,7 +7,6 @@
 #endif
 
 using System;
-using System.Web;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -180,7 +179,7 @@ public class FormController : Custom.Hybrid.ApiTyped
           return kvp.Value;
 
         // HTML-Encode the string value
-        return (object)System.Web.HttpUtility.HtmlEncode(value);
+        return (object)System.Net.WebUtility.HtmlEncode(value);
       },
       StringComparer.OrdinalIgnoreCase
     );

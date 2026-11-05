@@ -85,7 +85,7 @@ namespace AppCode.Mail
       var mailEngine = GetService<IMailTemplate>(typeName: "AppCode.MailTemplates." + emailTemplateFilename.Replace(".cs", ""));
 
       var stackHelper = GetService<DataStackHelper>();
-      var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem)); // TODO:: auf FormConfig umstellen
+      var formResources = stackHelper.GetFormResources(As<FormConfig>(MyItem));
 
       var subject = mailEngine.Subject(formResources);
       var mailBody = mailEngine.Message(formResources, valuesWithMailLabels).ToString();

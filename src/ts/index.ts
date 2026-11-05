@@ -22,6 +22,14 @@ function initAppMobius({ domAttribute, webApiUrl, validationOptions } : { domAtt
 
   if(!mobiusWrapper) return
 
+  const honeypotFields = mobiusWrapper.querySelectorAll<HTMLInputElement>('[data-pristine-honeypot]');
+  window.setTimeout(() => {
+    honeypotFields.forEach((honeypot) => {
+      const expectedValue = honeypot.dataset.pristineHoneypot;
+      if (!honeypot.value && expectedValue) honeypot.value = expectedValue;
+    });
+  }, 5000);
+
   const submitButton = (mobiusWrapper.querySelectorAll('[app-mobius6-send]')[0] as HTMLButtonElement)
 
   if(mobiusWrapper.classList.contains('app-mobius-groupform')) {

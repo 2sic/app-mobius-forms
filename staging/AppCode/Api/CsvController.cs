@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization; // .net core [AllowAnonymous] & [Autho
 using Microsoft.AspNetCore.Mvc;           // .net core [HttpGet] / [HttpPost] etc.
 #else
 using System.Web.Http;
+using DotNetNuke.Web.Api;
 #endif
 using System.Collections.Generic;
 using System.IO;
@@ -12,16 +13,22 @@ using System.Globalization;
 using System;
 using System.Linq;
 using System.Text;
-using DotNetNuke.Web.Api;
-
 using AppCode.FormData;
 
+#if NETCOREAPP
+[Authorize]
+#else
 [DnnAuthorize]
+#endif
 public class CsvController : Custom.Hybrid.ApiTyped
 {
 
   [HttpGet]
+#if NETCOREAPP
+  [Authorize]
+#else
   [DnnAuthorize(StaticRoles = "Registered Users")]
+#endif
   public object Csv(int id)
   {
     var formData = GetService<FormDataService>().Setup(id);

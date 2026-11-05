@@ -20,13 +20,3 @@
     <strong>Achtung:</strong> Das Formular enthält ein Formularfeld, welches durch JavaScript nach einigen Sekunden befüllt wird. Das Formular prüft beim Absenden, ob der befüllte Wert korrekt ist (Honeypot).
   </div>
 }
-
-<script>
-  window.setTimeout(function() {
-    var honeypotValue = "@field.String("DefaultValue")";
-    var honeypotElement = document.getElementById("module-@MyContext.Module.Id").querySelector("#Honeypot");
-    if (honeypotElement && !honeypotElement.value) {
-      honeypotElement.value = honeypotValue;
-    }
-  }, 5000)
-</script>
