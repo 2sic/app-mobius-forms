@@ -1,6 +1,8 @@
-@inherits Custom.Hybrid.RazorTyped
-@using ToSic.Razor.Blade
+@inherits AppCode.Razor.DynamicFormBase
 @using AppCode.Data
+
+@using ToSic.Razor.Blade
+
 @{
   var field = MyModel.Get<FormFieldConfig>("field");
 }
@@ -12,11 +14,11 @@
 @if (MyUser.IsContentAdmin) {
   if (!Text.Has(field.String("DefaultValue"))) {
     <div class="alert alert-danger">
-      <strong>Warnung:</strong> Das Honeypot-Feld hat keinen Standardwert.
+      @Html.Raw(AppRes.MessageMissingDefaultHoneyPot)
     </div>
   }
   
   <div class="alert alert-warning">
-    <strong>Achtung:</strong> Das Formular enthält ein Formularfeld, welches durch JavaScript nach einigen Sekunden befüllt wird. Das Formular prüft beim Absenden, ob der befüllte Wert korrekt ist (Honeypot).
+    @Html.Raw(AppRes.MessageHoneyPot)
   </div>
 }

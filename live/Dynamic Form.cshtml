@@ -23,6 +23,14 @@
 
   <input type="hidden" id="FormId" value="@FormConfig.Id">
 
+  @* Admin warning: multiple fields share the same FieldId - this causes problems on submit *@
+  @if (MyUser.IsContentAdmin && DuplicateFieldIds.Any())
+  {
+    <div class="alert alert-danger" role="alert">
+      @Html.Raw(AppRes.MessageDuplicateIdsWarning.Replace("###DUPLICATEIDS###", string.Join(", ", DuplicateFieldIds)))
+    </div>
+  }
+
   @* If we don't have any fields yet, show a placeholder so the user can add fields from the toolbar *@
   @if (FormConfig.Fields.Count() == 0)
   {
@@ -42,6 +50,10 @@
         {
           var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;
           <div class="col-@colWidth" @FieldToolbar(field)>
+            @if (ShowDuplicateIdWarning(field))
+            {
+              <div class="badge bg-danger mb-2">@AppRes.LabelDuplicateIdsWarning @field.FieldId</div>
+            }
             @* If it's a advanced field, use the custom razor - otherwise use FormBuilder from base class *@
             @if (field.UseRazorComponent)
             {
