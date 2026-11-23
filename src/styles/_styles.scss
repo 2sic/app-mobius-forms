@@ -140,6 +140,10 @@
 
 .alert > p {
   font-size: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .paginate_button {

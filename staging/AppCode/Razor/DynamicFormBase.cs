@@ -51,6 +51,32 @@ namespace AppCode.Razor
     }
 
 
+    #region Duplicate Field-ID Detection
+
+    /// <summary>
+    /// All FieldIds which are used by more than one field in this form (case-insensitive).
+    /// Duplicate IDs cause problems on submit, since the values overwrite each other.
+    /// Empty IDs are ignored.
+    /// </summary>
+    protected HashSet<string> DuplicateFieldIds => _duplicateFieldIds ??= new HashSet<string>(
+      FormConfig.Fields
+        .Where(f => !string.IsNullOrWhiteSpace(f.FieldId))
+        .GroupBy(f => f.FieldId.Trim(), System.StringComparer.OrdinalIgnoreCase)
+        .Where(g => g.Count() > 1)
+        .Select(g => g.Key),
+      System.StringComparer.OrdinalIgnoreCase);
+    private HashSet<string> _duplicateFieldIds;
+
+    /// <summary>
+    /// Check if a field shares its FieldId with another field - only relevant for admins, so others always get false.
+    /// </summary>
+    protected bool ShowDuplicateIdWarning(FormFieldConfig field)
+      => MyUser.IsContentAdmin
+        && !string.IsNullOrWhiteSpace(field.FieldId)
+        && DuplicateFieldIds.Contains(field.FieldId.Trim());
+
+    #endregion
+
     #region Toolbar Stuff
 
     /// <summary>
@@ -72,6 +98,8 @@ namespace AppCode.Razor
 
       // Prepare some notes so the editor sees what field is being edited
       var fieldInfo = $"Field: <strong>{field.FieldId}</strong> (type: {field.FieldType})";
+      if (ShowDuplicateIdWarning(field))
+        fieldInfo += "<br><strong style='color:red'>Diese Field-ID wird mehrfach verwendet!</strong>";
 
       // Prepare a special message for admins which don't have permissions
       // or which would have permissions, but shouldn't edit

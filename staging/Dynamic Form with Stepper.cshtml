@@ -23,6 +23,15 @@
 
   <input type="hidden" id="FormId" value="@FormConfig.Id">
 
+  @* Admin warning: multiple fields share the same FieldId - this causes problems on submit *@
+  @if (MyUser.IsContentAdmin && DuplicateFieldIds.Any())
+  {
+    <div class="alert alert-danger" role="alert">
+      <strong>Warnung:</strong> Folgende Field-IDs werden mehrfach verwendet: <strong>@string.Join(", ", DuplicateFieldIds)</strong>.
+      Die betroffenen Felder sind rot markiert. Bitte jedem Feld eine eindeutige ID geben, da es sonst beim Absenden zu Problemen kommt.
+    </div>
+  }
+
   @* If we don't have any fields yet, show a placeholder so the user can add fields from the toolbar *@
   @if (FormConfig.Fields.Count() == 0)
   {
@@ -63,6 +72,10 @@
           var colWidth = field.ColWidth > 1 ? field.ColWidth : 12;
 
           <div class="col-@colWidth" @FieldToolbar(field)>
+            @if (ShowDuplicateIdWarning(field))
+            {
+              <div class="badge bg-danger mb-2">Doppelte Field-ID: @field.FieldId</div>
+            }
             @if (field.UseRazorComponent)
             {
               @Html.Partial($"./razor-fields/{field.RazorFile}.cshtml", new { field })
