@@ -27,7 +27,13 @@ namespace AppCode.Mail
         mailLabels[fieldId] = field.Title;
       }
 
-      var valuesRelabled = RewriteKeys(contactFormRequest, mailLabels);
+      // remove technical values which should not appear in the mail (they are still saved in FormData)
+      var hiddenInMail = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "RawData", "Honeypot" };
+      var mailValues = contactFormRequest
+        .Where(kvp => !hiddenInMail.Contains(kvp.Key))
+        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+      var valuesRelabled = RewriteKeys(mailValues, mailLabels);
 
       // assemble all settings to send the mail
       // background: some settings are made in this module, but if they are missing we use fallback settings$
