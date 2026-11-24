@@ -12,28 +12,33 @@ namespace AppCode.Mail
   {
     public void SendMails(Dictionary<string, object> contactFormRequest, string customerMails, List<ToSic.Sxc.Adam.IFile> files)
     {
+      var formConfig = As<FormConfig>(MyItem);
+
       // rewrite the keys to be a nicer format, based on the configuration
-      var mailLabels = "";
+      // FieldId => Title; label-fields and empty IDs are skipped, on duplicate IDs the first field wins
+      // Uses formConfig.Fields (same as the frontend), so "Reuse Config" / InheritedConfig is respected
+      var mailLabels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-      if (contactFormRequest.ContainsKey("FormId"))
+      foreach (var field in formConfig.Fields)
       {
-        var dynForm = AsItems(App.Data["FormConfig"]).Where(e => e.Id == Int32.Parse(contactFormRequest["FormId"].ToString())).FirstOrDefault();
-
-        foreach (var item in dynForm.Children("Fields"))
-        {
-          var fieldId = item.String("FieldId");
-          var title = item.String("Title");
-          mailLabels += fieldId + "=" + title + "\n";
-        }
+        var fieldId = field.FieldId.Trim();
+        if (string.IsNullOrEmpty(fieldId) || field.FieldType == "label" || mailLabels.ContainsKey(fieldId))
+          continue;
+        mailLabels[fieldId] = field.Title;
       }
 
-      var valuesRelabled = RewriteKeys(contactFormRequest, mailLabels);
+      // remove technical values which should not appear in the mail (they are still saved in FormData)
+      var hiddenInMail = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "RawData", "Honeypot" };
+      var mailValues = contactFormRequest
+        .Where(kvp => !hiddenInMail.Contains(kvp.Key))
+        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+      var valuesRelabled = RewriteKeys(mailValues, mailLabels);
 
       // assemble all settings to send the mail
       // background: some settings are made in this module, but if they are missing we use fallback settings$
 
       var appSettings = As<AppSettings>(App.Settings);
-      var formConfig = As<FormConfig>(MyItem);
       var sendMailConfig = formConfig.FormSendMailConfig; // SendMailConfig; // MyItem.Bool("ReuseConfig") ? MyItem.Child("InheritedConfig").Child("FormSendMailConfig") : MyItem.Child("FormSendMailConfig");
 
       var dataStacker = GetService<DataStackHelper>();
@@ -110,14 +115,18 @@ namespace AppCode.Mail
     }
 
     // rewrite the keys to be a nicer format, based on the configuration
-    private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, string map)
+    // if two fields end up with the same label (e.g. same Title), the original key is kept so no value gets lost
+    private Dictionary<string, object> RewriteKeys(Dictionary<string, object> dic, Dictionary<string, string> newKeys)
     {
-      // create keys-map
-      Dictionary<string, string> newKeys = map
-        .Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
-        .ToDictionary(s => s.Split('=')[0], s => s.Split('=')[1], StringComparer.OrdinalIgnoreCase);
-
-      return dic.ToDictionary(g => newKeys.ContainsKey(g.Key) ? newKeys[g.Key] : g.Key, g => g.Value, StringComparer.OrdinalIgnoreCase);
+      var result = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+      foreach (var entry in dic)
+      {
+        var key = newKeys.TryGetValue(entry.Key, out var label) && !string.IsNullOrEmpty(label) && !result.ContainsKey(label)
+          ? label
+          : entry.Key;
+        result[key] = entry.Value;
+      }
+      return result;
     }
   }
 }

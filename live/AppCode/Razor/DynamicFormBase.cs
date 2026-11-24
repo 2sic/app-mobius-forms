@@ -56,11 +56,11 @@ namespace AppCode.Razor
     /// <summary>
     /// All FieldIds which are used by more than one field in this form (case-insensitive).
     /// Duplicate IDs cause problems on submit, since the values overwrite each other.
-    /// Empty IDs are ignored.
+    /// Empty IDs and label-fields are ignored, since labels are never submitted.
     /// </summary>
     protected HashSet<string> DuplicateFieldIds => _duplicateFieldIds ??= new HashSet<string>(
       FormConfig.Fields
-        .Where(f => !string.IsNullOrWhiteSpace(f.FieldId))
+        .Where(f => f.FieldType != "label" && !string.IsNullOrWhiteSpace(f.FieldId))
         .GroupBy(f => f.FieldId.Trim(), System.StringComparer.OrdinalIgnoreCase)
         .Where(g => g.Count() > 1)
         .Select(g => g.Key),
@@ -72,6 +72,7 @@ namespace AppCode.Razor
     /// </summary>
     protected bool ShowDuplicateIdWarning(FormFieldConfig field)
       => MyUser.IsContentAdmin
+        && field.FieldType != "label"
         && !string.IsNullOrWhiteSpace(field.FieldId)
         && DuplicateFieldIds.Contains(field.FieldId.Trim());
 
