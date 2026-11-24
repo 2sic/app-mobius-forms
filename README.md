@@ -86,6 +86,14 @@ The Source Code is all here - so you can easily customize to your hearts desire!
 ## History
 
 * v06.24.03 2026-11
+  * Added duplicate FieldId detection: admins see a warning above the form, a badge on the affected fields and a hint in the field toolbar (label fields and empty IDs are ignored)
+  * Added translatable resources for the duplicate-ID warnings and the honeypot admin messages
+  * Mail and FormData export now use the typed `FormConfig.Fields`, so "Reuse Config" / InheritedConfig is respected
+  * Duplicate FieldIds or identical titles no longer crash mail sending or the FormData export (first field wins, no values get lost)
+  * Technical values (`RawData`, `Honeypot`) are no longer included in mails (still saved in FormData)
+  * Fixed the EntityType of the mail configuration (`SendMailConfig` → `FormSendMailConfig`)
+
+* v06.24.02 2026-11
   * Replaced DataTables with Tabulator in staging
   * Added dynamic columns, filters and pagination
 
