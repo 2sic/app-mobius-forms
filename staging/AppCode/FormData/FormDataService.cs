@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using ToSic.Sxc.Data;
+using AppCode.Data;
 
 namespace AppCode.FormData
 {
@@ -76,12 +77,20 @@ namespace AppCode.FormData
 
     private Dictionary<string, string> GetColumnHeaders()
     {
-      var formFields = AsItems(App.Data["FormConfig"])
+      // Use the typed FormConfig, so .Fields respects "Reuse Config" / InheritedConfig (same as frontend and mail)
+      var formFields = AsList<FormConfig>(App.Data["FormConfig"])
           .FirstOrDefault(f => f.Id == FormId)
-          ?.Children("Fields");
+          ?.Fields;
 
-      var baseDictionary = formFields?.ToDictionary(field => field.Url("FieldId"), field => field.String("Title"))
-                              ?? new Dictionary<string, string>();
+      // FieldId => Title; skip label-fields and empty IDs; on duplicate IDs the first field wins (ToDictionary would throw)
+      var baseDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+      foreach (var field in formFields ?? Enumerable.Empty<FormFieldConfig>())
+      {
+        var fieldId = field.FieldId.Trim();
+        if (string.IsNullOrEmpty(fieldId) || field.FieldType == "label" || baseDictionary.ContainsKey(fieldId))
+          continue;
+        baseDictionary[fieldId] = field.Title;
+      }
 
       // Create the full list of headers and "translated" labels
       var headers = new List<string> { "Id", "Timestamp" }
