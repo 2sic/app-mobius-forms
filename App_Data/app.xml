@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="22.01.00" ExportDate="2026-11-05T14:05:35.5998758+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="22.02.00" ExportDate="2026-11-24T12:55:54.1137226+01:00">
   <Header>
     <App Guid="864d38ad-442b-4bd3-9f65-f6a9ab391da7" />
     <Language Default="en-us" />
@@ -197,7 +197,7 @@
             <Value Key="EnableRemove" Value="True" Type="Boolean">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
-            <Value Key="EntityType" Value="SendMailConfig" Type="String">
+            <Value Key="EntityType" Value="FormSendMailConfig" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="Prefill" Value="" Type="String">
@@ -1410,6 +1410,280 @@
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
             <Value Key="TextWrapping" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="GroupAdminWarnings" Type="Empty" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="2439534a-7341-48ac-b8bc-f18c49341930" Json="True" KeyNumber="7417">
+            <Value Key="InputType" Value="empty-default" Type="String" />
+            <Value Key="Name" Value="GroupAdminWarnings" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MessageDuplicateIdsWarning" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="6012820a-1c8b-4665-b371-40ee8badfd89" Json="True" KeyNumber="7418">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-wysiwyg" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Warning: Duplicate IDs" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Warnung: ID Duplikate" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="93c799b5-1d4e-475e-bd31-eb42a469baa8" Json="True" KeyNumber="7418">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-wysiwyg" AttributeSetName="@string-wysiwyg" EntityGUID="dccb9120-15fa-40e5-a059-7a4e4fefda89" Json="True" KeyNumber="7418">
+            <Value Key="ButtonAdvanced" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ButtonSource" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ContentCss" Value="" Type="Hyperlink">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Dialog" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InlineInitialHeight" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="WysiwygConfiguration" Value="d3dde02f-c1dc-43b8-a8b7-4be3c43eadd0" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="LabelDuplicateIdsWarning" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="5f8ab01f-d905-4990-b194-623e30383e2a" Json="True" KeyNumber="7419">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Label: Duplicate IDs" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Label: ID Duplikate" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="4302c0d0-1f76-4d50-b07a-6ef3bbe4f5b8" Json="True" KeyNumber="7419">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-default" AttributeSetName="@string-default" EntityGUID="b8e26d2d-7d1b-4d55-a662-e46a46ca6315" Json="True" KeyNumber="7419">
+            <Value Key="InputFontFamily" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="TextWrapping" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="GroupHoneyPot" Type="Empty" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="11e06b04-c2c4-47f8-a6f4-e5fc5c7e5710" Json="True" KeyNumber="7422">
+            <Value Key="InputType" Value="empty-default" Type="String" />
+            <Value Key="Name" Value="GroupHoneyPot" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MessageHoneyPot" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="9253cd5e-46a7-40e2-a9a1-53077351a39d" Json="True" KeyNumber="7420">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-wysiwyg" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Message: HoneyPot" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Meldung: HoneyPot" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="a439b785-49ec-44a1-84b8-4d76e9b618c7" Json="True" KeyNumber="7420">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-wysiwyg" AttributeSetName="@string-wysiwyg" EntityGUID="9540753c-afdb-4003-b2f5-14469a5e15c7" Json="True" KeyNumber="7420">
+            <Value Key="ButtonAdvanced" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ButtonSource" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ContentCss" Value="" Type="Hyperlink">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Dialog" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InlineInitialHeight" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="WysiwygConfiguration" Value="d3dde02f-c1dc-43b8-a8b7-4be3c43eadd0" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="MessageMissingDefaultHoneyPot" Type="String" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="937e7252-3251-4cdc-a416-12074f21ef53" Json="True" KeyNumber="7421">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="string-wysiwyg" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Message: Missing HoneyPot Default" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Meldung: Fehlender HoneyPot Standardwert" Type="String">
+              <Dimension DimensionID="214" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@String" AttributeSetName="@String" EntityGUID="46a6bcf8-e7d4-41d7-b03c-467a19f4e94e" Json="True" KeyNumber="7421">
+            <Value Key="DropdownValues" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@string-wysiwyg" AttributeSetName="@string-wysiwyg" EntityGUID="39c67887-2fff-40c3-b677-cb94499bbaa2" Json="True" KeyNumber="7421">
+            <Value Key="ButtonAdvanced" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ButtonSource" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="ContentCss" Value="" Type="Hyperlink">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="Dialog" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="InlineInitialHeight" Value="" Type="String">
+              <Dimension DimensionID="213" ReadOnly="false" />
+            </Value>
+            <Value Key="WysiwygConfiguration" Value="d3dde02f-c1dc-43b8-a8b7-4be3c43eadd0" Type="String">
               <Dimension DimensionID="213" ReadOnly="false" />
             </Value>
           </Entity>
@@ -8304,7 +8578,7 @@
       <Value Key="SupportsAjaxReload" Value="True" Type="Boolean">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
-      <Value Key="Version" Value="06.24.02" Type="String">
+      <Value Key="Version" Value="06.24.03" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
@@ -8323,6 +8597,12 @@
       </Value>
       <Value Key="DefaultFormResources" Value="25004f22-0300-4d3f-8402-a49c90c418bb" Type="Entity" />
       <Value Key="DefaultSendMailConfig" Value="6012078b-23a0-4938-95a7-7ff53d3076c3" Type="Entity" />
+      <Value Key="LabelDuplicateIdsWarning" Value="Duplicate Field ID:" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="LabelDuplicateIdsWarning" Value="Doppelte Field-ID:" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
       <Value Key="LabelFirst" Value="First" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
@@ -8377,10 +8657,28 @@
       <Value Key="MessageDemoItem" Value="Zeigt nur das Demo Formular, erstellen sie ein neues um es abzusenden" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
+      <Value Key="MessageDuplicateIdsWarning" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; The following field IDs are used more than once: &lt;strong&gt;###DUPLICATEIDS###&lt;/strong&gt;.&lt;br&gt;The affected fields are highlighted in red. Please assign a unique ID to each field; otherwise, problems will occur when submitting the form.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageDuplicateIdsWarning" Value="&lt;p&gt;&lt;strong&gt;Warnung:&lt;/strong&gt; Folgende Field-IDs werden mehrfach verwendet: ###DUPLICATEIDS###. Die betroffenen Felder sind rot markiert. Bitte jedem Feld eine eindeutige ID geben, da es sonst beim Absenden zu Problemen kommt.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
       <Value Key="MessageEnableMailchimp" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Please enable mailchimp for this form. Change the Settings using &lt;a class=&quot;alert-link target=&quot; href=&quot;https://azing.org/2sxc/r/gFD2W3iZ&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;these instructions&lt;/a&gt;&lt;/p&gt;" Type="String">
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
       <Value Key="MessageEnableMailchimp" Value="&lt;p&gt;&lt;strong&gt;Warnung:&lt;/strong&gt; Bitte aktivieren Sie Mailchimp f&amp;uuml;r dieses Formular. &amp;Auml;ndern Sie die Einstellungen mit &lt;a href=&quot;https://azing.org/2sxc/r/gFD2W3iZ&quot;&gt;dieser Anleitungen&lt;/a&gt;&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageHoneyPot" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; The form contains a field that is populated by JavaScript after a few seconds. When the form is submitted, it checks whether the populated value is correct (honeypot).&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageHoneyPot" Value="&lt;p&gt;&lt;strong&gt;Achtung:&lt;/strong&gt; Das Formular enth&amp;auml;lt ein Formularfeld, welches durch JavaScript nach einigen Sekunden bef&amp;uuml;llt wird. Das Formular pr&amp;uuml;ft beim Absenden, ob der bef&amp;uuml;llte Wert korrekt ist (Honeypot).&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="214" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageMissingDefaultHoneyPot" Value="&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; The &amp;ldquo;Honeypot&amp;rdquo; field has no default value.&lt;/p&gt;" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MessageMissingDefaultHoneyPot" Value="&lt;p&gt;&lt;strong&gt;Warnung:&lt;/strong&gt; Das Honeypot-Feld hat keinen Standardwert.&lt;/p&gt;" Type="String">
         <Dimension DimensionID="214" ReadOnly="false" />
       </Value>
       <Value Key="MessageRecaptchaMissing" Value="&lt;p&gt;Please fill in all required fields before sending.&lt;/p&gt;" Type="String">
@@ -15120,7 +15418,38 @@
         <Dimension DimensionID="213" ReadOnly="false" />
       </Value>
     </Entity>
-    <Entity TargetType="3" AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="263fa209-f3bc-4659-896e-e37677f73c2b" KeyNumber="320" />
+    <Entity TargetType="3" AssignmentObjectType="App" AttributeSetStaticName="App-Settings" AttributeSetName="App-Settings" EntityGUID="b9c63177-04eb-43dc-a438-eaf3118a3158" KeyNumber="320">
+      <Value Key="AdminHasPermission" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultMailFrom" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="DefaultOwnerMail" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="GdprEnabled" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpAPIKey" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpListId" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpServer" Value="" Type="String">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="MailchimpShowWarning" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsAndGdprCombined" Value="False" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+      <Value Key="TermsEnabled" Value="True" Type="Boolean">
+        <Dimension DimensionID="213" ReadOnly="false" />
+      </Value>
+    </Entity>
   </Entities>
   <PortalFiles />
   <PortalFolders>
